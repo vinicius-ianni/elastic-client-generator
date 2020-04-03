@@ -6,6 +6,7 @@ import java.util.Map;
 import org.elasticsearch.Either;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.suggesters.context_suggester.*;
+import org.elasticsearch.query_dsl.geo.*;
 import org.elasticsearch.common_options.geo.*;
 
 public class SuggestContextQuery  {

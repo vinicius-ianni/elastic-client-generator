@@ -7,7 +7,6 @@ class SuggestOption<TDocument> {
 	highlighted: string;
 	_id: string;
 	_index: IndexName;
-	score: double;
 	_source: TDocument;
 	text: string;
 }

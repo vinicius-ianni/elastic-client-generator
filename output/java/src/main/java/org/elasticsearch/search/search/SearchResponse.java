@@ -7,8 +7,10 @@ import org.elasticsearch.Either;
 import org.elasticsearch.aggregations.*;
 import org.elasticsearch.common_options.hit.*;
 import org.elasticsearch.common_abstractions.lazy_document.*;
+import org.elasticsearch.search.search.hits.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.search.profile.*;
+import org.elasticsearch.search.suggesters.*;
 
 public class SearchResponse<TDocument>  {
   

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Map;
 import org.elasticsearch.Either;
 import org.elasticsearch.internal.*;
+import org.elasticsearch.search.suggesters.*;
 
 public class Suggest<T>  {
   

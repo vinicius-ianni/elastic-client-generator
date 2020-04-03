@@ -6,6 +6,7 @@ namespace Domain {
   export class Type {
     constructor (public name: string) {}
     nullable: boolean;
+    closedGenerics: InstanceOf[] = [];
   }
   export class ArrayOf {
     type = new Type('array');
@@ -50,7 +51,7 @@ namespace Domain {
   }
 
   export class EnumMember {
-    constructor (public name: string) {}
+    constructor(public name: string, public stringRepresentation: string) {}
   }
 
   export class BodyDocumentation {

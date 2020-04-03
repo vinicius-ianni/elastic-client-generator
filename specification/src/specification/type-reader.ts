@@ -31,7 +31,9 @@ class EnumVisitor extends Visitor {
     if (!this.isMember(member, e)) return;
 
     const name = this.symbolName(member.name);
-    e.members.push(new Domain.EnumMember(name));
+    const description = (member.jsDoc || []).map(c => c.comment).join(".").trim();
+
+    e.members.push(new Domain.EnumMember(description || name, name));
   }
 }
 
@@ -139,7 +141,11 @@ class InterfaceVisitor extends Visitor {
     const typeName = t.typeName.getText();
     if (typeName.startsWith("Dictionary")) return this.createDictionary(t, typeName);
     if (typeName.startsWith("Union")) return this.createUnion(t, typeName);
-    return new Domain.Type(t.getText());
+    const typed = new Domain.Type(typeName);
+    if (!t.typeArguments || t.typeArguments.length === 0)
+      return typed;
+    typed.closedGenerics = t.typeArguments.map(gt => this.visitTypeNode(gt));
+    return typed;
   }
 
   private createUnion(t: ts.TypeReferenceNode, typeName) {

@@ -17,21 +17,34 @@ const $typeName = (name: string) => {
   if (reservedTypes.includes(name) || !name.includes("<"))
     return changeCase.pascalCase(name, {stripRegexp:/[^A-Z0-9<>]/gi });
 
-  const pre = name.substr(0, name.indexOf("<"));
-  const post = name.substr(name.indexOf("<"), name.lastIndexOf(">"));
-  return `${changeCase.pascalCase(pre, {stripRegexp:/[^A-Z0-9<>]/gi })}${post}`;
+  return changeCase.pascalCase(name, {stripRegexp:/[^A-Z0-9<>]/gi });
 };
 
 const $referencedTypes = (instance: Domain.InstanceOf) : Domain.TypeDeclaration[] => {
   // Type|ArrayOf|Dictionary|UnionOf;
-  if (instance instanceof Type) return [specification.typeLookup[instance.name]];
+  if (instance instanceof Type) {
+    const type = specification.typeLookup[instance.name];
+    const inherits =
+      type instanceof Domain.Interface
+      ? type.inherits.flatMap(t=> t.closedGenerics.map($referencedTypes)).flat()
+      : [];
+    return [type]
+      .concat(instance.closedGenerics.map($referencedTypes).flat(Infinity))
+      .concat(inherits);
+  }
   else if (instance instanceof ArrayOf) return $referencedTypes(instance.of).flat(Infinity);
   else if (instance instanceof Dictionary) return [$referencedTypes(instance.key), $referencedTypes(instance.value)].flat(Infinity);
   else if (instance instanceof UnionOf) return instance.items.map($referencedTypes).flat(Infinity);
 };
 
 const $instanceOf = (instance: Domain.InstanceOf) => {
-  if (instance instanceof Type) return $typeName(instance.name);
+  if (instance instanceof Type)  {
+    if (instance.closedGenerics.length === 0)
+      return $typeName(instance.name);
+
+    const generics = instance.closedGenerics.map($instanceOf).flat(Infinity);
+    return `${$typeName(instance.name)}<${generics.join(", ")}>`;
+  }
   else if (instance instanceof ArrayOf) return `${$instanceOf(instance.of)}[]`;
   else if (instance instanceof Dictionary) return `Map<${$instanceOf(instance.key)}, ${$instanceOf(instance.value)}>`;
   else if (instance instanceof UnionOf) return `Either<${instance.items.map($instanceOf).join(", ")}>`;
@@ -76,6 +89,7 @@ const $imports = (type: Domain.Interface) => {
     .properties
     .flatMap(e => $referencedTypes(e.type))
     .concat(type.inherits.map(i=>i.type))
+    .concat(type.inherits.flatMap(i=> i.closedGenerics.flatMap($referencedTypes)))
     .filter(e=>e && e.name !== "string")
     .map(e=> {
       if (e.namespace.startsWith("mapping.types.core."))
@@ -106,6 +120,7 @@ public class ${$typeName(type.name)}${$typeGenerics(type)} ${$typeExtends(type)}
 const $createUnionType = (type: Domain.Interface) => `package org.elasticsearch.${type.namespace};
 
 import org.elasticsearch.Either;
+${[...$imports(type)].join("\n")}
 
 public class ${type.name} extends Either<${type.inherits[0].closedGenerics.map($instanceOf).join(", ")}> { }
 `;
@@ -127,7 +142,7 @@ public final class ${$typeName(type.name)} {
     public ${$typeName(type.name)}(String value) { this.value = value; }
 
     @Override
-    public ${valueType} toString() { return value.toString(); }
+    public String toString() { return value.toString(); }
 
     @Override
     public boolean equals(Object o) {
@@ -150,7 +165,7 @@ const $createType = (type: Domain.Interface) => {
   return $type(type)
 };
 
-const $enumFlag = (e: Domain.EnumMember, flag: boolean, n: number) => !flag ? `"${e.name}"` : `1 << ${n+1}`;
+const $enumFlag = (e: Domain.EnumMember, flag: boolean, n: number) => !flag ? `"${e.stringRepresentation}"` : `1 << ${n+1}`;
 const $enumValue = (e: Domain.EnumMember, flag: boolean, n: number) => `${$propertyName(e.name)}(${$enumFlag(e, flag, n)})`;
 const $enumValues = (e: Domain.Enum) => e.members.map((m,i)=> $enumValue(m, e.flags, i)).join(",\n    ");
 const $enum = (e: Domain.Enum) => `

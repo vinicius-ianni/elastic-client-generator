@@ -4,11 +4,12 @@ package org.elasticsearch.aggregations.bucket.date_histogram;
 import java.util.Date;
 import java.util.Map;
 import org.elasticsearch.Either;
+import org.elasticsearch.aggregations.bucket.histogram.*;
+import org.elasticsearch.common_options.date_math.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.aggregations.bucket.date_histogram.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
-import org.elasticsearch.aggregations.bucket.histogram.*;
 import org.elasticsearch.common_options.scripting.*;
 
 public class DateHistogramAggregation  {

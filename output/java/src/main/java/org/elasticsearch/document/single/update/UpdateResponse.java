@@ -4,11 +4,10 @@ package org.elasticsearch.document.single.update;
 import java.util.Date;
 import java.util.Map;
 import org.elasticsearch.Either;
-import org.elasticsearch.search.explain.InlineGet;
-
+import org.elasticsearch.search.explain.*;
 
 public class UpdateResponse<TDocument>  {
-
+  
   private Boolean _isValid;
   public Boolean getIsValid() { return this._isValid; }
   public UpdateResponse<TDocument> setIsValid(Boolean val) { this._isValid = val; return this; }

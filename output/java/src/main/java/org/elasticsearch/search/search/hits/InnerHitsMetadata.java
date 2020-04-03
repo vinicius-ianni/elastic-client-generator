@@ -4,8 +4,9 @@ package org.elasticsearch.search.search.hits;
 import java.util.Date;
 import java.util.Map;
 import org.elasticsearch.Either;
-import org.elasticsearch.internal.*;
 import org.elasticsearch.search.search.hits.*;
+import org.elasticsearch.common_abstractions.lazy_document.*;
+import org.elasticsearch.internal.*;
 
 public class InnerHitsMetadata  {
   

@@ -4,16 +4,16 @@ package org.elasticsearch.aggregations.bucket.histogram;
 import java.util.Date;
 import java.util.Map;
 import org.elasticsearch.Either;
-import org.elasticsearch.common_abstractions.infer.field.*;
-import org.elasticsearch.internal.*;
 import org.elasticsearch.aggregations.bucket.histogram.*;
+import org.elasticsearch.internal.*;
+import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_options.scripting.*;
 
 public class HistogramAggregation  {
   
-  private ExtendedBounds<double> _extendedBounds;
-  public ExtendedBounds<double> getExtendedBounds() { return this._extendedBounds; }
-  public HistogramAggregation setExtendedBounds(ExtendedBounds<double> val) { this._extendedBounds = val; return this; }
+  private ExtendedBounds<Double> _extendedBounds;
+  public ExtendedBounds<Double> getExtendedBounds() { return this._extendedBounds; }
+  public HistogramAggregation setExtendedBounds(ExtendedBounds<Double> val) { this._extendedBounds = val; return this; }
 
 
   private Field _field;

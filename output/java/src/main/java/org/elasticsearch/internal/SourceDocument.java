@@ -9,7 +9,7 @@ public final class SourceDocument {
     public SourceDocument(String value) { this.value = value; }
 
     @Override
-    public Object toString() { return value.toString(); }
+    public String toString() { return value.toString(); }
 
     @Override
     public boolean equals(Object o) {

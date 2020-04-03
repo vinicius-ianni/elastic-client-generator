@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Map;
 import org.elasticsearch.Either;
 import org.elasticsearch.search.suggesters.context_suggester.*;
+import org.elasticsearch.query_dsl.geo.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.lazy_document.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
@@ -49,11 +50,6 @@ public class SuggestOption<TDocument>  {
   private IndexName _index;
   public IndexName getIndex() { return this._index; }
   public SuggestOption<TDocument> setIndex(IndexName val) { this._index = val; return this; }
-
-
-  private Double _score;
-  public Double getScore() { return this._score; }
-  public SuggestOption<TDocument> setScore(Double val) { this._score = val; return this; }
 
 
   private TDocument _source;
