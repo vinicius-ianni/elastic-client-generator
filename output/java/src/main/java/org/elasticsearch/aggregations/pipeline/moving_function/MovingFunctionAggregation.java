@@ -1,25 +1,56 @@
 
 package org.elasticsearch.aggregations.pipeline.moving_function;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class MovingFunctionAggregation  {
+public class MovingFunctionAggregation  implements XContentable<MovingFunctionAggregation> {
   
+  static final ParseField SCRIPT = new ParseField("script");
   private String _script;
   public String getScript() { return this._script; }
   public MovingFunctionAggregation setScript(String val) { this._script = val; return this; }
 
 
+  static final ParseField WINDOW = new ParseField("window");
   private Integer _window;
   public Integer getWindow() { return this._window; }
   public MovingFunctionAggregation setWindow(Integer val) { this._window = val; return this; }
 
 
+  static final ParseField SHIFT = new ParseField("shift");
   private Integer _shift;
   public Integer getShift() { return this._shift; }
   public MovingFunctionAggregation setShift(Integer val) { this._shift = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public MovingFunctionAggregation fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return MovingFunctionAggregation.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<MovingFunctionAggregation, Void> PARSER =
+    new ConstructingObjectParser<>(MovingFunctionAggregation.class.getName(), false, args -> new MovingFunctionAggregation());
+
+  static {
+    PARSER.declareString(MovingFunctionAggregation::setScript, SCRIPT);
+    PARSER.declareInteger(MovingFunctionAggregation::setWindow, WINDOW);
+    PARSER.declareInteger(MovingFunctionAggregation::setShift, SHIFT);
+  }
 
 }

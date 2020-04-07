@@ -1,25 +1,56 @@
 
 package org.elasticsearch.x_pack.machine_learning.update_filter;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
 
 
-public class UpdateFilterRequest  {
+
+
+public class UpdateFilterRequest  implements XContentable<UpdateFilterRequest> {
   
-  private String[] _addItems;
-  public String[] getAddItems() { return this._addItems; }
-  public UpdateFilterRequest setAddItems(String[] val) { this._addItems = val; return this; }
+  static final ParseField ADD_ITEMS = new ParseField("add_items");
+  private List<String> _addItems;
+  public List<String> getAddItems() { return this._addItems; }
+  public UpdateFilterRequest setAddItems(List<String> val) { this._addItems = val; return this; }
 
 
+  static final ParseField DESCRIPTION = new ParseField("description");
   private String _description;
   public String getDescription() { return this._description; }
   public UpdateFilterRequest setDescription(String val) { this._description = val; return this; }
 
 
-  private String[] _removeItems;
-  public String[] getRemoveItems() { return this._removeItems; }
-  public UpdateFilterRequest setRemoveItems(String[] val) { this._removeItems = val; return this; }
+  static final ParseField REMOVE_ITEMS = new ParseField("remove_items");
+  private List<String> _removeItems;
+  public List<String> getRemoveItems() { return this._removeItems; }
+  public UpdateFilterRequest setRemoveItems(List<String> val) { this._removeItems = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public UpdateFilterRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return UpdateFilterRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<UpdateFilterRequest, Void> PARSER =
+    new ConstructingObjectParser<>(UpdateFilterRequest.class.getName(), false, args -> new UpdateFilterRequest());
+
+  static {
+    PARSER.declareStringArray(UpdateFilterRequest::setAddItems, ADD_ITEMS);
+    PARSER.declareString(UpdateFilterRequest::setDescription, DESCRIPTION);
+    PARSER.declareStringArray(UpdateFilterRequest::setRemoveItems, REMOVE_ITEMS);
+  }
 
 }

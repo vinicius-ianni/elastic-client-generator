@@ -1,25 +1,56 @@
 
 package org.elasticsearch.x_pack.watcher.execution;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.watcher.execution.*;
 
-public class SimulatedActions  {
+public class SimulatedActions  implements XContentable<SimulatedActions> {
   
-  private String[] _actions;
-  public String[] getActions() { return this._actions; }
-  public SimulatedActions setActions(String[] val) { this._actions = val; return this; }
+  static final ParseField ACTIONS = new ParseField("actions");
+  private List<String> _actions;
+  public List<String> getActions() { return this._actions; }
+  public SimulatedActions setActions(List<String> val) { this._actions = val; return this; }
 
 
+  static final ParseField ALL = new ParseField("all");
   private SimulatedActions _all;
   public SimulatedActions getAll() { return this._all; }
   public SimulatedActions setAll(SimulatedActions val) { this._all = val; return this; }
 
 
+  static final ParseField USE_ALL = new ParseField("use_all");
   private Boolean _useAll;
   public Boolean getUseAll() { return this._useAll; }
   public SimulatedActions setUseAll(Boolean val) { this._useAll = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public SimulatedActions fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return SimulatedActions.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<SimulatedActions, Void> PARSER =
+    new ConstructingObjectParser<>(SimulatedActions.class.getName(), false, args -> new SimulatedActions());
+
+  static {
+    PARSER.declareStringArray(SimulatedActions::setActions, ACTIONS);
+    PARSER.declareObject(SimulatedActions::setAll, (p, t) -> SimulatedActions.PARSER.apply(p, null), ALL);
+    PARSER.declareBoolean(SimulatedActions::setUseAll, USE_ALL);
+  }
 
 }

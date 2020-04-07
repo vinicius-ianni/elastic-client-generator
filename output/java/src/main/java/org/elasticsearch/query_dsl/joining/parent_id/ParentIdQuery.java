@@ -1,26 +1,57 @@
 
 package org.elasticsearch.query_dsl.joining.parent_id;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.common_abstractions.infer.relation_name.*;
 
-public class ParentIdQuery  {
+public class ParentIdQuery  implements XContentable<ParentIdQuery> {
   
+  static final ParseField ID = new ParseField("id");
   private Id _id;
   public Id getId() { return this._id; }
   public ParentIdQuery setId(Id val) { this._id = val; return this; }
 
 
+  static final ParseField IGNORE_UNMAPPED = new ParseField("ignore_unmapped");
   private Boolean _ignoreUnmapped;
   public Boolean getIgnoreUnmapped() { return this._ignoreUnmapped; }
   public ParentIdQuery setIgnoreUnmapped(Boolean val) { this._ignoreUnmapped = val; return this; }
 
 
+  static final ParseField TYPE = new ParseField("type");
   private RelationName _type;
   public RelationName getType() { return this._type; }
   public ParentIdQuery setType(RelationName val) { this._type = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ParentIdQuery fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ParentIdQuery.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ParentIdQuery, Void> PARSER =
+    new ConstructingObjectParser<>(ParentIdQuery.class.getName(), false, args -> new ParentIdQuery());
+
+  static {
+    PARSER.declareId(ParentIdQuery::setId, (p, t) -> Id.createFrom(p), ID);
+    PARSER.declareBoolean(ParentIdQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
+    PARSER.declareRelationName(ParentIdQuery::setType, (p, t) -> RelationName.createFrom(p), TYPE);
+  }
 
 }

@@ -1,46 +1,85 @@
 
 package org.elasticsearch.cluster.cluster_reroute;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.cluster.cluster_reroute.commands.*;
 import org.elasticsearch.common_options.time_unit.*;
 
-public class ClusterRerouteRequest  {
+public class ClusterRerouteRequest  implements XContentable<ClusterRerouteRequest> {
   
-  private ClusterRerouteCommand[] _commands;
-  public ClusterRerouteCommand[] getCommands() { return this._commands; }
-  public ClusterRerouteRequest setCommands(ClusterRerouteCommand[] val) { this._commands = val; return this; }
+  static final ParseField COMMANDS = new ParseField("commands");
+  private List<ClusterRerouteCommand> _commands;
+  public List<ClusterRerouteCommand> getCommands() { return this._commands; }
+  public ClusterRerouteRequest setCommands(List<ClusterRerouteCommand> val) { this._commands = val; return this; }
 
 
+  static final ParseField DRY_RUN = new ParseField("dry_run");
   private Boolean _dryRun;
   public Boolean getDryRun() { return this._dryRun; }
   public ClusterRerouteRequest setDryRun(Boolean val) { this._dryRun = val; return this; }
 
 
+  static final ParseField EXPLAIN = new ParseField("explain");
   private Boolean _explain;
   public Boolean getExplain() { return this._explain; }
   public ClusterRerouteRequest setExplain(Boolean val) { this._explain = val; return this; }
 
 
+  static final ParseField MASTER_TIMEOUT = new ParseField("master_timeout");
   private Time _masterTimeout;
   public Time getMasterTimeout() { return this._masterTimeout; }
   public ClusterRerouteRequest setMasterTimeout(Time val) { this._masterTimeout = val; return this; }
 
 
-  private String[] _metric;
-  public String[] getMetric() { return this._metric; }
-  public ClusterRerouteRequest setMetric(String[] val) { this._metric = val; return this; }
+  static final ParseField METRIC = new ParseField("metric");
+  private List<String> _metric;
+  public List<String> getMetric() { return this._metric; }
+  public ClusterRerouteRequest setMetric(List<String> val) { this._metric = val; return this; }
 
 
+  static final ParseField RETRY_FAILED = new ParseField("retry_failed");
   private Boolean _retryFailed;
   public Boolean getRetryFailed() { return this._retryFailed; }
   public ClusterRerouteRequest setRetryFailed(Boolean val) { this._retryFailed = val; return this; }
 
 
+  static final ParseField TIMEOUT = new ParseField("timeout");
   private Time _timeout;
   public Time getTimeout() { return this._timeout; }
   public ClusterRerouteRequest setTimeout(Time val) { this._timeout = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ClusterRerouteRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ClusterRerouteRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ClusterRerouteRequest, Void> PARSER =
+    new ConstructingObjectParser<>(ClusterRerouteRequest.class.getName(), false, args -> new ClusterRerouteRequest());
+
+  static {
+    PARSER.declareObjectArray(ClusterRerouteRequest::setCommands, (p, t) -> ClusterRerouteCommand.PARSER.apply(p), COMMANDS);
+    PARSER.declareBoolean(ClusterRerouteRequest::setDryRun, DRY_RUN);
+    PARSER.declareBoolean(ClusterRerouteRequest::setExplain, EXPLAIN);
+    PARSER.declareObject(ClusterRerouteRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareStringArray(ClusterRerouteRequest::setMetric, METRIC);
+    PARSER.declareBoolean(ClusterRerouteRequest::setRetryFailed, RETRY_FAILED);
+    PARSER.declareObject(ClusterRerouteRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+  }
 
 }

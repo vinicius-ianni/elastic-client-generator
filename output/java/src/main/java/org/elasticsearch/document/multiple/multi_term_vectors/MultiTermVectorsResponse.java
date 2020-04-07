@@ -1,15 +1,42 @@
 
 package org.elasticsearch.document.multiple.multi_term_vectors;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.document.single.term_vectors.*;
 
-public class MultiTermVectorsResponse  {
+public class MultiTermVectorsResponse  implements XContentable<MultiTermVectorsResponse> {
   
-  private TermVectors[] _docs;
-  public TermVectors[] getDocs() { return this._docs; }
-  public MultiTermVectorsResponse setDocs(TermVectors[] val) { this._docs = val; return this; }
+  static final ParseField DOCS = new ParseField("docs");
+  private List<TermVectors> _docs;
+  public List<TermVectors> getDocs() { return this._docs; }
+  public MultiTermVectorsResponse setDocs(List<TermVectors> val) { this._docs = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public MultiTermVectorsResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return MultiTermVectorsResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<MultiTermVectorsResponse, Void> PARSER =
+    new ConstructingObjectParser<>(MultiTermVectorsResponse.class.getName(), false, args -> new MultiTermVectorsResponse());
+
+  static {
+    PARSER.declareObjectArray(MultiTermVectorsResponse::setDocs, (p, t) -> TermVectors.PARSER.apply(p), DOCS);
+  }
 
 }

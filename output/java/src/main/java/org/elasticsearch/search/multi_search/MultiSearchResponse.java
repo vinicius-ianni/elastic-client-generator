@@ -1,31 +1,64 @@
 
 package org.elasticsearch.search.multi_search;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.response.*;
 
-public class MultiSearchResponse  {
+public class MultiSearchResponse  implements XContentable<MultiSearchResponse> {
   
+  static final ParseField TOOK = new ParseField("took");
   private Long _took;
   public Long getTook() { return this._took; }
   public MultiSearchResponse setTook(Long val) { this._took = val; return this; }
 
 
-  private IResponse[] _allResponses;
-  public IResponse[] getAllResponses() { return this._allResponses; }
-  public MultiSearchResponse setAllResponses(IResponse[] val) { this._allResponses = val; return this; }
+  static final ParseField ALL_RESPONSES = new ParseField("all_responses");
+  private List<IResponse> _allResponses;
+  public List<IResponse> getAllResponses() { return this._allResponses; }
+  public MultiSearchResponse setAllResponses(List<IResponse> val) { this._allResponses = val; return this; }
 
 
+  static final ParseField IS_VALID = new ParseField("is_valid");
   private Boolean _isValid;
   public Boolean getIsValid() { return this._isValid; }
   public MultiSearchResponse setIsValid(Boolean val) { this._isValid = val; return this; }
 
 
+  static final ParseField TOTAL_RESPONSES = new ParseField("total_responses");
   private Integer _totalResponses;
   public Integer getTotalResponses() { return this._totalResponses; }
   public MultiSearchResponse setTotalResponses(Integer val) { this._totalResponses = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public MultiSearchResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return MultiSearchResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<MultiSearchResponse, Void> PARSER =
+    new ConstructingObjectParser<>(MultiSearchResponse.class.getName(), false, args -> new MultiSearchResponse());
+
+  static {
+    PARSER.declareLong(MultiSearchResponse::setTook, TOOK);
+    PARSER.declareObjectArray(MultiSearchResponse::setAllResponses, (p, t) -> IResponse.PARSER.apply(p), ALL_RESPONSES);
+    PARSER.declareBoolean(MultiSearchResponse::setIsValid, IS_VALID);
+    PARSER.declareInteger(MultiSearchResponse::setTotalResponses, TOTAL_RESPONSES);
+  }
 
 }

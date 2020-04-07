@@ -1,20 +1,49 @@
 
 package org.elasticsearch.search.search_shards;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.search.search_shards.*;
 
-public class SearchShardsResponse  {
+public class SearchShardsResponse  implements XContentable<SearchShardsResponse> {
   
-  private Map<String, SearchNode> _nodes;
-  public Map<String, SearchNode> getNodes() { return this._nodes; }
-  public SearchShardsResponse setNodes(Map<String, SearchNode> val) { this._nodes = val; return this; }
+  static final ParseField NODES = new ParseField("nodes");
+  private NamedContainer<String, SearchNode> _nodes;
+  public NamedContainer<String, SearchNode> getNodes() { return this._nodes; }
+  public SearchShardsResponse setNodes(NamedContainer<String, SearchNode> val) { this._nodes = val; return this; }
 
 
-  private SearchShard[][] _shards;
-  public SearchShard[][] getShards() { return this._shards; }
-  public SearchShardsResponse setShards(SearchShard[][] val) { this._shards = val; return this; }
+  static final ParseField SHARDS = new ParseField("shards");
+  private List<List<SearchShard>> _shards;
+  public List<List<SearchShard>> getShards() { return this._shards; }
+  public SearchShardsResponse setShards(List<List<SearchShard>> val) { this._shards = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public SearchShardsResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return SearchShardsResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<SearchShardsResponse, Void> PARSER =
+    new ConstructingObjectParser<>(SearchShardsResponse.class.getName(), false, args -> new SearchShardsResponse());
+
+  static {
+    PARSER.declareObject(SearchShardsResponse::setNodes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> SearchNode.PARSER.apply(pp, null)), NODES);;
+    PARSER.declareObjectArray(SearchShardsResponse::setShards, (p, t) -> List<SearchShard>.PARSER.apply(p), SHARDS);
+  }
 
 }

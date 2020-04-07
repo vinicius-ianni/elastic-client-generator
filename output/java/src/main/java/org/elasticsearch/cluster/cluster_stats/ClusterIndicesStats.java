@@ -1,52 +1,93 @@
 
 package org.elasticsearch.cluster.cluster_stats;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_options.stats.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.cluster_stats.*;
 
-public class ClusterIndicesStats  {
+public class ClusterIndicesStats  implements XContentable<ClusterIndicesStats> {
   
+  static final ParseField COMPLETION = new ParseField("completion");
   private CompletionStats _completion;
   public CompletionStats getCompletion() { return this._completion; }
   public ClusterIndicesStats setCompletion(CompletionStats val) { this._completion = val; return this; }
 
 
+  static final ParseField COUNT = new ParseField("count");
   private Long _count;
   public Long getCount() { return this._count; }
   public ClusterIndicesStats setCount(Long val) { this._count = val; return this; }
 
 
+  static final ParseField DOCS = new ParseField("docs");
   private DocStats _docs;
   public DocStats getDocs() { return this._docs; }
   public ClusterIndicesStats setDocs(DocStats val) { this._docs = val; return this; }
 
 
+  static final ParseField FIELDDATA = new ParseField("fielddata");
   private FielddataStats _fielddata;
   public FielddataStats getFielddata() { return this._fielddata; }
   public ClusterIndicesStats setFielddata(FielddataStats val) { this._fielddata = val; return this; }
 
 
+  static final ParseField QUERY_CACHE = new ParseField("query_cache");
   private QueryCacheStats _queryCache;
   public QueryCacheStats getQueryCache() { return this._queryCache; }
   public ClusterIndicesStats setQueryCache(QueryCacheStats val) { this._queryCache = val; return this; }
 
 
+  static final ParseField SEGMENTS = new ParseField("segments");
   private SegmentsStats _segments;
   public SegmentsStats getSegments() { return this._segments; }
   public ClusterIndicesStats setSegments(SegmentsStats val) { this._segments = val; return this; }
 
 
+  static final ParseField SHARDS = new ParseField("shards");
   private ClusterIndicesShardsStats _shards;
   public ClusterIndicesShardsStats getShards() { return this._shards; }
   public ClusterIndicesStats setShards(ClusterIndicesShardsStats val) { this._shards = val; return this; }
 
 
+  static final ParseField STORE = new ParseField("store");
   private StoreStats _store;
   public StoreStats getStore() { return this._store; }
   public ClusterIndicesStats setStore(StoreStats val) { this._store = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ClusterIndicesStats fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ClusterIndicesStats.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ClusterIndicesStats, Void> PARSER =
+    new ConstructingObjectParser<>(ClusterIndicesStats.class.getName(), false, args -> new ClusterIndicesStats());
+
+  static {
+    PARSER.declareObject(ClusterIndicesStats::setCompletion, (p, t) -> CompletionStats.PARSER.apply(p, null), COMPLETION);
+    PARSER.declareLong(ClusterIndicesStats::setCount, COUNT);
+    PARSER.declareObject(ClusterIndicesStats::setDocs, (p, t) -> DocStats.PARSER.apply(p, null), DOCS);
+    PARSER.declareObject(ClusterIndicesStats::setFielddata, (p, t) -> FielddataStats.PARSER.apply(p, null), FIELDDATA);
+    PARSER.declareObject(ClusterIndicesStats::setQueryCache, (p, t) -> QueryCacheStats.PARSER.apply(p, null), QUERY_CACHE);
+    PARSER.declareObject(ClusterIndicesStats::setSegments, (p, t) -> SegmentsStats.PARSER.apply(p, null), SEGMENTS);
+    PARSER.declareObject(ClusterIndicesStats::setShards, (p, t) -> ClusterIndicesShardsStats.PARSER.apply(p, null), SHARDS);
+    PARSER.declareObject(ClusterIndicesStats::setStore, (p, t) -> StoreStats.PARSER.apply(p, null), STORE);
+  }
 
 }

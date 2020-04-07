@@ -1,5 +1,6 @@
 package org.elasticsearch.search.search
 
+import org.elasticsearch.NamedContainer
 import org.elasticsearch.aggregations.AggregationContainer
 import org.elasticsearch.common_abstractions.infer.field.Field
 import org.elasticsearch.query_dsl.abstractions.container.QueryContainer
@@ -16,6 +17,7 @@ class SearchRequestTest {
           .setField(new Field("x")) as TermQuery
         )
       )
+      .setAggs(new NamedContainer<String, AggregationContainer>())
       .setSize(40);
   }
 }

@@ -1,35 +1,70 @@
 
 package org.elasticsearch.x_pack.machine_learning.get_calendar_events;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class GetCalendarEventsRequest  {
+public class GetCalendarEventsRequest  implements XContentable<GetCalendarEventsRequest> {
   
+  static final ParseField END = new ParseField("end");
   private Date _end;
   public Date getEnd() { return this._end; }
   public GetCalendarEventsRequest setEnd(Date val) { this._end = val; return this; }
 
 
+  static final ParseField JOB_ID = new ParseField("job_id");
   private String _jobId;
   public String getJobId() { return this._jobId; }
   public GetCalendarEventsRequest setJobId(String val) { this._jobId = val; return this; }
 
 
+  static final ParseField START = new ParseField("start");
   private String _start;
   public String getStart() { return this._start; }
   public GetCalendarEventsRequest setStart(String val) { this._start = val; return this; }
 
 
+  static final ParseField FROM = new ParseField("from");
   private Integer _from;
   public Integer getFrom() { return this._from; }
   public GetCalendarEventsRequest setFrom(Integer val) { this._from = val; return this; }
 
 
+  static final ParseField SIZE = new ParseField("size");
   private Integer _size;
   public Integer getSize() { return this._size; }
   public GetCalendarEventsRequest setSize(Integer val) { this._size = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public GetCalendarEventsRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return GetCalendarEventsRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<GetCalendarEventsRequest, Void> PARSER =
+    new ConstructingObjectParser<>(GetCalendarEventsRequest.class.getName(), false, args -> new GetCalendarEventsRequest());
+
+  static {
+    PARSER.declareDate(GetCalendarEventsRequest::setEnd, (p, t) -> Date.createFrom(p), END);
+    PARSER.declareString(GetCalendarEventsRequest::setJobId, JOB_ID);
+    PARSER.declareString(GetCalendarEventsRequest::setStart, START);
+    PARSER.declareInteger(GetCalendarEventsRequest::setFrom, FROM);
+    PARSER.declareInteger(GetCalendarEventsRequest::setSize, SIZE);
+  }
 
 }

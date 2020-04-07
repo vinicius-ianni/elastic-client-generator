@@ -1,15 +1,42 @@
 
 package org.elasticsearch.aggregations.bucket.missing;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_abstractions.infer.field.*;
 
-public class MissingAggregation  {
+public class MissingAggregation  implements XContentable<MissingAggregation> {
   
+  static final ParseField FIELD = new ParseField("field");
   private Field _field;
   public Field getField() { return this._field; }
   public MissingAggregation setField(Field val) { this._field = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public MissingAggregation fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return MissingAggregation.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<MissingAggregation, Void> PARSER =
+    new ConstructingObjectParser<>(MissingAggregation.class.getName(), false, args -> new MissingAggregation());
+
+  static {
+    PARSER.declareField(MissingAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+  }
 
 }

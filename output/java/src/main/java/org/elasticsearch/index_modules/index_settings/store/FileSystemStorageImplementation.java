@@ -1,7 +1,11 @@
 
 package org.elasticsearch.index_modules.index_settings.store;
 
-public enum FileSystemStorageImplementation {
+import org.elasticsearch.XContentable;
+import org.elasticsearch.common.xcontent.*;
+import java.io.IOException;
+
+public enum FileSystemStorageImplementation implements XContentable<FileSystemStorageImplementation> {
   Simplefs("simplefs"),
     Niofs("niofs"),
     Mmapfs("mmapfs"),
@@ -12,4 +16,27 @@ public enum FileSystemStorageImplementation {
 
   @Override
   public String toString() { return textRepresentation; }
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return builder.value(this.textRepresentation);
+  }
+
+  @Override
+  public FileSystemStorageImplementation fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PARSER.apply(parser);
+  }
+
+  public static final CheckedFunction<XContentParser, FileSystemStorageImplementation, IOException> PARSER = (parser) -> {
+    String text = parser.text();
+    switch (text) {
+      case "simplefs": return FileSystemStorageImplementation.Simplefs;
+      case "niofs": return FileSystemStorageImplementation.Niofs;
+      case "mmapfs": return FileSystemStorageImplementation.Mmapfs;
+      case "default_fs": return FileSystemStorageImplementation.DefaultFs;
+      default:
+        String message = String.format("'%s' not a valid value for enum '%s'", text, FileSystemStorageImplementation.class.getName());
+        throw new XContentParseException(parser.getTokenLocation(), message);
+    }
+  };
 }

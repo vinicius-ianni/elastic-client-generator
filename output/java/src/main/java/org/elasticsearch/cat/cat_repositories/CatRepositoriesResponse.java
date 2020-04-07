@@ -1,15 +1,42 @@
 
 package org.elasticsearch.cat.cat_repositories;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.cat.cat_repositories.*;
 
-public class CatRepositoriesResponse  {
+public class CatRepositoriesResponse  implements XContentable<CatRepositoriesResponse> {
   
-  private CatRepositoriesRecord[] _records;
-  public CatRepositoriesRecord[] getRecords() { return this._records; }
-  public CatRepositoriesResponse setRecords(CatRepositoriesRecord[] val) { this._records = val; return this; }
+  static final ParseField RECORDS = new ParseField("records");
+  private List<CatRepositoriesRecord> _records;
+  public List<CatRepositoriesRecord> getRecords() { return this._records; }
+  public CatRepositoriesResponse setRecords(List<CatRepositoriesRecord> val) { this._records = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public CatRepositoriesResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return CatRepositoriesResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<CatRepositoriesResponse, Void> PARSER =
+    new ConstructingObjectParser<>(CatRepositoriesResponse.class.getName(), false, args -> new CatRepositoriesResponse());
+
+  static {
+    PARSER.declareObjectArray(CatRepositoriesResponse::setRecords, (p, t) -> CatRepositoriesRecord.PARSER.apply(p), RECORDS);
+  }
 
 }

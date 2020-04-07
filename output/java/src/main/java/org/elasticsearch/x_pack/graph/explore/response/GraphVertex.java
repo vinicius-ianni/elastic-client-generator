@@ -1,30 +1,63 @@
 
 package org.elasticsearch.x_pack.graph.explore.response;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class GraphVertex  {
+public class GraphVertex  implements XContentable<GraphVertex> {
   
+  static final ParseField DEPTH = new ParseField("depth");
   private Long _depth;
   public Long getDepth() { return this._depth; }
   public GraphVertex setDepth(Long val) { this._depth = val; return this; }
 
 
+  static final ParseField FIELD = new ParseField("field");
   private String _field;
   public String getField() { return this._field; }
   public GraphVertex setField(String val) { this._field = val; return this; }
 
 
+  static final ParseField TERM = new ParseField("term");
   private String _term;
   public String getTerm() { return this._term; }
   public GraphVertex setTerm(String val) { this._term = val; return this; }
 
 
+  static final ParseField WEIGHT = new ParseField("weight");
   private Double _weight;
   public Double getWeight() { return this._weight; }
   public GraphVertex setWeight(Double val) { this._weight = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public GraphVertex fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return GraphVertex.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<GraphVertex, Void> PARSER =
+    new ConstructingObjectParser<>(GraphVertex.class.getName(), false, args -> new GraphVertex());
+
+  static {
+    PARSER.declareLong(GraphVertex::setDepth, DEPTH);
+    PARSER.declareString(GraphVertex::setField, FIELD);
+    PARSER.declareString(GraphVertex::setTerm, TERM);
+    PARSER.declareDouble(GraphVertex::setWeight, WEIGHT);
+  }
 
 }

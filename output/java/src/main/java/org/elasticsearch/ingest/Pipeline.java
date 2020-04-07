@@ -1,25 +1,56 @@
 
 package org.elasticsearch.ingest;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.ingest.*;
 
-public class Pipeline  {
+public class Pipeline  implements XContentable<Pipeline> {
   
+  static final ParseField DESCRIPTION = new ParseField("description");
   private String _description;
   public String getDescription() { return this._description; }
   public Pipeline setDescription(String val) { this._description = val; return this; }
 
 
-  private Processor[] _onFailure;
-  public Processor[] getOnFailure() { return this._onFailure; }
-  public Pipeline setOnFailure(Processor[] val) { this._onFailure = val; return this; }
+  static final ParseField ON_FAILURE = new ParseField("on_failure");
+  private List<Processor> _onFailure;
+  public List<Processor> getOnFailure() { return this._onFailure; }
+  public Pipeline setOnFailure(List<Processor> val) { this._onFailure = val; return this; }
 
 
-  private Processor[] _processors;
-  public Processor[] getProcessors() { return this._processors; }
-  public Pipeline setProcessors(Processor[] val) { this._processors = val; return this; }
+  static final ParseField PROCESSORS = new ParseField("processors");
+  private List<Processor> _processors;
+  public List<Processor> getProcessors() { return this._processors; }
+  public Pipeline setProcessors(List<Processor> val) { this._processors = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public Pipeline fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return Pipeline.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<Pipeline, Void> PARSER =
+    new ConstructingObjectParser<>(Pipeline.class.getName(), false, args -> new Pipeline());
+
+  static {
+    PARSER.declareString(Pipeline::setDescription, DESCRIPTION);
+    PARSER.declareObjectArray(Pipeline::setOnFailure, (p, t) -> Processor.PARSER.apply(p), ON_FAILURE);
+    PARSER.declareObjectArray(Pipeline::setProcessors, (p, t) -> Processor.PARSER.apply(p), PROCESSORS);
+  }
 
 }

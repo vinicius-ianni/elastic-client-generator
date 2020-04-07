@@ -1,21 +1,50 @@
 
 package org.elasticsearch.common_options.geo;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.geo.*;
 
-public class Distance  {
+public class Distance  implements XContentable<Distance> {
   
+  static final ParseField PRECISION = new ParseField("precision");
   private Double _precision;
   public Double getPrecision() { return this._precision; }
   public Distance setPrecision(Double val) { this._precision = val; return this; }
 
 
+  static final ParseField UNIT = new ParseField("unit");
   private DistanceUnit _unit;
   public DistanceUnit getUnit() { return this._unit; }
   public Distance setUnit(DistanceUnit val) { this._unit = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public Distance fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return Distance.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<Distance, Void> PARSER =
+    new ConstructingObjectParser<>(Distance.class.getName(), false, args -> new Distance());
+
+  static {
+    PARSER.declareDouble(Distance::setPrecision, PRECISION);
+    PARSER.declareObject(Distance::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p, null), UNIT);
+  }
 
 }

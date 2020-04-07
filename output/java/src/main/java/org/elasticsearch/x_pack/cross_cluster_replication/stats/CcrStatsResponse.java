@@ -1,20 +1,49 @@
 
 package org.elasticsearch.x_pack.cross_cluster_replication.stats;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.cross_cluster_replication.stats.*;
 
-public class CcrStatsResponse  {
+public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
   
+  static final ParseField AUTO_FOLLOW_STATS = new ParseField("auto_follow_stats");
   private CcrAutoFollowStats _autoFollowStats;
   public CcrAutoFollowStats getAutoFollowStats() { return this._autoFollowStats; }
   public CcrStatsResponse setAutoFollowStats(CcrAutoFollowStats val) { this._autoFollowStats = val; return this; }
 
 
+  static final ParseField FOLLOW_STATS = new ParseField("follow_stats");
   private CcrFollowStats _followStats;
   public CcrFollowStats getFollowStats() { return this._followStats; }
   public CcrStatsResponse setFollowStats(CcrFollowStats val) { this._followStats = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public CcrStatsResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return CcrStatsResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<CcrStatsResponse, Void> PARSER =
+    new ConstructingObjectParser<>(CcrStatsResponse.class.getName(), false, args -> new CcrStatsResponse());
+
+  static {
+    PARSER.declareObject(CcrStatsResponse::setAutoFollowStats, (p, t) -> CcrAutoFollowStats.PARSER.apply(p, null), AUTO_FOLLOW_STATS);
+    PARSER.declareObject(CcrStatsResponse::setFollowStats, (p, t) -> CcrFollowStats.PARSER.apply(p, null), FOLLOW_STATS);
+  }
 
 }

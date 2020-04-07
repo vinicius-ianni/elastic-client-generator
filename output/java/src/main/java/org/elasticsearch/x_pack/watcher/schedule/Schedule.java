@@ -1,11 +1,37 @@
 
 package org.elasticsearch.x_pack.watcher.schedule;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
 
 
-public class Schedule  {
+
+
+public class Schedule  implements XContentable<Schedule> {
   
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public Schedule fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return Schedule.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<Schedule, Void> PARSER =
+    new ConstructingObjectParser<>(Schedule.class.getName(), false, args -> new Schedule());
+
+  static {
+    
+  }
+
 }

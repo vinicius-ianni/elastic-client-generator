@@ -1,46 +1,85 @@
 
 package org.elasticsearch.x_pack.security.role.put_role;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common.*;
 import org.elasticsearch.x_pack.security.role.put_role.*;
 
-public class PutRoleRequest  {
+public class PutRoleRequest  implements XContentable<PutRoleRequest> {
   
+  static final ParseField REFRESH = new ParseField("refresh");
   private Refresh _refresh;
   public Refresh getRefresh() { return this._refresh; }
   public PutRoleRequest setRefresh(Refresh val) { this._refresh = val; return this; }
 
 
-  private ApplicationPrivileges[] _applications;
-  public ApplicationPrivileges[] getApplications() { return this._applications; }
-  public PutRoleRequest setApplications(ApplicationPrivileges[] val) { this._applications = val; return this; }
+  static final ParseField APPLICATIONS = new ParseField("applications");
+  private List<ApplicationPrivileges> _applications;
+  public List<ApplicationPrivileges> getApplications() { return this._applications; }
+  public PutRoleRequest setApplications(List<ApplicationPrivileges> val) { this._applications = val; return this; }
 
 
-  private String[] _cluster;
-  public String[] getCluster() { return this._cluster; }
-  public PutRoleRequest setCluster(String[] val) { this._cluster = val; return this; }
+  static final ParseField CLUSTER = new ParseField("cluster");
+  private List<String> _cluster;
+  public List<String> getCluster() { return this._cluster; }
+  public PutRoleRequest setCluster(List<String> val) { this._cluster = val; return this; }
 
 
-  private Map<String, Object> _global;
-  public Map<String, Object> getGlobal() { return this._global; }
-  public PutRoleRequest setGlobal(Map<String, Object> val) { this._global = val; return this; }
+  static final ParseField GLOBAL = new ParseField("global");
+  private NamedContainer<String, Object> _global;
+  public NamedContainer<String, Object> getGlobal() { return this._global; }
+  public PutRoleRequest setGlobal(NamedContainer<String, Object> val) { this._global = val; return this; }
 
 
-  private IndicesPrivileges[] _indices;
-  public IndicesPrivileges[] getIndices() { return this._indices; }
-  public PutRoleRequest setIndices(IndicesPrivileges[] val) { this._indices = val; return this; }
+  static final ParseField INDICES = new ParseField("indices");
+  private List<IndicesPrivileges> _indices;
+  public List<IndicesPrivileges> getIndices() { return this._indices; }
+  public PutRoleRequest setIndices(List<IndicesPrivileges> val) { this._indices = val; return this; }
 
 
-  private Map<String, Object> _metadata;
-  public Map<String, Object> getMetadata() { return this._metadata; }
-  public PutRoleRequest setMetadata(Map<String, Object> val) { this._metadata = val; return this; }
+  static final ParseField METADATA = new ParseField("metadata");
+  private NamedContainer<String, Object> _metadata;
+  public NamedContainer<String, Object> getMetadata() { return this._metadata; }
+  public PutRoleRequest setMetadata(NamedContainer<String, Object> val) { this._metadata = val; return this; }
 
 
-  private String[] _runAs;
-  public String[] getRunAs() { return this._runAs; }
-  public PutRoleRequest setRunAs(String[] val) { this._runAs = val; return this; }
+  static final ParseField RUN_AS = new ParseField("run_as");
+  private List<String> _runAs;
+  public List<String> getRunAs() { return this._runAs; }
+  public PutRoleRequest setRunAs(List<String> val) { this._runAs = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public PutRoleRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PutRoleRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<PutRoleRequest, Void> PARSER =
+    new ConstructingObjectParser<>(PutRoleRequest.class.getName(), false, args -> new PutRoleRequest());
+
+  static {
+    PARSER.declareObject(PutRoleRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
+    PARSER.declareObjectArray(PutRoleRequest::setApplications, (p, t) -> ApplicationPrivileges.PARSER.apply(p), APPLICATIONS);
+    PARSER.declareStringArray(PutRoleRequest::setCluster, CLUSTER);
+    PARSER.declareObject(PutRoleRequest::setGlobal, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), GLOBAL);;
+    PARSER.declareObjectArray(PutRoleRequest::setIndices, (p, t) -> IndicesPrivileges.PARSER.apply(p), INDICES);
+    PARSER.declareObject(PutRoleRequest::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareStringArray(PutRoleRequest::setRunAs, RUN_AS);
+  }
 
 }

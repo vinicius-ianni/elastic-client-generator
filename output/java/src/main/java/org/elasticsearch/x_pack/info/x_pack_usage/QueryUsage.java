@@ -1,30 +1,63 @@
 
 package org.elasticsearch.x_pack.info.x_pack_usage;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class QueryUsage  {
+public class QueryUsage  implements XContentable<QueryUsage> {
   
+  static final ParseField TOTAL = new ParseField("total");
   private Integer _total;
   public Integer getTotal() { return this._total; }
   public QueryUsage setTotal(Integer val) { this._total = val; return this; }
 
 
+  static final ParseField PAGING = new ParseField("paging");
   private Integer _paging;
   public Integer getPaging() { return this._paging; }
   public QueryUsage setPaging(Integer val) { this._paging = val; return this; }
 
 
+  static final ParseField FAILED = new ParseField("failed");
   private Integer _failed;
   public Integer getFailed() { return this._failed; }
   public QueryUsage setFailed(Integer val) { this._failed = val; return this; }
 
 
+  static final ParseField COUNT = new ParseField("count");
   private Integer _count;
   public Integer getCount() { return this._count; }
   public QueryUsage setCount(Integer val) { this._count = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public QueryUsage fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return QueryUsage.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<QueryUsage, Void> PARSER =
+    new ConstructingObjectParser<>(QueryUsage.class.getName(), false, args -> new QueryUsage());
+
+  static {
+    PARSER.declareInteger(QueryUsage::setTotal, TOTAL);
+    PARSER.declareInteger(QueryUsage::setPaging, PAGING);
+    PARSER.declareInteger(QueryUsage::setFailed, FAILED);
+    PARSER.declareInteger(QueryUsage::setCount, COUNT);
+  }
 
 }

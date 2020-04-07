@@ -1,15 +1,42 @@
 
 package org.elasticsearch.query_dsl.full_text.intervals;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.query_dsl.full_text.intervals.*;
 
-public class Intervals  {
+public class Intervals  implements XContentable<Intervals> {
   
+  static final ParseField FILTER = new ParseField("filter");
   private IntervalsFilter _filter;
   public IntervalsFilter getFilter() { return this._filter; }
   public Intervals setFilter(IntervalsFilter val) { this._filter = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public Intervals fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return Intervals.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<Intervals, Void> PARSER =
+    new ConstructingObjectParser<>(Intervals.class.getName(), false, args -> new Intervals());
+
+  static {
+    PARSER.declareObject(Intervals::setFilter, (p, t) -> IntervalsFilter.PARSER.apply(p, null), FILTER);
+  }
 
 }

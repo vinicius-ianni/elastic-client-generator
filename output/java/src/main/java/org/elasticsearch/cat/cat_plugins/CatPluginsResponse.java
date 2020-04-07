@@ -1,15 +1,42 @@
 
 package org.elasticsearch.cat.cat_plugins;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.cat.cat_plugins.*;
 
-public class CatPluginsResponse  {
+public class CatPluginsResponse  implements XContentable<CatPluginsResponse> {
   
-  private CatPluginsRecord[] _records;
-  public CatPluginsRecord[] getRecords() { return this._records; }
-  public CatPluginsResponse setRecords(CatPluginsRecord[] val) { this._records = val; return this; }
+  static final ParseField RECORDS = new ParseField("records");
+  private List<CatPluginsRecord> _records;
+  public List<CatPluginsRecord> getRecords() { return this._records; }
+  public CatPluginsResponse setRecords(List<CatPluginsRecord> val) { this._records = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public CatPluginsResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return CatPluginsResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<CatPluginsResponse, Void> PARSER =
+    new ConstructingObjectParser<>(CatPluginsResponse.class.getName(), false, args -> new CatPluginsResponse());
+
+  static {
+    PARSER.declareObjectArray(CatPluginsResponse::setRecords, (p, t) -> CatPluginsRecord.PARSER.apply(p), RECORDS);
+  }
 
 }

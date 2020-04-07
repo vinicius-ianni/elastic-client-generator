@@ -1,27 +1,58 @@
 
 package org.elasticsearch.aggregations.bucket.range;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_options.range.*;
 import org.elasticsearch.common_options.scripting.*;
 
-public class RangeAggregation  {
+public class RangeAggregation  implements XContentable<RangeAggregation> {
   
+  static final ParseField FIELD = new ParseField("field");
   private Field _field;
   public Field getField() { return this._field; }
   public RangeAggregation setField(Field val) { this._field = val; return this; }
 
 
-  private AggregationRange[] _ranges;
-  public AggregationRange[] getRanges() { return this._ranges; }
-  public RangeAggregation setRanges(AggregationRange[] val) { this._ranges = val; return this; }
+  static final ParseField RANGES = new ParseField("ranges");
+  private List<AggregationRange> _ranges;
+  public List<AggregationRange> getRanges() { return this._ranges; }
+  public RangeAggregation setRanges(List<AggregationRange> val) { this._ranges = val; return this; }
 
 
+  static final ParseField SCRIPT = new ParseField("script");
   private Script _script;
   public Script getScript() { return this._script; }
   public RangeAggregation setScript(Script val) { this._script = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public RangeAggregation fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return RangeAggregation.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<RangeAggregation, Void> PARSER =
+    new ConstructingObjectParser<>(RangeAggregation.class.getName(), false, args -> new RangeAggregation());
+
+  static {
+    PARSER.declareField(RangeAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObjectArray(RangeAggregation::setRanges, (p, t) -> AggregationRange.PARSER.apply(p), RANGES);
+    PARSER.declareObject(RangeAggregation::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+  }
 
 }

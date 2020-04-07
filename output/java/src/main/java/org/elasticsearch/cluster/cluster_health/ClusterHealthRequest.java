@@ -1,66 +1,113 @@
 
 package org.elasticsearch.cluster.cluster_health;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
-public class ClusterHealthRequest  {
+public class ClusterHealthRequest  implements XContentable<ClusterHealthRequest> {
   
+  static final ParseField EXPAND_WILDCARDS = new ParseField("expand_wildcards");
   private ExpandWildcards _expandWildcards;
   public ExpandWildcards getExpandWildcards() { return this._expandWildcards; }
   public ClusterHealthRequest setExpandWildcards(ExpandWildcards val) { this._expandWildcards = val; return this; }
 
 
+  static final ParseField LEVEL = new ParseField("level");
   private Level _level;
   public Level getLevel() { return this._level; }
   public ClusterHealthRequest setLevel(Level val) { this._level = val; return this; }
 
 
+  static final ParseField LOCAL = new ParseField("local");
   private Boolean _local;
   public Boolean getLocal() { return this._local; }
   public ClusterHealthRequest setLocal(Boolean val) { this._local = val; return this; }
 
 
+  static final ParseField MASTER_TIMEOUT = new ParseField("master_timeout");
   private Time _masterTimeout;
   public Time getMasterTimeout() { return this._masterTimeout; }
   public ClusterHealthRequest setMasterTimeout(Time val) { this._masterTimeout = val; return this; }
 
 
+  static final ParseField TIMEOUT = new ParseField("timeout");
   private Time _timeout;
   public Time getTimeout() { return this._timeout; }
   public ClusterHealthRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  static final ParseField WAIT_FOR_ACTIVE_SHARDS = new ParseField("wait_for_active_shards");
   private String _waitForActiveShards;
   public String getWaitForActiveShards() { return this._waitForActiveShards; }
   public ClusterHealthRequest setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  static final ParseField WAIT_FOR_EVENTS = new ParseField("wait_for_events");
   private WaitForEvents _waitForEvents;
   public WaitForEvents getWaitForEvents() { return this._waitForEvents; }
   public ClusterHealthRequest setWaitForEvents(WaitForEvents val) { this._waitForEvents = val; return this; }
 
 
+  static final ParseField WAIT_FOR_NO_INITIALIZING_SHARDS = new ParseField("wait_for_no_initializing_shards");
   private Boolean _waitForNoInitializingShards;
   public Boolean getWaitForNoInitializingShards() { return this._waitForNoInitializingShards; }
   public ClusterHealthRequest setWaitForNoInitializingShards(Boolean val) { this._waitForNoInitializingShards = val; return this; }
 
 
+  static final ParseField WAIT_FOR_NO_RELOCATING_SHARDS = new ParseField("wait_for_no_relocating_shards");
   private Boolean _waitForNoRelocatingShards;
   public Boolean getWaitForNoRelocatingShards() { return this._waitForNoRelocatingShards; }
   public ClusterHealthRequest setWaitForNoRelocatingShards(Boolean val) { this._waitForNoRelocatingShards = val; return this; }
 
 
+  static final ParseField WAIT_FOR_NODES = new ParseField("wait_for_nodes");
   private String _waitForNodes;
   public String getWaitForNodes() { return this._waitForNodes; }
   public ClusterHealthRequest setWaitForNodes(String val) { this._waitForNodes = val; return this; }
 
 
+  static final ParseField WAIT_FOR_STATUS = new ParseField("wait_for_status");
   private WaitForStatus _waitForStatus;
   public WaitForStatus getWaitForStatus() { return this._waitForStatus; }
   public ClusterHealthRequest setWaitForStatus(WaitForStatus val) { this._waitForStatus = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ClusterHealthRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ClusterHealthRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ClusterHealthRequest, Void> PARSER =
+    new ConstructingObjectParser<>(ClusterHealthRequest.class.getName(), false, args -> new ClusterHealthRequest());
+
+  static {
+    PARSER.declareObject(ClusterHealthRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(ClusterHealthRequest::setLevel, (p, t) -> Level.PARSER.apply(p, null), LEVEL);
+    PARSER.declareBoolean(ClusterHealthRequest::setLocal, LOCAL);
+    PARSER.declareObject(ClusterHealthRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(ClusterHealthRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareString(ClusterHealthRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
+    PARSER.declareObject(ClusterHealthRequest::setWaitForEvents, (p, t) -> WaitForEvents.PARSER.apply(p, null), WAIT_FOR_EVENTS);
+    PARSER.declareBoolean(ClusterHealthRequest::setWaitForNoInitializingShards, WAIT_FOR_NO_INITIALIZING_SHARDS);
+    PARSER.declareBoolean(ClusterHealthRequest::setWaitForNoRelocatingShards, WAIT_FOR_NO_RELOCATING_SHARDS);
+    PARSER.declareString(ClusterHealthRequest::setWaitForNodes, WAIT_FOR_NODES);
+    PARSER.declareObject(ClusterHealthRequest::setWaitForStatus, (p, t) -> WaitForStatus.PARSER.apply(p, null), WAIT_FOR_STATUS);
+  }
 
 }

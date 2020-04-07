@@ -1,15 +1,42 @@
 
 package org.elasticsearch.analysis.tokenizers;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class WhitespaceTokenizer  {
+public class WhitespaceTokenizer  implements XContentable<WhitespaceTokenizer> {
   
+  static final ParseField MAX_TOKEN_LENGTH = new ParseField("max_token_length");
   private Integer _maxTokenLength;
   public Integer getMaxTokenLength() { return this._maxTokenLength; }
   public WhitespaceTokenizer setMaxTokenLength(Integer val) { this._maxTokenLength = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public WhitespaceTokenizer fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return WhitespaceTokenizer.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<WhitespaceTokenizer, Void> PARSER =
+    new ConstructingObjectParser<>(WhitespaceTokenizer.class.getName(), false, args -> new WhitespaceTokenizer());
+
+  static {
+    PARSER.declareInteger(WhitespaceTokenizer::setMaxTokenLength, MAX_TOKEN_LENGTH);
+  }
 
 }

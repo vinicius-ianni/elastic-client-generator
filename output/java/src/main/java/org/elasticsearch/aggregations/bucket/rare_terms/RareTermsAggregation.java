@@ -1,42 +1,79 @@
 
 package org.elasticsearch.aggregations.bucket.rare_terms;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.aggregations.bucket.terms.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
 
-public class RareTermsAggregation  {
+public class RareTermsAggregation  implements XContentable<RareTermsAggregation> {
   
+  static final ParseField EXCLUDE = new ParseField("exclude");
   private TermsExclude _exclude;
   public TermsExclude getExclude() { return this._exclude; }
   public RareTermsAggregation setExclude(TermsExclude val) { this._exclude = val; return this; }
 
 
+  static final ParseField FIELD = new ParseField("field");
   private Field _field;
   public Field getField() { return this._field; }
   public RareTermsAggregation setField(Field val) { this._field = val; return this; }
 
 
+  static final ParseField INCLUDE = new ParseField("include");
   private TermsInclude _include;
   public TermsInclude getInclude() { return this._include; }
   public RareTermsAggregation setInclude(TermsInclude val) { this._include = val; return this; }
 
 
+  static final ParseField MAX_DOC_COUNT = new ParseField("max_doc_count");
   private Long _maxDocCount;
   public Long getMaxDocCount() { return this._maxDocCount; }
   public RareTermsAggregation setMaxDocCount(Long val) { this._maxDocCount = val; return this; }
 
 
+  static final ParseField MISSING = new ParseField("missing");
   private Object _missing;
   public Object getMissing() { return this._missing; }
   public RareTermsAggregation setMissing(Object val) { this._missing = val; return this; }
 
 
+  static final ParseField PRECISION = new ParseField("precision");
   private Double _precision;
   public Double getPrecision() { return this._precision; }
   public RareTermsAggregation setPrecision(Double val) { this._precision = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public RareTermsAggregation fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return RareTermsAggregation.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<RareTermsAggregation, Void> PARSER =
+    new ConstructingObjectParser<>(RareTermsAggregation.class.getName(), false, args -> new RareTermsAggregation());
+
+  static {
+    PARSER.declareObject(RareTermsAggregation::setExclude, (p, t) -> TermsExclude.PARSER.apply(p, null), EXCLUDE);
+    PARSER.declareField(RareTermsAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(RareTermsAggregation::setInclude, (p, t) -> TermsInclude.PARSER.apply(p, null), INCLUDE);
+    PARSER.declareLong(RareTermsAggregation::setMaxDocCount, MAX_DOC_COUNT);
+    PARSER.declareObject(RareTermsAggregation::setMissing, (p, t) -> Object.PARSER.apply(p, null), MISSING);
+    PARSER.declareDouble(RareTermsAggregation::setPrecision, PRECISION);
+  }
 
 }

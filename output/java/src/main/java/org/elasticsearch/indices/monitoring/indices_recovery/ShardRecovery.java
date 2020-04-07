@@ -1,76 +1,127 @@
 
 package org.elasticsearch.indices.monitoring.indices_recovery;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.indices.monitoring.indices_recovery.*;
 
-public class ShardRecovery  {
+public class ShardRecovery  implements XContentable<ShardRecovery> {
   
+  static final ParseField ID = new ParseField("id");
   private Long _id;
   public Long getId() { return this._id; }
   public ShardRecovery setId(Long val) { this._id = val; return this; }
 
 
+  static final ParseField INDEX = new ParseField("index");
   private RecoveryIndexStatus _index;
   public RecoveryIndexStatus getIndex() { return this._index; }
   public ShardRecovery setIndex(RecoveryIndexStatus val) { this._index = val; return this; }
 
 
+  static final ParseField PRIMARY = new ParseField("primary");
   private Boolean _primary;
   public Boolean getPrimary() { return this._primary; }
   public ShardRecovery setPrimary(Boolean val) { this._primary = val; return this; }
 
 
+  static final ParseField SOURCE = new ParseField("source");
   private RecoveryOrigin _source;
   public RecoveryOrigin getSource() { return this._source; }
   public ShardRecovery setSource(RecoveryOrigin val) { this._source = val; return this; }
 
 
+  static final ParseField STAGE = new ParseField("stage");
   private String _stage;
   public String getStage() { return this._stage; }
   public ShardRecovery setStage(String val) { this._stage = val; return this; }
 
 
+  static final ParseField START = new ParseField("start");
   private RecoveryStartStatus _start;
   public RecoveryStartStatus getStart() { return this._start; }
   public ShardRecovery setStart(RecoveryStartStatus val) { this._start = val; return this; }
 
 
+  static final ParseField START_TIME_IN_MILLIS = new ParseField("start_time_in_millis");
   private Date _startTimeInMillis;
   public Date getStartTimeInMillis() { return this._startTimeInMillis; }
   public ShardRecovery setStartTimeInMillis(Date val) { this._startTimeInMillis = val; return this; }
 
 
+  static final ParseField STOP_TIME_IN_MILLIS = new ParseField("stop_time_in_millis");
   private Date _stopTimeInMillis;
   public Date getStopTimeInMillis() { return this._stopTimeInMillis; }
   public ShardRecovery setStopTimeInMillis(Date val) { this._stopTimeInMillis = val; return this; }
 
 
+  static final ParseField TARGET = new ParseField("target");
   private RecoveryOrigin _target;
   public RecoveryOrigin getTarget() { return this._target; }
   public ShardRecovery setTarget(RecoveryOrigin val) { this._target = val; return this; }
 
 
+  static final ParseField TOTAL_TIME_IN_MILLIS = new ParseField("total_time_in_millis");
   private Long _totalTimeInMillis;
   public Long getTotalTimeInMillis() { return this._totalTimeInMillis; }
   public ShardRecovery setTotalTimeInMillis(Long val) { this._totalTimeInMillis = val; return this; }
 
 
+  static final ParseField TRANSLOG = new ParseField("translog");
   private RecoveryTranslogStatus _translog;
   public RecoveryTranslogStatus getTranslog() { return this._translog; }
   public ShardRecovery setTranslog(RecoveryTranslogStatus val) { this._translog = val; return this; }
 
 
+  static final ParseField TYPE = new ParseField("type");
   private String _type;
   public String getType() { return this._type; }
   public ShardRecovery setType(String val) { this._type = val; return this; }
 
 
+  static final ParseField VERIFY_INDEX = new ParseField("verify_index");
   private RecoveryVerifyIndex _verifyIndex;
   public RecoveryVerifyIndex getVerifyIndex() { return this._verifyIndex; }
   public ShardRecovery setVerifyIndex(RecoveryVerifyIndex val) { this._verifyIndex = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ShardRecovery fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ShardRecovery.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ShardRecovery, Void> PARSER =
+    new ConstructingObjectParser<>(ShardRecovery.class.getName(), false, args -> new ShardRecovery());
+
+  static {
+    PARSER.declareLong(ShardRecovery::setId, ID);
+    PARSER.declareObject(ShardRecovery::setIndex, (p, t) -> RecoveryIndexStatus.PARSER.apply(p, null), INDEX);
+    PARSER.declareBoolean(ShardRecovery::setPrimary, PRIMARY);
+    PARSER.declareObject(ShardRecovery::setSource, (p, t) -> RecoveryOrigin.PARSER.apply(p, null), SOURCE);
+    PARSER.declareString(ShardRecovery::setStage, STAGE);
+    PARSER.declareObject(ShardRecovery::setStart, (p, t) -> RecoveryStartStatus.PARSER.apply(p, null), START);
+    PARSER.declareDate(ShardRecovery::setStartTimeInMillis, (p, t) -> Date.createFrom(p), START_TIME_IN_MILLIS);
+    PARSER.declareDate(ShardRecovery::setStopTimeInMillis, (p, t) -> Date.createFrom(p), STOP_TIME_IN_MILLIS);
+    PARSER.declareObject(ShardRecovery::setTarget, (p, t) -> RecoveryOrigin.PARSER.apply(p, null), TARGET);
+    PARSER.declareLong(ShardRecovery::setTotalTimeInMillis, TOTAL_TIME_IN_MILLIS);
+    PARSER.declareObject(ShardRecovery::setTranslog, (p, t) -> RecoveryTranslogStatus.PARSER.apply(p, null), TRANSLOG);
+    PARSER.declareString(ShardRecovery::setType, TYPE);
+    PARSER.declareObject(ShardRecovery::setVerifyIndex, (p, t) -> RecoveryVerifyIndex.PARSER.apply(p, null), VERIFY_INDEX);
+  }
 
 }

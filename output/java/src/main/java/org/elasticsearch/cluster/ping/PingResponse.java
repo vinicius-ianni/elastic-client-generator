@@ -1,11 +1,37 @@
 
 package org.elasticsearch.cluster.ping;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
 
 
-public class PingResponse  {
+
+
+public class PingResponse  implements XContentable<PingResponse> {
   
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public PingResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PingResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<PingResponse, Void> PARSER =
+    new ConstructingObjectParser<>(PingResponse.class.getName(), false, args -> new PingResponse());
+
+  static {
+    
+  }
+
 }

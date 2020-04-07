@@ -1,20 +1,49 @@
 
 package org.elasticsearch.document.multiple.multi_get.response;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.document.multiple.multi_get.response.*;
 
-public class MultiGetResponse  {
-  
-  private MultiGetHit<Object>[] _hits;
-  public MultiGetHit<Object>[] getHits() { return this._hits; }
-  public MultiGetResponse setHits(MultiGetHit<Object>[] val) { this._hits = val; return this; }
+public class MultiGetResponse  implements XContentable<MultiGetResponse> {
+
+  static final ParseField HITS = new ParseField("hits");
+  private List<MultiGetHit<Object>> _hits;
+  public List<MultiGetHit<Object>> getHits() { return this._hits; }
+  public MultiGetResponse setHits(List<MultiGetHit<Object>> val) { this._hits = val; return this; }
 
 
+  static final ParseField IS_VALID = new ParseField("is_valid");
   private Boolean _isValid;
   public Boolean getIsValid() { return this._isValid; }
   public MultiGetResponse setIsValid(Boolean val) { this._isValid = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public MultiGetResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return MultiGetResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<MultiGetResponse, Void> PARSER =
+    new ConstructingObjectParser<>(MultiGetResponse.class.getName(), false, args -> new MultiGetResponse());
+
+  static {
+    PARSER.declareObjectArray(MultiGetResponse::setHits, (p, t) -> null /* NULL TODO */, HITS);
+    PARSER.declareBoolean(MultiGetResponse::setIsValid, IS_VALID);
+  }
 
 }

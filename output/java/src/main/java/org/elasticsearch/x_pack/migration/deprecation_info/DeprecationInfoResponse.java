@@ -1,25 +1,56 @@
 
 package org.elasticsearch.x_pack.migration.deprecation_info;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.migration.deprecation_info.*;
 
-public class DeprecationInfoResponse  {
+public class DeprecationInfoResponse  implements XContentable<DeprecationInfoResponse> {
   
-  private DeprecationInfo[] _clusterSettings;
-  public DeprecationInfo[] getClusterSettings() { return this._clusterSettings; }
-  public DeprecationInfoResponse setClusterSettings(DeprecationInfo[] val) { this._clusterSettings = val; return this; }
+  static final ParseField CLUSTER_SETTINGS = new ParseField("cluster_settings");
+  private List<DeprecationInfo> _clusterSettings;
+  public List<DeprecationInfo> getClusterSettings() { return this._clusterSettings; }
+  public DeprecationInfoResponse setClusterSettings(List<DeprecationInfo> val) { this._clusterSettings = val; return this; }
 
 
-  private Map<String, DeprecationInfo[]> _indexSettings;
-  public Map<String, DeprecationInfo[]> getIndexSettings() { return this._indexSettings; }
-  public DeprecationInfoResponse setIndexSettings(Map<String, DeprecationInfo[]> val) { this._indexSettings = val; return this; }
+  static final ParseField INDEX_SETTINGS = new ParseField("index_settings");
+  private NamedContainer<String, List<DeprecationInfo>> _indexSettings;
+  public NamedContainer<String, List<DeprecationInfo>> getIndexSettings() { return this._indexSettings; }
+  public DeprecationInfoResponse setIndexSettings(NamedContainer<String, List<DeprecationInfo>> val) { this._indexSettings = val; return this; }
 
 
-  private DeprecationInfo[] _nodeSettings;
-  public DeprecationInfo[] getNodeSettings() { return this._nodeSettings; }
-  public DeprecationInfoResponse setNodeSettings(DeprecationInfo[] val) { this._nodeSettings = val; return this; }
+  static final ParseField NODE_SETTINGS = new ParseField("node_settings");
+  private List<DeprecationInfo> _nodeSettings;
+  public List<DeprecationInfo> getNodeSettings() { return this._nodeSettings; }
+  public DeprecationInfoResponse setNodeSettings(List<DeprecationInfo> val) { this._nodeSettings = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public DeprecationInfoResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return DeprecationInfoResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<DeprecationInfoResponse, Void> PARSER =
+    new ConstructingObjectParser<>(DeprecationInfoResponse.class.getName(), false, args -> new DeprecationInfoResponse());
+
+  static {
+    PARSER.declareObjectArray(DeprecationInfoResponse::setClusterSettings, (p, t) -> DeprecationInfo.PARSER.apply(p), CLUSTER_SETTINGS);
+    PARSER.declareObject(DeprecationInfoResponse::setIndexSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), INDEX_SETTINGS);;
+    PARSER.declareObjectArray(DeprecationInfoResponse::setNodeSettings, (p, t) -> DeprecationInfo.PARSER.apply(p), NODE_SETTINGS);
+  }
 
 }

@@ -1,90 +1,147 @@
 
 package org.elasticsearch.indices.monitoring.indices_stats;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_options.stats.*;
 
-public class IndexStats  {
+public class IndexStats  implements XContentable<IndexStats> {
   
+  static final ParseField COMPLETION = new ParseField("completion");
   private CompletionStats _completion;
   public CompletionStats getCompletion() { return this._completion; }
   public IndexStats setCompletion(CompletionStats val) { this._completion = val; return this; }
 
 
+  static final ParseField DOCS = new ParseField("docs");
   private DocStats _docs;
   public DocStats getDocs() { return this._docs; }
   public IndexStats setDocs(DocStats val) { this._docs = val; return this; }
 
 
+  static final ParseField FIELDDATA = new ParseField("fielddata");
   private FielddataStats _fielddata;
   public FielddataStats getFielddata() { return this._fielddata; }
   public IndexStats setFielddata(FielddataStats val) { this._fielddata = val; return this; }
 
 
+  static final ParseField FLUSH = new ParseField("flush");
   private FlushStats _flush;
   public FlushStats getFlush() { return this._flush; }
   public IndexStats setFlush(FlushStats val) { this._flush = val; return this; }
 
 
+  static final ParseField GET = new ParseField("get");
   private GetStats _get;
   public GetStats getGet() { return this._get; }
   public IndexStats setGet(GetStats val) { this._get = val; return this; }
 
 
+  static final ParseField INDEXING = new ParseField("indexing");
   private IndexingStats _indexing;
   public IndexingStats getIndexing() { return this._indexing; }
   public IndexStats setIndexing(IndexingStats val) { this._indexing = val; return this; }
 
 
+  static final ParseField MERGES = new ParseField("merges");
   private MergesStats _merges;
   public MergesStats getMerges() { return this._merges; }
   public IndexStats setMerges(MergesStats val) { this._merges = val; return this; }
 
 
+  static final ParseField QUERY_CACHE = new ParseField("query_cache");
   private QueryCacheStats _queryCache;
   public QueryCacheStats getQueryCache() { return this._queryCache; }
   public IndexStats setQueryCache(QueryCacheStats val) { this._queryCache = val; return this; }
 
 
+  static final ParseField RECOVERY = new ParseField("recovery");
   private RecoveryStats _recovery;
   public RecoveryStats getRecovery() { return this._recovery; }
   public IndexStats setRecovery(RecoveryStats val) { this._recovery = val; return this; }
 
 
+  static final ParseField REFRESH = new ParseField("refresh");
   private RefreshStats _refresh;
   public RefreshStats getRefresh() { return this._refresh; }
   public IndexStats setRefresh(RefreshStats val) { this._refresh = val; return this; }
 
 
+  static final ParseField REQUEST_CACHE = new ParseField("request_cache");
   private RequestCacheStats _requestCache;
   public RequestCacheStats getRequestCache() { return this._requestCache; }
   public IndexStats setRequestCache(RequestCacheStats val) { this._requestCache = val; return this; }
 
 
+  static final ParseField SEARCH = new ParseField("search");
   private SearchStats _search;
   public SearchStats getSearch() { return this._search; }
   public IndexStats setSearch(SearchStats val) { this._search = val; return this; }
 
 
+  static final ParseField SEGMENTS = new ParseField("segments");
   private SegmentsStats _segments;
   public SegmentsStats getSegments() { return this._segments; }
   public IndexStats setSegments(SegmentsStats val) { this._segments = val; return this; }
 
 
+  static final ParseField STORE = new ParseField("store");
   private StoreStats _store;
   public StoreStats getStore() { return this._store; }
   public IndexStats setStore(StoreStats val) { this._store = val; return this; }
 
 
+  static final ParseField TRANSLOG = new ParseField("translog");
   private TranslogStats _translog;
   public TranslogStats getTranslog() { return this._translog; }
   public IndexStats setTranslog(TranslogStats val) { this._translog = val; return this; }
 
 
+  static final ParseField WARMER = new ParseField("warmer");
   private WarmerStats _warmer;
   public WarmerStats getWarmer() { return this._warmer; }
   public IndexStats setWarmer(WarmerStats val) { this._warmer = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public IndexStats fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return IndexStats.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<IndexStats, Void> PARSER =
+    new ConstructingObjectParser<>(IndexStats.class.getName(), false, args -> new IndexStats());
+
+  static {
+    PARSER.declareObject(IndexStats::setCompletion, (p, t) -> CompletionStats.PARSER.apply(p, null), COMPLETION);
+    PARSER.declareObject(IndexStats::setDocs, (p, t) -> DocStats.PARSER.apply(p, null), DOCS);
+    PARSER.declareObject(IndexStats::setFielddata, (p, t) -> FielddataStats.PARSER.apply(p, null), FIELDDATA);
+    PARSER.declareObject(IndexStats::setFlush, (p, t) -> FlushStats.PARSER.apply(p, null), FLUSH);
+    PARSER.declareObject(IndexStats::setGet, (p, t) -> GetStats.PARSER.apply(p, null), GET);
+    PARSER.declareObject(IndexStats::setIndexing, (p, t) -> IndexingStats.PARSER.apply(p, null), INDEXING);
+    PARSER.declareObject(IndexStats::setMerges, (p, t) -> MergesStats.PARSER.apply(p, null), MERGES);
+    PARSER.declareObject(IndexStats::setQueryCache, (p, t) -> QueryCacheStats.PARSER.apply(p, null), QUERY_CACHE);
+    PARSER.declareObject(IndexStats::setRecovery, (p, t) -> RecoveryStats.PARSER.apply(p, null), RECOVERY);
+    PARSER.declareObject(IndexStats::setRefresh, (p, t) -> RefreshStats.PARSER.apply(p, null), REFRESH);
+    PARSER.declareObject(IndexStats::setRequestCache, (p, t) -> RequestCacheStats.PARSER.apply(p, null), REQUEST_CACHE);
+    PARSER.declareObject(IndexStats::setSearch, (p, t) -> SearchStats.PARSER.apply(p, null), SEARCH);
+    PARSER.declareObject(IndexStats::setSegments, (p, t) -> SegmentsStats.PARSER.apply(p, null), SEGMENTS);
+    PARSER.declareObject(IndexStats::setStore, (p, t) -> StoreStats.PARSER.apply(p, null), STORE);
+    PARSER.declareObject(IndexStats::setTranslog, (p, t) -> TranslogStats.PARSER.apply(p, null), TRANSLOG);
+    PARSER.declareObject(IndexStats::setWarmer, (p, t) -> WarmerStats.PARSER.apply(p, null), WARMER);
+  }
 
 }

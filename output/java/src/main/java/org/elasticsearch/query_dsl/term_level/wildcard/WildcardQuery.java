@@ -1,15 +1,42 @@
 
 package org.elasticsearch.query_dsl.term_level.wildcard;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.query_dsl.multi_term_query_rewrite.*;
 
-public class WildcardQuery  {
+public class WildcardQuery  implements XContentable<WildcardQuery> {
   
+  static final ParseField REWRITE = new ParseField("rewrite");
   private MultiTermQueryRewrite _rewrite;
   public MultiTermQueryRewrite getRewrite() { return this._rewrite; }
   public WildcardQuery setRewrite(MultiTermQueryRewrite val) { this._rewrite = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public WildcardQuery fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return WildcardQuery.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<WildcardQuery, Void> PARSER =
+    new ConstructingObjectParser<>(WildcardQuery.class.getName(), false, args -> new WildcardQuery());
+
+  static {
+    PARSER.declareObject(WildcardQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), REWRITE);
+  }
 
 }

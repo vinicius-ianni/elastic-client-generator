@@ -1,35 +1,70 @@
 
 package org.elasticsearch.x_pack.security.user.get_user;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
 
 
-public class XPackUser  {
+
+
+public class XPackUser  implements XContentable<XPackUser> {
   
+  static final ParseField EMAIL = new ParseField("email");
   private String _email;
   public String getEmail() { return this._email; }
   public XPackUser setEmail(String val) { this._email = val; return this; }
 
 
+  static final ParseField FULL_NAME = new ParseField("full_name");
   private String _fullName;
   public String getFullName() { return this._fullName; }
   public XPackUser setFullName(String val) { this._fullName = val; return this; }
 
 
-  private Map<String, Object> _metadata;
-  public Map<String, Object> getMetadata() { return this._metadata; }
-  public XPackUser setMetadata(Map<String, Object> val) { this._metadata = val; return this; }
+  static final ParseField METADATA = new ParseField("metadata");
+  private NamedContainer<String, Object> _metadata;
+  public NamedContainer<String, Object> getMetadata() { return this._metadata; }
+  public XPackUser setMetadata(NamedContainer<String, Object> val) { this._metadata = val; return this; }
 
 
-  private String[] _roles;
-  public String[] getRoles() { return this._roles; }
-  public XPackUser setRoles(String[] val) { this._roles = val; return this; }
+  static final ParseField ROLES = new ParseField("roles");
+  private List<String> _roles;
+  public List<String> getRoles() { return this._roles; }
+  public XPackUser setRoles(List<String> val) { this._roles = val; return this; }
 
 
+  static final ParseField USERNAME = new ParseField("username");
   private String _username;
   public String getUsername() { return this._username; }
   public XPackUser setUsername(String val) { this._username = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public XPackUser fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return XPackUser.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<XPackUser, Void> PARSER =
+    new ConstructingObjectParser<>(XPackUser.class.getName(), false, args -> new XPackUser());
+
+  static {
+    PARSER.declareString(XPackUser::setEmail, EMAIL);
+    PARSER.declareString(XPackUser::setFullName, FULL_NAME);
+    PARSER.declareObject(XPackUser::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareStringArray(XPackUser::setRoles, ROLES);
+    PARSER.declareString(XPackUser::setUsername, USERNAME);
+  }
 
 }

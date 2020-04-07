@@ -1,11 +1,37 @@
 
 package org.elasticsearch.query_dsl;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
 
 
-public class MatchNoneQuery  {
+
+
+public class MatchNoneQuery  implements XContentable<MatchNoneQuery> {
   
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public MatchNoneQuery fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return MatchNoneQuery.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<MatchNoneQuery, Void> PARSER =
+    new ConstructingObjectParser<>(MatchNoneQuery.class.getName(), false, args -> new MatchNoneQuery());
+
+  static {
+    
+  }
+
 }

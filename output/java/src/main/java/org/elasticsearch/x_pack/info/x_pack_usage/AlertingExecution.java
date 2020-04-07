@@ -1,15 +1,42 @@
 
 package org.elasticsearch.x_pack.info.x_pack_usage;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.info.x_pack_usage.*;
 
-public class AlertingExecution  {
+public class AlertingExecution  implements XContentable<AlertingExecution> {
   
-  private Map<String, ExecutionAction> _actions;
-  public Map<String, ExecutionAction> getActions() { return this._actions; }
-  public AlertingExecution setActions(Map<String, ExecutionAction> val) { this._actions = val; return this; }
+  static final ParseField ACTIONS = new ParseField("actions");
+  private NamedContainer<String, ExecutionAction> _actions;
+  public NamedContainer<String, ExecutionAction> getActions() { return this._actions; }
+  public AlertingExecution setActions(NamedContainer<String, ExecutionAction> val) { this._actions = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public AlertingExecution fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return AlertingExecution.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<AlertingExecution, Void> PARSER =
+    new ConstructingObjectParser<>(AlertingExecution.class.getName(), false, args -> new AlertingExecution());
+
+  static {
+    PARSER.declareObject(AlertingExecution::setActions, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ExecutionAction.PARSER.apply(pp, null)), ACTIONS);;
+  }
 
 }

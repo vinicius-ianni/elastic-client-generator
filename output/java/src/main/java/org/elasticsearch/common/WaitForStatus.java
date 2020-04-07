@@ -1,7 +1,11 @@
 
 package org.elasticsearch.common;
 
-public enum WaitForStatus {
+import org.elasticsearch.XContentable;
+import org.elasticsearch.common.xcontent.*;
+import java.io.IOException;
+
+public enum WaitForStatus implements XContentable<WaitForStatus> {
   Green("green"),
     Yellow("yellow"),
     Red("red");
@@ -11,4 +15,26 @@ public enum WaitForStatus {
 
   @Override
   public String toString() { return textRepresentation; }
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return builder.value(this.textRepresentation);
+  }
+
+  @Override
+  public WaitForStatus fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PARSER.apply(parser);
+  }
+
+  public static final CheckedFunction<XContentParser, WaitForStatus, IOException> PARSER = (parser) -> {
+    String text = parser.text();
+    switch (text) {
+      case "green": return WaitForStatus.Green;
+      case "yellow": return WaitForStatus.Yellow;
+      case "red": return WaitForStatus.Red;
+      default:
+        String message = String.format("'%s' not a valid value for enum '%s'", text, WaitForStatus.class.getName());
+        throw new XContentParseException(parser.getTokenLocation(), message);
+    }
+  };
 }

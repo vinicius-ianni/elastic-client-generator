@@ -1,25 +1,56 @@
 
 package org.elasticsearch.x_pack.watcher.execution;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class HttpInputResponseResult  {
+public class HttpInputResponseResult  implements XContentable<HttpInputResponseResult> {
   
+  static final ParseField BODY = new ParseField("body");
   private String _body;
   public String getBody() { return this._body; }
   public HttpInputResponseResult setBody(String val) { this._body = val; return this; }
 
 
-  private Map<String, String[]> _headers;
-  public Map<String, String[]> getHeaders() { return this._headers; }
-  public HttpInputResponseResult setHeaders(Map<String, String[]> val) { this._headers = val; return this; }
+  static final ParseField HEADERS = new ParseField("headers");
+  private NamedContainer<String, List<String>> _headers;
+  public NamedContainer<String, List<String>> getHeaders() { return this._headers; }
+  public HttpInputResponseResult setHeaders(NamedContainer<String, List<String>> val) { this._headers = val; return this; }
 
 
+  static final ParseField STATUS = new ParseField("status");
   private Integer _status;
   public Integer getStatus() { return this._status; }
   public HttpInputResponseResult setStatus(Integer val) { this._status = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public HttpInputResponseResult fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return HttpInputResponseResult.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<HttpInputResponseResult, Void> PARSER =
+    new ConstructingObjectParser<>(HttpInputResponseResult.class.getName(), false, args -> new HttpInputResponseResult());
+
+  static {
+    PARSER.declareString(HttpInputResponseResult::setBody, BODY);
+    PARSER.declareObject(HttpInputResponseResult::setHeaders, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), HEADERS);;
+    PARSER.declareInteger(HttpInputResponseResult::setStatus, STATUS);
+  }
 
 }

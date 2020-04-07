@@ -1,25 +1,56 @@
 
 package org.elasticsearch.analysis.tokenizers;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class PatternTokenizer  {
+public class PatternTokenizer  implements XContentable<PatternTokenizer> {
   
+  static final ParseField FLAGS = new ParseField("flags");
   private String _flags;
   public String getFlags() { return this._flags; }
   public PatternTokenizer setFlags(String val) { this._flags = val; return this; }
 
 
+  static final ParseField GROUP = new ParseField("group");
   private Integer _group;
   public Integer getGroup() { return this._group; }
   public PatternTokenizer setGroup(Integer val) { this._group = val; return this; }
 
 
+  static final ParseField PATTERN = new ParseField("pattern");
   private String _pattern;
   public String getPattern() { return this._pattern; }
   public PatternTokenizer setPattern(String val) { this._pattern = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public PatternTokenizer fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PatternTokenizer.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<PatternTokenizer, Void> PARSER =
+    new ConstructingObjectParser<>(PatternTokenizer.class.getName(), false, args -> new PatternTokenizer());
+
+  static {
+    PARSER.declareString(PatternTokenizer::setFlags, FLAGS);
+    PARSER.declareInteger(PatternTokenizer::setGroup, GROUP);
+    PARSER.declareString(PatternTokenizer::setPattern, PATTERN);
+  }
 
 }

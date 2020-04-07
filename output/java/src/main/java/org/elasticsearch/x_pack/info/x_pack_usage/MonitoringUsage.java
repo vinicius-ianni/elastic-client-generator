@@ -1,20 +1,49 @@
 
 package org.elasticsearch.x_pack.info.x_pack_usage;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class MonitoringUsage  {
+public class MonitoringUsage  implements XContentable<MonitoringUsage> {
   
+  static final ParseField COLLECTION_ENABLED = new ParseField("collection_enabled");
   private Boolean _collectionEnabled;
   public Boolean getCollectionEnabled() { return this._collectionEnabled; }
   public MonitoringUsage setCollectionEnabled(Boolean val) { this._collectionEnabled = val; return this; }
 
 
-  private Map<String, Long> _enabledExporters;
-  public Map<String, Long> getEnabledExporters() { return this._enabledExporters; }
-  public MonitoringUsage setEnabledExporters(Map<String, Long> val) { this._enabledExporters = val; return this; }
+  static final ParseField ENABLED_EXPORTERS = new ParseField("enabled_exporters");
+  private NamedContainer<String, Long> _enabledExporters;
+  public NamedContainer<String, Long> getEnabledExporters() { return this._enabledExporters; }
+  public MonitoringUsage setEnabledExporters(NamedContainer<String, Long> val) { this._enabledExporters = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public MonitoringUsage fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return MonitoringUsage.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<MonitoringUsage, Void> PARSER =
+    new ConstructingObjectParser<>(MonitoringUsage.class.getName(), false, args -> new MonitoringUsage());
+
+  static {
+    PARSER.declareBoolean(MonitoringUsage::setCollectionEnabled, COLLECTION_ENABLED);
+    PARSER.declareObject(MonitoringUsage::setEnabledExporters, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Long.PARSER.apply(pp, null)), ENABLED_EXPORTERS);;
+  }
 
 }

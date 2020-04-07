@@ -1,20 +1,49 @@
 
 package org.elasticsearch.modules.scripting;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
 
 
-public class StoredScript  {
+
+
+public class StoredScript  implements XContentable<StoredScript> {
   
+  static final ParseField LANG = new ParseField("lang");
   private String _lang;
   public String getLang() { return this._lang; }
   public StoredScript setLang(String val) { this._lang = val; return this; }
 
 
+  static final ParseField SOURCE = new ParseField("source");
   private String _source;
   public String getSource() { return this._source; }
   public StoredScript setSource(String val) { this._source = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public StoredScript fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return StoredScript.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<StoredScript, Void> PARSER =
+    new ConstructingObjectParser<>(StoredScript.class.getName(), false, args -> new StoredScript());
+
+  static {
+    PARSER.declareString(StoredScript::setLang, LANG);
+    PARSER.declareString(StoredScript::setSource, SOURCE);
+  }
 
 }

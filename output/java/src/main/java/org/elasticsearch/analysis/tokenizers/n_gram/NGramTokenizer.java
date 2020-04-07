@@ -1,26 +1,57 @@
 
 package org.elasticsearch.analysis.tokenizers.n_gram;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.analysis.tokenizers.n_gram.*;
 
-public class NGramTokenizer  {
+public class NGramTokenizer  implements XContentable<NGramTokenizer> {
   
+  static final ParseField MAX_GRAM = new ParseField("max_gram");
   private Integer _maxGram;
   public Integer getMaxGram() { return this._maxGram; }
   public NGramTokenizer setMaxGram(Integer val) { this._maxGram = val; return this; }
 
 
+  static final ParseField MIN_GRAM = new ParseField("min_gram");
   private Integer _minGram;
   public Integer getMinGram() { return this._minGram; }
   public NGramTokenizer setMinGram(Integer val) { this._minGram = val; return this; }
 
 
-  private TokenChar[] _tokenChars;
-  public TokenChar[] getTokenChars() { return this._tokenChars; }
-  public NGramTokenizer setTokenChars(TokenChar[] val) { this._tokenChars = val; return this; }
+  static final ParseField TOKEN_CHARS = new ParseField("token_chars");
+  private List<TokenChar> _tokenChars;
+  public List<TokenChar> getTokenChars() { return this._tokenChars; }
+  public NGramTokenizer setTokenChars(List<TokenChar> val) { this._tokenChars = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public NGramTokenizer fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return NGramTokenizer.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<NGramTokenizer, Void> PARSER =
+    new ConstructingObjectParser<>(NGramTokenizer.class.getName(), false, args -> new NGramTokenizer());
+
+  static {
+    PARSER.declareInteger(NGramTokenizer::setMaxGram, MAX_GRAM);
+    PARSER.declareInteger(NGramTokenizer::setMinGram, MIN_GRAM);
+    PARSER.declareObjectArray(NGramTokenizer::setTokenChars, (p, t) -> TokenChar.PARSER.apply(p), TOKEN_CHARS);
+  }
 
 }

@@ -1,42 +1,79 @@
 
 package org.elasticsearch.query_dsl.full_text.common_terms;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.*;
 import org.elasticsearch.common_options.minimum_should_match.*;
 
-public class CommonTermsQuery  {
+public class CommonTermsQuery  implements XContentable<CommonTermsQuery> {
   
+  static final ParseField ANALYZER = new ParseField("analyzer");
   private String _analyzer;
   public String getAnalyzer() { return this._analyzer; }
   public CommonTermsQuery setAnalyzer(String val) { this._analyzer = val; return this; }
 
 
+  static final ParseField CUTOFF_FREQUENCY = new ParseField("cutoff_frequency");
   private Double _cutoffFrequency;
   public Double getCutoffFrequency() { return this._cutoffFrequency; }
   public CommonTermsQuery setCutoffFrequency(Double val) { this._cutoffFrequency = val; return this; }
 
 
+  static final ParseField HIGH_FREQ_OPERATOR = new ParseField("high_freq_operator");
   private Operator _highFreqOperator;
   public Operator getHighFreqOperator() { return this._highFreqOperator; }
   public CommonTermsQuery setHighFreqOperator(Operator val) { this._highFreqOperator = val; return this; }
 
 
+  static final ParseField LOW_FREQ_OPERATOR = new ParseField("low_freq_operator");
   private Operator _lowFreqOperator;
   public Operator getLowFreqOperator() { return this._lowFreqOperator; }
   public CommonTermsQuery setLowFreqOperator(Operator val) { this._lowFreqOperator = val; return this; }
 
 
+  static final ParseField MINIMUM_SHOULD_MATCH = new ParseField("minimum_should_match");
   private MinimumShouldMatch _minimumShouldMatch;
   public MinimumShouldMatch getMinimumShouldMatch() { return this._minimumShouldMatch; }
   public CommonTermsQuery setMinimumShouldMatch(MinimumShouldMatch val) { this._minimumShouldMatch = val; return this; }
 
 
+  static final ParseField QUERY = new ParseField("query");
   private String _query;
   public String getQuery() { return this._query; }
   public CommonTermsQuery setQuery(String val) { this._query = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public CommonTermsQuery fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return CommonTermsQuery.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<CommonTermsQuery, Void> PARSER =
+    new ConstructingObjectParser<>(CommonTermsQuery.class.getName(), false, args -> new CommonTermsQuery());
+
+  static {
+    PARSER.declareString(CommonTermsQuery::setAnalyzer, ANALYZER);
+    PARSER.declareDouble(CommonTermsQuery::setCutoffFrequency, CUTOFF_FREQUENCY);
+    PARSER.declareObject(CommonTermsQuery::setHighFreqOperator, (p, t) -> Operator.PARSER.apply(p, null), HIGH_FREQ_OPERATOR);
+    PARSER.declareObject(CommonTermsQuery::setLowFreqOperator, (p, t) -> Operator.PARSER.apply(p, null), LOW_FREQ_OPERATOR);
+    PARSER.declareObject(CommonTermsQuery::setMinimumShouldMatch, (p, t) -> MinimumShouldMatch.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH);
+    PARSER.declareString(CommonTermsQuery::setQuery, QUERY);
+  }
 
 }

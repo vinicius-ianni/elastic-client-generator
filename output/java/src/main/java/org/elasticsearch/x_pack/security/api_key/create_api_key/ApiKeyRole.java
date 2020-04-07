@@ -1,20 +1,49 @@
 
 package org.elasticsearch.x_pack.security.api_key.create_api_key;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.security.api_key.create_api_key.*;
 
-public class ApiKeyRole  {
+public class ApiKeyRole  implements XContentable<ApiKeyRole> {
   
-  private String[] _cluster;
-  public String[] getCluster() { return this._cluster; }
-  public ApiKeyRole setCluster(String[] val) { this._cluster = val; return this; }
+  static final ParseField CLUSTER = new ParseField("cluster");
+  private List<String> _cluster;
+  public List<String> getCluster() { return this._cluster; }
+  public ApiKeyRole setCluster(List<String> val) { this._cluster = val; return this; }
 
 
-  private ApiKeyPrivileges[] _index;
-  public ApiKeyPrivileges[] getIndex() { return this._index; }
-  public ApiKeyRole setIndex(ApiKeyPrivileges[] val) { this._index = val; return this; }
+  static final ParseField INDEX = new ParseField("index");
+  private List<ApiKeyPrivileges> _index;
+  public List<ApiKeyPrivileges> getIndex() { return this._index; }
+  public ApiKeyRole setIndex(List<ApiKeyPrivileges> val) { this._index = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ApiKeyRole fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ApiKeyRole.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ApiKeyRole, Void> PARSER =
+    new ConstructingObjectParser<>(ApiKeyRole.class.getName(), false, args -> new ApiKeyRole());
+
+  static {
+    PARSER.declareStringArray(ApiKeyRole::setCluster, CLUSTER);
+    PARSER.declareObjectArray(ApiKeyRole::setIndex, (p, t) -> ApiKeyPrivileges.PARSER.apply(p), INDEX);
+  }
 
 }

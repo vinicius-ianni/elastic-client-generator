@@ -1,25 +1,56 @@
 
 package org.elasticsearch.query_dsl.full_text.intervals;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_abstractions.infer.field.*;
 
-public class IntervalsPrefix  {
+public class IntervalsPrefix  implements XContentable<IntervalsPrefix> {
   
+  static final ParseField ANALYZER = new ParseField("analyzer");
   private String _analyzer;
   public String getAnalyzer() { return this._analyzer; }
   public IntervalsPrefix setAnalyzer(String val) { this._analyzer = val; return this; }
 
 
+  static final ParseField PREFIX = new ParseField("prefix");
   private String _prefix;
   public String getPrefix() { return this._prefix; }
   public IntervalsPrefix setPrefix(String val) { this._prefix = val; return this; }
 
 
+  static final ParseField USE_FIELD = new ParseField("use_field");
   private Field _useField;
   public Field getUseField() { return this._useField; }
   public IntervalsPrefix setUseField(Field val) { this._useField = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public IntervalsPrefix fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return IntervalsPrefix.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<IntervalsPrefix, Void> PARSER =
+    new ConstructingObjectParser<>(IntervalsPrefix.class.getName(), false, args -> new IntervalsPrefix());
+
+  static {
+    PARSER.declareString(IntervalsPrefix::setAnalyzer, ANALYZER);
+    PARSER.declareString(IntervalsPrefix::setPrefix, PREFIX);
+    PARSER.declareField(IntervalsPrefix::setUseField, (p, t) -> Field.createFrom(p), USE_FIELD);
+  }
 
 }

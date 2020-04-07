@@ -1,30 +1,63 @@
 
 package org.elasticsearch.document.single.term_vectors;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class Token  {
+public class Token  implements XContentable<Token> {
   
+  static final ParseField END_OFFSET = new ParseField("end_offset");
   private Integer _endOffset;
   public Integer getEndOffset() { return this._endOffset; }
   public Token setEndOffset(Integer val) { this._endOffset = val; return this; }
 
 
+  static final ParseField PAYLOAD = new ParseField("payload");
   private String _payload;
   public String getPayload() { return this._payload; }
   public Token setPayload(String val) { this._payload = val; return this; }
 
 
+  static final ParseField POSITION = new ParseField("position");
   private Integer _position;
   public Integer getPosition() { return this._position; }
   public Token setPosition(Integer val) { this._position = val; return this; }
 
 
+  static final ParseField START_OFFSET = new ParseField("start_offset");
   private Integer _startOffset;
   public Integer getStartOffset() { return this._startOffset; }
   public Token setStartOffset(Integer val) { this._startOffset = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public Token fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return Token.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<Token, Void> PARSER =
+    new ConstructingObjectParser<>(Token.class.getName(), false, args -> new Token());
+
+  static {
+    PARSER.declareInteger(Token::setEndOffset, END_OFFSET);
+    PARSER.declareString(Token::setPayload, PAYLOAD);
+    PARSER.declareInteger(Token::setPosition, POSITION);
+    PARSER.declareInteger(Token::setStartOffset, START_OFFSET);
+  }
 
 }

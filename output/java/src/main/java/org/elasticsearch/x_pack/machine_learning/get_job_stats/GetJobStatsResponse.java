@@ -1,21 +1,50 @@
 
 package org.elasticsearch.x_pack.machine_learning.get_job_stats;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.config.*;
 
-public class GetJobStatsResponse  {
+public class GetJobStatsResponse  implements XContentable<GetJobStatsResponse> {
   
+  static final ParseField COUNT = new ParseField("count");
   private Long _count;
   public Long getCount() { return this._count; }
   public GetJobStatsResponse setCount(Long val) { this._count = val; return this; }
 
 
-  private JobStats[] _jobs;
-  public JobStats[] getJobs() { return this._jobs; }
-  public GetJobStatsResponse setJobs(JobStats[] val) { this._jobs = val; return this; }
+  static final ParseField JOBS = new ParseField("jobs");
+  private List<JobStats> _jobs;
+  public List<JobStats> getJobs() { return this._jobs; }
+  public GetJobStatsResponse setJobs(List<JobStats> val) { this._jobs = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public GetJobStatsResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return GetJobStatsResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<GetJobStatsResponse, Void> PARSER =
+    new ConstructingObjectParser<>(GetJobStatsResponse.class.getName(), false, args -> new GetJobStatsResponse());
+
+  static {
+    PARSER.declareLong(GetJobStatsResponse::setCount, COUNT);
+    PARSER.declareObjectArray(GetJobStatsResponse::setJobs, (p, t) -> JobStats.PARSER.apply(p), JOBS);
+  }
 
 }

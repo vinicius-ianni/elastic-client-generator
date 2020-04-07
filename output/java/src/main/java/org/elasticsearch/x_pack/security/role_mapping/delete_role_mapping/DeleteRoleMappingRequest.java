@@ -1,15 +1,42 @@
 
 package org.elasticsearch.x_pack.security.role_mapping.delete_role_mapping;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common.*;
 
-public class DeleteRoleMappingRequest  {
+public class DeleteRoleMappingRequest  implements XContentable<DeleteRoleMappingRequest> {
   
+  static final ParseField REFRESH = new ParseField("refresh");
   private Refresh _refresh;
   public Refresh getRefresh() { return this._refresh; }
   public DeleteRoleMappingRequest setRefresh(Refresh val) { this._refresh = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public DeleteRoleMappingRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return DeleteRoleMappingRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<DeleteRoleMappingRequest, Void> PARSER =
+    new ConstructingObjectParser<>(DeleteRoleMappingRequest.class.getName(), false, args -> new DeleteRoleMappingRequest());
+
+  static {
+    PARSER.declareObject(DeleteRoleMappingRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
+  }
 
 }

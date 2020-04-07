@@ -1,21 +1,50 @@
 
 package org.elasticsearch.x_pack.machine_learning.get_influencers;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.results.*;
 
-public class GetInfluencersResponse  {
+public class GetInfluencersResponse  implements XContentable<GetInfluencersResponse> {
   
+  static final ParseField COUNT = new ParseField("count");
   private Long _count;
   public Long getCount() { return this._count; }
   public GetInfluencersResponse setCount(Long val) { this._count = val; return this; }
 
 
-  private BucketInfluencer[] _influencers;
-  public BucketInfluencer[] getInfluencers() { return this._influencers; }
-  public GetInfluencersResponse setInfluencers(BucketInfluencer[] val) { this._influencers = val; return this; }
+  static final ParseField INFLUENCERS = new ParseField("influencers");
+  private List<BucketInfluencer> _influencers;
+  public List<BucketInfluencer> getInfluencers() { return this._influencers; }
+  public GetInfluencersResponse setInfluencers(List<BucketInfluencer> val) { this._influencers = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public GetInfluencersResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return GetInfluencersResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<GetInfluencersResponse, Void> PARSER =
+    new ConstructingObjectParser<>(GetInfluencersResponse.class.getName(), false, args -> new GetInfluencersResponse());
+
+  static {
+    PARSER.declareLong(GetInfluencersResponse::setCount, COUNT);
+    PARSER.declareObjectArray(GetInfluencersResponse::setInfluencers, (p, t) -> BucketInfluencer.PARSER.apply(p), INFLUENCERS);
+  }
 
 }

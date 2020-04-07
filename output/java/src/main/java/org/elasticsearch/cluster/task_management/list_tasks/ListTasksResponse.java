@@ -1,26 +1,57 @@
 
 package org.elasticsearch.cluster.task_management.list_tasks;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common.*;
 import org.elasticsearch.cluster.task_management.list_tasks.*;
 
-public class ListTasksResponse  {
+public class ListTasksResponse  implements XContentable<ListTasksResponse> {
   
+  static final ParseField IS_VALID = new ParseField("is_valid");
   private Boolean _isValid;
   public Boolean getIsValid() { return this._isValid; }
   public ListTasksResponse setIsValid(Boolean val) { this._isValid = val; return this; }
 
 
-  private ErrorCause[] _nodeFailures;
-  public ErrorCause[] getNodeFailures() { return this._nodeFailures; }
-  public ListTasksResponse setNodeFailures(ErrorCause[] val) { this._nodeFailures = val; return this; }
+  static final ParseField NODE_FAILURES = new ParseField("node_failures");
+  private List<ErrorCause> _nodeFailures;
+  public List<ErrorCause> getNodeFailures() { return this._nodeFailures; }
+  public ListTasksResponse setNodeFailures(List<ErrorCause> val) { this._nodeFailures = val; return this; }
 
 
-  private Map<String, TaskExecutingNode> _nodes;
-  public Map<String, TaskExecutingNode> getNodes() { return this._nodes; }
-  public ListTasksResponse setNodes(Map<String, TaskExecutingNode> val) { this._nodes = val; return this; }
+  static final ParseField NODES = new ParseField("nodes");
+  private NamedContainer<String, TaskExecutingNode> _nodes;
+  public NamedContainer<String, TaskExecutingNode> getNodes() { return this._nodes; }
+  public ListTasksResponse setNodes(NamedContainer<String, TaskExecutingNode> val) { this._nodes = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ListTasksResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ListTasksResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ListTasksResponse, Void> PARSER =
+    new ConstructingObjectParser<>(ListTasksResponse.class.getName(), false, args -> new ListTasksResponse());
+
+  static {
+    PARSER.declareBoolean(ListTasksResponse::setIsValid, IS_VALID);
+    PARSER.declareObjectArray(ListTasksResponse::setNodeFailures, (p, t) -> ErrorCause.PARSER.apply(p), NODE_FAILURES);
+    PARSER.declareObject(ListTasksResponse::setNodes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> TaskExecutingNode.PARSER.apply(pp, null)), NODES);;
+  }
 
 }

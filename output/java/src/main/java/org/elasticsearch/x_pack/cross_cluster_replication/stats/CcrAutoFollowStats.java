@@ -1,37 +1,72 @@
 
 package org.elasticsearch.x_pack.cross_cluster_replication.stats;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.x_pack.cross_cluster_replication.stats.*;
 
-public class CcrAutoFollowStats  {
+public class CcrAutoFollowStats  implements XContentable<CcrAutoFollowStats> {
   
+  static final ParseField NUMBER_OF_FAILED_FOLLOW_INDICES = new ParseField("number_of_failed_follow_indices");
   private Long _numberOfFailedFollowIndices;
   public Long getNumberOfFailedFollowIndices() { return this._numberOfFailedFollowIndices; }
   public CcrAutoFollowStats setNumberOfFailedFollowIndices(Long val) { this._numberOfFailedFollowIndices = val; return this; }
 
 
+  static final ParseField NUMBER_OF_FAILED_REMOTE_CLUSTER_STATE_REQUESTS = new ParseField("number_of_failed_remote_cluster_state_requests");
   private Long _numberOfFailedRemoteClusterStateRequests;
   public Long getNumberOfFailedRemoteClusterStateRequests() { return this._numberOfFailedRemoteClusterStateRequests; }
   public CcrAutoFollowStats setNumberOfFailedRemoteClusterStateRequests(Long val) { this._numberOfFailedRemoteClusterStateRequests = val; return this; }
 
 
+  static final ParseField NUMBER_OF_SUCCESSFUL_FOLLOW_INDICES = new ParseField("number_of_successful_follow_indices");
   private Long _numberOfSuccessfulFollowIndices;
   public Long getNumberOfSuccessfulFollowIndices() { return this._numberOfSuccessfulFollowIndices; }
   public CcrAutoFollowStats setNumberOfSuccessfulFollowIndices(Long val) { this._numberOfSuccessfulFollowIndices = val; return this; }
 
 
-  private ErrorCause[] _recentAutoFollowErrors;
-  public ErrorCause[] getRecentAutoFollowErrors() { return this._recentAutoFollowErrors; }
-  public CcrAutoFollowStats setRecentAutoFollowErrors(ErrorCause[] val) { this._recentAutoFollowErrors = val; return this; }
+  static final ParseField RECENT_AUTO_FOLLOW_ERRORS = new ParseField("recent_auto_follow_errors");
+  private List<ErrorCause> _recentAutoFollowErrors;
+  public List<ErrorCause> getRecentAutoFollowErrors() { return this._recentAutoFollowErrors; }
+  public CcrAutoFollowStats setRecentAutoFollowErrors(List<ErrorCause> val) { this._recentAutoFollowErrors = val; return this; }
 
 
-  private AutoFollowedCluster[] _autoFollowedClusters;
-  public AutoFollowedCluster[] getAutoFollowedClusters() { return this._autoFollowedClusters; }
-  public CcrAutoFollowStats setAutoFollowedClusters(AutoFollowedCluster[] val) { this._autoFollowedClusters = val; return this; }
+  static final ParseField AUTO_FOLLOWED_CLUSTERS = new ParseField("auto_followed_clusters");
+  private List<AutoFollowedCluster> _autoFollowedClusters;
+  public List<AutoFollowedCluster> getAutoFollowedClusters() { return this._autoFollowedClusters; }
+  public CcrAutoFollowStats setAutoFollowedClusters(List<AutoFollowedCluster> val) { this._autoFollowedClusters = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public CcrAutoFollowStats fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return CcrAutoFollowStats.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<CcrAutoFollowStats, Void> PARSER =
+    new ConstructingObjectParser<>(CcrAutoFollowStats.class.getName(), false, args -> new CcrAutoFollowStats());
+
+  static {
+    PARSER.declareLong(CcrAutoFollowStats::setNumberOfFailedFollowIndices, NUMBER_OF_FAILED_FOLLOW_INDICES);
+    PARSER.declareLong(CcrAutoFollowStats::setNumberOfFailedRemoteClusterStateRequests, NUMBER_OF_FAILED_REMOTE_CLUSTER_STATE_REQUESTS);
+    PARSER.declareLong(CcrAutoFollowStats::setNumberOfSuccessfulFollowIndices, NUMBER_OF_SUCCESSFUL_FOLLOW_INDICES);
+    PARSER.declareObjectArray(CcrAutoFollowStats::setRecentAutoFollowErrors, (p, t) -> ErrorCause.PARSER.apply(p), RECENT_AUTO_FOLLOW_ERRORS);
+    PARSER.declareObjectArray(CcrAutoFollowStats::setAutoFollowedClusters, (p, t) -> AutoFollowedCluster.PARSER.apply(p), AUTO_FOLLOWED_CLUSTERS);
+  }
 
 }

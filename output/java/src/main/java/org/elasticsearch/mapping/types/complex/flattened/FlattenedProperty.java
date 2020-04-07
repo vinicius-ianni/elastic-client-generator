@@ -1,61 +1,106 @@
 
 package org.elasticsearch.mapping.types.complex.flattened;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.mapping.types.core.*;
 
-public class FlattenedProperty  {
+public class FlattenedProperty  implements XContentable<FlattenedProperty> {
   
+  static final ParseField BOOST = new ParseField("boost");
   private Double _boost;
   public Double getBoost() { return this._boost; }
   public FlattenedProperty setBoost(Double val) { this._boost = val; return this; }
 
 
+  static final ParseField DEPTH_LIMIT = new ParseField("depth_limit");
   private Integer _depthLimit;
   public Integer getDepthLimit() { return this._depthLimit; }
   public FlattenedProperty setDepthLimit(Integer val) { this._depthLimit = val; return this; }
 
 
+  static final ParseField DOC_VALUES = new ParseField("doc_values");
   private Boolean _docValues;
   public Boolean getDocValues() { return this._docValues; }
   public FlattenedProperty setDocValues(Boolean val) { this._docValues = val; return this; }
 
 
+  static final ParseField EAGER_GLOBAL_ORDINALS = new ParseField("eager_global_ordinals");
   private Boolean _eagerGlobalOrdinals;
   public Boolean getEagerGlobalOrdinals() { return this._eagerGlobalOrdinals; }
   public FlattenedProperty setEagerGlobalOrdinals(Boolean val) { this._eagerGlobalOrdinals = val; return this; }
 
 
+  static final ParseField IGNORE_ABOVE = new ParseField("ignore_above");
   private Integer _ignoreAbove;
   public Integer getIgnoreAbove() { return this._ignoreAbove; }
   public FlattenedProperty setIgnoreAbove(Integer val) { this._ignoreAbove = val; return this; }
 
 
+  static final ParseField INDEX = new ParseField("index");
   private Boolean _index;
   public Boolean getIndex() { return this._index; }
   public FlattenedProperty setIndex(Boolean val) { this._index = val; return this; }
 
 
+  static final ParseField INDEX_OPTIONS = new ParseField("index_options");
   private IndexOptions _indexOptions;
   public IndexOptions getIndexOptions() { return this._indexOptions; }
   public FlattenedProperty setIndexOptions(IndexOptions val) { this._indexOptions = val; return this; }
 
 
+  static final ParseField NULL_VALUE = new ParseField("null_value");
   private String _nullValue;
   public String getNullValue() { return this._nullValue; }
   public FlattenedProperty setNullValue(String val) { this._nullValue = val; return this; }
 
 
+  static final ParseField SIMILARITY = new ParseField("similarity");
   private String _similarity;
   public String getSimilarity() { return this._similarity; }
   public FlattenedProperty setSimilarity(String val) { this._similarity = val; return this; }
 
 
+  static final ParseField SPLIT_QUERIES_ON_WHITESPACE = new ParseField("split_queries_on_whitespace");
   private Boolean _splitQueriesOnWhitespace;
   public Boolean getSplitQueriesOnWhitespace() { return this._splitQueriesOnWhitespace; }
   public FlattenedProperty setSplitQueriesOnWhitespace(Boolean val) { this._splitQueriesOnWhitespace = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public FlattenedProperty fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return FlattenedProperty.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<FlattenedProperty, Void> PARSER =
+    new ConstructingObjectParser<>(FlattenedProperty.class.getName(), false, args -> new FlattenedProperty());
+
+  static {
+    PARSER.declareDouble(FlattenedProperty::setBoost, BOOST);
+    PARSER.declareInteger(FlattenedProperty::setDepthLimit, DEPTH_LIMIT);
+    PARSER.declareBoolean(FlattenedProperty::setDocValues, DOC_VALUES);
+    PARSER.declareBoolean(FlattenedProperty::setEagerGlobalOrdinals, EAGER_GLOBAL_ORDINALS);
+    PARSER.declareInteger(FlattenedProperty::setIgnoreAbove, IGNORE_ABOVE);
+    PARSER.declareBoolean(FlattenedProperty::setIndex, INDEX);
+    PARSER.declareObject(FlattenedProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p, null), INDEX_OPTIONS);
+    PARSER.declareString(FlattenedProperty::setNullValue, NULL_VALUE);
+    PARSER.declareString(FlattenedProperty::setSimilarity, SIMILARITY);
+    PARSER.declareBoolean(FlattenedProperty::setSplitQueriesOnWhitespace, SPLIT_QUERIES_ON_WHITESPACE);
+  }
 
 }

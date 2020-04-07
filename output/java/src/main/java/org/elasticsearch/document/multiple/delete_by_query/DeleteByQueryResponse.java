@@ -1,87 +1,142 @@
 
 package org.elasticsearch.document.multiple.delete_by_query;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.document.multiple.*;
 import org.elasticsearch.common_abstractions.infer.task_id.*;
 
-public class DeleteByQueryResponse  {
+public class DeleteByQueryResponse  implements XContentable<DeleteByQueryResponse> {
   
+  static final ParseField IS_VALID = new ParseField("is_valid");
   private Boolean _isValid;
   public Boolean getIsValid() { return this._isValid; }
   public DeleteByQueryResponse setIsValid(Boolean val) { this._isValid = val; return this; }
 
 
+  static final ParseField BATCHES = new ParseField("batches");
   private Long _batches;
   public Long getBatches() { return this._batches; }
   public DeleteByQueryResponse setBatches(Long val) { this._batches = val; return this; }
 
 
+  static final ParseField DELETED = new ParseField("deleted");
   private Long _deleted;
   public Long getDeleted() { return this._deleted; }
   public DeleteByQueryResponse setDeleted(Long val) { this._deleted = val; return this; }
 
 
-  private BulkIndexByScrollFailure[] _failures;
-  public BulkIndexByScrollFailure[] getFailures() { return this._failures; }
-  public DeleteByQueryResponse setFailures(BulkIndexByScrollFailure[] val) { this._failures = val; return this; }
+  static final ParseField FAILURES = new ParseField("failures");
+  private List<BulkIndexByScrollFailure> _failures;
+  public List<BulkIndexByScrollFailure> getFailures() { return this._failures; }
+  public DeleteByQueryResponse setFailures(List<BulkIndexByScrollFailure> val) { this._failures = val; return this; }
 
 
+  static final ParseField NOOPS = new ParseField("noops");
   private Long _noops;
   public Long getNoops() { return this._noops; }
   public DeleteByQueryResponse setNoops(Long val) { this._noops = val; return this; }
 
 
+  static final ParseField REQUESTS_PER_SECOND = new ParseField("requests_per_second");
   private Float _requestsPerSecond;
   public Float getRequestsPerSecond() { return this._requestsPerSecond; }
   public DeleteByQueryResponse setRequestsPerSecond(Float val) { this._requestsPerSecond = val; return this; }
 
 
+  static final ParseField RETRIES = new ParseField("retries");
   private Retries _retries;
   public Retries getRetries() { return this._retries; }
   public DeleteByQueryResponse setRetries(Retries val) { this._retries = val; return this; }
 
 
+  static final ParseField SLICE_ID = new ParseField("slice_id");
   private Integer _sliceId;
   public Integer getSliceId() { return this._sliceId; }
   public DeleteByQueryResponse setSliceId(Integer val) { this._sliceId = val; return this; }
 
 
+  static final ParseField TASK = new ParseField("task");
   private TaskId _task;
   public TaskId getTask() { return this._task; }
   public DeleteByQueryResponse setTask(TaskId val) { this._task = val; return this; }
 
 
+  static final ParseField THROTTLED_MILLIS = new ParseField("throttled_millis");
   private Long _throttledMillis;
   public Long getThrottledMillis() { return this._throttledMillis; }
   public DeleteByQueryResponse setThrottledMillis(Long val) { this._throttledMillis = val; return this; }
 
 
+  static final ParseField THROTTLED_UNTIL_MILLIS = new ParseField("throttled_until_millis");
   private Long _throttledUntilMillis;
   public Long getThrottledUntilMillis() { return this._throttledUntilMillis; }
   public DeleteByQueryResponse setThrottledUntilMillis(Long val) { this._throttledUntilMillis = val; return this; }
 
 
+  static final ParseField TIMED_OUT = new ParseField("timed_out");
   private Boolean _timedOut;
   public Boolean getTimedOut() { return this._timedOut; }
   public DeleteByQueryResponse setTimedOut(Boolean val) { this._timedOut = val; return this; }
 
 
+  static final ParseField TOOK = new ParseField("took");
   private Long _took;
   public Long getTook() { return this._took; }
   public DeleteByQueryResponse setTook(Long val) { this._took = val; return this; }
 
 
+  static final ParseField TOTAL = new ParseField("total");
   private Long _total;
   public Long getTotal() { return this._total; }
   public DeleteByQueryResponse setTotal(Long val) { this._total = val; return this; }
 
 
+  static final ParseField VERSION_CONFLICTS = new ParseField("version_conflicts");
   private Long _versionConflicts;
   public Long getVersionConflicts() { return this._versionConflicts; }
   public DeleteByQueryResponse setVersionConflicts(Long val) { this._versionConflicts = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public DeleteByQueryResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return DeleteByQueryResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<DeleteByQueryResponse, Void> PARSER =
+    new ConstructingObjectParser<>(DeleteByQueryResponse.class.getName(), false, args -> new DeleteByQueryResponse());
+
+  static {
+    PARSER.declareBoolean(DeleteByQueryResponse::setIsValid, IS_VALID);
+    PARSER.declareLong(DeleteByQueryResponse::setBatches, BATCHES);
+    PARSER.declareLong(DeleteByQueryResponse::setDeleted, DELETED);
+    PARSER.declareObjectArray(DeleteByQueryResponse::setFailures, (p, t) -> BulkIndexByScrollFailure.PARSER.apply(p), FAILURES);
+    PARSER.declareLong(DeleteByQueryResponse::setNoops, NOOPS);
+    PARSER.declareFloat(DeleteByQueryResponse::setRequestsPerSecond, REQUESTS_PER_SECOND);
+    PARSER.declareObject(DeleteByQueryResponse::setRetries, (p, t) -> Retries.PARSER.apply(p, null), RETRIES);
+    PARSER.declareInteger(DeleteByQueryResponse::setSliceId, SLICE_ID);
+    PARSER.declareTaskId(DeleteByQueryResponse::setTask, (p, t) -> TaskId.createFrom(p), TASK);
+    PARSER.declareLong(DeleteByQueryResponse::setThrottledMillis, THROTTLED_MILLIS);
+    PARSER.declareLong(DeleteByQueryResponse::setThrottledUntilMillis, THROTTLED_UNTIL_MILLIS);
+    PARSER.declareBoolean(DeleteByQueryResponse::setTimedOut, TIMED_OUT);
+    PARSER.declareLong(DeleteByQueryResponse::setTook, TOOK);
+    PARSER.declareLong(DeleteByQueryResponse::setTotal, TOTAL);
+    PARSER.declareLong(DeleteByQueryResponse::setVersionConflicts, VERSION_CONFLICTS);
+  }
 
 }

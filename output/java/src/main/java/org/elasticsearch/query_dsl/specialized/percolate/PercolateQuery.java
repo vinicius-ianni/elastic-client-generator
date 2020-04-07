@@ -1,54 +1,95 @@
 
 package org.elasticsearch.query_dsl.specialized.percolate;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.internal.*;
 
-public class PercolateQuery  {
+public class PercolateQuery  implements XContentable<PercolateQuery> {
   
+  static final ParseField DOCUMENT = new ParseField("document");
   private Object _document;
   public Object getDocument() { return this._document; }
   public PercolateQuery setDocument(Object val) { this._document = val; return this; }
 
 
-  private Object[] _documents;
-  public Object[] getDocuments() { return this._documents; }
-  public PercolateQuery setDocuments(Object[] val) { this._documents = val; return this; }
+  static final ParseField DOCUMENTS = new ParseField("documents");
+  private List<Object> _documents;
+  public List<Object> getDocuments() { return this._documents; }
+  public PercolateQuery setDocuments(List<Object> val) { this._documents = val; return this; }
 
 
+  static final ParseField FIELD = new ParseField("field");
   private Field _field;
   public Field getField() { return this._field; }
   public PercolateQuery setField(Field val) { this._field = val; return this; }
 
 
+  static final ParseField ID = new ParseField("id");
   private Id _id;
   public Id getId() { return this._id; }
   public PercolateQuery setId(Id val) { this._id = val; return this; }
 
 
+  static final ParseField INDEX = new ParseField("index");
   private IndexName _index;
   public IndexName getIndex() { return this._index; }
   public PercolateQuery setIndex(IndexName val) { this._index = val; return this; }
 
 
+  static final ParseField PREFERENCE = new ParseField("preference");
   private String _preference;
   public String getPreference() { return this._preference; }
   public PercolateQuery setPreference(String val) { this._preference = val; return this; }
 
 
+  static final ParseField ROUTING = new ParseField("routing");
   private Routing _routing;
   public Routing getRouting() { return this._routing; }
   public PercolateQuery setRouting(Routing val) { this._routing = val; return this; }
 
 
+  static final ParseField VERSION = new ParseField("version");
   private Long _version;
   public Long getVersion() { return this._version; }
   public PercolateQuery setVersion(Long val) { this._version = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public PercolateQuery fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PercolateQuery.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<PercolateQuery, Void> PARSER =
+    new ConstructingObjectParser<>(PercolateQuery.class.getName(), false, args -> new PercolateQuery());
+
+  static {
+    PARSER.declareObject(PercolateQuery::setDocument, (p, t) -> Object.PARSER.apply(p, null), DOCUMENT);
+    PARSER.declareObjectArray(PercolateQuery::setDocuments, (p, t) -> Object.PARSER.apply(p), DOCUMENTS);
+    PARSER.declareField(PercolateQuery::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareId(PercolateQuery::setId, (p, t) -> Id.createFrom(p), ID);
+    PARSER.declareIndexName(PercolateQuery::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareString(PercolateQuery::setPreference, PREFERENCE);
+    PARSER.declareRouting(PercolateQuery::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareLong(PercolateQuery::setVersion, VERSION);
+  }
 
 }

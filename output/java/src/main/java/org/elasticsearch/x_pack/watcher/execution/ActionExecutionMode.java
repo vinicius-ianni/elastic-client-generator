@@ -1,7 +1,11 @@
 
 package org.elasticsearch.x_pack.watcher.execution;
 
-public enum ActionExecutionMode {
+import org.elasticsearch.XContentable;
+import org.elasticsearch.common.xcontent.*;
+import java.io.IOException;
+
+public enum ActionExecutionMode implements XContentable<ActionExecutionMode> {
   Simulate("simulate"),
     ForceSimulate("force_simulate"),
     Execute("execute"),
@@ -13,4 +17,28 @@ public enum ActionExecutionMode {
 
   @Override
   public String toString() { return textRepresentation; }
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return builder.value(this.textRepresentation);
+  }
+
+  @Override
+  public ActionExecutionMode fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PARSER.apply(parser);
+  }
+
+  public static final CheckedFunction<XContentParser, ActionExecutionMode, IOException> PARSER = (parser) -> {
+    String text = parser.text();
+    switch (text) {
+      case "simulate": return ActionExecutionMode.Simulate;
+      case "force_simulate": return ActionExecutionMode.ForceSimulate;
+      case "execute": return ActionExecutionMode.Execute;
+      case "force_execute": return ActionExecutionMode.ForceExecute;
+      case "skip": return ActionExecutionMode.Skip;
+      default:
+        String message = String.format("'%s' not a valid value for enum '%s'", text, ActionExecutionMode.class.getName());
+        throw new XContentParseException(parser.getTokenLocation(), message);
+    }
+  };
 }

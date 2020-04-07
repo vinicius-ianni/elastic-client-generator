@@ -1,21 +1,50 @@
 
 package org.elasticsearch.x_pack.info.x_pack_usage;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.info.x_pack_usage.*;
 
-public class SqlUsage  {
+public class SqlUsage  implements XContentable<SqlUsage> {
   
-  private Map<String, Integer> _features;
-  public Map<String, Integer> getFeatures() { return this._features; }
-  public SqlUsage setFeatures(Map<String, Integer> val) { this._features = val; return this; }
+  static final ParseField FEATURES = new ParseField("features");
+  private NamedContainer<String, Integer> _features;
+  public NamedContainer<String, Integer> getFeatures() { return this._features; }
+  public SqlUsage setFeatures(NamedContainer<String, Integer> val) { this._features = val; return this; }
 
 
-  private Map<String, QueryUsage> _queries;
-  public Map<String, QueryUsage> getQueries() { return this._queries; }
-  public SqlUsage setQueries(Map<String, QueryUsage> val) { this._queries = val; return this; }
+  static final ParseField QUERIES = new ParseField("queries");
+  private NamedContainer<String, QueryUsage> _queries;
+  public NamedContainer<String, QueryUsage> getQueries() { return this._queries; }
+  public SqlUsage setQueries(NamedContainer<String, QueryUsage> val) { this._queries = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public SqlUsage fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return SqlUsage.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<SqlUsage, Void> PARSER =
+    new ConstructingObjectParser<>(SqlUsage.class.getName(), false, args -> new SqlUsage());
+
+  static {
+    PARSER.declareObject(SqlUsage::setFeatures, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Integer.PARSER.apply(pp, null)), FEATURES);;
+    PARSER.declareObject(SqlUsage::setQueries, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> QueryUsage.PARSER.apply(pp, null)), QUERIES);;
+  }
 
 }

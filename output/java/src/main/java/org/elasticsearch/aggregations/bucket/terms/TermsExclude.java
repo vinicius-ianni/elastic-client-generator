@@ -1,20 +1,49 @@
 
 package org.elasticsearch.aggregations.bucket.terms;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
 
 
-public class TermsExclude  {
+
+
+public class TermsExclude  implements XContentable<TermsExclude> {
   
+  static final ParseField PATTERN = new ParseField("pattern");
   private String _pattern;
   public String getPattern() { return this._pattern; }
   public TermsExclude setPattern(String val) { this._pattern = val; return this; }
 
 
-  private String[] _values;
-  public String[] getValues() { return this._values; }
-  public TermsExclude setValues(String[] val) { this._values = val; return this; }
+  static final ParseField VALUES = new ParseField("values");
+  private List<String> _values;
+  public List<String> getValues() { return this._values; }
+  public TermsExclude setValues(List<String> val) { this._values = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public TermsExclude fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return TermsExclude.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<TermsExclude, Void> PARSER =
+    new ConstructingObjectParser<>(TermsExclude.class.getName(), false, args -> new TermsExclude());
+
+  static {
+    PARSER.declareString(TermsExclude::setPattern, PATTERN);
+    PARSER.declareStringArray(TermsExclude::setValues, VALUES);
+  }
 
 }

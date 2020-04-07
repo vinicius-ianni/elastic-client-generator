@@ -1,41 +1,78 @@
 
 package org.elasticsearch.cluster.cluster_health;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 
-public class ShardHealthStats  {
+public class ShardHealthStats  implements XContentable<ShardHealthStats> {
   
+  static final ParseField ACTIVE_SHARDS = new ParseField("active_shards");
   private Integer _activeShards;
   public Integer getActiveShards() { return this._activeShards; }
   public ShardHealthStats setActiveShards(Integer val) { this._activeShards = val; return this; }
 
 
+  static final ParseField INITIALIZING_SHARDS = new ParseField("initializing_shards");
   private Integer _initializingShards;
   public Integer getInitializingShards() { return this._initializingShards; }
   public ShardHealthStats setInitializingShards(Integer val) { this._initializingShards = val; return this; }
 
 
+  static final ParseField PRIMARY_ACTIVE = new ParseField("primary_active");
   private Boolean _primaryActive;
   public Boolean getPrimaryActive() { return this._primaryActive; }
   public ShardHealthStats setPrimaryActive(Boolean val) { this._primaryActive = val; return this; }
 
 
+  static final ParseField RELOCATING_SHARDS = new ParseField("relocating_shards");
   private Integer _relocatingShards;
   public Integer getRelocatingShards() { return this._relocatingShards; }
   public ShardHealthStats setRelocatingShards(Integer val) { this._relocatingShards = val; return this; }
 
 
+  static final ParseField STATUS = new ParseField("status");
   private Health _status;
   public Health getStatus() { return this._status; }
   public ShardHealthStats setStatus(Health val) { this._status = val; return this; }
 
 
+  static final ParseField UNASSIGNED_SHARDS = new ParseField("unassigned_shards");
   private Integer _unassignedShards;
   public Integer getUnassignedShards() { return this._unassignedShards; }
   public ShardHealthStats setUnassignedShards(Integer val) { this._unassignedShards = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ShardHealthStats fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ShardHealthStats.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ShardHealthStats, Void> PARSER =
+    new ConstructingObjectParser<>(ShardHealthStats.class.getName(), false, args -> new ShardHealthStats());
+
+  static {
+    PARSER.declareInteger(ShardHealthStats::setActiveShards, ACTIVE_SHARDS);
+    PARSER.declareInteger(ShardHealthStats::setInitializingShards, INITIALIZING_SHARDS);
+    PARSER.declareBoolean(ShardHealthStats::setPrimaryActive, PRIMARY_ACTIVE);
+    PARSER.declareInteger(ShardHealthStats::setRelocatingShards, RELOCATING_SHARDS);
+    PARSER.declareObject(ShardHealthStats::setStatus, (p, t) -> Health.PARSER.apply(p, null), STATUS);
+    PARSER.declareInteger(ShardHealthStats::setUnassignedShards, UNASSIGNED_SHARDS);
+  }
 
 }

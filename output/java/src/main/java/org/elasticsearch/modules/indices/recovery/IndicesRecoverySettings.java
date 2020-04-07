@@ -1,45 +1,84 @@
 
 package org.elasticsearch.modules.indices.recovery;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class IndicesRecoverySettings  {
+public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySettings> {
   
+  static final ParseField COMPRESS = new ParseField("compress");
   private Boolean _compress;
   public Boolean getCompress() { return this._compress; }
   public IndicesRecoverySettings setCompress(Boolean val) { this._compress = val; return this; }
 
 
+  static final ParseField CONCURRENT_SMALL_FILE_STREAMS = new ParseField("concurrent_small_file_streams");
   private Integer _concurrentSmallFileStreams;
   public Integer getConcurrentSmallFileStreams() { return this._concurrentSmallFileStreams; }
   public IndicesRecoverySettings setConcurrentSmallFileStreams(Integer val) { this._concurrentSmallFileStreams = val; return this; }
 
 
+  static final ParseField CONCURRENT_STREAMS = new ParseField("concurrent_streams");
   private Integer _concurrentStreams;
   public Integer getConcurrentStreams() { return this._concurrentStreams; }
   public IndicesRecoverySettings setConcurrentStreams(Integer val) { this._concurrentStreams = val; return this; }
 
 
+  static final ParseField FILE_CHUNK_SIZE = new ParseField("file_chunk_size");
   private String _fileChunkSize;
   public String getFileChunkSize() { return this._fileChunkSize; }
   public IndicesRecoverySettings setFileChunkSize(String val) { this._fileChunkSize = val; return this; }
 
 
+  static final ParseField MAX_BYTES_PER_SECOND = new ParseField("max_bytes_per_second");
   private String _maxBytesPerSecond;
   public String getMaxBytesPerSecond() { return this._maxBytesPerSecond; }
   public IndicesRecoverySettings setMaxBytesPerSecond(String val) { this._maxBytesPerSecond = val; return this; }
 
 
+  static final ParseField TRANSLOG_OPERATIONS = new ParseField("translog_operations");
   private Integer _translogOperations;
   public Integer getTranslogOperations() { return this._translogOperations; }
   public IndicesRecoverySettings setTranslogOperations(Integer val) { this._translogOperations = val; return this; }
 
 
+  static final ParseField TRANSLOG_SIZE = new ParseField("translog_size");
   private String _translogSize;
   public String getTranslogSize() { return this._translogSize; }
   public IndicesRecoverySettings setTranslogSize(String val) { this._translogSize = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public IndicesRecoverySettings fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return IndicesRecoverySettings.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<IndicesRecoverySettings, Void> PARSER =
+    new ConstructingObjectParser<>(IndicesRecoverySettings.class.getName(), false, args -> new IndicesRecoverySettings());
+
+  static {
+    PARSER.declareBoolean(IndicesRecoverySettings::setCompress, COMPRESS);
+    PARSER.declareInteger(IndicesRecoverySettings::setConcurrentSmallFileStreams, CONCURRENT_SMALL_FILE_STREAMS);
+    PARSER.declareInteger(IndicesRecoverySettings::setConcurrentStreams, CONCURRENT_STREAMS);
+    PARSER.declareString(IndicesRecoverySettings::setFileChunkSize, FILE_CHUNK_SIZE);
+    PARSER.declareString(IndicesRecoverySettings::setMaxBytesPerSecond, MAX_BYTES_PER_SECOND);
+    PARSER.declareInteger(IndicesRecoverySettings::setTranslogOperations, TRANSLOG_OPERATIONS);
+    PARSER.declareString(IndicesRecoverySettings::setTranslogSize, TRANSLOG_SIZE);
+  }
 
 }

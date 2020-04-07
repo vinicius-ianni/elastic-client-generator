@@ -1,26 +1,57 @@
 
 package org.elasticsearch.indices.alias_management.alias;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.indices.alias_management.alias.actions.*;
 import org.elasticsearch.common_options.time_unit.*;
 
-public class BulkAliasRequest  {
+public class BulkAliasRequest  implements XContentable<BulkAliasRequest> {
   
-  private AliasAction[] _actions;
-  public AliasAction[] getActions() { return this._actions; }
-  public BulkAliasRequest setActions(AliasAction[] val) { this._actions = val; return this; }
+  static final ParseField ACTIONS = new ParseField("actions");
+  private List<AliasAction> _actions;
+  public List<AliasAction> getActions() { return this._actions; }
+  public BulkAliasRequest setActions(List<AliasAction> val) { this._actions = val; return this; }
 
 
+  static final ParseField MASTER_TIMEOUT = new ParseField("master_timeout");
   private Time _masterTimeout;
   public Time getMasterTimeout() { return this._masterTimeout; }
   public BulkAliasRequest setMasterTimeout(Time val) { this._masterTimeout = val; return this; }
 
 
+  static final ParseField TIMEOUT = new ParseField("timeout");
   private Time _timeout;
   public Time getTimeout() { return this._timeout; }
   public BulkAliasRequest setTimeout(Time val) { this._timeout = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public BulkAliasRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return BulkAliasRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<BulkAliasRequest, Void> PARSER =
+    new ConstructingObjectParser<>(BulkAliasRequest.class.getName(), false, args -> new BulkAliasRequest());
+
+  static {
+    PARSER.declareObjectArray(BulkAliasRequest::setActions, (p, t) -> AliasAction.PARSER.apply(p), ACTIONS);
+    PARSER.declareObject(BulkAliasRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(BulkAliasRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+  }
 
 }

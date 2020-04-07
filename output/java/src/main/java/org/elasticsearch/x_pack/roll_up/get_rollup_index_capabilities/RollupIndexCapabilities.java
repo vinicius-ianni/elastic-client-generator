@@ -1,15 +1,42 @@
 
 package org.elasticsearch.x_pack.roll_up.get_rollup_index_capabilities;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.roll_up.get_rollup_index_capabilities.*;
 
-public class RollupIndexCapabilities  {
+public class RollupIndexCapabilities  implements XContentable<RollupIndexCapabilities> {
   
-  private RollupIndexCapabilitiesJob[] _rollupJobs;
-  public RollupIndexCapabilitiesJob[] getRollupJobs() { return this._rollupJobs; }
-  public RollupIndexCapabilities setRollupJobs(RollupIndexCapabilitiesJob[] val) { this._rollupJobs = val; return this; }
+  static final ParseField ROLLUP_JOBS = new ParseField("rollup_jobs");
+  private List<RollupIndexCapabilitiesJob> _rollupJobs;
+  public List<RollupIndexCapabilitiesJob> getRollupJobs() { return this._rollupJobs; }
+  public RollupIndexCapabilities setRollupJobs(List<RollupIndexCapabilitiesJob> val) { this._rollupJobs = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public RollupIndexCapabilities fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return RollupIndexCapabilities.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<RollupIndexCapabilities, Void> PARSER =
+    new ConstructingObjectParser<>(RollupIndexCapabilities.class.getName(), false, args -> new RollupIndexCapabilities());
+
+  static {
+    PARSER.declareObjectArray(RollupIndexCapabilities::setRollupJobs, (p, t) -> RollupIndexCapabilitiesJob.PARSER.apply(p), ROLLUP_JOBS);
+  }
 
 }

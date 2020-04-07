@@ -1,20 +1,49 @@
 
 package org.elasticsearch.x_pack.machine_learning.job;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class Page  {
+public class Page  implements XContentable<Page> {
   
+  static final ParseField FROM = new ParseField("from");
   private Integer _from;
   public Integer getFrom() { return this._from; }
   public Page setFrom(Integer val) { this._from = val; return this; }
 
 
+  static final ParseField SIZE = new ParseField("size");
   private Integer _size;
   public Integer getSize() { return this._size; }
   public Page setSize(Integer val) { this._size = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public Page fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return Page.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<Page, Void> PARSER =
+    new ConstructingObjectParser<>(Page.class.getName(), false, args -> new Page());
+
+  static {
+    PARSER.declareInteger(Page::setFrom, FROM);
+    PARSER.declareInteger(Page::setSize, SIZE);
+  }
 
 }

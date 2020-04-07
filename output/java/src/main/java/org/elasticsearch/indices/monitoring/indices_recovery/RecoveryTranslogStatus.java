@@ -1,40 +1,77 @@
 
 package org.elasticsearch.indices.monitoring.indices_recovery;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class RecoveryTranslogStatus  {
+public class RecoveryTranslogStatus  implements XContentable<RecoveryTranslogStatus> {
   
+  static final ParseField PERCENT = new ParseField("percent");
   private String _percent;
   public String getPercent() { return this._percent; }
   public RecoveryTranslogStatus setPercent(String val) { this._percent = val; return this; }
 
 
+  static final ParseField RECOVERED = new ParseField("recovered");
   private Long _recovered;
   public Long getRecovered() { return this._recovered; }
   public RecoveryTranslogStatus setRecovered(Long val) { this._recovered = val; return this; }
 
 
+  static final ParseField TOTAL = new ParseField("total");
   private Long _total;
   public Long getTotal() { return this._total; }
   public RecoveryTranslogStatus setTotal(Long val) { this._total = val; return this; }
 
 
+  static final ParseField TOTAL_ON_START = new ParseField("total_on_start");
   private Long _totalOnStart;
   public Long getTotalOnStart() { return this._totalOnStart; }
   public RecoveryTranslogStatus setTotalOnStart(Long val) { this._totalOnStart = val; return this; }
 
 
+  static final ParseField TOTAL_TIME = new ParseField("total_time");
   private String _totalTime;
   public String getTotalTime() { return this._totalTime; }
   public RecoveryTranslogStatus setTotalTime(String val) { this._totalTime = val; return this; }
 
 
+  static final ParseField TOTAL_TIME_IN_MILLIS = new ParseField("total_time_in_millis");
   private Long _totalTimeInMillis;
   public Long getTotalTimeInMillis() { return this._totalTimeInMillis; }
   public RecoveryTranslogStatus setTotalTimeInMillis(Long val) { this._totalTimeInMillis = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public RecoveryTranslogStatus fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return RecoveryTranslogStatus.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<RecoveryTranslogStatus, Void> PARSER =
+    new ConstructingObjectParser<>(RecoveryTranslogStatus.class.getName(), false, args -> new RecoveryTranslogStatus());
+
+  static {
+    PARSER.declareString(RecoveryTranslogStatus::setPercent, PERCENT);
+    PARSER.declareLong(RecoveryTranslogStatus::setRecovered, RECOVERED);
+    PARSER.declareLong(RecoveryTranslogStatus::setTotal, TOTAL);
+    PARSER.declareLong(RecoveryTranslogStatus::setTotalOnStart, TOTAL_ON_START);
+    PARSER.declareString(RecoveryTranslogStatus::setTotalTime, TOTAL_TIME);
+    PARSER.declareLong(RecoveryTranslogStatus::setTotalTimeInMillis, TOTAL_TIME_IN_MILLIS);
+  }
 
 }

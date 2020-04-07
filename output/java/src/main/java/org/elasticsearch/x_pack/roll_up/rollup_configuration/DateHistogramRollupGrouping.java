@@ -1,36 +1,71 @@
 
 package org.elasticsearch.x_pack.roll_up.rollup_configuration;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 
-public class DateHistogramRollupGrouping  {
+public class DateHistogramRollupGrouping  implements XContentable<DateHistogramRollupGrouping> {
   
+  static final ParseField DELAY = new ParseField("delay");
   private Time _delay;
   public Time getDelay() { return this._delay; }
   public DateHistogramRollupGrouping setDelay(Time val) { this._delay = val; return this; }
 
 
+  static final ParseField FIELD = new ParseField("field");
   private Field _field;
   public Field getField() { return this._field; }
   public DateHistogramRollupGrouping setField(Field val) { this._field = val; return this; }
 
 
+  static final ParseField FORMAT = new ParseField("format");
   private String _format;
   public String getFormat() { return this._format; }
   public DateHistogramRollupGrouping setFormat(String val) { this._format = val; return this; }
 
 
+  static final ParseField INTERVAL = new ParseField("interval");
   private Time _interval;
   public Time getInterval() { return this._interval; }
   public DateHistogramRollupGrouping setInterval(Time val) { this._interval = val; return this; }
 
 
+  static final ParseField TIME_ZONE = new ParseField("time_zone");
   private String _timeZone;
   public String getTimeZone() { return this._timeZone; }
   public DateHistogramRollupGrouping setTimeZone(String val) { this._timeZone = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public DateHistogramRollupGrouping fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return DateHistogramRollupGrouping.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<DateHistogramRollupGrouping, Void> PARSER =
+    new ConstructingObjectParser<>(DateHistogramRollupGrouping.class.getName(), false, args -> new DateHistogramRollupGrouping());
+
+  static {
+    PARSER.declareObject(DateHistogramRollupGrouping::setDelay, (p, t) -> Time.PARSER.apply(p, null), DELAY);
+    PARSER.declareField(DateHistogramRollupGrouping::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareString(DateHistogramRollupGrouping::setFormat, FORMAT);
+    PARSER.declareObject(DateHistogramRollupGrouping::setInterval, (p, t) -> Time.PARSER.apply(p, null), INTERVAL);
+    PARSER.declareString(DateHistogramRollupGrouping::setTimeZone, TIME_ZONE);
+  }
 
 }

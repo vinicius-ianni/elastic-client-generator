@@ -1,64 +1,109 @@
 
 package org.elasticsearch.search.suggesters;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.search.suggesters.context_suggester.*;
 import org.elasticsearch.query_dsl.geo.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.lazy_document.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 
-public class SuggestOption<TDocument>  {
+public class SuggestOption<TDocument>  implements XContentable<SuggestOption> {
   
+  static final ParseField COLLATE_MATCH = new ParseField("collate_match");
   private Boolean _collateMatch;
   public Boolean getCollateMatch() { return this._collateMatch; }
   public SuggestOption<TDocument> setCollateMatch(Boolean val) { this._collateMatch = val; return this; }
 
 
-  private Map<String, Context[]> _contexts;
-  public Map<String, Context[]> getContexts() { return this._contexts; }
-  public SuggestOption<TDocument> setContexts(Map<String, Context[]> val) { this._contexts = val; return this; }
+  static final ParseField CONTEXTS = new ParseField("contexts");
+  private NamedContainer<String, List<Context>> _contexts;
+  public NamedContainer<String, List<Context>> getContexts() { return this._contexts; }
+  public SuggestOption<TDocument> setContexts(NamedContainer<String, List<Context>> val) { this._contexts = val; return this; }
 
 
+  static final ParseField SCORE = new ParseField("_score");
   private Double _score;
   public Double getScore() { return this._score; }
   public SuggestOption<TDocument> setScore(Double val) { this._score = val; return this; }
 
 
-  private Map<String, LazyDocument> _fields;
-  public Map<String, LazyDocument> getFields() { return this._fields; }
-  public SuggestOption<TDocument> setFields(Map<String, LazyDocument> val) { this._fields = val; return this; }
+  static final ParseField FIELDS = new ParseField("fields");
+  private NamedContainer<String, LazyDocument> _fields;
+  public NamedContainer<String, LazyDocument> getFields() { return this._fields; }
+  public SuggestOption<TDocument> setFields(NamedContainer<String, LazyDocument> val) { this._fields = val; return this; }
 
 
+  static final ParseField FREQ = new ParseField("freq");
   private Long _freq;
   public Long getFreq() { return this._freq; }
   public SuggestOption<TDocument> setFreq(Long val) { this._freq = val; return this; }
 
 
+  static final ParseField HIGHLIGHTED = new ParseField("highlighted");
   private String _highlighted;
   public String getHighlighted() { return this._highlighted; }
   public SuggestOption<TDocument> setHighlighted(String val) { this._highlighted = val; return this; }
 
 
+  static final ParseField ID = new ParseField("_id");
   private String _id;
   public String getId() { return this._id; }
   public SuggestOption<TDocument> setId(String val) { this._id = val; return this; }
 
 
+  static final ParseField INDEX = new ParseField("_index");
   private IndexName _index;
   public IndexName getIndex() { return this._index; }
   public SuggestOption<TDocument> setIndex(IndexName val) { this._index = val; return this; }
 
 
+  static final ParseField SOURCE = new ParseField("_source");
   private TDocument _source;
   public TDocument getSource() { return this._source; }
   public SuggestOption<TDocument> setSource(TDocument val) { this._source = val; return this; }
 
 
+  static final ParseField TEXT = new ParseField("text");
   private String _text;
   public String getText() { return this._text; }
   public SuggestOption<TDocument> setText(String val) { this._text = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public SuggestOption fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return SuggestOption.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<SuggestOption, Void> PARSER =
+    new ConstructingObjectParser<>(SuggestOption.class.getName(), false, args -> new SuggestOption());
+
+  static {
+    PARSER.declareBoolean(SuggestOption::setCollateMatch, COLLATE_MATCH);
+    PARSER.declareObject(SuggestOption::setContexts, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), CONTEXTS);;
+    PARSER.declareDouble(SuggestOption::setScore, SCORE);
+    PARSER.declareObject(SuggestOption::setFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);;
+    PARSER.declareLong(SuggestOption::setFreq, FREQ);
+    PARSER.declareString(SuggestOption::setHighlighted, HIGHLIGHTED);
+    PARSER.declareString(SuggestOption::setId, ID);
+    PARSER.declareIndexName(SuggestOption::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(SuggestOption::setSource, (p, t) -> TDocument.PARSER.apply(p, null), SOURCE);
+    PARSER.declareString(SuggestOption::setText, TEXT);
+  }
 
 }

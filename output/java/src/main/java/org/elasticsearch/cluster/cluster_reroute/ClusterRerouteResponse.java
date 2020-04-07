@@ -1,20 +1,49 @@
 
 package org.elasticsearch.cluster.cluster_reroute;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.cluster.cluster_reroute.*;
 
-public class ClusterRerouteResponse  {
+public class ClusterRerouteResponse  implements XContentable<ClusterRerouteResponse> {
   
-  private ClusterRerouteExplanation[] _explanations;
-  public ClusterRerouteExplanation[] getExplanations() { return this._explanations; }
-  public ClusterRerouteResponse setExplanations(ClusterRerouteExplanation[] val) { this._explanations = val; return this; }
+  static final ParseField EXPLANATIONS = new ParseField("explanations");
+  private List<ClusterRerouteExplanation> _explanations;
+  public List<ClusterRerouteExplanation> getExplanations() { return this._explanations; }
+  public ClusterRerouteResponse setExplanations(List<ClusterRerouteExplanation> val) { this._explanations = val; return this; }
 
 
-  private String[] _state;
-  public String[] getState() { return this._state; }
-  public ClusterRerouteResponse setState(String[] val) { this._state = val; return this; }
+  static final ParseField STATE = new ParseField("state");
+  private List<String> _state;
+  public List<String> getState() { return this._state; }
+  public ClusterRerouteResponse setState(List<String> val) { this._state = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ClusterRerouteResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ClusterRerouteResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ClusterRerouteResponse, Void> PARSER =
+    new ConstructingObjectParser<>(ClusterRerouteResponse.class.getName(), false, args -> new ClusterRerouteResponse());
+
+  static {
+    PARSER.declareObjectArray(ClusterRerouteResponse::setExplanations, (p, t) -> ClusterRerouteExplanation.PARSER.apply(p), EXPLANATIONS);
+    PARSER.declareStringArray(ClusterRerouteResponse::setState, STATE);
+  }
 
 }

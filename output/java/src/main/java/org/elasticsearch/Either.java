@@ -1,5 +1,7 @@
 package org.elasticsearch;
 
+import org.elasticsearch.common.xcontent.ConstructingObjectParser;
+import org.elasticsearch.mapping.meta_fields.source.SourceField;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Optional;
@@ -33,5 +35,17 @@ public abstract class Either<A, B> {
         return right.apply(value);
       }
     };
+  }
+
+  public static final <A, B> ConstructingObjectParser<SourceField, Void> PARSER() {
+    return new ConstructingObjectParser<Either<A, B>>(Either.class.getName(), false, args -> new Either<A,B>());
+  }
+
+  static {
+    PARSER.declareBoolean(SourceField::setCompress, COMPRESS);
+    PARSER.declareString(SourceField::setCompressThreshold, COMPRESS_THRESHOLD);
+    PARSER.declareBoolean(SourceField::setEnabled, ENABLED);
+    PARSER.declareObject(SourceField::setExcludes, (p, t) -> String[].PARSER.apply(p, null), EXCLUDES);
+    PARSER.declareObject(SourceField::setIncludes, (p, t) -> String[].PARSER.apply(p, null), INCLUDES);
   }
 }

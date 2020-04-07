@@ -1,31 +1,64 @@
 
 package org.elasticsearch.cluster.cluster_stats;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.cluster_stats.*;
 
-public class ClusterJvm  {
+public class ClusterJvm  implements XContentable<ClusterJvm> {
   
+  static final ParseField MAX_UPTIME_IN_MILLIS = new ParseField("max_uptime_in_millis");
   private Long _maxUptimeInMillis;
   public Long getMaxUptimeInMillis() { return this._maxUptimeInMillis; }
   public ClusterJvm setMaxUptimeInMillis(Long val) { this._maxUptimeInMillis = val; return this; }
 
 
+  static final ParseField MEM = new ParseField("mem");
   private ClusterJvmMemory _mem;
   public ClusterJvmMemory getMem() { return this._mem; }
   public ClusterJvm setMem(ClusterJvmMemory val) { this._mem = val; return this; }
 
 
+  static final ParseField THREADS = new ParseField("threads");
   private Long _threads;
   public Long getThreads() { return this._threads; }
   public ClusterJvm setThreads(Long val) { this._threads = val; return this; }
 
 
-  private ClusterJvmVersion[] _versions;
-  public ClusterJvmVersion[] getVersions() { return this._versions; }
-  public ClusterJvm setVersions(ClusterJvmVersion[] val) { this._versions = val; return this; }
+  static final ParseField VERSIONS = new ParseField("versions");
+  private List<ClusterJvmVersion> _versions;
+  public List<ClusterJvmVersion> getVersions() { return this._versions; }
+  public ClusterJvm setVersions(List<ClusterJvmVersion> val) { this._versions = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ClusterJvm fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ClusterJvm.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ClusterJvm, Void> PARSER =
+    new ConstructingObjectParser<>(ClusterJvm.class.getName(), false, args -> new ClusterJvm());
+
+  static {
+    PARSER.declareLong(ClusterJvm::setMaxUptimeInMillis, MAX_UPTIME_IN_MILLIS);
+    PARSER.declareObject(ClusterJvm::setMem, (p, t) -> ClusterJvmMemory.PARSER.apply(p, null), MEM);
+    PARSER.declareLong(ClusterJvm::setThreads, THREADS);
+    PARSER.declareObjectArray(ClusterJvm::setVersions, (p, t) -> ClusterJvmVersion.PARSER.apply(p), VERSIONS);
+  }
 
 }

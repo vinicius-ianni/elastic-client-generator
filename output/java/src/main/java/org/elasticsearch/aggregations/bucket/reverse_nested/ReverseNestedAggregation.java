@@ -1,15 +1,42 @@
 
 package org.elasticsearch.aggregations.bucket.reverse_nested;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_abstractions.infer.field.*;
 
-public class ReverseNestedAggregation  {
+public class ReverseNestedAggregation  implements XContentable<ReverseNestedAggregation> {
   
+  static final ParseField PATH = new ParseField("path");
   private Field _path;
   public Field getPath() { return this._path; }
   public ReverseNestedAggregation setPath(Field val) { this._path = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ReverseNestedAggregation fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ReverseNestedAggregation.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ReverseNestedAggregation, Void> PARSER =
+    new ConstructingObjectParser<>(ReverseNestedAggregation.class.getName(), false, args -> new ReverseNestedAggregation());
+
+  static {
+    PARSER.declareField(ReverseNestedAggregation::setPath, (p, t) -> Field.createFrom(p), PATH);
+  }
 
 }

@@ -1,15 +1,42 @@
 
 package org.elasticsearch.x_pack.watcher.schedule;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class HourlySchedule  {
+public class HourlySchedule  implements XContentable<HourlySchedule> {
   
-  private Integer[] _minute;
-  public Integer[] getMinute() { return this._minute; }
-  public HourlySchedule setMinute(Integer[] val) { this._minute = val; return this; }
+  static final ParseField MINUTE = new ParseField("minute");
+  private List<Integer> _minute;
+  public List<Integer> getMinute() { return this._minute; }
+  public HourlySchedule setMinute(List<Integer> val) { this._minute = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public HourlySchedule fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return HourlySchedule.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<HourlySchedule, Void> PARSER =
+    new ConstructingObjectParser<>(HourlySchedule.class.getName(), false, args -> new HourlySchedule());
+
+  static {
+    PARSER.declareIntegerArray(HourlySchedule::setMinute, MINUTE);
+  }
 
 }

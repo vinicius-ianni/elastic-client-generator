@@ -1,15 +1,42 @@
 
 package org.elasticsearch.x_pack.ilm.explain_lifecycle;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.ilm.explain_lifecycle.*;
 
-public class ExplainLifecycleResponse  {
+public class ExplainLifecycleResponse  implements XContentable<ExplainLifecycleResponse> {
   
-  private Map<String, LifecycleExplain> _indices;
-  public Map<String, LifecycleExplain> getIndices() { return this._indices; }
-  public ExplainLifecycleResponse setIndices(Map<String, LifecycleExplain> val) { this._indices = val; return this; }
+  static final ParseField INDICES = new ParseField("indices");
+  private NamedContainer<String, LifecycleExplain> _indices;
+  public NamedContainer<String, LifecycleExplain> getIndices() { return this._indices; }
+  public ExplainLifecycleResponse setIndices(NamedContainer<String, LifecycleExplain> val) { this._indices = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ExplainLifecycleResponse fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ExplainLifecycleResponse.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ExplainLifecycleResponse, Void> PARSER =
+    new ConstructingObjectParser<>(ExplainLifecycleResponse.class.getName(), false, args -> new ExplainLifecycleResponse());
+
+  static {
+    PARSER.declareObject(ExplainLifecycleResponse::setIndices, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LifecycleExplain.PARSER.apply(pp, null)), INDICES);;
+  }
 
 }

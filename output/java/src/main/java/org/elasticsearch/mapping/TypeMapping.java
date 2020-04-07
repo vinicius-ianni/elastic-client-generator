@@ -1,9 +1,17 @@
 
 package org.elasticsearch.mapping;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.mapping.meta_fields.all.*;
 import org.elasticsearch.mapping.*;
 import org.elasticsearch.mapping.dynamic_template.*;
@@ -15,70 +23,113 @@ import org.elasticsearch.mapping.meta_fields.routing.*;
 import org.elasticsearch.mapping.meta_fields.size.*;
 import org.elasticsearch.mapping.meta_fields.source.*;
 
-public class TypeMapping  {
+public class TypeMapping  implements XContentable<TypeMapping> {
   
+  static final ParseField ALL_FIELD = new ParseField("all_field");
   private AllField _allField;
   public AllField getAllField() { return this._allField; }
   public TypeMapping setAllField(AllField val) { this._allField = val; return this; }
 
 
+  static final ParseField DATE_DETECTION = new ParseField("date_detection");
   private Boolean _dateDetection;
   public Boolean getDateDetection() { return this._dateDetection; }
   public TypeMapping setDateDetection(Boolean val) { this._dateDetection = val; return this; }
 
 
+  static final ParseField DYNAMIC = new ParseField("dynamic");
   private Either<Boolean, DynamicMapping> _dynamic;
   public Either<Boolean, DynamicMapping> getDynamic() { return this._dynamic; }
   public TypeMapping setDynamic(Either<Boolean, DynamicMapping> val) { this._dynamic = val; return this; }
 
 
-  private String[] _dynamicDateFormats;
-  public String[] getDynamicDateFormats() { return this._dynamicDateFormats; }
-  public TypeMapping setDynamicDateFormats(String[] val) { this._dynamicDateFormats = val; return this; }
+  static final ParseField DYNAMIC_DATE_FORMATS = new ParseField("dynamic_date_formats");
+  private List<String> _dynamicDateFormats;
+  public List<String> getDynamicDateFormats() { return this._dynamicDateFormats; }
+  public TypeMapping setDynamicDateFormats(List<String> val) { this._dynamicDateFormats = val; return this; }
 
 
-  private Map<String, DynamicTemplate> _dynamicTemplates;
-  public Map<String, DynamicTemplate> getDynamicTemplates() { return this._dynamicTemplates; }
-  public TypeMapping setDynamicTemplates(Map<String, DynamicTemplate> val) { this._dynamicTemplates = val; return this; }
+  static final ParseField DYNAMIC_TEMPLATES = new ParseField("dynamic_templates");
+  private NamedContainer<String, DynamicTemplate> _dynamicTemplates;
+  public NamedContainer<String, DynamicTemplate> getDynamicTemplates() { return this._dynamicTemplates; }
+  public TypeMapping setDynamicTemplates(NamedContainer<String, DynamicTemplate> val) { this._dynamicTemplates = val; return this; }
 
 
+  static final ParseField FIELD_NAMES = new ParseField("_field_names");
   private FieldNamesField _fieldNames;
   public FieldNamesField getFieldNames() { return this._fieldNames; }
   public TypeMapping setFieldNames(FieldNamesField val) { this._fieldNames = val; return this; }
 
 
+  static final ParseField INDEX_FIELD = new ParseField("index_field");
   private IndexField _indexField;
   public IndexField getIndexField() { return this._indexField; }
   public TypeMapping setIndexField(IndexField val) { this._indexField = val; return this; }
 
 
-  private Map<String, Object> _meta;
-  public Map<String, Object> getMeta() { return this._meta; }
-  public TypeMapping setMeta(Map<String, Object> val) { this._meta = val; return this; }
+  static final ParseField META = new ParseField("_meta");
+  private NamedContainer<String, Object> _meta;
+  public NamedContainer<String, Object> getMeta() { return this._meta; }
+  public TypeMapping setMeta(NamedContainer<String, Object> val) { this._meta = val; return this; }
 
 
+  static final ParseField NUMERIC_DETECTION = new ParseField("numeric_detection");
   private Boolean _numericDetection;
   public Boolean getNumericDetection() { return this._numericDetection; }
   public TypeMapping setNumericDetection(Boolean val) { this._numericDetection = val; return this; }
 
 
-  private Map<PropertyName, IProperty> _properties;
-  public Map<PropertyName, IProperty> getProperties() { return this._properties; }
-  public TypeMapping setProperties(Map<PropertyName, IProperty> val) { this._properties = val; return this; }
+  static final ParseField PROPERTIES = new ParseField("properties");
+  private NamedContainer<PropertyName, IProperty> _properties;
+  public NamedContainer<PropertyName, IProperty> getProperties() { return this._properties; }
+  public TypeMapping setProperties(NamedContainer<PropertyName, IProperty> val) { this._properties = val; return this; }
 
 
+  static final ParseField ROUTING = new ParseField("_routing");
   private RoutingField _routing;
   public RoutingField getRouting() { return this._routing; }
   public TypeMapping setRouting(RoutingField val) { this._routing = val; return this; }
 
 
+  static final ParseField SIZE = new ParseField("_size");
   private SizeField _size;
   public SizeField getSize() { return this._size; }
   public TypeMapping setSize(SizeField val) { this._size = val; return this; }
 
 
+  static final ParseField SOURCE = new ParseField("_source");
   private SourceField _source;
   public SourceField getSource() { return this._source; }
   public TypeMapping setSource(SourceField val) { this._source = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public TypeMapping fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return TypeMapping.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<TypeMapping, Void> PARSER =
+    new ConstructingObjectParser<>(TypeMapping.class.getName(), false, args -> new TypeMapping());
+
+  static {
+    PARSER.declareObject(TypeMapping::setAllField, (p, t) -> AllField.PARSER.apply(p, null), ALL_FIELD);
+    PARSER.declareBoolean(TypeMapping::setDateDetection, DATE_DETECTION);
+    PARSER.declareObject(TypeMapping::setDynamic, (p, t) -> null, DYNAMIC);
+    PARSER.declareStringArray(TypeMapping::setDynamicDateFormats, DYNAMIC_DATE_FORMATS);
+    PARSER.declareObject(TypeMapping::setDynamicTemplates, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> DynamicTemplate.PARSER.apply(pp, null)), DYNAMIC_TEMPLATES);;
+    PARSER.declareObject(TypeMapping::setFieldNames, (p, t) -> FieldNamesField.PARSER.apply(p, null), FIELD_NAMES);
+    PARSER.declareObject(TypeMapping::setIndexField, (p, t) -> IndexField.PARSER.apply(p, null), INDEX_FIELD);
+    PARSER.declareObject(TypeMapping::setMeta, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);;
+    PARSER.declareBoolean(TypeMapping::setNumericDetection, NUMERIC_DETECTION);
+    PARSER.declareObject(TypeMapping::setProperties, (p, t) ->  new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), PROPERTIES);;
+    PARSER.declareObject(TypeMapping::setRouting, (p, t) -> RoutingField.PARSER.apply(p, null), ROUTING);
+    PARSER.declareObject(TypeMapping::setSize, (p, t) -> SizeField.PARSER.apply(p, null), SIZE);
+    PARSER.declareObject(TypeMapping::setSource, (p, t) -> SourceField.PARSER.apply(p, null), SOURCE);
+  }
 
 }

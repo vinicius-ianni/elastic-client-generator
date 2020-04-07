@@ -1,9 +1,17 @@
 
 package org.elasticsearch.x_pack.watcher.execute_watch;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.x_pack.watcher.execution.email.*;
 import org.elasticsearch.x_pack.watcher.execution.index.*;
 import org.elasticsearch.x_pack.watcher.execution.logging.*;
@@ -13,55 +21,92 @@ import org.elasticsearch.x_pack.watcher.execution.*;
 import org.elasticsearch.x_pack.watcher.action.*;
 import org.elasticsearch.x_pack.watcher.execution.webhook.*;
 
-public class ExecutionResultAction  {
+public class ExecutionResultAction  implements XContentable<ExecutionResultAction> {
   
+  static final ParseField EMAIL = new ParseField("email");
   private EmailActionResult _email;
   public EmailActionResult getEmail() { return this._email; }
   public ExecutionResultAction setEmail(EmailActionResult val) { this._email = val; return this; }
 
 
+  static final ParseField ID = new ParseField("id");
   private String _id;
   public String getId() { return this._id; }
   public ExecutionResultAction setId(String val) { this._id = val; return this; }
 
 
+  static final ParseField INDEX = new ParseField("index");
   private IndexActionResult _index;
   public IndexActionResult getIndex() { return this._index; }
   public ExecutionResultAction setIndex(IndexActionResult val) { this._index = val; return this; }
 
 
+  static final ParseField LOGGING = new ParseField("logging");
   private LoggingActionResult _logging;
   public LoggingActionResult getLogging() { return this._logging; }
   public ExecutionResultAction setLogging(LoggingActionResult val) { this._logging = val; return this; }
 
 
+  static final ParseField PAGERDUTY = new ParseField("pagerduty");
   private PagerDutyActionResult _pagerduty;
   public PagerDutyActionResult getPagerduty() { return this._pagerduty; }
   public ExecutionResultAction setPagerduty(PagerDutyActionResult val) { this._pagerduty = val; return this; }
 
 
+  static final ParseField REASON = new ParseField("reason");
   private String _reason;
   public String getReason() { return this._reason; }
   public ExecutionResultAction setReason(String val) { this._reason = val; return this; }
 
 
+  static final ParseField SLACK = new ParseField("slack");
   private SlackActionResult _slack;
   public SlackActionResult getSlack() { return this._slack; }
   public ExecutionResultAction setSlack(SlackActionResult val) { this._slack = val; return this; }
 
 
+  static final ParseField STATUS = new ParseField("status");
   private Status _status;
   public Status getStatus() { return this._status; }
   public ExecutionResultAction setStatus(Status val) { this._status = val; return this; }
 
 
+  static final ParseField TYPE = new ParseField("type");
   private ActionType _type;
   public ActionType getType() { return this._type; }
   public ExecutionResultAction setType(ActionType val) { this._type = val; return this; }
 
 
+  static final ParseField WEBHOOK = new ParseField("webhook");
   private WebhookActionResult _webhook;
   public WebhookActionResult getWebhook() { return this._webhook; }
   public ExecutionResultAction setWebhook(WebhookActionResult val) { this._webhook = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ExecutionResultAction fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ExecutionResultAction.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ExecutionResultAction, Void> PARSER =
+    new ConstructingObjectParser<>(ExecutionResultAction.class.getName(), false, args -> new ExecutionResultAction());
+
+  static {
+    PARSER.declareObject(ExecutionResultAction::setEmail, (p, t) -> EmailActionResult.PARSER.apply(p, null), EMAIL);
+    PARSER.declareString(ExecutionResultAction::setId, ID);
+    PARSER.declareObject(ExecutionResultAction::setIndex, (p, t) -> IndexActionResult.PARSER.apply(p, null), INDEX);
+    PARSER.declareObject(ExecutionResultAction::setLogging, (p, t) -> LoggingActionResult.PARSER.apply(p, null), LOGGING);
+    PARSER.declareObject(ExecutionResultAction::setPagerduty, (p, t) -> PagerDutyActionResult.PARSER.apply(p, null), PAGERDUTY);
+    PARSER.declareString(ExecutionResultAction::setReason, REASON);
+    PARSER.declareObject(ExecutionResultAction::setSlack, (p, t) -> SlackActionResult.PARSER.apply(p, null), SLACK);
+    PARSER.declareObject(ExecutionResultAction::setStatus, (p, t) -> Status.PARSER.apply(p, null), STATUS);
+    PARSER.declareObject(ExecutionResultAction::setType, (p, t) -> ActionType.PARSER.apply(p, null), TYPE);
+    PARSER.declareObject(ExecutionResultAction::setWebhook, (p, t) -> WebhookActionResult.PARSER.apply(p, null), WEBHOOK);
+  }
 
 }

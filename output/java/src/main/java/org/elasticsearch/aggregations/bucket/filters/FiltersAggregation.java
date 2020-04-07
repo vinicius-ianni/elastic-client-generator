@@ -1,25 +1,56 @@
 
 package org.elasticsearch.aggregations.bucket.filters;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
-public class FiltersAggregation  {
+public class FiltersAggregation  implements XContentable<FiltersAggregation> {
   
-  private Either<Map<String, QueryContainer>, QueryContainer[]> _filters;
-  public Either<Map<String, QueryContainer>, QueryContainer[]> getFilters() { return this._filters; }
-  public FiltersAggregation setFilters(Either<Map<String, QueryContainer>, QueryContainer[]> val) { this._filters = val; return this; }
+  static final ParseField FILTERS = new ParseField("filters");
+  private Either<NamedContainer<String, QueryContainer>, List<QueryContainer>> _filters;
+  public Either<NamedContainer<String, QueryContainer>, List<QueryContainer>> getFilters() { return this._filters; }
+  public FiltersAggregation setFilters(Either<NamedContainer<String, QueryContainer>, List<QueryContainer>> val) { this._filters = val; return this; }
 
 
+  static final ParseField OTHER_BUCKET = new ParseField("other_bucket");
   private Boolean _otherBucket;
   public Boolean getOtherBucket() { return this._otherBucket; }
   public FiltersAggregation setOtherBucket(Boolean val) { this._otherBucket = val; return this; }
 
 
+  static final ParseField OTHER_BUCKET_KEY = new ParseField("other_bucket_key");
   private String _otherBucketKey;
   public String getOtherBucketKey() { return this._otherBucketKey; }
   public FiltersAggregation setOtherBucketKey(String val) { this._otherBucketKey = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public FiltersAggregation fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return FiltersAggregation.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<FiltersAggregation, Void> PARSER =
+    new ConstructingObjectParser<>(FiltersAggregation.class.getName(), false, args -> new FiltersAggregation());
+
+  static {
+    PARSER.declareObject(FiltersAggregation::setFilters, (p, t) -> null, FILTERS);
+    PARSER.declareBoolean(FiltersAggregation::setOtherBucket, OTHER_BUCKET);
+    PARSER.declareString(FiltersAggregation::setOtherBucketKey, OTHER_BUCKET_KEY);
+  }
 
 }

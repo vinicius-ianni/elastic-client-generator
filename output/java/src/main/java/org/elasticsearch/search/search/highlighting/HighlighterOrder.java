@@ -1,7 +1,11 @@
 
 package org.elasticsearch.search.search.highlighting;
 
-public enum HighlighterOrder {
+import org.elasticsearch.XContentable;
+import org.elasticsearch.common.xcontent.*;
+import java.io.IOException;
+
+public enum HighlighterOrder implements XContentable<HighlighterOrder> {
   Score("score");
   private final String textRepresentation;
 
@@ -9,4 +13,24 @@ public enum HighlighterOrder {
 
   @Override
   public String toString() { return textRepresentation; }
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return builder.value(this.textRepresentation);
+  }
+
+  @Override
+  public HighlighterOrder fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return PARSER.apply(parser);
+  }
+
+  public static final CheckedFunction<XContentParser, HighlighterOrder, IOException> PARSER = (parser) -> {
+    String text = parser.text();
+    switch (text) {
+      case "score": return HighlighterOrder.Score;
+      default:
+        String message = String.format("'%s' not a valid value for enum '%s'", text, HighlighterOrder.class.getName());
+        throw new XContentParseException(parser.getTokenLocation(), message);
+    }
+  };
 }

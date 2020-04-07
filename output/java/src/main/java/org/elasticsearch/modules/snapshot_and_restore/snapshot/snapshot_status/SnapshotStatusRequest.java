@@ -1,20 +1,49 @@
 
 package org.elasticsearch.modules.snapshot_and_restore.snapshot.snapshot_status;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.common_options.time_unit.*;
 
-public class SnapshotStatusRequest  {
+public class SnapshotStatusRequest  implements XContentable<SnapshotStatusRequest> {
   
+  static final ParseField IGNORE_UNAVAILABLE = new ParseField("ignore_unavailable");
   private Boolean _ignoreUnavailable;
   public Boolean getIgnoreUnavailable() { return this._ignoreUnavailable; }
   public SnapshotStatusRequest setIgnoreUnavailable(Boolean val) { this._ignoreUnavailable = val; return this; }
 
 
+  static final ParseField MASTER_TIMEOUT = new ParseField("master_timeout");
   private Time _masterTimeout;
   public Time getMasterTimeout() { return this._masterTimeout; }
   public SnapshotStatusRequest setMasterTimeout(Time val) { this._masterTimeout = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public SnapshotStatusRequest fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return SnapshotStatusRequest.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<SnapshotStatusRequest, Void> PARSER =
+    new ConstructingObjectParser<>(SnapshotStatusRequest.class.getName(), false, args -> new SnapshotStatusRequest());
+
+  static {
+    PARSER.declareBoolean(SnapshotStatusRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
+    PARSER.declareObject(SnapshotStatusRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+  }
 
 }

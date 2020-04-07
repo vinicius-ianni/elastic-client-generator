@@ -1,62 +1,107 @@
 
 package org.elasticsearch.cluster.cluster_stats;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.cluster.cluster_stats.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.stats.*;
 
-public class ClusterNodesStats  {
+public class ClusterNodesStats  implements XContentable<ClusterNodesStats> {
   
+  static final ParseField COUNT = new ParseField("count");
   private ClusterNodeCount _count;
   public ClusterNodeCount getCount() { return this._count; }
   public ClusterNodesStats setCount(ClusterNodeCount val) { this._count = val; return this; }
 
 
-  private Map<String, Integer> _discoveryTypes;
-  public Map<String, Integer> getDiscoveryTypes() { return this._discoveryTypes; }
-  public ClusterNodesStats setDiscoveryTypes(Map<String, Integer> val) { this._discoveryTypes = val; return this; }
+  static final ParseField DISCOVERY_TYPES = new ParseField("discovery_types");
+  private NamedContainer<String, Integer> _discoveryTypes;
+  public NamedContainer<String, Integer> getDiscoveryTypes() { return this._discoveryTypes; }
+  public ClusterNodesStats setDiscoveryTypes(NamedContainer<String, Integer> val) { this._discoveryTypes = val; return this; }
 
 
+  static final ParseField FS = new ParseField("fs");
   private ClusterFileSystem _fs;
   public ClusterFileSystem getFs() { return this._fs; }
   public ClusterNodesStats setFs(ClusterFileSystem val) { this._fs = val; return this; }
 
 
+  static final ParseField JVM = new ParseField("jvm");
   private ClusterJvm _jvm;
   public ClusterJvm getJvm() { return this._jvm; }
   public ClusterNodesStats setJvm(ClusterJvm val) { this._jvm = val; return this; }
 
 
+  static final ParseField NETWORK_TYPES = new ParseField("network_types");
   private ClusterNetworkTypes _networkTypes;
   public ClusterNetworkTypes getNetworkTypes() { return this._networkTypes; }
   public ClusterNodesStats setNetworkTypes(ClusterNetworkTypes val) { this._networkTypes = val; return this; }
 
 
+  static final ParseField OS = new ParseField("os");
   private ClusterOperatingSystemStats _os;
   public ClusterOperatingSystemStats getOs() { return this._os; }
   public ClusterNodesStats setOs(ClusterOperatingSystemStats val) { this._os = val; return this; }
 
 
-  private NodePackagingType[] _packagingTypes;
-  public NodePackagingType[] getPackagingTypes() { return this._packagingTypes; }
-  public ClusterNodesStats setPackagingTypes(NodePackagingType[] val) { this._packagingTypes = val; return this; }
+  static final ParseField PACKAGING_TYPES = new ParseField("packaging_types");
+  private List<NodePackagingType> _packagingTypes;
+  public List<NodePackagingType> getPackagingTypes() { return this._packagingTypes; }
+  public ClusterNodesStats setPackagingTypes(List<NodePackagingType> val) { this._packagingTypes = val; return this; }
 
 
-  private PluginStats[] _plugins;
-  public PluginStats[] getPlugins() { return this._plugins; }
-  public ClusterNodesStats setPlugins(PluginStats[] val) { this._plugins = val; return this; }
+  static final ParseField PLUGINS = new ParseField("plugins");
+  private List<PluginStats> _plugins;
+  public List<PluginStats> getPlugins() { return this._plugins; }
+  public ClusterNodesStats setPlugins(List<PluginStats> val) { this._plugins = val; return this; }
 
 
+  static final ParseField PROCESS = new ParseField("process");
   private ClusterProcess _process;
   public ClusterProcess getProcess() { return this._process; }
   public ClusterNodesStats setProcess(ClusterProcess val) { this._process = val; return this; }
 
 
-  private String[] _versions;
-  public String[] getVersions() { return this._versions; }
-  public ClusterNodesStats setVersions(String[] val) { this._versions = val; return this; }
+  static final ParseField VERSIONS = new ParseField("versions");
+  private List<String> _versions;
+  public List<String> getVersions() { return this._versions; }
+  public ClusterNodesStats setVersions(List<String> val) { this._versions = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ClusterNodesStats fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ClusterNodesStats.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ClusterNodesStats, Void> PARSER =
+    new ConstructingObjectParser<>(ClusterNodesStats.class.getName(), false, args -> new ClusterNodesStats());
+
+  static {
+    PARSER.declareObject(ClusterNodesStats::setCount, (p, t) -> ClusterNodeCount.PARSER.apply(p, null), COUNT);
+    PARSER.declareObject(ClusterNodesStats::setDiscoveryTypes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Integer.PARSER.apply(pp, null)), DISCOVERY_TYPES);;
+    PARSER.declareObject(ClusterNodesStats::setFs, (p, t) -> ClusterFileSystem.PARSER.apply(p, null), FS);
+    PARSER.declareObject(ClusterNodesStats::setJvm, (p, t) -> ClusterJvm.PARSER.apply(p, null), JVM);
+    PARSER.declareObject(ClusterNodesStats::setNetworkTypes, (p, t) -> ClusterNetworkTypes.PARSER.apply(p, null), NETWORK_TYPES);
+    PARSER.declareObject(ClusterNodesStats::setOs, (p, t) -> ClusterOperatingSystemStats.PARSER.apply(p, null), OS);
+    PARSER.declareObjectArray(ClusterNodesStats::setPackagingTypes, (p, t) -> NodePackagingType.PARSER.apply(p), PACKAGING_TYPES);
+    PARSER.declareObjectArray(ClusterNodesStats::setPlugins, (p, t) -> PluginStats.PARSER.apply(p), PLUGINS);
+    PARSER.declareObject(ClusterNodesStats::setProcess, (p, t) -> ClusterProcess.PARSER.apply(p, null), PROCESS);
+    PARSER.declareStringArray(ClusterNodesStats::setVersions, VERSIONS);
+  }
 
 }

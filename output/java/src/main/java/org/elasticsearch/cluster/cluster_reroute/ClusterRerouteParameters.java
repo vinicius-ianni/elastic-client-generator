@@ -1,40 +1,77 @@
 
 package org.elasticsearch.cluster.cluster_reroute;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import org.elasticsearch.Either;
+import org.elasticsearch.XContentable;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.xcontent.*;
+
+
 import org.elasticsearch.internal.*;
 
-public class ClusterRerouteParameters  {
+public class ClusterRerouteParameters  implements XContentable<ClusterRerouteParameters> {
   
+  static final ParseField ALLOW_PRIMARY = new ParseField("allow_primary");
   private Boolean _allowPrimary;
   public Boolean getAllowPrimary() { return this._allowPrimary; }
   public ClusterRerouteParameters setAllowPrimary(Boolean val) { this._allowPrimary = val; return this; }
 
 
+  static final ParseField FROM_NODE = new ParseField("from_node");
   private String _fromNode;
   public String getFromNode() { return this._fromNode; }
   public ClusterRerouteParameters setFromNode(String val) { this._fromNode = val; return this; }
 
 
+  static final ParseField INDEX = new ParseField("index");
   private String _index;
   public String getIndex() { return this._index; }
   public ClusterRerouteParameters setIndex(String val) { this._index = val; return this; }
 
 
+  static final ParseField NODE = new ParseField("node");
   private String _node;
   public String getNode() { return this._node; }
   public ClusterRerouteParameters setNode(String val) { this._node = val; return this; }
 
 
+  static final ParseField SHARD = new ParseField("shard");
   private Integer _shard;
   public Integer getShard() { return this._shard; }
   public ClusterRerouteParameters setShard(Integer val) { this._shard = val; return this; }
 
 
+  static final ParseField TO_NODE = new ParseField("to_node");
   private String _toNode;
   public String getToNode() { return this._toNode; }
   public ClusterRerouteParameters setToNode(String val) { this._toNode = val; return this; }
+
+
+  @Override
+  public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    return null;
+  }
+
+  @Override
+  public ClusterRerouteParameters fromXContent(XContentParser parser) throws IOException, XContentParseException {
+    return ClusterRerouteParameters.PARSER.apply(parser, null);
+  }
+
+  public static final ConstructingObjectParser<ClusterRerouteParameters, Void> PARSER =
+    new ConstructingObjectParser<>(ClusterRerouteParameters.class.getName(), false, args -> new ClusterRerouteParameters());
+
+  static {
+    PARSER.declareBoolean(ClusterRerouteParameters::setAllowPrimary, ALLOW_PRIMARY);
+    PARSER.declareString(ClusterRerouteParameters::setFromNode, FROM_NODE);
+    PARSER.declareString(ClusterRerouteParameters::setIndex, INDEX);
+    PARSER.declareString(ClusterRerouteParameters::setNode, NODE);
+    PARSER.declareInteger(ClusterRerouteParameters::setShard, SHARD);
+    PARSER.declareString(ClusterRerouteParameters::setToNode, TO_NODE);
+  }
 
 }
