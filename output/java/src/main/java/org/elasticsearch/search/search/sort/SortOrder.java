@@ -2,6 +2,7 @@
 package org.elasticsearch.search.search.sort;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum SortOrder implements XContentable<SortOrder> {
       case "asc": return SortOrder.Asc;
       case "desc": return SortOrder.Desc;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, SortOrder.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, SortOrder.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

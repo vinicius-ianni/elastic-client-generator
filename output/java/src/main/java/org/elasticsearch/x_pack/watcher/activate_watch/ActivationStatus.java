@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.acknowledge_watch.*;
 
 public class ActivationStatus  implements XContentable<ActivationStatus> {
@@ -28,6 +28,7 @@ public class ActivationStatus  implements XContentable<ActivationStatus> {
   public ActivationStatus setState(ActivationState val) { this._state = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class ActivationStatus  implements XContentable<ActivationStatus> {
     new ConstructingObjectParser<>(ActivationStatus.class.getName(), false, args -> new ActivationStatus());
 
   static {
-    PARSER.declareObject(ActivationStatus::setActions, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ActionStatus.PARSER.apply(pp, null)), ACTIONS);;
-    PARSER.declareObject(ActivationStatus::setState, (p, t) -> ActivationState.PARSER.apply(p, null), STATE);
+    PARSER.declareObject(ActivationStatus::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ActionStatus.PARSER.apply(pp, null)), ACTIONS);
+    PARSER.declareObject(ActivationStatus::setState, (p, t) -> ActivationState.PARSER.apply(p, t), STATE);
   }
 
 }

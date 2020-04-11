@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
@@ -66,6 +66,7 @@ public class ClusterStateRequest  implements XContentable<ClusterStateRequest> {
   public ClusterStateRequest setWaitForTimeout(Time val) { this._waitForTimeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -81,13 +82,13 @@ public class ClusterStateRequest  implements XContentable<ClusterStateRequest> {
 
   static {
     PARSER.declareBoolean(ClusterStateRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(ClusterStateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(ClusterStateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(ClusterStateRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(ClusterStateRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(ClusterStateRequest::setLocal, LOCAL);
-    PARSER.declareObject(ClusterStateRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(ClusterStateRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareLong(ClusterStateRequest::setWaitForMetadataVersion, WAIT_FOR_METADATA_VERSION);
-    PARSER.declareObject(ClusterStateRequest::setWaitForTimeout, (p, t) -> Time.PARSER.apply(p, null), WAIT_FOR_TIMEOUT);
+    PARSER.declareObject(ClusterStateRequest::setWaitForTimeout, (p, t) -> Time.PARSER.apply(p, t), WAIT_FOR_TIMEOUT);
   }
 
 }

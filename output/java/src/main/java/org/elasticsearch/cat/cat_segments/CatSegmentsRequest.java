@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class CatSegmentsRequest  implements XContentable<CatSegmentsRequest> {
@@ -52,6 +52,7 @@ public class CatSegmentsRequest  implements XContentable<CatSegmentsRequest> {
   public CatSegmentsRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -66,7 +67,7 @@ public class CatSegmentsRequest  implements XContentable<CatSegmentsRequest> {
     new ConstructingObjectParser<>(CatSegmentsRequest.class.getName(), false, args -> new CatSegmentsRequest());
 
   static {
-    PARSER.declareObject(CatSegmentsRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p, null), BYTES);
+    PARSER.declareObject(CatSegmentsRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
     PARSER.declareString(CatSegmentsRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatSegmentsRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatSegmentsRequest::setHelp, HELP);

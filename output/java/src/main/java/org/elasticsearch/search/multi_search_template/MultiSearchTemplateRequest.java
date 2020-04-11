@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.search.search_template.*;
@@ -54,6 +54,7 @@ public class MultiSearchTemplateRequest  implements XContentable<MultiSearchTemp
   public MultiSearchTemplateRequest setOperations(NamedContainer<String, SearchTemplateRequest> val) { this._operations = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -70,10 +71,10 @@ public class MultiSearchTemplateRequest  implements XContentable<MultiSearchTemp
   static {
     PARSER.declareBoolean(MultiSearchTemplateRequest::setCcsMinimizeRoundtrips, CCS_MINIMIZE_ROUNDTRIPS);
     PARSER.declareLong(MultiSearchTemplateRequest::setMaxConcurrentSearches, MAX_CONCURRENT_SEARCHES);
-    PARSER.declareObject(MultiSearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p, null), SEARCH_TYPE);
+    PARSER.declareObject(MultiSearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
     PARSER.declareBoolean(MultiSearchTemplateRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);
     PARSER.declareBoolean(MultiSearchTemplateRequest::setTypedKeys, TYPED_KEYS);
-    PARSER.declareObject(MultiSearchTemplateRequest::setOperations, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> SearchTemplateRequest.PARSER.apply(pp, null)), OPERATIONS);;
+    PARSER.declareObject(MultiSearchTemplateRequest::setOperations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SearchTemplateRequest.PARSER.apply(pp, null)), OPERATIONS);
   }
 
 }

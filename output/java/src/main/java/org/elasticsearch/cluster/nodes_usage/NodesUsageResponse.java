@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_usage.*;
 
 public class NodesUsageResponse  implements XContentable<NodesUsageResponse> {
@@ -28,6 +28,7 @@ public class NodesUsageResponse  implements XContentable<NodesUsageResponse> {
   public NodesUsageResponse setNodes(NamedContainer<String, NodeUsageInformation> val) { this._nodes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class NodesUsageResponse  implements XContentable<NodesUsageResponse> {
 
   static {
     PARSER.declareString(NodesUsageResponse::setClusterName, CLUSTER_NAME);
-    PARSER.declareObject(NodesUsageResponse::setNodes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> NodeUsageInformation.PARSER.apply(pp, null)), NODES);;
+    PARSER.declareObject(NodesUsageResponse::setNodes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> NodeUsageInformation.PARSER.apply(pp, null)), NODES);
   }
 
 }

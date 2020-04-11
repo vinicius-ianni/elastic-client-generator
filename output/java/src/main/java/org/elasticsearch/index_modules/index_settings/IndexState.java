@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.indices.alias_management.*;
 import org.elasticsearch.mapping.*;
@@ -36,6 +36,7 @@ public class IndexState  implements XContentable<IndexState> {
   public IndexState setSettings(NamedContainer<String, Object> val) { this._settings = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,9 +51,9 @@ public class IndexState  implements XContentable<IndexState> {
     new ConstructingObjectParser<>(IndexState.class.getName(), false, args -> new IndexState());
 
   static {
-    PARSER.declareObject(IndexState::setAliases, (p, t) ->  new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);;
-    PARSER.declareObject(IndexState::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, null), MAPPINGS);
-    PARSER.declareObject(IndexState::setSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);;
+    PARSER.declareObject(IndexState::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);
+    PARSER.declareObject(IndexState::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, t), MAPPINGS);
+    PARSER.declareObject(IndexState::setSettings, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.license.get_license.*;
 
@@ -47,6 +47,7 @@ public class MinimalLicenseInformation  implements XContentable<MinimalLicenseIn
   public MinimalLicenseInformation setUid(String val) { this._uid = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,9 +63,9 @@ public class MinimalLicenseInformation  implements XContentable<MinimalLicenseIn
 
   static {
     PARSER.declareLong(MinimalLicenseInformation::setExpiryDateInMillis, EXPIRY_DATE_IN_MILLIS);
-    PARSER.declareObject(MinimalLicenseInformation::setMode, (p, t) -> LicenseType.PARSER.apply(p, null), MODE);
-    PARSER.declareObject(MinimalLicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p, null), STATUS);
-    PARSER.declareObject(MinimalLicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p, null), TYPE);
+    PARSER.declareObject(MinimalLicenseInformation::setMode, (p, t) -> LicenseType.PARSER.apply(p), MODE);
+    PARSER.declareObject(MinimalLicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p), STATUS);
+    PARSER.declareObject(MinimalLicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE);
     PARSER.declareString(MinimalLicenseInformation::setUid, UID);
   }
 

@@ -2,6 +2,7 @@
 package org.elasticsearch.analysis.tokenizers;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum NoriDecompoundMode implements XContentable<NoriDecompoundMode> {
       case "none": return NoriDecompoundMode.None;
       case "mixed": return NoriDecompoundMode.Mixed;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, NoriDecompoundMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, NoriDecompoundMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
@@ -41,6 +41,7 @@ public class TranslateSqlRequest  implements XContentable<TranslateSqlRequest> {
   public TranslateSqlRequest setTimeZone(String val) { this._timeZone = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,8 +56,8 @@ public class TranslateSqlRequest  implements XContentable<TranslateSqlRequest> {
     new ConstructingObjectParser<>(TranslateSqlRequest.class.getName(), false, args -> new TranslateSqlRequest());
 
   static {
-    PARSER.declareInteger(TranslateSqlRequest::setFetchSize, FETCH_SIZE);
-    PARSER.declareObject(TranslateSqlRequest::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, null), FILTER);
+    PARSER.declareInt(TranslateSqlRequest::setFetchSize, FETCH_SIZE);
+    PARSER.declareObject(TranslateSqlRequest::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);
     PARSER.declareString(TranslateSqlRequest::setQuery, QUERY);
     PARSER.declareString(TranslateSqlRequest::setTimeZone, TIME_ZONE);
   }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.ingest.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -47,6 +47,7 @@ public class PutPipelineRequest  implements XContentable<PutPipelineRequest> {
   public PutPipelineRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,10 +63,10 @@ public class PutPipelineRequest  implements XContentable<PutPipelineRequest> {
 
   static {
     PARSER.declareString(PutPipelineRequest::setDescription, DESCRIPTION);
-    PARSER.declareObjectArray(PutPipelineRequest::setOnFailure, (p, t) -> Processor.PARSER.apply(p), ON_FAILURE);
-    PARSER.declareObjectArray(PutPipelineRequest::setProcessors, (p, t) -> Processor.PARSER.apply(p), PROCESSORS);
-    PARSER.declareObject(PutPipelineRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(PutPipelineRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObjectArray(PutPipelineRequest::setOnFailure, (p, t) -> Processor.PARSER.apply(p, t), ON_FAILURE);
+    PARSER.declareObjectArray(PutPipelineRequest::setProcessors, (p, t) -> Processor.PARSER.apply(p, t), PROCESSORS);
+    PARSER.declareObject(PutPipelineRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(PutPipelineRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.action.slack.*;
 
 public class SlackDynamicAttachment  implements XContentable<SlackDynamicAttachment> {
@@ -28,6 +28,7 @@ public class SlackDynamicAttachment  implements XContentable<SlackDynamicAttachm
   public SlackDynamicAttachment setListPath(String val) { this._listPath = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,7 +43,7 @@ public class SlackDynamicAttachment  implements XContentable<SlackDynamicAttachm
     new ConstructingObjectParser<>(SlackDynamicAttachment.class.getName(), false, args -> new SlackDynamicAttachment());
 
   static {
-    PARSER.declareObject(SlackDynamicAttachment::setAttachmentTemplate, (p, t) -> SlackAttachment.PARSER.apply(p, null), ATTACHMENT_TEMPLATE);
+    PARSER.declareObject(SlackDynamicAttachment::setAttachmentTemplate, (p, t) -> SlackAttachment.PARSER.apply(p, t), ATTACHMENT_TEMPLATE);
     PARSER.declareString(SlackDynamicAttachment::setListPath, LIST_PATH);
   }
 

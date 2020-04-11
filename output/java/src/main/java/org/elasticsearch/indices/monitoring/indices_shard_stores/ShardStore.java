@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.monitoring.indices_shard_stores.*;
 import org.elasticsearch.internal.*;
 
@@ -65,6 +65,7 @@ public class ShardStore  implements XContentable<ShardStore> {
   public ShardStore setTransportAddress(String val) { this._transportAddress = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -79,13 +80,13 @@ public class ShardStore  implements XContentable<ShardStore> {
     new ConstructingObjectParser<>(ShardStore.class.getName(), false, args -> new ShardStore());
 
   static {
-    PARSER.declareObject(ShardStore::setAllocation, (p, t) -> ShardStoreAllocation.PARSER.apply(p, null), ALLOCATION);
+    PARSER.declareObject(ShardStore::setAllocation, (p, t) -> ShardStoreAllocation.PARSER.apply(p), ALLOCATION);
     PARSER.declareString(ShardStore::setAllocationId, ALLOCATION_ID);
-    PARSER.declareObject(ShardStore::setAttributes, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ATTRIBUTES);;
+    PARSER.declareObject(ShardStore::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ATTRIBUTES);
     PARSER.declareString(ShardStore::setId, ID);
     PARSER.declareLong(ShardStore::setLegacyVersion, LEGACY_VERSION);
     PARSER.declareString(ShardStore::setName, NAME);
-    PARSER.declareObject(ShardStore::setStoreException, (p, t) -> ShardStoreException.PARSER.apply(p, null), STORE_EXCEPTION);
+    PARSER.declareObject(ShardStore::setStoreException, (p, t) -> ShardStoreException.PARSER.apply(p, t), STORE_EXCEPTION);
     PARSER.declareString(ShardStore::setTransportAddress, TRANSPORT_ADDRESS);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -65,6 +65,7 @@ public class UpdateIndexSettingsRequest  implements XContentable<UpdateIndexSett
   public UpdateIndexSettingsRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -79,14 +80,14 @@ public class UpdateIndexSettingsRequest  implements XContentable<UpdateIndexSett
     new ConstructingObjectParser<>(UpdateIndexSettingsRequest.class.getName(), false, args -> new UpdateIndexSettingsRequest());
 
   static {
-    PARSER.declareObject(UpdateIndexSettingsRequest::setIndexSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), INDEX_SETTINGS);;
+    PARSER.declareObject(UpdateIndexSettingsRequest::setIndexSettings, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), INDEX_SETTINGS);
     PARSER.declareBoolean(UpdateIndexSettingsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(UpdateIndexSettingsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(UpdateIndexSettingsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(UpdateIndexSettingsRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(UpdateIndexSettingsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
-    PARSER.declareObject(UpdateIndexSettingsRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(UpdateIndexSettingsRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareBoolean(UpdateIndexSettingsRequest::setPreserveExisting, PRESERVE_EXISTING);
-    PARSER.declareObject(UpdateIndexSettingsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(UpdateIndexSettingsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

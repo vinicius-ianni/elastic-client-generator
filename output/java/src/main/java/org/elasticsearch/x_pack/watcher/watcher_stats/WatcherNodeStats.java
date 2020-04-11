@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.watcher_stats.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class WatcherNodeStats  implements XContentable<WatcherNodeStats> {
   public WatcherNodeStats setWatcherState(WatcherState val) { this._watcherState = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class WatcherNodeStats  implements XContentable<WatcherNodeStats> {
     new ConstructingObjectParser<>(WatcherNodeStats.class.getName(), false, args -> new WatcherNodeStats());
 
   static {
-    PARSER.declareObjectArray(WatcherNodeStats::setCurrentWatches, (p, t) -> WatchRecordStats.PARSER.apply(p), CURRENT_WATCHES);
-    PARSER.declareObject(WatcherNodeStats::setExecutionThreadPool, (p, t) -> ExecutionThreadPool.PARSER.apply(p, null), EXECUTION_THREAD_POOL);
-    PARSER.declareObjectArray(WatcherNodeStats::setQueuedWatches, (p, t) -> WatchRecordQueuedStats.PARSER.apply(p), QUEUED_WATCHES);
+    PARSER.declareObjectArray(WatcherNodeStats::setCurrentWatches, (p, t) -> WatchRecordStats.PARSER.apply(p, t), CURRENT_WATCHES);
+    PARSER.declareObject(WatcherNodeStats::setExecutionThreadPool, (p, t) -> ExecutionThreadPool.PARSER.apply(p, t), EXECUTION_THREAD_POOL);
+    PARSER.declareObjectArray(WatcherNodeStats::setQueuedWatches, (p, t) -> WatchRecordQueuedStats.PARSER.apply(p, t), QUEUED_WATCHES);
     PARSER.declareLong(WatcherNodeStats::setWatchCount, WATCH_COUNT);
-    PARSER.declareObject(WatcherNodeStats::setWatcherState, (p, t) -> WatcherState.PARSER.apply(p, null), WATCHER_STATE);
+    PARSER.declareObject(WatcherNodeStats::setWatcherState, (p, t) -> WatcherState.PARSER.apply(p), WATCHER_STATE);
   }
 
 }

@@ -2,6 +2,7 @@
 package org.elasticsearch.cluster.nodes_info;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public enum NodeRole implements XContentable<NodeRole> {
       case "ingest": return NodeRole.Ingest;
       case "ml": return NodeRole.Ml;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, NodeRole.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, NodeRole.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

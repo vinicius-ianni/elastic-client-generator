@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.x_pack.security.role.put_role.*;
 
@@ -59,6 +59,7 @@ public class PutRoleRequest  implements XContentable<PutRoleRequest> {
   public PutRoleRequest setRunAs(List<String> val) { this._runAs = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -73,12 +74,12 @@ public class PutRoleRequest  implements XContentable<PutRoleRequest> {
     new ConstructingObjectParser<>(PutRoleRequest.class.getName(), false, args -> new PutRoleRequest());
 
   static {
-    PARSER.declareObject(PutRoleRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
-    PARSER.declareObjectArray(PutRoleRequest::setApplications, (p, t) -> ApplicationPrivileges.PARSER.apply(p), APPLICATIONS);
+    PARSER.declareObject(PutRoleRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareObjectArray(PutRoleRequest::setApplications, (p, t) -> ApplicationPrivileges.PARSER.apply(p, t), APPLICATIONS);
     PARSER.declareStringArray(PutRoleRequest::setCluster, CLUSTER);
-    PARSER.declareObject(PutRoleRequest::setGlobal, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), GLOBAL);;
-    PARSER.declareObjectArray(PutRoleRequest::setIndices, (p, t) -> IndicesPrivileges.PARSER.apply(p), INDICES);
-    PARSER.declareObject(PutRoleRequest::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareObject(PutRoleRequest::setGlobal, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), GLOBAL);
+    PARSER.declareObjectArray(PutRoleRequest::setIndices, (p, t) -> IndicesPrivileges.PARSER.apply(p, t), INDICES);
+    PARSER.declareObject(PutRoleRequest::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareStringArray(PutRoleRequest::setRunAs, RUN_AS);
   }
 

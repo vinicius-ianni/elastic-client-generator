@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.bucket.histogram.*;
 import org.elasticsearch.search.search.sort.*;
 
@@ -53,6 +53,7 @@ public class HistogramOrder  implements XContentable<HistogramOrder> {
   public HistogramOrder setOrder(SortOrder val) { this._order = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -67,12 +68,12 @@ public class HistogramOrder  implements XContentable<HistogramOrder> {
     new ConstructingObjectParser<>(HistogramOrder.class.getName(), false, args -> new HistogramOrder());
 
   static {
-    PARSER.declareObject(HistogramOrder::setCountAscending, (p, t) -> HistogramOrder.PARSER.apply(p, null), COUNT_ASCENDING);
-    PARSER.declareObject(HistogramOrder::setCountDescending, (p, t) -> HistogramOrder.PARSER.apply(p, null), COUNT_DESCENDING);
+    PARSER.declareObject(HistogramOrder::setCountAscending, (p, t) -> HistogramOrder.PARSER.apply(p, t), COUNT_ASCENDING);
+    PARSER.declareObject(HistogramOrder::setCountDescending, (p, t) -> HistogramOrder.PARSER.apply(p, t), COUNT_DESCENDING);
     PARSER.declareString(HistogramOrder::setKey, KEY);
-    PARSER.declareObject(HistogramOrder::setKeyAscending, (p, t) -> HistogramOrder.PARSER.apply(p, null), KEY_ASCENDING);
-    PARSER.declareObject(HistogramOrder::setKeyDescending, (p, t) -> HistogramOrder.PARSER.apply(p, null), KEY_DESCENDING);
-    PARSER.declareObject(HistogramOrder::setOrder, (p, t) -> SortOrder.PARSER.apply(p, null), ORDER);
+    PARSER.declareObject(HistogramOrder::setKeyAscending, (p, t) -> HistogramOrder.PARSER.apply(p, t), KEY_ASCENDING);
+    PARSER.declareObject(HistogramOrder::setKeyDescending, (p, t) -> HistogramOrder.PARSER.apply(p, t), KEY_DESCENDING);
+    PARSER.declareObject(HistogramOrder::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER);
   }
 
 }

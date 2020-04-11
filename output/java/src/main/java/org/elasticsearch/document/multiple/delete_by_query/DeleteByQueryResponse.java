@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.document.multiple.*;
 import org.elasticsearch.common_abstractions.infer.task_id.*;
@@ -108,6 +108,7 @@ public class DeleteByQueryResponse  implements XContentable<DeleteByQueryRespons
   public DeleteByQueryResponse setVersionConflicts(Long val) { this._versionConflicts = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -125,12 +126,12 @@ public class DeleteByQueryResponse  implements XContentable<DeleteByQueryRespons
     PARSER.declareBoolean(DeleteByQueryResponse::setIsValid, IS_VALID);
     PARSER.declareLong(DeleteByQueryResponse::setBatches, BATCHES);
     PARSER.declareLong(DeleteByQueryResponse::setDeleted, DELETED);
-    PARSER.declareObjectArray(DeleteByQueryResponse::setFailures, (p, t) -> BulkIndexByScrollFailure.PARSER.apply(p), FAILURES);
+    PARSER.declareObjectArray(DeleteByQueryResponse::setFailures, (p, t) -> BulkIndexByScrollFailure.PARSER.apply(p, t), FAILURES);
     PARSER.declareLong(DeleteByQueryResponse::setNoops, NOOPS);
     PARSER.declareFloat(DeleteByQueryResponse::setRequestsPerSecond, REQUESTS_PER_SECOND);
-    PARSER.declareObject(DeleteByQueryResponse::setRetries, (p, t) -> Retries.PARSER.apply(p, null), RETRIES);
-    PARSER.declareInteger(DeleteByQueryResponse::setSliceId, SLICE_ID);
-    PARSER.declareTaskId(DeleteByQueryResponse::setTask, (p, t) -> TaskId.createFrom(p), TASK);
+    PARSER.declareObject(DeleteByQueryResponse::setRetries, (p, t) -> Retries.PARSER.apply(p, t), RETRIES);
+    PARSER.declareInt(DeleteByQueryResponse::setSliceId, SLICE_ID);
+    PARSER.declareObject(DeleteByQueryResponse::setTask, (p, t) -> TaskId.createFrom(p), TASK);
     PARSER.declareLong(DeleteByQueryResponse::setThrottledMillis, THROTTLED_MILLIS);
     PARSER.declareLong(DeleteByQueryResponse::setThrottledUntilMillis, THROTTLED_UNTIL_MILLIS);
     PARSER.declareBoolean(DeleteByQueryResponse::setTimedOut, TIMED_OUT);

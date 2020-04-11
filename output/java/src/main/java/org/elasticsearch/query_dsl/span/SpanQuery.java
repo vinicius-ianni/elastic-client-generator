@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.span.containing.*;
 import org.elasticsearch.query_dsl.span.field_masking.*;
 import org.elasticsearch.query_dsl.span.first.*;
@@ -85,6 +85,7 @@ public class SpanQuery  implements XContentable<SpanQuery> {
   public SpanQuery setSpanWithin(SpanWithinQuery val) { this._spanWithin = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -99,16 +100,16 @@ public class SpanQuery  implements XContentable<SpanQuery> {
     new ConstructingObjectParser<>(SpanQuery.class.getName(), false, args -> new SpanQuery());
 
   static {
-    PARSER.declareObject(SpanQuery::setSpanContaining, (p, t) -> SpanContainingQuery.PARSER.apply(p, null), SPAN_CONTAINING);
-    PARSER.declareObject(SpanQuery::setFieldMaskingSpan, (p, t) -> SpanFieldMaskingQuery.PARSER.apply(p, null), FIELD_MASKING_SPAN);
-    PARSER.declareObject(SpanQuery::setSpanFirst, (p, t) -> SpanFirstQuery.PARSER.apply(p, null), SPAN_FIRST);
-    PARSER.declareObject(SpanQuery::setSpanGap, (p, t) -> SpanGapQuery.PARSER.apply(p, null), SPAN_GAP);
-    PARSER.declareObject(SpanQuery::setSpanMulti, (p, t) -> SpanMultiTermQuery.PARSER.apply(p, null), SPAN_MULTI);
-    PARSER.declareObject(SpanQuery::setSpanNear, (p, t) -> SpanNearQuery.PARSER.apply(p, null), SPAN_NEAR);
-    PARSER.declareObject(SpanQuery::setSpanNot, (p, t) -> SpanNotQuery.PARSER.apply(p, null), SPAN_NOT);
-    PARSER.declareObject(SpanQuery::setSpanOr, (p, t) -> SpanOrQuery.PARSER.apply(p, null), SPAN_OR);
-    PARSER.declareObject(SpanQuery::setSpanTerm, (p, t) -> SpanTermQuery.PARSER.apply(p, null), SPAN_TERM);
-    PARSER.declareObject(SpanQuery::setSpanWithin, (p, t) -> SpanWithinQuery.PARSER.apply(p, null), SPAN_WITHIN);
+    PARSER.declareObject(SpanQuery::setSpanContaining, (p, t) -> SpanContainingQuery.PARSER.apply(p, t), SPAN_CONTAINING);
+    PARSER.declareObject(SpanQuery::setFieldMaskingSpan, (p, t) -> SpanFieldMaskingQuery.PARSER.apply(p, t), FIELD_MASKING_SPAN);
+    PARSER.declareObject(SpanQuery::setSpanFirst, (p, t) -> SpanFirstQuery.PARSER.apply(p, t), SPAN_FIRST);
+    PARSER.declareObject(SpanQuery::setSpanGap, (p, t) -> SpanGapQuery.PARSER.apply(p, t), SPAN_GAP);
+    PARSER.declareObject(SpanQuery::setSpanMulti, (p, t) -> SpanMultiTermQuery.PARSER.apply(p, t), SPAN_MULTI);
+    PARSER.declareObject(SpanQuery::setSpanNear, (p, t) -> SpanNearQuery.PARSER.apply(p, t), SPAN_NEAR);
+    PARSER.declareObject(SpanQuery::setSpanNot, (p, t) -> SpanNotQuery.PARSER.apply(p, t), SPAN_NOT);
+    PARSER.declareObject(SpanQuery::setSpanOr, (p, t) -> SpanOrQuery.PARSER.apply(p, t), SPAN_OR);
+    PARSER.declareObject(SpanQuery::setSpanTerm, (p, t) -> SpanTermQuery.PARSER.apply(p, t), SPAN_TERM);
+    PARSER.declareObject(SpanQuery::setSpanWithin, (p, t) -> SpanWithinQuery.PARSER.apply(p, t), SPAN_WITHIN);
   }
 
 }

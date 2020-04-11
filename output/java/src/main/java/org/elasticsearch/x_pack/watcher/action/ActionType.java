@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.action;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public enum ActionType implements XContentable<ActionType> {
       case "slack": return ActionType.Slack;
       case "pagerduty": return ActionType.Pagerduty;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ActionType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ActionType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

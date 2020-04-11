@@ -2,6 +2,7 @@
 package org.elasticsearch.document;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public enum Result implements XContentable<Result> {
       case "not_found": return Result.NotFound;
       case "noop": return Result.Noop;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, Result.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, Result.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

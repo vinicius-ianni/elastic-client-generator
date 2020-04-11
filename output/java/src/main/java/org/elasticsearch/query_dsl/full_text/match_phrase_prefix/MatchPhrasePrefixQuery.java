@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.full_text.multi_match.*;
 
@@ -47,6 +47,7 @@ public class MatchPhrasePrefixQuery  implements XContentable<MatchPhrasePrefixQu
   public MatchPhrasePrefixQuery setZeroTermsQuery(ZeroTermsQuery val) { this._zeroTermsQuery = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,10 +63,10 @@ public class MatchPhrasePrefixQuery  implements XContentable<MatchPhrasePrefixQu
 
   static {
     PARSER.declareString(MatchPhrasePrefixQuery::setAnalyzer, ANALYZER);
-    PARSER.declareInteger(MatchPhrasePrefixQuery::setMaxExpansions, MAX_EXPANSIONS);
+    PARSER.declareInt(MatchPhrasePrefixQuery::setMaxExpansions, MAX_EXPANSIONS);
     PARSER.declareString(MatchPhrasePrefixQuery::setQuery, QUERY);
-    PARSER.declareInteger(MatchPhrasePrefixQuery::setSlop, SLOP);
-    PARSER.declareObject(MatchPhrasePrefixQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p, null), ZERO_TERMS_QUERY);
+    PARSER.declareInt(MatchPhrasePrefixQuery::setSlop, SLOP);
+    PARSER.declareObject(MatchPhrasePrefixQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY);
   }
 
 }

@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
-public class HitMetadata<TDocument>  implements XContentable<HitMetadata> {
+public class HitMetadata<TDocument>  implements XContentable<HitMetadata<TDocument>> {
   
   static final ParseField ID = new ParseField("_id");
   private String _id;
@@ -64,6 +64,7 @@ public class HitMetadata<TDocument>  implements XContentable<HitMetadata> {
   public HitMetadata<TDocument> setVersion(Long val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -83,7 +84,7 @@ public class HitMetadata<TDocument>  implements XContentable<HitMetadata> {
     PARSER.declareLong(HitMetadata::setPrimaryTerm, PRIMARY_TERM);
     PARSER.declareString(HitMetadata::setRouting, ROUTING);
     PARSER.declareLong(HitMetadata::setSeqNo, SEQ_NO);
-    PARSER.declareObject(HitMetadata::setSource, (p, t) -> TDocument.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(HitMetadata::setSource, (p, t) -> null /* TODO TDocument */, SOURCE);
     PARSER.declareString(HitMetadata::setType, TYPE);
     PARSER.declareLong(HitMetadata::setVersion, VERSION);
   }

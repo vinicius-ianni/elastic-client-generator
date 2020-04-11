@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.privileges.get_user_privileges.*;
 
 public class GetUserPrivilegesResponse  implements XContentable<GetUserPrivilegesResponse> {
@@ -46,6 +46,7 @@ public class GetUserPrivilegesResponse  implements XContentable<GetUserPrivilege
   public GetUserPrivilegesResponse setRunAs(List<String> val) { this._runAs = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,10 +61,10 @@ public class GetUserPrivilegesResponse  implements XContentable<GetUserPrivilege
     new ConstructingObjectParser<>(GetUserPrivilegesResponse.class.getName(), false, args -> new GetUserPrivilegesResponse());
 
   static {
-    PARSER.declareObjectArray(GetUserPrivilegesResponse::setApplications, (p, t) -> ApplicationResourcePrivileges.PARSER.apply(p), APPLICATIONS);
+    PARSER.declareObjectArray(GetUserPrivilegesResponse::setApplications, (p, t) -> ApplicationResourcePrivileges.PARSER.apply(p, t), APPLICATIONS);
     PARSER.declareStringArray(GetUserPrivilegesResponse::setCluster, CLUSTER);
-    PARSER.declareObjectArray(GetUserPrivilegesResponse::setGlobal, (p, t) -> GlobalPrivileges.PARSER.apply(p), GLOBAL);
-    PARSER.declareObjectArray(GetUserPrivilegesResponse::setIndices, (p, t) -> UserIndicesPrivileges.PARSER.apply(p), INDICES);
+    PARSER.declareObjectArray(GetUserPrivilegesResponse::setGlobal, (p, t) -> GlobalPrivileges.PARSER.apply(p, t), GLOBAL);
+    PARSER.declareObjectArray(GetUserPrivilegesResponse::setIndices, (p, t) -> UserIndicesPrivileges.PARSER.apply(p, t), INDICES);
     PARSER.declareStringArray(GetUserPrivilegesResponse::setRunAs, RUN_AS);
   }
 

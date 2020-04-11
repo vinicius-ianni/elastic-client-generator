@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
@@ -97,6 +97,7 @@ public class ExplainRequest  implements XContentable<ExplainRequest> {
   public ExplainRequest setStoredFields(List<Field> val) { this._storedFields = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -113,17 +114,17 @@ public class ExplainRequest  implements XContentable<ExplainRequest> {
   static {
     PARSER.declareBoolean(ExplainRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(ExplainRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(ExplainRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p, null), DEFAULT_OPERATOR);
+    PARSER.declareObject(ExplainRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
     PARSER.declareString(ExplainRequest::setDf, DF);
     PARSER.declareBoolean(ExplainRequest::setLenient, LENIENT);
     PARSER.declareString(ExplainRequest::setPreference, PREFERENCE);
     PARSER.declareString(ExplainRequest::setQueryOnQueryString, QUERY_ON_QUERY_STRING);
-    PARSER.declareRouting(ExplainRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(ExplainRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(ExplainRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(ExplainRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(ExplainRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
-    PARSER.declareObject(ExplainRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObjectArray(ExplainRequest::setStoredFields, (p, t) -> Field.PARSER.apply(p), STORED_FIELDS);
+    PARSER.declareObjectArray(ExplainRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(ExplainRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
+    PARSER.declareObject(ExplainRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObjectArray(ExplainRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
   }
 
 }

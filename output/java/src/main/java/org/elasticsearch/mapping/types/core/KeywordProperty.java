@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.mapping.types.core.*;
 
@@ -71,6 +71,7 @@ public class KeywordProperty  implements XContentable<KeywordProperty> {
   public KeywordProperty setSplitQueriesOnWhitespace(Boolean val) { this._splitQueriesOnWhitespace = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -87,9 +88,9 @@ public class KeywordProperty  implements XContentable<KeywordProperty> {
   static {
     PARSER.declareDouble(KeywordProperty::setBoost, BOOST);
     PARSER.declareBoolean(KeywordProperty::setEagerGlobalOrdinals, EAGER_GLOBAL_ORDINALS);
-    PARSER.declareInteger(KeywordProperty::setIgnoreAbove, IGNORE_ABOVE);
+    PARSER.declareInt(KeywordProperty::setIgnoreAbove, IGNORE_ABOVE);
     PARSER.declareBoolean(KeywordProperty::setIndex, INDEX);
-    PARSER.declareObject(KeywordProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p, null), INDEX_OPTIONS);
+    PARSER.declareObject(KeywordProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
     PARSER.declareString(KeywordProperty::setNormalizer, NORMALIZER);
     PARSER.declareBoolean(KeywordProperty::setNorms, NORMS);
     PARSER.declareString(KeywordProperty::setNullValue, NULL_VALUE);

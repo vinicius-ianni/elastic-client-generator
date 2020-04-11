@@ -2,6 +2,7 @@
 package org.elasticsearch.aggregations.matrix.matrix_stats;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public enum MatrixStatsMode implements XContentable<MatrixStatsMode> {
       case "sum": return MatrixStatsMode.Sum;
       case "median": return MatrixStatsMode.Median;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, MatrixStatsMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, MatrixStatsMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

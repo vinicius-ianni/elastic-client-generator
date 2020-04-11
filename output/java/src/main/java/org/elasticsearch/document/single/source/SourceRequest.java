@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
@@ -73,6 +73,7 @@ public class SourceRequest  implements XContentable<SourceRequest> {
   public SourceRequest setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -90,12 +91,12 @@ public class SourceRequest  implements XContentable<SourceRequest> {
     PARSER.declareString(SourceRequest::setPreference, PREFERENCE);
     PARSER.declareBoolean(SourceRequest::setRealtime, REALTIME);
     PARSER.declareBoolean(SourceRequest::setRefresh, REFRESH);
-    PARSER.declareRouting(SourceRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(SourceRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(SourceRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(SourceRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(SourceRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
+    PARSER.declareObjectArray(SourceRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(SourceRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
     PARSER.declareLong(SourceRequest::setVersion, VERSION);
-    PARSER.declareObject(SourceRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(SourceRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

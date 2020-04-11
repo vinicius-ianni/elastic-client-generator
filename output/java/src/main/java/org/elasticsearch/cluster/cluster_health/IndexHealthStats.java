@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.cluster_health.*;
 import org.elasticsearch.common.*;
@@ -72,6 +72,7 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
   public IndexHealthStats setUnassignedShards(Integer val) { this._unassignedShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -86,15 +87,15 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
     new ConstructingObjectParser<>(IndexHealthStats.class.getName(), false, args -> new IndexHealthStats());
 
   static {
-    PARSER.declareInteger(IndexHealthStats::setActivePrimaryShards, ACTIVE_PRIMARY_SHARDS);
-    PARSER.declareInteger(IndexHealthStats::setActiveShards, ACTIVE_SHARDS);
-    PARSER.declareInteger(IndexHealthStats::setInitializingShards, INITIALIZING_SHARDS);
-    PARSER.declareInteger(IndexHealthStats::setNumberOfReplicas, NUMBER_OF_REPLICAS);
-    PARSER.declareInteger(IndexHealthStats::setNumberOfShards, NUMBER_OF_SHARDS);
-    PARSER.declareInteger(IndexHealthStats::setRelocatingShards, RELOCATING_SHARDS);
-    PARSER.declareObject(IndexHealthStats::setShards, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ShardHealthStats.PARSER.apply(pp, null)), SHARDS);;
-    PARSER.declareObject(IndexHealthStats::setStatus, (p, t) -> Health.PARSER.apply(p, null), STATUS);
-    PARSER.declareInteger(IndexHealthStats::setUnassignedShards, UNASSIGNED_SHARDS);
+    PARSER.declareInt(IndexHealthStats::setActivePrimaryShards, ACTIVE_PRIMARY_SHARDS);
+    PARSER.declareInt(IndexHealthStats::setActiveShards, ACTIVE_SHARDS);
+    PARSER.declareInt(IndexHealthStats::setInitializingShards, INITIALIZING_SHARDS);
+    PARSER.declareInt(IndexHealthStats::setNumberOfReplicas, NUMBER_OF_REPLICAS);
+    PARSER.declareInt(IndexHealthStats::setNumberOfShards, NUMBER_OF_SHARDS);
+    PARSER.declareInt(IndexHealthStats::setRelocatingShards, RELOCATING_SHARDS);
+    PARSER.declareObject(IndexHealthStats::setShards, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ShardHealthStats.PARSER.apply(pp, null)), SHARDS);
+    PARSER.declareObject(IndexHealthStats::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS);
+    PARSER.declareInt(IndexHealthStats::setUnassignedShards, UNASSIGNED_SHARDS);
   }
 
 }

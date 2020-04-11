@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.watcher.action.*;
 import org.elasticsearch.x_pack.watcher.condition.*;
@@ -87,6 +87,7 @@ public class PutWatchRequest  implements XContentable<PutWatchRequest> {
   public PutWatchRequest setTrigger(TriggerContainer val) { this._trigger = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -105,13 +106,13 @@ public class PutWatchRequest  implements XContentable<PutWatchRequest> {
     PARSER.declareLong(PutWatchRequest::setIfPrimaryTerm, IF_PRIMARY_TERM);
     PARSER.declareLong(PutWatchRequest::setIfSequenceNumber, IF_SEQUENCE_NUMBER);
     PARSER.declareLong(PutWatchRequest::setVersion, VERSION);
-    PARSER.declareObject(PutWatchRequest::setActions, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Action.PARSER.apply(pp, null)), ACTIONS);;
-    PARSER.declareObject(PutWatchRequest::setCondition, (p, t) -> ConditionContainer.PARSER.apply(p, null), CONDITION);
-    PARSER.declareObject(PutWatchRequest::setInput, (p, t) -> InputContainer.PARSER.apply(p, null), INPUT);
-    PARSER.declareObject(PutWatchRequest::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareObject(PutWatchRequest::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> Action.PARSER.apply(pp, null)), ACTIONS);
+    PARSER.declareObject(PutWatchRequest::setCondition, (p, t) -> ConditionContainer.PARSER.apply(p, t), CONDITION);
+    PARSER.declareObject(PutWatchRequest::setInput, (p, t) -> InputContainer.PARSER.apply(p, t), INPUT);
+    PARSER.declareObject(PutWatchRequest::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareString(PutWatchRequest::setThrottlePeriod, THROTTLE_PERIOD);
-    PARSER.declareObject(PutWatchRequest::setTransform, (p, t) -> TransformContainer.PARSER.apply(p, null), TRANSFORM);
-    PARSER.declareObject(PutWatchRequest::setTrigger, (p, t) -> TriggerContainer.PARSER.apply(p, null), TRIGGER);
+    PARSER.declareObject(PutWatchRequest::setTransform, (p, t) -> TransformContainer.PARSER.apply(p, t), TRANSFORM);
+    PARSER.declareObject(PutWatchRequest::setTrigger, (p, t) -> TriggerContainer.PARSER.apply(p, t), TRIGGER);
   }
 
 }

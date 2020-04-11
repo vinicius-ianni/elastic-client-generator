@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.common_options.minimum_should_match.*;
 import org.elasticsearch.internal.*;
@@ -54,6 +54,7 @@ public class BoolQuery  implements XContentable<BoolQuery> {
   public BoolQuery setShould(List<QueryContainer> val) { this._should = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,12 +69,12 @@ public class BoolQuery  implements XContentable<BoolQuery> {
     new ConstructingObjectParser<>(BoolQuery.class.getName(), false, args -> new BoolQuery());
 
   static {
-    PARSER.declareObjectArray(BoolQuery::setFilter, (p, t) -> QueryContainer.PARSER.apply(p), FILTER);
+    PARSER.declareObjectArray(BoolQuery::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);
     PARSER.declareBoolean(BoolQuery::setLocked, LOCKED);
-    PARSER.declareObject(BoolQuery::setMinimumShouldMatch, (p, t) -> MinimumShouldMatch.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH);
-    PARSER.declareObjectArray(BoolQuery::setMust, (p, t) -> QueryContainer.PARSER.apply(p), MUST);
-    PARSER.declareObjectArray(BoolQuery::setMustNot, (p, t) -> QueryContainer.PARSER.apply(p), MUST_NOT);
-    PARSER.declareObjectArray(BoolQuery::setShould, (p, t) -> QueryContainer.PARSER.apply(p), SHOULD);
+    PARSER.declareObject(BoolQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
+    PARSER.declareObjectArray(BoolQuery::setMust, (p, t) -> QueryContainer.PARSER.apply(p, t), MUST);
+    PARSER.declareObjectArray(BoolQuery::setMustNot, (p, t) -> QueryContainer.PARSER.apply(p, t), MUST_NOT);
+    PARSER.declareObjectArray(BoolQuery::setShould, (p, t) -> QueryContainer.PARSER.apply(p, t), SHOULD);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.analysis.*;
 
@@ -29,6 +29,7 @@ public class StandardAnalyzer  implements XContentable<StandardAnalyzer> {
   public StandardAnalyzer setStopwords(StopWords val) { this._stopwords = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class StandardAnalyzer  implements XContentable<StandardAnalyzer> {
     new ConstructingObjectParser<>(StandardAnalyzer.class.getName(), false, args -> new StandardAnalyzer());
 
   static {
-    PARSER.declareInteger(StandardAnalyzer::setMaxTokenLength, MAX_TOKEN_LENGTH);
-    PARSER.declareObject(StandardAnalyzer::setStopwords, (p, t) -> StopWords.PARSER.apply(p, null), STOPWORDS);
+    PARSER.declareInt(StandardAnalyzer::setMaxTokenLength, MAX_TOKEN_LENGTH);
+    PARSER.declareObject(StandardAnalyzer::setStopwords, (p, t) -> new StopWords().fromXContent(p), STOPWORDS);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class IndexExistsRequest  implements XContentable<IndexExistsRequest> {
@@ -52,6 +52,7 @@ public class IndexExistsRequest  implements XContentable<IndexExistsRequest> {
   public IndexExistsRequest setLocal(Boolean val) { this._local = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -67,7 +68,7 @@ public class IndexExistsRequest  implements XContentable<IndexExistsRequest> {
 
   static {
     PARSER.declareBoolean(IndexExistsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(IndexExistsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(IndexExistsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(IndexExistsRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(IndexExistsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(IndexExistsRequest::setIncludeDefaults, INCLUDE_DEFAULTS);

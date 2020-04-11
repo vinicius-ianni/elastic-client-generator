@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.schedule.*;
 import org.elasticsearch.internal.*;
 
@@ -35,6 +35,7 @@ public class TimeOfYear  implements XContentable<TimeOfYear> {
   public TimeOfYear setOn(List<Integer> val) { this._on = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -51,7 +52,7 @@ public class TimeOfYear  implements XContentable<TimeOfYear> {
   static {
     PARSER.declareStringArray(TimeOfYear::setAt, AT);
     PARSER.declareObjectArray(TimeOfYear::setInt, (p, t) -> Month.PARSER.apply(p), INT);
-    PARSER.declareIntegerArray(TimeOfYear::setOn, ON);
+    PARSER.declareIntArray(TimeOfYear::setOn, ON);
   }
 
 }

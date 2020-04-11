@@ -2,6 +2,7 @@
 package org.elasticsearch.common;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum OpType implements XContentable<OpType> {
       case "index": return OpType.Index;
       case "create": return OpType.Create;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, OpType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, OpType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

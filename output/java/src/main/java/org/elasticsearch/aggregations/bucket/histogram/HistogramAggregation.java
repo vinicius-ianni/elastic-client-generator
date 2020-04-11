@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.bucket.histogram.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
@@ -67,6 +67,7 @@ public class HistogramAggregation  implements XContentable<HistogramAggregation>
   public HistogramAggregation setScript(Script val) { this._script = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -81,14 +82,15 @@ public class HistogramAggregation  implements XContentable<HistogramAggregation>
     new ConstructingObjectParser<>(HistogramAggregation.class.getName(), false, args -> new HistogramAggregation());
 
   static {
-    PARSER.declareObject(HistogramAggregation::setExtendedBounds, (p, t) -> ExtendedBounds<Double>.PARSER.apply(p, null), EXTENDED_BOUNDS);
-    PARSER.declareField(HistogramAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    ExtendedBounds<Double> _extendedBounds = new ExtendedBounds<Double>();
+    PARSER.declareObject(HistogramAggregation::setExtendedBounds, (p, t) -> _extendedBounds.PARSER.apply(p, t), EXTENDED_BOUNDS);
+    PARSER.declareObject(HistogramAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareDouble(HistogramAggregation::setInterval, INTERVAL);
-    PARSER.declareInteger(HistogramAggregation::setMinDocCount, MIN_DOC_COUNT);
+    PARSER.declareInt(HistogramAggregation::setMinDocCount, MIN_DOC_COUNT);
     PARSER.declareDouble(HistogramAggregation::setMissing, MISSING);
     PARSER.declareDouble(HistogramAggregation::setOffset, OFFSET);
-    PARSER.declareObject(HistogramAggregation::setOrder, (p, t) -> HistogramOrder.PARSER.apply(p, null), ORDER);
-    PARSER.declareObject(HistogramAggregation::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(HistogramAggregation::setOrder, (p, t) -> HistogramOrder.PARSER.apply(p, t), ORDER);
+    PARSER.declareObject(HistogramAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
   }
 
 }

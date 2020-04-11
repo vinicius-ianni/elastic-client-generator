@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.ingest.*;
 
 public class Pipeline  implements XContentable<Pipeline> {
@@ -34,6 +34,7 @@ public class Pipeline  implements XContentable<Pipeline> {
   public Pipeline setProcessors(List<Processor> val) { this._processors = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class Pipeline  implements XContentable<Pipeline> {
 
   static {
     PARSER.declareString(Pipeline::setDescription, DESCRIPTION);
-    PARSER.declareObjectArray(Pipeline::setOnFailure, (p, t) -> Processor.PARSER.apply(p), ON_FAILURE);
-    PARSER.declareObjectArray(Pipeline::setProcessors, (p, t) -> Processor.PARSER.apply(p), PROCESSORS);
+    PARSER.declareObjectArray(Pipeline::setOnFailure, (p, t) -> Processor.PARSER.apply(p, t), ON_FAILURE);
+    PARSER.declareObjectArray(Pipeline::setProcessors, (p, t) -> Processor.PARSER.apply(p, t), PROCESSORS);
   }
 
 }

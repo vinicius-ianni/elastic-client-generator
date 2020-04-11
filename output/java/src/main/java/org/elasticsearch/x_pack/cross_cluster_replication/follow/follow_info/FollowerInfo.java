@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.cross_cluster_replication.follow.follow_info.*;
 
 public class FollowerInfo  implements XContentable<FollowerInfo> {
@@ -46,6 +46,7 @@ public class FollowerInfo  implements XContentable<FollowerInfo> {
   public FollowerInfo setParameters(FollowConfig val) { this._parameters = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -63,8 +64,8 @@ public class FollowerInfo  implements XContentable<FollowerInfo> {
     PARSER.declareString(FollowerInfo::setFollowerIndex, FOLLOWER_INDEX);
     PARSER.declareString(FollowerInfo::setRemoteCluster, REMOTE_CLUSTER);
     PARSER.declareString(FollowerInfo::setLeaderIndex, LEADER_INDEX);
-    PARSER.declareObject(FollowerInfo::setStatus, (p, t) -> FollowerIndexStatus.PARSER.apply(p, null), STATUS);
-    PARSER.declareObject(FollowerInfo::setParameters, (p, t) -> FollowConfig.PARSER.apply(p, null), PARAMETERS);
+    PARSER.declareObject(FollowerInfo::setStatus, (p, t) -> FollowerIndexStatus.PARSER.apply(p), STATUS);
+    PARSER.declareObject(FollowerInfo::setParameters, (p, t) -> FollowConfig.PARSER.apply(p, t), PARAMETERS);
   }
 
 }

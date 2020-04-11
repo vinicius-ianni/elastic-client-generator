@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
 
@@ -29,6 +29,7 @@ public class SpanGapQuery  implements XContentable<SpanGapQuery> {
   public SpanGapQuery setWidth(Integer val) { this._width = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class SpanGapQuery  implements XContentable<SpanGapQuery> {
     new ConstructingObjectParser<>(SpanGapQuery.class.getName(), false, args -> new SpanGapQuery());
 
   static {
-    PARSER.declareField(SpanGapQuery::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareInteger(SpanGapQuery::setWidth, WIDTH);
+    PARSER.declareObject(SpanGapQuery::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareInt(SpanGapQuery::setWidth, WIDTH);
   }
 
 }

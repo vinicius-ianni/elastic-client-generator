@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class PathHierarchyTokenizer  implements XContentable<PathHierarchyTokenizer> {
@@ -46,6 +46,7 @@ public class PathHierarchyTokenizer  implements XContentable<PathHierarchyTokeni
   public PathHierarchyTokenizer setSkip(Integer val) { this._skip = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,11 +61,11 @@ public class PathHierarchyTokenizer  implements XContentable<PathHierarchyTokeni
     new ConstructingObjectParser<>(PathHierarchyTokenizer.class.getName(), false, args -> new PathHierarchyTokenizer());
 
   static {
-    PARSER.declareInteger(PathHierarchyTokenizer::setBufferSize, BUFFER_SIZE);
+    PARSER.declareInt(PathHierarchyTokenizer::setBufferSize, BUFFER_SIZE);
     PARSER.declareString(PathHierarchyTokenizer::setDelimiter, DELIMITER);
     PARSER.declareString(PathHierarchyTokenizer::setReplacement, REPLACEMENT);
     PARSER.declareBoolean(PathHierarchyTokenizer::setReverse, REVERSE);
-    PARSER.declareInteger(PathHierarchyTokenizer::setSkip, SKIP);
+    PARSER.declareInt(PathHierarchyTokenizer::setSkip, SKIP);
   }
 
 }

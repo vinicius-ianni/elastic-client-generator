@@ -2,6 +2,7 @@
 package org.elasticsearch.analysis.languages;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -93,7 +94,7 @@ public enum Language implements XContentable<Language> {
       case "Turkish": return Language.Turkish;
       case "Thai": return Language.Thai;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, Language.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, Language.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.search.scroll.scroll.*;
 import org.elasticsearch.internal.*;
@@ -232,6 +232,7 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
   public DeleteByQueryRequest setWaitForCompletion(Boolean val) { this._waitForCompletion = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -246,16 +247,16 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
     new ConstructingObjectParser<>(DeleteByQueryRequest.class.getName(), false, args -> new DeleteByQueryRequest());
 
   static {
-    PARSER.declareObject(DeleteByQueryRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObject(DeleteByQueryRequest::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, null), SLICE);
+    PARSER.declareObject(DeleteByQueryRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObject(DeleteByQueryRequest::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, t), SLICE);
     PARSER.declareLong(DeleteByQueryRequest::setMaxDocs, MAX_DOCS);
     PARSER.declareBoolean(DeleteByQueryRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(DeleteByQueryRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(DeleteByQueryRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(DeleteByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p, null), CONFLICTS);
-    PARSER.declareObject(DeleteByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p, null), DEFAULT_OPERATOR);
+    PARSER.declareObject(DeleteByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS);
+    PARSER.declareObject(DeleteByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
     PARSER.declareString(DeleteByQueryRequest::setDf, DF);
-    PARSER.declareObject(DeleteByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(DeleteByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareLong(DeleteByQueryRequest::setFrom, FROM);
     PARSER.declareBoolean(DeleteByQueryRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(DeleteByQueryRequest::setLenient, LENIENT);
@@ -264,20 +265,20 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
     PARSER.declareBoolean(DeleteByQueryRequest::setRefresh, REFRESH);
     PARSER.declareBoolean(DeleteByQueryRequest::setRequestCache, REQUEST_CACHE);
     PARSER.declareLong(DeleteByQueryRequest::setRequestsPerSecond, REQUESTS_PER_SECOND);
-    PARSER.declareRouting(DeleteByQueryRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(DeleteByQueryRequest::setScroll, (p, t) -> Time.PARSER.apply(p, null), SCROLL);
+    PARSER.declareObject(DeleteByQueryRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(DeleteByQueryRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
     PARSER.declareLong(DeleteByQueryRequest::setScrollSize, SCROLL_SIZE);
-    PARSER.declareObject(DeleteByQueryRequest::setSearchTimeout, (p, t) -> Time.PARSER.apply(p, null), SEARCH_TIMEOUT);
-    PARSER.declareObject(DeleteByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p, null), SEARCH_TYPE);
+    PARSER.declareObject(DeleteByQueryRequest::setSearchTimeout, (p, t) -> Time.PARSER.apply(p, t), SEARCH_TIMEOUT);
+    PARSER.declareObject(DeleteByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
     PARSER.declareLong(DeleteByQueryRequest::setSize, SIZE);
     PARSER.declareLong(DeleteByQueryRequest::setSlices, SLICES);
     PARSER.declareStringArray(DeleteByQueryRequest::setSort, SORT);
     PARSER.declareBoolean(DeleteByQueryRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(DeleteByQueryRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(DeleteByQueryRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
+    PARSER.declareObjectArray(DeleteByQueryRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(DeleteByQueryRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
     PARSER.declareStringArray(DeleteByQueryRequest::setStats, STATS);
     PARSER.declareLong(DeleteByQueryRequest::setTerminateAfter, TERMINATE_AFTER);
-    PARSER.declareObject(DeleteByQueryRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(DeleteByQueryRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareBoolean(DeleteByQueryRequest::setVersion, VERSION);
     PARSER.declareString(DeleteByQueryRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
     PARSER.declareBoolean(DeleteByQueryRequest::setWaitForCompletion, WAIT_FOR_COMPLETION);

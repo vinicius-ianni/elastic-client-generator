@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.indices.alias_management.*;
 import org.elasticsearch.mapping.*;
@@ -61,6 +61,7 @@ public class CreateIndexRequest  implements XContentable<CreateIndexRequest> {
   public CreateIndexRequest setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -75,12 +76,12 @@ public class CreateIndexRequest  implements XContentable<CreateIndexRequest> {
     new ConstructingObjectParser<>(CreateIndexRequest.class.getName(), false, args -> new CreateIndexRequest());
 
   static {
-    PARSER.declareObject(CreateIndexRequest::setAliases, (p, t) ->  new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);;
-    PARSER.declareObject(CreateIndexRequest::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, null), MAPPINGS);
-    PARSER.declareObject(CreateIndexRequest::setSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);;
+    PARSER.declareObject(CreateIndexRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);
+    PARSER.declareObject(CreateIndexRequest::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, t), MAPPINGS);
+    PARSER.declareObject(CreateIndexRequest::setSettings, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);
     PARSER.declareBoolean(CreateIndexRequest::setIncludeTypeName, INCLUDE_TYPE_NAME);
-    PARSER.declareObject(CreateIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(CreateIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(CreateIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(CreateIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareString(CreateIndexRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

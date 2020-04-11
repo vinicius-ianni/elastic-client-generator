@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -65,6 +65,7 @@ public class GetIndexRequest  implements XContentable<GetIndexRequest> {
   public GetIndexRequest setMasterTimeout(Time val) { this._masterTimeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -80,13 +81,13 @@ public class GetIndexRequest  implements XContentable<GetIndexRequest> {
 
   static {
     PARSER.declareBoolean(GetIndexRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(GetIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(GetIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(GetIndexRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(GetIndexRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(GetIndexRequest::setIncludeDefaults, INCLUDE_DEFAULTS);
     PARSER.declareBoolean(GetIndexRequest::setIncludeTypeName, INCLUDE_TYPE_NAME);
     PARSER.declareBoolean(GetIndexRequest::setLocal, LOCAL);
-    PARSER.declareObject(GetIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(GetIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
   }
 
 }

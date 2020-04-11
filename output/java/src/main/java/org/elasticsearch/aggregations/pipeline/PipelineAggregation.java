@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.pipeline.*;
 
 public class PipelineAggregation  implements XContentable<PipelineAggregation> {
@@ -34,6 +34,7 @@ public class PipelineAggregation  implements XContentable<PipelineAggregation> {
   public PipelineAggregation setGapPolicy(GapPolicy val) { this._gapPolicy = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class PipelineAggregation  implements XContentable<PipelineAggregation> {
     new ConstructingObjectParser<>(PipelineAggregation.class.getName(), false, args -> new PipelineAggregation());
 
   static {
-    PARSER.declareObject(PipelineAggregation::setBucketsPath, (p, t) -> BucketsPath.PARSER.apply(p, null), BUCKETS_PATH);
+    PARSER.declareObject(PipelineAggregation::setBucketsPath, (p, t) -> BucketsPath.PARSER.apply(p, t), BUCKETS_PATH);
     PARSER.declareString(PipelineAggregation::setFormat, FORMAT);
-    PARSER.declareObject(PipelineAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p, null), GAP_POLICY);
+    PARSER.declareObject(PipelineAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p), GAP_POLICY);
   }
 
 }

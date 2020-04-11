@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.full_text.intervals.*;
 import org.elasticsearch.common_options.scripting.*;
 
@@ -71,6 +71,7 @@ public class IntervalsFilter  implements XContentable<IntervalsFilter> {
   public IntervalsFilter setScript(Script val) { this._script = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -85,15 +86,15 @@ public class IntervalsFilter  implements XContentable<IntervalsFilter> {
     new ConstructingObjectParser<>(IntervalsFilter.class.getName(), false, args -> new IntervalsFilter());
 
   static {
-    PARSER.declareObject(IntervalsFilter::setAfter, (p, t) -> IntervalsContainer.PARSER.apply(p, null), AFTER);
-    PARSER.declareObject(IntervalsFilter::setBefore, (p, t) -> IntervalsContainer.PARSER.apply(p, null), BEFORE);
-    PARSER.declareObject(IntervalsFilter::setContainedBy, (p, t) -> IntervalsContainer.PARSER.apply(p, null), CONTAINED_BY);
-    PARSER.declareObject(IntervalsFilter::setContaining, (p, t) -> IntervalsContainer.PARSER.apply(p, null), CONTAINING);
-    PARSER.declareObject(IntervalsFilter::setNotContainedBy, (p, t) -> IntervalsContainer.PARSER.apply(p, null), NOT_CONTAINED_BY);
-    PARSER.declareObject(IntervalsFilter::setNotContaining, (p, t) -> IntervalsContainer.PARSER.apply(p, null), NOT_CONTAINING);
-    PARSER.declareObject(IntervalsFilter::setNotOverlapping, (p, t) -> IntervalsContainer.PARSER.apply(p, null), NOT_OVERLAPPING);
-    PARSER.declareObject(IntervalsFilter::setOverlapping, (p, t) -> IntervalsContainer.PARSER.apply(p, null), OVERLAPPING);
-    PARSER.declareObject(IntervalsFilter::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(IntervalsFilter::setAfter, (p, t) -> IntervalsContainer.PARSER.apply(p, t), AFTER);
+    PARSER.declareObject(IntervalsFilter::setBefore, (p, t) -> IntervalsContainer.PARSER.apply(p, t), BEFORE);
+    PARSER.declareObject(IntervalsFilter::setContainedBy, (p, t) -> IntervalsContainer.PARSER.apply(p, t), CONTAINED_BY);
+    PARSER.declareObject(IntervalsFilter::setContaining, (p, t) -> IntervalsContainer.PARSER.apply(p, t), CONTAINING);
+    PARSER.declareObject(IntervalsFilter::setNotContainedBy, (p, t) -> IntervalsContainer.PARSER.apply(p, t), NOT_CONTAINED_BY);
+    PARSER.declareObject(IntervalsFilter::setNotContaining, (p, t) -> IntervalsContainer.PARSER.apply(p, t), NOT_CONTAINING);
+    PARSER.declareObject(IntervalsFilter::setNotOverlapping, (p, t) -> IntervalsContainer.PARSER.apply(p, t), NOT_OVERLAPPING);
+    PARSER.declareObject(IntervalsFilter::setOverlapping, (p, t) -> IntervalsContainer.PARSER.apply(p, t), OVERLAPPING);
+    PARSER.declareObject(IntervalsFilter::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class ClusterNodeCount  implements XContentable<ClusterNodeCount> {
@@ -52,6 +52,7 @@ public class ClusterNodeCount  implements XContentable<ClusterNodeCount> {
   public ClusterNodeCount setVotingOnly(Integer val) { this._votingOnly = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -66,12 +67,12 @@ public class ClusterNodeCount  implements XContentable<ClusterNodeCount> {
     new ConstructingObjectParser<>(ClusterNodeCount.class.getName(), false, args -> new ClusterNodeCount());
 
   static {
-    PARSER.declareInteger(ClusterNodeCount::setCoordinatingOnly, COORDINATING_ONLY);
-    PARSER.declareInteger(ClusterNodeCount::setData, DATA);
-    PARSER.declareInteger(ClusterNodeCount::setIngest, INGEST);
-    PARSER.declareInteger(ClusterNodeCount::setMaster, MASTER);
-    PARSER.declareInteger(ClusterNodeCount::setTotal, TOTAL);
-    PARSER.declareInteger(ClusterNodeCount::setVotingOnly, VOTING_ONLY);
+    PARSER.declareInt(ClusterNodeCount::setCoordinatingOnly, COORDINATING_ONLY);
+    PARSER.declareInt(ClusterNodeCount::setData, DATA);
+    PARSER.declareInt(ClusterNodeCount::setIngest, INGEST);
+    PARSER.declareInt(ClusterNodeCount::setMaster, MASTER);
+    PARSER.declareInt(ClusterNodeCount::setTotal, TOTAL);
+    PARSER.declareInt(ClusterNodeCount::setVotingOnly, VOTING_ONLY);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.geo.*;
 
 public class GeoPointProperty  implements XContentable<GeoPointProperty> {
@@ -34,6 +34,7 @@ public class GeoPointProperty  implements XContentable<GeoPointProperty> {
   public GeoPointProperty setNullValue(GeoLocation val) { this._nullValue = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,7 +51,7 @@ public class GeoPointProperty  implements XContentable<GeoPointProperty> {
   static {
     PARSER.declareBoolean(GeoPointProperty::setIgnoreMalformed, IGNORE_MALFORMED);
     PARSER.declareBoolean(GeoPointProperty::setIgnoreZValue, IGNORE_Z_VALUE);
-    PARSER.declareObject(GeoPointProperty::setNullValue, (p, t) -> GeoLocation.PARSER.apply(p, null), NULL_VALUE);
+    PARSER.declareObject(GeoPointProperty::setNullValue, (p, t) -> GeoLocation.PARSER.apply(p, t), NULL_VALUE);
   }
 
 }

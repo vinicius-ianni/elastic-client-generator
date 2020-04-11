@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 
 
 public class RolloverIndexResponse  implements XContentable<RolloverIndexResponse> {
@@ -52,6 +52,7 @@ public class RolloverIndexResponse  implements XContentable<RolloverIndexRespons
   public RolloverIndexResponse setShardsAcknowledged(Boolean val) { this._shardsAcknowledged = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -66,7 +67,7 @@ public class RolloverIndexResponse  implements XContentable<RolloverIndexRespons
     new ConstructingObjectParser<>(RolloverIndexResponse.class.getName(), false, args -> new RolloverIndexResponse());
 
   static {
-    PARSER.declareObject(RolloverIndexResponse::setConditions, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Boolean.PARSER.apply(pp, null)), CONDITIONS);;
+    PARSER.declareObject(RolloverIndexResponse::setConditions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.booleanValue()), CONDITIONS);
     PARSER.declareBoolean(RolloverIndexResponse::setDryRun, DRY_RUN);
     PARSER.declareString(RolloverIndexResponse::setNewIndex, NEW_INDEX);
     PARSER.declareString(RolloverIndexResponse::setOldIndex, OLD_INDEX);

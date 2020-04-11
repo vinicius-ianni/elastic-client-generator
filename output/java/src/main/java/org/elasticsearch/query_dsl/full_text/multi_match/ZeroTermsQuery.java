@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.full_text.multi_match;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum ZeroTermsQuery implements XContentable<ZeroTermsQuery> {
       case "all": return ZeroTermsQuery.All;
       case "none": return ZeroTermsQuery.None;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ZeroTermsQuery.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ZeroTermsQuery.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

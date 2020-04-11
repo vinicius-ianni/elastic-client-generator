@@ -2,6 +2,7 @@
 package org.elasticsearch.analysis.plugins.icu.normalization;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum IcuNormalizationType implements XContentable<IcuNormalizationType> {
       case "nfkc": return IcuNormalizationType.Nfkc;
       case "nfkc_cf": return IcuNormalizationType.NfkcCf;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, IcuNormalizationType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, IcuNormalizationType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

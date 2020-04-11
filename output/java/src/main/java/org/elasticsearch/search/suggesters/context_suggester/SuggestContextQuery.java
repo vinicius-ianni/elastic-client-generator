@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.suggesters.context_suggester.*;
 import org.elasticsearch.query_dsl.geo.*;
@@ -49,6 +49,7 @@ public class SuggestContextQuery  implements XContentable<SuggestContextQuery> {
   public SuggestContextQuery setPrefix(Boolean val) { this._prefix = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -64,9 +65,9 @@ public class SuggestContextQuery  implements XContentable<SuggestContextQuery> {
 
   static {
     PARSER.declareDouble(SuggestContextQuery::setBoost, BOOST);
-    PARSER.declareObject(SuggestContextQuery::setContext, (p, t) -> Context.PARSER.apply(p, null), CONTEXT);
-    PARSER.declareObject(SuggestContextQuery::setNeighbours, (p, t) -> null, NEIGHBOURS);
-    PARSER.declareObject(SuggestContextQuery::setPrecision, (p, t) -> null, PRECISION);
+    PARSER.declareObject(SuggestContextQuery::setContext, (p, t) -> new Context().fromXContent(p), CONTEXT);
+    PARSER.declareObject(SuggestContextQuery::setNeighbours, (p, t) ->  new Either<List<Distance>, List<Integer>>() /* TODO UnionOf */, NEIGHBOURS);
+    PARSER.declareObject(SuggestContextQuery::setPrecision, (p, t) ->  new Either<Distance, Integer>() /* TODO UnionOf */, PRECISION);
     PARSER.declareBoolean(SuggestContextQuery::setPrefix, PREFIX);
   }
 

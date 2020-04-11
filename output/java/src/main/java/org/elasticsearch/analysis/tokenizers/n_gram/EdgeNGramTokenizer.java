@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.analysis.tokenizers.n_gram.*;
 
@@ -35,6 +35,7 @@ public class EdgeNGramTokenizer  implements XContentable<EdgeNGramTokenizer> {
   public EdgeNGramTokenizer setTokenChars(List<TokenChar> val) { this._tokenChars = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class EdgeNGramTokenizer  implements XContentable<EdgeNGramTokenizer> {
     new ConstructingObjectParser<>(EdgeNGramTokenizer.class.getName(), false, args -> new EdgeNGramTokenizer());
 
   static {
-    PARSER.declareInteger(EdgeNGramTokenizer::setMaxGram, MAX_GRAM);
-    PARSER.declareInteger(EdgeNGramTokenizer::setMinGram, MIN_GRAM);
+    PARSER.declareInt(EdgeNGramTokenizer::setMaxGram, MAX_GRAM);
+    PARSER.declareInt(EdgeNGramTokenizer::setMinGram, MIN_GRAM);
     PARSER.declareObjectArray(EdgeNGramTokenizer::setTokenChars, (p, t) -> TokenChar.PARSER.apply(p), TOKEN_CHARS);
   }
 

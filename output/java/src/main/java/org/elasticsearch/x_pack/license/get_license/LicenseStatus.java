@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.license.get_license;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum LicenseStatus implements XContentable<LicenseStatus> {
       case "invalid": return LicenseStatus.Invalid;
       case "expired": return LicenseStatus.Expired;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, LicenseStatus.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, LicenseStatus.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

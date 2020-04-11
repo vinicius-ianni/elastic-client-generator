@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.multi_term_query_rewrite;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public enum RewriteMultiTerm implements XContentable<RewriteMultiTerm> {
       case "top_terms_boost_N": return RewriteMultiTerm.TopTermsBoostN;
       case "top_terms_blended_freqs_N": return RewriteMultiTerm.TopTermsBlendedFreqsN;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, RewriteMultiTerm.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, RewriteMultiTerm.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

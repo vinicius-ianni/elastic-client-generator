@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.indices.alias_management.*;
 import org.elasticsearch.indices.index_management.rollover_index.*;
@@ -74,6 +74,7 @@ public class RolloverIndexRequest  implements XContentable<RolloverIndexRequest>
   public RolloverIndexRequest setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -88,14 +89,14 @@ public class RolloverIndexRequest  implements XContentable<RolloverIndexRequest>
     new ConstructingObjectParser<>(RolloverIndexRequest.class.getName(), false, args -> new RolloverIndexRequest());
 
   static {
-    PARSER.declareObject(RolloverIndexRequest::setAliases, (p, t) ->  new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);;
-    PARSER.declareObject(RolloverIndexRequest::setConditions, (p, t) -> RolloverConditions.PARSER.apply(p, null), CONDITIONS);
-    PARSER.declareObject(RolloverIndexRequest::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, null), MAPPINGS);
-    PARSER.declareObject(RolloverIndexRequest::setSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);;
+    PARSER.declareObject(RolloverIndexRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);
+    PARSER.declareObject(RolloverIndexRequest::setConditions, (p, t) -> RolloverConditions.PARSER.apply(p, t), CONDITIONS);
+    PARSER.declareObject(RolloverIndexRequest::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, t), MAPPINGS);
+    PARSER.declareObject(RolloverIndexRequest::setSettings, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);
     PARSER.declareBoolean(RolloverIndexRequest::setDryRun, DRY_RUN);
     PARSER.declareBoolean(RolloverIndexRequest::setIncludeTypeName, INCLUDE_TYPE_NAME);
-    PARSER.declareObject(RolloverIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(RolloverIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(RolloverIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(RolloverIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareString(RolloverIndexRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

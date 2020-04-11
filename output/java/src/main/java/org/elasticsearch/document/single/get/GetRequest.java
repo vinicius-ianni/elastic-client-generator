@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
@@ -79,6 +79,7 @@ public class GetRequest  implements XContentable<GetRequest> {
   public GetRequest setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -96,13 +97,13 @@ public class GetRequest  implements XContentable<GetRequest> {
     PARSER.declareString(GetRequest::setPreference, PREFERENCE);
     PARSER.declareBoolean(GetRequest::setRealtime, REALTIME);
     PARSER.declareBoolean(GetRequest::setRefresh, REFRESH);
-    PARSER.declareRouting(GetRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(GetRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(GetRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(GetRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(GetRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
-    PARSER.declareObjectArray(GetRequest::setStoredFields, (p, t) -> Field.PARSER.apply(p), STORED_FIELDS);
+    PARSER.declareObjectArray(GetRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(GetRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
+    PARSER.declareObjectArray(GetRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
     PARSER.declareLong(GetRequest::setVersion, VERSION);
-    PARSER.declareObject(GetRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(GetRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

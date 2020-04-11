@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.modules.snapshot_and_restore.snapshot.snapshot_status.*;
 
 public class SnapshotStatus  implements XContentable<SnapshotStatus> {
@@ -64,6 +64,7 @@ public class SnapshotStatus  implements XContentable<SnapshotStatus> {
   public SnapshotStatus setUuid(String val) { this._uuid = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -79,12 +80,12 @@ public class SnapshotStatus  implements XContentable<SnapshotStatus> {
 
   static {
     PARSER.declareBoolean(SnapshotStatus::setIncludeGlobalState, INCLUDE_GLOBAL_STATE);
-    PARSER.declareObject(SnapshotStatus::setIndices, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> SnapshotIndexStats.PARSER.apply(pp, null)), INDICES);;
+    PARSER.declareObject(SnapshotStatus::setIndices, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SnapshotIndexStats.PARSER.apply(pp, null)), INDICES);
     PARSER.declareString(SnapshotStatus::setRepository, REPOSITORY);
-    PARSER.declareObject(SnapshotStatus::setShardsStats, (p, t) -> SnapshotShardsStats.PARSER.apply(p, null), SHARDS_STATS);
+    PARSER.declareObject(SnapshotStatus::setShardsStats, (p, t) -> SnapshotShardsStats.PARSER.apply(p, t), SHARDS_STATS);
     PARSER.declareString(SnapshotStatus::setSnapshot, SNAPSHOT);
     PARSER.declareString(SnapshotStatus::setState, STATE);
-    PARSER.declareObject(SnapshotStatus::setStats, (p, t) -> SnapshotStats.PARSER.apply(p, null), STATS);
+    PARSER.declareObject(SnapshotStatus::setStats, (p, t) -> SnapshotStats.PARSER.apply(p, t), STATS);
     PARSER.declareString(SnapshotStatus::setUuid, UUID);
   }
 

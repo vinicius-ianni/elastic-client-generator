@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.geo.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.query_dsl.geo.*;
@@ -49,6 +49,7 @@ public class GeoDistanceAggregation  implements XContentable<GeoDistanceAggregat
   public GeoDistanceAggregation setUnit(DistanceUnit val) { this._unit = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -63,11 +64,11 @@ public class GeoDistanceAggregation  implements XContentable<GeoDistanceAggregat
     new ConstructingObjectParser<>(GeoDistanceAggregation.class.getName(), false, args -> new GeoDistanceAggregation());
 
   static {
-    PARSER.declareObject(GeoDistanceAggregation::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p, null), DISTANCE_TYPE);
-    PARSER.declareField(GeoDistanceAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObject(GeoDistanceAggregation::setOrigin, (p, t) -> GeoLocation.PARSER.apply(p, null), ORIGIN);
-    PARSER.declareObjectArray(GeoDistanceAggregation::setRanges, (p, t) -> AggregationRange.PARSER.apply(p), RANGES);
-    PARSER.declareObject(GeoDistanceAggregation::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p, null), UNIT);
+    PARSER.declareObject(GeoDistanceAggregation::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p), DISTANCE_TYPE);
+    PARSER.declareObject(GeoDistanceAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(GeoDistanceAggregation::setOrigin, (p, t) -> GeoLocation.PARSER.apply(p, t), ORIGIN);
+    PARSER.declareObjectArray(GeoDistanceAggregation::setRanges, (p, t) -> AggregationRange.PARSER.apply(p, t), RANGES);
+    PARSER.declareObject(GeoDistanceAggregation::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p), UNIT);
   }
 
 }

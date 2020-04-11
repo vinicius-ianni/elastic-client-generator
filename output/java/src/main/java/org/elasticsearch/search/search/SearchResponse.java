@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.*;
 import org.elasticsearch.common_options.hit.*;
 import org.elasticsearch.common_abstractions.lazy_document.*;
@@ -20,8 +20,8 @@ import org.elasticsearch.internal.*;
 import org.elasticsearch.search.search.profile.*;
 import org.elasticsearch.search.suggesters.*;
 
-public class SearchResponse<TDocument>  implements XContentable<SearchResponse> {
-
+public class SearchResponse<TDocument>  implements XContentable<SearchResponse<TDocument>> {
+  
   static final ParseField AGGREGATIONS = new ParseField("aggregations");
   private NamedContainer<String, Aggregate> _aggregations;
   public NamedContainer<String, Aggregate> getAggregations() { return this._aggregations; }
@@ -106,6 +106,7 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse> 
   public SearchResponse<TDocument> setTotal(Long val) { this._total = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -120,16 +121,18 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse> 
     new ConstructingObjectParser<>(SearchResponse.class.getName(), false, args -> new SearchResponse());
 
   static {
-    PARSER.declareObject(SearchResponse::setAggregations, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Aggregate.PARSER.apply(pp, null)), AGGREGATIONS);
-    PARSER.declareObject(SearchResponse::setClusters, (p, t) -> ClusterStatistics.PARSER.apply(p, null), CLUSTERS);
-    PARSER.declareObject(SearchResponse::setFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);
-    PARSER.declareObject((t, v) -> t.setHits(v.), (p, t) -> HitsMetadata.PARSER2().apply(p, null), HITS);
+    PARSER.declareObject(SearchResponse::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> Aggregate.PARSER.apply(pp, null)), AGGREGATIONS);
+    PARSER.declareObject(SearchResponse::setClusters, (p, t) -> ClusterStatistics.PARSER.apply(p, t), CLUSTERS);
+    PARSER.declareObject(SearchResponse::setFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);
+    HitsMetadata _hits = new HitsMetadata<>();
+    PARSER.declareObject(SearchResponse::setHits, (p, t) -> _hits.PARSER.apply(p, t), HITS);
     PARSER.declareDouble(SearchResponse::setMaxScore, MAX_SCORE);
     PARSER.declareLong(SearchResponse::setNumReducePhases, NUM_REDUCE_PHASES);
-    PARSER.declareObject(SearchResponse::setProfile, (p, t) -> Profile.PARSER.apply(p, null), PROFILE);
+    PARSER.declareObject(SearchResponse::setProfile, (p, t) -> Profile.PARSER.apply(p, t), PROFILE);
     PARSER.declareString(SearchResponse::setScrollId, SCROLL_ID);
-    PARSER.declareObject(SearchResponse::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, null), SHARDS);
-    PARSER.declareObject(SearchResponse::setSuggest, (p, t) ->    new SuggestDictionary<>().PARSER.apply(p, null), SUGGEST);
+    PARSER.declareObject(SearchResponse::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);
+    SuggestDictionary _suggest = new SuggestDictionary<>();
+    PARSER.declareObject(SearchResponse::setSuggest, (p, t) -> _suggest.PARSER.apply(p, t), SUGGEST);
     PARSER.declareBoolean(SearchResponse::setTerminatedEarly, TERMINATED_EARLY);
     PARSER.declareBoolean(SearchResponse::setTimedOut, TIMED_OUT);
     PARSER.declareLong(SearchResponse::setTook, TOOK);

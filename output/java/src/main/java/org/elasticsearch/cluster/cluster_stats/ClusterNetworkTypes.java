@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class ClusterNetworkTypes  implements XContentable<ClusterNetworkTypes> {
@@ -28,6 +28,7 @@ public class ClusterNetworkTypes  implements XContentable<ClusterNetworkTypes> {
   public ClusterNetworkTypes setTransportTypes(NamedContainer<String, Integer> val) { this._transportTypes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class ClusterNetworkTypes  implements XContentable<ClusterNetworkTypes> {
     new ConstructingObjectParser<>(ClusterNetworkTypes.class.getName(), false, args -> new ClusterNetworkTypes());
 
   static {
-    PARSER.declareObject(ClusterNetworkTypes::setHttpTypes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Integer.PARSER.apply(pp, null)), HTTP_TYPES);;
-    PARSER.declareObject(ClusterNetworkTypes::setTransportTypes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Integer.PARSER.apply(pp, null)), TRANSPORT_TYPES);;
+    PARSER.declareObject(ClusterNetworkTypes::setHttpTypes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.intValue()), HTTP_TYPES);
+    PARSER.declareObject(ClusterNetworkTypes::setTransportTypes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.intValue()), TRANSPORT_TYPES);
   }
 
 }

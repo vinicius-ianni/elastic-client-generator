@@ -2,6 +2,7 @@
 package org.elasticsearch.modules.indices.fielddata.geo_point;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum GeoPointFielddataFormat implements XContentable<GeoPointFielddataFor
       case "compressed": return GeoPointFielddataFormat.Compressed;
       case "disabled": return GeoPointFielddataFormat.Disabled;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, GeoPointFielddataFormat.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, GeoPointFielddataFormat.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

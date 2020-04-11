@@ -2,6 +2,7 @@
 package org.elasticsearch.common;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum ThreadType implements XContentable<ThreadType> {
       case "wait": return ThreadType.Wait;
       case "block": return ThreadType.Block;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ThreadType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ThreadType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

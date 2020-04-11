@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.document.multiple.reindex_on_server.*;
 import org.elasticsearch.common_options.scripting.*;
@@ -98,6 +98,7 @@ public class ReindexOnServerRequest  implements XContentable<ReindexOnServerRequ
   public ReindexOnServerRequest setWaitForCompletion(Boolean val) { this._waitForCompletion = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -112,17 +113,17 @@ public class ReindexOnServerRequest  implements XContentable<ReindexOnServerRequ
     new ConstructingObjectParser<>(ReindexOnServerRequest.class.getName(), false, args -> new ReindexOnServerRequest());
 
   static {
-    PARSER.declareObject(ReindexOnServerRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p, null), CONFLICTS);
-    PARSER.declareObject(ReindexOnServerRequest::setDest, (p, t) -> ReindexDestination.PARSER.apply(p, null), DEST);
-    PARSER.declareObject(ReindexOnServerRequest::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(ReindexOnServerRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS);
+    PARSER.declareObject(ReindexOnServerRequest::setDest, (p, t) -> ReindexDestination.PARSER.apply(p, t), DEST);
+    PARSER.declareObject(ReindexOnServerRequest::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareLong(ReindexOnServerRequest::setSize, SIZE);
     PARSER.declareLong(ReindexOnServerRequest::setMaxDocs, MAX_DOCS);
-    PARSER.declareObject(ReindexOnServerRequest::setSource, (p, t) -> ReindexSource.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(ReindexOnServerRequest::setSource, (p, t) -> ReindexSource.PARSER.apply(p, t), SOURCE);
     PARSER.declareBoolean(ReindexOnServerRequest::setRefresh, REFRESH);
     PARSER.declareLong(ReindexOnServerRequest::setRequestsPerSecond, REQUESTS_PER_SECOND);
-    PARSER.declareObject(ReindexOnServerRequest::setScroll, (p, t) -> Time.PARSER.apply(p, null), SCROLL);
+    PARSER.declareObject(ReindexOnServerRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
     PARSER.declareLong(ReindexOnServerRequest::setSlices, SLICES);
-    PARSER.declareObject(ReindexOnServerRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(ReindexOnServerRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareString(ReindexOnServerRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
     PARSER.declareBoolean(ReindexOnServerRequest::setWaitForCompletion, WAIT_FOR_COMPLETION);
   }

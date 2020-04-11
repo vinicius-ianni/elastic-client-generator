@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.license.get_license.*;
 
 public class GetLicenseResponse  implements XContentable<GetLicenseResponse> {
@@ -28,6 +28,7 @@ public class GetLicenseResponse  implements XContentable<GetLicenseResponse> {
   public GetLicenseResponse setLicense(LicenseInformation val) { this._license = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class GetLicenseResponse  implements XContentable<GetLicenseResponse> {
 
   static {
     PARSER.declareBoolean(GetLicenseResponse::setIsValid, IS_VALID);
-    PARSER.declareObject(GetLicenseResponse::setLicense, (p, t) -> LicenseInformation.PARSER.apply(p, null), LICENSE);
+    PARSER.declareObject(GetLicenseResponse::setLicense, (p, t) -> LicenseInformation.PARSER.apply(p, t), LICENSE);
   }
 
 }

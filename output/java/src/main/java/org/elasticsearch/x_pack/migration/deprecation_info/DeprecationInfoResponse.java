@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.migration.deprecation_info.*;
 
 public class DeprecationInfoResponse  implements XContentable<DeprecationInfoResponse> {
@@ -34,6 +34,7 @@ public class DeprecationInfoResponse  implements XContentable<DeprecationInfoRes
   public DeprecationInfoResponse setNodeSettings(List<DeprecationInfo> val) { this._nodeSettings = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class DeprecationInfoResponse  implements XContentable<DeprecationInfoRes
     new ConstructingObjectParser<>(DeprecationInfoResponse.class.getName(), false, args -> new DeprecationInfoResponse());
 
   static {
-    PARSER.declareObjectArray(DeprecationInfoResponse::setClusterSettings, (p, t) -> DeprecationInfo.PARSER.apply(p), CLUSTER_SETTINGS);
-    PARSER.declareObject(DeprecationInfoResponse::setIndexSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), INDEX_SETTINGS);;
-    PARSER.declareObjectArray(DeprecationInfoResponse::setNodeSettings, (p, t) -> DeprecationInfo.PARSER.apply(p), NODE_SETTINGS);
+    PARSER.declareObjectArray(DeprecationInfoResponse::setClusterSettings, (p, t) -> DeprecationInfo.PARSER.apply(p, t), CLUSTER_SETTINGS);
+    PARSER.declareObject(DeprecationInfoResponse::setIndexSettings, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<DeprecationInfo> */), INDEX_SETTINGS);
+    PARSER.declareObjectArray(DeprecationInfoResponse::setNodeSettings, (p, t) -> DeprecationInfo.PARSER.apply(p, t), NODE_SETTINGS);
   }
 
 }

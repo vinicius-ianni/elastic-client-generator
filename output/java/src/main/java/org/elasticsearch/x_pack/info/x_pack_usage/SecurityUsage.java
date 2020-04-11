@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.info.x_pack_usage.*;
 
 public class SecurityUsage  implements XContentable<SecurityUsage> {
@@ -64,6 +64,7 @@ public class SecurityUsage  implements XContentable<SecurityUsage> {
   public SecurityUsage setSystemKey(SecurityFeatureToggle val) { this._systemKey = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -78,14 +79,14 @@ public class SecurityUsage  implements XContentable<SecurityUsage> {
     new ConstructingObjectParser<>(SecurityUsage.class.getName(), false, args -> new SecurityUsage());
 
   static {
-    PARSER.declareObject(SecurityUsage::setAnonymous, (p, t) -> SecurityFeatureToggle.PARSER.apply(p, null), ANONYMOUS);
-    PARSER.declareObject(SecurityUsage::setAudit, (p, t) -> AuditUsage.PARSER.apply(p, null), AUDIT);
-    PARSER.declareObject(SecurityUsage::setIpfilter, (p, t) -> IpFilterUsage.PARSER.apply(p, null), IPFILTER);
-    PARSER.declareObject(SecurityUsage::setRealms, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> RealmUsage.PARSER.apply(pp, null)), REALMS);;
-    PARSER.declareObject(SecurityUsage::setRoleMapping, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> RoleMappingUsage.PARSER.apply(pp, null)), ROLE_MAPPING);;
-    PARSER.declareObject(SecurityUsage::setRoles, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> RoleUsage.PARSER.apply(pp, null)), ROLES);;
-    PARSER.declareObject(SecurityUsage::setSsl, (p, t) -> SslUsage.PARSER.apply(p, null), SSL);
-    PARSER.declareObject(SecurityUsage::setSystemKey, (p, t) -> SecurityFeatureToggle.PARSER.apply(p, null), SYSTEM_KEY);
+    PARSER.declareObject(SecurityUsage::setAnonymous, (p, t) -> SecurityFeatureToggle.PARSER.apply(p, t), ANONYMOUS);
+    PARSER.declareObject(SecurityUsage::setAudit, (p, t) -> AuditUsage.PARSER.apply(p, t), AUDIT);
+    PARSER.declareObject(SecurityUsage::setIpfilter, (p, t) -> IpFilterUsage.PARSER.apply(p, t), IPFILTER);
+    PARSER.declareObject(SecurityUsage::setRealms, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> RealmUsage.PARSER.apply(pp, null)), REALMS);
+    PARSER.declareObject(SecurityUsage::setRoleMapping, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> RoleMappingUsage.PARSER.apply(pp, null)), ROLE_MAPPING);
+    PARSER.declareObject(SecurityUsage::setRoles, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> RoleUsage.PARSER.apply(pp, null)), ROLES);
+    PARSER.declareObject(SecurityUsage::setSsl, (p, t) -> SslUsage.PARSER.apply(p, t), SSL);
+    PARSER.declareObject(SecurityUsage::setSystemKey, (p, t) -> SecurityFeatureToggle.PARSER.apply(p, t), SYSTEM_KEY);
   }
 
 }

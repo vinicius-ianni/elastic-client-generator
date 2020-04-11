@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.collapsing.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
@@ -94,6 +94,7 @@ public class InnerHits  implements XContentable<InnerHits> {
   public InnerHits setVersion(Boolean val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -108,17 +109,17 @@ public class InnerHits  implements XContentable<InnerHits> {
     new ConstructingObjectParser<>(InnerHits.class.getName(), false, args -> new InnerHits());
 
   static {
-    PARSER.declareObject(InnerHits::setCollapse, (p, t) -> FieldCollapse.PARSER.apply(p, null), COLLAPSE);
-    PARSER.declareObjectArray(InnerHits::setDocvalueFields, (p, t) -> Field.PARSER.apply(p), DOCVALUE_FIELDS);
+    PARSER.declareObject(InnerHits::setCollapse, (p, t) -> FieldCollapse.PARSER.apply(p, t), COLLAPSE);
+    PARSER.declareObjectArray(InnerHits::setDocvalueFields, (p, t) -> Field.createFrom(p), DOCVALUE_FIELDS);
     PARSER.declareBoolean(InnerHits::setExplain, EXPLAIN);
-    PARSER.declareInteger(InnerHits::setFrom, FROM);
-    PARSER.declareObject(InnerHits::setHighlight, (p, t) -> Highlight.PARSER.apply(p, null), HIGHLIGHT);
+    PARSER.declareInt(InnerHits::setFrom, FROM);
+    PARSER.declareObject(InnerHits::setHighlight, (p, t) -> Highlight.PARSER.apply(p, t), HIGHLIGHT);
     PARSER.declareBoolean(InnerHits::setIgnoreUnmapped, IGNORE_UNMAPPED);
     PARSER.declareString(InnerHits::setName, NAME);
-    PARSER.declareObject(InnerHits::setScriptFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);;
-    PARSER.declareInteger(InnerHits::setSize, SIZE);
-    PARSER.declareObjectArray(InnerHits::setSort, (p, t) -> Sort.PARSER.apply(p), SORT);
-    PARSER.declareObject(InnerHits::setSource, (p, t) -> null, SOURCE);
+    PARSER.declareObject(InnerHits::setScriptFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);
+    PARSER.declareInt(InnerHits::setSize, SIZE);
+    PARSER.declareObjectArray(InnerHits::setSort, (p, t) -> Sort.PARSER.apply(p, t), SORT);
+    PARSER.declareObject(InnerHits::setSource, (p, t) ->  new Either<Boolean, SourceFilter>() /* TODO UnionOf */, SOURCE);
     PARSER.declareBoolean(InnerHits::setVersion, VERSION);
   }
 

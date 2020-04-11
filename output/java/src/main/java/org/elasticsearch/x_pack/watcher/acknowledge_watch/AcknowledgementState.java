@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.acknowledge_watch;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum AcknowledgementState implements XContentable<AcknowledgementState> {
       case "ackable": return AcknowledgementState.Ackable;
       case "acked": return AcknowledgementState.Acked;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, AcknowledgementState.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, AcknowledgementState.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

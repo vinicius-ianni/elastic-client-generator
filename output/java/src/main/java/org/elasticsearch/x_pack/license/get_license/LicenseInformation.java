@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.license.get_license.*;
 
@@ -77,6 +77,7 @@ public class LicenseInformation  implements XContentable<LicenseInformation> {
   public LicenseInformation setUid(String val) { this._uid = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -91,15 +92,15 @@ public class LicenseInformation  implements XContentable<LicenseInformation> {
     new ConstructingObjectParser<>(LicenseInformation.class.getName(), false, args -> new LicenseInformation());
 
   static {
-    PARSER.declareDate(LicenseInformation::setExpiryDate, (p, t) -> Date.createFrom(p), EXPIRY_DATE);
+    PARSER.declareObject(LicenseInformation::setExpiryDate, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXPIRY_DATE);
     PARSER.declareLong(LicenseInformation::setExpiryDateInMillis, EXPIRY_DATE_IN_MILLIS);
-    PARSER.declareDate(LicenseInformation::setIssueDate, (p, t) -> Date.createFrom(p), ISSUE_DATE);
+    PARSER.declareObject(LicenseInformation::setIssueDate, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), ISSUE_DATE);
     PARSER.declareLong(LicenseInformation::setIssueDateInMillis, ISSUE_DATE_IN_MILLIS);
     PARSER.declareString(LicenseInformation::setIssuedTo, ISSUED_TO);
     PARSER.declareString(LicenseInformation::setIssuer, ISSUER);
     PARSER.declareLong(LicenseInformation::setMaxNodes, MAX_NODES);
-    PARSER.declareObject(LicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p, null), STATUS);
-    PARSER.declareObject(LicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p, null), TYPE);
+    PARSER.declareObject(LicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p), STATUS);
+    PARSER.declareObject(LicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE);
     PARSER.declareString(LicenseInformation::setUid, UID);
   }
 

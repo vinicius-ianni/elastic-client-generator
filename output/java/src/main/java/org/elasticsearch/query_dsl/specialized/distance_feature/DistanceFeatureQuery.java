@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.geo.*;
 import org.elasticsearch.common_options.date_math.*;
 import org.elasticsearch.common_options.geo.*;
@@ -31,6 +31,7 @@ public class DistanceFeatureQuery  implements XContentable<DistanceFeatureQuery>
   public DistanceFeatureQuery setPivot(Either<Distance, Time> val) { this._pivot = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -45,8 +46,8 @@ public class DistanceFeatureQuery  implements XContentable<DistanceFeatureQuery>
     new ConstructingObjectParser<>(DistanceFeatureQuery.class.getName(), false, args -> new DistanceFeatureQuery());
 
   static {
-    PARSER.declareObject(DistanceFeatureQuery::setOrigin, (p, t) -> null, ORIGIN);
-    PARSER.declareObject(DistanceFeatureQuery::setPivot, (p, t) -> null, PIVOT);
+    PARSER.declareObject(DistanceFeatureQuery::setOrigin, (p, t) ->  new Either<GeoCoordinate, DateMath>() /* TODO UnionOf */, ORIGIN);
+    PARSER.declareObject(DistanceFeatureQuery::setPivot, (p, t) ->  new Either<Distance, Time>() /* TODO UnionOf */, PIVOT);
   }
 
 }

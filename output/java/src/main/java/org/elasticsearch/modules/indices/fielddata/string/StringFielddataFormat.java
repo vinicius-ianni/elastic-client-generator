@@ -2,6 +2,7 @@
 package org.elasticsearch.modules.indices.fielddata.string;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum StringFielddataFormat implements XContentable<StringFielddataFormat>
       case "paged_bytes": return StringFielddataFormat.PagedBytes;
       case "disabled": return StringFielddataFormat.Disabled;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, StringFielddataFormat.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, StringFielddataFormat.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

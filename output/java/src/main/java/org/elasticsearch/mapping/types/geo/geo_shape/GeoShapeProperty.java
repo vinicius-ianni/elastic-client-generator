@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.types.geo.geo_shape.*;
 
 public class GeoShapeProperty  implements XContentable<GeoShapeProperty> {
@@ -46,6 +46,7 @@ public class GeoShapeProperty  implements XContentable<GeoShapeProperty> {
   public GeoShapeProperty setCoerce(Boolean val) { this._coerce = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,8 +63,8 @@ public class GeoShapeProperty  implements XContentable<GeoShapeProperty> {
   static {
     PARSER.declareBoolean(GeoShapeProperty::setIgnoreMalformed, IGNORE_MALFORMED);
     PARSER.declareBoolean(GeoShapeProperty::setIgnoreZValue, IGNORE_Z_VALUE);
-    PARSER.declareObject(GeoShapeProperty::setOrientation, (p, t) -> GeoOrientation.PARSER.apply(p, null), ORIENTATION);
-    PARSER.declareObject(GeoShapeProperty::setStrategy, (p, t) -> GeoStrategy.PARSER.apply(p, null), STRATEGY);
+    PARSER.declareObject(GeoShapeProperty::setOrientation, (p, t) -> GeoOrientation.PARSER.apply(p), ORIENTATION);
+    PARSER.declareObject(GeoShapeProperty::setStrategy, (p, t) -> GeoStrategy.PARSER.apply(p), STRATEGY);
     PARSER.declareBoolean(GeoShapeProperty::setCoerce, COERCE);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.task_id.*;
 import org.elasticsearch.document.multiple.reindex_rethrottle.*;
 
@@ -59,6 +59,7 @@ public class ReindexNode  implements XContentable<ReindexNode> {
   public ReindexNode setTransportAddress(String val) { this._transportAddress = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -73,12 +74,12 @@ public class ReindexNode  implements XContentable<ReindexNode> {
     new ConstructingObjectParser<>(ReindexNode.class.getName(), false, args -> new ReindexNode());
 
   static {
-    PARSER.declareObject(ReindexNode::setAttributes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), ATTRIBUTES);;
+    PARSER.declareObject(ReindexNode::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), ATTRIBUTES);
     PARSER.declareString(ReindexNode::setHost, HOST);
     PARSER.declareString(ReindexNode::setIp, IP);
     PARSER.declareString(ReindexNode::setName, NAME);
     PARSER.declareStringArray(ReindexNode::setRoles, ROLES);
-    PARSER.declareObject(ReindexNode::setTasks, (p, t) ->  new NamedContainer<>(n -> () -> new TaskId(n),pp -> ReindexTask.PARSER.apply(pp, null)), TASKS);;
+    PARSER.declareObject(ReindexNode::setTasks, (p, t) -> new NamedContainer<>(n -> () -> new TaskId(n),pp -> ReindexTask.PARSER.apply(pp, null)), TASKS);
     PARSER.declareString(ReindexNode::setTransportAddress, TRANSPORT_ADDRESS);
   }
 

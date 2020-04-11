@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.x_pack.machine_learning.job.detectors.*;
 
@@ -29,6 +29,7 @@ public class FilterRef  implements XContentable<FilterRef> {
   public FilterRef setFilterType(RuleFilterType val) { this._filterType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class FilterRef  implements XContentable<FilterRef> {
     new ConstructingObjectParser<>(FilterRef.class.getName(), false, args -> new FilterRef());
 
   static {
-    PARSER.declareId(FilterRef::setFilterId, (p, t) -> Id.createFrom(p), FILTER_ID);
-    PARSER.declareObject(FilterRef::setFilterType, (p, t) -> RuleFilterType.PARSER.apply(p, null), FILTER_TYPE);
+    PARSER.declareObject(FilterRef::setFilterId, (p, t) -> Id.createFrom(p), FILTER_ID);
+    PARSER.declareObject(FilterRef::setFilterType, (p, t) -> RuleFilterType.PARSER.apply(p), FILTER_TYPE);
   }
 
 }

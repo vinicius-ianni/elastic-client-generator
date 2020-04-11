@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.config.*;
 
@@ -77,6 +77,7 @@ public class ModelSizeStats  implements XContentable<ModelSizeStats> {
   public ModelSizeStats setTotalPartitionFieldCount(Long val) { this._totalPartitionFieldCount = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -93,11 +94,11 @@ public class ModelSizeStats  implements XContentable<ModelSizeStats> {
   static {
     PARSER.declareLong(ModelSizeStats::setBucketAllocationFailuresCount, BUCKET_ALLOCATION_FAILURES_COUNT);
     PARSER.declareString(ModelSizeStats::setJobId, JOB_ID);
-    PARSER.declareDate(ModelSizeStats::setLogTime, (p, t) -> Date.createFrom(p), LOG_TIME);
-    PARSER.declareObject(ModelSizeStats::setMemoryStatus, (p, t) -> MemoryStatus.PARSER.apply(p, null), MEMORY_STATUS);
+    PARSER.declareObject(ModelSizeStats::setLogTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LOG_TIME);
+    PARSER.declareObject(ModelSizeStats::setMemoryStatus, (p, t) -> MemoryStatus.PARSER.apply(p), MEMORY_STATUS);
     PARSER.declareLong(ModelSizeStats::setModelBytes, MODEL_BYTES);
     PARSER.declareString(ModelSizeStats::setResultType, RESULT_TYPE);
-    PARSER.declareDate(ModelSizeStats::setTimestamp, (p, t) -> Date.createFrom(p), TIMESTAMP);
+    PARSER.declareObject(ModelSizeStats::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
     PARSER.declareLong(ModelSizeStats::setTotalByFieldCount, TOTAL_BY_FIELD_COUNT);
     PARSER.declareLong(ModelSizeStats::setTotalOverFieldCount, TOTAL_OVER_FIELD_COUNT);
     PARSER.declareLong(ModelSizeStats::setTotalPartitionFieldCount, TOTAL_PARTITION_FIELD_COUNT);

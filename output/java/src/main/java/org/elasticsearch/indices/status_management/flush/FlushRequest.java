@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class FlushRequest  implements XContentable<FlushRequest> {
@@ -46,6 +46,7 @@ public class FlushRequest  implements XContentable<FlushRequest> {
   public FlushRequest setWaitIfOngoing(Boolean val) { this._waitIfOngoing = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,7 +62,7 @@ public class FlushRequest  implements XContentable<FlushRequest> {
 
   static {
     PARSER.declareBoolean(FlushRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(FlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(FlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(FlushRequest::setForce, FORCE);
     PARSER.declareBoolean(FlushRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(FlushRequest::setWaitIfOngoing, WAIT_IF_ONGOING);

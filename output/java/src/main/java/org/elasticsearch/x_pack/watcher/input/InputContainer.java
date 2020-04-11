@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.input.*;
 
 public class InputContainer  implements XContentable<InputContainer> {
@@ -40,6 +40,7 @@ public class InputContainer  implements XContentable<InputContainer> {
   public InputContainer setSimple(SimpleInput val) { this._simple = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,10 +55,10 @@ public class InputContainer  implements XContentable<InputContainer> {
     new ConstructingObjectParser<>(InputContainer.class.getName(), false, args -> new InputContainer());
 
   static {
-    PARSER.declareObject(InputContainer::setChain, (p, t) -> ChainInput.PARSER.apply(p, null), CHAIN);
-    PARSER.declareObject(InputContainer::setHttp, (p, t) -> HttpInput.PARSER.apply(p, null), HTTP);
-    PARSER.declareObject(InputContainer::setSearch, (p, t) -> SearchInput.PARSER.apply(p, null), SEARCH);
-    PARSER.declareObject(InputContainer::setSimple, (p, t) -> SimpleInput.PARSER.apply(p, null), SIMPLE);
+    PARSER.declareObject(InputContainer::setChain, (p, t) -> ChainInput.PARSER.apply(p, t), CHAIN);
+    PARSER.declareObject(InputContainer::setHttp, (p, t) -> HttpInput.PARSER.apply(p, t), HTTP);
+    PARSER.declareObject(InputContainer::setSearch, (p, t) -> SearchInput.PARSER.apply(p, t), SEARCH);
+    PARSER.declareObject(InputContainer::setSimple, (p, t) -> SimpleInput.PARSER.apply(p, t), SIMPLE);
   }
 
 }

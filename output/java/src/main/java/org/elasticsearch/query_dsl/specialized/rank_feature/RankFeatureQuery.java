@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.specialized.rank_feature.*;
 
 public class RankFeatureQuery  implements XContentable<RankFeatureQuery> {
@@ -22,6 +22,7 @@ public class RankFeatureQuery  implements XContentable<RankFeatureQuery> {
   public RankFeatureQuery setFunction(RankFeatureFunction val) { this._function = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class RankFeatureQuery  implements XContentable<RankFeatureQuery> {
     new ConstructingObjectParser<>(RankFeatureQuery.class.getName(), false, args -> new RankFeatureQuery());
 
   static {
-    PARSER.declareObject(RankFeatureQuery::setFunction, (p, t) -> RankFeatureFunction.PARSER.apply(p, null), FUNCTION);
+    PARSER.declareObject(RankFeatureQuery::setFunction, (p, t) -> RankFeatureFunction.PARSER.apply(p, t), FUNCTION);
   }
 
 }

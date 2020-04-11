@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class TimeOfDay  implements XContentable<TimeOfDay> {
@@ -28,6 +28,7 @@ public class TimeOfDay  implements XContentable<TimeOfDay> {
   public TimeOfDay setMinute(List<Integer> val) { this._minute = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class TimeOfDay  implements XContentable<TimeOfDay> {
     new ConstructingObjectParser<>(TimeOfDay.class.getName(), false, args -> new TimeOfDay());
 
   static {
-    PARSER.declareIntegerArray(TimeOfDay::setHour, HOUR);
-    PARSER.declareIntegerArray(TimeOfDay::setMinute, MINUTE);
+    PARSER.declareIntArray(TimeOfDay::setHour, HOUR);
+    PARSER.declareIntArray(TimeOfDay::setMinute, MINUTE);
   }
 
 }

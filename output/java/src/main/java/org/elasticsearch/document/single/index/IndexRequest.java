@@ -5,19 +5,19 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_options.time_unit.*;
 
-public class IndexRequest<TDocument>  implements XContentable<IndexRequest> {
+public class IndexRequest<TDocument>  implements XContentable<IndexRequest<TDocument>> {
   
   static final ParseField DOCUMENT = new ParseField("document");
   private TDocument _document;
@@ -85,6 +85,7 @@ public class IndexRequest<TDocument>  implements XContentable<IndexRequest> {
   public IndexRequest<TDocument> setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -99,16 +100,16 @@ public class IndexRequest<TDocument>  implements XContentable<IndexRequest> {
     new ConstructingObjectParser<>(IndexRequest.class.getName(), false, args -> new IndexRequest());
 
   static {
-    PARSER.declareObject(IndexRequest::setDocument, (p, t) -> TDocument.PARSER.apply(p, null), DOCUMENT);
+    PARSER.declareObject(IndexRequest::setDocument, (p, t) -> null /* TODO TDocument */, DOCUMENT);
     PARSER.declareLong(IndexRequest::setIfPrimaryTerm, IF_PRIMARY_TERM);
     PARSER.declareLong(IndexRequest::setIfSequenceNumber, IF_SEQUENCE_NUMBER);
-    PARSER.declareObject(IndexRequest::setOpType, (p, t) -> OpType.PARSER.apply(p, null), OP_TYPE);
+    PARSER.declareObject(IndexRequest::setOpType, (p, t) -> OpType.PARSER.apply(p), OP_TYPE);
     PARSER.declareString(IndexRequest::setPipeline, PIPELINE);
-    PARSER.declareObject(IndexRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
-    PARSER.declareRouting(IndexRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(IndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(IndexRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareObject(IndexRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(IndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareLong(IndexRequest::setVersion, VERSION);
-    PARSER.declareObject(IndexRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(IndexRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
     PARSER.declareString(IndexRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

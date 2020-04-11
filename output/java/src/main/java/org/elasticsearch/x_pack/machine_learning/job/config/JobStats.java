@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.process.*;
 import org.elasticsearch.x_pack.machine_learning.job.config.*;
 import org.elasticsearch.x_pack.machine_learning.datafeed.*;
@@ -73,6 +73,7 @@ public class JobStats  implements XContentable<JobStats> {
   public JobStats setTimingStats(TimingStats val) { this._timingStats = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -88,14 +89,14 @@ public class JobStats  implements XContentable<JobStats> {
 
   static {
     PARSER.declareString(JobStats::setAssignmentExplanation, ASSIGNMENT_EXPLANATION);
-    PARSER.declareObject(JobStats::setDataCounts, (p, t) -> DataCounts.PARSER.apply(p, null), DATA_COUNTS);
-    PARSER.declareObject(JobStats::setForecastsStats, (p, t) -> JobForecastStatistics.PARSER.apply(p, null), FORECASTS_STATS);
+    PARSER.declareObject(JobStats::setDataCounts, (p, t) -> DataCounts.PARSER.apply(p, t), DATA_COUNTS);
+    PARSER.declareObject(JobStats::setForecastsStats, (p, t) -> JobForecastStatistics.PARSER.apply(p, t), FORECASTS_STATS);
     PARSER.declareString(JobStats::setJobId, JOB_ID);
-    PARSER.declareObject(JobStats::setModelSizeStats, (p, t) -> ModelSizeStats.PARSER.apply(p, null), MODEL_SIZE_STATS);
-    PARSER.declareObject(JobStats::setNode, (p, t) -> DiscoveryNode.PARSER.apply(p, null), NODE);
-    PARSER.declareObject(JobStats::setOpenTime, (p, t) -> Time.PARSER.apply(p, null), OPEN_TIME);
-    PARSER.declareObject(JobStats::setState, (p, t) -> JobState.PARSER.apply(p, null), STATE);
-    PARSER.declareObject(JobStats::setTimingStats, (p, t) -> TimingStats.PARSER.apply(p, null), TIMING_STATS);
+    PARSER.declareObject(JobStats::setModelSizeStats, (p, t) -> ModelSizeStats.PARSER.apply(p, t), MODEL_SIZE_STATS);
+    PARSER.declareObject(JobStats::setNode, (p, t) -> DiscoveryNode.PARSER.apply(p, t), NODE);
+    PARSER.declareObject(JobStats::setOpenTime, (p, t) -> Time.PARSER.apply(p, t), OPEN_TIME);
+    PARSER.declareObject(JobStats::setState, (p, t) -> JobState.PARSER.apply(p), STATE);
+    PARSER.declareObject(JobStats::setTimingStats, (p, t) -> TimingStats.PARSER.apply(p, t), TIMING_STATS);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 
 public class CatPendingTasksRequest  implements XContentable<CatPendingTasksRequest> {
@@ -58,6 +58,7 @@ public class CatPendingTasksRequest  implements XContentable<CatPendingTasksRequ
   public CatPendingTasksRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -76,7 +77,7 @@ public class CatPendingTasksRequest  implements XContentable<CatPendingTasksRequ
     PARSER.declareStringArray(CatPendingTasksRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatPendingTasksRequest::setHelp, HELP);
     PARSER.declareBoolean(CatPendingTasksRequest::setLocal, LOCAL);
-    PARSER.declareObject(CatPendingTasksRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(CatPendingTasksRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareStringArray(CatPendingTasksRequest::setSortByColumns, SORT_BY_COLUMNS);
     PARSER.declareBoolean(CatPendingTasksRequest::setVerbose, VERBOSE);
   }

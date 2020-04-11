@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.execution.email.*;
 
 public class EmailActionResult  implements XContentable<EmailActionResult> {
@@ -34,6 +34,7 @@ public class EmailActionResult  implements XContentable<EmailActionResult> {
   public EmailActionResult setReason(String val) { this._reason = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,7 +50,7 @@ public class EmailActionResult  implements XContentable<EmailActionResult> {
 
   static {
     PARSER.declareString(EmailActionResult::setAccount, ACCOUNT);
-    PARSER.declareObject(EmailActionResult::setMessage, (p, t) -> EmailResult.PARSER.apply(p, null), MESSAGE);
+    PARSER.declareObject(EmailActionResult::setMessage, (p, t) -> EmailResult.PARSER.apply(p, t), MESSAGE);
     PARSER.declareString(EmailActionResult::setReason, REASON);
   }
 

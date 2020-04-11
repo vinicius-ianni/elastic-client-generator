@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 
@@ -41,6 +41,7 @@ public class InvalidateApiKeyResponse  implements XContentable<InvalidateApiKeyR
   public InvalidateApiKeyResponse setPreviouslyInvalidatedApiKeys(List<String> val) { this._previouslyInvalidatedApiKeys = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,8 +56,8 @@ public class InvalidateApiKeyResponse  implements XContentable<InvalidateApiKeyR
     new ConstructingObjectParser<>(InvalidateApiKeyResponse.class.getName(), false, args -> new InvalidateApiKeyResponse());
 
   static {
-    PARSER.declareInteger(InvalidateApiKeyResponse::setErrorCount, ERROR_COUNT);
-    PARSER.declareObjectArray(InvalidateApiKeyResponse::setErrorDetails, (p, t) -> ErrorCause.PARSER.apply(p), ERROR_DETAILS);
+    PARSER.declareInt(InvalidateApiKeyResponse::setErrorCount, ERROR_COUNT);
+    PARSER.declareObjectArray(InvalidateApiKeyResponse::setErrorDetails, (p, t) -> ErrorCause.PARSER.apply(p, t), ERROR_DETAILS);
     PARSER.declareStringArray(InvalidateApiKeyResponse::setInvalidatedApiKeys, INVALIDATED_API_KEYS);
     PARSER.declareStringArray(InvalidateApiKeyResponse::setPreviouslyInvalidatedApiKeys, PREVIOUSLY_INVALIDATED_API_KEYS);
   }

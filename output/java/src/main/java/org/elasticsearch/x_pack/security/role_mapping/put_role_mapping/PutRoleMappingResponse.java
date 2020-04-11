@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.role_mapping.put_role_mapping.*;
 
 public class PutRoleMappingResponse  implements XContentable<PutRoleMappingResponse> {
@@ -28,6 +28,7 @@ public class PutRoleMappingResponse  implements XContentable<PutRoleMappingRespo
   public PutRoleMappingResponse setRoleMapping(PutRoleMappingStatus val) { this._roleMapping = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class PutRoleMappingResponse  implements XContentable<PutRoleMappingRespo
 
   static {
     PARSER.declareBoolean(PutRoleMappingResponse::setCreated, CREATED);
-    PARSER.declareObject(PutRoleMappingResponse::setRoleMapping, (p, t) -> PutRoleMappingStatus.PARSER.apply(p, null), ROLE_MAPPING);
+    PARSER.declareObject(PutRoleMappingResponse::setRoleMapping, (p, t) -> PutRoleMappingStatus.PARSER.apply(p, t), ROLE_MAPPING);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.inner_hits.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
@@ -62,6 +62,7 @@ public class HasChildQuery  implements XContentable<HasChildQuery> {
   public HasChildQuery setType(RelationName val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -77,12 +78,12 @@ public class HasChildQuery  implements XContentable<HasChildQuery> {
 
   static {
     PARSER.declareBoolean(HasChildQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
-    PARSER.declareObject(HasChildQuery::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, null), INNER_HITS);
-    PARSER.declareInteger(HasChildQuery::setMaxChildren, MAX_CHILDREN);
-    PARSER.declareInteger(HasChildQuery::setMinChildren, MIN_CHILDREN);
-    PARSER.declareObject(HasChildQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObject(HasChildQuery::setScoreMode, (p, t) -> ChildScoreMode.PARSER.apply(p, null), SCORE_MODE);
-    PARSER.declareRelationName(HasChildQuery::setType, (p, t) -> RelationName.createFrom(p), TYPE);
+    PARSER.declareObject(HasChildQuery::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, t), INNER_HITS);
+    PARSER.declareInt(HasChildQuery::setMaxChildren, MAX_CHILDREN);
+    PARSER.declareInt(HasChildQuery::setMinChildren, MIN_CHILDREN);
+    PARSER.declareObject(HasChildQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObject(HasChildQuery::setScoreMode, (p, t) -> ChildScoreMode.PARSER.apply(p), SCORE_MODE);
+    PARSER.declareObject(HasChildQuery::setType, (p, t) -> RelationName.createFrom(p), TYPE);
   }
 
 }

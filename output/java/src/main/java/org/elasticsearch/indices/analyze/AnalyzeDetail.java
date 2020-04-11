@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.analyze.*;
 
 public class AnalyzeDetail  implements XContentable<AnalyzeDetail> {
@@ -40,6 +40,7 @@ public class AnalyzeDetail  implements XContentable<AnalyzeDetail> {
   public AnalyzeDetail setTokenizer(TokenDetail val) { this._tokenizer = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,10 +55,10 @@ public class AnalyzeDetail  implements XContentable<AnalyzeDetail> {
     new ConstructingObjectParser<>(AnalyzeDetail.class.getName(), false, args -> new AnalyzeDetail());
 
   static {
-    PARSER.declareObjectArray(AnalyzeDetail::setCharfilters, (p, t) -> CharFilterDetail.PARSER.apply(p), CHARFILTERS);
+    PARSER.declareObjectArray(AnalyzeDetail::setCharfilters, (p, t) -> CharFilterDetail.PARSER.apply(p, t), CHARFILTERS);
     PARSER.declareBoolean(AnalyzeDetail::setCustomAnalyzer, CUSTOM_ANALYZER);
-    PARSER.declareObjectArray(AnalyzeDetail::setTokenfilters, (p, t) -> TokenDetail.PARSER.apply(p), TOKENFILTERS);
-    PARSER.declareObject(AnalyzeDetail::setTokenizer, (p, t) -> TokenDetail.PARSER.apply(p, null), TOKENIZER);
+    PARSER.declareObjectArray(AnalyzeDetail::setTokenfilters, (p, t) -> TokenDetail.PARSER.apply(p, t), TOKENFILTERS);
+    PARSER.declareObject(AnalyzeDetail::setTokenizer, (p, t) -> TokenDetail.PARSER.apply(p, t), TOKENIZER);
   }
 
 }

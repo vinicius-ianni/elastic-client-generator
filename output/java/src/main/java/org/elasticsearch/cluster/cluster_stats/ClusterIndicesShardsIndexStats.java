@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.cluster_stats.*;
 
 public class ClusterIndicesShardsIndexStats  implements XContentable<ClusterIndicesShardsIndexStats> {
@@ -34,6 +34,7 @@ public class ClusterIndicesShardsIndexStats  implements XContentable<ClusterIndi
   public ClusterIndicesShardsIndexStats setShards(ClusterShardMetrics val) { this._shards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class ClusterIndicesShardsIndexStats  implements XContentable<ClusterIndi
     new ConstructingObjectParser<>(ClusterIndicesShardsIndexStats.class.getName(), false, args -> new ClusterIndicesShardsIndexStats());
 
   static {
-    PARSER.declareObject(ClusterIndicesShardsIndexStats::setPrimaries, (p, t) -> ClusterShardMetrics.PARSER.apply(p, null), PRIMARIES);
-    PARSER.declareObject(ClusterIndicesShardsIndexStats::setReplication, (p, t) -> ClusterShardMetrics.PARSER.apply(p, null), REPLICATION);
-    PARSER.declareObject(ClusterIndicesShardsIndexStats::setShards, (p, t) -> ClusterShardMetrics.PARSER.apply(p, null), SHARDS);
+    PARSER.declareObject(ClusterIndicesShardsIndexStats::setPrimaries, (p, t) -> ClusterShardMetrics.PARSER.apply(p, t), PRIMARIES);
+    PARSER.declareObject(ClusterIndicesShardsIndexStats::setReplication, (p, t) -> ClusterShardMetrics.PARSER.apply(p, t), REPLICATION);
+    PARSER.declareObject(ClusterIndicesShardsIndexStats::setShards, (p, t) -> ClusterShardMetrics.PARSER.apply(p, t), SHARDS);
   }
 
 }

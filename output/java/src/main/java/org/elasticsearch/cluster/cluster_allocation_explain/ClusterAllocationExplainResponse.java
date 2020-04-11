@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.cluster_allocation_explain.*;
 
@@ -155,6 +155,7 @@ public class ClusterAllocationExplainResponse  implements XContentable<ClusterAl
   public ClusterAllocationExplainResponse setUnassignedInfo(UnassignedInformation val) { this._unassignedInfo = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -172,26 +173,26 @@ public class ClusterAllocationExplainResponse  implements XContentable<ClusterAl
     PARSER.declareString(ClusterAllocationExplainResponse::setAllocateExplanation, ALLOCATE_EXPLANATION);
     PARSER.declareString(ClusterAllocationExplainResponse::setAllocationDelay, ALLOCATION_DELAY);
     PARSER.declareLong(ClusterAllocationExplainResponse::setAllocationDelayInMillis, ALLOCATION_DELAY_IN_MILLIS);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanAllocate, (p, t) -> Decision.PARSER.apply(p, null), CAN_ALLOCATE);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanMoveToOtherNode, (p, t) -> Decision.PARSER.apply(p, null), CAN_MOVE_TO_OTHER_NODE);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRebalanceCluster, (p, t) -> Decision.PARSER.apply(p, null), CAN_REBALANCE_CLUSTER);
-    PARSER.declareObjectArray(ClusterAllocationExplainResponse::setCanRebalanceClusterDecisions, (p, t) -> AllocationDecision.PARSER.apply(p), CAN_REBALANCE_CLUSTER_DECISIONS);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRebalanceToOtherNode, (p, t) -> Decision.PARSER.apply(p, null), CAN_REBALANCE_TO_OTHER_NODE);
-    PARSER.declareObjectArray(ClusterAllocationExplainResponse::setCanRemainDecisions, (p, t) -> AllocationDecision.PARSER.apply(p), CAN_REMAIN_DECISIONS);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRemainOnCurrentNode, (p, t) -> Decision.PARSER.apply(p, null), CAN_REMAIN_ON_CURRENT_NODE);
+    PARSER.declareObject(ClusterAllocationExplainResponse::setCanAllocate, (p, t) -> Decision.PARSER.apply(p), CAN_ALLOCATE);
+    PARSER.declareObject(ClusterAllocationExplainResponse::setCanMoveToOtherNode, (p, t) -> Decision.PARSER.apply(p), CAN_MOVE_TO_OTHER_NODE);
+    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRebalanceCluster, (p, t) -> Decision.PARSER.apply(p), CAN_REBALANCE_CLUSTER);
+    PARSER.declareObjectArray(ClusterAllocationExplainResponse::setCanRebalanceClusterDecisions, (p, t) -> AllocationDecision.PARSER.apply(p, t), CAN_REBALANCE_CLUSTER_DECISIONS);
+    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRebalanceToOtherNode, (p, t) -> Decision.PARSER.apply(p), CAN_REBALANCE_TO_OTHER_NODE);
+    PARSER.declareObjectArray(ClusterAllocationExplainResponse::setCanRemainDecisions, (p, t) -> AllocationDecision.PARSER.apply(p, t), CAN_REMAIN_DECISIONS);
+    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRemainOnCurrentNode, (p, t) -> Decision.PARSER.apply(p), CAN_REMAIN_ON_CURRENT_NODE);
     PARSER.declareString(ClusterAllocationExplainResponse::setConfiguredDelay, CONFIGURED_DELAY);
     PARSER.declareLong(ClusterAllocationExplainResponse::setConfiguredDelayInMills, CONFIGURED_DELAY_IN_MILLS);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCurrentNode, (p, t) -> CurrentNode.PARSER.apply(p, null), CURRENT_NODE);
+    PARSER.declareObject(ClusterAllocationExplainResponse::setCurrentNode, (p, t) -> CurrentNode.PARSER.apply(p, t), CURRENT_NODE);
     PARSER.declareString(ClusterAllocationExplainResponse::setCurrentState, CURRENT_STATE);
     PARSER.declareString(ClusterAllocationExplainResponse::setIndex, INDEX);
     PARSER.declareString(ClusterAllocationExplainResponse::setMoveExplanation, MOVE_EXPLANATION);
-    PARSER.declareObjectArray(ClusterAllocationExplainResponse::setNodeAllocationDecisions, (p, t) -> NodeAllocationExplanation.PARSER.apply(p), NODE_ALLOCATION_DECISIONS);
+    PARSER.declareObjectArray(ClusterAllocationExplainResponse::setNodeAllocationDecisions, (p, t) -> NodeAllocationExplanation.PARSER.apply(p, t), NODE_ALLOCATION_DECISIONS);
     PARSER.declareBoolean(ClusterAllocationExplainResponse::setPrimary, PRIMARY);
     PARSER.declareString(ClusterAllocationExplainResponse::setRebalanceExplanation, REBALANCE_EXPLANATION);
     PARSER.declareString(ClusterAllocationExplainResponse::setRemainingDelay, REMAINING_DELAY);
     PARSER.declareLong(ClusterAllocationExplainResponse::setRemainingDelayInMillis, REMAINING_DELAY_IN_MILLIS);
-    PARSER.declareInteger(ClusterAllocationExplainResponse::setShard, SHARD);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setUnassignedInfo, (p, t) -> UnassignedInformation.PARSER.apply(p, null), UNASSIGNED_INFO);
+    PARSER.declareInt(ClusterAllocationExplainResponse::setShard, SHARD);
+    PARSER.declareObject(ClusterAllocationExplainResponse::setUnassignedInfo, (p, t) -> UnassignedInformation.PARSER.apply(p, t), UNASSIGNED_INFO);
   }
 
 }

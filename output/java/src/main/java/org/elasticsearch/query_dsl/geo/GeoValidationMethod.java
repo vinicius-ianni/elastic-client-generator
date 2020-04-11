@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.geo;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum GeoValidationMethod implements XContentable<GeoValidationMethod> {
       case "ignore_malformed": return GeoValidationMethod.IgnoreMalformed;
       case "strict": return GeoValidationMethod.Strict;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, GeoValidationMethod.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, GeoValidationMethod.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

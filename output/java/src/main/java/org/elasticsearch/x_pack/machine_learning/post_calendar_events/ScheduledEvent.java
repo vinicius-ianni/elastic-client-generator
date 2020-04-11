@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class ScheduledEvent  implements XContentable<ScheduledEvent> {
   public ScheduledEvent setEventId(Id val) { this._eventId = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class ScheduledEvent  implements XContentable<ScheduledEvent> {
     new ConstructingObjectParser<>(ScheduledEvent.class.getName(), false, args -> new ScheduledEvent());
 
   static {
-    PARSER.declareId(ScheduledEvent::setCalendarId, (p, t) -> Id.createFrom(p), CALENDAR_ID);
+    PARSER.declareObject(ScheduledEvent::setCalendarId, (p, t) -> Id.createFrom(p), CALENDAR_ID);
     PARSER.declareString(ScheduledEvent::setDescription, DESCRIPTION);
-    PARSER.declareDate(ScheduledEvent::setStartTime, (p, t) -> Date.createFrom(p), START_TIME);
-    PARSER.declareDate(ScheduledEvent::setEndTime, (p, t) -> Date.createFrom(p), END_TIME);
-    PARSER.declareId(ScheduledEvent::setEventId, (p, t) -> Id.createFrom(p), EVENT_ID);
+    PARSER.declareObject(ScheduledEvent::setStartTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), START_TIME);
+    PARSER.declareObject(ScheduledEvent::setEndTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END_TIME);
+    PARSER.declareObject(ScheduledEvent::setEventId, (p, t) -> Id.createFrom(p), EVENT_ID);
   }
 
 }

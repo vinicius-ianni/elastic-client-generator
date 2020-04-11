@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.search.highlighting.*;
@@ -87,6 +87,7 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
   public TopHitsAggregation setVersion(Boolean val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -101,15 +102,15 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
     new ConstructingObjectParser<>(TopHitsAggregation.class.getName(), false, args -> new TopHitsAggregation());
 
   static {
-    PARSER.declareObjectArray(TopHitsAggregation::setDocvalueFields, (p, t) -> Field.PARSER.apply(p), DOCVALUE_FIELDS);
+    PARSER.declareObjectArray(TopHitsAggregation::setDocvalueFields, (p, t) -> Field.createFrom(p), DOCVALUE_FIELDS);
     PARSER.declareBoolean(TopHitsAggregation::setExplain, EXPLAIN);
-    PARSER.declareInteger(TopHitsAggregation::setFrom, FROM);
-    PARSER.declareObject(TopHitsAggregation::setHighlight, (p, t) -> Highlight.PARSER.apply(p, null), HIGHLIGHT);
-    PARSER.declareObject(TopHitsAggregation::setScriptFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);;
-    PARSER.declareInteger(TopHitsAggregation::setSize, SIZE);
-    PARSER.declareObjectArray(TopHitsAggregation::setSort, (p, t) -> Sort.PARSER.apply(p), SORT);
-    PARSER.declareObject(TopHitsAggregation::setSource, (p, t) -> null, SOURCE);
-    PARSER.declareObjectArray(TopHitsAggregation::setStoredFields, (p, t) -> Field.PARSER.apply(p), STORED_FIELDS);
+    PARSER.declareInt(TopHitsAggregation::setFrom, FROM);
+    PARSER.declareObject(TopHitsAggregation::setHighlight, (p, t) -> Highlight.PARSER.apply(p, t), HIGHLIGHT);
+    PARSER.declareObject(TopHitsAggregation::setScriptFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);
+    PARSER.declareInt(TopHitsAggregation::setSize, SIZE);
+    PARSER.declareObjectArray(TopHitsAggregation::setSort, (p, t) -> Sort.PARSER.apply(p, t), SORT);
+    PARSER.declareObject(TopHitsAggregation::setSource, (p, t) ->  new Either<Boolean, SourceFilter>() /* TODO UnionOf */, SOURCE);
+    PARSER.declareObjectArray(TopHitsAggregation::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
     PARSER.declareBoolean(TopHitsAggregation::setTrackScores, TRACK_SCORES);
     PARSER.declareBoolean(TopHitsAggregation::setVersion, VERSION);
   }

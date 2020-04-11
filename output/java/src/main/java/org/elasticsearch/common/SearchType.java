@@ -2,6 +2,7 @@
 package org.elasticsearch.common;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum SearchType implements XContentable<SearchType> {
       case "query_then_fetch": return SearchType.QueryThenFetch;
       case "dfs_query_then_fetch": return SearchType.DfsQueryThenFetch;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, SearchType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, SearchType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

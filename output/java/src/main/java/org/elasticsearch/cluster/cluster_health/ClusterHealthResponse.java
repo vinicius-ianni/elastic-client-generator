@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.cluster.cluster_health.*;
@@ -115,6 +115,7 @@ public class ClusterHealthResponse  implements XContentable<ClusterHealthRespons
   public ClusterHealthResponse setUnassignedShards(Integer val) { this._unassignedShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -129,22 +130,22 @@ public class ClusterHealthResponse  implements XContentable<ClusterHealthRespons
     new ConstructingObjectParser<>(ClusterHealthResponse.class.getName(), false, args -> new ClusterHealthResponse());
 
   static {
-    PARSER.declareInteger(ClusterHealthResponse::setActivePrimaryShards, ACTIVE_PRIMARY_SHARDS);
-    PARSER.declareInteger(ClusterHealthResponse::setActiveShards, ACTIVE_SHARDS);
+    PARSER.declareInt(ClusterHealthResponse::setActivePrimaryShards, ACTIVE_PRIMARY_SHARDS);
+    PARSER.declareInt(ClusterHealthResponse::setActiveShards, ACTIVE_SHARDS);
     PARSER.declareDouble(ClusterHealthResponse::setActiveShardsPercentAsNumber, ACTIVE_SHARDS_PERCENT_AS_NUMBER);
     PARSER.declareString(ClusterHealthResponse::setClusterName, CLUSTER_NAME);
-    PARSER.declareInteger(ClusterHealthResponse::setDelayedUnassignedShards, DELAYED_UNASSIGNED_SHARDS);
-    PARSER.declareObject(ClusterHealthResponse::setIndices, (p, t) ->  new NamedContainer<>(n -> () -> new IndexName(n),pp -> IndexHealthStats.PARSER.apply(pp, null)), INDICES);;
-    PARSER.declareInteger(ClusterHealthResponse::setInitializingShards, INITIALIZING_SHARDS);
-    PARSER.declareInteger(ClusterHealthResponse::setNumberOfDataNodes, NUMBER_OF_DATA_NODES);
-    PARSER.declareInteger(ClusterHealthResponse::setNumberOfInFlightFetch, NUMBER_OF_IN_FLIGHT_FETCH);
-    PARSER.declareInteger(ClusterHealthResponse::setNumberOfNodes, NUMBER_OF_NODES);
-    PARSER.declareInteger(ClusterHealthResponse::setNumberOfPendingTasks, NUMBER_OF_PENDING_TASKS);
-    PARSER.declareInteger(ClusterHealthResponse::setRelocatingShards, RELOCATING_SHARDS);
-    PARSER.declareObject(ClusterHealthResponse::setStatus, (p, t) -> Health.PARSER.apply(p, null), STATUS);
+    PARSER.declareInt(ClusterHealthResponse::setDelayedUnassignedShards, DELAYED_UNASSIGNED_SHARDS);
+    PARSER.declareObject(ClusterHealthResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> IndexHealthStats.PARSER.apply(pp, null)), INDICES);
+    PARSER.declareInt(ClusterHealthResponse::setInitializingShards, INITIALIZING_SHARDS);
+    PARSER.declareInt(ClusterHealthResponse::setNumberOfDataNodes, NUMBER_OF_DATA_NODES);
+    PARSER.declareInt(ClusterHealthResponse::setNumberOfInFlightFetch, NUMBER_OF_IN_FLIGHT_FETCH);
+    PARSER.declareInt(ClusterHealthResponse::setNumberOfNodes, NUMBER_OF_NODES);
+    PARSER.declareInt(ClusterHealthResponse::setNumberOfPendingTasks, NUMBER_OF_PENDING_TASKS);
+    PARSER.declareInt(ClusterHealthResponse::setRelocatingShards, RELOCATING_SHARDS);
+    PARSER.declareObject(ClusterHealthResponse::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS);
     PARSER.declareLong(ClusterHealthResponse::setTaskMaxWaitingInQueueMillis, TASK_MAX_WAITING_IN_QUEUE_MILLIS);
     PARSER.declareBoolean(ClusterHealthResponse::setTimedOut, TIMED_OUT);
-    PARSER.declareInteger(ClusterHealthResponse::setUnassignedShards, UNASSIGNED_SHARDS);
+    PARSER.declareInt(ClusterHealthResponse::setUnassignedShards, UNASSIGNED_SHARDS);
   }
 
 }

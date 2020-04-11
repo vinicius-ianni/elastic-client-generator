@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.aggregations.bucket.significant_terms.heuristics.*;
 import org.elasticsearch.aggregations.bucket.significant_terms.*;
@@ -105,6 +105,7 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
   public SignificantTermsAggregation setSize(Integer val) { this._size = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -119,20 +120,20 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
     new ConstructingObjectParser<>(SignificantTermsAggregation.class.getName(), false, args -> new SignificantTermsAggregation());
 
   static {
-    PARSER.declareObject(SignificantTermsAggregation::setBackgroundFilter, (p, t) -> QueryContainer.PARSER.apply(p, null), BACKGROUND_FILTER);
-    PARSER.declareObject(SignificantTermsAggregation::setChiSquare, (p, t) -> ChiSquareHeuristic.PARSER.apply(p, null), CHI_SQUARE);
-    PARSER.declareObject(SignificantTermsAggregation::setExclude, (p, t) -> IncludeExclude.PARSER.apply(p, null), EXCLUDE);
-    PARSER.declareObject(SignificantTermsAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p, null), EXECUTION_HINT);
-    PARSER.declareField(SignificantTermsAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObject(SignificantTermsAggregation::setGnd, (p, t) -> GoogleNormalizedDistanceHeuristic.PARSER.apply(p, null), GND);
-    PARSER.declareObject(SignificantTermsAggregation::setInclude, (p, t) -> IncludeExclude.PARSER.apply(p, null), INCLUDE);
+    PARSER.declareObject(SignificantTermsAggregation::setBackgroundFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), BACKGROUND_FILTER);
+    PARSER.declareObject(SignificantTermsAggregation::setChiSquare, (p, t) -> ChiSquareHeuristic.PARSER.apply(p, t), CHI_SQUARE);
+    PARSER.declareObject(SignificantTermsAggregation::setExclude, (p, t) -> IncludeExclude.PARSER.apply(p, t), EXCLUDE);
+    PARSER.declareObject(SignificantTermsAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT);
+    PARSER.declareObject(SignificantTermsAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(SignificantTermsAggregation::setGnd, (p, t) -> GoogleNormalizedDistanceHeuristic.PARSER.apply(p, t), GND);
+    PARSER.declareObject(SignificantTermsAggregation::setInclude, (p, t) -> IncludeExclude.PARSER.apply(p, t), INCLUDE);
     PARSER.declareLong(SignificantTermsAggregation::setMinDocCount, MIN_DOC_COUNT);
-    PARSER.declareObject(SignificantTermsAggregation::setMutualInformation, (p, t) -> MutualInformationHeuristic.PARSER.apply(p, null), MUTUAL_INFORMATION);
-    PARSER.declareObject(SignificantTermsAggregation::setPercentage, (p, t) -> PercentageScoreHeuristic.PARSER.apply(p, null), PERCENTAGE);
-    PARSER.declareObject(SignificantTermsAggregation::setScriptHeuristic, (p, t) -> ScriptedHeuristic.PARSER.apply(p, null), SCRIPT_HEURISTIC);
+    PARSER.declareObject(SignificantTermsAggregation::setMutualInformation, (p, t) -> MutualInformationHeuristic.PARSER.apply(p, t), MUTUAL_INFORMATION);
+    PARSER.declareObject(SignificantTermsAggregation::setPercentage, (p, t) -> PercentageScoreHeuristic.PARSER.apply(p, t), PERCENTAGE);
+    PARSER.declareObject(SignificantTermsAggregation::setScriptHeuristic, (p, t) -> ScriptedHeuristic.PARSER.apply(p, t), SCRIPT_HEURISTIC);
     PARSER.declareLong(SignificantTermsAggregation::setShardMinDocCount, SHARD_MIN_DOC_COUNT);
-    PARSER.declareInteger(SignificantTermsAggregation::setShardSize, SHARD_SIZE);
-    PARSER.declareInteger(SignificantTermsAggregation::setSize, SIZE);
+    PARSER.declareInt(SignificantTermsAggregation::setShardSize, SHARD_SIZE);
+    PARSER.declareInt(SignificantTermsAggregation::setSize, SIZE);
   }
 
 }

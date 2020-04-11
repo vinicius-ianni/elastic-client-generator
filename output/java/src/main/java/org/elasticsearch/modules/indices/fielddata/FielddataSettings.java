@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 
 public class FielddataSettings  implements XContentable<FielddataSettings> {
@@ -28,6 +28,7 @@ public class FielddataSettings  implements XContentable<FielddataSettings> {
   public FielddataSettings setCacheSize(String val) { this._cacheSize = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,7 +43,7 @@ public class FielddataSettings  implements XContentable<FielddataSettings> {
     new ConstructingObjectParser<>(FielddataSettings.class.getName(), false, args -> new FielddataSettings());
 
   static {
-    PARSER.declareObject(FielddataSettings::setCacheExpire, (p, t) -> Time.PARSER.apply(p, null), CACHE_EXPIRE);
+    PARSER.declareObject(FielddataSettings::setCacheExpire, (p, t) -> Time.PARSER.apply(p, t), CACHE_EXPIRE);
     PARSER.declareString(FielddataSettings::setCacheSize, CACHE_SIZE);
   }
 

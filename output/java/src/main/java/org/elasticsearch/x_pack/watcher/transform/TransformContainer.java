@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.transform.*;
 
 public class TransformContainer  implements XContentable<TransformContainer> {
@@ -34,6 +34,7 @@ public class TransformContainer  implements XContentable<TransformContainer> {
   public TransformContainer setSearch(SearchTransform val) { this._search = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class TransformContainer  implements XContentable<TransformContainer> {
     new ConstructingObjectParser<>(TransformContainer.class.getName(), false, args -> new TransformContainer());
 
   static {
-    PARSER.declareObject(TransformContainer::setChain, (p, t) -> ChainTransform.PARSER.apply(p, null), CHAIN);
-    PARSER.declareObject(TransformContainer::setScript, (p, t) -> ScriptTransform.PARSER.apply(p, null), SCRIPT);
-    PARSER.declareObject(TransformContainer::setSearch, (p, t) -> SearchTransform.PARSER.apply(p, null), SEARCH);
+    PARSER.declareObject(TransformContainer::setChain, (p, t) -> ChainTransform.PARSER.apply(p, t), CHAIN);
+    PARSER.declareObject(TransformContainer::setScript, (p, t) -> ScriptTransform.PARSER.apply(p, t), SCRIPT);
+    PARSER.declareObject(TransformContainer::setSearch, (p, t) -> SearchTransform.PARSER.apply(p, t), SEARCH);
   }
 
 }

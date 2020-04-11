@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class DateNanosProperty  implements XContentable<DateNanosProperty> {
@@ -52,6 +52,7 @@ public class DateNanosProperty  implements XContentable<DateNanosProperty> {
   public DateNanosProperty setPrecisionStep(Integer val) { this._precisionStep = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -70,8 +71,8 @@ public class DateNanosProperty  implements XContentable<DateNanosProperty> {
     PARSER.declareString(DateNanosProperty::setFormat, FORMAT);
     PARSER.declareBoolean(DateNanosProperty::setIgnoreMalformed, IGNORE_MALFORMED);
     PARSER.declareBoolean(DateNanosProperty::setIndex, INDEX);
-    PARSER.declareDate(DateNanosProperty::setNullValue, (p, t) -> Date.createFrom(p), NULL_VALUE);
-    PARSER.declareInteger(DateNanosProperty::setPrecisionStep, PRECISION_STEP);
+    PARSER.declareObject(DateNanosProperty::setNullValue, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), NULL_VALUE);
+    PARSER.declareInt(DateNanosProperty::setPrecisionStep, PRECISION_STEP);
   }
 
 }

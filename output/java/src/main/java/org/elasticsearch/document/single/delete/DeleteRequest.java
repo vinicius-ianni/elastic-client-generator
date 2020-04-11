@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
@@ -67,6 +67,7 @@ public class DeleteRequest  implements XContentable<DeleteRequest> {
   public DeleteRequest setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -83,11 +84,11 @@ public class DeleteRequest  implements XContentable<DeleteRequest> {
   static {
     PARSER.declareLong(DeleteRequest::setIfPrimaryTerm, IF_PRIMARY_TERM);
     PARSER.declareLong(DeleteRequest::setIfSequenceNumber, IF_SEQUENCE_NUMBER);
-    PARSER.declareObject(DeleteRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
-    PARSER.declareRouting(DeleteRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(DeleteRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(DeleteRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareObject(DeleteRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(DeleteRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareLong(DeleteRequest::setVersion, VERSION);
-    PARSER.declareObject(DeleteRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(DeleteRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
     PARSER.declareString(DeleteRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

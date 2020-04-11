@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_options.scripting.*;
 
@@ -35,6 +35,7 @@ public class TermsSetQuery  implements XContentable<TermsSetQuery> {
   public TermsSetQuery setTerms(List<Object> val) { this._terms = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class TermsSetQuery  implements XContentable<TermsSetQuery> {
     new ConstructingObjectParser<>(TermsSetQuery.class.getName(), false, args -> new TermsSetQuery());
 
   static {
-    PARSER.declareField(TermsSetQuery::setMinimumShouldMatchField, (p, t) -> Field.createFrom(p), MINIMUM_SHOULD_MATCH_FIELD);
-    PARSER.declareObject(TermsSetQuery::setMinimumShouldMatchScript, (p, t) -> Script.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH_SCRIPT);
-    PARSER.declareObjectArray(TermsSetQuery::setTerms, (p, t) -> Object.PARSER.apply(p), TERMS);
+    PARSER.declareObject(TermsSetQuery::setMinimumShouldMatchField, (p, t) -> Field.createFrom(p), MINIMUM_SHOULD_MATCH_FIELD);
+    PARSER.declareObject(TermsSetQuery::setMinimumShouldMatchScript, (p, t) -> Script.PARSER.apply(p, t), MINIMUM_SHOULD_MATCH_SCRIPT);
+    PARSER.declareObjectArray(TermsSetQuery::setTerms, (p, t) -> p.objectText(), TERMS);
   }
 
 }

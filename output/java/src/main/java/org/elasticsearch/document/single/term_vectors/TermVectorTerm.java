@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.document.single.term_vectors.*;
 
@@ -47,6 +47,7 @@ public class TermVectorTerm  implements XContentable<TermVectorTerm> {
   public TermVectorTerm setTtf(Integer val) { this._ttf = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class TermVectorTerm  implements XContentable<TermVectorTerm> {
     new ConstructingObjectParser<>(TermVectorTerm.class.getName(), false, args -> new TermVectorTerm());
 
   static {
-    PARSER.declareInteger(TermVectorTerm::setDocFreq, DOC_FREQ);
-    PARSER.declareInteger(TermVectorTerm::setTermFreq, TERM_FREQ);
+    PARSER.declareInt(TermVectorTerm::setDocFreq, DOC_FREQ);
+    PARSER.declareInt(TermVectorTerm::setTermFreq, TERM_FREQ);
     PARSER.declareDouble(TermVectorTerm::setScore, SCORE);
-    PARSER.declareObjectArray(TermVectorTerm::setTokens, (p, t) -> Token.PARSER.apply(p), TOKENS);
-    PARSER.declareInteger(TermVectorTerm::setTtf, TTF);
+    PARSER.declareObjectArray(TermVectorTerm::setTokens, (p, t) -> Token.PARSER.apply(p, t), TOKENS);
+    PARSER.declareInt(TermVectorTerm::setTtf, TTF);
   }
 
 }

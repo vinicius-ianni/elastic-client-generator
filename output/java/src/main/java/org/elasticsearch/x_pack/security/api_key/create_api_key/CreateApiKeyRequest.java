@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.x_pack.security.api_key.create_api_key.*;
@@ -42,6 +42,7 @@ public class CreateApiKeyRequest  implements XContentable<CreateApiKeyRequest> {
   public CreateApiKeyRequest setRoleDescriptors(NamedContainer<String, ApiKeyRole> val) { this._roleDescriptors = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class CreateApiKeyRequest  implements XContentable<CreateApiKeyRequest> {
     new ConstructingObjectParser<>(CreateApiKeyRequest.class.getName(), false, args -> new CreateApiKeyRequest());
 
   static {
-    PARSER.declareObject(CreateApiKeyRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
-    PARSER.declareObject(CreateApiKeyRequest::setExpiration, (p, t) -> Time.PARSER.apply(p, null), EXPIRATION);
+    PARSER.declareObject(CreateApiKeyRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareObject(CreateApiKeyRequest::setExpiration, (p, t) -> Time.PARSER.apply(p, t), EXPIRATION);
     PARSER.declareString(CreateApiKeyRequest::setName, NAME);
-    PARSER.declareObject(CreateApiKeyRequest::setRoleDescriptors, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ApiKeyRole.PARSER.apply(pp, null)), ROLE_DESCRIPTORS);;
+    PARSER.declareObject(CreateApiKeyRequest::setRoleDescriptors, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ApiKeyRole.PARSER.apply(pp, null)), ROLE_DESCRIPTORS);
   }
 
 }

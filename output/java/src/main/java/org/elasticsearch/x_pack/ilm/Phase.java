@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.ilm.actions.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -29,6 +29,7 @@ public class Phase  implements XContentable<Phase> {
   public Phase setMinAge(Time val) { this._minAge = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class Phase  implements XContentable<Phase> {
     new ConstructingObjectParser<>(Phase.class.getName(), false, args -> new Phase());
 
   static {
-    PARSER.declareObject(Phase::setActions, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LifecycleAction.PARSER.apply(pp, null)), ACTIONS);;
-    PARSER.declareObject(Phase::setMinAge, (p, t) -> Time.PARSER.apply(p, null), MIN_AGE);
+    PARSER.declareObject(Phase::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LifecycleAction.PARSER.apply(pp, null)), ACTIONS);
+    PARSER.declareObject(Phase::setMinAge, (p, t) -> Time.PARSER.apply(p, t), MIN_AGE);
   }
 
 }

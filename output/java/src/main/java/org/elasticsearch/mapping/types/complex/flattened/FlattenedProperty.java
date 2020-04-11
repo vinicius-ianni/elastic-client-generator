@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.mapping.types.core.*;
 
@@ -77,6 +77,7 @@ public class FlattenedProperty  implements XContentable<FlattenedProperty> {
   public FlattenedProperty setSplitQueriesOnWhitespace(Boolean val) { this._splitQueriesOnWhitespace = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -92,12 +93,12 @@ public class FlattenedProperty  implements XContentable<FlattenedProperty> {
 
   static {
     PARSER.declareDouble(FlattenedProperty::setBoost, BOOST);
-    PARSER.declareInteger(FlattenedProperty::setDepthLimit, DEPTH_LIMIT);
+    PARSER.declareInt(FlattenedProperty::setDepthLimit, DEPTH_LIMIT);
     PARSER.declareBoolean(FlattenedProperty::setDocValues, DOC_VALUES);
     PARSER.declareBoolean(FlattenedProperty::setEagerGlobalOrdinals, EAGER_GLOBAL_ORDINALS);
-    PARSER.declareInteger(FlattenedProperty::setIgnoreAbove, IGNORE_ABOVE);
+    PARSER.declareInt(FlattenedProperty::setIgnoreAbove, IGNORE_ABOVE);
     PARSER.declareBoolean(FlattenedProperty::setIndex, INDEX);
-    PARSER.declareObject(FlattenedProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p, null), INDEX_OPTIONS);
+    PARSER.declareObject(FlattenedProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
     PARSER.declareString(FlattenedProperty::setNullValue, NULL_VALUE);
     PARSER.declareString(FlattenedProperty::setSimilarity, SIMILARITY);
     PARSER.declareBoolean(FlattenedProperty::setSplitQueriesOnWhitespace, SPLIT_QUERIES_ON_WHITESPACE);

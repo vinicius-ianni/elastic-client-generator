@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.condition;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public enum ConditionType implements XContentable<ConditionType> {
       case "compare": return ConditionType.Compare;
       case "array_compare": return ConditionType.ArrayCompare;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ConditionType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ConditionType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

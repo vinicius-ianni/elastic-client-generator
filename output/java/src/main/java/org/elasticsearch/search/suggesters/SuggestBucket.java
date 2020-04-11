@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.suggesters.completion_suggester.*;
 import org.elasticsearch.search.suggesters.phrase_suggester.*;
 import org.elasticsearch.search.suggesters.term_suggester.*;
@@ -54,6 +54,7 @@ public class SuggestBucket  implements XContentable<SuggestBucket> {
   public SuggestBucket setText(String val) { this._text = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,11 +69,11 @@ public class SuggestBucket  implements XContentable<SuggestBucket> {
     new ConstructingObjectParser<>(SuggestBucket.class.getName(), false, args -> new SuggestBucket());
 
   static {
-    PARSER.declareObject(SuggestBucket::setCompletion, (p, t) -> CompletionSuggester.PARSER.apply(p, null), COMPLETION);
-    PARSER.declareObject(SuggestBucket::setPhrase, (p, t) -> PhraseSuggester.PARSER.apply(p, null), PHRASE);
+    PARSER.declareObject(SuggestBucket::setCompletion, (p, t) -> CompletionSuggester.PARSER.apply(p, t), COMPLETION);
+    PARSER.declareObject(SuggestBucket::setPhrase, (p, t) -> PhraseSuggester.PARSER.apply(p, t), PHRASE);
     PARSER.declareString(SuggestBucket::setPrefix, PREFIX);
     PARSER.declareString(SuggestBucket::setRegex, REGEX);
-    PARSER.declareObject(SuggestBucket::setTerm, (p, t) -> TermSuggester.PARSER.apply(p, null), TERM);
+    PARSER.declareObject(SuggestBucket::setTerm, (p, t) -> TermSuggester.PARSER.apply(p, t), TERM);
     PARSER.declareString(SuggestBucket::setText, TEXT);
   }
 

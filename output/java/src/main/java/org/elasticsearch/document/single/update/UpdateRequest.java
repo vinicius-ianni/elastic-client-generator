@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.scripting.*;
 import org.elasticsearch.search.search.source_filtering.*;
 import org.elasticsearch.internal.*;
@@ -19,7 +19,7 @@ import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_options.time_unit.*;
 
-public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable<UpdateRequest> {
+public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable<UpdateRequest<TDocument, TPartialDocument>> {
   
   static final ParseField DETECT_NOOP = new ParseField("detect_noop");
   private Boolean _detectNoop;
@@ -117,6 +117,7 @@ public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable
   public UpdateRequest<TDocument, TPartialDocument> setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -132,20 +133,20 @@ public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable
 
   static {
     PARSER.declareBoolean(UpdateRequest::setDetectNoop, DETECT_NOOP);
-    PARSER.declareObject(UpdateRequest::setDoc, (p, t) -> TPartialDocument.PARSER.apply(p, null), DOC);
+    PARSER.declareObject(UpdateRequest::setDoc, (p, t) -> null /* TODO TPartialDocument */, DOC);
     PARSER.declareBoolean(UpdateRequest::setDocAsUpsert, DOC_AS_UPSERT);
-    PARSER.declareObject(UpdateRequest::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(UpdateRequest::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareBoolean(UpdateRequest::setScriptedUpsert, SCRIPTED_UPSERT);
-    PARSER.declareObject(UpdateRequest::setSource, (p, t) -> null, SOURCE);
-    PARSER.declareObject(UpdateRequest::setUpsert, (p, t) -> TDocument.PARSER.apply(p, null), UPSERT);
+    PARSER.declareObject(UpdateRequest::setSource, (p, t) ->  new Either<Boolean, SourceFilter>() /* TODO UnionOf */, SOURCE);
+    PARSER.declareObject(UpdateRequest::setUpsert, (p, t) -> null /* TODO TDocument */, UPSERT);
     PARSER.declareLong(UpdateRequest::setIfPrimaryTerm, IF_PRIMARY_TERM);
     PARSER.declareLong(UpdateRequest::setIfSequenceNumber, IF_SEQUENCE_NUMBER);
     PARSER.declareString(UpdateRequest::setLang, LANG);
-    PARSER.declareObject(UpdateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
+    PARSER.declareObject(UpdateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
     PARSER.declareLong(UpdateRequest::setRetryOnConflict, RETRY_ON_CONFLICT);
-    PARSER.declareRouting(UpdateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(UpdateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(UpdateRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObject(UpdateRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(UpdateRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareString(UpdateRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

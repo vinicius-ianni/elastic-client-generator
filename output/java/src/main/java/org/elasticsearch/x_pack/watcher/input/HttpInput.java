@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.input.*;
 
 public class HttpInput  implements XContentable<HttpInput> {
@@ -34,6 +34,7 @@ public class HttpInput  implements XContentable<HttpInput> {
   public HttpInput setResponseContentType(ResponseContentType val) { this._responseContentType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class HttpInput  implements XContentable<HttpInput> {
 
   static {
     PARSER.declareStringArray(HttpInput::setExtract, EXTRACT);
-    PARSER.declareObject(HttpInput::setRequest, (p, t) -> HttpInputRequest.PARSER.apply(p, null), REQUEST);
-    PARSER.declareObject(HttpInput::setResponseContentType, (p, t) -> ResponseContentType.PARSER.apply(p, null), RESPONSE_CONTENT_TYPE);
+    PARSER.declareObject(HttpInput::setRequest, (p, t) -> HttpInputRequest.PARSER.apply(p, t), REQUEST);
+    PARSER.declareObject(HttpInput::setResponseContentType, (p, t) -> ResponseContentType.PARSER.apply(p), RESPONSE_CONTENT_TYPE);
   }
 
 }

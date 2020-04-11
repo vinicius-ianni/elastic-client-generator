@@ -2,6 +2,7 @@
 package org.elasticsearch.search.search.highlighting;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum HighlighterEncoder implements XContentable<HighlighterEncoder> {
       case "default": return HighlighterEncoder.Default;
       case "html": return HighlighterEncoder.Html;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, HighlighterEncoder.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, HighlighterEncoder.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 
 public class DeleteSnapshotRequest  implements XContentable<DeleteSnapshotRequest> {
@@ -22,6 +22,7 @@ public class DeleteSnapshotRequest  implements XContentable<DeleteSnapshotReques
   public DeleteSnapshotRequest setMasterTimeout(Time val) { this._masterTimeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class DeleteSnapshotRequest  implements XContentable<DeleteSnapshotReques
     new ConstructingObjectParser<>(DeleteSnapshotRequest.class.getName(), false, args -> new DeleteSnapshotRequest());
 
   static {
-    PARSER.declareObject(DeleteSnapshotRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(DeleteSnapshotRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
   }
 
 }

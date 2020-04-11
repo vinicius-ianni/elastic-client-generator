@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.query_dsl.*;
 import org.elasticsearch.common_options.fuzziness.*;
@@ -172,6 +172,7 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
   public QueryStringQuery setType(TextQueryType val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -190,27 +191,27 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
     PARSER.declareString(QueryStringQuery::setAnalyzer, ANALYZER);
     PARSER.declareBoolean(QueryStringQuery::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareBoolean(QueryStringQuery::setAutoGenerateSynonymsPhraseQuery, AUTO_GENERATE_SYNONYMS_PHRASE_QUERY);
-    PARSER.declareField(QueryStringQuery::setDefaultField, (p, t) -> Field.createFrom(p), DEFAULT_FIELD);
-    PARSER.declareObject(QueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p, null), DEFAULT_OPERATOR);
+    PARSER.declareObject(QueryStringQuery::setDefaultField, (p, t) -> Field.createFrom(p), DEFAULT_FIELD);
+    PARSER.declareObject(QueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p), DEFAULT_OPERATOR);
     PARSER.declareBoolean(QueryStringQuery::setEnablePositionIncrements, ENABLE_POSITION_INCREMENTS);
     PARSER.declareBoolean(QueryStringQuery::setEscape, ESCAPE);
-    PARSER.declareObjectArray(QueryStringQuery::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
-    PARSER.declareObject(QueryStringQuery::setFuzziness, (p, t) -> Fuzziness.PARSER.apply(p, null), FUZZINESS);
-    PARSER.declareInteger(QueryStringQuery::setFuzzyMaxExpansions, FUZZY_MAX_EXPANSIONS);
-    PARSER.declareInteger(QueryStringQuery::setFuzzyPrefixLength, FUZZY_PREFIX_LENGTH);
-    PARSER.declareObject(QueryStringQuery::setFuzzyRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), FUZZY_REWRITE);
+    PARSER.declareObjectArray(QueryStringQuery::setFields, (p, t) -> Field.createFrom(p), FIELDS);
+    PARSER.declareObject(QueryStringQuery::setFuzziness, (p, t) -> Fuzziness.PARSER.apply(p, t), FUZZINESS);
+    PARSER.declareInt(QueryStringQuery::setFuzzyMaxExpansions, FUZZY_MAX_EXPANSIONS);
+    PARSER.declareInt(QueryStringQuery::setFuzzyPrefixLength, FUZZY_PREFIX_LENGTH);
+    PARSER.declareObject(QueryStringQuery::setFuzzyRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), FUZZY_REWRITE);
     PARSER.declareBoolean(QueryStringQuery::setFuzzyTranspositions, FUZZY_TRANSPOSITIONS);
     PARSER.declareBoolean(QueryStringQuery::setLenient, LENIENT);
-    PARSER.declareInteger(QueryStringQuery::setMaxDeterminizedStates, MAX_DETERMINIZED_STATES);
-    PARSER.declareObject(QueryStringQuery::setMinimumShouldMatch, (p, t) -> MinimumShouldMatch.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH);
+    PARSER.declareInt(QueryStringQuery::setMaxDeterminizedStates, MAX_DETERMINIZED_STATES);
+    PARSER.declareObject(QueryStringQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
     PARSER.declareDouble(QueryStringQuery::setPhraseSlop, PHRASE_SLOP);
     PARSER.declareString(QueryStringQuery::setQuery, QUERY);
     PARSER.declareString(QueryStringQuery::setQuoteAnalyzer, QUOTE_ANALYZER);
     PARSER.declareString(QueryStringQuery::setQuoteFieldSuffix, QUOTE_FIELD_SUFFIX);
-    PARSER.declareObject(QueryStringQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), REWRITE);
+    PARSER.declareObject(QueryStringQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), REWRITE);
     PARSER.declareDouble(QueryStringQuery::setTieBreaker, TIE_BREAKER);
     PARSER.declareString(QueryStringQuery::setTimeZone, TIME_ZONE);
-    PARSER.declareObject(QueryStringQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p, null), TYPE);
+    PARSER.declareObject(QueryStringQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p), TYPE);
   }
 
 }

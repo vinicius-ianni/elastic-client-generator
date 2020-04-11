@@ -2,6 +2,7 @@
 package org.elasticsearch.analysis.token_filters;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum KeepTypesMode implements XContentable<KeepTypesMode> {
       case "include": return KeepTypesMode.Include;
       case "exclude": return KeepTypesMode.Exclude;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, KeepTypesMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, KeepTypesMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

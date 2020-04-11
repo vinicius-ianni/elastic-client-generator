@@ -2,6 +2,7 @@
 package org.elasticsearch.analysis.plugins.icu.collation;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum IcuCollationCaseFirst implements XContentable<IcuCollationCaseFirst>
       case "lower": return IcuCollationCaseFirst.Lower;
       case "upper": return IcuCollationCaseFirst.Upper;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, IcuCollationCaseFirst.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, IcuCollationCaseFirst.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

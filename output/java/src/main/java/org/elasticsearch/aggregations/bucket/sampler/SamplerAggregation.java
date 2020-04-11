@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.bucket.sampler.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.scripting.*;
@@ -42,6 +42,7 @@ public class SamplerAggregation  implements XContentable<SamplerAggregation> {
   public SamplerAggregation setShardSize(Integer val) { this._shardSize = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class SamplerAggregation  implements XContentable<SamplerAggregation> {
     new ConstructingObjectParser<>(SamplerAggregation.class.getName(), false, args -> new SamplerAggregation());
 
   static {
-    PARSER.declareObject(SamplerAggregation::setExecutionHint, (p, t) -> SamplerAggregationExecutionHint.PARSER.apply(p, null), EXECUTION_HINT);
-    PARSER.declareInteger(SamplerAggregation::setMaxDocsPerValue, MAX_DOCS_PER_VALUE);
-    PARSER.declareObject(SamplerAggregation::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
-    PARSER.declareInteger(SamplerAggregation::setShardSize, SHARD_SIZE);
+    PARSER.declareObject(SamplerAggregation::setExecutionHint, (p, t) -> SamplerAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT);
+    PARSER.declareInt(SamplerAggregation::setMaxDocsPerValue, MAX_DOCS_PER_VALUE);
+    PARSER.declareObject(SamplerAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
+    PARSER.declareInt(SamplerAggregation::setShardSize, SHARD_SIZE);
   }
 
 }

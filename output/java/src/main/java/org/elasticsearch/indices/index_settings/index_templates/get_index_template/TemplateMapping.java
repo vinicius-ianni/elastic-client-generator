@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.indices.alias_management.*;
 import org.elasticsearch.mapping.*;
@@ -55,6 +55,7 @@ public class TemplateMapping  implements XContentable<TemplateMapping> {
   public TemplateMapping setVersion(Integer val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -69,12 +70,12 @@ public class TemplateMapping  implements XContentable<TemplateMapping> {
     new ConstructingObjectParser<>(TemplateMapping.class.getName(), false, args -> new TemplateMapping());
 
   static {
-    PARSER.declareObject(TemplateMapping::setAliases, (p, t) ->  new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);;
+    PARSER.declareObject(TemplateMapping::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);
     PARSER.declareStringArray(TemplateMapping::setIndexPatterns, INDEX_PATTERNS);
-    PARSER.declareObject(TemplateMapping::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, null), MAPPINGS);
-    PARSER.declareInteger(TemplateMapping::setOrder, ORDER);
-    PARSER.declareObject(TemplateMapping::setSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);;
-    PARSER.declareInteger(TemplateMapping::setVersion, VERSION);
+    PARSER.declareObject(TemplateMapping::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, t), MAPPINGS);
+    PARSER.declareInt(TemplateMapping::setOrder, ORDER);
+    PARSER.declareObject(TemplateMapping::setSettings, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), SETTINGS);
+    PARSER.declareInt(TemplateMapping::setVersion, VERSION);
   }
 
 }

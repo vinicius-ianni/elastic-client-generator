@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class PendingTask  implements XContentable<PendingTask> {
@@ -46,6 +46,7 @@ public class PendingTask  implements XContentable<PendingTask> {
   public PendingTask setTimeInQueueMillis(Integer val) { this._timeInQueueMillis = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,11 +61,11 @@ public class PendingTask  implements XContentable<PendingTask> {
     new ConstructingObjectParser<>(PendingTask.class.getName(), false, args -> new PendingTask());
 
   static {
-    PARSER.declareInteger(PendingTask::setInsertOrder, INSERT_ORDER);
+    PARSER.declareInt(PendingTask::setInsertOrder, INSERT_ORDER);
     PARSER.declareString(PendingTask::setPriority, PRIORITY);
     PARSER.declareString(PendingTask::setSource, SOURCE);
     PARSER.declareString(PendingTask::setTimeInQueue, TIME_IN_QUEUE);
-    PARSER.declareInteger(PendingTask::setTimeInQueueMillis, TIME_IN_QUEUE_MILLIS);
+    PARSER.declareInt(PendingTask::setTimeInQueueMillis, TIME_IN_QUEUE_MILLIS);
   }
 
 }

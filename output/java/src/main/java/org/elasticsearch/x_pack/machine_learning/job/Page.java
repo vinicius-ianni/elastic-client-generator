@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class Page  implements XContentable<Page> {
@@ -28,6 +28,7 @@ public class Page  implements XContentable<Page> {
   public Page setSize(Integer val) { this._size = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class Page  implements XContentable<Page> {
     new ConstructingObjectParser<>(Page.class.getName(), false, args -> new Page());
 
   static {
-    PARSER.declareInteger(Page::setFrom, FROM);
-    PARSER.declareInteger(Page::setSize, SIZE);
+    PARSER.declareInt(Page::setFrom, FROM);
+    PARSER.declareInt(Page::setSize, SIZE);
   }
 
 }

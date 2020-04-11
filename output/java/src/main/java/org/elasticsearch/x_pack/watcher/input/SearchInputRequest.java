@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.x_pack.watcher.input.*;
@@ -50,6 +50,7 @@ public class SearchInputRequest  implements XContentable<SearchInputRequest> {
   public SearchInputRequest setTemplate(SearchTemplateRequest val) { this._template = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -64,11 +65,11 @@ public class SearchInputRequest  implements XContentable<SearchInputRequest> {
     new ConstructingObjectParser<>(SearchInputRequest.class.getName(), false, args -> new SearchInputRequest());
 
   static {
-    PARSER.declareObject(SearchInputRequest::setBody, (p, t) -> SearchRequest.PARSER.apply(p, null), BODY);
-    PARSER.declareObjectArray(SearchInputRequest::setIndices, (p, t) -> IndexName.PARSER.apply(p), INDICES);
-    PARSER.declareObject(SearchInputRequest::setIndicesOptions, (p, t) -> IndicesOptions.PARSER.apply(p, null), INDICES_OPTIONS);
-    PARSER.declareObject(SearchInputRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p, null), SEARCH_TYPE);
-    PARSER.declareObject(SearchInputRequest::setTemplate, (p, t) -> SearchTemplateRequest.PARSER.apply(p, null), TEMPLATE);
+    PARSER.declareObject(SearchInputRequest::setBody, (p, t) -> SearchRequest.PARSER.apply(p, t), BODY);
+    PARSER.declareObjectArray(SearchInputRequest::setIndices, (p, t) -> IndexName.createFrom(p), INDICES);
+    PARSER.declareObject(SearchInputRequest::setIndicesOptions, (p, t) -> IndicesOptions.PARSER.apply(p, t), INDICES_OPTIONS);
+    PARSER.declareObject(SearchInputRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareObject(SearchInputRequest::setTemplate, (p, t) -> SearchTemplateRequest.PARSER.apply(p, t), TEMPLATE);
   }
 
 }

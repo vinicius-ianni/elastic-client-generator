@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.languages.*;
 import org.elasticsearch.analysis.*;
 
@@ -29,6 +29,7 @@ public class SnowballAnalyzer  implements XContentable<SnowballAnalyzer> {
   public SnowballAnalyzer setStopwords(StopWords val) { this._stopwords = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class SnowballAnalyzer  implements XContentable<SnowballAnalyzer> {
     new ConstructingObjectParser<>(SnowballAnalyzer.class.getName(), false, args -> new SnowballAnalyzer());
 
   static {
-    PARSER.declareObject(SnowballAnalyzer::setLanguage, (p, t) -> SnowballLanguage.PARSER.apply(p, null), LANGUAGE);
-    PARSER.declareObject(SnowballAnalyzer::setStopwords, (p, t) -> StopWords.PARSER.apply(p, null), STOPWORDS);
+    PARSER.declareObject(SnowballAnalyzer::setLanguage, (p, t) -> SnowballLanguage.PARSER.apply(p), LANGUAGE);
+    PARSER.declareObject(SnowballAnalyzer::setStopwords, (p, t) -> new StopWords().fromXContent(p), STOPWORDS);
   }
 
 }

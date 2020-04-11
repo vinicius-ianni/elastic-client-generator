@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -53,6 +53,7 @@ public class CloseIndexRequest  implements XContentable<CloseIndexRequest> {
   public CloseIndexRequest setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,10 +69,10 @@ public class CloseIndexRequest  implements XContentable<CloseIndexRequest> {
 
   static {
     PARSER.declareBoolean(CloseIndexRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(CloseIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(CloseIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(CloseIndexRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
-    PARSER.declareObject(CloseIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(CloseIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(CloseIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(CloseIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareString(CloseIndexRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

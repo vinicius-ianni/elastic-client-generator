@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.roll_up.get_rollup_job.*;
 
 public class RollupJobInformation  implements XContentable<RollupJobInformation> {
@@ -34,6 +34,7 @@ public class RollupJobInformation  implements XContentable<RollupJobInformation>
   public RollupJobInformation setStatus(RollupJobStatus val) { this._status = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class RollupJobInformation  implements XContentable<RollupJobInformation>
     new ConstructingObjectParser<>(RollupJobInformation.class.getName(), false, args -> new RollupJobInformation());
 
   static {
-    PARSER.declareObject(RollupJobInformation::setConfig, (p, t) -> RollupJobConfiguration.PARSER.apply(p, null), CONFIG);
-    PARSER.declareObject(RollupJobInformation::setStats, (p, t) -> RollupJobStats.PARSER.apply(p, null), STATS);
-    PARSER.declareObject(RollupJobInformation::setStatus, (p, t) -> RollupJobStatus.PARSER.apply(p, null), STATUS);
+    PARSER.declareObject(RollupJobInformation::setConfig, (p, t) -> RollupJobConfiguration.PARSER.apply(p, t), CONFIG);
+    PARSER.declareObject(RollupJobInformation::setStats, (p, t) -> RollupJobStats.PARSER.apply(p, t), STATS);
+    PARSER.declareObject(RollupJobInformation::setStatus, (p, t) -> RollupJobStatus.PARSER.apply(p, t), STATUS);
   }
 
 }

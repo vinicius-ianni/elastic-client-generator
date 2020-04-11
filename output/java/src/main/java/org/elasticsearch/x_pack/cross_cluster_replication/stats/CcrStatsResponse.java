@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.cross_cluster_replication.stats.*;
 
 public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
@@ -28,6 +28,7 @@ public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
   public CcrStatsResponse setFollowStats(CcrFollowStats val) { this._followStats = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
     new ConstructingObjectParser<>(CcrStatsResponse.class.getName(), false, args -> new CcrStatsResponse());
 
   static {
-    PARSER.declareObject(CcrStatsResponse::setAutoFollowStats, (p, t) -> CcrAutoFollowStats.PARSER.apply(p, null), AUTO_FOLLOW_STATS);
-    PARSER.declareObject(CcrStatsResponse::setFollowStats, (p, t) -> CcrFollowStats.PARSER.apply(p, null), FOLLOW_STATS);
+    PARSER.declareObject(CcrStatsResponse::setAutoFollowStats, (p, t) -> CcrAutoFollowStats.PARSER.apply(p, t), AUTO_FOLLOW_STATS);
+    PARSER.declareObject(CcrStatsResponse::setFollowStats, (p, t) -> CcrFollowStats.PARSER.apply(p, t), FOLLOW_STATS);
   }
 
 }

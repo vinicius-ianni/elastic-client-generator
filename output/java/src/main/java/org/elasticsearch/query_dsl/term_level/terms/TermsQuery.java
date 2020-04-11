@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.field_lookup.*;
 
 public class TermsQuery  implements XContentable<TermsQuery> {
@@ -28,6 +28,7 @@ public class TermsQuery  implements XContentable<TermsQuery> {
   public TermsQuery setTermsLookup(FieldLookup val) { this._termsLookup = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class TermsQuery  implements XContentable<TermsQuery> {
     new ConstructingObjectParser<>(TermsQuery.class.getName(), false, args -> new TermsQuery());
 
   static {
-    PARSER.declareObjectArray(TermsQuery::setTerms, (p, t) -> Object.PARSER.apply(p), TERMS);
-    PARSER.declareObject(TermsQuery::setTermsLookup, (p, t) -> FieldLookup.PARSER.apply(p, null), TERMS_LOOKUP);
+    PARSER.declareObjectArray(TermsQuery::setTerms, (p, t) -> p.objectText(), TERMS);
+    PARSER.declareObject(TermsQuery::setTermsLookup, (p, t) -> FieldLookup.PARSER.apply(p, t), TERMS_LOOKUP);
   }
 
 }

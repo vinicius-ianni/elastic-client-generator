@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.action.pager_duty;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum PagerDutyEventType implements XContentable<PagerDutyEventType> {
       case "resolve": return PagerDutyEventType.Resolve;
       case "acknowledge": return PagerDutyEventType.Acknowledge;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, PagerDutyEventType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, PagerDutyEventType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.search.search.source_filtering.*;
@@ -69,6 +69,7 @@ public class MultiGetOperation  implements XContentable<MultiGetOperation> {
   public MultiGetOperation setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -84,13 +85,13 @@ public class MultiGetOperation  implements XContentable<MultiGetOperation> {
 
   static {
     PARSER.declareBoolean(MultiGetOperation::setCanBeFlattened, CAN_BE_FLATTENED);
-    PARSER.declareId(MultiGetOperation::setId, (p, t) -> Id.createFrom(p), ID);
-    PARSER.declareIndexName(MultiGetOperation::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(MultiGetOperation::setId, (p, t) -> Id.createFrom(p), ID);
+    PARSER.declareObject(MultiGetOperation::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
     PARSER.declareString(MultiGetOperation::setRouting, ROUTING);
-    PARSER.declareObject(MultiGetOperation::setSource, (p, t) -> null, SOURCE);
-    PARSER.declareObjectArray(MultiGetOperation::setStoredFields, (p, t) -> Field.PARSER.apply(p), STORED_FIELDS);
+    PARSER.declareObject(MultiGetOperation::setSource, (p, t) ->  new Either<Boolean, SourceFilter>() /* TODO UnionOf */, SOURCE);
+    PARSER.declareObjectArray(MultiGetOperation::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
     PARSER.declareLong(MultiGetOperation::setVersion, VERSION);
-    PARSER.declareObject(MultiGetOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(MultiGetOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

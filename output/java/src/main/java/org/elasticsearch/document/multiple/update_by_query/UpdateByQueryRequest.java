@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.scroll.scroll.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.common_options.scripting.*;
@@ -251,6 +251,7 @@ public class UpdateByQueryRequest  implements XContentable<UpdateByQueryRequest>
   public UpdateByQueryRequest setWaitForCompletion(Boolean val) { this._waitForCompletion = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -265,17 +266,17 @@ public class UpdateByQueryRequest  implements XContentable<UpdateByQueryRequest>
     new ConstructingObjectParser<>(UpdateByQueryRequest.class.getName(), false, args -> new UpdateByQueryRequest());
 
   static {
-    PARSER.declareObject(UpdateByQueryRequest::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, null), SLICE);
-    PARSER.declareObject(UpdateByQueryRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObject(UpdateByQueryRequest::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(UpdateByQueryRequest::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, t), SLICE);
+    PARSER.declareObject(UpdateByQueryRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObject(UpdateByQueryRequest::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareLong(UpdateByQueryRequest::setMaxDocs, MAX_DOCS);
     PARSER.declareBoolean(UpdateByQueryRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(UpdateByQueryRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(UpdateByQueryRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(UpdateByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p, null), CONFLICTS);
-    PARSER.declareObject(UpdateByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p, null), DEFAULT_OPERATOR);
+    PARSER.declareObject(UpdateByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS);
+    PARSER.declareObject(UpdateByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
     PARSER.declareString(UpdateByQueryRequest::setDf, DF);
-    PARSER.declareObject(UpdateByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(UpdateByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareLong(UpdateByQueryRequest::setFrom, FROM);
     PARSER.declareBoolean(UpdateByQueryRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(UpdateByQueryRequest::setLenient, LENIENT);
@@ -285,20 +286,20 @@ public class UpdateByQueryRequest  implements XContentable<UpdateByQueryRequest>
     PARSER.declareBoolean(UpdateByQueryRequest::setRefresh, REFRESH);
     PARSER.declareBoolean(UpdateByQueryRequest::setRequestCache, REQUEST_CACHE);
     PARSER.declareLong(UpdateByQueryRequest::setRequestsPerSecond, REQUESTS_PER_SECOND);
-    PARSER.declareRouting(UpdateByQueryRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(UpdateByQueryRequest::setScroll, (p, t) -> Time.PARSER.apply(p, null), SCROLL);
+    PARSER.declareObject(UpdateByQueryRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(UpdateByQueryRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
     PARSER.declareLong(UpdateByQueryRequest::setScrollSize, SCROLL_SIZE);
-    PARSER.declareObject(UpdateByQueryRequest::setSearchTimeout, (p, t) -> Time.PARSER.apply(p, null), SEARCH_TIMEOUT);
-    PARSER.declareObject(UpdateByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p, null), SEARCH_TYPE);
+    PARSER.declareObject(UpdateByQueryRequest::setSearchTimeout, (p, t) -> Time.PARSER.apply(p, t), SEARCH_TIMEOUT);
+    PARSER.declareObject(UpdateByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
     PARSER.declareLong(UpdateByQueryRequest::setSize, SIZE);
     PARSER.declareLong(UpdateByQueryRequest::setSlices, SLICES);
     PARSER.declareStringArray(UpdateByQueryRequest::setSort, SORT);
     PARSER.declareBoolean(UpdateByQueryRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(UpdateByQueryRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(UpdateByQueryRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
+    PARSER.declareObjectArray(UpdateByQueryRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(UpdateByQueryRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
     PARSER.declareStringArray(UpdateByQueryRequest::setStats, STATS);
     PARSER.declareLong(UpdateByQueryRequest::setTerminateAfter, TERMINATE_AFTER);
-    PARSER.declareObject(UpdateByQueryRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(UpdateByQueryRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareBoolean(UpdateByQueryRequest::setVersion, VERSION);
     PARSER.declareBoolean(UpdateByQueryRequest::setVersionType, VERSION_TYPE);
     PARSER.declareString(UpdateByQueryRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.modules.indices.fielddata.numeric.*;
 
@@ -41,6 +41,7 @@ public class BooleanProperty  implements XContentable<BooleanProperty> {
   public BooleanProperty setNullValue(Boolean val) { this._nullValue = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,7 +57,7 @@ public class BooleanProperty  implements XContentable<BooleanProperty> {
 
   static {
     PARSER.declareDouble(BooleanProperty::setBoost, BOOST);
-    PARSER.declareObject(BooleanProperty::setFielddata, (p, t) -> NumericFielddata.PARSER.apply(p, null), FIELDDATA);
+    PARSER.declareObject(BooleanProperty::setFielddata, (p, t) -> NumericFielddata.PARSER.apply(p, t), FIELDDATA);
     PARSER.declareBoolean(BooleanProperty::setIndex, INDEX);
     PARSER.declareBoolean(BooleanProperty::setNullValue, NULL_VALUE);
   }

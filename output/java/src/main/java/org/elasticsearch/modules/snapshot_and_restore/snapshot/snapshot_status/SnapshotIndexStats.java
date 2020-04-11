@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.modules.snapshot_and_restore.snapshot.snapshot_status.*;
 
 public class SnapshotIndexStats  implements XContentable<SnapshotIndexStats> {
@@ -34,6 +34,7 @@ public class SnapshotIndexStats  implements XContentable<SnapshotIndexStats> {
   public SnapshotIndexStats setStats(SnapshotStats val) { this._stats = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class SnapshotIndexStats  implements XContentable<SnapshotIndexStats> {
     new ConstructingObjectParser<>(SnapshotIndexStats.class.getName(), false, args -> new SnapshotIndexStats());
 
   static {
-    PARSER.declareObject(SnapshotIndexStats::setShards, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> SnapshotShardsStats.PARSER.apply(pp, null)), SHARDS);;
-    PARSER.declareObject(SnapshotIndexStats::setShardsStats, (p, t) -> SnapshotShardsStats.PARSER.apply(p, null), SHARDS_STATS);
-    PARSER.declareObject(SnapshotIndexStats::setStats, (p, t) -> SnapshotStats.PARSER.apply(p, null), STATS);
+    PARSER.declareObject(SnapshotIndexStats::setShards, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SnapshotShardsStats.PARSER.apply(pp, null)), SHARDS);
+    PARSER.declareObject(SnapshotIndexStats::setShardsStats, (p, t) -> SnapshotShardsStats.PARSER.apply(p, t), SHARDS_STATS);
+    PARSER.declareObject(SnapshotIndexStats::setStats, (p, t) -> SnapshotStats.PARSER.apply(p, t), STATS);
   }
 
 }

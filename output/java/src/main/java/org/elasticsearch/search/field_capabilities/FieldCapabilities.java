@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.indices.*;
 
 public class FieldCapabilities  implements XContentable<FieldCapabilities> {
@@ -46,6 +46,7 @@ public class FieldCapabilities  implements XContentable<FieldCapabilities> {
   public FieldCapabilities setSearchable(Boolean val) { this._searchable = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,9 +62,9 @@ public class FieldCapabilities  implements XContentable<FieldCapabilities> {
 
   static {
     PARSER.declareBoolean(FieldCapabilities::setAggregatable, AGGREGATABLE);
-    PARSER.declareIndices(FieldCapabilities::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
-    PARSER.declareIndices(FieldCapabilities::setNonAggregatableIndices, (p, t) -> Indices.createFrom(p), NON_AGGREGATABLE_INDICES);
-    PARSER.declareIndices(FieldCapabilities::setNonSearchableIndices, (p, t) -> Indices.createFrom(p), NON_SEARCHABLE_INDICES);
+    PARSER.declareObject(FieldCapabilities::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
+    PARSER.declareObject(FieldCapabilities::setNonAggregatableIndices, (p, t) -> Indices.createFrom(p), NON_AGGREGATABLE_INDICES);
+    PARSER.declareObject(FieldCapabilities::setNonSearchableIndices, (p, t) -> Indices.createFrom(p), NON_SEARCHABLE_INDICES);
     PARSER.declareBoolean(FieldCapabilities::setSearchable, SEARCHABLE);
   }
 

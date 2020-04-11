@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class CustomAnalyzer  implements XContentable<CustomAnalyzer> {
@@ -40,6 +40,7 @@ public class CustomAnalyzer  implements XContentable<CustomAnalyzer> {
   public CustomAnalyzer setTokenizer(String val) { this._tokenizer = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,7 +57,7 @@ public class CustomAnalyzer  implements XContentable<CustomAnalyzer> {
   static {
     PARSER.declareStringArray(CustomAnalyzer::setCharFilter, CHAR_FILTER);
     PARSER.declareStringArray(CustomAnalyzer::setFilter, FILTER);
-    PARSER.declareInteger(CustomAnalyzer::setPositionOffsetGap, POSITION_OFFSET_GAP);
+    PARSER.declareInt(CustomAnalyzer::setPositionOffsetGap, POSITION_OFFSET_GAP);
     PARSER.declareString(CustomAnalyzer::setTokenizer, TOKENIZER);
   }
 

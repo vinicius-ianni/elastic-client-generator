@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.compound.function_score.functions.field_value;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -47,7 +48,7 @@ public enum FieldValueFactorModifier implements XContentable<FieldValueFactorMod
       case "sqrt": return FieldValueFactorModifier.Sqrt;
       case "reciprocal": return FieldValueFactorModifier.Reciprocal;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, FieldValueFactorModifier.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, FieldValueFactorModifier.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

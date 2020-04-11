@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.graph.explore.request.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -42,6 +42,7 @@ public class GraphExploreControls  implements XContentable<GraphExploreControls>
   public GraphExploreControls setUseSignificance(Boolean val) { this._useSignificance = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,9 +57,9 @@ public class GraphExploreControls  implements XContentable<GraphExploreControls>
     new ConstructingObjectParser<>(GraphExploreControls.class.getName(), false, args -> new GraphExploreControls());
 
   static {
-    PARSER.declareObject(GraphExploreControls::setSampleDiversity, (p, t) -> SampleDiversity.PARSER.apply(p, null), SAMPLE_DIVERSITY);
-    PARSER.declareInteger(GraphExploreControls::setSampleSize, SAMPLE_SIZE);
-    PARSER.declareObject(GraphExploreControls::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(GraphExploreControls::setSampleDiversity, (p, t) -> SampleDiversity.PARSER.apply(p, t), SAMPLE_DIVERSITY);
+    PARSER.declareInt(GraphExploreControls::setSampleSize, SAMPLE_SIZE);
+    PARSER.declareObject(GraphExploreControls::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareBoolean(GraphExploreControls::setUseSignificance, USE_SIGNIFICANCE);
   }
 

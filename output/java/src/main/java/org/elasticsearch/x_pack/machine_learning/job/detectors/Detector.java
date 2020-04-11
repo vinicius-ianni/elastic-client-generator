@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.detectors.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.put_job.*;
@@ -54,6 +54,7 @@ public class Detector  implements XContentable<Detector> {
   public Detector setUseNull(Boolean val) { this._useNull = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,10 +69,10 @@ public class Detector  implements XContentable<Detector> {
     new ConstructingObjectParser<>(Detector.class.getName(), false, args -> new Detector());
 
   static {
-    PARSER.declareObjectArray(Detector::setCustomRules, (p, t) -> DetectionRule.PARSER.apply(p), CUSTOM_RULES);
+    PARSER.declareObjectArray(Detector::setCustomRules, (p, t) -> DetectionRule.PARSER.apply(p, t), CUSTOM_RULES);
     PARSER.declareString(Detector::setDetectorDescription, DETECTOR_DESCRIPTION);
-    PARSER.declareInteger(Detector::setDetectorIndex, DETECTOR_INDEX);
-    PARSER.declareObject(Detector::setExcludeFrequent, (p, t) -> ExcludeFrequent.PARSER.apply(p, null), EXCLUDE_FREQUENT);
+    PARSER.declareInt(Detector::setDetectorIndex, DETECTOR_INDEX);
+    PARSER.declareObject(Detector::setExcludeFrequent, (p, t) -> ExcludeFrequent.PARSER.apply(p), EXCLUDE_FREQUENT);
     PARSER.declareString(Detector::setFunction, FUNCTION);
     PARSER.declareBoolean(Detector::setUseNull, USE_NULL);
   }

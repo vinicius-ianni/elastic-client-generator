@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.task_id.*;
 import org.elasticsearch.cluster.task_management.list_tasks.*;
 
@@ -59,6 +59,7 @@ public class TaskExecutingNode  implements XContentable<TaskExecutingNode> {
   public TaskExecutingNode setTransportAddress(String val) { this._transportAddress = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -73,12 +74,12 @@ public class TaskExecutingNode  implements XContentable<TaskExecutingNode> {
     new ConstructingObjectParser<>(TaskExecutingNode.class.getName(), false, args -> new TaskExecutingNode());
 
   static {
-    PARSER.declareObject(TaskExecutingNode::setAttributes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), ATTRIBUTES);;
+    PARSER.declareObject(TaskExecutingNode::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), ATTRIBUTES);
     PARSER.declareString(TaskExecutingNode::setHost, HOST);
     PARSER.declareString(TaskExecutingNode::setIp, IP);
     PARSER.declareString(TaskExecutingNode::setName, NAME);
     PARSER.declareStringArray(TaskExecutingNode::setRoles, ROLES);
-    PARSER.declareObject(TaskExecutingNode::setTasks, (p, t) ->  new NamedContainer<>(n -> () -> new TaskId(n),pp -> TaskState.PARSER.apply(pp, null)), TASKS);;
+    PARSER.declareObject(TaskExecutingNode::setTasks, (p, t) -> new NamedContainer<>(n -> () -> new TaskId(n),pp -> TaskState.PARSER.apply(pp, null)), TASKS);
     PARSER.declareString(TaskExecutingNode::setTransportAddress, TRANSPORT_ADDRESS);
   }
 

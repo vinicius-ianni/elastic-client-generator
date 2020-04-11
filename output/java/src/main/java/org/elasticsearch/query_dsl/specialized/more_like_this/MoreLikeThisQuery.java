@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.query_dsl.specialized.more_like_this.like.*;
@@ -130,6 +130,7 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
   public MoreLikeThisQuery setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -146,22 +147,22 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
   static {
     PARSER.declareString(MoreLikeThisQuery::setAnalyzer, ANALYZER);
     PARSER.declareDouble(MoreLikeThisQuery::setBoostTerms, BOOST_TERMS);
-    PARSER.declareObjectArray(MoreLikeThisQuery::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObjectArray(MoreLikeThisQuery::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(MoreLikeThisQuery::setInclude, INCLUDE);
-    PARSER.declareObjectArray(MoreLikeThisQuery::setLike, (p, t) -> Like.PARSER.apply(p), LIKE);
-    PARSER.declareInteger(MoreLikeThisQuery::setMaxDocFreq, MAX_DOC_FREQ);
-    PARSER.declareInteger(MoreLikeThisQuery::setMaxQueryTerms, MAX_QUERY_TERMS);
-    PARSER.declareInteger(MoreLikeThisQuery::setMaxWordLength, MAX_WORD_LENGTH);
-    PARSER.declareInteger(MoreLikeThisQuery::setMinDocFreq, MIN_DOC_FREQ);
-    PARSER.declareObject(MoreLikeThisQuery::setMinimumShouldMatch, (p, t) -> MinimumShouldMatch.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH);
-    PARSER.declareInteger(MoreLikeThisQuery::setMinTermFreq, MIN_TERM_FREQ);
-    PARSER.declareInteger(MoreLikeThisQuery::setMinWordLength, MIN_WORD_LENGTH);
-    PARSER.declareObject(MoreLikeThisQuery::setPerFieldAnalyzer, (p, t) ->  new NamedContainer<>(n -> () -> new Field(n),pp -> String.PARSER.apply(pp, null)), PER_FIELD_ANALYZER);;
-    PARSER.declareRouting(MoreLikeThisQuery::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(MoreLikeThisQuery::setStopWords, (p, t) -> StopWords.PARSER.apply(p, null), STOP_WORDS);
-    PARSER.declareObjectArray(MoreLikeThisQuery::setUnlike, (p, t) -> Like.PARSER.apply(p), UNLIKE);
+    PARSER.declareObjectArray(MoreLikeThisQuery::setLike, (p, t) -> new Like().fromXContent(p), LIKE);
+    PARSER.declareInt(MoreLikeThisQuery::setMaxDocFreq, MAX_DOC_FREQ);
+    PARSER.declareInt(MoreLikeThisQuery::setMaxQueryTerms, MAX_QUERY_TERMS);
+    PARSER.declareInt(MoreLikeThisQuery::setMaxWordLength, MAX_WORD_LENGTH);
+    PARSER.declareInt(MoreLikeThisQuery::setMinDocFreq, MIN_DOC_FREQ);
+    PARSER.declareObject(MoreLikeThisQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
+    PARSER.declareInt(MoreLikeThisQuery::setMinTermFreq, MIN_TERM_FREQ);
+    PARSER.declareInt(MoreLikeThisQuery::setMinWordLength, MIN_WORD_LENGTH);
+    PARSER.declareObject(MoreLikeThisQuery::setPerFieldAnalyzer, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),pp -> pp.text()), PER_FIELD_ANALYZER);
+    PARSER.declareObject(MoreLikeThisQuery::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(MoreLikeThisQuery::setStopWords, (p, t) -> new StopWords().fromXContent(p), STOP_WORDS);
+    PARSER.declareObjectArray(MoreLikeThisQuery::setUnlike, (p, t) -> new Like().fromXContent(p), UNLIKE);
     PARSER.declareLong(MoreLikeThisQuery::setVersion, VERSION);
-    PARSER.declareObject(MoreLikeThisQuery::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(MoreLikeThisQuery::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

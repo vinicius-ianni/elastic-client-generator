@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.geo.w_k_t;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum CharacterType implements XContentable<CharacterType> {
       case "Alpha": return CharacterType.Alpha;
       case "Comment": return CharacterType.Comment;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, CharacterType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, CharacterType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

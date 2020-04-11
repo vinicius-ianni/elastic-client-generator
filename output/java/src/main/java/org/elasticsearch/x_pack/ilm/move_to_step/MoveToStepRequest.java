@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.ilm.move_to_step.*;
 
 public class MoveToStepRequest  implements XContentable<MoveToStepRequest> {
@@ -28,6 +28,7 @@ public class MoveToStepRequest  implements XContentable<MoveToStepRequest> {
   public MoveToStepRequest setNextStep(StepKey val) { this._nextStep = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class MoveToStepRequest  implements XContentable<MoveToStepRequest> {
     new ConstructingObjectParser<>(MoveToStepRequest.class.getName(), false, args -> new MoveToStepRequest());
 
   static {
-    PARSER.declareObject(MoveToStepRequest::setCurrentStep, (p, t) -> StepKey.PARSER.apply(p, null), CURRENT_STEP);
-    PARSER.declareObject(MoveToStepRequest::setNextStep, (p, t) -> StepKey.PARSER.apply(p, null), NEXT_STEP);
+    PARSER.declareObject(MoveToStepRequest::setCurrentStep, (p, t) -> StepKey.PARSER.apply(p, t), CURRENT_STEP);
+    PARSER.declareObject(MoveToStepRequest::setNextStep, (p, t) -> StepKey.PARSER.apply(p, t), NEXT_STEP);
   }
 
 }

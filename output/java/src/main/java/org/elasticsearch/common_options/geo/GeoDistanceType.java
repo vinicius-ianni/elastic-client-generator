@@ -2,6 +2,7 @@
 package org.elasticsearch.common_options.geo;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum GeoDistanceType implements XContentable<GeoDistanceType> {
       case "arc": return GeoDistanceType.Arc;
       case "plane": return GeoDistanceType.Plane;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, GeoDistanceType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, GeoDistanceType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

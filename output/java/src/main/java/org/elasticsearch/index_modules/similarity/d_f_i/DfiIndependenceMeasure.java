@@ -2,6 +2,7 @@
 package org.elasticsearch.index_modules.similarity.d_f_i;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum DfiIndependenceMeasure implements XContentable<DfiIndependenceMeasur
       case "saturated": return DfiIndependenceMeasure.Saturated;
       case "chisquared": return DfiIndependenceMeasure.Chisquared;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, DfiIndependenceMeasure.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, DfiIndependenceMeasure.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

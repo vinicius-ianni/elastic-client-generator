@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.lazy_document.*;
 
-public class InlineGet<TDocument>  implements XContentable<InlineGet> {
+public class InlineGet<TDocument>  implements XContentable<InlineGet<TDocument>> {
   
   static final ParseField FIELDS = new ParseField("fields");
   private NamedContainer<String, LazyDocument> _fields;
@@ -34,6 +34,7 @@ public class InlineGet<TDocument>  implements XContentable<InlineGet> {
   public InlineGet<TDocument> setSource(TDocument val) { this._source = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class InlineGet<TDocument>  implements XContentable<InlineGet> {
     new ConstructingObjectParser<>(InlineGet.class.getName(), false, args -> new InlineGet());
 
   static {
-    PARSER.declareObject(InlineGet::setFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);;
+    PARSER.declareObject(InlineGet::setFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);
     PARSER.declareBoolean(InlineGet::setFound, FOUND);
-    PARSER.declareObject(InlineGet::setSource, (p, t) -> TDocument.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(InlineGet::setSource, (p, t) -> null /* TODO TDocument */, SOURCE);
   }
 
 }

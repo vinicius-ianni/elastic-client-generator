@@ -2,6 +2,7 @@
 package org.elasticsearch.search.search.sort;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum SortSpecialField implements XContentable<SortSpecialField> {
       case "_score": return SortSpecialField.Score;
       case "_doc": return SortSpecialField.Doc;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, SortSpecialField.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, SortSpecialField.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

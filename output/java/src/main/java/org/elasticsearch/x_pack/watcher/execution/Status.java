@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.execution;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum Status implements XContentable<Status> {
       case "simulated": return Status.Simulated;
       case "throttled": return Status.Throttled;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, Status.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, Status.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.compound.function_score.functions.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
@@ -54,6 +54,7 @@ public class FunctionScoreQuery  implements XContentable<FunctionScoreQuery> {
   public FunctionScoreQuery setScoreMode(FunctionScoreMode val) { this._scoreMode = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,12 +69,12 @@ public class FunctionScoreQuery  implements XContentable<FunctionScoreQuery> {
     new ConstructingObjectParser<>(FunctionScoreQuery.class.getName(), false, args -> new FunctionScoreQuery());
 
   static {
-    PARSER.declareObject(FunctionScoreQuery::setBoostMode, (p, t) -> FunctionBoostMode.PARSER.apply(p, null), BOOST_MODE);
-    PARSER.declareObjectArray(FunctionScoreQuery::setFunctions, (p, t) -> ScoreFunction.PARSER.apply(p), FUNCTIONS);
+    PARSER.declareObject(FunctionScoreQuery::setBoostMode, (p, t) -> FunctionBoostMode.PARSER.apply(p), BOOST_MODE);
+    PARSER.declareObjectArray(FunctionScoreQuery::setFunctions, (p, t) -> ScoreFunction.PARSER.apply(p, t), FUNCTIONS);
     PARSER.declareDouble(FunctionScoreQuery::setMaxBoost, MAX_BOOST);
     PARSER.declareDouble(FunctionScoreQuery::setMinScore, MIN_SCORE);
-    PARSER.declareObject(FunctionScoreQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObject(FunctionScoreQuery::setScoreMode, (p, t) -> FunctionScoreMode.PARSER.apply(p, null), SCORE_MODE);
+    PARSER.declareObject(FunctionScoreQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObject(FunctionScoreQuery::setScoreMode, (p, t) -> FunctionScoreMode.PARSER.apply(p), SCORE_MODE);
   }
 
 }

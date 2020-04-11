@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.role_mapping.rules.role.*;
 
 public class XPackRoleMapping  implements XContentable<XPackRoleMapping> {
@@ -40,6 +40,7 @@ public class XPackRoleMapping  implements XContentable<XPackRoleMapping> {
   public XPackRoleMapping setRules(RoleMappingRuleBase val) { this._rules = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,9 +56,9 @@ public class XPackRoleMapping  implements XContentable<XPackRoleMapping> {
 
   static {
     PARSER.declareBoolean(XPackRoleMapping::setEnabled, ENABLED);
-    PARSER.declareObject(XPackRoleMapping::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareObject(XPackRoleMapping::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareStringArray(XPackRoleMapping::setRoles, ROLES);
-    PARSER.declareObject(XPackRoleMapping::setRules, (p, t) -> RoleMappingRuleBase.PARSER.apply(p, null), RULES);
+    PARSER.declareObject(XPackRoleMapping::setRules, (p, t) -> RoleMappingRuleBase.PARSER.apply(p, t), RULES);
   }
 
 }

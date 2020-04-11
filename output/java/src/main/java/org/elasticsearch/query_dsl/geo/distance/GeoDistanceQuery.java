@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.geo.*;
 import org.elasticsearch.query_dsl.geo.*;
 
@@ -41,6 +41,7 @@ public class GeoDistanceQuery  implements XContentable<GeoDistanceQuery> {
   public GeoDistanceQuery setValidationMethod(GeoValidationMethod val) { this._validationMethod = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,10 +56,10 @@ public class GeoDistanceQuery  implements XContentable<GeoDistanceQuery> {
     new ConstructingObjectParser<>(GeoDistanceQuery.class.getName(), false, args -> new GeoDistanceQuery());
 
   static {
-    PARSER.declareObject(GeoDistanceQuery::setDistance, (p, t) -> Distance.PARSER.apply(p, null), DISTANCE);
-    PARSER.declareObject(GeoDistanceQuery::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p, null), DISTANCE_TYPE);
-    PARSER.declareObject(GeoDistanceQuery::setLocation, (p, t) -> GeoLocation.PARSER.apply(p, null), LOCATION);
-    PARSER.declareObject(GeoDistanceQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p, null), VALIDATION_METHOD);
+    PARSER.declareObject(GeoDistanceQuery::setDistance, (p, t) -> Distance.PARSER.apply(p, t), DISTANCE);
+    PARSER.declareObject(GeoDistanceQuery::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p), DISTANCE_TYPE);
+    PARSER.declareObject(GeoDistanceQuery::setLocation, (p, t) -> GeoLocation.PARSER.apply(p, t), LOCATION);
+    PARSER.declareObject(GeoDistanceQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.cluster_stats.*;
 
@@ -41,6 +41,7 @@ public class ClusterJvm  implements XContentable<ClusterJvm> {
   public ClusterJvm setVersions(List<ClusterJvmVersion> val) { this._versions = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,9 +57,9 @@ public class ClusterJvm  implements XContentable<ClusterJvm> {
 
   static {
     PARSER.declareLong(ClusterJvm::setMaxUptimeInMillis, MAX_UPTIME_IN_MILLIS);
-    PARSER.declareObject(ClusterJvm::setMem, (p, t) -> ClusterJvmMemory.PARSER.apply(p, null), MEM);
+    PARSER.declareObject(ClusterJvm::setMem, (p, t) -> ClusterJvmMemory.PARSER.apply(p, t), MEM);
     PARSER.declareLong(ClusterJvm::setThreads, THREADS);
-    PARSER.declareObjectArray(ClusterJvm::setVersions, (p, t) -> ClusterJvmVersion.PARSER.apply(p), VERSIONS);
+    PARSER.declareObjectArray(ClusterJvm::setVersions, (p, t) -> ClusterJvmVersion.PARSER.apply(p, t), VERSIONS);
   }
 
 }

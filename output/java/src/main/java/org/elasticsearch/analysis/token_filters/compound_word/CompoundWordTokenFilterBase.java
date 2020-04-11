@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class CompoundWordTokenFilterBase  implements XContentable<CompoundWordTokenFilterBase> {
@@ -58,6 +58,7 @@ public class CompoundWordTokenFilterBase  implements XContentable<CompoundWordTo
   public CompoundWordTokenFilterBase setWordListPath(String val) { this._wordListPath = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -73,9 +74,9 @@ public class CompoundWordTokenFilterBase  implements XContentable<CompoundWordTo
 
   static {
     PARSER.declareString(CompoundWordTokenFilterBase::setHyphenationPatternsPath, HYPHENATION_PATTERNS_PATH);
-    PARSER.declareInteger(CompoundWordTokenFilterBase::setMaxSubwordSize, MAX_SUBWORD_SIZE);
-    PARSER.declareInteger(CompoundWordTokenFilterBase::setMinSubwordSize, MIN_SUBWORD_SIZE);
-    PARSER.declareInteger(CompoundWordTokenFilterBase::setMinWordSize, MIN_WORD_SIZE);
+    PARSER.declareInt(CompoundWordTokenFilterBase::setMaxSubwordSize, MAX_SUBWORD_SIZE);
+    PARSER.declareInt(CompoundWordTokenFilterBase::setMinSubwordSize, MIN_SUBWORD_SIZE);
+    PARSER.declareInt(CompoundWordTokenFilterBase::setMinWordSize, MIN_WORD_SIZE);
     PARSER.declareBoolean(CompoundWordTokenFilterBase::setOnlyLongestMatch, ONLY_LONGEST_MATCH);
     PARSER.declareStringArray(CompoundWordTokenFilterBase::setWordList, WORD_LIST);
     PARSER.declareString(CompoundWordTokenFilterBase::setWordListPath, WORD_LIST_PATH);

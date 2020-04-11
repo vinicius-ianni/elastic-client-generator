@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.task_management.list_tasks.*;
 
@@ -83,6 +83,7 @@ public class TaskStatus  implements XContentable<TaskStatus> {
   public TaskStatus setVersionConflicts(Long val) { this._versionConflicts = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -102,7 +103,7 @@ public class TaskStatus  implements XContentable<TaskStatus> {
     PARSER.declareLong(TaskStatus::setDeleted, DELETED);
     PARSER.declareLong(TaskStatus::setNoops, NOOPS);
     PARSER.declareFloat(TaskStatus::setRequestsPerSecond, REQUESTS_PER_SECOND);
-    PARSER.declareObject(TaskStatus::setRetries, (p, t) -> TaskRetries.PARSER.apply(p, null), RETRIES);
+    PARSER.declareObject(TaskStatus::setRetries, (p, t) -> TaskRetries.PARSER.apply(p, t), RETRIES);
     PARSER.declareLong(TaskStatus::setThrottledMillis, THROTTLED_MILLIS);
     PARSER.declareLong(TaskStatus::setThrottledUntilMillis, THROTTLED_UNTIL_MILLIS);
     PARSER.declareLong(TaskStatus::setTotal, TOTAL);

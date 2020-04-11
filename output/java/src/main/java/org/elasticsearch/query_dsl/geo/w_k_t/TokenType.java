@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.geo.w_k_t;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public enum TokenType implements XContentable<TokenType> {
       case "RParen": return TokenType.RParen;
       case "Comma": return TokenType.Comma;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, TokenType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, TokenType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

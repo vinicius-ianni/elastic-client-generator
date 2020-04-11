@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
@@ -12,9 +14,7 @@ import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
 
 
-
-
-public class ExecutePainlessScriptResponse<TResult>  implements XContentable<ExecutePainlessScriptResponse> {
+public class ExecutePainlessScriptResponse<TResult>  implements XContentable<ExecutePainlessScriptResponse<TResult>> {
   
   static final ParseField RESULT = new ParseField("result");
   private TResult _result;
@@ -22,6 +22,7 @@ public class ExecutePainlessScriptResponse<TResult>  implements XContentable<Exe
   public ExecutePainlessScriptResponse<TResult> setResult(TResult val) { this._result = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class ExecutePainlessScriptResponse<TResult>  implements XContentable<Exe
     new ConstructingObjectParser<>(ExecutePainlessScriptResponse.class.getName(), false, args -> new ExecutePainlessScriptResponse());
 
   static {
-    PARSER.declareObject(ExecutePainlessScriptResponse::setResult, (p, t) -> TResult.PARSER.apply(p, null), RESULT);
+    PARSER.declareObject(ExecutePainlessScriptResponse::setResult, (p, t) -> null /* TODO TResult */, RESULT);
   }
 
 }

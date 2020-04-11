@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.inner_hits.*;
 import org.elasticsearch.common_abstractions.infer.relation_name.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
@@ -48,6 +48,7 @@ public class HasParentQuery  implements XContentable<HasParentQuery> {
   public HasParentQuery setScore(Boolean val) { this._score = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -63,9 +64,9 @@ public class HasParentQuery  implements XContentable<HasParentQuery> {
 
   static {
     PARSER.declareBoolean(HasParentQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
-    PARSER.declareObject(HasParentQuery::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, null), INNER_HITS);
-    PARSER.declareRelationName(HasParentQuery::setParentType, (p, t) -> RelationName.createFrom(p), PARENT_TYPE);
-    PARSER.declareObject(HasParentQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
+    PARSER.declareObject(HasParentQuery::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, t), INNER_HITS);
+    PARSER.declareObject(HasParentQuery::setParentType, (p, t) -> RelationName.createFrom(p), PARENT_TYPE);
+    PARSER.declareObject(HasParentQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
     PARSER.declareBoolean(HasParentQuery::setScore, SCORE);
   }
 

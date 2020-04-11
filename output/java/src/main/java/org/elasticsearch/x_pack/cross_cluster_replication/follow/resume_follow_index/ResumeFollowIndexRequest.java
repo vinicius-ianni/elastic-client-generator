@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -77,6 +77,7 @@ public class ResumeFollowIndexRequest  implements XContentable<ResumeFollowIndex
   public ResumeFollowIndexRequest setReadPollTimeout(Time val) { this._readPollTimeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -99,8 +100,8 @@ public class ResumeFollowIndexRequest  implements XContentable<ResumeFollowIndex
     PARSER.declareLong(ResumeFollowIndexRequest::setMaxOutstandingWriteRequests, MAX_OUTSTANDING_WRITE_REQUESTS);
     PARSER.declareLong(ResumeFollowIndexRequest::setMaxWriteBufferCount, MAX_WRITE_BUFFER_COUNT);
     PARSER.declareString(ResumeFollowIndexRequest::setMaxWriteBufferSize, MAX_WRITE_BUFFER_SIZE);
-    PARSER.declareObject(ResumeFollowIndexRequest::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, null), MAX_RETRY_DELAY);
-    PARSER.declareObject(ResumeFollowIndexRequest::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, null), READ_POLL_TIMEOUT);
+    PARSER.declareObject(ResumeFollowIndexRequest::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, t), MAX_RETRY_DELAY);
+    PARSER.declareObject(ResumeFollowIndexRequest::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, t), READ_POLL_TIMEOUT);
   }
 
 }

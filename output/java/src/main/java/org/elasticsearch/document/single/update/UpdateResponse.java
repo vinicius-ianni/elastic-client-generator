@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.explain.*;
 
-public class UpdateResponse<TDocument>  implements XContentable<UpdateResponse> {
+public class UpdateResponse<TDocument>  implements XContentable<UpdateResponse<TDocument>> {
   
   static final ParseField IS_VALID = new ParseField("is_valid");
   private Boolean _isValid;
@@ -28,6 +28,7 @@ public class UpdateResponse<TDocument>  implements XContentable<UpdateResponse> 
   public UpdateResponse<TDocument> setGet(InlineGet<TDocument> val) { this._get = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,8 @@ public class UpdateResponse<TDocument>  implements XContentable<UpdateResponse> 
 
   static {
     PARSER.declareBoolean(UpdateResponse::setIsValid, IS_VALID);
-    PARSER.declareObject(UpdateResponse::setGet, (p, t) -> InlineGet<TDocument>.PARSER.apply(p, null), GET);
+    InlineGet _get = new InlineGet<>();
+    PARSER.declareObject(UpdateResponse::setGet, (p, t) -> _get.PARSER.apply(p, t), GET);
   }
 
 }

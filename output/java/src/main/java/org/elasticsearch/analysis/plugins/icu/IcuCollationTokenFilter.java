@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.plugins.icu.collation.*;
 
 public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenFilter> {
@@ -82,6 +82,7 @@ public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenF
   public IcuCollationTokenFilter setVariant(String val) { this._variant = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -96,15 +97,15 @@ public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenF
     new ConstructingObjectParser<>(IcuCollationTokenFilter.class.getName(), false, args -> new IcuCollationTokenFilter());
 
   static {
-    PARSER.declareObject(IcuCollationTokenFilter::setAlternate, (p, t) -> IcuCollationAlternate.PARSER.apply(p, null), ALTERNATE);
-    PARSER.declareObject(IcuCollationTokenFilter::setCaseFirst, (p, t) -> IcuCollationCaseFirst.PARSER.apply(p, null), CASE_FIRST);
+    PARSER.declareObject(IcuCollationTokenFilter::setAlternate, (p, t) -> IcuCollationAlternate.PARSER.apply(p), ALTERNATE);
+    PARSER.declareObject(IcuCollationTokenFilter::setCaseFirst, (p, t) -> IcuCollationCaseFirst.PARSER.apply(p), CASE_FIRST);
     PARSER.declareBoolean(IcuCollationTokenFilter::setCaseLevel, CASE_LEVEL);
     PARSER.declareString(IcuCollationTokenFilter::setCountry, COUNTRY);
-    PARSER.declareObject(IcuCollationTokenFilter::setDecomposition, (p, t) -> IcuCollationDecomposition.PARSER.apply(p, null), DECOMPOSITION);
+    PARSER.declareObject(IcuCollationTokenFilter::setDecomposition, (p, t) -> IcuCollationDecomposition.PARSER.apply(p), DECOMPOSITION);
     PARSER.declareBoolean(IcuCollationTokenFilter::setHiraganaQuaternaryMode, HIRAGANA_QUATERNARY_MODE);
     PARSER.declareString(IcuCollationTokenFilter::setLanguage, LANGUAGE);
     PARSER.declareBoolean(IcuCollationTokenFilter::setNumeric, NUMERIC);
-    PARSER.declareObject(IcuCollationTokenFilter::setStrength, (p, t) -> IcuCollationStrength.PARSER.apply(p, null), STRENGTH);
+    PARSER.declareObject(IcuCollationTokenFilter::setStrength, (p, t) -> IcuCollationStrength.PARSER.apply(p), STRENGTH);
     PARSER.declareString(IcuCollationTokenFilter::setVariableTop, VARIABLE_TOP);
     PARSER.declareString(IcuCollationTokenFilter::setVariant, VARIANT);
   }

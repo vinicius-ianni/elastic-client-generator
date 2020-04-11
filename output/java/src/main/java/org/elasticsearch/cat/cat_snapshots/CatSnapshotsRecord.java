@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
 
@@ -83,6 +83,7 @@ public class CatSnapshotsRecord  implements XContentable<CatSnapshotsRecord> {
   public CatSnapshotsRecord setTotalShards(Long val) { this._totalShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -97,7 +98,7 @@ public class CatSnapshotsRecord  implements XContentable<CatSnapshotsRecord> {
     new ConstructingObjectParser<>(CatSnapshotsRecord.class.getName(), false, args -> new CatSnapshotsRecord());
 
   static {
-    PARSER.declareObject(CatSnapshotsRecord::setDuration, (p, t) -> Time.PARSER.apply(p, null), DURATION);
+    PARSER.declareObject(CatSnapshotsRecord::setDuration, (p, t) -> Time.PARSER.apply(p, t), DURATION);
     PARSER.declareLong(CatSnapshotsRecord::setEndEpoch, END_EPOCH);
     PARSER.declareString(CatSnapshotsRecord::setEndTime, END_TIME);
     PARSER.declareLong(CatSnapshotsRecord::setFailedShards, FAILED_SHARDS);

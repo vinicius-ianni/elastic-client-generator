@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 
@@ -41,6 +41,7 @@ public class NodeStatistics  implements XContentable<NodeStatistics> {
   public NodeStatistics setFailures(List<ErrorCause> val) { this._failures = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,10 +56,10 @@ public class NodeStatistics  implements XContentable<NodeStatistics> {
     new ConstructingObjectParser<>(NodeStatistics.class.getName(), false, args -> new NodeStatistics());
 
   static {
-    PARSER.declareInteger(NodeStatistics::setFailed, FAILED);
-    PARSER.declareInteger(NodeStatistics::setSuccessful, SUCCESSFUL);
-    PARSER.declareInteger(NodeStatistics::setTotal, TOTAL);
-    PARSER.declareObjectArray(NodeStatistics::setFailures, (p, t) -> ErrorCause.PARSER.apply(p), FAILURES);
+    PARSER.declareInt(NodeStatistics::setFailed, FAILED);
+    PARSER.declareInt(NodeStatistics::setSuccessful, SUCCESSFUL);
+    PARSER.declareInt(NodeStatistics::setTotal, TOTAL);
+    PARSER.declareObjectArray(NodeStatistics::setFailures, (p, t) -> ErrorCause.PARSER.apply(p, t), FAILURES);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.char_filters.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.analysis.token_filters.*;
@@ -73,6 +73,7 @@ public class AnalyzeRequest  implements XContentable<AnalyzeRequest> {
   public AnalyzeRequest setTokenizer(Either<String, ITokenizer> val) { this._tokenizer = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -89,13 +90,13 @@ public class AnalyzeRequest  implements XContentable<AnalyzeRequest> {
   static {
     PARSER.declareString(AnalyzeRequest::setAnalyzer, ANALYZER);
     PARSER.declareStringArray(AnalyzeRequest::setAttributes, ATTRIBUTES);
-    PARSER.declareObjectArray(AnalyzeRequest::setCharFilter, (p, t) -> null, CHAR_FILTER);
+    PARSER.declareObjectArray(AnalyzeRequest::setCharFilter, (p, t) ->  new Either<String, ICharFilter>() /* TODO UnionOf */, CHAR_FILTER);
     PARSER.declareBoolean(AnalyzeRequest::setExplain, EXPLAIN);
-    PARSER.declareField(AnalyzeRequest::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObjectArray(AnalyzeRequest::setFilter, (p, t) -> null, FILTER);
+    PARSER.declareObject(AnalyzeRequest::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObjectArray(AnalyzeRequest::setFilter, (p, t) ->  new Either<String, ITokenFilter>() /* TODO UnionOf */, FILTER);
     PARSER.declareString(AnalyzeRequest::setNormalizer, NORMALIZER);
     PARSER.declareStringArray(AnalyzeRequest::setText, TEXT);
-    PARSER.declareObject(AnalyzeRequest::setTokenizer, (p, t) -> null, TOKENIZER);
+    PARSER.declareObject(AnalyzeRequest::setTokenizer, (p, t) ->  new Either<String, ITokenizer>() /* TODO UnionOf */, TOKENIZER);
   }
 
 }

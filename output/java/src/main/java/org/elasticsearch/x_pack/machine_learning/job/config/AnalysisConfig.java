@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.x_pack.machine_learning.job.detectors.*;
@@ -66,6 +66,7 @@ public class AnalysisConfig  implements XContentable<AnalysisConfig> {
   public AnalysisConfig setSummaryCountFieldName(Field val) { this._summaryCountFieldName = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -80,14 +81,14 @@ public class AnalysisConfig  implements XContentable<AnalysisConfig> {
     new ConstructingObjectParser<>(AnalysisConfig.class.getName(), false, args -> new AnalysisConfig());
 
   static {
-    PARSER.declareObject(AnalysisConfig::setBucketSpan, (p, t) -> Time.PARSER.apply(p, null), BUCKET_SPAN);
-    PARSER.declareField(AnalysisConfig::setCategorizationFieldName, (p, t) -> Field.createFrom(p), CATEGORIZATION_FIELD_NAME);
+    PARSER.declareObject(AnalysisConfig::setBucketSpan, (p, t) -> Time.PARSER.apply(p, t), BUCKET_SPAN);
+    PARSER.declareObject(AnalysisConfig::setCategorizationFieldName, (p, t) -> Field.createFrom(p), CATEGORIZATION_FIELD_NAME);
     PARSER.declareStringArray(AnalysisConfig::setCategorizationFilters, CATEGORIZATION_FILTERS);
-    PARSER.declareObjectArray(AnalysisConfig::setDetectors, (p, t) -> Detector.PARSER.apply(p), DETECTORS);
-    PARSER.declareObjectArray(AnalysisConfig::setInfluencers, (p, t) -> Field.PARSER.apply(p), INFLUENCERS);
-    PARSER.declareObject(AnalysisConfig::setLatency, (p, t) -> Time.PARSER.apply(p, null), LATENCY);
+    PARSER.declareObjectArray(AnalysisConfig::setDetectors, (p, t) -> Detector.PARSER.apply(p, t), DETECTORS);
+    PARSER.declareObjectArray(AnalysisConfig::setInfluencers, (p, t) -> Field.createFrom(p), INFLUENCERS);
+    PARSER.declareObject(AnalysisConfig::setLatency, (p, t) -> Time.PARSER.apply(p, t), LATENCY);
     PARSER.declareBoolean(AnalysisConfig::setMultivariateByFields, MULTIVARIATE_BY_FIELDS);
-    PARSER.declareField(AnalysisConfig::setSummaryCountFieldName, (p, t) -> Field.createFrom(p), SUMMARY_COUNT_FIELD_NAME);
+    PARSER.declareObject(AnalysisConfig::setSummaryCountFieldName, (p, t) -> Field.createFrom(p), SUMMARY_COUNT_FIELD_NAME);
   }
 
 }

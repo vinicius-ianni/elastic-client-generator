@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class ApiKeys  implements XContentable<ApiKeys> {
@@ -58,6 +58,7 @@ public class ApiKeys  implements XContentable<ApiKeys> {
   public ApiKeys setUsername(String val) { this._username = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -72,8 +73,8 @@ public class ApiKeys  implements XContentable<ApiKeys> {
     new ConstructingObjectParser<>(ApiKeys.class.getName(), false, args -> new ApiKeys());
 
   static {
-    PARSER.declareDate(ApiKeys::setCreation, (p, t) -> Date.createFrom(p), CREATION);
-    PARSER.declareDate(ApiKeys::setExpiration, (p, t) -> Date.createFrom(p), EXPIRATION);
+    PARSER.declareObject(ApiKeys::setCreation, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), CREATION);
+    PARSER.declareObject(ApiKeys::setExpiration, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXPIRATION);
     PARSER.declareString(ApiKeys::setId, ID);
     PARSER.declareBoolean(ApiKeys::setInvalidated, INVALIDATED);
     PARSER.declareString(ApiKeys::setName, NAME);

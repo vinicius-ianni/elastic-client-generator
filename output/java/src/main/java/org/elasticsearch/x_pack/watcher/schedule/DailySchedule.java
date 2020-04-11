@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.schedule.*;
 
 public class DailySchedule  implements XContentable<DailySchedule> {
@@ -22,6 +22,7 @@ public class DailySchedule  implements XContentable<DailySchedule> {
   public DailySchedule setAt(Either<List<String>, TimeOfDay> val) { this._at = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class DailySchedule  implements XContentable<DailySchedule> {
     new ConstructingObjectParser<>(DailySchedule.class.getName(), false, args -> new DailySchedule());
 
   static {
-    PARSER.declareObject(DailySchedule::setAt, (p, t) -> null, AT);
+    PARSER.declareObject(DailySchedule::setAt, (p, t) ->  new Either<List<String>, TimeOfDay>() /* TODO UnionOf */, AT);
   }
 
 }

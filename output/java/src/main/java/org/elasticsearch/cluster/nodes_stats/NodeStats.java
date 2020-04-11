@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_stats.*;
 import org.elasticsearch.indices.monitoring.indices_stats.*;
 import org.elasticsearch.cluster.nodes_stats.statistics.*;
@@ -128,6 +128,7 @@ public class NodeStats  implements XContentable<NodeStats> {
   public NodeStats setTransportAddress(String val) { this._transportAddress = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -142,23 +143,23 @@ public class NodeStats  implements XContentable<NodeStats> {
     new ConstructingObjectParser<>(NodeStats.class.getName(), false, args -> new NodeStats());
 
   static {
-    PARSER.declareObject(NodeStats::setAdaptiveSelection, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> AdaptiveSelectionStats.PARSER.apply(pp, null)), ADAPTIVE_SELECTION);;
-    PARSER.declareObject(NodeStats::setBreakers, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> BreakerStats.PARSER.apply(pp, null)), BREAKERS);;
-    PARSER.declareObject(NodeStats::setFs, (p, t) -> FileSystemStats.PARSER.apply(p, null), FS);
+    PARSER.declareObject(NodeStats::setAdaptiveSelection, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AdaptiveSelectionStats.PARSER.apply(pp, null)), ADAPTIVE_SELECTION);
+    PARSER.declareObject(NodeStats::setBreakers, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> BreakerStats.PARSER.apply(pp, null)), BREAKERS);
+    PARSER.declareObject(NodeStats::setFs, (p, t) -> FileSystemStats.PARSER.apply(p, t), FS);
     PARSER.declareString(NodeStats::setHost, HOST);
-    PARSER.declareObject(NodeStats::setHttp, (p, t) -> HttpStats.PARSER.apply(p, null), HTTP);
-    PARSER.declareObject(NodeStats::setIndices, (p, t) -> IndexStats.PARSER.apply(p, null), INDICES);
-    PARSER.declareObject(NodeStats::setIngest, (p, t) -> NodeIngestStats.PARSER.apply(p, null), INGEST);
+    PARSER.declareObject(NodeStats::setHttp, (p, t) -> HttpStats.PARSER.apply(p, t), HTTP);
+    PARSER.declareObject(NodeStats::setIndices, (p, t) -> IndexStats.PARSER.apply(p, t), INDICES);
+    PARSER.declareObject(NodeStats::setIngest, (p, t) -> NodeIngestStats.PARSER.apply(p, t), INGEST);
     PARSER.declareStringArray(NodeStats::setIp, IP);
-    PARSER.declareObject(NodeStats::setJvm, (p, t) -> NodeJvmStats.PARSER.apply(p, null), JVM);
+    PARSER.declareObject(NodeStats::setJvm, (p, t) -> NodeJvmStats.PARSER.apply(p, t), JVM);
     PARSER.declareString(NodeStats::setName, NAME);
-    PARSER.declareObject(NodeStats::setOs, (p, t) -> OperatingSystemStats.PARSER.apply(p, null), OS);
-    PARSER.declareObject(NodeStats::setProcess, (p, t) -> ProcessStats.PARSER.apply(p, null), PROCESS);
+    PARSER.declareObject(NodeStats::setOs, (p, t) -> OperatingSystemStats.PARSER.apply(p, t), OS);
+    PARSER.declareObject(NodeStats::setProcess, (p, t) -> ProcessStats.PARSER.apply(p, t), PROCESS);
     PARSER.declareObjectArray(NodeStats::setRoles, (p, t) -> NodeRole.PARSER.apply(p), ROLES);
-    PARSER.declareObject(NodeStats::setScript, (p, t) -> ScriptStats.PARSER.apply(p, null), SCRIPT);
-    PARSER.declareObject(NodeStats::setThreadPool, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ThreadCountStats.PARSER.apply(pp, null)), THREAD_POOL);;
+    PARSER.declareObject(NodeStats::setScript, (p, t) -> ScriptStats.PARSER.apply(p, t), SCRIPT);
+    PARSER.declareObject(NodeStats::setThreadPool, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ThreadCountStats.PARSER.apply(pp, null)), THREAD_POOL);
     PARSER.declareLong(NodeStats::setTimestamp, TIMESTAMP);
-    PARSER.declareObject(NodeStats::setTransport, (p, t) -> TransportStats.PARSER.apply(p, null), TRANSPORT);
+    PARSER.declareObject(NodeStats::setTransport, (p, t) -> TransportStats.PARSER.apply(p, t), TRANSPORT);
     PARSER.declareString(NodeStats::setTransportAddress, TRANSPORT_ADDRESS);
   }
 

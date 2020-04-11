@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_info.*;
 import org.elasticsearch.internal.*;
 
@@ -71,6 +71,7 @@ public class NodeJvmInfo  implements XContentable<NodeJvmInfo> {
   public NodeJvmInfo setVmVersion(String val) { this._vmVersion = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -86,9 +87,9 @@ public class NodeJvmInfo  implements XContentable<NodeJvmInfo> {
 
   static {
     PARSER.declareStringArray(NodeJvmInfo::setGcCollectors, GC_COLLECTORS);
-    PARSER.declareObject(NodeJvmInfo::setMem, (p, t) -> NodeInfoJvmMemory.PARSER.apply(p, null), MEM);
+    PARSER.declareObject(NodeJvmInfo::setMem, (p, t) -> NodeInfoJvmMemory.PARSER.apply(p, t), MEM);
     PARSER.declareStringArray(NodeJvmInfo::setMemoryPools, MEMORY_POOLS);
-    PARSER.declareInteger(NodeJvmInfo::setPid, PID);
+    PARSER.declareInt(NodeJvmInfo::setPid, PID);
     PARSER.declareLong(NodeJvmInfo::setStartTimeInMillis, START_TIME_IN_MILLIS);
     PARSER.declareString(NodeJvmInfo::setVersion, VERSION);
     PARSER.declareString(NodeJvmInfo::setVmName, VM_NAME);

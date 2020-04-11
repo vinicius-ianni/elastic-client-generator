@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 
 public class RollupCapabilitiesJob  implements XContentable<RollupCapabilitiesJob> {
@@ -40,6 +40,7 @@ public class RollupCapabilitiesJob  implements XContentable<RollupCapabilitiesJo
   public RollupCapabilitiesJob setRollupIndex(String val) { this._rollupIndex = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,7 +55,7 @@ public class RollupCapabilitiesJob  implements XContentable<RollupCapabilitiesJo
     new ConstructingObjectParser<>(RollupCapabilitiesJob.class.getName(), false, args -> new RollupCapabilitiesJob());
 
   static {
-    PARSER.declareObject(RollupCapabilitiesJob::setFields, (p, t) ->  new NamedContainer<>(n -> () -> new Field(n),UNSUPPORTED), FIELDS);;
+    PARSER.declareObject(RollupCapabilitiesJob::setFields, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),null /* TODO NamedContainer<String, Object> */), FIELDS);
     PARSER.declareString(RollupCapabilitiesJob::setIndexPattern, INDEX_PATTERN);
     PARSER.declareString(RollupCapabilitiesJob::setJobId, JOB_ID);
     PARSER.declareString(RollupCapabilitiesJob::setRollupIndex, ROLLUP_INDEX);

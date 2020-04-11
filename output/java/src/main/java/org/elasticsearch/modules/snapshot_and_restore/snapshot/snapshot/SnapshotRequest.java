@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.indices.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -59,6 +59,7 @@ public class SnapshotRequest  implements XContentable<SnapshotRequest> {
   public SnapshotRequest setWaitForCompletion(Boolean val) { this._waitForCompletion = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -75,10 +76,10 @@ public class SnapshotRequest  implements XContentable<SnapshotRequest> {
   static {
     PARSER.declareBoolean(SnapshotRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(SnapshotRequest::setIncludeGlobalState, INCLUDE_GLOBAL_STATE);
-    PARSER.declareIndices(SnapshotRequest::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
+    PARSER.declareObject(SnapshotRequest::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
     PARSER.declareBoolean(SnapshotRequest::setPartial, PARTIAL);
-    PARSER.declareObject(SnapshotRequest::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
-    PARSER.declareObject(SnapshotRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(SnapshotRequest::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
+    PARSER.declareObject(SnapshotRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareBoolean(SnapshotRequest::setWaitForCompletion, WAIT_FOR_COMPLETION);
   }
 

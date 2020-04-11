@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.ingest.simulate_pipeline.*;
 import org.elasticsearch.ingest.*;
 
@@ -35,6 +35,7 @@ public class SimulatePipelineRequest  implements XContentable<SimulatePipelineRe
   public SimulatePipelineRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class SimulatePipelineRequest  implements XContentable<SimulatePipelineRe
     new ConstructingObjectParser<>(SimulatePipelineRequest.class.getName(), false, args -> new SimulatePipelineRequest());
 
   static {
-    PARSER.declareObjectArray(SimulatePipelineRequest::setDocs, (p, t) -> SimulatePipelineDocument.PARSER.apply(p), DOCS);
-    PARSER.declareObject(SimulatePipelineRequest::setPipeline, (p, t) -> Pipeline.PARSER.apply(p, null), PIPELINE);
+    PARSER.declareObjectArray(SimulatePipelineRequest::setDocs, (p, t) -> SimulatePipelineDocument.PARSER.apply(p, t), DOCS);
+    PARSER.declareObject(SimulatePipelineRequest::setPipeline, (p, t) -> Pipeline.PARSER.apply(p, t), PIPELINE);
     PARSER.declareBoolean(SimulatePipelineRequest::setVerbose, VERBOSE);
   }
 

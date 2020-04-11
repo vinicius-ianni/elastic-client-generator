@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.monitoring.indices_stats.*;
 
 public class ShardStats  implements XContentable<ShardStats> {
@@ -136,6 +136,7 @@ public class ShardStats  implements XContentable<ShardStats> {
   public ShardStats setWarmer(ShardWarmer val) { this._warmer = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -150,26 +151,26 @@ public class ShardStats  implements XContentable<ShardStats> {
     new ConstructingObjectParser<>(ShardStats.class.getName(), false, args -> new ShardStats());
 
   static {
-    PARSER.declareObject(ShardStats::setCommit, (p, t) -> ShardCommit.PARSER.apply(p, null), COMMIT);
-    PARSER.declareObject(ShardStats::setCompletion, (p, t) -> ShardCompletion.PARSER.apply(p, null), COMPLETION);
-    PARSER.declareObject(ShardStats::setDocs, (p, t) -> ShardDocs.PARSER.apply(p, null), DOCS);
-    PARSER.declareObject(ShardStats::setFielddata, (p, t) -> ShardFielddata.PARSER.apply(p, null), FIELDDATA);
-    PARSER.declareObject(ShardStats::setFlush, (p, t) -> ShardFlush.PARSER.apply(p, null), FLUSH);
-    PARSER.declareObject(ShardStats::setGet, (p, t) -> ShardGet.PARSER.apply(p, null), GET);
-    PARSER.declareObject(ShardStats::setIndexing, (p, t) -> ShardIndexing.PARSER.apply(p, null), INDEXING);
-    PARSER.declareObject(ShardStats::setMerges, (p, t) -> ShardMerges.PARSER.apply(p, null), MERGES);
-    PARSER.declareObject(ShardStats::setShardPath, (p, t) -> ShardPath.PARSER.apply(p, null), SHARD_PATH);
-    PARSER.declareObject(ShardStats::setQueryCache, (p, t) -> ShardQueryCache.PARSER.apply(p, null), QUERY_CACHE);
-    PARSER.declareObject(ShardStats::setRecovery, (p, t) -> ShardStatsRecovery.PARSER.apply(p, null), RECOVERY);
-    PARSER.declareObject(ShardStats::setRefresh, (p, t) -> ShardRefresh.PARSER.apply(p, null), REFRESH);
-    PARSER.declareObject(ShardStats::setRequestCache, (p, t) -> ShardRequestCache.PARSER.apply(p, null), REQUEST_CACHE);
-    PARSER.declareObject(ShardStats::setRouting, (p, t) -> ShardRouting.PARSER.apply(p, null), ROUTING);
-    PARSER.declareObject(ShardStats::setSearch, (p, t) -> ShardSearch.PARSER.apply(p, null), SEARCH);
-    PARSER.declareObject(ShardStats::setSegments, (p, t) -> ShardSegments.PARSER.apply(p, null), SEGMENTS);
-    PARSER.declareObject(ShardStats::setSeqNo, (p, t) -> ShardSequenceNumber.PARSER.apply(p, null), SEQ_NO);
-    PARSER.declareObject(ShardStats::setStore, (p, t) -> ShardStatsStore.PARSER.apply(p, null), STORE);
-    PARSER.declareObject(ShardStats::setTranslog, (p, t) -> ShardTransactionLog.PARSER.apply(p, null), TRANSLOG);
-    PARSER.declareObject(ShardStats::setWarmer, (p, t) -> ShardWarmer.PARSER.apply(p, null), WARMER);
+    PARSER.declareObject(ShardStats::setCommit, (p, t) -> ShardCommit.PARSER.apply(p, t), COMMIT);
+    PARSER.declareObject(ShardStats::setCompletion, (p, t) -> ShardCompletion.PARSER.apply(p, t), COMPLETION);
+    PARSER.declareObject(ShardStats::setDocs, (p, t) -> ShardDocs.PARSER.apply(p, t), DOCS);
+    PARSER.declareObject(ShardStats::setFielddata, (p, t) -> ShardFielddata.PARSER.apply(p, t), FIELDDATA);
+    PARSER.declareObject(ShardStats::setFlush, (p, t) -> ShardFlush.PARSER.apply(p, t), FLUSH);
+    PARSER.declareObject(ShardStats::setGet, (p, t) -> ShardGet.PARSER.apply(p, t), GET);
+    PARSER.declareObject(ShardStats::setIndexing, (p, t) -> ShardIndexing.PARSER.apply(p, t), INDEXING);
+    PARSER.declareObject(ShardStats::setMerges, (p, t) -> ShardMerges.PARSER.apply(p, t), MERGES);
+    PARSER.declareObject(ShardStats::setShardPath, (p, t) -> ShardPath.PARSER.apply(p, t), SHARD_PATH);
+    PARSER.declareObject(ShardStats::setQueryCache, (p, t) -> ShardQueryCache.PARSER.apply(p, t), QUERY_CACHE);
+    PARSER.declareObject(ShardStats::setRecovery, (p, t) -> ShardStatsRecovery.PARSER.apply(p, t), RECOVERY);
+    PARSER.declareObject(ShardStats::setRefresh, (p, t) -> ShardRefresh.PARSER.apply(p, t), REFRESH);
+    PARSER.declareObject(ShardStats::setRequestCache, (p, t) -> ShardRequestCache.PARSER.apply(p, t), REQUEST_CACHE);
+    PARSER.declareObject(ShardStats::setRouting, (p, t) -> ShardRouting.PARSER.apply(p, t), ROUTING);
+    PARSER.declareObject(ShardStats::setSearch, (p, t) -> ShardSearch.PARSER.apply(p, t), SEARCH);
+    PARSER.declareObject(ShardStats::setSegments, (p, t) -> ShardSegments.PARSER.apply(p, t), SEGMENTS);
+    PARSER.declareObject(ShardStats::setSeqNo, (p, t) -> ShardSequenceNumber.PARSER.apply(p, t), SEQ_NO);
+    PARSER.declareObject(ShardStats::setStore, (p, t) -> ShardStatsStore.PARSER.apply(p, t), STORE);
+    PARSER.declareObject(ShardStats::setTranslog, (p, t) -> ShardTransactionLog.PARSER.apply(p, t), TRANSLOG);
+    PARSER.declareObject(ShardStats::setWarmer, (p, t) -> ShardWarmer.PARSER.apply(p, t), WARMER);
   }
 
 }

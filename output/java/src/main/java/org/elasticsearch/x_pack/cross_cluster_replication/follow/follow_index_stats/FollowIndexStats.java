@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.cross_cluster_replication.follow.follow_index_stats.*;
 
 public class FollowIndexStats  implements XContentable<FollowIndexStats> {
@@ -28,6 +28,7 @@ public class FollowIndexStats  implements XContentable<FollowIndexStats> {
   public FollowIndexStats setShards(List<FollowIndexShardStats> val) { this._shards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class FollowIndexStats  implements XContentable<FollowIndexStats> {
 
   static {
     PARSER.declareString(FollowIndexStats::setIndex, INDEX);
-    PARSER.declareObjectArray(FollowIndexStats::setShards, (p, t) -> FollowIndexShardStats.PARSER.apply(p), SHARDS);
+    PARSER.declareObjectArray(FollowIndexStats::setShards, (p, t) -> FollowIndexShardStats.PARSER.apply(p, t), SHARDS);
   }
 
 }

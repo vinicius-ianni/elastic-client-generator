@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.indices.monitoring.indices_segments.*;
 
@@ -41,6 +41,7 @@ public class ShardsSegment  implements XContentable<ShardsSegment> {
   public ShardsSegment setSegments(NamedContainer<String, Segment> val) { this._segments = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,10 +56,10 @@ public class ShardsSegment  implements XContentable<ShardsSegment> {
     new ConstructingObjectParser<>(ShardsSegment.class.getName(), false, args -> new ShardsSegment());
 
   static {
-    PARSER.declareInteger(ShardsSegment::setNumCommittedSegments, NUM_COMMITTED_SEGMENTS);
-    PARSER.declareObject(ShardsSegment::setRouting, (p, t) -> ShardSegmentRouting.PARSER.apply(p, null), ROUTING);
-    PARSER.declareInteger(ShardsSegment::setNumSearchSegments, NUM_SEARCH_SEGMENTS);
-    PARSER.declareObject(ShardsSegment::setSegments, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Segment.PARSER.apply(pp, null)), SEGMENTS);;
+    PARSER.declareInt(ShardsSegment::setNumCommittedSegments, NUM_COMMITTED_SEGMENTS);
+    PARSER.declareObject(ShardsSegment::setRouting, (p, t) -> ShardSegmentRouting.PARSER.apply(p, t), ROUTING);
+    PARSER.declareInt(ShardsSegment::setNumSearchSegments, NUM_SEARCH_SEGMENTS);
+    PARSER.declareObject(ShardsSegment::setSegments, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> Segment.PARSER.apply(pp, null)), SEGMENTS);
   }
 
 }

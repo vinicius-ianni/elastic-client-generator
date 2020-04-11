@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.action.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
@@ -62,6 +62,7 @@ public class Action  implements XContentable<Action> {
   public Action setCondition(ConditionContainer val) { this._condition = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -76,13 +77,13 @@ public class Action  implements XContentable<Action> {
     new ConstructingObjectParser<>(Action.class.getName(), false, args -> new Action());
 
   static {
-    PARSER.declareObject(Action::setActionType, (p, t) -> ActionType.PARSER.apply(p, null), ACTION_TYPE);
+    PARSER.declareObject(Action::setActionType, (p, t) -> ActionType.PARSER.apply(p), ACTION_TYPE);
     PARSER.declareString(Action::setName, NAME);
-    PARSER.declareObject(Action::setThrottlePeriod, (p, t) -> Time.PARSER.apply(p, null), THROTTLE_PERIOD);
+    PARSER.declareObject(Action::setThrottlePeriod, (p, t) -> Time.PARSER.apply(p, t), THROTTLE_PERIOD);
     PARSER.declareString(Action::setForeach, FOREACH);
-    PARSER.declareInteger(Action::setMaxIterations, MAX_ITERATIONS);
-    PARSER.declareObject(Action::setTransform, (p, t) -> TransformContainer.PARSER.apply(p, null), TRANSFORM);
-    PARSER.declareObject(Action::setCondition, (p, t) -> ConditionContainer.PARSER.apply(p, null), CONDITION);
+    PARSER.declareInt(Action::setMaxIterations, MAX_ITERATIONS);
+    PARSER.declareObject(Action::setTransform, (p, t) -> TransformContainer.PARSER.apply(p, t), TRANSFORM);
+    PARSER.declareObject(Action::setCondition, (p, t) -> ConditionContainer.PARSER.apply(p, t), CONDITION);
   }
 
 }

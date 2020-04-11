@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class PostJobDataRequest  implements XContentable<PostJobDataRequest> {
@@ -34,6 +34,7 @@ public class PostJobDataRequest  implements XContentable<PostJobDataRequest> {
   public PostJobDataRequest setData(List<Object> val) { this._data = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class PostJobDataRequest  implements XContentable<PostJobDataRequest> {
     new ConstructingObjectParser<>(PostJobDataRequest.class.getName(), false, args -> new PostJobDataRequest());
 
   static {
-    PARSER.declareDate(PostJobDataRequest::setResetEnd, (p, t) -> Date.createFrom(p), RESET_END);
-    PARSER.declareDate(PostJobDataRequest::setResetStart, (p, t) -> Date.createFrom(p), RESET_START);
-    PARSER.declareObjectArray(PostJobDataRequest::setData, (p, t) -> Object.PARSER.apply(p), DATA);
+    PARSER.declareObject(PostJobDataRequest::setResetEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), RESET_END);
+    PARSER.declareObject(PostJobDataRequest::setResetStart, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), RESET_START);
+    PARSER.declareObjectArray(PostJobDataRequest::setData, (p, t) -> p.objectText(), DATA);
   }
 
 }

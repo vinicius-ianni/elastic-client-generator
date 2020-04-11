@@ -2,6 +2,7 @@
 package org.elasticsearch.index_modules.similarity.i_b;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum IbLambda implements XContentable<IbLambda> {
       case "df": return IbLambda.Df;
       case "ttf": return IbLambda.Ttf;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, IbLambda.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, IbLambda.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

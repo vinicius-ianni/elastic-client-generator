@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.stats.*;
 
 public class IndexStats  implements XContentable<IndexStats> {
@@ -112,6 +112,7 @@ public class IndexStats  implements XContentable<IndexStats> {
   public IndexStats setWarmer(WarmerStats val) { this._warmer = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -126,22 +127,22 @@ public class IndexStats  implements XContentable<IndexStats> {
     new ConstructingObjectParser<>(IndexStats.class.getName(), false, args -> new IndexStats());
 
   static {
-    PARSER.declareObject(IndexStats::setCompletion, (p, t) -> CompletionStats.PARSER.apply(p, null), COMPLETION);
-    PARSER.declareObject(IndexStats::setDocs, (p, t) -> DocStats.PARSER.apply(p, null), DOCS);
-    PARSER.declareObject(IndexStats::setFielddata, (p, t) -> FielddataStats.PARSER.apply(p, null), FIELDDATA);
-    PARSER.declareObject(IndexStats::setFlush, (p, t) -> FlushStats.PARSER.apply(p, null), FLUSH);
-    PARSER.declareObject(IndexStats::setGet, (p, t) -> GetStats.PARSER.apply(p, null), GET);
-    PARSER.declareObject(IndexStats::setIndexing, (p, t) -> IndexingStats.PARSER.apply(p, null), INDEXING);
-    PARSER.declareObject(IndexStats::setMerges, (p, t) -> MergesStats.PARSER.apply(p, null), MERGES);
-    PARSER.declareObject(IndexStats::setQueryCache, (p, t) -> QueryCacheStats.PARSER.apply(p, null), QUERY_CACHE);
-    PARSER.declareObject(IndexStats::setRecovery, (p, t) -> RecoveryStats.PARSER.apply(p, null), RECOVERY);
-    PARSER.declareObject(IndexStats::setRefresh, (p, t) -> RefreshStats.PARSER.apply(p, null), REFRESH);
-    PARSER.declareObject(IndexStats::setRequestCache, (p, t) -> RequestCacheStats.PARSER.apply(p, null), REQUEST_CACHE);
-    PARSER.declareObject(IndexStats::setSearch, (p, t) -> SearchStats.PARSER.apply(p, null), SEARCH);
-    PARSER.declareObject(IndexStats::setSegments, (p, t) -> SegmentsStats.PARSER.apply(p, null), SEGMENTS);
-    PARSER.declareObject(IndexStats::setStore, (p, t) -> StoreStats.PARSER.apply(p, null), STORE);
-    PARSER.declareObject(IndexStats::setTranslog, (p, t) -> TranslogStats.PARSER.apply(p, null), TRANSLOG);
-    PARSER.declareObject(IndexStats::setWarmer, (p, t) -> WarmerStats.PARSER.apply(p, null), WARMER);
+    PARSER.declareObject(IndexStats::setCompletion, (p, t) -> CompletionStats.PARSER.apply(p, t), COMPLETION);
+    PARSER.declareObject(IndexStats::setDocs, (p, t) -> DocStats.PARSER.apply(p, t), DOCS);
+    PARSER.declareObject(IndexStats::setFielddata, (p, t) -> FielddataStats.PARSER.apply(p, t), FIELDDATA);
+    PARSER.declareObject(IndexStats::setFlush, (p, t) -> FlushStats.PARSER.apply(p, t), FLUSH);
+    PARSER.declareObject(IndexStats::setGet, (p, t) -> GetStats.PARSER.apply(p, t), GET);
+    PARSER.declareObject(IndexStats::setIndexing, (p, t) -> IndexingStats.PARSER.apply(p, t), INDEXING);
+    PARSER.declareObject(IndexStats::setMerges, (p, t) -> MergesStats.PARSER.apply(p, t), MERGES);
+    PARSER.declareObject(IndexStats::setQueryCache, (p, t) -> QueryCacheStats.PARSER.apply(p, t), QUERY_CACHE);
+    PARSER.declareObject(IndexStats::setRecovery, (p, t) -> RecoveryStats.PARSER.apply(p, t), RECOVERY);
+    PARSER.declareObject(IndexStats::setRefresh, (p, t) -> RefreshStats.PARSER.apply(p, t), REFRESH);
+    PARSER.declareObject(IndexStats::setRequestCache, (p, t) -> RequestCacheStats.PARSER.apply(p, t), REQUEST_CACHE);
+    PARSER.declareObject(IndexStats::setSearch, (p, t) -> SearchStats.PARSER.apply(p, t), SEARCH);
+    PARSER.declareObject(IndexStats::setSegments, (p, t) -> SegmentsStats.PARSER.apply(p, t), SEGMENTS);
+    PARSER.declareObject(IndexStats::setStore, (p, t) -> StoreStats.PARSER.apply(p, t), STORE);
+    PARSER.declareObject(IndexStats::setTranslog, (p, t) -> TranslogStats.PARSER.apply(p, t), TRANSLOG);
+    PARSER.declareObject(IndexStats::setWarmer, (p, t) -> WarmerStats.PARSER.apply(p, t), WARMER);
   }
 
 }

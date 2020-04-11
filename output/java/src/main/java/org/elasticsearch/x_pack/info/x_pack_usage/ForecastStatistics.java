@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.info.x_pack_usage.*;
 
@@ -53,6 +53,7 @@ public class ForecastStatistics  implements XContentable<ForecastStatistics> {
   public ForecastStatistics setTotal(Long val) { this._total = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,10 +69,10 @@ public class ForecastStatistics  implements XContentable<ForecastStatistics> {
 
   static {
     PARSER.declareLong(ForecastStatistics::setForecastedJobs, FORECASTED_JOBS);
-    PARSER.declareObject(ForecastStatistics::setMemoryBytes, (p, t) -> JobStatistics.PARSER.apply(p, null), MEMORY_BYTES);
-    PARSER.declareObject(ForecastStatistics::setProcessingTimeMs, (p, t) -> JobStatistics.PARSER.apply(p, null), PROCESSING_TIME_MS);
-    PARSER.declareObject(ForecastStatistics::setRecords, (p, t) -> JobStatistics.PARSER.apply(p, null), RECORDS);
-    PARSER.declareObject(ForecastStatistics::setStatus, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Long.PARSER.apply(pp, null)), STATUS);;
+    PARSER.declareObject(ForecastStatistics::setMemoryBytes, (p, t) -> JobStatistics.PARSER.apply(p, t), MEMORY_BYTES);
+    PARSER.declareObject(ForecastStatistics::setProcessingTimeMs, (p, t) -> JobStatistics.PARSER.apply(p, t), PROCESSING_TIME_MS);
+    PARSER.declareObject(ForecastStatistics::setRecords, (p, t) -> JobStatistics.PARSER.apply(p, t), RECORDS);
+    PARSER.declareObject(ForecastStatistics::setStatus, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.longValue()), STATUS);
     PARSER.declareLong(ForecastStatistics::setTotal, TOTAL);
   }
 

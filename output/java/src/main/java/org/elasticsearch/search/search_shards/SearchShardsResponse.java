@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search_shards.*;
 
 public class SearchShardsResponse  implements XContentable<SearchShardsResponse> {
@@ -28,6 +28,7 @@ public class SearchShardsResponse  implements XContentable<SearchShardsResponse>
   public SearchShardsResponse setShards(List<List<SearchShard>> val) { this._shards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class SearchShardsResponse  implements XContentable<SearchShardsResponse>
     new ConstructingObjectParser<>(SearchShardsResponse.class.getName(), false, args -> new SearchShardsResponse());
 
   static {
-    PARSER.declareObject(SearchShardsResponse::setNodes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> SearchNode.PARSER.apply(pp, null)), NODES);;
-    PARSER.declareObjectArray(SearchShardsResponse::setShards, (p, t) -> List<SearchShard>.PARSER.apply(p), SHARDS);
+    PARSER.declareObject(SearchShardsResponse::setNodes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SearchNode.PARSER.apply(pp, null)), NODES);
+    PARSER.declareObjectArray(SearchShardsResponse::setShards, (p, t) -> null /* TODO List<SearchShard> */, SHARDS);
   }
 
 }

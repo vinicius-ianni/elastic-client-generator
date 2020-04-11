@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.aggregations.pipeline.*;
 import org.elasticsearch.search.search.sort.*;
@@ -42,6 +42,7 @@ public class BucketSortAggregation  implements XContentable<BucketSortAggregatio
   public BucketSortAggregation setSort(List<Sort> val) { this._sort = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class BucketSortAggregation  implements XContentable<BucketSortAggregatio
     new ConstructingObjectParser<>(BucketSortAggregation.class.getName(), false, args -> new BucketSortAggregation());
 
   static {
-    PARSER.declareInteger(BucketSortAggregation::setFrom, FROM);
-    PARSER.declareObject(BucketSortAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p, null), GAP_POLICY);
-    PARSER.declareInteger(BucketSortAggregation::setSize, SIZE);
-    PARSER.declareObjectArray(BucketSortAggregation::setSort, (p, t) -> Sort.PARSER.apply(p), SORT);
+    PARSER.declareInt(BucketSortAggregation::setFrom, FROM);
+    PARSER.declareObject(BucketSortAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p), GAP_POLICY);
+    PARSER.declareInt(BucketSortAggregation::setSize, SIZE);
+    PARSER.declareObjectArray(BucketSortAggregation::setSort, (p, t) -> Sort.PARSER.apply(p, t), SORT);
   }
 
 }

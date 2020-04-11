@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.execute_watch.*;
 
 public class ExecuteWatchResponse  implements XContentable<ExecuteWatchResponse> {
@@ -28,6 +28,7 @@ public class ExecuteWatchResponse  implements XContentable<ExecuteWatchResponse>
   public ExecuteWatchResponse setWatchRecord(WatchRecord val) { this._watchRecord = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class ExecuteWatchResponse  implements XContentable<ExecuteWatchResponse>
 
   static {
     PARSER.declareString(ExecuteWatchResponse::setId, ID);
-    PARSER.declareObject(ExecuteWatchResponse::setWatchRecord, (p, t) -> WatchRecord.PARSER.apply(p, null), WATCH_RECORD);
+    PARSER.declareObject(ExecuteWatchResponse::setWatchRecord, (p, t) -> WatchRecord.PARSER.apply(p, t), WATCH_RECORD);
   }
 
 }

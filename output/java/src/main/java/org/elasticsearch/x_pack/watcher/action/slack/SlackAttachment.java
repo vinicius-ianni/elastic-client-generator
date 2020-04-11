@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.action.slack.*;
 import org.elasticsearch.internal.*;
 
@@ -107,6 +107,7 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
   public SlackAttachment setTs(Date val) { this._ts = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -126,7 +127,7 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
     PARSER.declareString(SlackAttachment::setAuthorName, AUTHOR_NAME);
     PARSER.declareString(SlackAttachment::setColor, COLOR);
     PARSER.declareString(SlackAttachment::setFallback, FALLBACK);
-    PARSER.declareObjectArray(SlackAttachment::setFields, (p, t) -> SlackAttachmentField.PARSER.apply(p), FIELDS);
+    PARSER.declareObjectArray(SlackAttachment::setFields, (p, t) -> SlackAttachmentField.PARSER.apply(p, t), FIELDS);
     PARSER.declareString(SlackAttachment::setFooter, FOOTER);
     PARSER.declareString(SlackAttachment::setFooterIcon, FOOTER_ICON);
     PARSER.declareString(SlackAttachment::setImageUrl, IMAGE_URL);
@@ -135,7 +136,7 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
     PARSER.declareString(SlackAttachment::setThumbUrl, THUMB_URL);
     PARSER.declareString(SlackAttachment::setTitle, TITLE);
     PARSER.declareString(SlackAttachment::setTitleLink, TITLE_LINK);
-    PARSER.declareDate(SlackAttachment::setTs, (p, t) -> Date.createFrom(p), TS);
+    PARSER.declareObject(SlackAttachment::setTs, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TS);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
@@ -30,7 +30,7 @@ import org.elasticsearch.search.search.source_filtering.*;
 import org.elasticsearch.search.suggesters.*;
 
 public class SearchRequest  implements XContentable<SearchRequest> {
-
+  
   static final ParseField ALLOW_NO_INDICES = new ParseField("allow_no_indices");
   private Boolean _allowNoIndices;
   public Boolean getAllowNoIndices() { return this._allowNoIndices; }
@@ -343,6 +343,7 @@ public class SearchRequest  implements XContentable<SearchRequest> {
   public SearchRequest setVersion(Boolean val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -363,9 +364,9 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     PARSER.declareString(SearchRequest::setAnalyzer, ANALYZER);
     PARSER.declareLong(SearchRequest::setBatchedReduceSize, BATCHED_REDUCE_SIZE);
     PARSER.declareBoolean(SearchRequest::setCcsMinimizeRoundtrips, CCS_MINIMIZE_ROUNDTRIPS);
-    PARSER.declareObject(SearchRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p, null), DEFAULT_OPERATOR);
+    PARSER.declareObject(SearchRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
     PARSER.declareString(SearchRequest::setDf, DF);
-    PARSER.declareObject(SearchRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(SearchRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(SearchRequest::setIgnoreThrottled, IGNORE_THROTTLED);
     PARSER.declareBoolean(SearchRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(SearchRequest::setLenient, LENIENT);
@@ -374,36 +375,36 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     PARSER.declareString(SearchRequest::setPreference, PREFERENCE);
     PARSER.declareBoolean(SearchRequest::setRequestCache, REQUEST_CACHE);
     PARSER.declareObject(SearchRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(SearchRequest::setScroll, (p, t) -> Time.PARSER.apply(p, null), SCROLL);
-    PARSER.declareObject(SearchRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p, null), SEARCH_TYPE);
+    PARSER.declareObject(SearchRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
+    PARSER.declareObject(SearchRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
     PARSER.declareBoolean(SearchRequest::setSequenceNumberPrimaryTerm, SEQUENCE_NUMBER_PRIMARY_TERM);
     PARSER.declareStringArray(SearchRequest::setStats, STATS);
-    PARSER.declareField(SearchRequest::setSuggestField, (p, t) -> Field.createFrom(p), SUGGEST_FIELD);
-    PARSER.declareObject(SearchRequest::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p, null), SUGGEST_MODE);
+    PARSER.declareObject(SearchRequest::setSuggestField, (p, t) -> Field.createFrom(p), SUGGEST_FIELD);
+    PARSER.declareObject(SearchRequest::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE);
     PARSER.declareLong(SearchRequest::setSuggestSize, SUGGEST_SIZE);
     PARSER.declareString(SearchRequest::setSuggestText, SUGGEST_TEXT);
     PARSER.declareBoolean(SearchRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);
     PARSER.declareBoolean(SearchRequest::setTypedKeys, TYPED_KEYS);
-    PARSER.declareObject(SearchRequest::setAggs, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGS);;
-    PARSER.declareObject(SearchRequest::setCollapse, (p, t) -> FieldCollapse.PARSER.apply(p, null), COLLAPSE);
-    PARSER.declareObjectArray(SearchRequest::setDocvalueFields, (p, t) -> Field.PARSER.apply(p), DOCVALUE_FIELDS);
+    PARSER.declareObject(SearchRequest::setAggs, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGS);
+    PARSER.declareObject(SearchRequest::setCollapse, (p, t) -> FieldCollapse.PARSER.apply(p, t), COLLAPSE);
+    PARSER.declareObjectArray(SearchRequest::setDocvalueFields, (p, t) -> Field.createFrom(p), DOCVALUE_FIELDS);
     PARSER.declareBoolean(SearchRequest::setExplain, EXPLAIN);
-    PARSER.declareInteger(SearchRequest::setFrom, FROM);
-    PARSER.declareObject(SearchRequest::setHighlight, (p, t) -> Highlight.PARSER.apply(p, null), HIGHLIGHT);
-    PARSER.declareObject(SearchRequest::setIndicesBoost, (p, t) ->  new NamedContainer<>(n -> () -> new IndexName(n),pp -> Double.PARSER.apply(pp, null)), INDICES_BOOST);;
+    PARSER.declareInt(SearchRequest::setFrom, FROM);
+    PARSER.declareObject(SearchRequest::setHighlight, (p, t) -> Highlight.PARSER.apply(p, t), HIGHLIGHT);
+    PARSER.declareObject(SearchRequest::setIndicesBoost, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> pp.doubleValue()), INDICES_BOOST);
     PARSER.declareDouble(SearchRequest::setMinScore, MIN_SCORE);
-    PARSER.declareObject(SearchRequest::setPostFilter, (p, t) -> QueryContainer.PARSER.apply(p, null), POST_FILTER);
+    PARSER.declareObject(SearchRequest::setPostFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), POST_FILTER);
     PARSER.declareBoolean(SearchRequest::setProfile, PROFILE);
-    PARSER.declareObject(SearchRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObjectArray(SearchRequest::setRescore, (p, t) -> Rescore.PARSER.apply(p), RESCORE);
-    PARSER.declareObject(SearchRequest::setScriptFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);;
-    PARSER.declareObjectArray(SearchRequest::setSearchAfter, (p, t) -> Object.PARSER.apply(p), SEARCH_AFTER);
-    PARSER.declareInteger(SearchRequest::setSize, SIZE);
-    PARSER.declareObject(SearchRequest::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, null), SLICE);
-    PARSER.declareObjectArray(SearchRequest::setSort, (p, t) -> Sort.PARSER.apply(p), SORT);
-    PARSER.declareObject(SearchRequest::setSource, (p, t) -> null, SOURCE);
-    PARSER.declareObjectArray(SearchRequest::setStoredFields, (p, t) -> Field.PARSER.apply(p), STORED_FIELDS);
-    PARSER.declareObject(SearchRequest::setSuggest, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> SuggestBucket.PARSER.apply(pp, null)), SUGGEST);;
+    PARSER.declareObject(SearchRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObjectArray(SearchRequest::setRescore, (p, t) -> Rescore.PARSER.apply(p, t), RESCORE);
+    PARSER.declareObject(SearchRequest::setScriptFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);
+    PARSER.declareObjectArray(SearchRequest::setSearchAfter, (p, t) -> p.objectText(), SEARCH_AFTER);
+    PARSER.declareInt(SearchRequest::setSize, SIZE);
+    PARSER.declareObject(SearchRequest::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, t), SLICE);
+    PARSER.declareObjectArray(SearchRequest::setSort, (p, t) -> Sort.PARSER.apply(p, t), SORT);
+    PARSER.declareObject(SearchRequest::setSource, (p, t) ->  new Either<Boolean, SourceFilter>() /* TODO UnionOf */, SOURCE);
+    PARSER.declareObjectArray(SearchRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
+    PARSER.declareObject(SearchRequest::setSuggest, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SuggestBucket.PARSER.apply(pp, null)), SUGGEST);
     PARSER.declareLong(SearchRequest::setTerminateAfter, TERMINATE_AFTER);
     PARSER.declareString(SearchRequest::setTimeout, TIMEOUT);
     PARSER.declareBoolean(SearchRequest::setTrackScores, TRACK_SCORES);

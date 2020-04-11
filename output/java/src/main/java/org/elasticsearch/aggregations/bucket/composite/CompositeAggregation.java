@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.aggregations.bucket.composite.*;
 
@@ -35,6 +35,7 @@ public class CompositeAggregation  implements XContentable<CompositeAggregation>
   public CompositeAggregation setSources(List<CompositeAggregationSource> val) { this._sources = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class CompositeAggregation  implements XContentable<CompositeAggregation>
     new ConstructingObjectParser<>(CompositeAggregation.class.getName(), false, args -> new CompositeAggregation());
 
   static {
-    PARSER.declareObject(CompositeAggregation::setAfter, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), AFTER);;
-    PARSER.declareInteger(CompositeAggregation::setSize, SIZE);
-    PARSER.declareObjectArray(CompositeAggregation::setSources, (p, t) -> CompositeAggregationSource.PARSER.apply(p), SOURCES);
+    PARSER.declareObject(CompositeAggregation::setAfter, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), AFTER);
+    PARSER.declareInt(CompositeAggregation::setSize, SIZE);
+    PARSER.declareObjectArray(CompositeAggregation::setSources, (p, t) -> CompositeAggregationSource.PARSER.apply(p, t), SOURCES);
   }
 
 }

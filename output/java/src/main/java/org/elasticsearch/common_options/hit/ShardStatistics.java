@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 
@@ -41,6 +41,7 @@ public class ShardStatistics  implements XContentable<ShardStatistics> {
   public ShardStatistics setTotal(Integer val) { this._total = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,10 +56,10 @@ public class ShardStatistics  implements XContentable<ShardStatistics> {
     new ConstructingObjectParser<>(ShardStatistics.class.getName(), false, args -> new ShardStatistics());
 
   static {
-    PARSER.declareInteger(ShardStatistics::setFailed, FAILED);
-    PARSER.declareObjectArray(ShardStatistics::setFailures, (p, t) -> ShardFailure.PARSER.apply(p), FAILURES);
-    PARSER.declareInteger(ShardStatistics::setSuccessful, SUCCESSFUL);
-    PARSER.declareInteger(ShardStatistics::setTotal, TOTAL);
+    PARSER.declareInt(ShardStatistics::setFailed, FAILED);
+    PARSER.declareObjectArray(ShardStatistics::setFailures, (p, t) -> ShardFailure.PARSER.apply(p, t), FAILURES);
+    PARSER.declareInt(ShardStatistics::setSuccessful, SUCCESSFUL);
+    PARSER.declareInt(ShardStatistics::setTotal, TOTAL);
   }
 
 }

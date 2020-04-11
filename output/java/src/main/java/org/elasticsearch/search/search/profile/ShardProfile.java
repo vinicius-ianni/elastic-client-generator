@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.profile.*;
 
 public class ShardProfile  implements XContentable<ShardProfile> {
@@ -34,6 +34,7 @@ public class ShardProfile  implements XContentable<ShardProfile> {
   public ShardProfile setSearches(List<SearchProfile> val) { this._searches = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class ShardProfile  implements XContentable<ShardProfile> {
     new ConstructingObjectParser<>(ShardProfile.class.getName(), false, args -> new ShardProfile());
 
   static {
-    PARSER.declareObjectArray(ShardProfile::setAggregations, (p, t) -> AggregationProfile.PARSER.apply(p), AGGREGATIONS);
+    PARSER.declareObjectArray(ShardProfile::setAggregations, (p, t) -> AggregationProfile.PARSER.apply(p, t), AGGREGATIONS);
     PARSER.declareString(ShardProfile::setId, ID);
-    PARSER.declareObjectArray(ShardProfile::setSearches, (p, t) -> SearchProfile.PARSER.apply(p), SEARCHES);
+    PARSER.declareObjectArray(ShardProfile::setSearches, (p, t) -> SearchProfile.PARSER.apply(p, t), SEARCHES);
   }
 
 }

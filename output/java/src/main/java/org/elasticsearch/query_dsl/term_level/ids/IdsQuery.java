@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.id.*;
 
 public class IdsQuery  implements XContentable<IdsQuery> {
@@ -22,6 +22,7 @@ public class IdsQuery  implements XContentable<IdsQuery> {
   public IdsQuery setValues(List<Id> val) { this._values = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class IdsQuery  implements XContentable<IdsQuery> {
     new ConstructingObjectParser<>(IdsQuery.class.getName(), false, args -> new IdsQuery());
 
   static {
-    PARSER.declareObjectArray(IdsQuery::setValues, (p, t) -> Id.PARSER.apply(p), VALUES);
+    PARSER.declareObjectArray(IdsQuery::setValues, (p, t) -> Id.createFrom(p), VALUES);
   }
 
 }

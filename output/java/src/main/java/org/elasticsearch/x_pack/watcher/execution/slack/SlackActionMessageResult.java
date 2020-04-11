@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.action.slack.*;
 import org.elasticsearch.x_pack.watcher.execution.*;
 
@@ -53,6 +53,7 @@ public class SlackActionMessageResult  implements XContentable<SlackActionMessag
   public SlackActionMessageResult setTo(String val) { this._to = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -67,11 +68,11 @@ public class SlackActionMessageResult  implements XContentable<SlackActionMessag
     new ConstructingObjectParser<>(SlackActionMessageResult.class.getName(), false, args -> new SlackActionMessageResult());
 
   static {
-    PARSER.declareObject(SlackActionMessageResult::setMessage, (p, t) -> SlackMessage.PARSER.apply(p, null), MESSAGE);
+    PARSER.declareObject(SlackActionMessageResult::setMessage, (p, t) -> SlackMessage.PARSER.apply(p, t), MESSAGE);
     PARSER.declareString(SlackActionMessageResult::setReason, REASON);
-    PARSER.declareObject(SlackActionMessageResult::setRequest, (p, t) -> HttpInputRequestResult.PARSER.apply(p, null), REQUEST);
-    PARSER.declareObject(SlackActionMessageResult::setResponse, (p, t) -> HttpInputResponseResult.PARSER.apply(p, null), RESPONSE);
-    PARSER.declareObject(SlackActionMessageResult::setStatus, (p, t) -> Status.PARSER.apply(p, null), STATUS);
+    PARSER.declareObject(SlackActionMessageResult::setRequest, (p, t) -> HttpInputRequestResult.PARSER.apply(p, t), REQUEST);
+    PARSER.declareObject(SlackActionMessageResult::setResponse, (p, t) -> HttpInputResponseResult.PARSER.apply(p, t), RESPONSE);
+    PARSER.declareObject(SlackActionMessageResult::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS);
     PARSER.declareString(SlackActionMessageResult::setTo, TO);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -66,6 +66,7 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
   public NodesStatsRequest setTypes(List<String> val) { this._types = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -80,13 +81,13 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
     new ConstructingObjectParser<>(NodesStatsRequest.class.getName(), false, args -> new NodesStatsRequest());
 
   static {
-    PARSER.declareObjectArray(NodesStatsRequest::setCompletionFields, (p, t) -> Field.PARSER.apply(p), COMPLETION_FIELDS);
-    PARSER.declareObjectArray(NodesStatsRequest::setFielddataFields, (p, t) -> Field.PARSER.apply(p), FIELDDATA_FIELDS);
-    PARSER.declareObjectArray(NodesStatsRequest::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObjectArray(NodesStatsRequest::setCompletionFields, (p, t) -> Field.createFrom(p), COMPLETION_FIELDS);
+    PARSER.declareObjectArray(NodesStatsRequest::setFielddataFields, (p, t) -> Field.createFrom(p), FIELDDATA_FIELDS);
+    PARSER.declareObjectArray(NodesStatsRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(NodesStatsRequest::setGroups, GROUPS);
     PARSER.declareBoolean(NodesStatsRequest::setIncludeSegmentFileSizes, INCLUDE_SEGMENT_FILE_SIZES);
-    PARSER.declareObject(NodesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p, null), LEVEL);
-    PARSER.declareObject(NodesStatsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(NodesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL);
+    PARSER.declareObject(NodesStatsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareStringArray(NodesStatsRequest::setTypes, TYPES);
   }
 

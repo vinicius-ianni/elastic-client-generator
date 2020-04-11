@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.modules.snapshot_and_restore.snapshot.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
@@ -85,6 +85,7 @@ public class Snapshot  implements XContentable<Snapshot> {
   public Snapshot setMetadata(NamedContainer<String, Object> val) { this._metadata = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -100,16 +101,16 @@ public class Snapshot  implements XContentable<Snapshot> {
 
   static {
     PARSER.declareLong(Snapshot::setDurationInMillis, DURATION_IN_MILLIS);
-    PARSER.declareDate(Snapshot::setEndTime, (p, t) -> Date.createFrom(p), END_TIME);
+    PARSER.declareObject(Snapshot::setEndTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END_TIME);
     PARSER.declareLong(Snapshot::setEndTimeInMillis, END_TIME_IN_MILLIS);
-    PARSER.declareObjectArray(Snapshot::setFailures, (p, t) -> SnapshotShardFailure.PARSER.apply(p), FAILURES);
-    PARSER.declareObjectArray(Snapshot::setIndices, (p, t) -> IndexName.PARSER.apply(p), INDICES);
+    PARSER.declareObjectArray(Snapshot::setFailures, (p, t) -> SnapshotShardFailure.PARSER.apply(p, t), FAILURES);
+    PARSER.declareObjectArray(Snapshot::setIndices, (p, t) -> IndexName.createFrom(p), INDICES);
     PARSER.declareString(Snapshot::setSnapshot, SNAPSHOT);
-    PARSER.declareObject(Snapshot::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, null), SHARDS);
-    PARSER.declareDate(Snapshot::setStartTime, (p, t) -> Date.createFrom(p), START_TIME);
+    PARSER.declareObject(Snapshot::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);
+    PARSER.declareObject(Snapshot::setStartTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), START_TIME);
     PARSER.declareLong(Snapshot::setStartTimeInMillis, START_TIME_IN_MILLIS);
     PARSER.declareString(Snapshot::setState, STATE);
-    PARSER.declareObject(Snapshot::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareObject(Snapshot::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
   }
 
 }

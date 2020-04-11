@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
 public class SpanMultiTermQuery  implements XContentable<SpanMultiTermQuery> {
@@ -22,6 +22,7 @@ public class SpanMultiTermQuery  implements XContentable<SpanMultiTermQuery> {
   public SpanMultiTermQuery setMatch(QueryContainer val) { this._match = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class SpanMultiTermQuery  implements XContentable<SpanMultiTermQuery> {
     new ConstructingObjectParser<>(SpanMultiTermQuery.class.getName(), false, args -> new SpanMultiTermQuery());
 
   static {
-    PARSER.declareObject(SpanMultiTermQuery::setMatch, (p, t) -> QueryContainer.PARSER.apply(p, null), MATCH);
+    PARSER.declareObject(SpanMultiTermQuery::setMatch, (p, t) -> QueryContainer.PARSER.apply(p, t), MATCH);
   }
 
 }

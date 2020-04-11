@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 
 
 public class CompareCondition  implements XContentable<CompareCondition> {
@@ -34,6 +34,7 @@ public class CompareCondition  implements XContentable<CompareCondition> {
   public CompareCondition setValue(Object val) { this._value = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,7 +51,7 @@ public class CompareCondition  implements XContentable<CompareCondition> {
   static {
     PARSER.declareString(CompareCondition::setComparison, COMPARISON);
     PARSER.declareString(CompareCondition::setPath, PATH);
-    PARSER.declareObject(CompareCondition::setValue, (p, t) -> Object.PARSER.apply(p, null), VALUE);
+    PARSER.declareObject(CompareCondition::setValue, (p, t) -> p.objectText(), VALUE);
   }
 
 }

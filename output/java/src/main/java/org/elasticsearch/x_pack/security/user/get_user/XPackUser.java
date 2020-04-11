@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 
 
 public class XPackUser  implements XContentable<XPackUser> {
@@ -46,6 +46,7 @@ public class XPackUser  implements XContentable<XPackUser> {
   public XPackUser setUsername(String val) { this._username = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,7 +63,7 @@ public class XPackUser  implements XContentable<XPackUser> {
   static {
     PARSER.declareString(XPackUser::setEmail, EMAIL);
     PARSER.declareString(XPackUser::setFullName, FULL_NAME);
-    PARSER.declareObject(XPackUser::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareObject(XPackUser::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareStringArray(XPackUser::setRoles, ROLES);
     PARSER.declareString(XPackUser::setUsername, USERNAME);
   }

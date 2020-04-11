@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.info.x_pack_info.*;
 
 public class XPackFeatures  implements XContentable<XPackFeatures> {
@@ -100,6 +100,7 @@ public class XPackFeatures  implements XContentable<XPackFeatures> {
   public XPackFeatures setWatcher(XPackFeature val) { this._watcher = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -114,20 +115,20 @@ public class XPackFeatures  implements XContentable<XPackFeatures> {
     new ConstructingObjectParser<>(XPackFeatures.class.getName(), false, args -> new XPackFeatures());
 
   static {
-    PARSER.declareObject(XPackFeatures::setCcr, (p, t) -> XPackFeature.PARSER.apply(p, null), CCR);
-    PARSER.declareObject(XPackFeatures::setDataFrame, (p, t) -> XPackFeature.PARSER.apply(p, null), DATA_FRAME);
-    PARSER.declareObject(XPackFeatures::setFlattened, (p, t) -> XPackFeature.PARSER.apply(p, null), FLATTENED);
-    PARSER.declareObject(XPackFeatures::setDataScience, (p, t) -> XPackFeature.PARSER.apply(p, null), DATA_SCIENCE);
-    PARSER.declareObject(XPackFeatures::setGraph, (p, t) -> XPackFeature.PARSER.apply(p, null), GRAPH);
-    PARSER.declareObject(XPackFeatures::setIlm, (p, t) -> XPackFeature.PARSER.apply(p, null), ILM);
-    PARSER.declareObject(XPackFeatures::setLogstash, (p, t) -> XPackFeature.PARSER.apply(p, null), LOGSTASH);
-    PARSER.declareObject(XPackFeatures::setMl, (p, t) -> XPackFeature.PARSER.apply(p, null), ML);
-    PARSER.declareObject(XPackFeatures::setMonitoring, (p, t) -> XPackFeature.PARSER.apply(p, null), MONITORING);
-    PARSER.declareObject(XPackFeatures::setRollup, (p, t) -> XPackFeature.PARSER.apply(p, null), ROLLUP);
-    PARSER.declareObject(XPackFeatures::setSecurity, (p, t) -> XPackFeature.PARSER.apply(p, null), SECURITY);
-    PARSER.declareObject(XPackFeatures::setSql, (p, t) -> XPackFeature.PARSER.apply(p, null), SQL);
-    PARSER.declareObject(XPackFeatures::setVectors, (p, t) -> XPackFeature.PARSER.apply(p, null), VECTORS);
-    PARSER.declareObject(XPackFeatures::setWatcher, (p, t) -> XPackFeature.PARSER.apply(p, null), WATCHER);
+    PARSER.declareObject(XPackFeatures::setCcr, (p, t) -> XPackFeature.PARSER.apply(p, t), CCR);
+    PARSER.declareObject(XPackFeatures::setDataFrame, (p, t) -> XPackFeature.PARSER.apply(p, t), DATA_FRAME);
+    PARSER.declareObject(XPackFeatures::setFlattened, (p, t) -> XPackFeature.PARSER.apply(p, t), FLATTENED);
+    PARSER.declareObject(XPackFeatures::setDataScience, (p, t) -> XPackFeature.PARSER.apply(p, t), DATA_SCIENCE);
+    PARSER.declareObject(XPackFeatures::setGraph, (p, t) -> XPackFeature.PARSER.apply(p, t), GRAPH);
+    PARSER.declareObject(XPackFeatures::setIlm, (p, t) -> XPackFeature.PARSER.apply(p, t), ILM);
+    PARSER.declareObject(XPackFeatures::setLogstash, (p, t) -> XPackFeature.PARSER.apply(p, t), LOGSTASH);
+    PARSER.declareObject(XPackFeatures::setMl, (p, t) -> XPackFeature.PARSER.apply(p, t), ML);
+    PARSER.declareObject(XPackFeatures::setMonitoring, (p, t) -> XPackFeature.PARSER.apply(p, t), MONITORING);
+    PARSER.declareObject(XPackFeatures::setRollup, (p, t) -> XPackFeature.PARSER.apply(p, t), ROLLUP);
+    PARSER.declareObject(XPackFeatures::setSecurity, (p, t) -> XPackFeature.PARSER.apply(p, t), SECURITY);
+    PARSER.declareObject(XPackFeatures::setSql, (p, t) -> XPackFeature.PARSER.apply(p, t), SQL);
+    PARSER.declareObject(XPackFeatures::setVectors, (p, t) -> XPackFeature.PARSER.apply(p, t), VECTORS);
+    PARSER.declareObject(XPackFeatures::setWatcher, (p, t) -> XPackFeature.PARSER.apply(p, t), WATCHER);
   }
 
 }

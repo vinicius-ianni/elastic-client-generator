@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.acknowledge_watch.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class WatchStatus  implements XContentable<WatchStatus> {
   public WatchStatus setVersion(Integer val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class WatchStatus  implements XContentable<WatchStatus> {
     new ConstructingObjectParser<>(WatchStatus.class.getName(), false, args -> new WatchStatus());
 
   static {
-    PARSER.declareObject(WatchStatus::setActions, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ActionStatus.PARSER.apply(pp, null)), ACTIONS);;
-    PARSER.declareDate(WatchStatus::setLastChecked, (p, t) -> Date.createFrom(p), LAST_CHECKED);
-    PARSER.declareDate(WatchStatus::setLastMetCondition, (p, t) -> Date.createFrom(p), LAST_MET_CONDITION);
-    PARSER.declareObject(WatchStatus::setState, (p, t) -> ActivationState.PARSER.apply(p, null), STATE);
-    PARSER.declareInteger(WatchStatus::setVersion, VERSION);
+    PARSER.declareObject(WatchStatus::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ActionStatus.PARSER.apply(pp, null)), ACTIONS);
+    PARSER.declareObject(WatchStatus::setLastChecked, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LAST_CHECKED);
+    PARSER.declareObject(WatchStatus::setLastMetCondition, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LAST_MET_CONDITION);
+    PARSER.declareObject(WatchStatus::setState, (p, t) -> ActivationState.PARSER.apply(p, t), STATE);
+    PARSER.declareInt(WatchStatus::setVersion, VERSION);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.x_pack.machine_learning.job.results.*;
@@ -150,6 +150,7 @@ public class AnomalyRecord  implements XContentable<AnomalyRecord> {
   public AnomalyRecord setTypical(List<Double> val) { this._typical = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -165,15 +166,15 @@ public class AnomalyRecord  implements XContentable<AnomalyRecord> {
 
   static {
     PARSER.declareDoubleArray(AnomalyRecord::setActual, ACTUAL);
-    PARSER.declareObject(AnomalyRecord::setBucketSpan, (p, t) -> Time.PARSER.apply(p, null), BUCKET_SPAN);
+    PARSER.declareObject(AnomalyRecord::setBucketSpan, (p, t) -> Time.PARSER.apply(p, t), BUCKET_SPAN);
     PARSER.declareString(AnomalyRecord::setByFieldName, BY_FIELD_NAME);
     PARSER.declareString(AnomalyRecord::setByFieldValue, BY_FIELD_VALUE);
-    PARSER.declareObjectArray(AnomalyRecord::setCauses, (p, t) -> AnomalyCause.PARSER.apply(p), CAUSES);
-    PARSER.declareInteger(AnomalyRecord::setDetectorIndex, DETECTOR_INDEX);
+    PARSER.declareObjectArray(AnomalyRecord::setCauses, (p, t) -> AnomalyCause.PARSER.apply(p, t), CAUSES);
+    PARSER.declareInt(AnomalyRecord::setDetectorIndex, DETECTOR_INDEX);
     PARSER.declareString(AnomalyRecord::setFieldName, FIELD_NAME);
     PARSER.declareString(AnomalyRecord::setFunction, FUNCTION);
     PARSER.declareString(AnomalyRecord::setFunctionDescription, FUNCTION_DESCRIPTION);
-    PARSER.declareObjectArray(AnomalyRecord::setInfluencers, (p, t) -> Influence.PARSER.apply(p), INFLUENCERS);
+    PARSER.declareObjectArray(AnomalyRecord::setInfluencers, (p, t) -> Influence.PARSER.apply(p, t), INFLUENCERS);
     PARSER.declareDouble(AnomalyRecord::setInitialRecordScore, INITIAL_RECORD_SCORE);
     PARSER.declareBoolean(AnomalyRecord::setIsInterim, IS_INTERIM);
     PARSER.declareString(AnomalyRecord::setJobId, JOB_ID);
@@ -184,7 +185,7 @@ public class AnomalyRecord  implements XContentable<AnomalyRecord> {
     PARSER.declareDouble(AnomalyRecord::setProbability, PROBABILITY);
     PARSER.declareDouble(AnomalyRecord::setRecordScore, RECORD_SCORE);
     PARSER.declareString(AnomalyRecord::setResultType, RESULT_TYPE);
-    PARSER.declareDate(AnomalyRecord::setTimestamp, (p, t) -> Date.createFrom(p), TIMESTAMP);
+    PARSER.declareObject(AnomalyRecord::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
     PARSER.declareDoubleArray(AnomalyRecord::setTypical, TYPICAL);
   }
 

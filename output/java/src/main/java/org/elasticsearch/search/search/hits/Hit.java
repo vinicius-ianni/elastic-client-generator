@@ -5,19 +5,19 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.explain.*;
 import org.elasticsearch.common_abstractions.lazy_document.*;
 import org.elasticsearch.search.search.hits.*;
 import org.elasticsearch.internal.*;
 
-public class Hit<TDocument>  implements XContentable<Hit> {
+public class Hit<TDocument>  implements XContentable<Hit<TDocument>> {
   
   static final ParseField EXPLANATION = new ParseField("_explanation");
   private Explanation _explanation;
@@ -67,6 +67,7 @@ public class Hit<TDocument>  implements XContentable<Hit> {
   public Hit<TDocument> setSort(List<Object> val) { this._sort = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -81,14 +82,14 @@ public class Hit<TDocument>  implements XContentable<Hit> {
     new ConstructingObjectParser<>(Hit.class.getName(), false, args -> new Hit());
 
   static {
-    PARSER.declareObject(Hit::setExplanation, (p, t) -> Explanation.PARSER.apply(p, null), EXPLANATION);
-    PARSER.declareObject(Hit::setFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);;
-    PARSER.declareObject(Hit::setHighlight, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), HIGHLIGHT);;
-    PARSER.declareObject(Hit::setInnerHits, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> InnerHitsResult.PARSER.apply(pp, null)), INNER_HITS);;
+    PARSER.declareObject(Hit::setExplanation, (p, t) -> Explanation.PARSER.apply(p, t), EXPLANATION);
+    PARSER.declareObject(Hit::setFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);
+    PARSER.declareObject(Hit::setHighlight, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<String> */), HIGHLIGHT);
+    PARSER.declareObject(Hit::setInnerHits, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> InnerHitsResult.PARSER.apply(pp, null)), INNER_HITS);
     PARSER.declareStringArray(Hit::setMatchedQueries, MATCHED_QUERIES);
-    PARSER.declareObject(Hit::setNested, (p, t) -> NestedIdentity.PARSER.apply(p, null), NESTED);
+    PARSER.declareObject(Hit::setNested, (p, t) -> NestedIdentity.PARSER.apply(p, t), NESTED);
     PARSER.declareDouble(Hit::setScore, SCORE);
-    PARSER.declareObjectArray(Hit::setSort, (p, t) -> Object.PARSER.apply(p), SORT);
+    PARSER.declareObjectArray(Hit::setSort, (p, t) -> p.objectText(), SORT);
   }
 
 }

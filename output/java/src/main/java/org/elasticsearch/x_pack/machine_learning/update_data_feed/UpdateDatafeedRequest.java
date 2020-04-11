@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.*;
 import org.elasticsearch.x_pack.machine_learning.datafeed.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -77,6 +77,7 @@ public class UpdateDatafeedRequest  implements XContentable<UpdateDatafeedReques
   public UpdateDatafeedRequest setScrollSize(Integer val) { this._scrollSize = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -91,15 +92,15 @@ public class UpdateDatafeedRequest  implements XContentable<UpdateDatafeedReques
     new ConstructingObjectParser<>(UpdateDatafeedRequest.class.getName(), false, args -> new UpdateDatafeedRequest());
 
   static {
-    PARSER.declareObject(UpdateDatafeedRequest::setAggregations, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);;
-    PARSER.declareObject(UpdateDatafeedRequest::setChunkingConfig, (p, t) -> ChunkingConfig.PARSER.apply(p, null), CHUNKING_CONFIG);
-    PARSER.declareObject(UpdateDatafeedRequest::setFrequency, (p, t) -> Time.PARSER.apply(p, null), FREQUENCY);
-    PARSER.declareIndices(UpdateDatafeedRequest::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
-    PARSER.declareId(UpdateDatafeedRequest::setJobId, (p, t) -> Id.createFrom(p), JOB_ID);
-    PARSER.declareObject(UpdateDatafeedRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObject(UpdateDatafeedRequest::setQueryDelay, (p, t) -> Time.PARSER.apply(p, null), QUERY_DELAY);
-    PARSER.declareObject(UpdateDatafeedRequest::setScriptFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);;
-    PARSER.declareInteger(UpdateDatafeedRequest::setScrollSize, SCROLL_SIZE);
+    PARSER.declareObject(UpdateDatafeedRequest::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);
+    PARSER.declareObject(UpdateDatafeedRequest::setChunkingConfig, (p, t) -> ChunkingConfig.PARSER.apply(p, t), CHUNKING_CONFIG);
+    PARSER.declareObject(UpdateDatafeedRequest::setFrequency, (p, t) -> Time.PARSER.apply(p, t), FREQUENCY);
+    PARSER.declareObject(UpdateDatafeedRequest::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
+    PARSER.declareObject(UpdateDatafeedRequest::setJobId, (p, t) -> Id.createFrom(p), JOB_ID);
+    PARSER.declareObject(UpdateDatafeedRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObject(UpdateDatafeedRequest::setQueryDelay, (p, t) -> Time.PARSER.apply(p, t), QUERY_DELAY);
+    PARSER.declareObject(UpdateDatafeedRequest::setScriptFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ScriptField.PARSER.apply(pp, null)), SCRIPT_FIELDS);
+    PARSER.declareInt(UpdateDatafeedRequest::setScrollSize, SCROLL_SIZE);
   }
 
 }

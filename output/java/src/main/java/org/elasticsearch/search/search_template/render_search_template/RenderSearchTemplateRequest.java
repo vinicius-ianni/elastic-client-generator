@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 
 
 public class RenderSearchTemplateRequest  implements XContentable<RenderSearchTemplateRequest> {
@@ -34,6 +34,7 @@ public class RenderSearchTemplateRequest  implements XContentable<RenderSearchTe
   public RenderSearchTemplateRequest setSource(String val) { this._source = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,7 +50,7 @@ public class RenderSearchTemplateRequest  implements XContentable<RenderSearchTe
 
   static {
     PARSER.declareString(RenderSearchTemplateRequest::setFile, FILE);
-    PARSER.declareObject(RenderSearchTemplateRequest::setParams, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);;
+    PARSER.declareObject(RenderSearchTemplateRequest::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);
     PARSER.declareString(RenderSearchTemplateRequest::setSource, SOURCE);
   }
 

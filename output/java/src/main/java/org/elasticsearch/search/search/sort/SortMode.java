@@ -2,6 +2,7 @@
 package org.elasticsearch.search.search.sort;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public enum SortMode implements XContentable<SortMode> {
       case "avg": return SortMode.Avg;
       case "median": return SortMode.Median;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, SortMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, SortMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

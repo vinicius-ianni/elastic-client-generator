@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.multi_term_query_rewrite.*;
 
@@ -41,6 +41,7 @@ public class FuzzyQuery  implements XContentable<FuzzyQuery> {
   public FuzzyQuery setTranspositions(Boolean val) { this._transpositions = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,9 +56,9 @@ public class FuzzyQuery  implements XContentable<FuzzyQuery> {
     new ConstructingObjectParser<>(FuzzyQuery.class.getName(), false, args -> new FuzzyQuery());
 
   static {
-    PARSER.declareInteger(FuzzyQuery::setMaxExpansions, MAX_EXPANSIONS);
-    PARSER.declareInteger(FuzzyQuery::setPrefixLength, PREFIX_LENGTH);
-    PARSER.declareObject(FuzzyQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), REWRITE);
+    PARSER.declareInt(FuzzyQuery::setMaxExpansions, MAX_EXPANSIONS);
+    PARSER.declareInt(FuzzyQuery::setPrefixLength, PREFIX_LENGTH);
+    PARSER.declareObject(FuzzyQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), REWRITE);
     PARSER.declareBoolean(FuzzyQuery::setTranspositions, TRANSPOSITIONS);
   }
 

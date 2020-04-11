@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class BulkIndexByScrollFailure  implements XContentable<BulkIndexByScroll
   public BulkIndexByScrollFailure setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,10 +62,10 @@ public class BulkIndexByScrollFailure  implements XContentable<BulkIndexByScroll
     new ConstructingObjectParser<>(BulkIndexByScrollFailure.class.getName(), false, args -> new BulkIndexByScrollFailure());
 
   static {
-    PARSER.declareObject(BulkIndexByScrollFailure::setCause, (p, t) -> MainError.PARSER.apply(p, null), CAUSE);
+    PARSER.declareObject(BulkIndexByScrollFailure::setCause, (p, t) -> MainError.PARSER.apply(p, t), CAUSE);
     PARSER.declareString(BulkIndexByScrollFailure::setId, ID);
     PARSER.declareString(BulkIndexByScrollFailure::setIndex, INDEX);
-    PARSER.declareInteger(BulkIndexByScrollFailure::setStatus, STATUS);
+    PARSER.declareInt(BulkIndexByScrollFailure::setStatus, STATUS);
     PARSER.declareString(BulkIndexByScrollFailure::setType, TYPE);
   }
 

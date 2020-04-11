@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.execution.*;
 import org.elasticsearch.x_pack.watcher.schedule.*;
 import org.elasticsearch.x_pack.watcher.*;
@@ -66,6 +66,7 @@ public class ExecuteWatchRequest  implements XContentable<ExecuteWatchRequest> {
   public ExecuteWatchRequest setWatch(Watch val) { this._watch = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -81,13 +82,13 @@ public class ExecuteWatchRequest  implements XContentable<ExecuteWatchRequest> {
 
   static {
     PARSER.declareBoolean(ExecuteWatchRequest::setDebug, DEBUG);
-    PARSER.declareObject(ExecuteWatchRequest::setActionModes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ActionExecutionMode.PARSER.apply(pp, null)), ACTION_MODES);;
-    PARSER.declareObject(ExecuteWatchRequest::setAlternativeInput, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ALTERNATIVE_INPUT);;
+    PARSER.declareObject(ExecuteWatchRequest::setActionModes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ActionExecutionMode.PARSER.apply(p)), ACTION_MODES);
+    PARSER.declareObject(ExecuteWatchRequest::setAlternativeInput, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ALTERNATIVE_INPUT);
     PARSER.declareBoolean(ExecuteWatchRequest::setIgnoreCondition, IGNORE_CONDITION);
     PARSER.declareBoolean(ExecuteWatchRequest::setRecordExecution, RECORD_EXECUTION);
-    PARSER.declareObject(ExecuteWatchRequest::setSimulatedActions, (p, t) -> SimulatedActions.PARSER.apply(p, null), SIMULATED_ACTIONS);
-    PARSER.declareObject(ExecuteWatchRequest::setTriggerData, (p, t) -> ScheduleTriggerEvent.PARSER.apply(p, null), TRIGGER_DATA);
-    PARSER.declareObject(ExecuteWatchRequest::setWatch, (p, t) -> Watch.PARSER.apply(p, null), WATCH);
+    PARSER.declareObject(ExecuteWatchRequest::setSimulatedActions, (p, t) -> SimulatedActions.PARSER.apply(p, t), SIMULATED_ACTIONS);
+    PARSER.declareObject(ExecuteWatchRequest::setTriggerData, (p, t) -> ScheduleTriggerEvent.PARSER.apply(p, t), TRIGGER_DATA);
+    PARSER.declareObject(ExecuteWatchRequest::setWatch, (p, t) -> Watch.PARSER.apply(p, t), WATCH);
   }
 
 }

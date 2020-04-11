@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.cluster_stats.*;
 import org.elasticsearch.cluster.*;
 import org.elasticsearch.internal.*;
@@ -54,6 +54,7 @@ public class ClusterStatsResponse  implements XContentable<ClusterStatsResponse>
   public ClusterStatsResponse setTimestamp(Long val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -70,9 +71,9 @@ public class ClusterStatsResponse  implements XContentable<ClusterStatsResponse>
   static {
     PARSER.declareString(ClusterStatsResponse::setClusterName, CLUSTER_NAME);
     PARSER.declareString(ClusterStatsResponse::setClusterUuid, CLUSTER_UUID);
-    PARSER.declareObject(ClusterStatsResponse::setIndices, (p, t) -> ClusterIndicesStats.PARSER.apply(p, null), INDICES);
-    PARSER.declareObject(ClusterStatsResponse::setNodes, (p, t) -> ClusterNodesStats.PARSER.apply(p, null), NODES);
-    PARSER.declareObject(ClusterStatsResponse::setStatus, (p, t) -> ClusterStatus.PARSER.apply(p, null), STATUS);
+    PARSER.declareObject(ClusterStatsResponse::setIndices, (p, t) -> ClusterIndicesStats.PARSER.apply(p, t), INDICES);
+    PARSER.declareObject(ClusterStatsResponse::setNodes, (p, t) -> ClusterNodesStats.PARSER.apply(p, t), NODES);
+    PARSER.declareObject(ClusterStatsResponse::setStatus, (p, t) -> ClusterStatus.PARSER.apply(p), STATUS);
     PARSER.declareLong(ClusterStatsResponse::setTimestamp, TIMESTAMP);
   }
 

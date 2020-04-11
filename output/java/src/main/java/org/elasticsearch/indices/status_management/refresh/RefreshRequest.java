@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class RefreshRequest  implements XContentable<RefreshRequest> {
@@ -34,6 +34,7 @@ public class RefreshRequest  implements XContentable<RefreshRequest> {
   public RefreshRequest setIgnoreUnavailable(Boolean val) { this._ignoreUnavailable = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,7 +50,7 @@ public class RefreshRequest  implements XContentable<RefreshRequest> {
 
   static {
     PARSER.declareBoolean(RefreshRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(RefreshRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(RefreshRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(RefreshRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
   }
 

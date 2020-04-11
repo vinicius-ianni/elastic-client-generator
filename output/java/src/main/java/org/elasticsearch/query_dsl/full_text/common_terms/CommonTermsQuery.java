@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.*;
 import org.elasticsearch.common_options.minimum_should_match.*;
@@ -54,6 +54,7 @@ public class CommonTermsQuery  implements XContentable<CommonTermsQuery> {
   public CommonTermsQuery setQuery(String val) { this._query = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -70,9 +71,9 @@ public class CommonTermsQuery  implements XContentable<CommonTermsQuery> {
   static {
     PARSER.declareString(CommonTermsQuery::setAnalyzer, ANALYZER);
     PARSER.declareDouble(CommonTermsQuery::setCutoffFrequency, CUTOFF_FREQUENCY);
-    PARSER.declareObject(CommonTermsQuery::setHighFreqOperator, (p, t) -> Operator.PARSER.apply(p, null), HIGH_FREQ_OPERATOR);
-    PARSER.declareObject(CommonTermsQuery::setLowFreqOperator, (p, t) -> Operator.PARSER.apply(p, null), LOW_FREQ_OPERATOR);
-    PARSER.declareObject(CommonTermsQuery::setMinimumShouldMatch, (p, t) -> MinimumShouldMatch.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH);
+    PARSER.declareObject(CommonTermsQuery::setHighFreqOperator, (p, t) -> Operator.PARSER.apply(p), HIGH_FREQ_OPERATOR);
+    PARSER.declareObject(CommonTermsQuery::setLowFreqOperator, (p, t) -> Operator.PARSER.apply(p), LOW_FREQ_OPERATOR);
+    PARSER.declareObject(CommonTermsQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
     PARSER.declareString(CommonTermsQuery::setQuery, QUERY);
   }
 

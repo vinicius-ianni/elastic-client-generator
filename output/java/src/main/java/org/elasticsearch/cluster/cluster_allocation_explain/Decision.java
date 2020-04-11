@@ -2,6 +2,7 @@
 package org.elasticsearch.cluster.cluster_allocation_explain;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ public enum Decision implements XContentable<Decision> {
       case "no_valid_shard_copy": return Decision.NoValidShardCopy;
       case "no_attempt": return Decision.NoAttempt;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, Decision.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, Decision.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

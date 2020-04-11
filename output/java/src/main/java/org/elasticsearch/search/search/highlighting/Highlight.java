@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.search.highlighting.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
@@ -120,6 +120,7 @@ public class Highlight  implements XContentable<Highlight> {
   public Highlight setTagsSchema(HighlighterTagsSchema val) { this._tagsSchema = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -135,22 +136,22 @@ public class Highlight  implements XContentable<Highlight> {
 
   static {
     PARSER.declareString(Highlight::setBoundaryChars, BOUNDARY_CHARS);
-    PARSER.declareInteger(Highlight::setBoundaryMaxScan, BOUNDARY_MAX_SCAN);
-    PARSER.declareObject(Highlight::setBoundaryScanner, (p, t) -> BoundaryScanner.PARSER.apply(p, null), BOUNDARY_SCANNER);
+    PARSER.declareInt(Highlight::setBoundaryMaxScan, BOUNDARY_MAX_SCAN);
+    PARSER.declareObject(Highlight::setBoundaryScanner, (p, t) -> BoundaryScanner.PARSER.apply(p), BOUNDARY_SCANNER);
     PARSER.declareString(Highlight::setBoundaryScannerLocale, BOUNDARY_SCANNER_LOCALE);
-    PARSER.declareObject(Highlight::setEncoder, (p, t) -> HighlighterEncoder.PARSER.apply(p, null), ENCODER);
-    PARSER.declareObject(Highlight::setFields, (p, t) ->  new NamedContainer<>(n -> () -> new Field(n),pp -> HighlightField.PARSER.apply(pp, null)), FIELDS);;
-    PARSER.declareObject(Highlight::setFragmenter, (p, t) -> HighlighterFragmenter.PARSER.apply(p, null), FRAGMENTER);
-    PARSER.declareInteger(Highlight::setFragmentOffset, FRAGMENT_OFFSET);
-    PARSER.declareInteger(Highlight::setFragmentSize, FRAGMENT_SIZE);
-    PARSER.declareInteger(Highlight::setMaxFragmentLength, MAX_FRAGMENT_LENGTH);
-    PARSER.declareInteger(Highlight::setNoMatchSize, NO_MATCH_SIZE);
-    PARSER.declareInteger(Highlight::setNumberOfFragments, NUMBER_OF_FRAGMENTS);
-    PARSER.declareObject(Highlight::setOrder, (p, t) -> HighlighterOrder.PARSER.apply(p, null), ORDER);
+    PARSER.declareObject(Highlight::setEncoder, (p, t) -> HighlighterEncoder.PARSER.apply(p), ENCODER);
+    PARSER.declareObject(Highlight::setFields, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),pp -> HighlightField.PARSER.apply(pp, null)), FIELDS);
+    PARSER.declareObject(Highlight::setFragmenter, (p, t) -> HighlighterFragmenter.PARSER.apply(p), FRAGMENTER);
+    PARSER.declareInt(Highlight::setFragmentOffset, FRAGMENT_OFFSET);
+    PARSER.declareInt(Highlight::setFragmentSize, FRAGMENT_SIZE);
+    PARSER.declareInt(Highlight::setMaxFragmentLength, MAX_FRAGMENT_LENGTH);
+    PARSER.declareInt(Highlight::setNoMatchSize, NO_MATCH_SIZE);
+    PARSER.declareInt(Highlight::setNumberOfFragments, NUMBER_OF_FRAGMENTS);
+    PARSER.declareObject(Highlight::setOrder, (p, t) -> HighlighterOrder.PARSER.apply(p), ORDER);
     PARSER.declareStringArray(Highlight::setPostTags, POST_TAGS);
     PARSER.declareStringArray(Highlight::setPreTags, PRE_TAGS);
     PARSER.declareBoolean(Highlight::setRequireFieldMatch, REQUIRE_FIELD_MATCH);
-    PARSER.declareObject(Highlight::setTagsSchema, (p, t) -> HighlighterTagsSchema.PARSER.apply(p, null), TAGS_SCHEMA);
+    PARSER.declareObject(Highlight::setTagsSchema, (p, t) -> HighlighterTagsSchema.PARSER.apply(p), TAGS_SCHEMA);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.document.multiple.multi_get.request.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
@@ -72,6 +72,7 @@ public class MultiGetRequest  implements XContentable<MultiGetRequest> {
   public MultiGetRequest setSourceIncludes(List<Field> val) { this._sourceIncludes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -86,15 +87,15 @@ public class MultiGetRequest  implements XContentable<MultiGetRequest> {
     new ConstructingObjectParser<>(MultiGetRequest.class.getName(), false, args -> new MultiGetRequest());
 
   static {
-    PARSER.declareObjectArray(MultiGetRequest::setStoredFields, (p, t) -> Field.PARSER.apply(p), STORED_FIELDS);
-    PARSER.declareObjectArray(MultiGetRequest::setDocs, (p, t) -> MultiGetOperation.PARSER.apply(p), DOCS);
+    PARSER.declareObjectArray(MultiGetRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
+    PARSER.declareObjectArray(MultiGetRequest::setDocs, (p, t) -> MultiGetOperation.PARSER.apply(p, t), DOCS);
     PARSER.declareString(MultiGetRequest::setPreference, PREFERENCE);
     PARSER.declareBoolean(MultiGetRequest::setRealtime, REALTIME);
     PARSER.declareBoolean(MultiGetRequest::setRefresh, REFRESH);
-    PARSER.declareRouting(MultiGetRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(MultiGetRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(MultiGetRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(MultiGetRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(MultiGetRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
+    PARSER.declareObjectArray(MultiGetRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(MultiGetRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
   }
 
 }

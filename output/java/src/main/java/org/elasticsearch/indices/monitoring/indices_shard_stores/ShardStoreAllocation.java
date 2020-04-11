@@ -2,6 +2,7 @@
 package org.elasticsearch.indices.monitoring.indices_shard_stores;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum ShardStoreAllocation implements XContentable<ShardStoreAllocation> {
       case "replica": return ShardStoreAllocation.Replica;
       case "unused": return ShardStoreAllocation.Unused;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ShardStoreAllocation.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ShardStoreAllocation.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.watcher_stats;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum WatcherState implements XContentable<WatcherState> {
       case "started": return WatcherState.Started;
       case "stopping": return WatcherState.Stopping;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, WatcherState.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, WatcherState.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

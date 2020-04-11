@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -95,6 +95,7 @@ public class AutoFollowPattern  implements XContentable<AutoFollowPattern> {
   public AutoFollowPattern setRemoteCluster(String val) { this._remoteCluster = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -112,14 +113,14 @@ public class AutoFollowPattern  implements XContentable<AutoFollowPattern> {
     PARSER.declareString(AutoFollowPattern::setFollowIndexPattern, FOLLOW_INDEX_PATTERN);
     PARSER.declareStringArray(AutoFollowPattern::setLeaderIndexPatterns, LEADER_INDEX_PATTERNS);
     PARSER.declareLong(AutoFollowPattern::setMaxOutstandingReadRequests, MAX_OUTSTANDING_READ_REQUESTS);
-    PARSER.declareInteger(AutoFollowPattern::setMaxOutstandingWriteRequests, MAX_OUTSTANDING_WRITE_REQUESTS);
-    PARSER.declareObject(AutoFollowPattern::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, null), READ_POLL_TIMEOUT);
-    PARSER.declareInteger(AutoFollowPattern::setMaxReadRequestOperationCount, MAX_READ_REQUEST_OPERATION_COUNT);
+    PARSER.declareInt(AutoFollowPattern::setMaxOutstandingWriteRequests, MAX_OUTSTANDING_WRITE_REQUESTS);
+    PARSER.declareObject(AutoFollowPattern::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, t), READ_POLL_TIMEOUT);
+    PARSER.declareInt(AutoFollowPattern::setMaxReadRequestOperationCount, MAX_READ_REQUEST_OPERATION_COUNT);
     PARSER.declareString(AutoFollowPattern::setMaxReadRequestSize, MAX_READ_REQUEST_SIZE);
-    PARSER.declareObject(AutoFollowPattern::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, null), MAX_RETRY_DELAY);
-    PARSER.declareInteger(AutoFollowPattern::setMaxWriteBufferCount, MAX_WRITE_BUFFER_COUNT);
+    PARSER.declareObject(AutoFollowPattern::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, t), MAX_RETRY_DELAY);
+    PARSER.declareInt(AutoFollowPattern::setMaxWriteBufferCount, MAX_WRITE_BUFFER_COUNT);
     PARSER.declareString(AutoFollowPattern::setMaxWriteBufferSize, MAX_WRITE_BUFFER_SIZE);
-    PARSER.declareInteger(AutoFollowPattern::setMaxWriteRequestOperationCount, MAX_WRITE_REQUEST_OPERATION_COUNT);
+    PARSER.declareInt(AutoFollowPattern::setMaxWriteRequestOperationCount, MAX_WRITE_REQUEST_OPERATION_COUNT);
     PARSER.declareString(AutoFollowPattern::setMaxWriteRequestSize, MAX_WRITE_REQUEST_SIZE);
     PARSER.declareString(AutoFollowPattern::setRemoteCluster, REMOTE_CLUSTER);
   }

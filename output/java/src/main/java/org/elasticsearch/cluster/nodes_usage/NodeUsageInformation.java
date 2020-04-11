@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class NodeUsageInformation  implements XContentable<NodeUsageInformation> {
@@ -34,6 +34,7 @@ public class NodeUsageInformation  implements XContentable<NodeUsageInformation>
   public NodeUsageInformation setTimestamp(Date val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class NodeUsageInformation  implements XContentable<NodeUsageInformation>
     new ConstructingObjectParser<>(NodeUsageInformation.class.getName(), false, args -> new NodeUsageInformation());
 
   static {
-    PARSER.declareObject(NodeUsageInformation::setRestActions, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Integer.PARSER.apply(pp, null)), REST_ACTIONS);;
-    PARSER.declareDate(NodeUsageInformation::setSince, (p, t) -> Date.createFrom(p), SINCE);
-    PARSER.declareDate(NodeUsageInformation::setTimestamp, (p, t) -> Date.createFrom(p), TIMESTAMP);
+    PARSER.declareObject(NodeUsageInformation::setRestActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.intValue()), REST_ACTIONS);
+    PARSER.declareObject(NodeUsageInformation::setSince, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), SINCE);
+    PARSER.declareObject(NodeUsageInformation::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
   }
 
 }

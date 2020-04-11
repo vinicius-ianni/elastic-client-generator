@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.role.put_role.*;
 
 public class XPackRole  implements XContentable<XPackRole> {
@@ -40,6 +40,7 @@ public class XPackRole  implements XContentable<XPackRole> {
   public XPackRole setRunAs(List<String> val) { this._runAs = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,8 +56,8 @@ public class XPackRole  implements XContentable<XPackRole> {
 
   static {
     PARSER.declareStringArray(XPackRole::setCluster, CLUSTER);
-    PARSER.declareObjectArray(XPackRole::setIndices, (p, t) -> IndicesPrivileges.PARSER.apply(p), INDICES);
-    PARSER.declareObject(XPackRole::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareObjectArray(XPackRole::setIndices, (p, t) -> IndicesPrivileges.PARSER.apply(p, t), INDICES);
+    PARSER.declareObject(XPackRole::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareStringArray(XPackRole::setRunAs, RUN_AS);
   }
 

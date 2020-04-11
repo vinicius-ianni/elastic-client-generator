@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
 
@@ -53,6 +53,7 @@ public class RemoteInfo  implements XContentable<RemoteInfo> {
   public RemoteInfo setSeeds(List<String> val) { this._seeds = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -69,8 +70,8 @@ public class RemoteInfo  implements XContentable<RemoteInfo> {
   static {
     PARSER.declareBoolean(RemoteInfo::setConnected, CONNECTED);
     PARSER.declareBoolean(RemoteInfo::setSkipUnavailable, SKIP_UNAVAILABLE);
-    PARSER.declareObject(RemoteInfo::setInitialConnectTimeout, (p, t) -> Time.PARSER.apply(p, null), INITIAL_CONNECT_TIMEOUT);
-    PARSER.declareInteger(RemoteInfo::setMaxConnectionsPerCluster, MAX_CONNECTIONS_PER_CLUSTER);
+    PARSER.declareObject(RemoteInfo::setInitialConnectTimeout, (p, t) -> Time.PARSER.apply(p, t), INITIAL_CONNECT_TIMEOUT);
+    PARSER.declareInt(RemoteInfo::setMaxConnectionsPerCluster, MAX_CONNECTIONS_PER_CLUSTER);
     PARSER.declareLong(RemoteInfo::setNumNodesConnected, NUM_NODES_CONNECTED);
     PARSER.declareStringArray(RemoteInfo::setSeeds, SEEDS);
   }

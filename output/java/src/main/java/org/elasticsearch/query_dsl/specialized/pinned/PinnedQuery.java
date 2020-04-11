@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
@@ -29,6 +29,7 @@ public class PinnedQuery  implements XContentable<PinnedQuery> {
   public PinnedQuery setOrganic(QueryContainer val) { this._organic = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class PinnedQuery  implements XContentable<PinnedQuery> {
     new ConstructingObjectParser<>(PinnedQuery.class.getName(), false, args -> new PinnedQuery());
 
   static {
-    PARSER.declareObjectArray(PinnedQuery::setIds, (p, t) -> Id.PARSER.apply(p), IDS);
-    PARSER.declareObject(PinnedQuery::setOrganic, (p, t) -> QueryContainer.PARSER.apply(p, null), ORGANIC);
+    PARSER.declareObjectArray(PinnedQuery::setIds, (p, t) -> Id.createFrom(p), IDS);
+    PARSER.declareObject(PinnedQuery::setOrganic, (p, t) -> QueryContainer.PARSER.apply(p, t), ORGANIC);
   }
 
 }

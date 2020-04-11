@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.job.detectors;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -51,7 +52,7 @@ public enum MetricFunction implements XContentable<MetricFunction> {
       case "HighVarp": return MetricFunction.HighVarp;
       case "LowVarp": return MetricFunction.LowVarp;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, MetricFunction.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, MetricFunction.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

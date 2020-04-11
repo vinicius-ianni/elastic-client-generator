@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.machine_learning_info.*;
 
 public class Defaults  implements XContentable<Defaults> {
@@ -28,6 +28,7 @@ public class Defaults  implements XContentable<Defaults> {
   public Defaults setDatafeeds(Datafeeds val) { this._datafeeds = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class Defaults  implements XContentable<Defaults> {
     new ConstructingObjectParser<>(Defaults.class.getName(), false, args -> new Defaults());
 
   static {
-    PARSER.declareObject(Defaults::setAnomalyDetectors, (p, t) -> AnomalyDetectors.PARSER.apply(p, null), ANOMALY_DETECTORS);
-    PARSER.declareObject(Defaults::setDatafeeds, (p, t) -> Datafeeds.PARSER.apply(p, null), DATAFEEDS);
+    PARSER.declareObject(Defaults::setAnomalyDetectors, (p, t) -> AnomalyDetectors.PARSER.apply(p, t), ANOMALY_DETECTORS);
+    PARSER.declareObject(Defaults::setDatafeeds, (p, t) -> Datafeeds.PARSER.apply(p, t), DATAFEEDS);
   }
 
 }

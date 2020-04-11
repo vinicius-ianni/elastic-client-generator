@@ -2,6 +2,7 @@
 package org.elasticsearch.modules.cluster.shard_allocation;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum AllocationEnable implements XContentable<AllocationEnable> {
       case "new_primaries": return AllocationEnable.NewPrimaries;
       case "none": return AllocationEnable.None;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, AllocationEnable.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, AllocationEnable.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

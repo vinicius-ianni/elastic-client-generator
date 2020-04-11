@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.analysis.*;
 
@@ -47,6 +47,7 @@ public class FingerprintAnalyzer  implements XContentable<FingerprintAnalyzer> {
   public FingerprintAnalyzer setStopwordsPath(String val) { this._stopwordsPath = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,10 +62,10 @@ public class FingerprintAnalyzer  implements XContentable<FingerprintAnalyzer> {
     new ConstructingObjectParser<>(FingerprintAnalyzer.class.getName(), false, args -> new FingerprintAnalyzer());
 
   static {
-    PARSER.declareInteger(FingerprintAnalyzer::setMaxOutputSize, MAX_OUTPUT_SIZE);
+    PARSER.declareInt(FingerprintAnalyzer::setMaxOutputSize, MAX_OUTPUT_SIZE);
     PARSER.declareBoolean(FingerprintAnalyzer::setPreserveOriginal, PRESERVE_ORIGINAL);
     PARSER.declareString(FingerprintAnalyzer::setSeparator, SEPARATOR);
-    PARSER.declareObject(FingerprintAnalyzer::setStopwords, (p, t) -> StopWords.PARSER.apply(p, null), STOPWORDS);
+    PARSER.declareObject(FingerprintAnalyzer::setStopwords, (p, t) -> new StopWords().fromXContent(p), STOPWORDS);
     PARSER.declareString(FingerprintAnalyzer::setStopwordsPath, STOPWORDS_PATH);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class NodeInfoOscpu  implements XContentable<NodeInfoOscpu> {
@@ -64,6 +64,7 @@ public class NodeInfoOscpu  implements XContentable<NodeInfoOscpu> {
   public NodeInfoOscpu setVendor(String val) { this._vendor = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -79,12 +80,12 @@ public class NodeInfoOscpu  implements XContentable<NodeInfoOscpu> {
 
   static {
     PARSER.declareString(NodeInfoOscpu::setCacheSize, CACHE_SIZE);
-    PARSER.declareInteger(NodeInfoOscpu::setCacheSizeInBytes, CACHE_SIZE_IN_BYTES);
-    PARSER.declareInteger(NodeInfoOscpu::setCoresPerSocket, CORES_PER_SOCKET);
-    PARSER.declareInteger(NodeInfoOscpu::setMhz, MHZ);
+    PARSER.declareInt(NodeInfoOscpu::setCacheSizeInBytes, CACHE_SIZE_IN_BYTES);
+    PARSER.declareInt(NodeInfoOscpu::setCoresPerSocket, CORES_PER_SOCKET);
+    PARSER.declareInt(NodeInfoOscpu::setMhz, MHZ);
     PARSER.declareString(NodeInfoOscpu::setModel, MODEL);
-    PARSER.declareInteger(NodeInfoOscpu::setTotalCores, TOTAL_CORES);
-    PARSER.declareInteger(NodeInfoOscpu::setTotalSockets, TOTAL_SOCKETS);
+    PARSER.declareInt(NodeInfoOscpu::setTotalCores, TOTAL_CORES);
+    PARSER.declareInt(NodeInfoOscpu::setTotalSockets, TOTAL_SOCKETS);
     PARSER.declareString(NodeInfoOscpu::setVendor, VENDOR);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -114,6 +114,7 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
   public SearchTemplateRequest setSource(String val) { this._source = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -130,19 +131,19 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
   static {
     PARSER.declareBoolean(SearchTemplateRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(SearchTemplateRequest::setCcsMinimizeRoundtrips, CCS_MINIMIZE_ROUNDTRIPS);
-    PARSER.declareObject(SearchTemplateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(SearchTemplateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(SearchTemplateRequest::setExplain, EXPLAIN);
     PARSER.declareBoolean(SearchTemplateRequest::setIgnoreThrottled, IGNORE_THROTTLED);
     PARSER.declareBoolean(SearchTemplateRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareString(SearchTemplateRequest::setPreference, PREFERENCE);
     PARSER.declareBoolean(SearchTemplateRequest::setProfile, PROFILE);
-    PARSER.declareRouting(SearchTemplateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(SearchTemplateRequest::setScroll, (p, t) -> Time.PARSER.apply(p, null), SCROLL);
-    PARSER.declareObject(SearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p, null), SEARCH_TYPE);
+    PARSER.declareObject(SearchTemplateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(SearchTemplateRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
+    PARSER.declareObject(SearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
     PARSER.declareBoolean(SearchTemplateRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);
     PARSER.declareBoolean(SearchTemplateRequest::setTypedKeys, TYPED_KEYS);
     PARSER.declareString(SearchTemplateRequest::setId, ID);
-    PARSER.declareObject(SearchTemplateRequest::setParams, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);;
+    PARSER.declareObject(SearchTemplateRequest::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);
     PARSER.declareString(SearchTemplateRequest::setSource, SOURCE);
   }
 

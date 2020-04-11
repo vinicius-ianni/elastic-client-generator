@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.job.detectors;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum NonNullSumFunction implements XContentable<NonNullSumFunction> {
       case "HighNonNullSum": return NonNullSumFunction.HighNonNullSum;
       case "LowNonNullSum": return NonNullSumFunction.LowNonNullSum;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, NonNullSumFunction.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, NonNullSumFunction.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

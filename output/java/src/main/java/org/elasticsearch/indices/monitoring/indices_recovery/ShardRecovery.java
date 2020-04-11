@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.indices.monitoring.indices_recovery.*;
 
@@ -95,6 +95,7 @@ public class ShardRecovery  implements XContentable<ShardRecovery> {
   public ShardRecovery setVerifyIndex(RecoveryVerifyIndex val) { this._verifyIndex = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -110,18 +111,18 @@ public class ShardRecovery  implements XContentable<ShardRecovery> {
 
   static {
     PARSER.declareLong(ShardRecovery::setId, ID);
-    PARSER.declareObject(ShardRecovery::setIndex, (p, t) -> RecoveryIndexStatus.PARSER.apply(p, null), INDEX);
+    PARSER.declareObject(ShardRecovery::setIndex, (p, t) -> RecoveryIndexStatus.PARSER.apply(p, t), INDEX);
     PARSER.declareBoolean(ShardRecovery::setPrimary, PRIMARY);
-    PARSER.declareObject(ShardRecovery::setSource, (p, t) -> RecoveryOrigin.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(ShardRecovery::setSource, (p, t) -> RecoveryOrigin.PARSER.apply(p, t), SOURCE);
     PARSER.declareString(ShardRecovery::setStage, STAGE);
-    PARSER.declareObject(ShardRecovery::setStart, (p, t) -> RecoveryStartStatus.PARSER.apply(p, null), START);
-    PARSER.declareDate(ShardRecovery::setStartTimeInMillis, (p, t) -> Date.createFrom(p), START_TIME_IN_MILLIS);
-    PARSER.declareDate(ShardRecovery::setStopTimeInMillis, (p, t) -> Date.createFrom(p), STOP_TIME_IN_MILLIS);
-    PARSER.declareObject(ShardRecovery::setTarget, (p, t) -> RecoveryOrigin.PARSER.apply(p, null), TARGET);
+    PARSER.declareObject(ShardRecovery::setStart, (p, t) -> RecoveryStartStatus.PARSER.apply(p, t), START);
+    PARSER.declareObject(ShardRecovery::setStartTimeInMillis, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), START_TIME_IN_MILLIS);
+    PARSER.declareObject(ShardRecovery::setStopTimeInMillis, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), STOP_TIME_IN_MILLIS);
+    PARSER.declareObject(ShardRecovery::setTarget, (p, t) -> RecoveryOrigin.PARSER.apply(p, t), TARGET);
     PARSER.declareLong(ShardRecovery::setTotalTimeInMillis, TOTAL_TIME_IN_MILLIS);
-    PARSER.declareObject(ShardRecovery::setTranslog, (p, t) -> RecoveryTranslogStatus.PARSER.apply(p, null), TRANSLOG);
+    PARSER.declareObject(ShardRecovery::setTranslog, (p, t) -> RecoveryTranslogStatus.PARSER.apply(p, t), TRANSLOG);
     PARSER.declareString(ShardRecovery::setType, TYPE);
-    PARSER.declareObject(ShardRecovery::setVerifyIndex, (p, t) -> RecoveryVerifyIndex.PARSER.apply(p, null), VERIFY_INDEX);
+    PARSER.declareObject(ShardRecovery::setVerifyIndex, (p, t) -> RecoveryVerifyIndex.PARSER.apply(p, t), VERIFY_INDEX);
   }
 
 }

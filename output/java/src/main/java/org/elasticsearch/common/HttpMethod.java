@@ -2,6 +2,7 @@
 package org.elasticsearch.common;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public enum HttpMethod implements XContentable<HttpMethod> {
       case "DELETE": return HttpMethod.Delete;
       case "HEAD": return HttpMethod.Head;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, HttpMethod.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, HttpMethod.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

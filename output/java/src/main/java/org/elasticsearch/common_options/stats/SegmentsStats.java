@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.indices.monitoring.indices_stats.*;
 
@@ -101,6 +101,7 @@ public class SegmentsStats  implements XContentable<SegmentsStats> {
   public SegmentsStats setFileSizes(NamedContainer<String, ShardFileSizeInfo> val) { this._fileSizes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -128,7 +129,7 @@ public class SegmentsStats  implements XContentable<SegmentsStats> {
     PARSER.declareLong(SegmentsStats::setTermsMemoryInBytes, TERMS_MEMORY_IN_BYTES);
     PARSER.declareLong(SegmentsStats::setTermVectorsMemoryInBytes, TERM_VECTORS_MEMORY_IN_BYTES);
     PARSER.declareLong(SegmentsStats::setVersionMapMemoryInBytes, VERSION_MAP_MEMORY_IN_BYTES);
-    PARSER.declareObject(SegmentsStats::setFileSizes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> ShardFileSizeInfo.PARSER.apply(pp, null)), FILE_SIZES);;
+    PARSER.declareObject(SegmentsStats::setFileSizes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ShardFileSizeInfo.PARSER.apply(pp, null)), FILE_SIZES);
   }
 
 }

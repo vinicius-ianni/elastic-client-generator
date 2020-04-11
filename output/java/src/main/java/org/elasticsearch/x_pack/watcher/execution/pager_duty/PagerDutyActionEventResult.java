@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.action.pager_duty.*;
 import org.elasticsearch.x_pack.watcher.execution.*;
 
@@ -41,6 +41,7 @@ public class PagerDutyActionEventResult  implements XContentable<PagerDutyAction
   public PagerDutyActionEventResult setResponse(HttpInputResponseResult val) { this._response = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,10 +56,10 @@ public class PagerDutyActionEventResult  implements XContentable<PagerDutyAction
     new ConstructingObjectParser<>(PagerDutyActionEventResult.class.getName(), false, args -> new PagerDutyActionEventResult());
 
   static {
-    PARSER.declareObject(PagerDutyActionEventResult::setEvent, (p, t) -> PagerDutyEvent.PARSER.apply(p, null), EVENT);
+    PARSER.declareObject(PagerDutyActionEventResult::setEvent, (p, t) -> PagerDutyEvent.PARSER.apply(p, t), EVENT);
     PARSER.declareString(PagerDutyActionEventResult::setReason, REASON);
-    PARSER.declareObject(PagerDutyActionEventResult::setRequest, (p, t) -> HttpInputRequestResult.PARSER.apply(p, null), REQUEST);
-    PARSER.declareObject(PagerDutyActionEventResult::setResponse, (p, t) -> HttpInputResponseResult.PARSER.apply(p, null), RESPONSE);
+    PARSER.declareObject(PagerDutyActionEventResult::setRequest, (p, t) -> HttpInputRequestResult.PARSER.apply(p, t), REQUEST);
+    PARSER.declareObject(PagerDutyActionEventResult::setResponse, (p, t) -> HttpInputResponseResult.PARSER.apply(p, t), RESPONSE);
   }
 
 }

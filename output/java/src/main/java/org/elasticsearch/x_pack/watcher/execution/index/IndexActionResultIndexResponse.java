@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.document.*;
 import org.elasticsearch.internal.*;
@@ -48,6 +48,7 @@ public class IndexActionResultIndexResponse  implements XContentable<IndexAction
   public IndexActionResultIndexResponse setVersion(Integer val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -64,9 +65,9 @@ public class IndexActionResultIndexResponse  implements XContentable<IndexAction
   static {
     PARSER.declareBoolean(IndexActionResultIndexResponse::setCreated, CREATED);
     PARSER.declareString(IndexActionResultIndexResponse::setId, ID);
-    PARSER.declareIndexName(IndexActionResultIndexResponse::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareObject(IndexActionResultIndexResponse::setResult, (p, t) -> Result.PARSER.apply(p, null), RESULT);
-    PARSER.declareInteger(IndexActionResultIndexResponse::setVersion, VERSION);
+    PARSER.declareObject(IndexActionResultIndexResponse::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(IndexActionResultIndexResponse::setResult, (p, t) -> Result.PARSER.apply(p), RESULT);
+    PARSER.declareInt(IndexActionResultIndexResponse::setVersion, VERSION);
   }
 
 }

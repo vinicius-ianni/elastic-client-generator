@@ -5,17 +5,17 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.lazy_document.*;
 import org.elasticsearch.internal.*;
 
-public class GetResponse<TDocument>  implements XContentable<GetResponse> {
+public class GetResponse<TDocument>  implements XContentable<GetResponse<TDocument>> {
   
   static final ParseField FIELDS = new ParseField("fields");
   private NamedContainer<String, LazyDocument> _fields;
@@ -77,6 +77,7 @@ public class GetResponse<TDocument>  implements XContentable<GetResponse> {
   public GetResponse<TDocument> setVersion(Long val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -91,14 +92,14 @@ public class GetResponse<TDocument>  implements XContentable<GetResponse> {
     new ConstructingObjectParser<>(GetResponse.class.getName(), false, args -> new GetResponse());
 
   static {
-    PARSER.declareObject(GetResponse::setFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);;
+    PARSER.declareObject(GetResponse::setFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);
     PARSER.declareBoolean(GetResponse::setFound, FOUND);
     PARSER.declareString(GetResponse::setId, ID);
     PARSER.declareString(GetResponse::setIndex, INDEX);
     PARSER.declareLong(GetResponse::setPrimaryTerm, PRIMARY_TERM);
     PARSER.declareString(GetResponse::setRouting, ROUTING);
     PARSER.declareLong(GetResponse::setSeqNo, SEQ_NO);
-    PARSER.declareObject(GetResponse::setSource, (p, t) -> TDocument.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(GetResponse::setSource, (p, t) -> null /* TODO TDocument */, SOURCE);
     PARSER.declareString(GetResponse::setType, TYPE);
     PARSER.declareLong(GetResponse::setVersion, VERSION);
   }

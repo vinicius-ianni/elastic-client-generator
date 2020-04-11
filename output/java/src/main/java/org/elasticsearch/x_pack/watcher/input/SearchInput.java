@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.input.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -35,6 +35,7 @@ public class SearchInput  implements XContentable<SearchInput> {
   public SearchInput setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,8 +51,8 @@ public class SearchInput  implements XContentable<SearchInput> {
 
   static {
     PARSER.declareStringArray(SearchInput::setExtract, EXTRACT);
-    PARSER.declareObject(SearchInput::setRequest, (p, t) -> SearchInputRequest.PARSER.apply(p, null), REQUEST);
-    PARSER.declareObject(SearchInput::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(SearchInput::setRequest, (p, t) -> SearchInputRequest.PARSER.apply(p, t), REQUEST);
+    PARSER.declareObject(SearchInput::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

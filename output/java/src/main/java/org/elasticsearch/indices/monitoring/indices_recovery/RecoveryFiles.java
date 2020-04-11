@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.monitoring.indices_recovery.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class RecoveryFiles  implements XContentable<RecoveryFiles> {
   public RecoveryFiles setTotal(Long val) { this._total = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,7 +62,7 @@ public class RecoveryFiles  implements XContentable<RecoveryFiles> {
     new ConstructingObjectParser<>(RecoveryFiles.class.getName(), false, args -> new RecoveryFiles());
 
   static {
-    PARSER.declareObjectArray(RecoveryFiles::setDetails, (p, t) -> RecoveryFileDetails.PARSER.apply(p), DETAILS);
+    PARSER.declareObjectArray(RecoveryFiles::setDetails, (p, t) -> RecoveryFileDetails.PARSER.apply(p, t), DETAILS);
     PARSER.declareString(RecoveryFiles::setPercent, PERCENT);
     PARSER.declareLong(RecoveryFiles::setRecovered, RECOVERED);
     PARSER.declareLong(RecoveryFiles::setReused, REUSED);

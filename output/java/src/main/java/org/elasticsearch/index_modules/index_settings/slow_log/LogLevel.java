@@ -2,6 +2,7 @@
 package org.elasticsearch.index_modules.index_settings.slow_log;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -37,7 +38,7 @@ public enum LogLevel implements XContentable<LogLevel> {
       case "debug": return LogLevel.Debug;
       case "trace": return LogLevel.Trace;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, LogLevel.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, LogLevel.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

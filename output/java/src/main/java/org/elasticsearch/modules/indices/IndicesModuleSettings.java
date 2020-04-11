@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.modules.indices.circuit_breaker.*;
 import org.elasticsearch.modules.indices.fielddata.*;
 import org.elasticsearch.modules.indices.recovery.*;
@@ -42,6 +42,7 @@ public class IndicesModuleSettings  implements XContentable<IndicesModuleSetting
   public IndicesModuleSettings setRecoverySettings(IndicesRecoverySettings val) { this._recoverySettings = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class IndicesModuleSettings  implements XContentable<IndicesModuleSetting
     new ConstructingObjectParser<>(IndicesModuleSettings.class.getName(), false, args -> new IndicesModuleSettings());
 
   static {
-    PARSER.declareObject(IndicesModuleSettings::setCircuitBreakerSettings, (p, t) -> CircuitBreakerSettings.PARSER.apply(p, null), CIRCUIT_BREAKER_SETTINGS);
-    PARSER.declareObject(IndicesModuleSettings::setFielddataSettings, (p, t) -> FielddataSettings.PARSER.apply(p, null), FIELDDATA_SETTINGS);
+    PARSER.declareObject(IndicesModuleSettings::setCircuitBreakerSettings, (p, t) -> CircuitBreakerSettings.PARSER.apply(p, t), CIRCUIT_BREAKER_SETTINGS);
+    PARSER.declareObject(IndicesModuleSettings::setFielddataSettings, (p, t) -> FielddataSettings.PARSER.apply(p, t), FIELDDATA_SETTINGS);
     PARSER.declareString(IndicesModuleSettings::setQeueriesCacheSize, QEUERIES_CACHE_SIZE);
-    PARSER.declareObject(IndicesModuleSettings::setRecoverySettings, (p, t) -> IndicesRecoverySettings.PARSER.apply(p, null), RECOVERY_SETTINGS);
+    PARSER.declareObject(IndicesModuleSettings::setRecoverySettings, (p, t) -> IndicesRecoverySettings.PARSER.apply(p, t), RECOVERY_SETTINGS);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.field_lookup.*;
 import org.elasticsearch.common_options.shape.*;
 import org.elasticsearch.query_dsl.geo.shape.*;
@@ -42,6 +42,7 @@ public class ShapeQuery  implements XContentable<ShapeQuery> {
   public ShapeQuery setShape(GeoShape val) { this._shape = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -57,9 +58,9 @@ public class ShapeQuery  implements XContentable<ShapeQuery> {
 
   static {
     PARSER.declareBoolean(ShapeQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
-    PARSER.declareObject(ShapeQuery::setIndexedShape, (p, t) -> FieldLookup.PARSER.apply(p, null), INDEXED_SHAPE);
-    PARSER.declareObject(ShapeQuery::setRelation, (p, t) -> ShapeRelation.PARSER.apply(p, null), RELATION);
-    PARSER.declareObject(ShapeQuery::setShape, (p, t) -> GeoShape.PARSER.apply(p, null), SHAPE);
+    PARSER.declareObject(ShapeQuery::setIndexedShape, (p, t) -> FieldLookup.PARSER.apply(p, t), INDEXED_SHAPE);
+    PARSER.declareObject(ShapeQuery::setRelation, (p, t) -> ShapeRelation.PARSER.apply(p), RELATION);
+    PARSER.declareObject(ShapeQuery::setShape, (p, t) -> GeoShape.PARSER.apply(p, t), SHAPE);
   }
 
 }

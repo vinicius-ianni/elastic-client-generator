@@ -5,20 +5,20 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.suggesters.context_suggester.*;
 import org.elasticsearch.query_dsl.geo.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.lazy_document.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 
-public class SuggestOption<TDocument>  implements XContentable<SuggestOption> {
+public class SuggestOption<TDocument>  implements XContentable<SuggestOption<TDocument>> {
   
   static final ParseField COLLATE_MATCH = new ParseField("collate_match");
   private Boolean _collateMatch;
@@ -80,6 +80,7 @@ public class SuggestOption<TDocument>  implements XContentable<SuggestOption> {
   public SuggestOption<TDocument> setText(String val) { this._text = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -95,14 +96,14 @@ public class SuggestOption<TDocument>  implements XContentable<SuggestOption> {
 
   static {
     PARSER.declareBoolean(SuggestOption::setCollateMatch, COLLATE_MATCH);
-    PARSER.declareObject(SuggestOption::setContexts, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), CONTEXTS);;
+    PARSER.declareObject(SuggestOption::setContexts, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<Context> */), CONTEXTS);
     PARSER.declareDouble(SuggestOption::setScore, SCORE);
-    PARSER.declareObject(SuggestOption::setFields, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);;
+    PARSER.declareObject(SuggestOption::setFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);
     PARSER.declareLong(SuggestOption::setFreq, FREQ);
     PARSER.declareString(SuggestOption::setHighlighted, HIGHLIGHTED);
     PARSER.declareString(SuggestOption::setId, ID);
-    PARSER.declareIndexName(SuggestOption::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareObject(SuggestOption::setSource, (p, t) -> TDocument.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(SuggestOption::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(SuggestOption::setSource, (p, t) -> null /* TODO TDocument */, SOURCE);
     PARSER.declareString(SuggestOption::setText, TEXT);
   }
 

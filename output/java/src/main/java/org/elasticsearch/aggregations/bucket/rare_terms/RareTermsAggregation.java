@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.bucket.terms.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
@@ -54,6 +54,7 @@ public class RareTermsAggregation  implements XContentable<RareTermsAggregation>
   public RareTermsAggregation setPrecision(Double val) { this._precision = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,11 +69,11 @@ public class RareTermsAggregation  implements XContentable<RareTermsAggregation>
     new ConstructingObjectParser<>(RareTermsAggregation.class.getName(), false, args -> new RareTermsAggregation());
 
   static {
-    PARSER.declareObject(RareTermsAggregation::setExclude, (p, t) -> TermsExclude.PARSER.apply(p, null), EXCLUDE);
-    PARSER.declareField(RareTermsAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObject(RareTermsAggregation::setInclude, (p, t) -> TermsInclude.PARSER.apply(p, null), INCLUDE);
+    PARSER.declareObject(RareTermsAggregation::setExclude, (p, t) -> TermsExclude.PARSER.apply(p, t), EXCLUDE);
+    PARSER.declareObject(RareTermsAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(RareTermsAggregation::setInclude, (p, t) -> TermsInclude.PARSER.apply(p, t), INCLUDE);
     PARSER.declareLong(RareTermsAggregation::setMaxDocCount, MAX_DOC_COUNT);
-    PARSER.declareObject(RareTermsAggregation::setMissing, (p, t) -> Object.PARSER.apply(p, null), MISSING);
+    PARSER.declareObject(RareTermsAggregation::setMissing, (p, t) -> p.objectText(), MISSING);
     PARSER.declareDouble(RareTermsAggregation::setPrecision, PRECISION);
   }
 

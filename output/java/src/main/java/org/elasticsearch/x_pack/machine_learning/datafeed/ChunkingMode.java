@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.datafeed;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum ChunkingMode implements XContentable<ChunkingMode> {
       case "manual": return ChunkingMode.Manual;
       case "off": return ChunkingMode.Off;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ChunkingMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ChunkingMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

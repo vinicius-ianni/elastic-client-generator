@@ -2,6 +2,7 @@
 package org.elasticsearch.cluster;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum ClusterStatus implements XContentable<ClusterStatus> {
       case "yellow": return ClusterStatus.Yellow;
       case "red": return ClusterStatus.Red;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ClusterStatus.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ClusterStatus.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

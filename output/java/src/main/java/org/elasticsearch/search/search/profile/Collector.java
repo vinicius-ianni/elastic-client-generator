@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.profile.*;
 import org.elasticsearch.internal.*;
 
@@ -41,6 +41,7 @@ public class Collector  implements XContentable<Collector> {
   public Collector setTimeInNanos(Long val) { this._timeInNanos = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,7 +56,7 @@ public class Collector  implements XContentable<Collector> {
     new ConstructingObjectParser<>(Collector.class.getName(), false, args -> new Collector());
 
   static {
-    PARSER.declareObjectArray(Collector::setChildren, (p, t) -> Collector.PARSER.apply(p), CHILDREN);
+    PARSER.declareObjectArray(Collector::setChildren, (p, t) -> Collector.PARSER.apply(p, t), CHILDREN);
     PARSER.declareString(Collector::setName, NAME);
     PARSER.declareString(Collector::setReason, REASON);
     PARSER.declareLong(Collector::setTimeInNanos, TIME_IN_NANOS);

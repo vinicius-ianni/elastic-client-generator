@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_stats.*;
 
 public class ReloadSecureSettingsResponse  implements XContentable<ReloadSecureSettingsResponse> {
@@ -28,6 +28,7 @@ public class ReloadSecureSettingsResponse  implements XContentable<ReloadSecureS
   public ReloadSecureSettingsResponse setNodes(NamedContainer<String, NodeStats> val) { this._nodes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class ReloadSecureSettingsResponse  implements XContentable<ReloadSecureS
 
   static {
     PARSER.declareString(ReloadSecureSettingsResponse::setClusterName, CLUSTER_NAME);
-    PARSER.declareObject(ReloadSecureSettingsResponse::setNodes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> NodeStats.PARSER.apply(pp, null)), NODES);;
+    PARSER.declareObject(ReloadSecureSettingsResponse::setNodes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> NodeStats.PARSER.apply(pp, null)), NODES);
   }
 
 }

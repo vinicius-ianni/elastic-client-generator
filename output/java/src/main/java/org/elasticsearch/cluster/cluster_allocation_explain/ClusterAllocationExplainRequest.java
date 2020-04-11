@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class ClusterAllocationExplainRequest  implements XContentable<ClusterAll
   public ClusterAllocationExplainRequest setIncludeYesDecisions(Boolean val) { this._includeYesDecisions = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,9 +62,9 @@ public class ClusterAllocationExplainRequest  implements XContentable<ClusterAll
     new ConstructingObjectParser<>(ClusterAllocationExplainRequest.class.getName(), false, args -> new ClusterAllocationExplainRequest());
 
   static {
-    PARSER.declareIndexName(ClusterAllocationExplainRequest::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(ClusterAllocationExplainRequest::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
     PARSER.declareBoolean(ClusterAllocationExplainRequest::setPrimary, PRIMARY);
-    PARSER.declareInteger(ClusterAllocationExplainRequest::setShard, SHARD);
+    PARSER.declareInt(ClusterAllocationExplainRequest::setShard, SHARD);
     PARSER.declareBoolean(ClusterAllocationExplainRequest::setIncludeDiskInfo, INCLUDE_DISK_INFO);
     PARSER.declareBoolean(ClusterAllocationExplainRequest::setIncludeYesDecisions, INCLUDE_YES_DECISIONS);
   }

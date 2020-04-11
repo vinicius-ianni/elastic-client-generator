@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.condition.*;
 
 public class ConditionContainer  implements XContentable<ConditionContainer> {
@@ -46,6 +46,7 @@ public class ConditionContainer  implements XContentable<ConditionContainer> {
   public ConditionContainer setScript(ScriptCondition val) { this._script = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,11 +61,11 @@ public class ConditionContainer  implements XContentable<ConditionContainer> {
     new ConstructingObjectParser<>(ConditionContainer.class.getName(), false, args -> new ConditionContainer());
 
   static {
-    PARSER.declareObject(ConditionContainer::setAlways, (p, t) -> AlwaysCondition.PARSER.apply(p, null), ALWAYS);
-    PARSER.declareObject(ConditionContainer::setArrayCompare, (p, t) -> ArrayCompareCondition.PARSER.apply(p, null), ARRAY_COMPARE);
-    PARSER.declareObject(ConditionContainer::setCompare, (p, t) -> CompareCondition.PARSER.apply(p, null), COMPARE);
-    PARSER.declareObject(ConditionContainer::setNever, (p, t) -> NeverCondition.PARSER.apply(p, null), NEVER);
-    PARSER.declareObject(ConditionContainer::setScript, (p, t) -> ScriptCondition.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(ConditionContainer::setAlways, (p, t) -> AlwaysCondition.PARSER.apply(p, t), ALWAYS);
+    PARSER.declareObject(ConditionContainer::setArrayCompare, (p, t) -> ArrayCompareCondition.PARSER.apply(p, t), ARRAY_COMPARE);
+    PARSER.declareObject(ConditionContainer::setCompare, (p, t) -> CompareCondition.PARSER.apply(p, t), COMPARE);
+    PARSER.declareObject(ConditionContainer::setNever, (p, t) -> NeverCondition.PARSER.apply(p, t), NEVER);
+    PARSER.declareObject(ConditionContainer::setScript, (p, t) -> ScriptCondition.PARSER.apply(p, t), SCRIPT);
   }
 
 }

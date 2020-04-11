@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.acknowledge_watch.*;
 import org.elasticsearch.internal.*;
 
@@ -29,6 +29,7 @@ public class AcknowledgeState  implements XContentable<AcknowledgeState> {
   public AcknowledgeState setTimestamp(Date val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class AcknowledgeState  implements XContentable<AcknowledgeState> {
     new ConstructingObjectParser<>(AcknowledgeState.class.getName(), false, args -> new AcknowledgeState());
 
   static {
-    PARSER.declareObject(AcknowledgeState::setState, (p, t) -> AcknowledgementState.PARSER.apply(p, null), STATE);
-    PARSER.declareDate(AcknowledgeState::setTimestamp, (p, t) -> Date.createFrom(p), TIMESTAMP);
+    PARSER.declareObject(AcknowledgeState::setState, (p, t) -> AcknowledgementState.PARSER.apply(p), STATE);
+    PARSER.declareObject(AcknowledgeState::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
   }
 
 }

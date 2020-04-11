@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.compound.bool.*;
 import org.elasticsearch.query_dsl.compound.boosting.*;
 import org.elasticsearch.query_dsl.full_text.common_terms.*;
@@ -395,6 +395,7 @@ public class QueryContainer  implements XContentable<QueryContainer> {
   public QueryContainer setPinned(PinnedQuery val) { this._pinned = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -409,61 +410,61 @@ public class QueryContainer  implements XContentable<QueryContainer> {
     new ConstructingObjectParser<>(QueryContainer.class.getName(), false, args -> new QueryContainer());
 
   static {
-    PARSER.declareObject(QueryContainer::setBool, (p, t) -> BoolQuery.PARSER.apply(p, null), BOOL);
-    PARSER.declareObject(QueryContainer::setBoosting, (p, t) -> BoostingQuery.PARSER.apply(p, null), BOOSTING);
-    PARSER.declareObject(QueryContainer::setCommon, (p, t) -> CommonTermsQuery.PARSER.apply(p, null), COMMON);
-    PARSER.declareObject(QueryContainer::setConstantScore, (p, t) -> ConstantScoreQuery.PARSER.apply(p, null), CONSTANT_SCORE);
-    PARSER.declareObject(QueryContainer::setDisMax, (p, t) -> DisMaxQuery.PARSER.apply(p, null), DIS_MAX);
-    PARSER.declareObject(QueryContainer::setExists, (p, t) -> ExistsQuery.PARSER.apply(p, null), EXISTS);
-    PARSER.declareObject(QueryContainer::setFunctionScore, (p, t) -> FunctionScoreQuery.PARSER.apply(p, null), FUNCTION_SCORE);
-    PARSER.declareObject(QueryContainer::setFuzzy, (p, t) -> FuzzyQuery.PARSER.apply(p, null), FUZZY);
-    PARSER.declareObject(QueryContainer::setGeoBoundingBox, (p, t) -> GeoBoundingBoxQuery.PARSER.apply(p, null), GEO_BOUNDING_BOX);
-    PARSER.declareObject(QueryContainer::setGeoDistance, (p, t) -> GeoDistanceQuery.PARSER.apply(p, null), GEO_DISTANCE);
-    PARSER.declareObject(QueryContainer::setGeoPolygon, (p, t) -> GeoPolygonQuery.PARSER.apply(p, null), GEO_POLYGON);
-    PARSER.declareObject(QueryContainer::setGeoShape, (p, t) -> GeoShapeQuery.PARSER.apply(p, null), GEO_SHAPE);
-    PARSER.declareObject(QueryContainer::setShape, (p, t) -> ShapeQuery.PARSER.apply(p, null), SHAPE);
-    PARSER.declareObject(QueryContainer::setHasChild, (p, t) -> HasChildQuery.PARSER.apply(p, null), HAS_CHILD);
-    PARSER.declareObject(QueryContainer::setHasParent, (p, t) -> HasParentQuery.PARSER.apply(p, null), HAS_PARENT);
-    PARSER.declareObject(QueryContainer::setIds, (p, t) -> IdsQuery.PARSER.apply(p, null), IDS);
-    PARSER.declareObject(QueryContainer::setIntervals, (p, t) -> IntervalsQuery.PARSER.apply(p, null), INTERVALS);
+    PARSER.declareObject(QueryContainer::setBool, (p, t) -> BoolQuery.PARSER.apply(p, t), BOOL);
+    PARSER.declareObject(QueryContainer::setBoosting, (p, t) -> BoostingQuery.PARSER.apply(p, t), BOOSTING);
+    PARSER.declareObject(QueryContainer::setCommon, (p, t) -> CommonTermsQuery.PARSER.apply(p, t), COMMON);
+    PARSER.declareObject(QueryContainer::setConstantScore, (p, t) -> ConstantScoreQuery.PARSER.apply(p, t), CONSTANT_SCORE);
+    PARSER.declareObject(QueryContainer::setDisMax, (p, t) -> DisMaxQuery.PARSER.apply(p, t), DIS_MAX);
+    PARSER.declareObject(QueryContainer::setExists, (p, t) -> ExistsQuery.PARSER.apply(p, t), EXISTS);
+    PARSER.declareObject(QueryContainer::setFunctionScore, (p, t) -> FunctionScoreQuery.PARSER.apply(p, t), FUNCTION_SCORE);
+    PARSER.declareObject(QueryContainer::setFuzzy, (p, t) -> FuzzyQuery.PARSER.apply(p, t), FUZZY);
+    PARSER.declareObject(QueryContainer::setGeoBoundingBox, (p, t) -> GeoBoundingBoxQuery.PARSER.apply(p, t), GEO_BOUNDING_BOX);
+    PARSER.declareObject(QueryContainer::setGeoDistance, (p, t) -> GeoDistanceQuery.PARSER.apply(p, t), GEO_DISTANCE);
+    PARSER.declareObject(QueryContainer::setGeoPolygon, (p, t) -> GeoPolygonQuery.PARSER.apply(p, t), GEO_POLYGON);
+    PARSER.declareObject(QueryContainer::setGeoShape, (p, t) -> GeoShapeQuery.PARSER.apply(p, t), GEO_SHAPE);
+    PARSER.declareObject(QueryContainer::setShape, (p, t) -> ShapeQuery.PARSER.apply(p, t), SHAPE);
+    PARSER.declareObject(QueryContainer::setHasChild, (p, t) -> HasChildQuery.PARSER.apply(p, t), HAS_CHILD);
+    PARSER.declareObject(QueryContainer::setHasParent, (p, t) -> HasParentQuery.PARSER.apply(p, t), HAS_PARENT);
+    PARSER.declareObject(QueryContainer::setIds, (p, t) -> IdsQuery.PARSER.apply(p, t), IDS);
+    PARSER.declareObject(QueryContainer::setIntervals, (p, t) -> IntervalsQuery.PARSER.apply(p, t), INTERVALS);
     PARSER.declareBoolean(QueryContainer::setIsConditionless, IS_CONDITIONLESS);
     PARSER.declareBoolean(QueryContainer::setIsStrict, IS_STRICT);
     PARSER.declareBoolean(QueryContainer::setIsVerbatim, IS_VERBATIM);
     PARSER.declareBoolean(QueryContainer::setIsWritable, IS_WRITABLE);
-    PARSER.declareObject(QueryContainer::setMatch, (p, t) -> MatchQuery.PARSER.apply(p, null), MATCH);
-    PARSER.declareObject(QueryContainer::setMatchAll, (p, t) -> MatchAllQuery.PARSER.apply(p, null), MATCH_ALL);
-    PARSER.declareObject(QueryContainer::setMatchNone, (p, t) -> MatchNoneQuery.PARSER.apply(p, null), MATCH_NONE);
-    PARSER.declareObject(QueryContainer::setMatchPhrase, (p, t) -> MatchPhraseQuery.PARSER.apply(p, null), MATCH_PHRASE);
-    PARSER.declareObject(QueryContainer::setMatchPhrasePrefix, (p, t) -> MatchPhrasePrefixQuery.PARSER.apply(p, null), MATCH_PHRASE_PREFIX);
-    PARSER.declareObject(QueryContainer::setMoreLikeThis, (p, t) -> MoreLikeThisQuery.PARSER.apply(p, null), MORE_LIKE_THIS);
-    PARSER.declareObject(QueryContainer::setMultiMatch, (p, t) -> MultiMatchQuery.PARSER.apply(p, null), MULTI_MATCH);
-    PARSER.declareObject(QueryContainer::setNested, (p, t) -> NestedQuery.PARSER.apply(p, null), NESTED);
-    PARSER.declareObject(QueryContainer::setParentId, (p, t) -> ParentIdQuery.PARSER.apply(p, null), PARENT_ID);
-    PARSER.declareObject(QueryContainer::setPercolate, (p, t) -> PercolateQuery.PARSER.apply(p, null), PERCOLATE);
-    PARSER.declareObject(QueryContainer::setPrefix, (p, t) -> PrefixQuery.PARSER.apply(p, null), PREFIX);
-    PARSER.declareObject(QueryContainer::setQueryString, (p, t) -> QueryStringQuery.PARSER.apply(p, null), QUERY_STRING);
-    PARSER.declareObject(QueryContainer::setRange, (p, t) -> RangeQuery.PARSER.apply(p, null), RANGE);
-    PARSER.declareObject(QueryContainer::setRawQuery, (p, t) -> RawQuery.PARSER.apply(p, null), RAW_QUERY);
-    PARSER.declareObject(QueryContainer::setRegexp, (p, t) -> RegexpQuery.PARSER.apply(p, null), REGEXP);
-    PARSER.declareObject(QueryContainer::setScript, (p, t) -> ScriptQuery.PARSER.apply(p, null), SCRIPT);
-    PARSER.declareObject(QueryContainer::setScriptScore, (p, t) -> ScriptScoreQuery.PARSER.apply(p, null), SCRIPT_SCORE);
-    PARSER.declareObject(QueryContainer::setSimpleQueryString, (p, t) -> SimpleQueryStringQuery.PARSER.apply(p, null), SIMPLE_QUERY_STRING);
-    PARSER.declareObject(QueryContainer::setSpanContaining, (p, t) -> SpanContainingQuery.PARSER.apply(p, null), SPAN_CONTAINING);
-    PARSER.declareObject(QueryContainer::setFieldMaskingSpan, (p, t) -> SpanFieldMaskingQuery.PARSER.apply(p, null), FIELD_MASKING_SPAN);
-    PARSER.declareObject(QueryContainer::setSpanFirst, (p, t) -> SpanFirstQuery.PARSER.apply(p, null), SPAN_FIRST);
-    PARSER.declareObject(QueryContainer::setSpanMulti, (p, t) -> SpanMultiTermQuery.PARSER.apply(p, null), SPAN_MULTI);
-    PARSER.declareObject(QueryContainer::setSpanNear, (p, t) -> SpanNearQuery.PARSER.apply(p, null), SPAN_NEAR);
-    PARSER.declareObject(QueryContainer::setSpanNot, (p, t) -> SpanNotQuery.PARSER.apply(p, null), SPAN_NOT);
-    PARSER.declareObject(QueryContainer::setSpanOr, (p, t) -> SpanOrQuery.PARSER.apply(p, null), SPAN_OR);
-    PARSER.declareObject(QueryContainer::setSpanTerm, (p, t) -> SpanTermQuery.PARSER.apply(p, null), SPAN_TERM);
-    PARSER.declareObject(QueryContainer::setSpanWithin, (p, t) -> SpanWithinQuery.PARSER.apply(p, null), SPAN_WITHIN);
-    PARSER.declareObject(QueryContainer::setTerm, (p, t) -> TermQuery.PARSER.apply(p, null), TERM);
-    PARSER.declareObject(QueryContainer::setTerms, (p, t) -> TermsQuery.PARSER.apply(p, null), TERMS);
-    PARSER.declareObject(QueryContainer::setTermsSet, (p, t) -> TermsSetQuery.PARSER.apply(p, null), TERMS_SET);
-    PARSER.declareObject(QueryContainer::setWildcard, (p, t) -> WildcardQuery.PARSER.apply(p, null), WILDCARD);
-    PARSER.declareObject(QueryContainer::setRankFeature, (p, t) -> RankFeatureQuery.PARSER.apply(p, null), RANK_FEATURE);
-    PARSER.declareObject(QueryContainer::setDistanceFeature, (p, t) -> DistanceFeatureQuery.PARSER.apply(p, null), DISTANCE_FEATURE);
-    PARSER.declareObject(QueryContainer::setPinned, (p, t) -> PinnedQuery.PARSER.apply(p, null), PINNED);
+    PARSER.declareObject(QueryContainer::setMatch, (p, t) -> MatchQuery.PARSER.apply(p, t), MATCH);
+    PARSER.declareObject(QueryContainer::setMatchAll, (p, t) -> MatchAllQuery.PARSER.apply(p, t), MATCH_ALL);
+    PARSER.declareObject(QueryContainer::setMatchNone, (p, t) -> MatchNoneQuery.PARSER.apply(p, t), MATCH_NONE);
+    PARSER.declareObject(QueryContainer::setMatchPhrase, (p, t) -> MatchPhraseQuery.PARSER.apply(p, t), MATCH_PHRASE);
+    PARSER.declareObject(QueryContainer::setMatchPhrasePrefix, (p, t) -> MatchPhrasePrefixQuery.PARSER.apply(p, t), MATCH_PHRASE_PREFIX);
+    PARSER.declareObject(QueryContainer::setMoreLikeThis, (p, t) -> MoreLikeThisQuery.PARSER.apply(p, t), MORE_LIKE_THIS);
+    PARSER.declareObject(QueryContainer::setMultiMatch, (p, t) -> MultiMatchQuery.PARSER.apply(p, t), MULTI_MATCH);
+    PARSER.declareObject(QueryContainer::setNested, (p, t) -> NestedQuery.PARSER.apply(p, t), NESTED);
+    PARSER.declareObject(QueryContainer::setParentId, (p, t) -> ParentIdQuery.PARSER.apply(p, t), PARENT_ID);
+    PARSER.declareObject(QueryContainer::setPercolate, (p, t) -> PercolateQuery.PARSER.apply(p, t), PERCOLATE);
+    PARSER.declareObject(QueryContainer::setPrefix, (p, t) -> PrefixQuery.PARSER.apply(p, t), PREFIX);
+    PARSER.declareObject(QueryContainer::setQueryString, (p, t) -> QueryStringQuery.PARSER.apply(p, t), QUERY_STRING);
+    PARSER.declareObject(QueryContainer::setRange, (p, t) -> RangeQuery.PARSER.apply(p, t), RANGE);
+    PARSER.declareObject(QueryContainer::setRawQuery, (p, t) -> RawQuery.PARSER.apply(p, t), RAW_QUERY);
+    PARSER.declareObject(QueryContainer::setRegexp, (p, t) -> RegexpQuery.PARSER.apply(p, t), REGEXP);
+    PARSER.declareObject(QueryContainer::setScript, (p, t) -> ScriptQuery.PARSER.apply(p, t), SCRIPT);
+    PARSER.declareObject(QueryContainer::setScriptScore, (p, t) -> ScriptScoreQuery.PARSER.apply(p, t), SCRIPT_SCORE);
+    PARSER.declareObject(QueryContainer::setSimpleQueryString, (p, t) -> SimpleQueryStringQuery.PARSER.apply(p, t), SIMPLE_QUERY_STRING);
+    PARSER.declareObject(QueryContainer::setSpanContaining, (p, t) -> SpanContainingQuery.PARSER.apply(p, t), SPAN_CONTAINING);
+    PARSER.declareObject(QueryContainer::setFieldMaskingSpan, (p, t) -> SpanFieldMaskingQuery.PARSER.apply(p, t), FIELD_MASKING_SPAN);
+    PARSER.declareObject(QueryContainer::setSpanFirst, (p, t) -> SpanFirstQuery.PARSER.apply(p, t), SPAN_FIRST);
+    PARSER.declareObject(QueryContainer::setSpanMulti, (p, t) -> SpanMultiTermQuery.PARSER.apply(p, t), SPAN_MULTI);
+    PARSER.declareObject(QueryContainer::setSpanNear, (p, t) -> SpanNearQuery.PARSER.apply(p, t), SPAN_NEAR);
+    PARSER.declareObject(QueryContainer::setSpanNot, (p, t) -> SpanNotQuery.PARSER.apply(p, t), SPAN_NOT);
+    PARSER.declareObject(QueryContainer::setSpanOr, (p, t) -> SpanOrQuery.PARSER.apply(p, t), SPAN_OR);
+    PARSER.declareObject(QueryContainer::setSpanTerm, (p, t) -> SpanTermQuery.PARSER.apply(p, t), SPAN_TERM);
+    PARSER.declareObject(QueryContainer::setSpanWithin, (p, t) -> SpanWithinQuery.PARSER.apply(p, t), SPAN_WITHIN);
+    PARSER.declareObject(QueryContainer::setTerm, (p, t) -> TermQuery.PARSER.apply(p, t), TERM);
+    PARSER.declareObject(QueryContainer::setTerms, (p, t) -> TermsQuery.PARSER.apply(p, t), TERMS);
+    PARSER.declareObject(QueryContainer::setTermsSet, (p, t) -> TermsSetQuery.PARSER.apply(p, t), TERMS_SET);
+    PARSER.declareObject(QueryContainer::setWildcard, (p, t) -> WildcardQuery.PARSER.apply(p, t), WILDCARD);
+    PARSER.declareObject(QueryContainer::setRankFeature, (p, t) -> RankFeatureQuery.PARSER.apply(p, t), RANK_FEATURE);
+    PARSER.declareObject(QueryContainer::setDistanceFeature, (p, t) -> DistanceFeatureQuery.PARSER.apply(p, t), DISTANCE_FEATURE);
+    PARSER.declareObject(QueryContainer::setPinned, (p, t) -> PinnedQuery.PARSER.apply(p, t), PINNED);
   }
 
 }

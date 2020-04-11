@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.schedule.*;
 
 public class ScheduleContainer  implements XContentable<ScheduleContainer> {
@@ -58,6 +58,7 @@ public class ScheduleContainer  implements XContentable<ScheduleContainer> {
   public ScheduleContainer setYearly(List<TimeOfYear> val) { this._yearly = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -72,13 +73,13 @@ public class ScheduleContainer  implements XContentable<ScheduleContainer> {
     new ConstructingObjectParser<>(ScheduleContainer.class.getName(), false, args -> new ScheduleContainer());
 
   static {
-    PARSER.declareObject(ScheduleContainer::setCron, (p, t) -> CronExpression.PARSER.apply(p, null), CRON);
-    PARSER.declareObject(ScheduleContainer::setDaily, (p, t) -> DailySchedule.PARSER.apply(p, null), DAILY);
-    PARSER.declareObject(ScheduleContainer::setHourly, (p, t) -> HourlySchedule.PARSER.apply(p, null), HOURLY);
-    PARSER.declareObject(ScheduleContainer::setInterval, (p, t) -> Interval.PARSER.apply(p, null), INTERVAL);
-    PARSER.declareObjectArray(ScheduleContainer::setMonthly, (p, t) -> TimeOfMonth.PARSER.apply(p), MONTHLY);
-    PARSER.declareObjectArray(ScheduleContainer::setWeekly, (p, t) -> TimeOfWeek.PARSER.apply(p), WEEKLY);
-    PARSER.declareObjectArray(ScheduleContainer::setYearly, (p, t) -> TimeOfYear.PARSER.apply(p), YEARLY);
+    PARSER.declareObject(ScheduleContainer::setCron, (p, t) -> CronExpression.PARSER.apply(p, t), CRON);
+    PARSER.declareObject(ScheduleContainer::setDaily, (p, t) -> DailySchedule.PARSER.apply(p, t), DAILY);
+    PARSER.declareObject(ScheduleContainer::setHourly, (p, t) -> HourlySchedule.PARSER.apply(p, t), HOURLY);
+    PARSER.declareObject(ScheduleContainer::setInterval, (p, t) -> Interval.PARSER.apply(p, t), INTERVAL);
+    PARSER.declareObjectArray(ScheduleContainer::setMonthly, (p, t) -> TimeOfMonth.PARSER.apply(p, t), MONTHLY);
+    PARSER.declareObjectArray(ScheduleContainer::setWeekly, (p, t) -> TimeOfWeek.PARSER.apply(p, t), WEEKLY);
+    PARSER.declareObjectArray(ScheduleContainer::setYearly, (p, t) -> TimeOfYear.PARSER.apply(p, t), YEARLY);
   }
 
 }

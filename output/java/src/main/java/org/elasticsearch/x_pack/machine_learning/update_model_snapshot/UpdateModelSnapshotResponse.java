@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.process.*;
 
 public class UpdateModelSnapshotResponse  implements XContentable<UpdateModelSnapshotResponse> {
@@ -22,6 +22,7 @@ public class UpdateModelSnapshotResponse  implements XContentable<UpdateModelSna
   public UpdateModelSnapshotResponse setModel(ModelSnapshot val) { this._model = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class UpdateModelSnapshotResponse  implements XContentable<UpdateModelSna
     new ConstructingObjectParser<>(UpdateModelSnapshotResponse.class.getName(), false, args -> new UpdateModelSnapshotResponse());
 
   static {
-    PARSER.declareObject(UpdateModelSnapshotResponse::setModel, (p, t) -> ModelSnapshot.PARSER.apply(p, null), MODEL);
+    PARSER.declareObject(UpdateModelSnapshotResponse::setModel, (p, t) -> ModelSnapshot.PARSER.apply(p, t), MODEL);
   }
 
 }

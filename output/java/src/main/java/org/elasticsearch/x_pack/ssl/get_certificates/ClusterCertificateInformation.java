@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class ClusterCertificateInformation  implements XContentable<ClusterCertificateInformation> {
@@ -58,6 +58,7 @@ public class ClusterCertificateInformation  implements XContentable<ClusterCerti
   public ClusterCertificateInformation setExpiry(Date val) { this._expiry = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -78,7 +79,7 @@ public class ClusterCertificateInformation  implements XContentable<ClusterCerti
     PARSER.declareString(ClusterCertificateInformation::setSubjectDn, SUBJECT_DN);
     PARSER.declareString(ClusterCertificateInformation::setSerialNumber, SERIAL_NUMBER);
     PARSER.declareBoolean(ClusterCertificateInformation::setHasPrivateKey, HAS_PRIVATE_KEY);
-    PARSER.declareDate(ClusterCertificateInformation::setExpiry, (p, t) -> Date.createFrom(p), EXPIRY);
+    PARSER.declareObject(ClusterCertificateInformation::setExpiry, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXPIRY);
   }
 
 }

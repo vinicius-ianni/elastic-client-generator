@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.ingest.*;
 
 public class Processor  implements XContentable<Processor> {
@@ -46,6 +46,7 @@ public class Processor  implements XContentable<Processor> {
   public Processor setIgnoreFailure(Boolean val) { this._ignoreFailure = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,7 +62,7 @@ public class Processor  implements XContentable<Processor> {
 
   static {
     PARSER.declareString(Processor::setName, NAME);
-    PARSER.declareObjectArray(Processor::setOnFailure, (p, t) -> Processor.PARSER.apply(p), ON_FAILURE);
+    PARSER.declareObjectArray(Processor::setOnFailure, (p, t) -> Processor.PARSER.apply(p, t), ON_FAILURE);
     PARSER.declareString(Processor::setIf, IF);
     PARSER.declareString(Processor::setTag, TAG);
     PARSER.declareBoolean(Processor::setIgnoreFailure, IGNORE_FAILURE);

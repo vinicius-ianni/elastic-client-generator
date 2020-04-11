@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class DeleteRoleMappingRequest  implements XContentable<DeleteRoleMappingRequest> {
@@ -22,6 +22,7 @@ public class DeleteRoleMappingRequest  implements XContentable<DeleteRoleMapping
   public DeleteRoleMappingRequest setRefresh(Refresh val) { this._refresh = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class DeleteRoleMappingRequest  implements XContentable<DeleteRoleMapping
     new ConstructingObjectParser<>(DeleteRoleMappingRequest.class.getName(), false, args -> new DeleteRoleMappingRequest());
 
   static {
-    PARSER.declareObject(DeleteRoleMappingRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
+    PARSER.declareObject(DeleteRoleMappingRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
   }
 
 }

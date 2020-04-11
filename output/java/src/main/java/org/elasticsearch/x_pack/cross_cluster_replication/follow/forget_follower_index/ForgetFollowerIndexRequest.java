@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 
 public class ForgetFollowerIndexRequest  implements XContentable<ForgetFollowerIndexRequest> {
@@ -40,6 +40,7 @@ public class ForgetFollowerIndexRequest  implements XContentable<ForgetFollowerI
   public ForgetFollowerIndexRequest setLeaderRemoteCluster(String val) { this._leaderRemoteCluster = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,7 +56,7 @@ public class ForgetFollowerIndexRequest  implements XContentable<ForgetFollowerI
 
   static {
     PARSER.declareString(ForgetFollowerIndexRequest::setFollowerCluster, FOLLOWER_CLUSTER);
-    PARSER.declareIndexName(ForgetFollowerIndexRequest::setFollowerIndex, (p, t) -> IndexName.createFrom(p), FOLLOWER_INDEX);
+    PARSER.declareObject(ForgetFollowerIndexRequest::setFollowerIndex, (p, t) -> IndexName.createFrom(p), FOLLOWER_INDEX);
     PARSER.declareString(ForgetFollowerIndexRequest::setFollowerIndexUuid, FOLLOWER_INDEX_UUID);
     PARSER.declareString(ForgetFollowerIndexRequest::setLeaderRemoteCluster, LEADER_REMOTE_CLUSTER);
   }

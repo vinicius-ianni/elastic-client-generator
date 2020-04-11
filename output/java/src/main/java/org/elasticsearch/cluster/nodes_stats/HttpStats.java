@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class HttpStats  implements XContentable<HttpStats> {
@@ -28,6 +28,7 @@ public class HttpStats  implements XContentable<HttpStats> {
   public HttpStats setTotalOpened(Long val) { this._totalOpened = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,7 +43,7 @@ public class HttpStats  implements XContentable<HttpStats> {
     new ConstructingObjectParser<>(HttpStats.class.getName(), false, args -> new HttpStats());
 
   static {
-    PARSER.declareInteger(HttpStats::setCurrentOpen, CURRENT_OPEN);
+    PARSER.declareInt(HttpStats::setCurrentOpen, CURRENT_OPEN);
     PARSER.declareLong(HttpStats::setTotalOpened, TOTAL_OPENED);
   }
 

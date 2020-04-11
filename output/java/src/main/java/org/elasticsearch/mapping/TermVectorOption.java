@@ -2,6 +2,7 @@
 package org.elasticsearch.mapping;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public enum TermVectorOption implements XContentable<TermVectorOption> {
       case "with_positions_offsets": return TermVectorOption.WithPositionsOffsets;
       case "with_positions_offsets_payloads": return TermVectorOption.WithPositionsOffsetsPayloads;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, TermVectorOption.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, TermVectorOption.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

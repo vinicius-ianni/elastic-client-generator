@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.license.get_license.*;
 
@@ -65,6 +65,7 @@ public class License  implements XContentable<License> {
   public License setUid(String val) { this._uid = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -85,7 +86,7 @@ public class License  implements XContentable<License> {
     PARSER.declareString(License::setIssuer, ISSUER);
     PARSER.declareLong(License::setMaxNodes, MAX_NODES);
     PARSER.declareString(License::setSignature, SIGNATURE);
-    PARSER.declareObject(License::setType, (p, t) -> LicenseType.PARSER.apply(p, null), TYPE);
+    PARSER.declareObject(License::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE);
     PARSER.declareString(License::setUid, UID);
   }
 

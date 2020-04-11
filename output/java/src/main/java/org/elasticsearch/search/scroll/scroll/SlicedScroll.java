@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
 
@@ -35,6 +35,7 @@ public class SlicedScroll  implements XContentable<SlicedScroll> {
   public SlicedScroll setMax(Integer val) { this._max = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class SlicedScroll  implements XContentable<SlicedScroll> {
     new ConstructingObjectParser<>(SlicedScroll.class.getName(), false, args -> new SlicedScroll());
 
   static {
-    PARSER.declareField(SlicedScroll::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareInteger(SlicedScroll::setId, ID);
-    PARSER.declareInteger(SlicedScroll::setMax, MAX);
+    PARSER.declareObject(SlicedScroll::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareInt(SlicedScroll::setId, ID);
+    PARSER.declareInt(SlicedScroll::setMax, MAX);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.x_pack.graph.explore.request.*;
 import org.elasticsearch.internal.*;
@@ -54,6 +54,7 @@ public class GraphVertexDefinition  implements XContentable<GraphVertexDefinitio
   public GraphVertexDefinition setSize(Integer val) { this._size = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -69,11 +70,11 @@ public class GraphVertexDefinition  implements XContentable<GraphVertexDefinitio
 
   static {
     PARSER.declareStringArray(GraphVertexDefinition::setExclude, EXCLUDE);
-    PARSER.declareField(GraphVertexDefinition::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObjectArray(GraphVertexDefinition::setInclude, (p, t) -> GraphVertexInclude.PARSER.apply(p), INCLUDE);
+    PARSER.declareObject(GraphVertexDefinition::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObjectArray(GraphVertexDefinition::setInclude, (p, t) -> GraphVertexInclude.PARSER.apply(p, t), INCLUDE);
     PARSER.declareLong(GraphVertexDefinition::setMinDocCount, MIN_DOC_COUNT);
     PARSER.declareLong(GraphVertexDefinition::setShardMinDocCount, SHARD_MIN_DOC_COUNT);
-    PARSER.declareInteger(GraphVertexDefinition::setSize, SIZE);
+    PARSER.declareInt(GraphVertexDefinition::setSize, SIZE);
   }
 
 }

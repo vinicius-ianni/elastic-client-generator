@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.search.search.sort.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
@@ -36,6 +36,7 @@ public class NestedSort  implements XContentable<NestedSort> {
   public NestedSort setPath(Field val) { this._path = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,9 +51,9 @@ public class NestedSort  implements XContentable<NestedSort> {
     new ConstructingObjectParser<>(NestedSort.class.getName(), false, args -> new NestedSort());
 
   static {
-    PARSER.declareObject(NestedSort::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, null), FILTER);
-    PARSER.declareObject(NestedSort::setNested, (p, t) -> NestedSort.PARSER.apply(p, null), NESTED);
-    PARSER.declareField(NestedSort::setPath, (p, t) -> Field.createFrom(p), PATH);
+    PARSER.declareObject(NestedSort::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);
+    PARSER.declareObject(NestedSort::setNested, (p, t) -> NestedSort.PARSER.apply(p, t), NESTED);
+    PARSER.declareObject(NestedSort::setPath, (p, t) -> Field.createFrom(p), PATH);
   }
 
 }

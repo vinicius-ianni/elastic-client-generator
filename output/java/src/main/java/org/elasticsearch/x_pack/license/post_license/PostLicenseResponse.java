@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.license.post_license.*;
 import org.elasticsearch.x_pack.license.get_license.*;
 
@@ -35,6 +35,7 @@ public class PostLicenseResponse  implements XContentable<PostLicenseResponse> {
   public PostLicenseResponse setLicenseStatus(LicenseStatus val) { this._licenseStatus = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class PostLicenseResponse  implements XContentable<PostLicenseResponse> {
     new ConstructingObjectParser<>(PostLicenseResponse.class.getName(), false, args -> new PostLicenseResponse());
 
   static {
-    PARSER.declareObject(PostLicenseResponse::setAcknowledge, (p, t) -> LicenseAcknowledgement.PARSER.apply(p, null), ACKNOWLEDGE);
+    PARSER.declareObject(PostLicenseResponse::setAcknowledge, (p, t) -> LicenseAcknowledgement.PARSER.apply(p, t), ACKNOWLEDGE);
     PARSER.declareBoolean(PostLicenseResponse::setAcknowledged, ACKNOWLEDGED);
-    PARSER.declareObject(PostLicenseResponse::setLicenseStatus, (p, t) -> LicenseStatus.PARSER.apply(p, null), LICENSE_STATUS);
+    PARSER.declareObject(PostLicenseResponse::setLicenseStatus, (p, t) -> LicenseStatus.PARSER.apply(p), LICENSE_STATUS);
   }
 
 }

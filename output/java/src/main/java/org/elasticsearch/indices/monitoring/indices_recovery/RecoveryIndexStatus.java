@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.monitoring.indices_recovery.*;
 import org.elasticsearch.internal.*;
 
@@ -53,6 +53,7 @@ public class RecoveryIndexStatus  implements XContentable<RecoveryIndexStatus> {
   public RecoveryIndexStatus setTotalTimeInMillis(Long val) { this._totalTimeInMillis = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -67,9 +68,9 @@ public class RecoveryIndexStatus  implements XContentable<RecoveryIndexStatus> {
     new ConstructingObjectParser<>(RecoveryIndexStatus.class.getName(), false, args -> new RecoveryIndexStatus());
 
   static {
-    PARSER.declareObject(RecoveryIndexStatus::setBytes, (p, t) -> RecoveryBytes.PARSER.apply(p, null), BYTES);
-    PARSER.declareObject(RecoveryIndexStatus::setFiles, (p, t) -> RecoveryFiles.PARSER.apply(p, null), FILES);
-    PARSER.declareObject(RecoveryIndexStatus::setSize, (p, t) -> RecoveryBytes.PARSER.apply(p, null), SIZE);
+    PARSER.declareObject(RecoveryIndexStatus::setBytes, (p, t) -> RecoveryBytes.PARSER.apply(p, t), BYTES);
+    PARSER.declareObject(RecoveryIndexStatus::setFiles, (p, t) -> RecoveryFiles.PARSER.apply(p, t), FILES);
+    PARSER.declareObject(RecoveryIndexStatus::setSize, (p, t) -> RecoveryBytes.PARSER.apply(p, t), SIZE);
     PARSER.declareLong(RecoveryIndexStatus::setSourceThrottleTimeInMillis, SOURCE_THROTTLE_TIME_IN_MILLIS);
     PARSER.declareLong(RecoveryIndexStatus::setTargetThrottleTimeInMillis, TARGET_THROTTLE_TIME_IN_MILLIS);
     PARSER.declareLong(RecoveryIndexStatus::setTotalTimeInMillis, TOTAL_TIME_IN_MILLIS);

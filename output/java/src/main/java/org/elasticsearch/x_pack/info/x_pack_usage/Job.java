@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.config.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
@@ -108,6 +108,7 @@ public class Job  implements XContentable<Job> {
   public Job setResultsRetentionDays(Long val) { this._resultsRetentionDays = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -122,16 +123,16 @@ public class Job  implements XContentable<Job> {
     new ConstructingObjectParser<>(Job.class.getName(), false, args -> new Job());
 
   static {
-    PARSER.declareObject(Job::setAnalysisConfig, (p, t) -> AnalysisConfig.PARSER.apply(p, null), ANALYSIS_CONFIG);
-    PARSER.declareObject(Job::setAnalysisLimits, (p, t) -> AnalysisLimits.PARSER.apply(p, null), ANALYSIS_LIMITS);
-    PARSER.declareObject(Job::setBackgroundPersistInterval, (p, t) -> Time.PARSER.apply(p, null), BACKGROUND_PERSIST_INTERVAL);
-    PARSER.declareDate(Job::setCreateTime, (p, t) -> Date.createFrom(p), CREATE_TIME);
-    PARSER.declareObject(Job::setDataDescription, (p, t) -> DataDescription.PARSER.apply(p, null), DATA_DESCRIPTION);
+    PARSER.declareObject(Job::setAnalysisConfig, (p, t) -> AnalysisConfig.PARSER.apply(p, t), ANALYSIS_CONFIG);
+    PARSER.declareObject(Job::setAnalysisLimits, (p, t) -> AnalysisLimits.PARSER.apply(p, t), ANALYSIS_LIMITS);
+    PARSER.declareObject(Job::setBackgroundPersistInterval, (p, t) -> Time.PARSER.apply(p, t), BACKGROUND_PERSIST_INTERVAL);
+    PARSER.declareObject(Job::setCreateTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), CREATE_TIME);
+    PARSER.declareObject(Job::setDataDescription, (p, t) -> DataDescription.PARSER.apply(p, t), DATA_DESCRIPTION);
     PARSER.declareString(Job::setDescription, DESCRIPTION);
-    PARSER.declareDate(Job::setFinishedTime, (p, t) -> Date.createFrom(p), FINISHED_TIME);
+    PARSER.declareObject(Job::setFinishedTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), FINISHED_TIME);
     PARSER.declareString(Job::setJobId, JOB_ID);
     PARSER.declareString(Job::setJobType, JOB_TYPE);
-    PARSER.declareObject(Job::setModelPlot, (p, t) -> ModelPlotConfig.PARSER.apply(p, null), MODEL_PLOT);
+    PARSER.declareObject(Job::setModelPlot, (p, t) -> ModelPlotConfig.PARSER.apply(p, t), MODEL_PLOT);
     PARSER.declareString(Job::setModelSnapshotId, MODEL_SNAPSHOT_ID);
     PARSER.declareLong(Job::setModelSnapshotRetentionDays, MODEL_SNAPSHOT_RETENTION_DAYS);
     PARSER.declareLong(Job::setRenormalizationWindowDays, RENORMALIZATION_WINDOW_DAYS);

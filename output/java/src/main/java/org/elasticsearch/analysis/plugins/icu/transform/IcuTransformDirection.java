@@ -2,6 +2,7 @@
 package org.elasticsearch.analysis.plugins.icu.transform;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum IcuTransformDirection implements XContentable<IcuTransformDirection>
       case "forward": return IcuTransformDirection.Forward;
       case "reverse": return IcuTransformDirection.Reverse;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, IcuTransformDirection.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, IcuTransformDirection.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.inner_hits.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
@@ -49,6 +49,7 @@ public class NestedQuery  implements XContentable<NestedQuery> {
   public NestedQuery setScoreMode(NestedScoreMode val) { this._scoreMode = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -64,10 +65,10 @@ public class NestedQuery  implements XContentable<NestedQuery> {
 
   static {
     PARSER.declareBoolean(NestedQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
-    PARSER.declareObject(NestedQuery::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, null), INNER_HITS);
-    PARSER.declareField(NestedQuery::setPath, (p, t) -> Field.createFrom(p), PATH);
-    PARSER.declareObject(NestedQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObject(NestedQuery::setScoreMode, (p, t) -> NestedScoreMode.PARSER.apply(p, null), SCORE_MODE);
+    PARSER.declareObject(NestedQuery::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, t), INNER_HITS);
+    PARSER.declareObject(NestedQuery::setPath, (p, t) -> Field.createFrom(p), PATH);
+    PARSER.declareObject(NestedQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObject(NestedQuery::setScoreMode, (p, t) -> NestedScoreMode.PARSER.apply(p), SCORE_MODE);
   }
 
 }

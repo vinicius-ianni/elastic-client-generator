@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class Token  implements XContentable<Token> {
@@ -40,6 +40,7 @@ public class Token  implements XContentable<Token> {
   public Token setStartOffset(Integer val) { this._startOffset = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,10 +55,10 @@ public class Token  implements XContentable<Token> {
     new ConstructingObjectParser<>(Token.class.getName(), false, args -> new Token());
 
   static {
-    PARSER.declareInteger(Token::setEndOffset, END_OFFSET);
+    PARSER.declareInt(Token::setEndOffset, END_OFFSET);
     PARSER.declareString(Token::setPayload, PAYLOAD);
-    PARSER.declareInteger(Token::setPosition, POSITION);
-    PARSER.declareInteger(Token::setStartOffset, START_OFFSET);
+    PARSER.declareInt(Token::setPosition, POSITION);
+    PARSER.declareInt(Token::setStartOffset, START_OFFSET);
   }
 
 }

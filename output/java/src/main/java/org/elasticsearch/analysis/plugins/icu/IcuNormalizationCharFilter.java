@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.plugins.icu.normalization.*;
 
 public class IcuNormalizationCharFilter  implements XContentable<IcuNormalizationCharFilter> {
@@ -28,6 +28,7 @@ public class IcuNormalizationCharFilter  implements XContentable<IcuNormalizatio
   public IcuNormalizationCharFilter setName(IcuNormalizationType val) { this._name = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class IcuNormalizationCharFilter  implements XContentable<IcuNormalizatio
     new ConstructingObjectParser<>(IcuNormalizationCharFilter.class.getName(), false, args -> new IcuNormalizationCharFilter());
 
   static {
-    PARSER.declareObject(IcuNormalizationCharFilter::setMode, (p, t) -> IcuNormalizationMode.PARSER.apply(p, null), MODE);
-    PARSER.declareObject(IcuNormalizationCharFilter::setName, (p, t) -> IcuNormalizationType.PARSER.apply(p, null), NAME);
+    PARSER.declareObject(IcuNormalizationCharFilter::setMode, (p, t) -> IcuNormalizationMode.PARSER.apply(p), MODE);
+    PARSER.declareObject(IcuNormalizationCharFilter::setName, (p, t) -> IcuNormalizationType.PARSER.apply(p), NAME);
   }
 
 }

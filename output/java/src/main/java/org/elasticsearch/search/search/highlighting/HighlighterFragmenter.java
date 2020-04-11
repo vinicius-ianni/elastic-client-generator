@@ -2,6 +2,7 @@
 package org.elasticsearch.search.search.highlighting;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum HighlighterFragmenter implements XContentable<HighlighterFragmenter>
       case "simple": return HighlighterFragmenter.Simple;
       case "span": return HighlighterFragmenter.Span;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, HighlighterFragmenter.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, HighlighterFragmenter.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

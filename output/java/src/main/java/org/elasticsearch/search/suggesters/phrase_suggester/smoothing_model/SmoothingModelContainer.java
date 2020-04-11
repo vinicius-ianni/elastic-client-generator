@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.suggesters.phrase_suggester.smoothing_model.*;
 
 public class SmoothingModelContainer  implements XContentable<SmoothingModelContainer> {
@@ -34,6 +34,7 @@ public class SmoothingModelContainer  implements XContentable<SmoothingModelCont
   public SmoothingModelContainer setStupidBackoff(StupidBackoffSmoothingModel val) { this._stupidBackoff = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class SmoothingModelContainer  implements XContentable<SmoothingModelCont
     new ConstructingObjectParser<>(SmoothingModelContainer.class.getName(), false, args -> new SmoothingModelContainer());
 
   static {
-    PARSER.declareObject(SmoothingModelContainer::setLaplace, (p, t) -> LaplaceSmoothingModel.PARSER.apply(p, null), LAPLACE);
-    PARSER.declareObject(SmoothingModelContainer::setLinearInterpolation, (p, t) -> LinearInterpolationSmoothingModel.PARSER.apply(p, null), LINEAR_INTERPOLATION);
-    PARSER.declareObject(SmoothingModelContainer::setStupidBackoff, (p, t) -> StupidBackoffSmoothingModel.PARSER.apply(p, null), STUPID_BACKOFF);
+    PARSER.declareObject(SmoothingModelContainer::setLaplace, (p, t) -> LaplaceSmoothingModel.PARSER.apply(p, t), LAPLACE);
+    PARSER.declareObject(SmoothingModelContainer::setLinearInterpolation, (p, t) -> LinearInterpolationSmoothingModel.PARSER.apply(p, t), LINEAR_INTERPOLATION);
+    PARSER.declareObject(SmoothingModelContainer::setStupidBackoff, (p, t) -> StupidBackoffSmoothingModel.PARSER.apply(p, t), STUPID_BACKOFF);
   }
 
 }

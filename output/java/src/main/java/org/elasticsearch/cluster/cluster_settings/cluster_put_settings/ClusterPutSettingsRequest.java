@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 
 public class ClusterPutSettingsRequest  implements XContentable<ClusterPutSettingsRequest> {
@@ -46,6 +46,7 @@ public class ClusterPutSettingsRequest  implements XContentable<ClusterPutSettin
   public ClusterPutSettingsRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,11 +61,11 @@ public class ClusterPutSettingsRequest  implements XContentable<ClusterPutSettin
     new ConstructingObjectParser<>(ClusterPutSettingsRequest.class.getName(), false, args -> new ClusterPutSettingsRequest());
 
   static {
-    PARSER.declareObject(ClusterPutSettingsRequest::setPersistent, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PERSISTENT);;
-    PARSER.declareObject(ClusterPutSettingsRequest::setTransient, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), TRANSIENT);;
+    PARSER.declareObject(ClusterPutSettingsRequest::setPersistent, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PERSISTENT);
+    PARSER.declareObject(ClusterPutSettingsRequest::setTransient, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), TRANSIENT);
     PARSER.declareBoolean(ClusterPutSettingsRequest::setFlatSettings, FLAT_SETTINGS);
-    PARSER.declareObject(ClusterPutSettingsRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(ClusterPutSettingsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(ClusterPutSettingsRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(ClusterPutSettingsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

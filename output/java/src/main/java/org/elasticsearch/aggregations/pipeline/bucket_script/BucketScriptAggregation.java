@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.scripting.*;
 
 public class BucketScriptAggregation  implements XContentable<BucketScriptAggregation> {
@@ -22,6 +22,7 @@ public class BucketScriptAggregation  implements XContentable<BucketScriptAggreg
   public BucketScriptAggregation setScript(Script val) { this._script = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class BucketScriptAggregation  implements XContentable<BucketScriptAggreg
     new ConstructingObjectParser<>(BucketScriptAggregation.class.getName(), false, args -> new BucketScriptAggregation());
 
   static {
-    PARSER.declareObject(BucketScriptAggregation::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(BucketScriptAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
   }
 
 }

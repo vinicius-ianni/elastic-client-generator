@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class LengthTokenFilter  implements XContentable<LengthTokenFilter> {
@@ -28,6 +28,7 @@ public class LengthTokenFilter  implements XContentable<LengthTokenFilter> {
   public LengthTokenFilter setMin(Integer val) { this._min = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class LengthTokenFilter  implements XContentable<LengthTokenFilter> {
     new ConstructingObjectParser<>(LengthTokenFilter.class.getName(), false, args -> new LengthTokenFilter());
 
   static {
-    PARSER.declareInteger(LengthTokenFilter::setMax, MAX);
-    PARSER.declareInteger(LengthTokenFilter::setMin, MIN);
+    PARSER.declareInt(LengthTokenFilter::setMax, MAX);
+    PARSER.declareInt(LengthTokenFilter::setMin, MIN);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.process.*;
 
@@ -71,6 +71,7 @@ public class ModelSnapshot  implements XContentable<ModelSnapshot> {
   public ModelSnapshot setTimestamp(Date val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -87,13 +88,13 @@ public class ModelSnapshot  implements XContentable<ModelSnapshot> {
   static {
     PARSER.declareString(ModelSnapshot::setDescription, DESCRIPTION);
     PARSER.declareString(ModelSnapshot::setJobId, JOB_ID);
-    PARSER.declareDate(ModelSnapshot::setLatestRecordTimeStamp, (p, t) -> Date.createFrom(p), LATEST_RECORD_TIME_STAMP);
-    PARSER.declareDate(ModelSnapshot::setLatestResultTimeStamp, (p, t) -> Date.createFrom(p), LATEST_RESULT_TIME_STAMP);
-    PARSER.declareObject(ModelSnapshot::setModelSizeStats, (p, t) -> ModelSizeStats.PARSER.apply(p, null), MODEL_SIZE_STATS);
+    PARSER.declareObject(ModelSnapshot::setLatestRecordTimeStamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LATEST_RECORD_TIME_STAMP);
+    PARSER.declareObject(ModelSnapshot::setLatestResultTimeStamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LATEST_RESULT_TIME_STAMP);
+    PARSER.declareObject(ModelSnapshot::setModelSizeStats, (p, t) -> ModelSizeStats.PARSER.apply(p, t), MODEL_SIZE_STATS);
     PARSER.declareBoolean(ModelSnapshot::setRetain, RETAIN);
     PARSER.declareLong(ModelSnapshot::setSnapshotDocCount, SNAPSHOT_DOC_COUNT);
     PARSER.declareString(ModelSnapshot::setSnapshotId, SNAPSHOT_ID);
-    PARSER.declareDate(ModelSnapshot::setTimestamp, (p, t) -> Date.createFrom(p), TIMESTAMP);
+    PARSER.declareObject(ModelSnapshot::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
   }
 
 }

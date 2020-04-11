@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.job.detectors;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum DistinctCountFunction implements XContentable<DistinctCountFunction>
       case "LowDistinctCount": return DistinctCountFunction.LowDistinctCount;
       case "HighDistinctCount": return DistinctCountFunction.HighDistinctCount;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, DistinctCountFunction.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, DistinctCountFunction.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.*;
 
 public class BucketAggregation  implements XContentable<BucketAggregation> {
@@ -22,6 +22,7 @@ public class BucketAggregation  implements XContentable<BucketAggregation> {
   public BucketAggregation setAggregations(NamedContainer<String, AggregationContainer> val) { this._aggregations = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class BucketAggregation  implements XContentable<BucketAggregation> {
     new ConstructingObjectParser<>(BucketAggregation.class.getName(), false, args -> new BucketAggregation());
 
   static {
-    PARSER.declareObject(BucketAggregation::setAggregations, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);;
+    PARSER.declareObject(BucketAggregation::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);
   }
 
 }

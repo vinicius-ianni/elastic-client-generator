@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.date_math.*;
 
 public class DateRangeExpression  implements XContentable<DateRangeExpression> {
@@ -34,6 +34,7 @@ public class DateRangeExpression  implements XContentable<DateRangeExpression> {
   public DateRangeExpression setTo(DateMath val) { this._to = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,9 @@ public class DateRangeExpression  implements XContentable<DateRangeExpression> {
     new ConstructingObjectParser<>(DateRangeExpression.class.getName(), false, args -> new DateRangeExpression());
 
   static {
-    PARSER.declareObject(DateRangeExpression::setFrom, (p, t) -> DateMath.PARSER.apply(p, null), FROM);
+    PARSER.declareObject(DateRangeExpression::setFrom, (p, t) -> DateMath.PARSER.apply(p, t), FROM);
     PARSER.declareString(DateRangeExpression::setKey, KEY);
-    PARSER.declareObject(DateRangeExpression::setTo, (p, t) -> DateMath.PARSER.apply(p, null), TO);
+    PARSER.declareObject(DateRangeExpression::setTo, (p, t) -> DateMath.PARSER.apply(p, t), TO);
   }
 
 }

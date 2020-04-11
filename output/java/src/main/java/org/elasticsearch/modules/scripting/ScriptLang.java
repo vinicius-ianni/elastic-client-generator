@@ -2,6 +2,7 @@
 package org.elasticsearch.modules.scripting;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum ScriptLang implements XContentable<ScriptLang> {
       case "expression": return ScriptLang.Expression;
       case "mustache": return ScriptLang.Mustache;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ScriptLang.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ScriptLang.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

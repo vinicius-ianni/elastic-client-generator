@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.search.rescoring.*;
@@ -42,6 +42,7 @@ public class RescoreQuery  implements XContentable<RescoreQuery> {
   public RescoreQuery setScoreMode(ScoreMode val) { this._scoreMode = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class RescoreQuery  implements XContentable<RescoreQuery> {
     new ConstructingObjectParser<>(RescoreQuery.class.getName(), false, args -> new RescoreQuery());
 
   static {
-    PARSER.declareObject(RescoreQuery::setRescoreQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), RESCORE_QUERY);
+    PARSER.declareObject(RescoreQuery::setRescoreQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), RESCORE_QUERY);
     PARSER.declareDouble(RescoreQuery::setQueryWeight, QUERY_WEIGHT);
     PARSER.declareDouble(RescoreQuery::setRescoreQueryWeight, RESCORE_QUERY_WEIGHT);
-    PARSER.declareObject(RescoreQuery::setScoreMode, (p, t) -> ScoreMode.PARSER.apply(p, null), SCORE_MODE);
+    PARSER.declareObject(RescoreQuery::setScoreMode, (p, t) -> ScoreMode.PARSER.apply(p), SCORE_MODE);
   }
 
 }

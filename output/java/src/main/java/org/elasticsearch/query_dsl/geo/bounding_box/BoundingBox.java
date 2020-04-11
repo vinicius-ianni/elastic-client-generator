@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.geo.*;
 
 public class BoundingBox  implements XContentable<BoundingBox> {
@@ -34,6 +34,7 @@ public class BoundingBox  implements XContentable<BoundingBox> {
   public BoundingBox setWkt(String val) { this._wkt = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,8 +49,8 @@ public class BoundingBox  implements XContentable<BoundingBox> {
     new ConstructingObjectParser<>(BoundingBox.class.getName(), false, args -> new BoundingBox());
 
   static {
-    PARSER.declareObject(BoundingBox::setBottomRight, (p, t) -> GeoLocation.PARSER.apply(p, null), BOTTOM_RIGHT);
-    PARSER.declareObject(BoundingBox::setTopLeft, (p, t) -> GeoLocation.PARSER.apply(p, null), TOP_LEFT);
+    PARSER.declareObject(BoundingBox::setBottomRight, (p, t) -> GeoLocation.PARSER.apply(p, t), BOTTOM_RIGHT);
+    PARSER.declareObject(BoundingBox::setTopLeft, (p, t) -> GeoLocation.PARSER.apply(p, t), TOP_LEFT);
     PARSER.declareString(BoundingBox::setWkt, WKT);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.document.multiple.*;
 import org.elasticsearch.common_abstractions.infer.task_id.*;
@@ -97,6 +97,7 @@ public class ReindexOnServerResponse  implements XContentable<ReindexOnServerRes
   public ReindexOnServerResponse setVersionConflicts(Long val) { this._versionConflicts = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -114,13 +115,13 @@ public class ReindexOnServerResponse  implements XContentable<ReindexOnServerRes
     PARSER.declareBoolean(ReindexOnServerResponse::setIsValid, IS_VALID);
     PARSER.declareLong(ReindexOnServerResponse::setBatches, BATCHES);
     PARSER.declareLong(ReindexOnServerResponse::setCreated, CREATED);
-    PARSER.declareObjectArray(ReindexOnServerResponse::setFailures, (p, t) -> BulkIndexByScrollFailure.PARSER.apply(p), FAILURES);
+    PARSER.declareObjectArray(ReindexOnServerResponse::setFailures, (p, t) -> BulkIndexByScrollFailure.PARSER.apply(p, t), FAILURES);
     PARSER.declareLong(ReindexOnServerResponse::setNoops, NOOPS);
-    PARSER.declareObject(ReindexOnServerResponse::setRetries, (p, t) -> Retries.PARSER.apply(p, null), RETRIES);
-    PARSER.declareInteger(ReindexOnServerResponse::setSliceId, SLICE_ID);
-    PARSER.declareTaskId(ReindexOnServerResponse::setTask, (p, t) -> TaskId.createFrom(p), TASK);
+    PARSER.declareObject(ReindexOnServerResponse::setRetries, (p, t) -> Retries.PARSER.apply(p, t), RETRIES);
+    PARSER.declareInt(ReindexOnServerResponse::setSliceId, SLICE_ID);
+    PARSER.declareObject(ReindexOnServerResponse::setTask, (p, t) -> TaskId.createFrom(p), TASK);
     PARSER.declareBoolean(ReindexOnServerResponse::setTimedOut, TIMED_OUT);
-    PARSER.declareObject(ReindexOnServerResponse::setTook, (p, t) -> Time.PARSER.apply(p, null), TOOK);
+    PARSER.declareObject(ReindexOnServerResponse::setTook, (p, t) -> Time.PARSER.apply(p, t), TOOK);
     PARSER.declareLong(ReindexOnServerResponse::setTotal, TOTAL);
     PARSER.declareLong(ReindexOnServerResponse::setUpdated, UPDATED);
     PARSER.declareLong(ReindexOnServerResponse::setVersionConflicts, VERSION_CONFLICTS);

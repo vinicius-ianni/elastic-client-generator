@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.schedule;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -51,7 +52,7 @@ public enum Month implements XContentable<Month> {
       case "november": return Month.November;
       case "december": return Month.December;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, Month.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, Month.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

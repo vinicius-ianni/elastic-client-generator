@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.monitoring.indices_stats.*;
 
 public class IndicesStats  implements XContentable<IndicesStats> {
@@ -40,6 +40,7 @@ public class IndicesStats  implements XContentable<IndicesStats> {
   public IndicesStats setUuid(String val) { this._uuid = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,9 +55,9 @@ public class IndicesStats  implements XContentable<IndicesStats> {
     new ConstructingObjectParser<>(IndicesStats.class.getName(), false, args -> new IndicesStats());
 
   static {
-    PARSER.declareObject(IndicesStats::setPrimaries, (p, t) -> IndexStats.PARSER.apply(p, null), PRIMARIES);
-    PARSER.declareObject(IndicesStats::setShards, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), SHARDS);;
-    PARSER.declareObject(IndicesStats::setTotal, (p, t) -> IndexStats.PARSER.apply(p, null), TOTAL);
+    PARSER.declareObject(IndicesStats::setPrimaries, (p, t) -> IndexStats.PARSER.apply(p, t), PRIMARIES);
+    PARSER.declareObject(IndicesStats::setShards, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<ShardStats> */), SHARDS);
+    PARSER.declareObject(IndicesStats::setTotal, (p, t) -> IndexStats.PARSER.apply(p, t), TOTAL);
     PARSER.declareString(IndicesStats::setUuid, UUID);
   }
 

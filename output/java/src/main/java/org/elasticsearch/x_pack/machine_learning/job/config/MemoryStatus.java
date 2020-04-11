@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.job.config;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum MemoryStatus implements XContentable<MemoryStatus> {
       case "soft_limit": return MemoryStatus.SoftLimit;
       case "hard_limit": return MemoryStatus.HardLimit;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, MemoryStatus.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, MemoryStatus.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

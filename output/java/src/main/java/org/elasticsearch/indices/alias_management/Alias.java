@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 
@@ -47,6 +47,7 @@ public class Alias  implements XContentable<Alias> {
   public Alias setSearchRouting(Routing val) { this._searchRouting = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class Alias  implements XContentable<Alias> {
     new ConstructingObjectParser<>(Alias.class.getName(), false, args -> new Alias());
 
   static {
-    PARSER.declareObject(Alias::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, null), FILTER);
-    PARSER.declareRouting(Alias::setIndexRouting, (p, t) -> Routing.createFrom(p), INDEX_ROUTING);
+    PARSER.declareObject(Alias::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);
+    PARSER.declareObject(Alias::setIndexRouting, (p, t) -> Routing.createFrom(p), INDEX_ROUTING);
     PARSER.declareBoolean(Alias::setIsWriteIndex, IS_WRITE_INDEX);
-    PARSER.declareRouting(Alias::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareRouting(Alias::setSearchRouting, (p, t) -> Routing.createFrom(p), SEARCH_ROUTING);
+    PARSER.declareObject(Alias::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(Alias::setSearchRouting, (p, t) -> Routing.createFrom(p), SEARCH_ROUTING);
   }
 
 }

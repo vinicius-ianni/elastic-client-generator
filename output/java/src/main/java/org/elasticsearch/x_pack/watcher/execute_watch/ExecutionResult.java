@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.execute_watch.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class ExecutionResult  implements XContentable<ExecutionResult> {
   public ExecutionResult setInput(ExecutionResultInput val) { this._input = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class ExecutionResult  implements XContentable<ExecutionResult> {
     new ConstructingObjectParser<>(ExecutionResult.class.getName(), false, args -> new ExecutionResult());
 
   static {
-    PARSER.declareObjectArray(ExecutionResult::setActions, (p, t) -> ExecutionResultAction.PARSER.apply(p), ACTIONS);
-    PARSER.declareObject(ExecutionResult::setCondition, (p, t) -> ExecutionResultCondition.PARSER.apply(p, null), CONDITION);
-    PARSER.declareInteger(ExecutionResult::setExecutionDuration, EXECUTION_DURATION);
-    PARSER.declareDate(ExecutionResult::setExecutionTime, (p, t) -> Date.createFrom(p), EXECUTION_TIME);
-    PARSER.declareObject(ExecutionResult::setInput, (p, t) -> ExecutionResultInput.PARSER.apply(p, null), INPUT);
+    PARSER.declareObjectArray(ExecutionResult::setActions, (p, t) -> ExecutionResultAction.PARSER.apply(p, t), ACTIONS);
+    PARSER.declareObject(ExecutionResult::setCondition, (p, t) -> ExecutionResultCondition.PARSER.apply(p, t), CONDITION);
+    PARSER.declareInt(ExecutionResult::setExecutionDuration, EXECUTION_DURATION);
+    PARSER.declareObject(ExecutionResult::setExecutionTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXECUTION_TIME);
+    PARSER.declareObject(ExecutionResult::setInput, (p, t) -> ExecutionResultInput.PARSER.apply(p, t), INPUT);
   }
 
 }

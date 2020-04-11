@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -96,6 +96,7 @@ public class CreateFollowIndexRequest  implements XContentable<CreateFollowIndex
   public CreateFollowIndexRequest setReadPollTimeout(Time val) { this._readPollTimeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -112,7 +113,7 @@ public class CreateFollowIndexRequest  implements XContentable<CreateFollowIndex
   static {
     PARSER.declareString(CreateFollowIndexRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
     PARSER.declareString(CreateFollowIndexRequest::setRemoteCluster, REMOTE_CLUSTER);
-    PARSER.declareIndexName(CreateFollowIndexRequest::setLeaderIndex, (p, t) -> IndexName.createFrom(p), LEADER_INDEX);
+    PARSER.declareObject(CreateFollowIndexRequest::setLeaderIndex, (p, t) -> IndexName.createFrom(p), LEADER_INDEX);
     PARSER.declareLong(CreateFollowIndexRequest::setMaxReadRequestOperationCount, MAX_READ_REQUEST_OPERATION_COUNT);
     PARSER.declareLong(CreateFollowIndexRequest::setMaxOutstandingReadRequests, MAX_OUTSTANDING_READ_REQUESTS);
     PARSER.declareString(CreateFollowIndexRequest::setMaxReadRequestSize, MAX_READ_REQUEST_SIZE);
@@ -121,8 +122,8 @@ public class CreateFollowIndexRequest  implements XContentable<CreateFollowIndex
     PARSER.declareLong(CreateFollowIndexRequest::setMaxOutstandingWriteRequests, MAX_OUTSTANDING_WRITE_REQUESTS);
     PARSER.declareLong(CreateFollowIndexRequest::setMaxWriteBufferCount, MAX_WRITE_BUFFER_COUNT);
     PARSER.declareString(CreateFollowIndexRequest::setMaxWriteBufferSize, MAX_WRITE_BUFFER_SIZE);
-    PARSER.declareObject(CreateFollowIndexRequest::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, null), MAX_RETRY_DELAY);
-    PARSER.declareObject(CreateFollowIndexRequest::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, null), READ_POLL_TIMEOUT);
+    PARSER.declareObject(CreateFollowIndexRequest::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, t), MAX_RETRY_DELAY);
+    PARSER.declareObject(CreateFollowIndexRequest::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, t), READ_POLL_TIMEOUT);
   }
 
 }

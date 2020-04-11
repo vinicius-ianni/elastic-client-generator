@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
 public class AdjacencyMatrixAggregation  implements XContentable<AdjacencyMatrixAggregation> {
@@ -22,6 +22,7 @@ public class AdjacencyMatrixAggregation  implements XContentable<AdjacencyMatrix
   public AdjacencyMatrixAggregation setFilters(NamedContainer<String, QueryContainer> val) { this._filters = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class AdjacencyMatrixAggregation  implements XContentable<AdjacencyMatrix
     new ConstructingObjectParser<>(AdjacencyMatrixAggregation.class.getName(), false, args -> new AdjacencyMatrixAggregation());
 
   static {
-    PARSER.declareObject(AdjacencyMatrixAggregation::setFilters, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> QueryContainer.PARSER.apply(pp, null)), FILTERS);;
+    PARSER.declareObject(AdjacencyMatrixAggregation::setFilters, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> QueryContainer.PARSER.apply(pp, null)), FILTERS);
   }
 
 }

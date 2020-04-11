@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.ingest.simulate_pipeline.*;
 import org.elasticsearch.common_abstractions.lazy_document.*;
 
@@ -59,6 +59,7 @@ public class DocumentSimulation  implements XContentable<DocumentSimulation> {
   public DocumentSimulation setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -75,10 +76,10 @@ public class DocumentSimulation  implements XContentable<DocumentSimulation> {
   static {
     PARSER.declareString(DocumentSimulation::setId, ID);
     PARSER.declareString(DocumentSimulation::setIndex, INDEX);
-    PARSER.declareObject(DocumentSimulation::setIngest, (p, t) -> Ingest.PARSER.apply(p, null), INGEST);
+    PARSER.declareObject(DocumentSimulation::setIngest, (p, t) -> Ingest.PARSER.apply(p, t), INGEST);
     PARSER.declareString(DocumentSimulation::setParent, PARENT);
     PARSER.declareString(DocumentSimulation::setRouting, ROUTING);
-    PARSER.declareObject(DocumentSimulation::setSource, (p, t) -> LazyDocument.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(DocumentSimulation::setSource, (p, t) -> LazyDocument.PARSER.apply(p, t), SOURCE);
     PARSER.declareString(DocumentSimulation::setType, TYPE);
   }
 

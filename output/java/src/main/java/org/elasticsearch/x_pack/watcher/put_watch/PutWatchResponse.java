@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class PutWatchResponse  implements XContentable<PutWatchResponse> {
@@ -46,6 +46,7 @@ public class PutWatchResponse  implements XContentable<PutWatchResponse> {
   public PutWatchResponse setPrimaryTerm(Long val) { this._primaryTerm = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,7 +63,7 @@ public class PutWatchResponse  implements XContentable<PutWatchResponse> {
   static {
     PARSER.declareBoolean(PutWatchResponse::setCreated, CREATED);
     PARSER.declareString(PutWatchResponse::setId, ID);
-    PARSER.declareInteger(PutWatchResponse::setVersion, VERSION);
+    PARSER.declareInt(PutWatchResponse::setVersion, VERSION);
     PARSER.declareLong(PutWatchResponse::setSeqNo, SEQ_NO);
     PARSER.declareLong(PutWatchResponse::setPrimaryTerm, PRIMARY_TERM);
   }

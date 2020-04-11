@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.document.single.term_vectors.*;
 
 public class MultiTermVectorsResponse  implements XContentable<MultiTermVectorsResponse> {
@@ -22,6 +22,7 @@ public class MultiTermVectorsResponse  implements XContentable<MultiTermVectorsR
   public MultiTermVectorsResponse setDocs(List<TermVectors> val) { this._docs = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class MultiTermVectorsResponse  implements XContentable<MultiTermVectorsR
     new ConstructingObjectParser<>(MultiTermVectorsResponse.class.getName(), false, args -> new MultiTermVectorsResponse());
 
   static {
-    PARSER.declareObjectArray(MultiTermVectorsResponse::setDocs, (p, t) -> TermVectors.PARSER.apply(p), DOCS);
+    PARSER.declareObjectArray(MultiTermVectorsResponse::setDocs, (p, t) -> TermVectors.PARSER.apply(p, t), DOCS);
   }
 
 }

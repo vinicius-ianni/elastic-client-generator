@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_info.*;
 import org.elasticsearch.common_options.stats.*;
 
@@ -113,6 +113,7 @@ public class NodeInfo  implements XContentable<NodeInfo> {
   public NodeInfo setVersion(String val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -129,18 +130,18 @@ public class NodeInfo  implements XContentable<NodeInfo> {
   static {
     PARSER.declareString(NodeInfo::setBuildHash, BUILD_HASH);
     PARSER.declareString(NodeInfo::setHost, HOST);
-    PARSER.declareObject(NodeInfo::setHttp, (p, t) -> NodeInfoHttp.PARSER.apply(p, null), HTTP);
+    PARSER.declareObject(NodeInfo::setHttp, (p, t) -> NodeInfoHttp.PARSER.apply(p, t), HTTP);
     PARSER.declareString(NodeInfo::setIp, IP);
-    PARSER.declareObject(NodeInfo::setJvm, (p, t) -> NodeJvmInfo.PARSER.apply(p, null), JVM);
+    PARSER.declareObject(NodeInfo::setJvm, (p, t) -> NodeJvmInfo.PARSER.apply(p, t), JVM);
     PARSER.declareString(NodeInfo::setName, NAME);
-    PARSER.declareObject(NodeInfo::setNetwork, (p, t) -> NodeInfoNetwork.PARSER.apply(p, null), NETWORK);
-    PARSER.declareObject(NodeInfo::setOs, (p, t) -> NodeOperatingSystemInfo.PARSER.apply(p, null), OS);
-    PARSER.declareObjectArray(NodeInfo::setPlugins, (p, t) -> PluginStats.PARSER.apply(p), PLUGINS);
-    PARSER.declareObject(NodeInfo::setProcess, (p, t) -> NodeProcessInfo.PARSER.apply(p, null), PROCESS);
+    PARSER.declareObject(NodeInfo::setNetwork, (p, t) -> NodeInfoNetwork.PARSER.apply(p, t), NETWORK);
+    PARSER.declareObject(NodeInfo::setOs, (p, t) -> NodeOperatingSystemInfo.PARSER.apply(p, t), OS);
+    PARSER.declareObjectArray(NodeInfo::setPlugins, (p, t) -> PluginStats.PARSER.apply(p, t), PLUGINS);
+    PARSER.declareObject(NodeInfo::setProcess, (p, t) -> NodeProcessInfo.PARSER.apply(p, t), PROCESS);
     PARSER.declareObjectArray(NodeInfo::setRoles, (p, t) -> NodeRole.PARSER.apply(p), ROLES);
     PARSER.declareStringArray(NodeInfo::setSettings, SETTINGS);
-    PARSER.declareObject(NodeInfo::setThreadPool, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> NodeThreadPoolInfo.PARSER.apply(pp, null)), THREAD_POOL);;
-    PARSER.declareObject(NodeInfo::setTransport, (p, t) -> NodeInfoTransport.PARSER.apply(p, null), TRANSPORT);
+    PARSER.declareObject(NodeInfo::setThreadPool, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> NodeThreadPoolInfo.PARSER.apply(pp, null)), THREAD_POOL);
+    PARSER.declareObject(NodeInfo::setTransport, (p, t) -> NodeInfoTransport.PARSER.apply(p, t), TRANSPORT);
     PARSER.declareString(NodeInfo::setTransportAddress, TRANSPORT_ADDRESS);
     PARSER.declareString(NodeInfo::setVersion, VERSION);
   }

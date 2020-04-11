@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
@@ -95,6 +95,7 @@ public class ValidateQueryRequest  implements XContentable<ValidateQueryRequest>
   public ValidateQueryRequest setQuery(QueryContainer val) { this._query = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -113,15 +114,15 @@ public class ValidateQueryRequest  implements XContentable<ValidateQueryRequest>
     PARSER.declareBoolean(ValidateQueryRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(ValidateQueryRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(ValidateQueryRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(ValidateQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p, null), DEFAULT_OPERATOR);
+    PARSER.declareObject(ValidateQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
     PARSER.declareString(ValidateQueryRequest::setDf, DF);
-    PARSER.declareObject(ValidateQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(ValidateQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(ValidateQueryRequest::setExplain, EXPLAIN);
     PARSER.declareBoolean(ValidateQueryRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(ValidateQueryRequest::setLenient, LENIENT);
     PARSER.declareString(ValidateQueryRequest::setQueryOnQueryString, QUERY_ON_QUERY_STRING);
     PARSER.declareBoolean(ValidateQueryRequest::setRewrite, REWRITE);
-    PARSER.declareObject(ValidateQueryRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
+    PARSER.declareObject(ValidateQueryRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
   }
 
 }

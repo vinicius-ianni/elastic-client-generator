@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 
@@ -47,6 +47,7 @@ public class DateHistogramRollupGrouping  implements XContentable<DateHistogramR
   public DateHistogramRollupGrouping setTimeZone(String val) { this._timeZone = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,10 +62,10 @@ public class DateHistogramRollupGrouping  implements XContentable<DateHistogramR
     new ConstructingObjectParser<>(DateHistogramRollupGrouping.class.getName(), false, args -> new DateHistogramRollupGrouping());
 
   static {
-    PARSER.declareObject(DateHistogramRollupGrouping::setDelay, (p, t) -> Time.PARSER.apply(p, null), DELAY);
-    PARSER.declareField(DateHistogramRollupGrouping::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(DateHistogramRollupGrouping::setDelay, (p, t) -> Time.PARSER.apply(p, t), DELAY);
+    PARSER.declareObject(DateHistogramRollupGrouping::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareString(DateHistogramRollupGrouping::setFormat, FORMAT);
-    PARSER.declareObject(DateHistogramRollupGrouping::setInterval, (p, t) -> Time.PARSER.apply(p, null), INTERVAL);
+    PARSER.declareObject(DateHistogramRollupGrouping::setInterval, (p, t) -> Time.PARSER.apply(p, t), INTERVAL);
     PARSER.declareString(DateHistogramRollupGrouping::setTimeZone, TIME_ZONE);
   }
 

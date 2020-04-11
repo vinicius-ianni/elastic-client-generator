@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.monitoring.indices_segments.*;
 import org.elasticsearch.common_options.hit.*;
 
@@ -29,6 +29,7 @@ public class SegmentsResponse  implements XContentable<SegmentsResponse> {
   public SegmentsResponse setShards(ShardStatistics val) { this._shards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class SegmentsResponse  implements XContentable<SegmentsResponse> {
     new ConstructingObjectParser<>(SegmentsResponse.class.getName(), false, args -> new SegmentsResponse());
 
   static {
-    PARSER.declareObject(SegmentsResponse::setIndices, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> IndexSegment.PARSER.apply(pp, null)), INDICES);;
-    PARSER.declareObject(SegmentsResponse::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, null), SHARDS);
+    PARSER.declareObject(SegmentsResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> IndexSegment.PARSER.apply(pp, null)), INDICES);
+    PARSER.declareObject(SegmentsResponse::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);
   }
 
 }

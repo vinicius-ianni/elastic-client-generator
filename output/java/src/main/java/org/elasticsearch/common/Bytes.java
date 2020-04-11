@@ -2,6 +2,7 @@
 package org.elasticsearch.common;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -49,7 +50,7 @@ public enum Bytes implements XContentable<Bytes> {
       case "p": return Bytes.P;
       case "pb": return Bytes.Pb;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, Bytes.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, Bytes.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

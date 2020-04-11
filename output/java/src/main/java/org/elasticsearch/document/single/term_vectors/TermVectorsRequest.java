@@ -5,20 +5,20 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.document.single.term_vectors.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 
-public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsRequest> {
+public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsRequest<TDocument>> {
   
   static final ParseField DOC = new ParseField("doc");
   private TDocument _doc;
@@ -104,6 +104,7 @@ public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsR
   public TermVectorsRequest<TDocument> setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -118,20 +119,20 @@ public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsR
     new ConstructingObjectParser<>(TermVectorsRequest.class.getName(), false, args -> new TermVectorsRequest());
 
   static {
-    PARSER.declareObject(TermVectorsRequest::setDoc, (p, t) -> TDocument.PARSER.apply(p, null), DOC);
-    PARSER.declareObject(TermVectorsRequest::setFilter, (p, t) -> TermVectorFilter.PARSER.apply(p, null), FILTER);
-    PARSER.declareObject(TermVectorsRequest::setPerFieldAnalyzer, (p, t) ->  new NamedContainer<>(n -> () -> new Field(n),pp -> String.PARSER.apply(pp, null)), PER_FIELD_ANALYZER);;
+    PARSER.declareObject(TermVectorsRequest::setDoc, (p, t) -> null /* TODO TDocument */, DOC);
+    PARSER.declareObject(TermVectorsRequest::setFilter, (p, t) -> TermVectorFilter.PARSER.apply(p, t), FILTER);
+    PARSER.declareObject(TermVectorsRequest::setPerFieldAnalyzer, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),pp -> pp.text()), PER_FIELD_ANALYZER);
     PARSER.declareBoolean(TermVectorsRequest::setFieldStatistics, FIELD_STATISTICS);
-    PARSER.declareObjectArray(TermVectorsRequest::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObjectArray(TermVectorsRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(TermVectorsRequest::setOffsets, OFFSETS);
     PARSER.declareBoolean(TermVectorsRequest::setPayloads, PAYLOADS);
     PARSER.declareBoolean(TermVectorsRequest::setPositions, POSITIONS);
     PARSER.declareString(TermVectorsRequest::setPreference, PREFERENCE);
     PARSER.declareBoolean(TermVectorsRequest::setRealtime, REALTIME);
-    PARSER.declareRouting(TermVectorsRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(TermVectorsRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(TermVectorsRequest::setTermStatistics, TERM_STATISTICS);
     PARSER.declareLong(TermVectorsRequest::setVersion, VERSION);
-    PARSER.declareObject(TermVectorsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(TermVectorsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
@@ -79,6 +79,7 @@ public class DocumentExistsRequest  implements XContentable<DocumentExistsReques
   public DocumentExistsRequest setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -96,13 +97,13 @@ public class DocumentExistsRequest  implements XContentable<DocumentExistsReques
     PARSER.declareString(DocumentExistsRequest::setPreference, PREFERENCE);
     PARSER.declareBoolean(DocumentExistsRequest::setRealtime, REALTIME);
     PARSER.declareBoolean(DocumentExistsRequest::setRefresh, REFRESH);
-    PARSER.declareRouting(DocumentExistsRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(DocumentExistsRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(DocumentExistsRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(DocumentExistsRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(DocumentExistsRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
-    PARSER.declareObjectArray(DocumentExistsRequest::setStoredFields, (p, t) -> Field.PARSER.apply(p), STORED_FIELDS);
+    PARSER.declareObjectArray(DocumentExistsRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(DocumentExistsRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
+    PARSER.declareObjectArray(DocumentExistsRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
     PARSER.declareLong(DocumentExistsRequest::setVersion, VERSION);
-    PARSER.declareObject(DocumentExistsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(DocumentExistsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

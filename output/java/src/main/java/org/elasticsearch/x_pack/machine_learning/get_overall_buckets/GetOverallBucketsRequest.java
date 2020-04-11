@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
 
@@ -59,6 +59,7 @@ public class GetOverallBucketsRequest  implements XContentable<GetOverallBuckets
   public GetOverallBucketsRequest setTopN(Integer val) { this._topN = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -74,12 +75,12 @@ public class GetOverallBucketsRequest  implements XContentable<GetOverallBuckets
 
   static {
     PARSER.declareBoolean(GetOverallBucketsRequest::setAllowNoJobs, ALLOW_NO_JOBS);
-    PARSER.declareObject(GetOverallBucketsRequest::setBucketSpan, (p, t) -> Time.PARSER.apply(p, null), BUCKET_SPAN);
-    PARSER.declareDate(GetOverallBucketsRequest::setEnd, (p, t) -> Date.createFrom(p), END);
+    PARSER.declareObject(GetOverallBucketsRequest::setBucketSpan, (p, t) -> Time.PARSER.apply(p, t), BUCKET_SPAN);
+    PARSER.declareObject(GetOverallBucketsRequest::setEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END);
     PARSER.declareBoolean(GetOverallBucketsRequest::setExcludeInterim, EXCLUDE_INTERIM);
     PARSER.declareDouble(GetOverallBucketsRequest::setOverallScore, OVERALL_SCORE);
-    PARSER.declareDate(GetOverallBucketsRequest::setStart, (p, t) -> Date.createFrom(p), START);
-    PARSER.declareInteger(GetOverallBucketsRequest::setTopN, TOP_N);
+    PARSER.declareObject(GetOverallBucketsRequest::setStart, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), START);
+    PARSER.declareInt(GetOverallBucketsRequest::setTopN, TOP_N);
   }
 
 }

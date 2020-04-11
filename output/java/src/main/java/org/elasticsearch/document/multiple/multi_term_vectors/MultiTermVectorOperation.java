@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.document.single.term_vectors.*;
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
@@ -100,6 +100,7 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
   public MultiTermVectorOperation setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -114,19 +115,19 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
     new ConstructingObjectParser<>(MultiTermVectorOperation.class.getName(), false, args -> new MultiTermVectorOperation());
 
   static {
-    PARSER.declareObject(MultiTermVectorOperation::setDoc, (p, t) -> Object.PARSER.apply(p, null), DOC);
+    PARSER.declareObject(MultiTermVectorOperation::setDoc, (p, t) -> p.objectText(), DOC);
     PARSER.declareBoolean(MultiTermVectorOperation::setFieldStatistics, FIELD_STATISTICS);
-    PARSER.declareObject(MultiTermVectorOperation::setFilter, (p, t) -> TermVectorFilter.PARSER.apply(p, null), FILTER);
-    PARSER.declareId(MultiTermVectorOperation::setId, (p, t) -> Id.createFrom(p), ID);
-    PARSER.declareIndexName(MultiTermVectorOperation::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(MultiTermVectorOperation::setFilter, (p, t) -> TermVectorFilter.PARSER.apply(p, t), FILTER);
+    PARSER.declareObject(MultiTermVectorOperation::setId, (p, t) -> Id.createFrom(p), ID);
+    PARSER.declareObject(MultiTermVectorOperation::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
     PARSER.declareBoolean(MultiTermVectorOperation::setOffsets, OFFSETS);
     PARSER.declareBoolean(MultiTermVectorOperation::setPayloads, PAYLOADS);
     PARSER.declareBoolean(MultiTermVectorOperation::setPositions, POSITIONS);
-    PARSER.declareRouting(MultiTermVectorOperation::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObjectArray(MultiTermVectorOperation::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObject(MultiTermVectorOperation::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObjectArray(MultiTermVectorOperation::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(MultiTermVectorOperation::setTermStatistics, TERM_STATISTICS);
     PARSER.declareLong(MultiTermVectorOperation::setVersion, VERSION);
-    PARSER.declareObject(MultiTermVectorOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(MultiTermVectorOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

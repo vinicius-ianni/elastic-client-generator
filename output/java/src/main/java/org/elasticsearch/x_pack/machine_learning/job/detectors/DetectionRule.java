@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.detectors.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 
@@ -35,6 +35,7 @@ public class DetectionRule  implements XContentable<DetectionRule> {
   public DetectionRule setScope(NamedContainer<Field, FilterRef> val) { this._scope = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,8 +51,8 @@ public class DetectionRule  implements XContentable<DetectionRule> {
 
   static {
     PARSER.declareObjectArray(DetectionRule::setActions, (p, t) -> RuleAction.PARSER.apply(p), ACTIONS);
-    PARSER.declareObjectArray(DetectionRule::setConditions, (p, t) -> RuleCondition.PARSER.apply(p), CONDITIONS);
-    PARSER.declareObject(DetectionRule::setScope, (p, t) ->  new NamedContainer<>(n -> () -> new Field(n),pp -> FilterRef.PARSER.apply(pp, null)), SCOPE);;
+    PARSER.declareObjectArray(DetectionRule::setConditions, (p, t) -> RuleCondition.PARSER.apply(p, t), CONDITIONS);
+    PARSER.declareObject(DetectionRule::setScope, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),pp -> FilterRef.PARSER.apply(pp, null)), SCOPE);
   }
 
 }

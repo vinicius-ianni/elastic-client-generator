@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
@@ -109,6 +109,7 @@ public class CountRequest  implements XContentable<CountRequest> {
   public CountRequest setQuery(QueryContainer val) { this._query = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -126,18 +127,18 @@ public class CountRequest  implements XContentable<CountRequest> {
     PARSER.declareBoolean(CountRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(CountRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(CountRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(CountRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p, null), DEFAULT_OPERATOR);
+    PARSER.declareObject(CountRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
     PARSER.declareString(CountRequest::setDf, DF);
-    PARSER.declareObject(CountRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(CountRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(CountRequest::setIgnoreThrottled, IGNORE_THROTTLED);
     PARSER.declareBoolean(CountRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(CountRequest::setLenient, LENIENT);
     PARSER.declareDouble(CountRequest::setMinScore, MIN_SCORE);
     PARSER.declareString(CountRequest::setPreference, PREFERENCE);
     PARSER.declareString(CountRequest::setQueryOnQueryString, QUERY_ON_QUERY_STRING);
-    PARSER.declareRouting(CountRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(CountRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareLong(CountRequest::setTerminateAfter, TERMINATE_AFTER);
-    PARSER.declareObject(CountRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
+    PARSER.declareObject(CountRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.results.*;
 import org.elasticsearch.internal.*;
 
@@ -29,6 +29,7 @@ public class GetCategoriesResponse  implements XContentable<GetCategoriesRespons
   public GetCategoriesResponse setCount(Long val) { this._count = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class GetCategoriesResponse  implements XContentable<GetCategoriesRespons
     new ConstructingObjectParser<>(GetCategoriesResponse.class.getName(), false, args -> new GetCategoriesResponse());
 
   static {
-    PARSER.declareObjectArray(GetCategoriesResponse::setCategories, (p, t) -> CategoryDefinition.PARSER.apply(p), CATEGORIES);
+    PARSER.declareObjectArray(GetCategoriesResponse::setCategories, (p, t) -> CategoryDefinition.PARSER.apply(p, t), CATEGORIES);
     PARSER.declareLong(GetCategoriesResponse::setCount, COUNT);
   }
 

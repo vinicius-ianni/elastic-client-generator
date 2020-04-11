@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.types.*;
 import org.elasticsearch.mapping.dynamic_template.*;
 
@@ -59,6 +59,7 @@ public class DynamicTemplate  implements XContentable<DynamicTemplate> {
   public DynamicTemplate setUnmatch(String val) { this._unmatch = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -73,10 +74,10 @@ public class DynamicTemplate  implements XContentable<DynamicTemplate> {
     new ConstructingObjectParser<>(DynamicTemplate.class.getName(), false, args -> new DynamicTemplate());
 
   static {
-    PARSER.declareObject(DynamicTemplate::setMapping, (p, t) -> IProperty.PARSER.apply(p, null), MAPPING);
+    PARSER.declareObject(DynamicTemplate::setMapping, (p, t) -> IProperty.PARSER.apply(p, t), MAPPING);
     PARSER.declareString(DynamicTemplate::setMatch, MATCH);
     PARSER.declareString(DynamicTemplate::setMatchMappingType, MATCH_MAPPING_TYPE);
-    PARSER.declareObject(DynamicTemplate::setMatchPattern, (p, t) -> MatchType.PARSER.apply(p, null), MATCH_PATTERN);
+    PARSER.declareObject(DynamicTemplate::setMatchPattern, (p, t) -> MatchType.PARSER.apply(p), MATCH_PATTERN);
     PARSER.declareString(DynamicTemplate::setPathMatch, PATH_MATCH);
     PARSER.declareString(DynamicTemplate::setPathUnmatch, PATH_UNMATCH);
     PARSER.declareString(DynamicTemplate::setUnmatch, UNMATCH);

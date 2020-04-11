@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 
@@ -35,6 +35,7 @@ public class FollowIndexReadException  implements XContentable<FollowIndexReadEx
   public FollowIndexReadException setException(ErrorCause val) { this._exception = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,8 +51,8 @@ public class FollowIndexReadException  implements XContentable<FollowIndexReadEx
 
   static {
     PARSER.declareLong(FollowIndexReadException::setFromSeqNo, FROM_SEQ_NO);
-    PARSER.declareInteger(FollowIndexReadException::setRetries, RETRIES);
-    PARSER.declareObject(FollowIndexReadException::setException, (p, t) -> ErrorCause.PARSER.apply(p, null), EXCEPTION);
+    PARSER.declareInt(FollowIndexReadException::setRetries, RETRIES);
+    PARSER.declareObject(FollowIndexReadException::setException, (p, t) -> ErrorCause.PARSER.apply(p, t), EXCEPTION);
   }
 
 }

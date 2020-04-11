@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -60,6 +60,7 @@ public class PutAliasRequest  implements XContentable<PutAliasRequest> {
   public PutAliasRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -74,13 +75,13 @@ public class PutAliasRequest  implements XContentable<PutAliasRequest> {
     new ConstructingObjectParser<>(PutAliasRequest.class.getName(), false, args -> new PutAliasRequest());
 
   static {
-    PARSER.declareObject(PutAliasRequest::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, null), FILTER);
-    PARSER.declareRouting(PutAliasRequest::setIndexRouting, (p, t) -> Routing.createFrom(p), INDEX_ROUTING);
+    PARSER.declareObject(PutAliasRequest::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);
+    PARSER.declareObject(PutAliasRequest::setIndexRouting, (p, t) -> Routing.createFrom(p), INDEX_ROUTING);
     PARSER.declareBoolean(PutAliasRequest::setIsWriteIndex, IS_WRITE_INDEX);
-    PARSER.declareRouting(PutAliasRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareRouting(PutAliasRequest::setSearchRouting, (p, t) -> Routing.createFrom(p), SEARCH_ROUTING);
-    PARSER.declareObject(PutAliasRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(PutAliasRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(PutAliasRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(PutAliasRequest::setSearchRouting, (p, t) -> Routing.createFrom(p), SEARCH_ROUTING);
+    PARSER.declareObject(PutAliasRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(PutAliasRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

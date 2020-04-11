@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 
@@ -59,6 +59,7 @@ public class ClearCacheRequest  implements XContentable<ClearCacheRequest> {
   public ClearCacheRequest setRequest(Boolean val) { this._request = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -74,9 +75,9 @@ public class ClearCacheRequest  implements XContentable<ClearCacheRequest> {
 
   static {
     PARSER.declareBoolean(ClearCacheRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(ClearCacheRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(ClearCacheRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(ClearCacheRequest::setFielddata, FIELDDATA);
-    PARSER.declareObjectArray(ClearCacheRequest::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObjectArray(ClearCacheRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(ClearCacheRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(ClearCacheRequest::setQuery, QUERY);
     PARSER.declareBoolean(ClearCacheRequest::setRequest, REQUEST);

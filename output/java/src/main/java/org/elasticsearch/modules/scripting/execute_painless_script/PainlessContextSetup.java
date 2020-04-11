@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
@@ -35,6 +35,7 @@ public class PainlessContextSetup  implements XContentable<PainlessContextSetup>
   public PainlessContextSetup setQuery(QueryContainer val) { this._query = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class PainlessContextSetup  implements XContentable<PainlessContextSetup>
     new ConstructingObjectParser<>(PainlessContextSetup.class.getName(), false, args -> new PainlessContextSetup());
 
   static {
-    PARSER.declareObject(PainlessContextSetup::setDocument, (p, t) -> Object.PARSER.apply(p, null), DOCUMENT);
-    PARSER.declareIndexName(PainlessContextSetup::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareObject(PainlessContextSetup::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
+    PARSER.declareObject(PainlessContextSetup::setDocument, (p, t) -> p.objectText(), DOCUMENT);
+    PARSER.declareObject(PainlessContextSetup::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(PainlessContextSetup::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_abstractions.infer.property_name.*;
 import org.elasticsearch.mapping.types.*;
@@ -42,6 +42,7 @@ public class CorePropertyBase  implements XContentable<CorePropertyBase> {
   public CorePropertyBase setStore(Boolean val) { this._store = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,8 +57,8 @@ public class CorePropertyBase  implements XContentable<CorePropertyBase> {
     new ConstructingObjectParser<>(CorePropertyBase.class.getName(), false, args -> new CorePropertyBase());
 
   static {
-    PARSER.declareObjectArray(CorePropertyBase::setCopyTo, (p, t) -> Field.PARSER.apply(p), COPY_TO);
-    PARSER.declareObject(CorePropertyBase::setFields, (p, t) ->  new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), FIELDS);;
+    PARSER.declareObjectArray(CorePropertyBase::setCopyTo, (p, t) -> Field.createFrom(p), COPY_TO);
+    PARSER.declareObject(CorePropertyBase::setFields, (p, t) -> new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), FIELDS);
     PARSER.declareString(CorePropertyBase::setSimilarity, SIMILARITY);
     PARSER.declareBoolean(CorePropertyBase::setStore, STORE);
   }

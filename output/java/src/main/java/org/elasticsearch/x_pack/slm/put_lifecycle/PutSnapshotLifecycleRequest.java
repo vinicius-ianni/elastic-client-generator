@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.slm.*;
 import org.elasticsearch.x_pack.watcher.schedule.*;
 
@@ -41,6 +41,7 @@ public class PutSnapshotLifecycleRequest  implements XContentable<PutSnapshotLif
   public PutSnapshotLifecycleRequest setSchedule(CronExpression val) { this._schedule = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,10 +56,10 @@ public class PutSnapshotLifecycleRequest  implements XContentable<PutSnapshotLif
     new ConstructingObjectParser<>(PutSnapshotLifecycleRequest.class.getName(), false, args -> new PutSnapshotLifecycleRequest());
 
   static {
-    PARSER.declareObject(PutSnapshotLifecycleRequest::setConfig, (p, t) -> SnapshotLifecycleConfig.PARSER.apply(p, null), CONFIG);
+    PARSER.declareObject(PutSnapshotLifecycleRequest::setConfig, (p, t) -> SnapshotLifecycleConfig.PARSER.apply(p, t), CONFIG);
     PARSER.declareString(PutSnapshotLifecycleRequest::setName, NAME);
     PARSER.declareString(PutSnapshotLifecycleRequest::setRepository, REPOSITORY);
-    PARSER.declareObject(PutSnapshotLifecycleRequest::setSchedule, (p, t) -> CronExpression.PARSER.apply(p, null), SCHEDULE);
+    PARSER.declareObject(PutSnapshotLifecycleRequest::setSchedule, (p, t) -> CronExpression.PARSER.apply(p, t), SCHEDULE);
   }
 
 }

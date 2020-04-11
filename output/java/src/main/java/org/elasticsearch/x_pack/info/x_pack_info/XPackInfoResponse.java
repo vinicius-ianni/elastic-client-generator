@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.info.x_pack_info.*;
 
 public class XPackInfoResponse  implements XContentable<XPackInfoResponse> {
@@ -40,6 +40,7 @@ public class XPackInfoResponse  implements XContentable<XPackInfoResponse> {
   public XPackInfoResponse setTagline(String val) { this._tagline = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,9 +55,9 @@ public class XPackInfoResponse  implements XContentable<XPackInfoResponse> {
     new ConstructingObjectParser<>(XPackInfoResponse.class.getName(), false, args -> new XPackInfoResponse());
 
   static {
-    PARSER.declareObject(XPackInfoResponse::setBuild, (p, t) -> XPackBuildInformation.PARSER.apply(p, null), BUILD);
-    PARSER.declareObject(XPackInfoResponse::setFeatures, (p, t) -> XPackFeatures.PARSER.apply(p, null), FEATURES);
-    PARSER.declareObject(XPackInfoResponse::setLicense, (p, t) -> MinimalLicenseInformation.PARSER.apply(p, null), LICENSE);
+    PARSER.declareObject(XPackInfoResponse::setBuild, (p, t) -> XPackBuildInformation.PARSER.apply(p, t), BUILD);
+    PARSER.declareObject(XPackInfoResponse::setFeatures, (p, t) -> XPackFeatures.PARSER.apply(p, t), FEATURES);
+    PARSER.declareObject(XPackInfoResponse::setLicense, (p, t) -> MinimalLicenseInformation.PARSER.apply(p, t), LICENSE);
     PARSER.declareString(XPackInfoResponse::setTagline, TAGLINE);
   }
 

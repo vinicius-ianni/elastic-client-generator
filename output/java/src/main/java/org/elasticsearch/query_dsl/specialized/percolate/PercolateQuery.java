@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
@@ -68,6 +68,7 @@ public class PercolateQuery  implements XContentable<PercolateQuery> {
   public PercolateQuery setVersion(Long val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -82,13 +83,13 @@ public class PercolateQuery  implements XContentable<PercolateQuery> {
     new ConstructingObjectParser<>(PercolateQuery.class.getName(), false, args -> new PercolateQuery());
 
   static {
-    PARSER.declareObject(PercolateQuery::setDocument, (p, t) -> Object.PARSER.apply(p, null), DOCUMENT);
-    PARSER.declareObjectArray(PercolateQuery::setDocuments, (p, t) -> Object.PARSER.apply(p), DOCUMENTS);
-    PARSER.declareField(PercolateQuery::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareId(PercolateQuery::setId, (p, t) -> Id.createFrom(p), ID);
-    PARSER.declareIndexName(PercolateQuery::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(PercolateQuery::setDocument, (p, t) -> p.objectText(), DOCUMENT);
+    PARSER.declareObjectArray(PercolateQuery::setDocuments, (p, t) -> p.objectText(), DOCUMENTS);
+    PARSER.declareObject(PercolateQuery::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(PercolateQuery::setId, (p, t) -> Id.createFrom(p), ID);
+    PARSER.declareObject(PercolateQuery::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
     PARSER.declareString(PercolateQuery::setPreference, PREFERENCE);
-    PARSER.declareRouting(PercolateQuery::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(PercolateQuery::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareLong(PercolateQuery::setVersion, VERSION);
   }
 

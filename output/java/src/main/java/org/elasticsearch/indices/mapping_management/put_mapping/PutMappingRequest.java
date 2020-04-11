@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.meta_fields.all.*;
 import org.elasticsearch.mapping.*;
 import org.elasticsearch.mapping.dynamic_template.*;
@@ -141,6 +141,7 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
   public PutMappingRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -155,25 +156,25 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
     new ConstructingObjectParser<>(PutMappingRequest.class.getName(), false, args -> new PutMappingRequest());
 
   static {
-    PARSER.declareObject(PutMappingRequest::setAllField, (p, t) -> AllField.PARSER.apply(p, null), ALL_FIELD);
+    PARSER.declareObject(PutMappingRequest::setAllField, (p, t) -> AllField.PARSER.apply(p, t), ALL_FIELD);
     PARSER.declareBoolean(PutMappingRequest::setDateDetection, DATE_DETECTION);
-    PARSER.declareObject(PutMappingRequest::setDynamic, (p, t) -> null, DYNAMIC);
+    PARSER.declareObject(PutMappingRequest::setDynamic, (p, t) ->  new Either<Boolean, DynamicMapping>() /* TODO UnionOf */, DYNAMIC);
     PARSER.declareStringArray(PutMappingRequest::setDynamicDateFormats, DYNAMIC_DATE_FORMATS);
-    PARSER.declareObject(PutMappingRequest::setDynamicTemplates, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> DynamicTemplate.PARSER.apply(pp, null)), DYNAMIC_TEMPLATES);;
-    PARSER.declareObject(PutMappingRequest::setFieldNamesField, (p, t) -> FieldNamesField.PARSER.apply(p, null), FIELD_NAMES_FIELD);
-    PARSER.declareObject(PutMappingRequest::setIndexField, (p, t) -> IndexField.PARSER.apply(p, null), INDEX_FIELD);
-    PARSER.declareObject(PutMappingRequest::setMeta, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);;
+    PARSER.declareObject(PutMappingRequest::setDynamicTemplates, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> DynamicTemplate.PARSER.apply(pp, null)), DYNAMIC_TEMPLATES);
+    PARSER.declareObject(PutMappingRequest::setFieldNamesField, (p, t) -> FieldNamesField.PARSER.apply(p, t), FIELD_NAMES_FIELD);
+    PARSER.declareObject(PutMappingRequest::setIndexField, (p, t) -> IndexField.PARSER.apply(p, t), INDEX_FIELD);
+    PARSER.declareObject(PutMappingRequest::setMeta, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);
     PARSER.declareBoolean(PutMappingRequest::setNumericDetection, NUMERIC_DETECTION);
-    PARSER.declareObject(PutMappingRequest::setProperties, (p, t) ->  new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), PROPERTIES);;
-    PARSER.declareObject(PutMappingRequest::setRoutingField, (p, t) -> RoutingField.PARSER.apply(p, null), ROUTING_FIELD);
-    PARSER.declareObject(PutMappingRequest::setSizeField, (p, t) -> SizeField.PARSER.apply(p, null), SIZE_FIELD);
-    PARSER.declareObject(PutMappingRequest::setSourceField, (p, t) -> SourceField.PARSER.apply(p, null), SOURCE_FIELD);
+    PARSER.declareObject(PutMappingRequest::setProperties, (p, t) -> new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), PROPERTIES);
+    PARSER.declareObject(PutMappingRequest::setRoutingField, (p, t) -> RoutingField.PARSER.apply(p, t), ROUTING_FIELD);
+    PARSER.declareObject(PutMappingRequest::setSizeField, (p, t) -> SizeField.PARSER.apply(p, t), SIZE_FIELD);
+    PARSER.declareObject(PutMappingRequest::setSourceField, (p, t) -> SourceField.PARSER.apply(p, t), SOURCE_FIELD);
     PARSER.declareBoolean(PutMappingRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(PutMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(PutMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(PutMappingRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(PutMappingRequest::setIncludeTypeName, INCLUDE_TYPE_NAME);
-    PARSER.declareObject(PutMappingRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(PutMappingRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(PutMappingRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(PutMappingRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

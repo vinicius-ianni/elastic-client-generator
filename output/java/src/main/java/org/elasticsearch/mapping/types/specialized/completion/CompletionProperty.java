@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.types.specialized.completion.*;
 import org.elasticsearch.internal.*;
 
@@ -53,6 +53,7 @@ public class CompletionProperty  implements XContentable<CompletionProperty> {
   public CompletionProperty setSearchAnalyzer(String val) { this._searchAnalyzer = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,8 +69,8 @@ public class CompletionProperty  implements XContentable<CompletionProperty> {
 
   static {
     PARSER.declareString(CompletionProperty::setAnalyzer, ANALYZER);
-    PARSER.declareObjectArray(CompletionProperty::setContexts, (p, t) -> SuggestContext.PARSER.apply(p), CONTEXTS);
-    PARSER.declareInteger(CompletionProperty::setMaxInputLength, MAX_INPUT_LENGTH);
+    PARSER.declareObjectArray(CompletionProperty::setContexts, (p, t) -> SuggestContext.PARSER.apply(p, t), CONTEXTS);
+    PARSER.declareInt(CompletionProperty::setMaxInputLength, MAX_INPUT_LENGTH);
     PARSER.declareBoolean(CompletionProperty::setPreservePositionIncrements, PRESERVE_POSITION_INCREMENTS);
     PARSER.declareBoolean(CompletionProperty::setPreserveSeparators, PRESERVE_SEPARATORS);
     PARSER.declareString(CompletionProperty::setSearchAnalyzer, SEARCH_ANALYZER);

@@ -2,6 +2,7 @@
 package org.elasticsearch.index_modules.index_settings.store;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum FileSystemStorageImplementation implements XContentable<FileSystemSt
       case "mmapfs": return FileSystemStorageImplementation.Mmapfs;
       case "default_fs": return FileSystemStorageImplementation.DefaultFs;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, FileSystemStorageImplementation.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, FileSystemStorageImplementation.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

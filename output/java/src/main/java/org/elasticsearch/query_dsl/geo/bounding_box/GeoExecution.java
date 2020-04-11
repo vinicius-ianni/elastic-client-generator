@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.geo.bounding_box;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum GeoExecution implements XContentable<GeoExecution> {
       case "memory": return GeoExecution.Memory;
       case "indexed": return GeoExecution.Indexed;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, GeoExecution.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, GeoExecution.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.condition.*;
 import org.elasticsearch.x_pack.watcher.input.*;
 import org.elasticsearch.x_pack.watcher.execute_watch.*;
@@ -78,6 +78,7 @@ public class WatchRecord  implements XContentable<WatchRecord> {
   public WatchRecord setWatchId(String val) { this._watchId = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -92,13 +93,13 @@ public class WatchRecord  implements XContentable<WatchRecord> {
     new ConstructingObjectParser<>(WatchRecord.class.getName(), false, args -> new WatchRecord());
 
   static {
-    PARSER.declareObject(WatchRecord::setCondition, (p, t) -> ConditionContainer.PARSER.apply(p, null), CONDITION);
-    PARSER.declareObject(WatchRecord::setInput, (p, t) -> InputContainer.PARSER.apply(p, null), INPUT);
+    PARSER.declareObject(WatchRecord::setCondition, (p, t) -> ConditionContainer.PARSER.apply(p, t), CONDITION);
+    PARSER.declareObject(WatchRecord::setInput, (p, t) -> InputContainer.PARSER.apply(p, t), INPUT);
     PARSER.declareStringArray(WatchRecord::setMessages, MESSAGES);
-    PARSER.declareObject(WatchRecord::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
-    PARSER.declareObject(WatchRecord::setResult, (p, t) -> ExecutionResult.PARSER.apply(p, null), RESULT);
-    PARSER.declareObject(WatchRecord::setState, (p, t) -> ActionExecutionState.PARSER.apply(p, null), STATE);
-    PARSER.declareObject(WatchRecord::setTriggerEvent, (p, t) -> TriggerEventResult.PARSER.apply(p, null), TRIGGER_EVENT);
+    PARSER.declareObject(WatchRecord::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
+    PARSER.declareObject(WatchRecord::setResult, (p, t) -> ExecutionResult.PARSER.apply(p, t), RESULT);
+    PARSER.declareObject(WatchRecord::setState, (p, t) -> ActionExecutionState.PARSER.apply(p), STATE);
+    PARSER.declareObject(WatchRecord::setTriggerEvent, (p, t) -> TriggerEventResult.PARSER.apply(p, t), TRIGGER_EVENT);
     PARSER.declareString(WatchRecord::setUser, USER);
     PARSER.declareString(WatchRecord::setNode, NODE);
     PARSER.declareString(WatchRecord::setWatchId, WATCH_ID);

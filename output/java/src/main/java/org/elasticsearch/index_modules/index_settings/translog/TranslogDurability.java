@@ -2,6 +2,7 @@
 package org.elasticsearch.index_modules.index_settings.translog;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum TranslogDurability implements XContentable<TranslogDurability> {
       case "request": return TranslogDurability.Request;
       case "async": return TranslogDurability.Async;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, TranslogDurability.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, TranslogDurability.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

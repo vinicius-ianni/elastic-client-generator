@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.job.detectors;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum RuleAction implements XContentable<RuleAction> {
       case "skip_result": return RuleAction.SkipResult;
       case "skip_model_update": return RuleAction.SkipModelUpdate;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, RuleAction.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, RuleAction.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

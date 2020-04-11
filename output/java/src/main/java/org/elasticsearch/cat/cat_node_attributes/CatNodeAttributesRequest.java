@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 
 public class CatNodeAttributesRequest  implements XContentable<CatNodeAttributesRequest> {
@@ -58,6 +58,7 @@ public class CatNodeAttributesRequest  implements XContentable<CatNodeAttributes
   public CatNodeAttributesRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -76,7 +77,7 @@ public class CatNodeAttributesRequest  implements XContentable<CatNodeAttributes
     PARSER.declareStringArray(CatNodeAttributesRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatNodeAttributesRequest::setHelp, HELP);
     PARSER.declareBoolean(CatNodeAttributesRequest::setLocal, LOCAL);
-    PARSER.declareObject(CatNodeAttributesRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(CatNodeAttributesRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareStringArray(CatNodeAttributesRequest::setSortByColumns, SORT_BY_COLUMNS);
     PARSER.declareBoolean(CatNodeAttributesRequest::setVerbose, VERBOSE);
   }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -65,6 +65,7 @@ public class CatAllocationRequest  implements XContentable<CatAllocationRequest>
   public CatAllocationRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -79,12 +80,12 @@ public class CatAllocationRequest  implements XContentable<CatAllocationRequest>
     new ConstructingObjectParser<>(CatAllocationRequest.class.getName(), false, args -> new CatAllocationRequest());
 
   static {
-    PARSER.declareObject(CatAllocationRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p, null), BYTES);
+    PARSER.declareObject(CatAllocationRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
     PARSER.declareString(CatAllocationRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatAllocationRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatAllocationRequest::setHelp, HELP);
     PARSER.declareBoolean(CatAllocationRequest::setLocal, LOCAL);
-    PARSER.declareObject(CatAllocationRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(CatAllocationRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareStringArray(CatAllocationRequest::setSortByColumns, SORT_BY_COLUMNS);
     PARSER.declareBoolean(CatAllocationRequest::setVerbose, VERBOSE);
   }

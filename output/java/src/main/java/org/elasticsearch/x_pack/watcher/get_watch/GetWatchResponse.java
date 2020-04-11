@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.acknowledge_watch.*;
 import org.elasticsearch.x_pack.watcher.*;
 
@@ -41,6 +41,7 @@ public class GetWatchResponse  implements XContentable<GetWatchResponse> {
   public GetWatchResponse setWatch(Watch val) { this._watch = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -57,8 +58,8 @@ public class GetWatchResponse  implements XContentable<GetWatchResponse> {
   static {
     PARSER.declareBoolean(GetWatchResponse::setFound, FOUND);
     PARSER.declareString(GetWatchResponse::setId, ID);
-    PARSER.declareObject(GetWatchResponse::setStatus, (p, t) -> WatchStatus.PARSER.apply(p, null), STATUS);
-    PARSER.declareObject(GetWatchResponse::setWatch, (p, t) -> Watch.PARSER.apply(p, null), WATCH);
+    PARSER.declareObject(GetWatchResponse::setStatus, (p, t) -> WatchStatus.PARSER.apply(p, t), STATUS);
+    PARSER.declareObject(GetWatchResponse::setWatch, (p, t) -> Watch.PARSER.apply(p, t), WATCH);
   }
 
 }

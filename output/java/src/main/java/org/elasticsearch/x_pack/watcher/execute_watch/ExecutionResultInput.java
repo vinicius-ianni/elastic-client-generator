@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.execution.*;
 import org.elasticsearch.x_pack.watcher.input.*;
 
@@ -35,6 +35,7 @@ public class ExecutionResultInput  implements XContentable<ExecutionResultInput>
   public ExecutionResultInput setType(InputType val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class ExecutionResultInput  implements XContentable<ExecutionResultInput>
     new ConstructingObjectParser<>(ExecutionResultInput.class.getName(), false, args -> new ExecutionResultInput());
 
   static {
-    PARSER.declareObject(ExecutionResultInput::setPayload, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PAYLOAD);;
-    PARSER.declareObject(ExecutionResultInput::setStatus, (p, t) -> Status.PARSER.apply(p, null), STATUS);
-    PARSER.declareObject(ExecutionResultInput::setType, (p, t) -> InputType.PARSER.apply(p, null), TYPE);
+    PARSER.declareObject(ExecutionResultInput::setPayload, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PAYLOAD);
+    PARSER.declareObject(ExecutionResultInput::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS);
+    PARSER.declareObject(ExecutionResultInput::setType, (p, t) -> InputType.PARSER.apply(p), TYPE);
   }
 
 }

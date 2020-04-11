@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.search.search.inner_hits.*;
 import org.elasticsearch.internal.*;
@@ -36,6 +36,7 @@ public class FieldCollapse  implements XContentable<FieldCollapse> {
   public FieldCollapse setMaxConcurrentGroupSearches(Integer val) { this._maxConcurrentGroupSearches = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,9 +51,9 @@ public class FieldCollapse  implements XContentable<FieldCollapse> {
     new ConstructingObjectParser<>(FieldCollapse.class.getName(), false, args -> new FieldCollapse());
 
   static {
-    PARSER.declareField(FieldCollapse::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObject(FieldCollapse::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, null), INNER_HITS);
-    PARSER.declareInteger(FieldCollapse::setMaxConcurrentGroupSearches, MAX_CONCURRENT_GROUP_SEARCHES);
+    PARSER.declareObject(FieldCollapse::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(FieldCollapse::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, t), INNER_HITS);
+    PARSER.declareInt(FieldCollapse::setMaxConcurrentGroupSearches, MAX_CONCURRENT_GROUP_SEARCHES);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class WatchRecordQueuedStats  implements XContentable<WatchRecordQueuedStats> {
@@ -40,6 +40,7 @@ public class WatchRecordQueuedStats  implements XContentable<WatchRecordQueuedSt
   public WatchRecordQueuedStats setWatchRecordId(String val) { this._watchRecordId = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,8 +55,8 @@ public class WatchRecordQueuedStats  implements XContentable<WatchRecordQueuedSt
     new ConstructingObjectParser<>(WatchRecordQueuedStats.class.getName(), false, args -> new WatchRecordQueuedStats());
 
   static {
-    PARSER.declareDate(WatchRecordQueuedStats::setExecutionTime, (p, t) -> Date.createFrom(p), EXECUTION_TIME);
-    PARSER.declareDate(WatchRecordQueuedStats::setTriggeredTime, (p, t) -> Date.createFrom(p), TRIGGERED_TIME);
+    PARSER.declareObject(WatchRecordQueuedStats::setExecutionTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXECUTION_TIME);
+    PARSER.declareObject(WatchRecordQueuedStats::setTriggeredTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TRIGGERED_TIME);
     PARSER.declareString(WatchRecordQueuedStats::setWatchId, WATCH_ID);
     PARSER.declareString(WatchRecordQueuedStats::setWatchRecordId, WATCH_RECORD_ID);
   }

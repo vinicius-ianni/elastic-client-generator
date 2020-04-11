@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.watcher.input;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum ResponseContentType implements XContentable<ResponseContentType> {
       case "yaml": return ResponseContentType.Yaml;
       case "text": return ResponseContentType.Text;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ResponseContentType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ResponseContentType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

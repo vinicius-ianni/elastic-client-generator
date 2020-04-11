@@ -2,6 +2,7 @@
 package org.elasticsearch.common;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -47,7 +48,7 @@ public enum PipelineFailure implements XContentable<PipelineFailure> {
       case "BadRequest": return PipelineFailure.BadRequest;
       case "NoNodesAttempted": return PipelineFailure.NoNodesAttempted;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, PipelineFailure.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, PipelineFailure.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

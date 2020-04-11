@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.info.x_pack_usage.*;
 
 public class XPackUsageResponse  implements XContentable<XPackUsageResponse> {
@@ -106,6 +106,7 @@ public class XPackUsageResponse  implements XContentable<XPackUsageResponse> {
   public XPackUsageResponse setVotingOnly(XPackUsage val) { this._votingOnly = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -120,21 +121,21 @@ public class XPackUsageResponse  implements XContentable<XPackUsageResponse> {
     new ConstructingObjectParser<>(XPackUsageResponse.class.getName(), false, args -> new XPackUsageResponse());
 
   static {
-    PARSER.declareObject(XPackUsageResponse::setSql, (p, t) -> SqlUsage.PARSER.apply(p, null), SQL);
-    PARSER.declareObject(XPackUsageResponse::setRollup, (p, t) -> XPackUsage.PARSER.apply(p, null), ROLLUP);
-    PARSER.declareObject(XPackUsageResponse::setDataFrame, (p, t) -> XPackUsage.PARSER.apply(p, null), DATA_FRAME);
-    PARSER.declareObject(XPackUsageResponse::setFlattened, (p, t) -> XPackUsage.PARSER.apply(p, null), FLATTENED);
-    PARSER.declareObject(XPackUsageResponse::setDataScience, (p, t) -> XPackUsage.PARSER.apply(p, null), DATA_SCIENCE);
-    PARSER.declareObject(XPackUsageResponse::setIlm, (p, t) -> IlmUsage.PARSER.apply(p, null), ILM);
-    PARSER.declareObject(XPackUsageResponse::setCcr, (p, t) -> CcrUsage.PARSER.apply(p, null), CCR);
-    PARSER.declareObject(XPackUsageResponse::setWatcher, (p, t) -> AlertingUsage.PARSER.apply(p, null), WATCHER);
-    PARSER.declareObject(XPackUsageResponse::setGraph, (p, t) -> XPackUsage.PARSER.apply(p, null), GRAPH);
-    PARSER.declareObject(XPackUsageResponse::setLogstash, (p, t) -> XPackUsage.PARSER.apply(p, null), LOGSTASH);
-    PARSER.declareObject(XPackUsageResponse::setMl, (p, t) -> MachineLearningUsage.PARSER.apply(p, null), ML);
-    PARSER.declareObject(XPackUsageResponse::setMonitoring, (p, t) -> MonitoringUsage.PARSER.apply(p, null), MONITORING);
-    PARSER.declareObject(XPackUsageResponse::setSecurity, (p, t) -> SecurityUsage.PARSER.apply(p, null), SECURITY);
-    PARSER.declareObject(XPackUsageResponse::setVectors, (p, t) -> VectorUsage.PARSER.apply(p, null), VECTORS);
-    PARSER.declareObject(XPackUsageResponse::setVotingOnly, (p, t) -> XPackUsage.PARSER.apply(p, null), VOTING_ONLY);
+    PARSER.declareObject(XPackUsageResponse::setSql, (p, t) -> SqlUsage.PARSER.apply(p, t), SQL);
+    PARSER.declareObject(XPackUsageResponse::setRollup, (p, t) -> XPackUsage.PARSER.apply(p, t), ROLLUP);
+    PARSER.declareObject(XPackUsageResponse::setDataFrame, (p, t) -> XPackUsage.PARSER.apply(p, t), DATA_FRAME);
+    PARSER.declareObject(XPackUsageResponse::setFlattened, (p, t) -> XPackUsage.PARSER.apply(p, t), FLATTENED);
+    PARSER.declareObject(XPackUsageResponse::setDataScience, (p, t) -> XPackUsage.PARSER.apply(p, t), DATA_SCIENCE);
+    PARSER.declareObject(XPackUsageResponse::setIlm, (p, t) -> IlmUsage.PARSER.apply(p, t), ILM);
+    PARSER.declareObject(XPackUsageResponse::setCcr, (p, t) -> CcrUsage.PARSER.apply(p, t), CCR);
+    PARSER.declareObject(XPackUsageResponse::setWatcher, (p, t) -> AlertingUsage.PARSER.apply(p, t), WATCHER);
+    PARSER.declareObject(XPackUsageResponse::setGraph, (p, t) -> XPackUsage.PARSER.apply(p, t), GRAPH);
+    PARSER.declareObject(XPackUsageResponse::setLogstash, (p, t) -> XPackUsage.PARSER.apply(p, t), LOGSTASH);
+    PARSER.declareObject(XPackUsageResponse::setMl, (p, t) -> MachineLearningUsage.PARSER.apply(p, t), ML);
+    PARSER.declareObject(XPackUsageResponse::setMonitoring, (p, t) -> MonitoringUsage.PARSER.apply(p, t), MONITORING);
+    PARSER.declareObject(XPackUsageResponse::setSecurity, (p, t) -> SecurityUsage.PARSER.apply(p, t), SECURITY);
+    PARSER.declareObject(XPackUsageResponse::setVectors, (p, t) -> VectorUsage.PARSER.apply(p, t), VECTORS);
+    PARSER.declareObject(XPackUsageResponse::setVotingOnly, (p, t) -> XPackUsage.PARSER.apply(p, t), VOTING_ONLY);
   }
 
 }

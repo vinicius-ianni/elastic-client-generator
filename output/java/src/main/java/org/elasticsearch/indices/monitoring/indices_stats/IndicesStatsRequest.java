@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common.*;
 
@@ -71,6 +71,7 @@ public class IndicesStatsRequest  implements XContentable<IndicesStatsRequest> {
   public IndicesStatsRequest setLevel(Level val) { this._level = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -85,15 +86,15 @@ public class IndicesStatsRequest  implements XContentable<IndicesStatsRequest> {
     new ConstructingObjectParser<>(IndicesStatsRequest.class.getName(), false, args -> new IndicesStatsRequest());
 
   static {
-    PARSER.declareObjectArray(IndicesStatsRequest::setCompletionFields, (p, t) -> Field.PARSER.apply(p), COMPLETION_FIELDS);
-    PARSER.declareObject(IndicesStatsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
-    PARSER.declareObjectArray(IndicesStatsRequest::setFielddataFields, (p, t) -> Field.PARSER.apply(p), FIELDDATA_FIELDS);
-    PARSER.declareObjectArray(IndicesStatsRequest::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObjectArray(IndicesStatsRequest::setCompletionFields, (p, t) -> Field.createFrom(p), COMPLETION_FIELDS);
+    PARSER.declareObject(IndicesStatsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareObjectArray(IndicesStatsRequest::setFielddataFields, (p, t) -> Field.createFrom(p), FIELDDATA_FIELDS);
+    PARSER.declareObjectArray(IndicesStatsRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(IndicesStatsRequest::setForbidClosedIndices, FORBID_CLOSED_INDICES);
     PARSER.declareStringArray(IndicesStatsRequest::setGroups, GROUPS);
     PARSER.declareBoolean(IndicesStatsRequest::setIncludeSegmentFileSizes, INCLUDE_SEGMENT_FILE_SIZES);
     PARSER.declareBoolean(IndicesStatsRequest::setIncludeUnloadedSegments, INCLUDE_UNLOADED_SEGMENTS);
-    PARSER.declareObject(IndicesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p, null), LEVEL);
+    PARSER.declareObject(IndicesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL);
   }
 
 }

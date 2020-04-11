@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -59,6 +59,7 @@ public class ListTasksRequest  implements XContentable<ListTasksRequest> {
   public ListTasksRequest setWaitForCompletion(Boolean val) { this._waitForCompletion = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -75,10 +76,10 @@ public class ListTasksRequest  implements XContentable<ListTasksRequest> {
   static {
     PARSER.declareStringArray(ListTasksRequest::setActions, ACTIONS);
     PARSER.declareBoolean(ListTasksRequest::setDetailed, DETAILED);
-    PARSER.declareObject(ListTasksRequest::setGroupBy, (p, t) -> GroupBy.PARSER.apply(p, null), GROUP_BY);
+    PARSER.declareObject(ListTasksRequest::setGroupBy, (p, t) -> GroupBy.PARSER.apply(p), GROUP_BY);
     PARSER.declareStringArray(ListTasksRequest::setNodes, NODES);
     PARSER.declareString(ListTasksRequest::setParentTaskId, PARENT_TASK_ID);
-    PARSER.declareObject(ListTasksRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(ListTasksRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareBoolean(ListTasksRequest::setWaitForCompletion, WAIT_FOR_COMPLETION);
   }
 

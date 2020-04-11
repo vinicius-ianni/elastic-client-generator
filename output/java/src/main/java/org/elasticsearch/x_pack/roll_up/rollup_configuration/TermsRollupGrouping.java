@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 
 public class TermsRollupGrouping  implements XContentable<TermsRollupGrouping> {
@@ -22,6 +22,7 @@ public class TermsRollupGrouping  implements XContentable<TermsRollupGrouping> {
   public TermsRollupGrouping setFields(List<Field> val) { this._fields = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class TermsRollupGrouping  implements XContentable<TermsRollupGrouping> {
     new ConstructingObjectParser<>(TermsRollupGrouping.class.getName(), false, args -> new TermsRollupGrouping());
 
   static {
-    PARSER.declareObjectArray(TermsRollupGrouping::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObjectArray(TermsRollupGrouping::setFields, (p, t) -> Field.createFrom(p), FIELDS);
   }
 
 }

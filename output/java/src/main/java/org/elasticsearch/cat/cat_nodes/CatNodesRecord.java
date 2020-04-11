@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class CatNodesRecord  implements XContentable<CatNodesRecord> {
@@ -442,6 +442,7 @@ public class CatNodesRecord  implements XContentable<CatNodesRecord> {
   public CatNodesRecord setVersion(String val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -462,9 +463,9 @@ public class CatNodesRecord  implements XContentable<CatNodesRecord> {
     PARSER.declareString(CatNodesRecord::setDiskAvailable, DISK_AVAILABLE);
     PARSER.declareString(CatNodesRecord::setFielddataEvictions, FIELDDATA_EVICTIONS);
     PARSER.declareString(CatNodesRecord::setFielddataMemory, FIELDDATA_MEMORY);
-    PARSER.declareInteger(CatNodesRecord::setFileDescriptorCurrent, FILE_DESCRIPTOR_CURRENT);
-    PARSER.declareInteger(CatNodesRecord::setFileDescriptorMax, FILE_DESCRIPTOR_MAX);
-    PARSER.declareInteger(CatNodesRecord::setFileDescriptorPercent, FILE_DESCRIPTOR_PERCENT);
+    PARSER.declareInt(CatNodesRecord::setFileDescriptorCurrent, FILE_DESCRIPTOR_CURRENT);
+    PARSER.declareInt(CatNodesRecord::setFileDescriptorMax, FILE_DESCRIPTOR_MAX);
+    PARSER.declareInt(CatNodesRecord::setFileDescriptorPercent, FILE_DESCRIPTOR_PERCENT);
     PARSER.declareString(CatNodesRecord::setFilterCacheEvictions, FILTER_CACHE_EVICTIONS);
     PARSER.declareString(CatNodesRecord::setFilterCacheMemory, FILTER_CACHE_MEMORY);
     PARSER.declareString(CatNodesRecord::setFlushTotal, FLUSH_TOTAL);

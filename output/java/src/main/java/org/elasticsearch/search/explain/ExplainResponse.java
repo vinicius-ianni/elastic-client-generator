@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.explain.*;
 
-public class ExplainResponse<TDocument>  implements XContentable<ExplainResponse> {
+public class ExplainResponse<TDocument>  implements XContentable<ExplainResponse<TDocument>> {
   
   static final ParseField EXPLANATION = new ParseField("explanation");
   private ExplanationDetail _explanation;
@@ -34,6 +34,7 @@ public class ExplainResponse<TDocument>  implements XContentable<ExplainResponse
   public ExplainResponse<TDocument> setMatched(Boolean val) { this._matched = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,8 +49,9 @@ public class ExplainResponse<TDocument>  implements XContentable<ExplainResponse
     new ConstructingObjectParser<>(ExplainResponse.class.getName(), false, args -> new ExplainResponse());
 
   static {
-    PARSER.declareObject(ExplainResponse::setExplanation, (p, t) -> ExplanationDetail.PARSER.apply(p, null), EXPLANATION);
-    PARSER.declareObject(ExplainResponse::setGet, (p, t) -> InlineGet<TDocument>.PARSER.apply(p, null), GET);
+    PARSER.declareObject(ExplainResponse::setExplanation, (p, t) -> ExplanationDetail.PARSER.apply(p, t), EXPLANATION);
+    InlineGet _get = new InlineGet<>();
+    PARSER.declareObject(ExplainResponse::setGet, (p, t) -> _get.PARSER.apply(p, t), GET);
     PARSER.declareBoolean(ExplainResponse::setMatched, MATCHED);
   }
 

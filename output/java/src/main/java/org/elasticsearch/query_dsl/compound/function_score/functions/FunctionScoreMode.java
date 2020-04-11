@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.compound.function_score.functions;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public enum FunctionScoreMode implements XContentable<FunctionScoreMode> {
       case "max": return FunctionScoreMode.Max;
       case "min": return FunctionScoreMode.Min;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, FunctionScoreMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, FunctionScoreMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

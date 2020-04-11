@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.span.*;
 
@@ -47,6 +47,7 @@ public class SpanNotQuery  implements XContentable<SpanNotQuery> {
   public SpanNotQuery setPre(Integer val) { this._pre = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class SpanNotQuery  implements XContentable<SpanNotQuery> {
     new ConstructingObjectParser<>(SpanNotQuery.class.getName(), false, args -> new SpanNotQuery());
 
   static {
-    PARSER.declareInteger(SpanNotQuery::setDist, DIST);
-    PARSER.declareObject(SpanNotQuery::setExclude, (p, t) -> SpanQuery.PARSER.apply(p, null), EXCLUDE);
-    PARSER.declareObject(SpanNotQuery::setInclude, (p, t) -> SpanQuery.PARSER.apply(p, null), INCLUDE);
-    PARSER.declareInteger(SpanNotQuery::setPost, POST);
-    PARSER.declareInteger(SpanNotQuery::setPre, PRE);
+    PARSER.declareInt(SpanNotQuery::setDist, DIST);
+    PARSER.declareObject(SpanNotQuery::setExclude, (p, t) -> SpanQuery.PARSER.apply(p, t), EXCLUDE);
+    PARSER.declareObject(SpanNotQuery::setInclude, (p, t) -> SpanQuery.PARSER.apply(p, t), INCLUDE);
+    PARSER.declareInt(SpanNotQuery::setPost, POST);
+    PARSER.declareInt(SpanNotQuery::setPre, PRE);
   }
 
 }

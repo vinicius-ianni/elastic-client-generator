@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.suggesters.*;
 
-public class SuggestDictionary<T>  implements XContentable<SuggestDictionary> {
+public class SuggestDictionary<T>  implements XContentable<SuggestDictionary<T>> {
   
   static final ParseField ITEM = new ParseField("item");
   private List<Suggest<T>> _item;
@@ -34,6 +34,7 @@ public class SuggestDictionary<T>  implements XContentable<SuggestDictionary> {
   public SuggestDictionary<T> setValues(List<List<Suggest<T>>> val) { this._values = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,9 +49,11 @@ public class SuggestDictionary<T>  implements XContentable<SuggestDictionary> {
     new ConstructingObjectParser<>(SuggestDictionary.class.getName(), false, args -> new SuggestDictionary());
 
   static {
-    PARSER.declareObjectArray(SuggestDictionary::setItem, (p, t) -> Suggest<T>.PARSER.apply(p), ITEM);
+    Suggest _item = new Suggest<>();
+    PARSER.declareObjectArray(SuggestDictionary::setItem, (p, t) -> _item.PARSER.apply(p, t), ITEM);
     PARSER.declareStringArray(SuggestDictionary::setKeys, KEYS);
-    PARSER.declareObjectArray(SuggestDictionary::setValues, (p, t) -> List<Suggest<T>>.PARSER.apply(p), VALUES);
+    Suggest _values = new Suggest<>();
+    PARSER.declareObjectArray(SuggestDictionary::setValues, (p, t) -> null /* TODO List<_values> */, VALUES);
   }
 
 }

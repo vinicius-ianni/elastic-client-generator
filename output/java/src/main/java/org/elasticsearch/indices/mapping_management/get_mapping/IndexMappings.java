@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.*;
 
 public class IndexMappings  implements XContentable<IndexMappings> {
@@ -28,6 +28,7 @@ public class IndexMappings  implements XContentable<IndexMappings> {
   public IndexMappings setMappings(TypeMapping val) { this._mappings = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class IndexMappings  implements XContentable<IndexMappings> {
     new ConstructingObjectParser<>(IndexMappings.class.getName(), false, args -> new IndexMappings());
 
   static {
-    PARSER.declareObject(IndexMappings::setItem, (p, t) -> TypeMapping.PARSER.apply(p, null), ITEM);
-    PARSER.declareObject(IndexMappings::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, null), MAPPINGS);
+    PARSER.declareObject(IndexMappings::setItem, (p, t) -> TypeMapping.PARSER.apply(p, t), ITEM);
+    PARSER.declareObject(IndexMappings::setMappings, (p, t) -> TypeMapping.PARSER.apply(p, t), MAPPINGS);
   }
 
 }

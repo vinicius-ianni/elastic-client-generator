@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.hit.*;
@@ -90,6 +90,7 @@ public class BulkResponseItemBase  implements XContentable<BulkResponseItemBase>
   public BulkResponseItemBase setIsValid(Boolean val) { this._isValid = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -104,15 +105,15 @@ public class BulkResponseItemBase  implements XContentable<BulkResponseItemBase>
     new ConstructingObjectParser<>(BulkResponseItemBase.class.getName(), false, args -> new BulkResponseItemBase());
 
   static {
-    PARSER.declareObject(BulkResponseItemBase::setError, (p, t) -> MainError.PARSER.apply(p, null), ERROR);
+    PARSER.declareObject(BulkResponseItemBase::setError, (p, t) -> MainError.PARSER.apply(p, t), ERROR);
     PARSER.declareString(BulkResponseItemBase::setId, ID);
     PARSER.declareString(BulkResponseItemBase::setIndex, INDEX);
     PARSER.declareString(BulkResponseItemBase::setOperation, OPERATION);
     PARSER.declareLong(BulkResponseItemBase::setPrimaryTerm, PRIMARY_TERM);
     PARSER.declareString(BulkResponseItemBase::setResult, RESULT);
     PARSER.declareLong(BulkResponseItemBase::setSeqNo, SEQ_NO);
-    PARSER.declareObject(BulkResponseItemBase::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, null), SHARDS);
-    PARSER.declareInteger(BulkResponseItemBase::setStatus, STATUS);
+    PARSER.declareObject(BulkResponseItemBase::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);
+    PARSER.declareInt(BulkResponseItemBase::setStatus, STATUS);
     PARSER.declareString(BulkResponseItemBase::setType, TYPE);
     PARSER.declareLong(BulkResponseItemBase::setVersion, VERSION);
     PARSER.declareBoolean(BulkResponseItemBase::setIsValid, IS_VALID);

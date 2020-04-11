@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.cluster_stats.*;
 import org.elasticsearch.cluster.nodes_info.*;
@@ -48,6 +48,7 @@ public class ClusterOperatingSystemStats  implements XContentable<ClusterOperati
   public ClusterOperatingSystemStats setPrettyNames(List<ClusterOperatingSystemPrettyNane> val) { this._prettyNames = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,11 +63,11 @@ public class ClusterOperatingSystemStats  implements XContentable<ClusterOperati
     new ConstructingObjectParser<>(ClusterOperatingSystemStats.class.getName(), false, args -> new ClusterOperatingSystemStats());
 
   static {
-    PARSER.declareInteger(ClusterOperatingSystemStats::setAllocatedProcessors, ALLOCATED_PROCESSORS);
-    PARSER.declareInteger(ClusterOperatingSystemStats::setAvailableProcessors, AVAILABLE_PROCESSORS);
-    PARSER.declareObject(ClusterOperatingSystemStats::setMem, (p, t) -> OperatingSystemMemoryInfo.PARSER.apply(p, null), MEM);
-    PARSER.declareObjectArray(ClusterOperatingSystemStats::setNames, (p, t) -> ClusterOperatingSystemName.PARSER.apply(p), NAMES);
-    PARSER.declareObjectArray(ClusterOperatingSystemStats::setPrettyNames, (p, t) -> ClusterOperatingSystemPrettyNane.PARSER.apply(p), PRETTY_NAMES);
+    PARSER.declareInt(ClusterOperatingSystemStats::setAllocatedProcessors, ALLOCATED_PROCESSORS);
+    PARSER.declareInt(ClusterOperatingSystemStats::setAvailableProcessors, AVAILABLE_PROCESSORS);
+    PARSER.declareObject(ClusterOperatingSystemStats::setMem, (p, t) -> OperatingSystemMemoryInfo.PARSER.apply(p, t), MEM);
+    PARSER.declareObjectArray(ClusterOperatingSystemStats::setNames, (p, t) -> ClusterOperatingSystemName.PARSER.apply(p, t), NAMES);
+    PARSER.declareObjectArray(ClusterOperatingSystemStats::setPrettyNames, (p, t) -> ClusterOperatingSystemPrettyNane.PARSER.apply(p, t), PRETTY_NAMES);
   }
 
 }

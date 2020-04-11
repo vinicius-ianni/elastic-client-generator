@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.modules.snapshot_and_restore.snapshot.snapshot_status.*;
 import org.elasticsearch.internal.*;
 
@@ -41,6 +41,7 @@ public class SnapshotStats  implements XContentable<SnapshotStats> {
   public SnapshotStats setTimeInMillis(Long val) { this._timeInMillis = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,8 +56,8 @@ public class SnapshotStats  implements XContentable<SnapshotStats> {
     new ConstructingObjectParser<>(SnapshotStats.class.getName(), false, args -> new SnapshotStats());
 
   static {
-    PARSER.declareObject(SnapshotStats::setIncremental, (p, t) -> FileCountSnapshotStats.PARSER.apply(p, null), INCREMENTAL);
-    PARSER.declareObject(SnapshotStats::setTotal, (p, t) -> FileCountSnapshotStats.PARSER.apply(p, null), TOTAL);
+    PARSER.declareObject(SnapshotStats::setIncremental, (p, t) -> FileCountSnapshotStats.PARSER.apply(p, t), INCREMENTAL);
+    PARSER.declareObject(SnapshotStats::setTotal, (p, t) -> FileCountSnapshotStats.PARSER.apply(p, t), TOTAL);
     PARSER.declareLong(SnapshotStats::setStartTimeInMillis, START_TIME_IN_MILLIS);
     PARSER.declareLong(SnapshotStats::setTimeInMillis, TIME_IN_MILLIS);
   }

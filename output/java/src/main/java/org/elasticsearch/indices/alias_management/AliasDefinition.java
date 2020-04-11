@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
 public class AliasDefinition  implements XContentable<AliasDefinition> {
@@ -46,6 +46,7 @@ public class AliasDefinition  implements XContentable<AliasDefinition> {
   public AliasDefinition setSearchRouting(String val) { this._searchRouting = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,7 +61,7 @@ public class AliasDefinition  implements XContentable<AliasDefinition> {
     new ConstructingObjectParser<>(AliasDefinition.class.getName(), false, args -> new AliasDefinition());
 
   static {
-    PARSER.declareObject(AliasDefinition::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, null), FILTER);
+    PARSER.declareObject(AliasDefinition::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);
     PARSER.declareString(AliasDefinition::setIndexRouting, INDEX_ROUTING);
     PARSER.declareBoolean(AliasDefinition::setIsWriteIndex, IS_WRITE_INDEX);
     PARSER.declareString(AliasDefinition::setRouting, ROUTING);

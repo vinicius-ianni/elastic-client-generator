@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.scripting.*;
 
 public class ScriptedMetricAggregation  implements XContentable<ScriptedMetricAggregation> {
@@ -46,6 +46,7 @@ public class ScriptedMetricAggregation  implements XContentable<ScriptedMetricAg
   public ScriptedMetricAggregation setReduceScript(Script val) { this._reduceScript = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,11 +61,11 @@ public class ScriptedMetricAggregation  implements XContentable<ScriptedMetricAg
     new ConstructingObjectParser<>(ScriptedMetricAggregation.class.getName(), false, args -> new ScriptedMetricAggregation());
 
   static {
-    PARSER.declareObject(ScriptedMetricAggregation::setCombineScript, (p, t) -> Script.PARSER.apply(p, null), COMBINE_SCRIPT);
-    PARSER.declareObject(ScriptedMetricAggregation::setInitScript, (p, t) -> Script.PARSER.apply(p, null), INIT_SCRIPT);
-    PARSER.declareObject(ScriptedMetricAggregation::setMapScript, (p, t) -> Script.PARSER.apply(p, null), MAP_SCRIPT);
-    PARSER.declareObject(ScriptedMetricAggregation::setParams, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);;
-    PARSER.declareObject(ScriptedMetricAggregation::setReduceScript, (p, t) -> Script.PARSER.apply(p, null), REDUCE_SCRIPT);
+    PARSER.declareObject(ScriptedMetricAggregation::setCombineScript, (p, t) -> Script.PARSER.apply(p, t), COMBINE_SCRIPT);
+    PARSER.declareObject(ScriptedMetricAggregation::setInitScript, (p, t) -> Script.PARSER.apply(p, t), INIT_SCRIPT);
+    PARSER.declareObject(ScriptedMetricAggregation::setMapScript, (p, t) -> Script.PARSER.apply(p, t), MAP_SCRIPT);
+    PARSER.declareObject(ScriptedMetricAggregation::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);
+    PARSER.declareObject(ScriptedMetricAggregation::setReduceScript, (p, t) -> Script.PARSER.apply(p, t), REDUCE_SCRIPT);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class SegmentsRequest  implements XContentable<SegmentsRequest> {
@@ -40,6 +40,7 @@ public class SegmentsRequest  implements XContentable<SegmentsRequest> {
   public SegmentsRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,7 +56,7 @@ public class SegmentsRequest  implements XContentable<SegmentsRequest> {
 
   static {
     PARSER.declareBoolean(SegmentsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(SegmentsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(SegmentsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(SegmentsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(SegmentsRequest::setVerbose, VERBOSE);
   }

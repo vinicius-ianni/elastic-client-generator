@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.scripting.*;
@@ -36,6 +36,7 @@ public class MetricAggregation  implements XContentable<MetricAggregation> {
   public MetricAggregation setScript(Script val) { this._script = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,9 +51,9 @@ public class MetricAggregation  implements XContentable<MetricAggregation> {
     new ConstructingObjectParser<>(MetricAggregation.class.getName(), false, args -> new MetricAggregation());
 
   static {
-    PARSER.declareField(MetricAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(MetricAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareDouble(MetricAggregation::setMissing, MISSING);
-    PARSER.declareObject(MetricAggregation::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(MetricAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
   }
 
 }

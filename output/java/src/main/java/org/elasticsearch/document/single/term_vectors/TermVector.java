@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.document.single.term_vectors.*;
 
 public class TermVector  implements XContentable<TermVector> {
@@ -28,6 +28,7 @@ public class TermVector  implements XContentable<TermVector> {
   public TermVector setTerms(NamedContainer<String, TermVectorTerm> val) { this._terms = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class TermVector  implements XContentable<TermVector> {
     new ConstructingObjectParser<>(TermVector.class.getName(), false, args -> new TermVector());
 
   static {
-    PARSER.declareObject(TermVector::setFieldStatistics, (p, t) -> FieldStatistics.PARSER.apply(p, null), FIELD_STATISTICS);
-    PARSER.declareObject(TermVector::setTerms, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> TermVectorTerm.PARSER.apply(pp, null)), TERMS);;
+    PARSER.declareObject(TermVector::setFieldStatistics, (p, t) -> FieldStatistics.PARSER.apply(p, t), FIELD_STATISTICS);
+    PARSER.declareObject(TermVector::setTerms, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> TermVectorTerm.PARSER.apply(pp, null)), TERMS);
   }
 
 }

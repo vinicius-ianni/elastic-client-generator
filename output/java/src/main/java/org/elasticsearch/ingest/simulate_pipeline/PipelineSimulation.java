@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.ingest.simulate_pipeline.*;
 
 public class PipelineSimulation  implements XContentable<PipelineSimulation> {
@@ -34,6 +34,7 @@ public class PipelineSimulation  implements XContentable<PipelineSimulation> {
   public PipelineSimulation setTag(String val) { this._tag = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,8 +49,8 @@ public class PipelineSimulation  implements XContentable<PipelineSimulation> {
     new ConstructingObjectParser<>(PipelineSimulation.class.getName(), false, args -> new PipelineSimulation());
 
   static {
-    PARSER.declareObject(PipelineSimulation::setDoc, (p, t) -> DocumentSimulation.PARSER.apply(p, null), DOC);
-    PARSER.declareObjectArray(PipelineSimulation::setProcessorResults, (p, t) -> PipelineSimulation.PARSER.apply(p), PROCESSOR_RESULTS);
+    PARSER.declareObject(PipelineSimulation::setDoc, (p, t) -> DocumentSimulation.PARSER.apply(p, t), DOC);
+    PARSER.declareObjectArray(PipelineSimulation::setProcessorResults, (p, t) -> PipelineSimulation.PARSER.apply(p, t), PROCESSOR_RESULTS);
     PARSER.declareString(PipelineSimulation::setTag, TAG);
   }
 

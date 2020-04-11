@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.x_pack.cross_cluster_replication.stats.*;
@@ -48,6 +48,7 @@ public class CcrAutoFollowStats  implements XContentable<CcrAutoFollowStats> {
   public CcrAutoFollowStats setAutoFollowedClusters(List<AutoFollowedCluster> val) { this._autoFollowedClusters = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -65,8 +66,8 @@ public class CcrAutoFollowStats  implements XContentable<CcrAutoFollowStats> {
     PARSER.declareLong(CcrAutoFollowStats::setNumberOfFailedFollowIndices, NUMBER_OF_FAILED_FOLLOW_INDICES);
     PARSER.declareLong(CcrAutoFollowStats::setNumberOfFailedRemoteClusterStateRequests, NUMBER_OF_FAILED_REMOTE_CLUSTER_STATE_REQUESTS);
     PARSER.declareLong(CcrAutoFollowStats::setNumberOfSuccessfulFollowIndices, NUMBER_OF_SUCCESSFUL_FOLLOW_INDICES);
-    PARSER.declareObjectArray(CcrAutoFollowStats::setRecentAutoFollowErrors, (p, t) -> ErrorCause.PARSER.apply(p), RECENT_AUTO_FOLLOW_ERRORS);
-    PARSER.declareObjectArray(CcrAutoFollowStats::setAutoFollowedClusters, (p, t) -> AutoFollowedCluster.PARSER.apply(p), AUTO_FOLLOWED_CLUSTERS);
+    PARSER.declareObjectArray(CcrAutoFollowStats::setRecentAutoFollowErrors, (p, t) -> ErrorCause.PARSER.apply(p, t), RECENT_AUTO_FOLLOW_ERRORS);
+    PARSER.declareObjectArray(CcrAutoFollowStats::setAutoFollowedClusters, (p, t) -> AutoFollowedCluster.PARSER.apply(p, t), AUTO_FOLLOWED_CLUSTERS);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 
 
 public class Script  implements XContentable<Script> {
@@ -28,6 +28,7 @@ public class Script  implements XContentable<Script> {
   public Script setParams(NamedContainer<String, Object> val) { this._params = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,7 +44,7 @@ public class Script  implements XContentable<Script> {
 
   static {
     PARSER.declareString(Script::setLang, LANG);
-    PARSER.declareObject(Script::setParams, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);;
+    PARSER.declareObject(Script::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);
   }
 
 }

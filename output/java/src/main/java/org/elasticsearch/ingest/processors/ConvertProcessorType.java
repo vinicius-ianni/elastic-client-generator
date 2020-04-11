@@ -2,6 +2,7 @@
 package org.elasticsearch.ingest.processors;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -41,7 +42,7 @@ public enum ConvertProcessorType implements XContentable<ConvertProcessorType> {
       case "boolean": return ConvertProcessorType.Boolean;
       case "auto": return ConvertProcessorType.Auto;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ConvertProcessorType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ConvertProcessorType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

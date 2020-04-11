@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.security.user.get_user_access_token;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -29,7 +30,7 @@ public enum AccessTokenGrantType implements XContentable<AccessTokenGrantType> {
     switch (text) {
       case "password": return AccessTokenGrantType.Password;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, AccessTokenGrantType.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, AccessTokenGrantType.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

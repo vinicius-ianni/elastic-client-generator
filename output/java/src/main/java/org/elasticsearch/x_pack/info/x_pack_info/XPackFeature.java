@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.info.x_pack_info.*;
 
 public class XPackFeature  implements XContentable<XPackFeature> {
@@ -40,6 +40,7 @@ public class XPackFeature  implements XContentable<XPackFeature> {
   public XPackFeature setNativeCodeInfo(NativeCodeInformation val) { this._nativeCodeInfo = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -57,7 +58,7 @@ public class XPackFeature  implements XContentable<XPackFeature> {
     PARSER.declareBoolean(XPackFeature::setAvailable, AVAILABLE);
     PARSER.declareString(XPackFeature::setDescription, DESCRIPTION);
     PARSER.declareBoolean(XPackFeature::setEnabled, ENABLED);
-    PARSER.declareObject(XPackFeature::setNativeCodeInfo, (p, t) -> NativeCodeInformation.PARSER.apply(p, null), NATIVE_CODE_INFO);
+    PARSER.declareObject(XPackFeature::setNativeCodeInfo, (p, t) -> NativeCodeInformation.PARSER.apply(p, t), NATIVE_CODE_INFO);
   }
 
 }

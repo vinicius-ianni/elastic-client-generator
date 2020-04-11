@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.geo.bounding_box.*;
 import org.elasticsearch.query_dsl.geo.*;
 
@@ -35,6 +35,7 @@ public class GeoBoundingBoxQuery  implements XContentable<GeoBoundingBoxQuery> {
   public GeoBoundingBoxQuery setValidationMethod(GeoValidationMethod val) { this._validationMethod = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class GeoBoundingBoxQuery  implements XContentable<GeoBoundingBoxQuery> {
     new ConstructingObjectParser<>(GeoBoundingBoxQuery.class.getName(), false, args -> new GeoBoundingBoxQuery());
 
   static {
-    PARSER.declareObject(GeoBoundingBoxQuery::setBoundingBox, (p, t) -> BoundingBox.PARSER.apply(p, null), BOUNDING_BOX);
-    PARSER.declareObject(GeoBoundingBoxQuery::setType, (p, t) -> GeoExecution.PARSER.apply(p, null), TYPE);
-    PARSER.declareObject(GeoBoundingBoxQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p, null), VALIDATION_METHOD);
+    PARSER.declareObject(GeoBoundingBoxQuery::setBoundingBox, (p, t) -> BoundingBox.PARSER.apply(p, t), BOUNDING_BOX);
+    PARSER.declareObject(GeoBoundingBoxQuery::setType, (p, t) -> GeoExecution.PARSER.apply(p), TYPE);
+    PARSER.declareObject(GeoBoundingBoxQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD);
   }
 
 }

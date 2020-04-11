@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySettings> {
@@ -58,6 +58,7 @@ public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySet
   public IndicesRecoverySettings setTranslogSize(String val) { this._translogSize = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -73,11 +74,11 @@ public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySet
 
   static {
     PARSER.declareBoolean(IndicesRecoverySettings::setCompress, COMPRESS);
-    PARSER.declareInteger(IndicesRecoverySettings::setConcurrentSmallFileStreams, CONCURRENT_SMALL_FILE_STREAMS);
-    PARSER.declareInteger(IndicesRecoverySettings::setConcurrentStreams, CONCURRENT_STREAMS);
+    PARSER.declareInt(IndicesRecoverySettings::setConcurrentSmallFileStreams, CONCURRENT_SMALL_FILE_STREAMS);
+    PARSER.declareInt(IndicesRecoverySettings::setConcurrentStreams, CONCURRENT_STREAMS);
     PARSER.declareString(IndicesRecoverySettings::setFileChunkSize, FILE_CHUNK_SIZE);
     PARSER.declareString(IndicesRecoverySettings::setMaxBytesPerSecond, MAX_BYTES_PER_SECOND);
-    PARSER.declareInteger(IndicesRecoverySettings::setTranslogOperations, TRANSLOG_OPERATIONS);
+    PARSER.declareInt(IndicesRecoverySettings::setTranslogOperations, TRANSLOG_OPERATIONS);
     PARSER.declareString(IndicesRecoverySettings::setTranslogSize, TRANSLOG_SIZE);
   }
 

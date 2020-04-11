@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.info.x_pack_usage.*;
 
@@ -29,6 +29,7 @@ public class GetJobsResponse  implements XContentable<GetJobsResponse> {
   public GetJobsResponse setJobs(List<Job> val) { this._jobs = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -44,7 +45,7 @@ public class GetJobsResponse  implements XContentable<GetJobsResponse> {
 
   static {
     PARSER.declareLong(GetJobsResponse::setCount, COUNT);
-    PARSER.declareObjectArray(GetJobsResponse::setJobs, (p, t) -> Job.PARSER.apply(p), JOBS);
+    PARSER.declareObjectArray(GetJobsResponse::setJobs, (p, t) -> Job.PARSER.apply(p, t), JOBS);
   }
 
 }

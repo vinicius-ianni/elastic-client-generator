@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.indices.alias_management.get_alias.*;
 import org.elasticsearch.common_abstractions.response.*;
@@ -30,6 +30,7 @@ public class GetAliasResponse extends DictionaryResponseBase<IndexName, IndexAli
   public GetAliasResponse setIsValid(Boolean val) { this._isValid = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -44,7 +45,7 @@ public class GetAliasResponse extends DictionaryResponseBase<IndexName, IndexAli
     new ConstructingObjectParser<>(GetAliasResponse.class.getName(), false, args -> new GetAliasResponse());
 
   static {
-    PARSER.declareObject(GetAliasResponse::setIndices, (p, t) ->  new NamedContainer<>(n -> () -> new IndexName(n),pp -> IndexAliases.PARSER.apply(pp, null)), INDICES);;
+    PARSER.declareObject(GetAliasResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> IndexAliases.PARSER.apply(pp, null)), INDICES);
     PARSER.declareBoolean(GetAliasResponse::setIsValid, IS_VALID);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.document.multiple.reindex_on_server.*;
@@ -42,6 +42,7 @@ public class ReindexDestination  implements XContentable<ReindexDestination> {
   public ReindexDestination setVersionType(VersionType val) { this._versionType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class ReindexDestination  implements XContentable<ReindexDestination> {
     new ConstructingObjectParser<>(ReindexDestination.class.getName(), false, args -> new ReindexDestination());
 
   static {
-    PARSER.declareIndexName(ReindexDestination::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareObject(ReindexDestination::setOpType, (p, t) -> OpType.PARSER.apply(p, null), OP_TYPE);
-    PARSER.declareObject(ReindexDestination::setRouting, (p, t) -> ReindexRouting.PARSER.apply(p, null), ROUTING);
-    PARSER.declareObject(ReindexDestination::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(ReindexDestination::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(ReindexDestination::setOpType, (p, t) -> OpType.PARSER.apply(p), OP_TYPE);
+    PARSER.declareObject(ReindexDestination::setRouting, (p, t) -> ReindexRouting.PARSER.apply(p, t), ROUTING);
+    PARSER.declareObject(ReindexDestination::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
   }
 
 }

@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.job.detectors;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum TimeFunction implements XContentable<TimeFunction> {
       case "TimeOfDay": return TimeFunction.TimeOfDay;
       case "TimeOfWeek": return TimeFunction.TimeOfWeek;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, TimeFunction.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, TimeFunction.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

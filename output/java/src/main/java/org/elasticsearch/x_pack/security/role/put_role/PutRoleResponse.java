@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.role.put_role.*;
 
 public class PutRoleResponse  implements XContentable<PutRoleResponse> {
@@ -22,6 +22,7 @@ public class PutRoleResponse  implements XContentable<PutRoleResponse> {
   public PutRoleResponse setRole(PutRoleStatus val) { this._role = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class PutRoleResponse  implements XContentable<PutRoleResponse> {
     new ConstructingObjectParser<>(PutRoleResponse.class.getName(), false, args -> new PutRoleResponse());
 
   static {
-    PARSER.declareObject(PutRoleResponse::setRole, (p, t) -> PutRoleStatus.PARSER.apply(p, null), ROLE);
+    PARSER.declareObject(PutRoleResponse::setRole, (p, t) -> PutRoleStatus.PARSER.apply(p, t), ROLE);
   }
 
 }

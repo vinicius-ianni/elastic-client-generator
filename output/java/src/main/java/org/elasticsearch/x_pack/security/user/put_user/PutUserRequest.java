@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class PutUserRequest  implements XContentable<PutUserRequest> {
@@ -58,6 +58,7 @@ public class PutUserRequest  implements XContentable<PutUserRequest> {
   public PutUserRequest setRoles(List<String> val) { this._roles = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -72,10 +73,10 @@ public class PutUserRequest  implements XContentable<PutUserRequest> {
     new ConstructingObjectParser<>(PutUserRequest.class.getName(), false, args -> new PutUserRequest());
 
   static {
-    PARSER.declareObject(PutUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
+    PARSER.declareObject(PutUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
     PARSER.declareString(PutUserRequest::setEmail, EMAIL);
     PARSER.declareString(PutUserRequest::setFullName, FULL_NAME);
-    PARSER.declareObject(PutUserRequest::setMetadata, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);;
+    PARSER.declareObject(PutUserRequest::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareString(PutUserRequest::setPassword, PASSWORD);
     PARSER.declareString(PutUserRequest::setPasswordHash, PASSWORD_HASH);
     PARSER.declareStringArray(PutUserRequest::setRoles, ROLES);

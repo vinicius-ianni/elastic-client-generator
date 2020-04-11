@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class DataCounts  implements XContentable<DataCounts> {
@@ -118,6 +118,7 @@ public class DataCounts  implements XContentable<DataCounts> {
   public DataCounts setSparseBucketCount(Long val) { this._sparseBucketCount = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -133,17 +134,17 @@ public class DataCounts  implements XContentable<DataCounts> {
 
   static {
     PARSER.declareLong(DataCounts::setBucketCount, BUCKET_COUNT);
-    PARSER.declareDate(DataCounts::setEarliestRecordTimestamp, (p, t) -> Date.createFrom(p), EARLIEST_RECORD_TIMESTAMP);
+    PARSER.declareObject(DataCounts::setEarliestRecordTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EARLIEST_RECORD_TIMESTAMP);
     PARSER.declareLong(DataCounts::setEmptyBucketCount, EMPTY_BUCKET_COUNT);
     PARSER.declareLong(DataCounts::setInputBytes, INPUT_BYTES);
     PARSER.declareLong(DataCounts::setInputFieldCount, INPUT_FIELD_COUNT);
     PARSER.declareLong(DataCounts::setInputRecordCount, INPUT_RECORD_COUNT);
     PARSER.declareLong(DataCounts::setInvalidDateCount, INVALID_DATE_COUNT);
     PARSER.declareString(DataCounts::setJobId, JOB_ID);
-    PARSER.declareDate(DataCounts::setLastDataTime, (p, t) -> Date.createFrom(p), LAST_DATA_TIME);
-    PARSER.declareDate(DataCounts::setLatestEmptyBucketTimestamp, (p, t) -> Date.createFrom(p), LATEST_EMPTY_BUCKET_TIMESTAMP);
-    PARSER.declareDate(DataCounts::setLatestRecordTimestamp, (p, t) -> Date.createFrom(p), LATEST_RECORD_TIMESTAMP);
-    PARSER.declareDate(DataCounts::setLatestSparseBucketTimestamp, (p, t) -> Date.createFrom(p), LATEST_SPARSE_BUCKET_TIMESTAMP);
+    PARSER.declareObject(DataCounts::setLastDataTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LAST_DATA_TIME);
+    PARSER.declareObject(DataCounts::setLatestEmptyBucketTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LATEST_EMPTY_BUCKET_TIMESTAMP);
+    PARSER.declareObject(DataCounts::setLatestRecordTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LATEST_RECORD_TIMESTAMP);
+    PARSER.declareObject(DataCounts::setLatestSparseBucketTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LATEST_SPARSE_BUCKET_TIMESTAMP);
     PARSER.declareLong(DataCounts::setMissingFieldCount, MISSING_FIELD_COUNT);
     PARSER.declareLong(DataCounts::setOutOfOrderTimestampCount, OUT_OF_ORDER_TIMESTAMP_COUNT);
     PARSER.declareLong(DataCounts::setProcessedFieldCount, PROCESSED_FIELD_COUNT);

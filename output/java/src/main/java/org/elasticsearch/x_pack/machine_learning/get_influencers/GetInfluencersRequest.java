@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
@@ -60,6 +60,7 @@ public class GetInfluencersRequest  implements XContentable<GetInfluencersReques
   public GetInfluencersRequest setStart(Date val) { this._start = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -75,12 +76,12 @@ public class GetInfluencersRequest  implements XContentable<GetInfluencersReques
 
   static {
     PARSER.declareBoolean(GetInfluencersRequest::setDescending, DESCENDING);
-    PARSER.declareDate(GetInfluencersRequest::setEnd, (p, t) -> Date.createFrom(p), END);
+    PARSER.declareObject(GetInfluencersRequest::setEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END);
     PARSER.declareBoolean(GetInfluencersRequest::setExcludeInterim, EXCLUDE_INTERIM);
     PARSER.declareDouble(GetInfluencersRequest::setInfluencerScore, INFLUENCER_SCORE);
-    PARSER.declareObject(GetInfluencersRequest::setPage, (p, t) -> Page.PARSER.apply(p, null), PAGE);
-    PARSER.declareField(GetInfluencersRequest::setSort, (p, t) -> Field.createFrom(p), SORT);
-    PARSER.declareDate(GetInfluencersRequest::setStart, (p, t) -> Date.createFrom(p), START);
+    PARSER.declareObject(GetInfluencersRequest::setPage, (p, t) -> Page.PARSER.apply(p, t), PAGE);
+    PARSER.declareObject(GetInfluencersRequest::setSort, (p, t) -> Field.createFrom(p), SORT);
+    PARSER.declareObject(GetInfluencersRequest::setStart, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), START);
   }
 
 }

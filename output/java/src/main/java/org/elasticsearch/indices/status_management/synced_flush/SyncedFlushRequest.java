@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class SyncedFlushRequest  implements XContentable<SyncedFlushRequest> {
@@ -34,6 +34,7 @@ public class SyncedFlushRequest  implements XContentable<SyncedFlushRequest> {
   public SyncedFlushRequest setIgnoreUnavailable(Boolean val) { this._ignoreUnavailable = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,7 +50,7 @@ public class SyncedFlushRequest  implements XContentable<SyncedFlushRequest> {
 
   static {
     PARSER.declareBoolean(SyncedFlushRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(SyncedFlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(SyncedFlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(SyncedFlushRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
   }
 

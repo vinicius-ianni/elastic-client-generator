@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
@@ -60,6 +60,7 @@ public class GetAnomalyRecordsRequest  implements XContentable<GetAnomalyRecords
   public GetAnomalyRecordsRequest setStart(Date val) { this._start = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -75,12 +76,12 @@ public class GetAnomalyRecordsRequest  implements XContentable<GetAnomalyRecords
 
   static {
     PARSER.declareBoolean(GetAnomalyRecordsRequest::setDesc, DESC);
-    PARSER.declareDate(GetAnomalyRecordsRequest::setEnd, (p, t) -> Date.createFrom(p), END);
+    PARSER.declareObject(GetAnomalyRecordsRequest::setEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END);
     PARSER.declareBoolean(GetAnomalyRecordsRequest::setExcludeInterim, EXCLUDE_INTERIM);
-    PARSER.declareObject(GetAnomalyRecordsRequest::setPage, (p, t) -> Page.PARSER.apply(p, null), PAGE);
+    PARSER.declareObject(GetAnomalyRecordsRequest::setPage, (p, t) -> Page.PARSER.apply(p, t), PAGE);
     PARSER.declareDouble(GetAnomalyRecordsRequest::setRecordScore, RECORD_SCORE);
-    PARSER.declareField(GetAnomalyRecordsRequest::setSort, (p, t) -> Field.createFrom(p), SORT);
-    PARSER.declareDate(GetAnomalyRecordsRequest::setStart, (p, t) -> Date.createFrom(p), START);
+    PARSER.declareObject(GetAnomalyRecordsRequest::setSort, (p, t) -> Field.createFrom(p), SORT);
+    PARSER.declareObject(GetAnomalyRecordsRequest::setStart, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), START);
   }
 
 }

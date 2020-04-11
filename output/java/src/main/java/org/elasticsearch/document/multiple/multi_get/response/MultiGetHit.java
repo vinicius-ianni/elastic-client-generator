@@ -5,17 +5,17 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.internal.*;
 
-public class MultiGetHit<TDocument>  implements XContentable<MultiGetHit> {
+public class MultiGetHit<TDocument>  implements XContentable<MultiGetHit<TDocument>> {
   
   static final ParseField ERROR = new ParseField("error");
   private MainError _error;
@@ -77,6 +77,7 @@ public class MultiGetHit<TDocument>  implements XContentable<MultiGetHit> {
   public MultiGetHit<TDocument> setPrimaryTerm(Long val) { this._primaryTerm = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -91,12 +92,12 @@ public class MultiGetHit<TDocument>  implements XContentable<MultiGetHit> {
     new ConstructingObjectParser<>(MultiGetHit.class.getName(), false, args -> new MultiGetHit());
 
   static {
-    PARSER.declareObject(MultiGetHit::setError, (p, t) -> MainError.PARSER.apply(p, null), ERROR);
+    PARSER.declareObject(MultiGetHit::setError, (p, t) -> MainError.PARSER.apply(p, t), ERROR);
     PARSER.declareBoolean(MultiGetHit::setFound, FOUND);
     PARSER.declareString(MultiGetHit::setId, ID);
     PARSER.declareString(MultiGetHit::setIndex, INDEX);
     PARSER.declareString(MultiGetHit::setRouting, ROUTING);
-    PARSER.declareObject(MultiGetHit::setSource, (p, t) -> TDocument.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(MultiGetHit::setSource, (p, t) -> null /* TODO TDocument */, SOURCE);
     PARSER.declareString(MultiGetHit::setType, TYPE);
     PARSER.declareLong(MultiGetHit::setVersion, VERSION);
     PARSER.declareLong(MultiGetHit::setSequenceNumber, SEQUENCE_NUMBER);

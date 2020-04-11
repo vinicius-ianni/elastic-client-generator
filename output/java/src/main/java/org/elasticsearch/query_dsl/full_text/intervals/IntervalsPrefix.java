@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 
 public class IntervalsPrefix  implements XContentable<IntervalsPrefix> {
@@ -34,6 +34,7 @@ public class IntervalsPrefix  implements XContentable<IntervalsPrefix> {
   public IntervalsPrefix setUseField(Field val) { this._useField = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,7 +51,7 @@ public class IntervalsPrefix  implements XContentable<IntervalsPrefix> {
   static {
     PARSER.declareString(IntervalsPrefix::setAnalyzer, ANALYZER);
     PARSER.declareString(IntervalsPrefix::setPrefix, PREFIX);
-    PARSER.declareField(IntervalsPrefix::setUseField, (p, t) -> Field.createFrom(p), USE_FIELD);
+    PARSER.declareObject(IntervalsPrefix::setUseField, (p, t) -> Field.createFrom(p), USE_FIELD);
   }
 
 }

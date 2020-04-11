@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.cluster_stats.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.stats.*;
@@ -78,6 +78,7 @@ public class ClusterNodesStats  implements XContentable<ClusterNodesStats> {
   public ClusterNodesStats setVersions(List<String> val) { this._versions = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -92,15 +93,15 @@ public class ClusterNodesStats  implements XContentable<ClusterNodesStats> {
     new ConstructingObjectParser<>(ClusterNodesStats.class.getName(), false, args -> new ClusterNodesStats());
 
   static {
-    PARSER.declareObject(ClusterNodesStats::setCount, (p, t) -> ClusterNodeCount.PARSER.apply(p, null), COUNT);
-    PARSER.declareObject(ClusterNodesStats::setDiscoveryTypes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Integer.PARSER.apply(pp, null)), DISCOVERY_TYPES);;
-    PARSER.declareObject(ClusterNodesStats::setFs, (p, t) -> ClusterFileSystem.PARSER.apply(p, null), FS);
-    PARSER.declareObject(ClusterNodesStats::setJvm, (p, t) -> ClusterJvm.PARSER.apply(p, null), JVM);
-    PARSER.declareObject(ClusterNodesStats::setNetworkTypes, (p, t) -> ClusterNetworkTypes.PARSER.apply(p, null), NETWORK_TYPES);
-    PARSER.declareObject(ClusterNodesStats::setOs, (p, t) -> ClusterOperatingSystemStats.PARSER.apply(p, null), OS);
-    PARSER.declareObjectArray(ClusterNodesStats::setPackagingTypes, (p, t) -> NodePackagingType.PARSER.apply(p), PACKAGING_TYPES);
-    PARSER.declareObjectArray(ClusterNodesStats::setPlugins, (p, t) -> PluginStats.PARSER.apply(p), PLUGINS);
-    PARSER.declareObject(ClusterNodesStats::setProcess, (p, t) -> ClusterProcess.PARSER.apply(p, null), PROCESS);
+    PARSER.declareObject(ClusterNodesStats::setCount, (p, t) -> ClusterNodeCount.PARSER.apply(p, t), COUNT);
+    PARSER.declareObject(ClusterNodesStats::setDiscoveryTypes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.intValue()), DISCOVERY_TYPES);
+    PARSER.declareObject(ClusterNodesStats::setFs, (p, t) -> ClusterFileSystem.PARSER.apply(p, t), FS);
+    PARSER.declareObject(ClusterNodesStats::setJvm, (p, t) -> ClusterJvm.PARSER.apply(p, t), JVM);
+    PARSER.declareObject(ClusterNodesStats::setNetworkTypes, (p, t) -> ClusterNetworkTypes.PARSER.apply(p, t), NETWORK_TYPES);
+    PARSER.declareObject(ClusterNodesStats::setOs, (p, t) -> ClusterOperatingSystemStats.PARSER.apply(p, t), OS);
+    PARSER.declareObjectArray(ClusterNodesStats::setPackagingTypes, (p, t) -> NodePackagingType.PARSER.apply(p, t), PACKAGING_TYPES);
+    PARSER.declareObjectArray(ClusterNodesStats::setPlugins, (p, t) -> PluginStats.PARSER.apply(p, t), PLUGINS);
+    PARSER.declareObject(ClusterNodesStats::setProcess, (p, t) -> ClusterProcess.PARSER.apply(p, t), PROCESS);
     PARSER.declareStringArray(ClusterNodesStats::setVersions, VERSIONS);
   }
 

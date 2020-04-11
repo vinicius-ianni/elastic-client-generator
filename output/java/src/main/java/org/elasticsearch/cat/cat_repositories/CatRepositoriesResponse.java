@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cat.cat_repositories.*;
 
 public class CatRepositoriesResponse  implements XContentable<CatRepositoriesResponse> {
@@ -22,6 +22,7 @@ public class CatRepositoriesResponse  implements XContentable<CatRepositoriesRes
   public CatRepositoriesResponse setRecords(List<CatRepositoriesRecord> val) { this._records = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class CatRepositoriesResponse  implements XContentable<CatRepositoriesRes
     new ConstructingObjectParser<>(CatRepositoriesResponse.class.getName(), false, args -> new CatRepositoriesResponse());
 
   static {
-    PARSER.declareObjectArray(CatRepositoriesResponse::setRecords, (p, t) -> CatRepositoriesRecord.PARSER.apply(p), RECORDS);
+    PARSER.declareObjectArray(CatRepositoriesResponse::setRecords, (p, t) -> CatRepositoriesRecord.PARSER.apply(p, t), RECORDS);
   }
 
 }

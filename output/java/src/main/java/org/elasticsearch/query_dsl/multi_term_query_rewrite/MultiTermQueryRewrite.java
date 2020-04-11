@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.multi_term_query_rewrite.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class MultiTermQueryRewrite  implements XContentable<MultiTermQueryRewrit
   public MultiTermQueryRewrite setSize(Integer val) { this._size = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,11 +62,11 @@ public class MultiTermQueryRewrite  implements XContentable<MultiTermQueryRewrit
     new ConstructingObjectParser<>(MultiTermQueryRewrite.class.getName(), false, args -> new MultiTermQueryRewrite());
 
   static {
-    PARSER.declareObject(MultiTermQueryRewrite::setConstantScore, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), CONSTANT_SCORE);
-    PARSER.declareObject(MultiTermQueryRewrite::setConstantScoreBoolean, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), CONSTANT_SCORE_BOOLEAN);
-    PARSER.declareObject(MultiTermQueryRewrite::setRewrite, (p, t) -> RewriteMultiTerm.PARSER.apply(p, null), REWRITE);
-    PARSER.declareObject(MultiTermQueryRewrite::setScoringBoolean, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), SCORING_BOOLEAN);
-    PARSER.declareInteger(MultiTermQueryRewrite::setSize, SIZE);
+    PARSER.declareObject(MultiTermQueryRewrite::setConstantScore, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), CONSTANT_SCORE);
+    PARSER.declareObject(MultiTermQueryRewrite::setConstantScoreBoolean, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), CONSTANT_SCORE_BOOLEAN);
+    PARSER.declareObject(MultiTermQueryRewrite::setRewrite, (p, t) -> RewriteMultiTerm.PARSER.apply(p), REWRITE);
+    PARSER.declareObject(MultiTermQueryRewrite::setScoringBoolean, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), SCORING_BOOLEAN);
+    PARSER.declareInt(MultiTermQueryRewrite::setSize, SIZE);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.suggesters.term_suggester.*;
 import org.elasticsearch.common.*;
@@ -90,6 +90,7 @@ public class TermSuggester  implements XContentable<TermSuggester> {
   public TermSuggester setText(String val) { this._text = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -105,16 +106,16 @@ public class TermSuggester  implements XContentable<TermSuggester> {
 
   static {
     PARSER.declareBoolean(TermSuggester::setLowercaseTerms, LOWERCASE_TERMS);
-    PARSER.declareInteger(TermSuggester::setMaxEdits, MAX_EDITS);
-    PARSER.declareInteger(TermSuggester::setMaxInspections, MAX_INSPECTIONS);
+    PARSER.declareInt(TermSuggester::setMaxEdits, MAX_EDITS);
+    PARSER.declareInt(TermSuggester::setMaxInspections, MAX_INSPECTIONS);
     PARSER.declareFloat(TermSuggester::setMaxTermFreq, MAX_TERM_FREQ);
     PARSER.declareFloat(TermSuggester::setMinDocFreq, MIN_DOC_FREQ);
-    PARSER.declareInteger(TermSuggester::setMinWordLength, MIN_WORD_LENGTH);
-    PARSER.declareInteger(TermSuggester::setPrefixLength, PREFIX_LENGTH);
-    PARSER.declareInteger(TermSuggester::setShardSize, SHARD_SIZE);
-    PARSER.declareObject(TermSuggester::setSort, (p, t) -> SuggestSort.PARSER.apply(p, null), SORT);
-    PARSER.declareObject(TermSuggester::setStringDistance, (p, t) -> StringDistance.PARSER.apply(p, null), STRING_DISTANCE);
-    PARSER.declareObject(TermSuggester::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p, null), SUGGEST_MODE);
+    PARSER.declareInt(TermSuggester::setMinWordLength, MIN_WORD_LENGTH);
+    PARSER.declareInt(TermSuggester::setPrefixLength, PREFIX_LENGTH);
+    PARSER.declareInt(TermSuggester::setShardSize, SHARD_SIZE);
+    PARSER.declareObject(TermSuggester::setSort, (p, t) -> SuggestSort.PARSER.apply(p), SORT);
+    PARSER.declareObject(TermSuggester::setStringDistance, (p, t) -> StringDistance.PARSER.apply(p), STRING_DISTANCE);
+    PARSER.declareObject(TermSuggester::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE);
     PARSER.declareString(TermSuggester::setText, TEXT);
   }
 

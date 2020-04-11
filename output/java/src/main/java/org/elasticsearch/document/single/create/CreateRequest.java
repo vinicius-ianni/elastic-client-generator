@@ -5,19 +5,19 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
 
-public class CreateRequest<TDocument>  implements XContentable<CreateRequest> {
+public class CreateRequest<TDocument>  implements XContentable<CreateRequest<TDocument>> {
   
   static final ParseField DOCUMENT = new ParseField("document");
   private TDocument _document;
@@ -67,6 +67,7 @@ public class CreateRequest<TDocument>  implements XContentable<CreateRequest> {
   public CreateRequest<TDocument> setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -81,13 +82,13 @@ public class CreateRequest<TDocument>  implements XContentable<CreateRequest> {
     new ConstructingObjectParser<>(CreateRequest.class.getName(), false, args -> new CreateRequest());
 
   static {
-    PARSER.declareObject(CreateRequest::setDocument, (p, t) -> TDocument.PARSER.apply(p, null), DOCUMENT);
+    PARSER.declareObject(CreateRequest::setDocument, (p, t) -> null /* TODO TDocument */, DOCUMENT);
     PARSER.declareString(CreateRequest::setPipeline, PIPELINE);
-    PARSER.declareObject(CreateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
-    PARSER.declareRouting(CreateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
-    PARSER.declareObject(CreateRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(CreateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareObject(CreateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(CreateRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareLong(CreateRequest::setVersion, VERSION);
-    PARSER.declareObject(CreateRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p, null), VERSION_TYPE);
+    PARSER.declareObject(CreateRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
     PARSER.declareString(CreateRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

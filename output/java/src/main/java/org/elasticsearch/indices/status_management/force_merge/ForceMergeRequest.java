@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.internal.*;
 
@@ -53,6 +53,7 @@ public class ForceMergeRequest  implements XContentable<ForceMergeRequest> {
   public ForceMergeRequest setOnlyExpungeDeletes(Boolean val) { this._onlyExpungeDeletes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,7 +69,7 @@ public class ForceMergeRequest  implements XContentable<ForceMergeRequest> {
 
   static {
     PARSER.declareBoolean(ForceMergeRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(ForceMergeRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(ForceMergeRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(ForceMergeRequest::setFlush, FLUSH);
     PARSER.declareBoolean(ForceMergeRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareLong(ForceMergeRequest::setMaxNumSegments, MAX_NUM_SEGMENTS);

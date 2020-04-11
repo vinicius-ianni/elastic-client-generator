@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.config.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
@@ -66,6 +66,7 @@ public class UpdateJobRequest  implements XContentable<UpdateJobRequest> {
   public UpdateJobRequest setResultsRetentionDays(Long val) { this._resultsRetentionDays = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -80,11 +81,11 @@ public class UpdateJobRequest  implements XContentable<UpdateJobRequest> {
     new ConstructingObjectParser<>(UpdateJobRequest.class.getName(), false, args -> new UpdateJobRequest());
 
   static {
-    PARSER.declareObject(UpdateJobRequest::setAnalysisLimits, (p, t) -> AnalysisMemoryLimit.PARSER.apply(p, null), ANALYSIS_LIMITS);
-    PARSER.declareObject(UpdateJobRequest::setBackgroundPersistInterval, (p, t) -> Time.PARSER.apply(p, null), BACKGROUND_PERSIST_INTERVAL);
-    PARSER.declareObject(UpdateJobRequest::setCustomSettings, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), CUSTOM_SETTINGS);;
+    PARSER.declareObject(UpdateJobRequest::setAnalysisLimits, (p, t) -> AnalysisMemoryLimit.PARSER.apply(p, t), ANALYSIS_LIMITS);
+    PARSER.declareObject(UpdateJobRequest::setBackgroundPersistInterval, (p, t) -> Time.PARSER.apply(p, t), BACKGROUND_PERSIST_INTERVAL);
+    PARSER.declareObject(UpdateJobRequest::setCustomSettings, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), CUSTOM_SETTINGS);
     PARSER.declareString(UpdateJobRequest::setDescription, DESCRIPTION);
-    PARSER.declareObject(UpdateJobRequest::setModelPlotConfig, (p, t) -> ModelPlotConfigEnabled.PARSER.apply(p, null), MODEL_PLOT_CONFIG);
+    PARSER.declareObject(UpdateJobRequest::setModelPlotConfig, (p, t) -> ModelPlotConfigEnabled.PARSER.apply(p, t), MODEL_PLOT_CONFIG);
     PARSER.declareLong(UpdateJobRequest::setModelSnapshotRetentionDays, MODEL_SNAPSHOT_RETENTION_DAYS);
     PARSER.declareLong(UpdateJobRequest::setRenormalizationWindowDays, RENORMALIZATION_WINDOW_DAYS);
     PARSER.declareLong(UpdateJobRequest::setResultsRetentionDays, RESULTS_RETENTION_DAYS);

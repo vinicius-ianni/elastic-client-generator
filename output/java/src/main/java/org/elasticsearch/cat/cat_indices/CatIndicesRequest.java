@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -83,6 +83,7 @@ public class CatIndicesRequest  implements XContentable<CatIndicesRequest> {
   public CatIndicesRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -97,14 +98,14 @@ public class CatIndicesRequest  implements XContentable<CatIndicesRequest> {
     new ConstructingObjectParser<>(CatIndicesRequest.class.getName(), false, args -> new CatIndicesRequest());
 
   static {
-    PARSER.declareObject(CatIndicesRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p, null), BYTES);
+    PARSER.declareObject(CatIndicesRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
     PARSER.declareString(CatIndicesRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatIndicesRequest::setHeaders, HEADERS);
-    PARSER.declareObject(CatIndicesRequest::setHealth, (p, t) -> Health.PARSER.apply(p, null), HEALTH);
+    PARSER.declareObject(CatIndicesRequest::setHealth, (p, t) -> Health.PARSER.apply(p), HEALTH);
     PARSER.declareBoolean(CatIndicesRequest::setHelp, HELP);
     PARSER.declareBoolean(CatIndicesRequest::setIncludeUnloadedSegments, INCLUDE_UNLOADED_SEGMENTS);
     PARSER.declareBoolean(CatIndicesRequest::setLocal, LOCAL);
-    PARSER.declareObject(CatIndicesRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(CatIndicesRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareBoolean(CatIndicesRequest::setPri, PRI);
     PARSER.declareStringArray(CatIndicesRequest::setSortByColumns, SORT_BY_COLUMNS);
     PARSER.declareBoolean(CatIndicesRequest::setVerbose, VERBOSE);

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.datafeed.*;
 
 public class DatafeedStats  implements XContentable<DatafeedStats> {
@@ -46,6 +46,7 @@ public class DatafeedStats  implements XContentable<DatafeedStats> {
   public DatafeedStats setTimingStats(DatafeedTimingStats val) { this._timingStats = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,9 +63,9 @@ public class DatafeedStats  implements XContentable<DatafeedStats> {
   static {
     PARSER.declareString(DatafeedStats::setAssignmentExplanation, ASSIGNMENT_EXPLANATION);
     PARSER.declareString(DatafeedStats::setDatafeedId, DATAFEED_ID);
-    PARSER.declareObject(DatafeedStats::setNode, (p, t) -> DiscoveryNode.PARSER.apply(p, null), NODE);
-    PARSER.declareObject(DatafeedStats::setState, (p, t) -> DatafeedState.PARSER.apply(p, null), STATE);
-    PARSER.declareObject(DatafeedStats::setTimingStats, (p, t) -> DatafeedTimingStats.PARSER.apply(p, null), TIMING_STATS);
+    PARSER.declareObject(DatafeedStats::setNode, (p, t) -> DiscoveryNode.PARSER.apply(p, t), NODE);
+    PARSER.declareObject(DatafeedStats::setState, (p, t) -> DatafeedState.PARSER.apply(p), STATE);
+    PARSER.declareObject(DatafeedStats::setTimingStats, (p, t) -> DatafeedTimingStats.PARSER.apply(p, t), TIMING_STATS);
   }
 
 }

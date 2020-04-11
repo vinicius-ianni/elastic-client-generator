@@ -2,6 +2,7 @@
 package org.elasticsearch.index_modules.similarity.d_f_r;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum DfrAfterEffect implements XContentable<DfrAfterEffect> {
       case "b": return DfrAfterEffect.B;
       case "l": return DfrAfterEffect.L;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, DfrAfterEffect.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, DfrAfterEffect.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

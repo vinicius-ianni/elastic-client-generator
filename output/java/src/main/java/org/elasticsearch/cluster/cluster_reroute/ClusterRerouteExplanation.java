@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.cluster_reroute.*;
 
 public class ClusterRerouteExplanation  implements XContentable<ClusterRerouteExplanation> {
@@ -34,6 +34,7 @@ public class ClusterRerouteExplanation  implements XContentable<ClusterRerouteEx
   public ClusterRerouteExplanation setParameters(ClusterRerouteParameters val) { this._parameters = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class ClusterRerouteExplanation  implements XContentable<ClusterRerouteEx
 
   static {
     PARSER.declareString(ClusterRerouteExplanation::setCommand, COMMAND);
-    PARSER.declareObjectArray(ClusterRerouteExplanation::setDecisions, (p, t) -> ClusterRerouteDecision.PARSER.apply(p), DECISIONS);
-    PARSER.declareObject(ClusterRerouteExplanation::setParameters, (p, t) -> ClusterRerouteParameters.PARSER.apply(p, null), PARAMETERS);
+    PARSER.declareObjectArray(ClusterRerouteExplanation::setDecisions, (p, t) -> ClusterRerouteDecision.PARSER.apply(p, t), DECISIONS);
+    PARSER.declareObject(ClusterRerouteExplanation::setParameters, (p, t) -> ClusterRerouteParameters.PARSER.apply(p, t), PARAMETERS);
   }
 
 }

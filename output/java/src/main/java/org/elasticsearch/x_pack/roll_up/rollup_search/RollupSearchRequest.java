@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.internal.*;
@@ -48,6 +48,7 @@ public class RollupSearchRequest  implements XContentable<RollupSearchRequest> {
   public RollupSearchRequest setSize(Integer val) { this._size = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -64,9 +65,9 @@ public class RollupSearchRequest  implements XContentable<RollupSearchRequest> {
   static {
     PARSER.declareBoolean(RollupSearchRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);
     PARSER.declareBoolean(RollupSearchRequest::setTypedKeys, TYPED_KEYS);
-    PARSER.declareObject(RollupSearchRequest::setAggs, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGS);;
-    PARSER.declareObject(RollupSearchRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareInteger(RollupSearchRequest::setSize, SIZE);
+    PARSER.declareObject(RollupSearchRequest::setAggs, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGS);
+    PARSER.declareObject(RollupSearchRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareInt(RollupSearchRequest::setSize, SIZE);
   }
 
 }

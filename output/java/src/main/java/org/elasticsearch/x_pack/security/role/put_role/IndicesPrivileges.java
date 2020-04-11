@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.role.*;
 import org.elasticsearch.common_abstractions.infer.indices.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
@@ -42,6 +42,7 @@ public class IndicesPrivileges  implements XContentable<IndicesPrivileges> {
   public IndicesPrivileges setQuery(QueryContainer val) { this._query = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class IndicesPrivileges  implements XContentable<IndicesPrivileges> {
     new ConstructingObjectParser<>(IndicesPrivileges.class.getName(), false, args -> new IndicesPrivileges());
 
   static {
-    PARSER.declareObject(IndicesPrivileges::setFieldSecurity, (p, t) -> FieldSecurity.PARSER.apply(p, null), FIELD_SECURITY);
-    PARSER.declareIndices(IndicesPrivileges::setNames, (p, t) -> Indices.createFrom(p), NAMES);
+    PARSER.declareObject(IndicesPrivileges::setFieldSecurity, (p, t) -> FieldSecurity.PARSER.apply(p, t), FIELD_SECURITY);
+    PARSER.declareObject(IndicesPrivileges::setNames, (p, t) -> Indices.createFrom(p), NAMES);
     PARSER.declareStringArray(IndicesPrivileges::setPrivileges, PRIVILEGES);
-    PARSER.declareObject(IndicesPrivileges::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
+    PARSER.declareObject(IndicesPrivileges::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
   }
 
 }

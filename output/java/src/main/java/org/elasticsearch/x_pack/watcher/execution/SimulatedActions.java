@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.execution.*;
 
 public class SimulatedActions  implements XContentable<SimulatedActions> {
@@ -34,6 +34,7 @@ public class SimulatedActions  implements XContentable<SimulatedActions> {
   public SimulatedActions setUseAll(Boolean val) { this._useAll = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,7 +50,7 @@ public class SimulatedActions  implements XContentable<SimulatedActions> {
 
   static {
     PARSER.declareStringArray(SimulatedActions::setActions, ACTIONS);
-    PARSER.declareObject(SimulatedActions::setAll, (p, t) -> SimulatedActions.PARSER.apply(p, null), ALL);
+    PARSER.declareObject(SimulatedActions::setAll, (p, t) -> SimulatedActions.PARSER.apply(p, t), ALL);
     PARSER.declareBoolean(SimulatedActions::setUseAll, USE_ALL);
   }
 

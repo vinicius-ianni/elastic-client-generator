@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class FielddataFrequencyFilter  implements XContentable<FielddataFrequencyFilter> {
@@ -34,6 +34,7 @@ public class FielddataFrequencyFilter  implements XContentable<FielddataFrequenc
   public FielddataFrequencyFilter setMinSegmentSize(Integer val) { this._minSegmentSize = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,7 +51,7 @@ public class FielddataFrequencyFilter  implements XContentable<FielddataFrequenc
   static {
     PARSER.declareDouble(FielddataFrequencyFilter::setMax, MAX);
     PARSER.declareDouble(FielddataFrequencyFilter::setMin, MIN);
-    PARSER.declareInteger(FielddataFrequencyFilter::setMinSegmentSize, MIN_SEGMENT_SIZE);
+    PARSER.declareInt(FielddataFrequencyFilter::setMinSegmentSize, MIN_SEGMENT_SIZE);
   }
 
 }

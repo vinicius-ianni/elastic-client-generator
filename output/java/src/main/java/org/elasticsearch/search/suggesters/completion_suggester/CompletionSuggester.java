@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.suggesters.context_suggester.*;
 import org.elasticsearch.search.suggesters.completion_suggester.*;
 
@@ -47,6 +47,7 @@ public class CompletionSuggester  implements XContentable<CompletionSuggester> {
   public CompletionSuggester setSkipDuplicates(Boolean val) { this._skipDuplicates = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,8 +62,8 @@ public class CompletionSuggester  implements XContentable<CompletionSuggester> {
     new ConstructingObjectParser<>(CompletionSuggester.class.getName(), false, args -> new CompletionSuggester());
 
   static {
-    PARSER.declareObject(CompletionSuggester::setContexts, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), CONTEXTS);;
-    PARSER.declareObject(CompletionSuggester::setFuzzy, (p, t) -> SuggestFuzziness.PARSER.apply(p, null), FUZZY);
+    PARSER.declareObject(CompletionSuggester::setContexts, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<SuggestContextQuery> */), CONTEXTS);
+    PARSER.declareObject(CompletionSuggester::setFuzzy, (p, t) -> SuggestFuzziness.PARSER.apply(p, t), FUZZY);
     PARSER.declareString(CompletionSuggester::setPrefix, PREFIX);
     PARSER.declareString(CompletionSuggester::setRegex, REGEX);
     PARSER.declareBoolean(CompletionSuggester::setSkipDuplicates, SKIP_DUPLICATES);

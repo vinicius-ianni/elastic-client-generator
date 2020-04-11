@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.full_text.intervals.*;
 
 public class Intervals  implements XContentable<Intervals> {
@@ -22,6 +22,7 @@ public class Intervals  implements XContentable<Intervals> {
   public Intervals setFilter(IntervalsFilter val) { this._filter = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class Intervals  implements XContentable<Intervals> {
     new ConstructingObjectParser<>(Intervals.class.getName(), false, args -> new Intervals());
 
   static {
-    PARSER.declareObject(Intervals::setFilter, (p, t) -> IntervalsFilter.PARSER.apply(p, null), FILTER);
+    PARSER.declareObject(Intervals::setFilter, (p, t) -> IntervalsFilter.PARSER.apply(p, t), FILTER);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class ClusterRerouteParameters  implements XContentable<ClusterRerouteParameters> {
@@ -52,6 +52,7 @@ public class ClusterRerouteParameters  implements XContentable<ClusterReroutePar
   public ClusterRerouteParameters setToNode(String val) { this._toNode = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -70,7 +71,7 @@ public class ClusterRerouteParameters  implements XContentable<ClusterReroutePar
     PARSER.declareString(ClusterRerouteParameters::setFromNode, FROM_NODE);
     PARSER.declareString(ClusterRerouteParameters::setIndex, INDEX);
     PARSER.declareString(ClusterRerouteParameters::setNode, NODE);
-    PARSER.declareInteger(ClusterRerouteParameters::setShard, SHARD);
+    PARSER.declareInt(ClusterRerouteParameters::setShard, SHARD);
     PARSER.declareString(ClusterRerouteParameters::setToNode, TO_NODE);
   }
 

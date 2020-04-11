@@ -2,6 +2,7 @@
 package org.elasticsearch.analysis.plugins.kuromoji;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum KuromojiTokenizationMode implements XContentable<KuromojiTokenizatio
       case "search": return KuromojiTokenizationMode.Search;
       case "extended": return KuromojiTokenizationMode.Extended;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, KuromojiTokenizationMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, KuromojiTokenizationMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

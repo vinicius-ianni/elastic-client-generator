@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.ilm.*;
 
 public class Phases  implements XContentable<Phases> {
@@ -40,6 +40,7 @@ public class Phases  implements XContentable<Phases> {
   public Phases setWarm(Phase val) { this._warm = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,10 +55,10 @@ public class Phases  implements XContentable<Phases> {
     new ConstructingObjectParser<>(Phases.class.getName(), false, args -> new Phases());
 
   static {
-    PARSER.declareObject(Phases::setCold, (p, t) -> Phase.PARSER.apply(p, null), COLD);
-    PARSER.declareObject(Phases::setDelete, (p, t) -> Phase.PARSER.apply(p, null), DELETE);
-    PARSER.declareObject(Phases::setHot, (p, t) -> Phase.PARSER.apply(p, null), HOT);
-    PARSER.declareObject(Phases::setWarm, (p, t) -> Phase.PARSER.apply(p, null), WARM);
+    PARSER.declareObject(Phases::setCold, (p, t) -> Phase.PARSER.apply(p, t), COLD);
+    PARSER.declareObject(Phases::setDelete, (p, t) -> Phase.PARSER.apply(p, t), DELETE);
+    PARSER.declareObject(Phases::setHot, (p, t) -> Phase.PARSER.apply(p, t), HOT);
+    PARSER.declareObject(Phases::setWarm, (p, t) -> Phase.PARSER.apply(p, t), WARM);
   }
 
 }

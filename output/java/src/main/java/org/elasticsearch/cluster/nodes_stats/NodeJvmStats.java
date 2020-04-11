@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_stats.*;
 import org.elasticsearch.internal.*;
 
@@ -65,6 +65,7 @@ public class NodeJvmStats  implements XContentable<NodeJvmStats> {
   public NodeJvmStats setUptimeInMillis(Long val) { this._uptimeInMillis = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -79,11 +80,11 @@ public class NodeJvmStats  implements XContentable<NodeJvmStats> {
     new ConstructingObjectParser<>(NodeJvmStats.class.getName(), false, args -> new NodeJvmStats());
 
   static {
-    PARSER.declareObject(NodeJvmStats::setBufferPools, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> NodeBufferPool.PARSER.apply(pp, null)), BUFFER_POOLS);;
-    PARSER.declareObject(NodeJvmStats::setClasses, (p, t) -> JvmClassesStats.PARSER.apply(p, null), CLASSES);
-    PARSER.declareObject(NodeJvmStats::setGc, (p, t) -> GarbageCollectionStats.PARSER.apply(p, null), GC);
-    PARSER.declareObject(NodeJvmStats::setMem, (p, t) -> MemoryStats.PARSER.apply(p, null), MEM);
-    PARSER.declareObject(NodeJvmStats::setThreads, (p, t) -> ThreadStats.PARSER.apply(p, null), THREADS);
+    PARSER.declareObject(NodeJvmStats::setBufferPools, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> NodeBufferPool.PARSER.apply(pp, null)), BUFFER_POOLS);
+    PARSER.declareObject(NodeJvmStats::setClasses, (p, t) -> JvmClassesStats.PARSER.apply(p, t), CLASSES);
+    PARSER.declareObject(NodeJvmStats::setGc, (p, t) -> GarbageCollectionStats.PARSER.apply(p, t), GC);
+    PARSER.declareObject(NodeJvmStats::setMem, (p, t) -> MemoryStats.PARSER.apply(p, t), MEM);
+    PARSER.declareObject(NodeJvmStats::setThreads, (p, t) -> ThreadStats.PARSER.apply(p, t), THREADS);
     PARSER.declareLong(NodeJvmStats::setTimestamp, TIMESTAMP);
     PARSER.declareString(NodeJvmStats::setUptime, UPTIME);
     PARSER.declareLong(NodeJvmStats::setUptimeInMillis, UPTIME_IN_MILLIS);

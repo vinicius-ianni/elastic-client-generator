@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.profile.*;
 import org.elasticsearch.internal.*;
 
@@ -41,6 +41,7 @@ public class AggregationProfile  implements XContentable<AggregationProfile> {
   public AggregationProfile setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,7 +56,7 @@ public class AggregationProfile  implements XContentable<AggregationProfile> {
     new ConstructingObjectParser<>(AggregationProfile.class.getName(), false, args -> new AggregationProfile());
 
   static {
-    PARSER.declareObject(AggregationProfile::setBreakdown, (p, t) -> AggregationBreakdown.PARSER.apply(p, null), BREAKDOWN);
+    PARSER.declareObject(AggregationProfile::setBreakdown, (p, t) -> AggregationBreakdown.PARSER.apply(p, t), BREAKDOWN);
     PARSER.declareString(AggregationProfile::setDescription, DESCRIPTION);
     PARSER.declareLong(AggregationProfile::setTimeInNanos, TIME_IN_NANOS);
     PARSER.declareString(AggregationProfile::setType, TYPE);

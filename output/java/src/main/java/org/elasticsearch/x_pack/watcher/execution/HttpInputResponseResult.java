@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class HttpInputResponseResult  implements XContentable<HttpInputResponseResult> {
@@ -34,6 +34,7 @@ public class HttpInputResponseResult  implements XContentable<HttpInputResponseR
   public HttpInputResponseResult setStatus(Integer val) { this._status = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class HttpInputResponseResult  implements XContentable<HttpInputResponseR
 
   static {
     PARSER.declareString(HttpInputResponseResult::setBody, BODY);
-    PARSER.declareObject(HttpInputResponseResult::setHeaders, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), HEADERS);;
-    PARSER.declareInteger(HttpInputResponseResult::setStatus, STATUS);
+    PARSER.declareObject(HttpInputResponseResult::setHeaders, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<String> */), HEADERS);
+    PARSER.declareInt(HttpInputResponseResult::setStatus, STATUS);
   }
 
 }

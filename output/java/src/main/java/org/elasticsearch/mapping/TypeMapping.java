@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.meta_fields.all.*;
 import org.elasticsearch.mapping.*;
 import org.elasticsearch.mapping.dynamic_template.*;
@@ -103,6 +103,7 @@ public class TypeMapping  implements XContentable<TypeMapping> {
   public TypeMapping setSource(SourceField val) { this._source = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -117,19 +118,19 @@ public class TypeMapping  implements XContentable<TypeMapping> {
     new ConstructingObjectParser<>(TypeMapping.class.getName(), false, args -> new TypeMapping());
 
   static {
-    PARSER.declareObject(TypeMapping::setAllField, (p, t) -> AllField.PARSER.apply(p, null), ALL_FIELD);
+    PARSER.declareObject(TypeMapping::setAllField, (p, t) -> AllField.PARSER.apply(p, t), ALL_FIELD);
     PARSER.declareBoolean(TypeMapping::setDateDetection, DATE_DETECTION);
-    PARSER.declareObject(TypeMapping::setDynamic, (p, t) -> null, DYNAMIC);
+    PARSER.declareObject(TypeMapping::setDynamic, (p, t) ->  new Either<Boolean, DynamicMapping>() /* TODO UnionOf */, DYNAMIC);
     PARSER.declareStringArray(TypeMapping::setDynamicDateFormats, DYNAMIC_DATE_FORMATS);
-    PARSER.declareObject(TypeMapping::setDynamicTemplates, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> DynamicTemplate.PARSER.apply(pp, null)), DYNAMIC_TEMPLATES);;
-    PARSER.declareObject(TypeMapping::setFieldNames, (p, t) -> FieldNamesField.PARSER.apply(p, null), FIELD_NAMES);
-    PARSER.declareObject(TypeMapping::setIndexField, (p, t) -> IndexField.PARSER.apply(p, null), INDEX_FIELD);
-    PARSER.declareObject(TypeMapping::setMeta, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);;
+    PARSER.declareObject(TypeMapping::setDynamicTemplates, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> DynamicTemplate.PARSER.apply(pp, null)), DYNAMIC_TEMPLATES);
+    PARSER.declareObject(TypeMapping::setFieldNames, (p, t) -> FieldNamesField.PARSER.apply(p, t), FIELD_NAMES);
+    PARSER.declareObject(TypeMapping::setIndexField, (p, t) -> IndexField.PARSER.apply(p, t), INDEX_FIELD);
+    PARSER.declareObject(TypeMapping::setMeta, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);
     PARSER.declareBoolean(TypeMapping::setNumericDetection, NUMERIC_DETECTION);
-    PARSER.declareObject(TypeMapping::setProperties, (p, t) ->  new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), PROPERTIES);;
-    PARSER.declareObject(TypeMapping::setRouting, (p, t) -> RoutingField.PARSER.apply(p, null), ROUTING);
-    PARSER.declareObject(TypeMapping::setSize, (p, t) -> SizeField.PARSER.apply(p, null), SIZE);
-    PARSER.declareObject(TypeMapping::setSource, (p, t) -> SourceField.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(TypeMapping::setProperties, (p, t) -> new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), PROPERTIES);
+    PARSER.declareObject(TypeMapping::setRouting, (p, t) -> RoutingField.PARSER.apply(p, t), ROUTING);
+    PARSER.declareObject(TypeMapping::setSize, (p, t) -> SizeField.PARSER.apply(p, t), SIZE);
+    PARSER.declareObject(TypeMapping::setSource, (p, t) -> SourceField.PARSER.apply(p, t), SOURCE);
   }
 
 }

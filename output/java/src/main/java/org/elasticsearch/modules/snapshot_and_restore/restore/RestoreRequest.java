@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.index_settings.update_index_settings.*;
 import org.elasticsearch.common_abstractions.infer.indices.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -84,6 +84,7 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
   public RestoreRequest setWaitForCompletion(Boolean val) { this._waitForCompletion = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -102,12 +103,12 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
     PARSER.declareBoolean(RestoreRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(RestoreRequest::setIncludeAliases, INCLUDE_ALIASES);
     PARSER.declareBoolean(RestoreRequest::setIncludeGlobalState, INCLUDE_GLOBAL_STATE);
-    PARSER.declareObject(RestoreRequest::setIndexSettings, (p, t) -> UpdateIndexSettingsRequest.PARSER.apply(p, null), INDEX_SETTINGS);
-    PARSER.declareIndices(RestoreRequest::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
+    PARSER.declareObject(RestoreRequest::setIndexSettings, (p, t) -> UpdateIndexSettingsRequest.PARSER.apply(p, t), INDEX_SETTINGS);
+    PARSER.declareObject(RestoreRequest::setIndices, (p, t) -> Indices.createFrom(p), INDICES);
     PARSER.declareBoolean(RestoreRequest::setPartial, PARTIAL);
     PARSER.declareString(RestoreRequest::setRenamePattern, RENAME_PATTERN);
     PARSER.declareString(RestoreRequest::setRenameReplacement, RENAME_REPLACEMENT);
-    PARSER.declareObject(RestoreRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(RestoreRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareBoolean(RestoreRequest::setWaitForCompletion, WAIT_FOR_COMPLETION);
   }
 

@@ -2,6 +2,7 @@
 package org.elasticsearch.common_options.shape;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum ShapeRelation implements XContentable<ShapeRelation> {
       case "disjoint": return ShapeRelation.Disjoint;
       case "within": return ShapeRelation.Within;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ShapeRelation.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ShapeRelation.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

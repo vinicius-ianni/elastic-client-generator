@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl.visitor;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -45,7 +46,7 @@ public enum VisitorScope implements XContentable<VisitorScope> {
       case "NegativeQuery": return VisitorScope.NegativeQuery;
       case "Span": return VisitorScope.Span;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, VisitorScope.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, VisitorScope.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

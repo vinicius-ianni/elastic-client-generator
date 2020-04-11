@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -77,6 +77,7 @@ public class FollowConfig  implements XContentable<FollowConfig> {
   public FollowConfig setReadPollTimeout(Time val) { this._readPollTimeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -91,16 +92,16 @@ public class FollowConfig  implements XContentable<FollowConfig> {
     new ConstructingObjectParser<>(FollowConfig.class.getName(), false, args -> new FollowConfig());
 
   static {
-    PARSER.declareInteger(FollowConfig::setMaxReadRequestOperationCount, MAX_READ_REQUEST_OPERATION_COUNT);
+    PARSER.declareInt(FollowConfig::setMaxReadRequestOperationCount, MAX_READ_REQUEST_OPERATION_COUNT);
     PARSER.declareString(FollowConfig::setMaxReadRequestSize, MAX_READ_REQUEST_SIZE);
-    PARSER.declareInteger(FollowConfig::setMaxOutstandingReadRequests, MAX_OUTSTANDING_READ_REQUESTS);
-    PARSER.declareInteger(FollowConfig::setMaxWriteRequestOperationCount, MAX_WRITE_REQUEST_OPERATION_COUNT);
+    PARSER.declareInt(FollowConfig::setMaxOutstandingReadRequests, MAX_OUTSTANDING_READ_REQUESTS);
+    PARSER.declareInt(FollowConfig::setMaxWriteRequestOperationCount, MAX_WRITE_REQUEST_OPERATION_COUNT);
     PARSER.declareString(FollowConfig::setMaxWriteRequestSize, MAX_WRITE_REQUEST_SIZE);
-    PARSER.declareInteger(FollowConfig::setMaxOutstandingWriteRequests, MAX_OUTSTANDING_WRITE_REQUESTS);
-    PARSER.declareInteger(FollowConfig::setMaxWriteBufferCount, MAX_WRITE_BUFFER_COUNT);
+    PARSER.declareInt(FollowConfig::setMaxOutstandingWriteRequests, MAX_OUTSTANDING_WRITE_REQUESTS);
+    PARSER.declareInt(FollowConfig::setMaxWriteBufferCount, MAX_WRITE_BUFFER_COUNT);
     PARSER.declareString(FollowConfig::setMaxWriteBufferSize, MAX_WRITE_BUFFER_SIZE);
-    PARSER.declareObject(FollowConfig::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, null), MAX_RETRY_DELAY);
-    PARSER.declareObject(FollowConfig::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, null), READ_POLL_TIMEOUT);
+    PARSER.declareObject(FollowConfig::setMaxRetryDelay, (p, t) -> Time.PARSER.apply(p, t), MAX_RETRY_DELAY);
+    PARSER.declareObject(FollowConfig::setReadPollTimeout, (p, t) -> Time.PARSER.apply(p, t), READ_POLL_TIMEOUT);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.query_dsl.full_text.simple_query_string.*;
@@ -98,6 +98,7 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
   public SimpleQueryStringQuery setQuoteFieldSuffix(String val) { this._quoteFieldSuffix = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -115,14 +116,14 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
     PARSER.declareString(SimpleQueryStringQuery::setAnalyzer, ANALYZER);
     PARSER.declareBoolean(SimpleQueryStringQuery::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareBoolean(SimpleQueryStringQuery::setAutoGenerateSynonymsPhraseQuery, AUTO_GENERATE_SYNONYMS_PHRASE_QUERY);
-    PARSER.declareObject(SimpleQueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p, null), DEFAULT_OPERATOR);
-    PARSER.declareObjectArray(SimpleQueryStringQuery::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
-    PARSER.declareObject(SimpleQueryStringQuery::setFlags, (p, t) -> SimpleQueryStringFlags.PARSER.apply(p, null), FLAGS);
-    PARSER.declareInteger(SimpleQueryStringQuery::setFuzzyMaxExpansions, FUZZY_MAX_EXPANSIONS);
-    PARSER.declareInteger(SimpleQueryStringQuery::setFuzzyPrefixLength, FUZZY_PREFIX_LENGTH);
+    PARSER.declareObject(SimpleQueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareObjectArray(SimpleQueryStringQuery::setFields, (p, t) -> Field.createFrom(p), FIELDS);
+    PARSER.declareObject(SimpleQueryStringQuery::setFlags, (p, t) -> SimpleQueryStringFlags.PARSER.apply(p), FLAGS);
+    PARSER.declareInt(SimpleQueryStringQuery::setFuzzyMaxExpansions, FUZZY_MAX_EXPANSIONS);
+    PARSER.declareInt(SimpleQueryStringQuery::setFuzzyPrefixLength, FUZZY_PREFIX_LENGTH);
     PARSER.declareBoolean(SimpleQueryStringQuery::setFuzzyTranspositions, FUZZY_TRANSPOSITIONS);
     PARSER.declareBoolean(SimpleQueryStringQuery::setLenient, LENIENT);
-    PARSER.declareObject(SimpleQueryStringQuery::setMinimumShouldMatch, (p, t) -> MinimumShouldMatch.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH);
+    PARSER.declareObject(SimpleQueryStringQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
     PARSER.declareString(SimpleQueryStringQuery::setQuery, QUERY);
     PARSER.declareString(SimpleQueryStringQuery::setQuoteFieldSuffix, QUOTE_FIELD_SUFFIX);
   }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.document.multiple.bulk.bulk_response_item.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class BulkResponse  implements XContentable<BulkResponse> {
   public BulkResponse setTook(Long val) { this._took = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -63,8 +64,8 @@ public class BulkResponse  implements XContentable<BulkResponse> {
   static {
     PARSER.declareBoolean(BulkResponse::setErrors, ERRORS);
     PARSER.declareBoolean(BulkResponse::setIsValid, IS_VALID);
-    PARSER.declareObjectArray(BulkResponse::setItems, (p, t) -> BulkResponseItemBase.PARSER.apply(p), ITEMS);
-    PARSER.declareObjectArray(BulkResponse::setItemsWithErrors, (p, t) -> BulkResponseItemBase.PARSER.apply(p), ITEMS_WITH_ERRORS);
+    PARSER.declareObjectArray(BulkResponse::setItems, (p, t) -> BulkResponseItemBase.PARSER.apply(p, t), ITEMS);
+    PARSER.declareObjectArray(BulkResponse::setItemsWithErrors, (p, t) -> BulkResponseItemBase.PARSER.apply(p, t), ITEMS_WITH_ERRORS);
     PARSER.declareLong(BulkResponse::setTook, TOOK);
   }
 

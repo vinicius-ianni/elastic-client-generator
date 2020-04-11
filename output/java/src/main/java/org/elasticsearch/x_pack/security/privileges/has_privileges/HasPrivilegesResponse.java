@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.privileges.has_privileges.*;
 
 public class HasPrivilegesResponse  implements XContentable<HasPrivilegesResponse> {
@@ -46,6 +46,7 @@ public class HasPrivilegesResponse  implements XContentable<HasPrivilegesRespons
   public HasPrivilegesResponse setUsername(String val) { this._username = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,10 +61,10 @@ public class HasPrivilegesResponse  implements XContentable<HasPrivilegesRespons
     new ConstructingObjectParser<>(HasPrivilegesResponse.class.getName(), false, args -> new HasPrivilegesResponse());
 
   static {
-    PARSER.declareObject(HasPrivilegesResponse::setApplication, (p, t) ->  new NamedContainer<>(n -> () -> n,UNSUPPORTED), APPLICATION);;
-    PARSER.declareObject(HasPrivilegesResponse::setCluster, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Boolean.PARSER.apply(pp, null)), CLUSTER);;
+    PARSER.declareObject(HasPrivilegesResponse::setApplication, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<ResourcePrivileges> */), APPLICATION);
+    PARSER.declareObject(HasPrivilegesResponse::setCluster, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.booleanValue()), CLUSTER);
     PARSER.declareBoolean(HasPrivilegesResponse::setHasAllRequested, HAS_ALL_REQUESTED);
-    PARSER.declareObjectArray(HasPrivilegesResponse::setIndex, (p, t) -> ResourcePrivileges.PARSER.apply(p), INDEX);
+    PARSER.declareObjectArray(HasPrivilegesResponse::setIndex, (p, t) -> ResourcePrivileges.PARSER.apply(p, t), INDEX);
     PARSER.declareString(HasPrivilegesResponse::setUsername, USERNAME);
   }
 

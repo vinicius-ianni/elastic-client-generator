@@ -5,22 +5,22 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.suggesters.*;
 
-public class Suggest implements XContentable<Suggest> {
-
+public class Suggest<T>  implements XContentable<Suggest<T>> {
+  
   static final ParseField LENGTH = new ParseField("length");
   private Integer _length;
   public Integer getLength() { return this._length; }
-  public Suggest> setLength(Integer val) { this._length = val; return this; }
+  public Suggest<T> setLength(Integer val) { this._length = val; return this; }
 
 
   static final ParseField OFFSET = new ParseField("offset");
@@ -41,6 +41,7 @@ public class Suggest implements XContentable<Suggest> {
   public Suggest<T> setText(String val) { this._text = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,9 +56,10 @@ public class Suggest implements XContentable<Suggest> {
     new ConstructingObjectParser<>(Suggest.class.getName(), false, args -> new Suggest());
 
   static {
-    PARSER.declareInteger(Suggest::setLength, LENGTH);
-    PARSER.declareInteger(Suggest::setOffset, OFFSET);
-    PARSER.declareObjectArray(Suggest::setOptions, (p, t) -> SuggestOption<T>.PARSER.apply(p), OPTIONS);
+    PARSER.declareInt(Suggest::setLength, LENGTH);
+    PARSER.declareInt(Suggest::setOffset, OFFSET);
+    SuggestOption _options = new SuggestOption<>();
+    PARSER.declareObjectArray(Suggest::setOptions, (p, t) -> _options.PARSER.apply(p, t), OPTIONS);
     PARSER.declareString(Suggest::setText, TEXT);
   }
 

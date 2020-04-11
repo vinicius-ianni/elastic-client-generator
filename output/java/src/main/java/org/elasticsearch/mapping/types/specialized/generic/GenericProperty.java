@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.modules.indices.fielddata.string.*;
 import org.elasticsearch.mapping.types.core.*;
@@ -91,6 +91,7 @@ public class GenericProperty  implements XContentable<GenericProperty> {
   public GenericProperty setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -107,15 +108,15 @@ public class GenericProperty  implements XContentable<GenericProperty> {
   static {
     PARSER.declareString(GenericProperty::setAnalyzer, ANALYZER);
     PARSER.declareDouble(GenericProperty::setBoost, BOOST);
-    PARSER.declareObject(GenericProperty::setFielddata, (p, t) -> StringFielddata.PARSER.apply(p, null), FIELDDATA);
-    PARSER.declareInteger(GenericProperty::setIgnoreAbove, IGNORE_ABOVE);
+    PARSER.declareObject(GenericProperty::setFielddata, (p, t) -> StringFielddata.PARSER.apply(p, t), FIELDDATA);
+    PARSER.declareInt(GenericProperty::setIgnoreAbove, IGNORE_ABOVE);
     PARSER.declareBoolean(GenericProperty::setIndex, INDEX);
-    PARSER.declareObject(GenericProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p, null), INDEX_OPTIONS);
+    PARSER.declareObject(GenericProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
     PARSER.declareBoolean(GenericProperty::setNorms, NORMS);
     PARSER.declareString(GenericProperty::setNullValue, NULL_VALUE);
-    PARSER.declareInteger(GenericProperty::setPositionIncrementGap, POSITION_INCREMENT_GAP);
+    PARSER.declareInt(GenericProperty::setPositionIncrementGap, POSITION_INCREMENT_GAP);
     PARSER.declareString(GenericProperty::setSearchAnalyzer, SEARCH_ANALYZER);
-    PARSER.declareObject(GenericProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p, null), TERM_VECTOR);
+    PARSER.declareObject(GenericProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR);
     PARSER.declareString(GenericProperty::setType, TYPE);
   }
 

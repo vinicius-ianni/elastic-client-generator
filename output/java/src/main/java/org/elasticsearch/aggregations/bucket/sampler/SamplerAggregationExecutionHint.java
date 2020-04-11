@@ -2,6 +2,7 @@
 package org.elasticsearch.aggregations.bucket.sampler;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum SamplerAggregationExecutionHint implements XContentable<SamplerAggre
       case "global_ordinals": return SamplerAggregationExecutionHint.GlobalOrdinals;
       case "bytes_hash": return SamplerAggregationExecutionHint.BytesHash;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, SamplerAggregationExecutionHint.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, SamplerAggregationExecutionHint.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

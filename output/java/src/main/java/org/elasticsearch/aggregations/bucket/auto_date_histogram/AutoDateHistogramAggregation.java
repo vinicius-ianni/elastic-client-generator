@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.scripting.*;
@@ -73,6 +73,7 @@ public class AutoDateHistogramAggregation  implements XContentable<AutoDateHisto
   public AutoDateHistogramAggregation setMinimumInterval(MinimumInterval val) { this._minimumInterval = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -87,15 +88,15 @@ public class AutoDateHistogramAggregation  implements XContentable<AutoDateHisto
     new ConstructingObjectParser<>(AutoDateHistogramAggregation.class.getName(), false, args -> new AutoDateHistogramAggregation());
 
   static {
-    PARSER.declareField(AutoDateHistogramAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareInteger(AutoDateHistogramAggregation::setBuckets, BUCKETS);
+    PARSER.declareObject(AutoDateHistogramAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareInt(AutoDateHistogramAggregation::setBuckets, BUCKETS);
     PARSER.declareString(AutoDateHistogramAggregation::setFormat, FORMAT);
-    PARSER.declareDate(AutoDateHistogramAggregation::setMissing, (p, t) -> Date.createFrom(p), MISSING);
+    PARSER.declareObject(AutoDateHistogramAggregation::setMissing, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), MISSING);
     PARSER.declareString(AutoDateHistogramAggregation::setOffset, OFFSET);
-    PARSER.declareObject(AutoDateHistogramAggregation::setParams, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);;
-    PARSER.declareObject(AutoDateHistogramAggregation::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(AutoDateHistogramAggregation::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);
+    PARSER.declareObject(AutoDateHistogramAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareString(AutoDateHistogramAggregation::setTimeZone, TIME_ZONE);
-    PARSER.declareObject(AutoDateHistogramAggregation::setMinimumInterval, (p, t) -> MinimumInterval.PARSER.apply(p, null), MINIMUM_INTERVAL);
+    PARSER.declareObject(AutoDateHistogramAggregation::setMinimumInterval, (p, t) -> MinimumInterval.PARSER.apply(p), MINIMUM_INTERVAL);
   }
 
 }

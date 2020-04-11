@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.bucket.adjacency_matrix.*;
 import org.elasticsearch.aggregations.*;
 import org.elasticsearch.aggregations.metric.average.*;
@@ -427,6 +427,7 @@ public class AggregationContainer  implements XContentable<AggregationContainer>
   public AggregationContainer setMedianAbsoluteDeviation(MedianAbsoluteDeviationAggregation val) { this._medianAbsoluteDeviation = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -441,65 +442,65 @@ public class AggregationContainer  implements XContentable<AggregationContainer>
     new ConstructingObjectParser<>(AggregationContainer.class.getName(), false, args -> new AggregationContainer());
 
   static {
-    PARSER.declareObject(AggregationContainer::setAdjacencyMatrix, (p, t) -> AdjacencyMatrixAggregation.PARSER.apply(p, null), ADJACENCY_MATRIX);
-    PARSER.declareObject(AggregationContainer::setAggs, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGS);;
-    PARSER.declareObject(AggregationContainer::setAvg, (p, t) -> AverageAggregation.PARSER.apply(p, null), AVG);
-    PARSER.declareObject(AggregationContainer::setAvgBucket, (p, t) -> AverageBucketAggregation.PARSER.apply(p, null), AVG_BUCKET);
-    PARSER.declareObject(AggregationContainer::setBucketScript, (p, t) -> BucketScriptAggregation.PARSER.apply(p, null), BUCKET_SCRIPT);
-    PARSER.declareObject(AggregationContainer::setBucketSelector, (p, t) -> BucketSelectorAggregation.PARSER.apply(p, null), BUCKET_SELECTOR);
-    PARSER.declareObject(AggregationContainer::setBucketSort, (p, t) -> BucketSortAggregation.PARSER.apply(p, null), BUCKET_SORT);
-    PARSER.declareObject(AggregationContainer::setCardinality, (p, t) -> CardinalityAggregation.PARSER.apply(p, null), CARDINALITY);
-    PARSER.declareObject(AggregationContainer::setChildren, (p, t) -> ChildrenAggregation.PARSER.apply(p, null), CHILDREN);
-    PARSER.declareObject(AggregationContainer::setComposite, (p, t) -> CompositeAggregation.PARSER.apply(p, null), COMPOSITE);
-    PARSER.declareObject(AggregationContainer::setCumulativeSum, (p, t) -> CumulativeSumAggregation.PARSER.apply(p, null), CUMULATIVE_SUM);
-    PARSER.declareObject(AggregationContainer::setCumulativeCardinality, (p, t) -> CumulativeCardinalityAggregation.PARSER.apply(p, null), CUMULATIVE_CARDINALITY);
-    PARSER.declareObject(AggregationContainer::setDateHistogram, (p, t) -> DateHistogramAggregation.PARSER.apply(p, null), DATE_HISTOGRAM);
-    PARSER.declareObject(AggregationContainer::setAutoDateHistogram, (p, t) -> AutoDateHistogramAggregation.PARSER.apply(p, null), AUTO_DATE_HISTOGRAM);
-    PARSER.declareObject(AggregationContainer::setDateRange, (p, t) -> DateRangeAggregation.PARSER.apply(p, null), DATE_RANGE);
-    PARSER.declareObject(AggregationContainer::setDerivative, (p, t) -> DerivativeAggregation.PARSER.apply(p, null), DERIVATIVE);
-    PARSER.declareObject(AggregationContainer::setExtendedStats, (p, t) -> ExtendedStatsAggregation.PARSER.apply(p, null), EXTENDED_STATS);
-    PARSER.declareObject(AggregationContainer::setExtendedStatsBucket, (p, t) -> ExtendedStatsBucketAggregation.PARSER.apply(p, null), EXTENDED_STATS_BUCKET);
-    PARSER.declareObject(AggregationContainer::setFilter, (p, t) -> FilterAggregation.PARSER.apply(p, null), FILTER);
-    PARSER.declareObject(AggregationContainer::setFilters, (p, t) -> FiltersAggregation.PARSER.apply(p, null), FILTERS);
-    PARSER.declareObject(AggregationContainer::setGeoBounds, (p, t) -> GeoBoundsAggregation.PARSER.apply(p, null), GEO_BOUNDS);
-    PARSER.declareObject(AggregationContainer::setGeoCentroid, (p, t) -> GeoCentroidAggregation.PARSER.apply(p, null), GEO_CENTROID);
-    PARSER.declareObject(AggregationContainer::setGeoDistance, (p, t) -> GeoDistanceAggregation.PARSER.apply(p, null), GEO_DISTANCE);
-    PARSER.declareObject(AggregationContainer::setGeohashGrid, (p, t) -> GeoHashGridAggregation.PARSER.apply(p, null), GEOHASH_GRID);
-    PARSER.declareObject(AggregationContainer::setGeotileGrid, (p, t) -> GeoTileGridAggregation.PARSER.apply(p, null), GEOTILE_GRID);
-    PARSER.declareObject(AggregationContainer::setGlobal, (p, t) -> GlobalAggregation.PARSER.apply(p, null), GLOBAL);
-    PARSER.declareObject(AggregationContainer::setHistogram, (p, t) -> HistogramAggregation.PARSER.apply(p, null), HISTOGRAM);
-    PARSER.declareObject(AggregationContainer::setIpRange, (p, t) -> IpRangeAggregation.PARSER.apply(p, null), IP_RANGE);
-    PARSER.declareObject(AggregationContainer::setMatrixStats, (p, t) -> MatrixStatsAggregation.PARSER.apply(p, null), MATRIX_STATS);
-    PARSER.declareObject(AggregationContainer::setMax, (p, t) -> MaxAggregation.PARSER.apply(p, null), MAX);
-    PARSER.declareObject(AggregationContainer::setMaxBucket, (p, t) -> MaxBucketAggregation.PARSER.apply(p, null), MAX_BUCKET);
-    PARSER.declareObject(AggregationContainer::setMeta, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);;
-    PARSER.declareObject(AggregationContainer::setMin, (p, t) -> MinAggregation.PARSER.apply(p, null), MIN);
-    PARSER.declareObject(AggregationContainer::setMinBucket, (p, t) -> MinBucketAggregation.PARSER.apply(p, null), MIN_BUCKET);
-    PARSER.declareObject(AggregationContainer::setMissing, (p, t) -> MissingAggregation.PARSER.apply(p, null), MISSING);
-    PARSER.declareObject(AggregationContainer::setMovingAvg, (p, t) -> MovingAverageAggregation.PARSER.apply(p, null), MOVING_AVG);
-    PARSER.declareObject(AggregationContainer::setMovingFn, (p, t) -> MovingFunctionAggregation.PARSER.apply(p, null), MOVING_FN);
-    PARSER.declareObject(AggregationContainer::setNested, (p, t) -> NestedAggregation.PARSER.apply(p, null), NESTED);
-    PARSER.declareObject(AggregationContainer::setParent, (p, t) -> ParentAggregation.PARSER.apply(p, null), PARENT);
-    PARSER.declareObject(AggregationContainer::setPercentileRanks, (p, t) -> PercentileRanksAggregation.PARSER.apply(p, null), PERCENTILE_RANKS);
-    PARSER.declareObject(AggregationContainer::setPercentiles, (p, t) -> PercentilesAggregation.PARSER.apply(p, null), PERCENTILES);
-    PARSER.declareObject(AggregationContainer::setPercentilesBucket, (p, t) -> PercentilesBucketAggregation.PARSER.apply(p, null), PERCENTILES_BUCKET);
-    PARSER.declareObject(AggregationContainer::setRange, (p, t) -> RangeAggregation.PARSER.apply(p, null), RANGE);
-    PARSER.declareObject(AggregationContainer::setRareTerms, (p, t) -> RareTermsAggregation.PARSER.apply(p, null), RARE_TERMS);
-    PARSER.declareObject(AggregationContainer::setReverseNested, (p, t) -> ReverseNestedAggregation.PARSER.apply(p, null), REVERSE_NESTED);
-    PARSER.declareObject(AggregationContainer::setSampler, (p, t) -> SamplerAggregation.PARSER.apply(p, null), SAMPLER);
-    PARSER.declareObject(AggregationContainer::setScriptedMetric, (p, t) -> ScriptedMetricAggregation.PARSER.apply(p, null), SCRIPTED_METRIC);
-    PARSER.declareObject(AggregationContainer::setSerialDiff, (p, t) -> SerialDifferencingAggregation.PARSER.apply(p, null), SERIAL_DIFF);
-    PARSER.declareObject(AggregationContainer::setSignificantTerms, (p, t) -> SignificantTermsAggregation.PARSER.apply(p, null), SIGNIFICANT_TERMS);
-    PARSER.declareObject(AggregationContainer::setSignificantText, (p, t) -> SignificantTextAggregation.PARSER.apply(p, null), SIGNIFICANT_TEXT);
-    PARSER.declareObject(AggregationContainer::setStats, (p, t) -> StatsAggregation.PARSER.apply(p, null), STATS);
-    PARSER.declareObject(AggregationContainer::setStatsBucket, (p, t) -> StatsBucketAggregation.PARSER.apply(p, null), STATS_BUCKET);
-    PARSER.declareObject(AggregationContainer::setSum, (p, t) -> SumAggregation.PARSER.apply(p, null), SUM);
-    PARSER.declareObject(AggregationContainer::setSumBucket, (p, t) -> SumBucketAggregation.PARSER.apply(p, null), SUM_BUCKET);
-    PARSER.declareObject(AggregationContainer::setTerms, (p, t) -> TermsAggregation.PARSER.apply(p, null), TERMS);
-    PARSER.declareObject(AggregationContainer::setTopHits, (p, t) -> TopHitsAggregation.PARSER.apply(p, null), TOP_HITS);
-    PARSER.declareObject(AggregationContainer::setValueCount, (p, t) -> ValueCountAggregation.PARSER.apply(p, null), VALUE_COUNT);
-    PARSER.declareObject(AggregationContainer::setWeightedAvg, (p, t) -> WeightedAverageAggregation.PARSER.apply(p, null), WEIGHTED_AVG);
-    PARSER.declareObject(AggregationContainer::setMedianAbsoluteDeviation, (p, t) -> MedianAbsoluteDeviationAggregation.PARSER.apply(p, null), MEDIAN_ABSOLUTE_DEVIATION);
+    PARSER.declareObject(AggregationContainer::setAdjacencyMatrix, (p, t) -> AdjacencyMatrixAggregation.PARSER.apply(p, t), ADJACENCY_MATRIX);
+    PARSER.declareObject(AggregationContainer::setAggs, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGS);
+    PARSER.declareObject(AggregationContainer::setAvg, (p, t) -> AverageAggregation.PARSER.apply(p, t), AVG);
+    PARSER.declareObject(AggregationContainer::setAvgBucket, (p, t) -> AverageBucketAggregation.PARSER.apply(p, t), AVG_BUCKET);
+    PARSER.declareObject(AggregationContainer::setBucketScript, (p, t) -> BucketScriptAggregation.PARSER.apply(p, t), BUCKET_SCRIPT);
+    PARSER.declareObject(AggregationContainer::setBucketSelector, (p, t) -> BucketSelectorAggregation.PARSER.apply(p, t), BUCKET_SELECTOR);
+    PARSER.declareObject(AggregationContainer::setBucketSort, (p, t) -> BucketSortAggregation.PARSER.apply(p, t), BUCKET_SORT);
+    PARSER.declareObject(AggregationContainer::setCardinality, (p, t) -> CardinalityAggregation.PARSER.apply(p, t), CARDINALITY);
+    PARSER.declareObject(AggregationContainer::setChildren, (p, t) -> ChildrenAggregation.PARSER.apply(p, t), CHILDREN);
+    PARSER.declareObject(AggregationContainer::setComposite, (p, t) -> CompositeAggregation.PARSER.apply(p, t), COMPOSITE);
+    PARSER.declareObject(AggregationContainer::setCumulativeSum, (p, t) -> CumulativeSumAggregation.PARSER.apply(p, t), CUMULATIVE_SUM);
+    PARSER.declareObject(AggregationContainer::setCumulativeCardinality, (p, t) -> CumulativeCardinalityAggregation.PARSER.apply(p, t), CUMULATIVE_CARDINALITY);
+    PARSER.declareObject(AggregationContainer::setDateHistogram, (p, t) -> DateHistogramAggregation.PARSER.apply(p, t), DATE_HISTOGRAM);
+    PARSER.declareObject(AggregationContainer::setAutoDateHistogram, (p, t) -> AutoDateHistogramAggregation.PARSER.apply(p, t), AUTO_DATE_HISTOGRAM);
+    PARSER.declareObject(AggregationContainer::setDateRange, (p, t) -> DateRangeAggregation.PARSER.apply(p, t), DATE_RANGE);
+    PARSER.declareObject(AggregationContainer::setDerivative, (p, t) -> DerivativeAggregation.PARSER.apply(p, t), DERIVATIVE);
+    PARSER.declareObject(AggregationContainer::setExtendedStats, (p, t) -> ExtendedStatsAggregation.PARSER.apply(p, t), EXTENDED_STATS);
+    PARSER.declareObject(AggregationContainer::setExtendedStatsBucket, (p, t) -> ExtendedStatsBucketAggregation.PARSER.apply(p, t), EXTENDED_STATS_BUCKET);
+    PARSER.declareObject(AggregationContainer::setFilter, (p, t) -> FilterAggregation.PARSER.apply(p, t), FILTER);
+    PARSER.declareObject(AggregationContainer::setFilters, (p, t) -> FiltersAggregation.PARSER.apply(p, t), FILTERS);
+    PARSER.declareObject(AggregationContainer::setGeoBounds, (p, t) -> GeoBoundsAggregation.PARSER.apply(p, t), GEO_BOUNDS);
+    PARSER.declareObject(AggregationContainer::setGeoCentroid, (p, t) -> GeoCentroidAggregation.PARSER.apply(p, t), GEO_CENTROID);
+    PARSER.declareObject(AggregationContainer::setGeoDistance, (p, t) -> GeoDistanceAggregation.PARSER.apply(p, t), GEO_DISTANCE);
+    PARSER.declareObject(AggregationContainer::setGeohashGrid, (p, t) -> GeoHashGridAggregation.PARSER.apply(p, t), GEOHASH_GRID);
+    PARSER.declareObject(AggregationContainer::setGeotileGrid, (p, t) -> GeoTileGridAggregation.PARSER.apply(p, t), GEOTILE_GRID);
+    PARSER.declareObject(AggregationContainer::setGlobal, (p, t) -> GlobalAggregation.PARSER.apply(p, t), GLOBAL);
+    PARSER.declareObject(AggregationContainer::setHistogram, (p, t) -> HistogramAggregation.PARSER.apply(p, t), HISTOGRAM);
+    PARSER.declareObject(AggregationContainer::setIpRange, (p, t) -> IpRangeAggregation.PARSER.apply(p, t), IP_RANGE);
+    PARSER.declareObject(AggregationContainer::setMatrixStats, (p, t) -> MatrixStatsAggregation.PARSER.apply(p, t), MATRIX_STATS);
+    PARSER.declareObject(AggregationContainer::setMax, (p, t) -> MaxAggregation.PARSER.apply(p, t), MAX);
+    PARSER.declareObject(AggregationContainer::setMaxBucket, (p, t) -> MaxBucketAggregation.PARSER.apply(p, t), MAX_BUCKET);
+    PARSER.declareObject(AggregationContainer::setMeta, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);
+    PARSER.declareObject(AggregationContainer::setMin, (p, t) -> MinAggregation.PARSER.apply(p, t), MIN);
+    PARSER.declareObject(AggregationContainer::setMinBucket, (p, t) -> MinBucketAggregation.PARSER.apply(p, t), MIN_BUCKET);
+    PARSER.declareObject(AggregationContainer::setMissing, (p, t) -> MissingAggregation.PARSER.apply(p, t), MISSING);
+    PARSER.declareObject(AggregationContainer::setMovingAvg, (p, t) -> MovingAverageAggregation.PARSER.apply(p, t), MOVING_AVG);
+    PARSER.declareObject(AggregationContainer::setMovingFn, (p, t) -> MovingFunctionAggregation.PARSER.apply(p, t), MOVING_FN);
+    PARSER.declareObject(AggregationContainer::setNested, (p, t) -> NestedAggregation.PARSER.apply(p, t), NESTED);
+    PARSER.declareObject(AggregationContainer::setParent, (p, t) -> ParentAggregation.PARSER.apply(p, t), PARENT);
+    PARSER.declareObject(AggregationContainer::setPercentileRanks, (p, t) -> PercentileRanksAggregation.PARSER.apply(p, t), PERCENTILE_RANKS);
+    PARSER.declareObject(AggregationContainer::setPercentiles, (p, t) -> PercentilesAggregation.PARSER.apply(p, t), PERCENTILES);
+    PARSER.declareObject(AggregationContainer::setPercentilesBucket, (p, t) -> PercentilesBucketAggregation.PARSER.apply(p, t), PERCENTILES_BUCKET);
+    PARSER.declareObject(AggregationContainer::setRange, (p, t) -> RangeAggregation.PARSER.apply(p, t), RANGE);
+    PARSER.declareObject(AggregationContainer::setRareTerms, (p, t) -> RareTermsAggregation.PARSER.apply(p, t), RARE_TERMS);
+    PARSER.declareObject(AggregationContainer::setReverseNested, (p, t) -> ReverseNestedAggregation.PARSER.apply(p, t), REVERSE_NESTED);
+    PARSER.declareObject(AggregationContainer::setSampler, (p, t) -> SamplerAggregation.PARSER.apply(p, t), SAMPLER);
+    PARSER.declareObject(AggregationContainer::setScriptedMetric, (p, t) -> ScriptedMetricAggregation.PARSER.apply(p, t), SCRIPTED_METRIC);
+    PARSER.declareObject(AggregationContainer::setSerialDiff, (p, t) -> SerialDifferencingAggregation.PARSER.apply(p, t), SERIAL_DIFF);
+    PARSER.declareObject(AggregationContainer::setSignificantTerms, (p, t) -> SignificantTermsAggregation.PARSER.apply(p, t), SIGNIFICANT_TERMS);
+    PARSER.declareObject(AggregationContainer::setSignificantText, (p, t) -> SignificantTextAggregation.PARSER.apply(p, t), SIGNIFICANT_TEXT);
+    PARSER.declareObject(AggregationContainer::setStats, (p, t) -> StatsAggregation.PARSER.apply(p, t), STATS);
+    PARSER.declareObject(AggregationContainer::setStatsBucket, (p, t) -> StatsBucketAggregation.PARSER.apply(p, t), STATS_BUCKET);
+    PARSER.declareObject(AggregationContainer::setSum, (p, t) -> SumAggregation.PARSER.apply(p, t), SUM);
+    PARSER.declareObject(AggregationContainer::setSumBucket, (p, t) -> SumBucketAggregation.PARSER.apply(p, t), SUM_BUCKET);
+    PARSER.declareObject(AggregationContainer::setTerms, (p, t) -> TermsAggregation.PARSER.apply(p, t), TERMS);
+    PARSER.declareObject(AggregationContainer::setTopHits, (p, t) -> TopHitsAggregation.PARSER.apply(p, t), TOP_HITS);
+    PARSER.declareObject(AggregationContainer::setValueCount, (p, t) -> ValueCountAggregation.PARSER.apply(p, t), VALUE_COUNT);
+    PARSER.declareObject(AggregationContainer::setWeightedAvg, (p, t) -> WeightedAverageAggregation.PARSER.apply(p, t), WEIGHTED_AVG);
+    PARSER.declareObject(AggregationContainer::setMedianAbsoluteDeviation, (p, t) -> MedianAbsoluteDeviationAggregation.PARSER.apply(p, t), MEDIAN_ABSOLUTE_DEVIATION);
   }
 
 }

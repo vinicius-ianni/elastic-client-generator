@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.modules.indices.fielddata.string.*;
 
 public class StringFielddata  implements XContentable<StringFielddata> {
@@ -22,6 +22,7 @@ public class StringFielddata  implements XContentable<StringFielddata> {
   public StringFielddata setFormat(StringFielddataFormat val) { this._format = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class StringFielddata  implements XContentable<StringFielddata> {
     new ConstructingObjectParser<>(StringFielddata.class.getName(), false, args -> new StringFielddata());
 
   static {
-    PARSER.declareObject(StringFielddata::setFormat, (p, t) -> StringFielddataFormat.PARSER.apply(p, null), FORMAT);
+    PARSER.declareObject(StringFielddata::setFormat, (p, t) -> StringFielddataFormat.PARSER.apply(p), FORMAT);
   }
 
 }

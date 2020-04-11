@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.sort.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 
@@ -53,6 +53,7 @@ public class Sort  implements XContentable<Sort> {
   public Sort setSortKey(Field val) { this._sortKey = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -67,12 +68,12 @@ public class Sort  implements XContentable<Sort> {
     new ConstructingObjectParser<>(Sort.class.getName(), false, args -> new Sort());
 
   static {
-    PARSER.declareObject(Sort::setMissing, (p, t) -> Object.PARSER.apply(p, null), MISSING);
-    PARSER.declareObject(Sort::setMode, (p, t) -> SortMode.PARSER.apply(p, null), MODE);
-    PARSER.declareObject(Sort::setNumericType, (p, t) -> NumericType.PARSER.apply(p, null), NUMERIC_TYPE);
-    PARSER.declareObject(Sort::setNested, (p, t) -> NestedSort.PARSER.apply(p, null), NESTED);
-    PARSER.declareObject(Sort::setOrder, (p, t) -> SortOrder.PARSER.apply(p, null), ORDER);
-    PARSER.declareField(Sort::setSortKey, (p, t) -> Field.createFrom(p), SORT_KEY);
+    PARSER.declareObject(Sort::setMissing, (p, t) -> p.objectText(), MISSING);
+    PARSER.declareObject(Sort::setMode, (p, t) -> SortMode.PARSER.apply(p), MODE);
+    PARSER.declareObject(Sort::setNumericType, (p, t) -> NumericType.PARSER.apply(p), NUMERIC_TYPE);
+    PARSER.declareObject(Sort::setNested, (p, t) -> NestedSort.PARSER.apply(p, t), NESTED);
+    PARSER.declareObject(Sort::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER);
+    PARSER.declareObject(Sort::setSortKey, (p, t) -> Field.createFrom(p), SORT_KEY);
   }
 
 }

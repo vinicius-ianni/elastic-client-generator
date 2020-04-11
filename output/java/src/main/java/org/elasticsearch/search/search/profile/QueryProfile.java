@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.search.profile.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class QueryProfile  implements XContentable<QueryProfile> {
   public QueryProfile setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,8 +62,8 @@ public class QueryProfile  implements XContentable<QueryProfile> {
     new ConstructingObjectParser<>(QueryProfile.class.getName(), false, args -> new QueryProfile());
 
   static {
-    PARSER.declareObject(QueryProfile::setBreakdown, (p, t) -> QueryBreakdown.PARSER.apply(p, null), BREAKDOWN);
-    PARSER.declareObjectArray(QueryProfile::setChildren, (p, t) -> QueryProfile.PARSER.apply(p), CHILDREN);
+    PARSER.declareObject(QueryProfile::setBreakdown, (p, t) -> QueryBreakdown.PARSER.apply(p, t), BREAKDOWN);
+    PARSER.declareObjectArray(QueryProfile::setChildren, (p, t) -> QueryProfile.PARSER.apply(p, t), CHILDREN);
     PARSER.declareString(QueryProfile::setDescription, DESCRIPTION);
     PARSER.declareLong(QueryProfile::setTimeInNanos, TIME_IN_NANOS);
     PARSER.declareString(QueryProfile::setType, TYPE);

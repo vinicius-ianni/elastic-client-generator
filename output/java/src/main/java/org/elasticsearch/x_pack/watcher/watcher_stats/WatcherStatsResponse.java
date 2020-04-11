@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.watcher_stats.*;
 
 public class WatcherStatsResponse  implements XContentable<WatcherStatsResponse> {
@@ -34,6 +34,7 @@ public class WatcherStatsResponse  implements XContentable<WatcherStatsResponse>
   public WatcherStatsResponse setStats(List<WatcherNodeStats> val) { this._stats = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,7 +51,7 @@ public class WatcherStatsResponse  implements XContentable<WatcherStatsResponse>
   static {
     PARSER.declareString(WatcherStatsResponse::setClusterName, CLUSTER_NAME);
     PARSER.declareBoolean(WatcherStatsResponse::setManuallyStopped, MANUALLY_STOPPED);
-    PARSER.declareObjectArray(WatcherStatsResponse::setStats, (p, t) -> WatcherNodeStats.PARSER.apply(p), STATS);
+    PARSER.declareObjectArray(WatcherStatsResponse::setStats, (p, t) -> WatcherNodeStats.PARSER.apply(p, t), STATS);
   }
 
 }

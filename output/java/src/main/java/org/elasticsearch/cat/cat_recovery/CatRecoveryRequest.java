@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -59,6 +59,7 @@ public class CatRecoveryRequest  implements XContentable<CatRecoveryRequest> {
   public CatRecoveryRequest setVerbose(Boolean val) { this._verbose = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -73,11 +74,11 @@ public class CatRecoveryRequest  implements XContentable<CatRecoveryRequest> {
     new ConstructingObjectParser<>(CatRecoveryRequest.class.getName(), false, args -> new CatRecoveryRequest());
 
   static {
-    PARSER.declareObject(CatRecoveryRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p, null), BYTES);
+    PARSER.declareObject(CatRecoveryRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
     PARSER.declareString(CatRecoveryRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatRecoveryRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatRecoveryRequest::setHelp, HELP);
-    PARSER.declareObject(CatRecoveryRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
+    PARSER.declareObject(CatRecoveryRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareStringArray(CatRecoveryRequest::setSortByColumns, SORT_BY_COLUMNS);
     PARSER.declareBoolean(CatRecoveryRequest::setVerbose, VERBOSE);
   }

@@ -2,6 +2,7 @@
 package org.elasticsearch.cluster.cluster_allocation_explain;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public enum StoreCopy implements XContentable<StoreCopy> {
       case "STALE": return StoreCopy.Stale;
       case "UNKNOWN": return StoreCopy.Unknown;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, StoreCopy.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, StoreCopy.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.sql.query_sql.*;
 
 public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
@@ -40,6 +40,7 @@ public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
   public QuerySqlResponse setValues(List<List<SqlValue>> val) { this._values = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,10 +55,10 @@ public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
     new ConstructingObjectParser<>(QuerySqlResponse.class.getName(), false, args -> new QuerySqlResponse());
 
   static {
-    PARSER.declareObjectArray(QuerySqlResponse::setColumns, (p, t) -> SqlColumn.PARSER.apply(p), COLUMNS);
+    PARSER.declareObjectArray(QuerySqlResponse::setColumns, (p, t) -> SqlColumn.PARSER.apply(p, t), COLUMNS);
     PARSER.declareString(QuerySqlResponse::setCursor, CURSOR);
-    PARSER.declareObjectArray(QuerySqlResponse::setRows, (p, t) -> List<SqlValue>.PARSER.apply(p), ROWS);
-    PARSER.declareObjectArray(QuerySqlResponse::setValues, (p, t) -> List<SqlValue>.PARSER.apply(p), VALUES);
+    PARSER.declareObjectArray(QuerySqlResponse::setRows, (p, t) -> null /* TODO List<SqlValue> */, ROWS);
+    PARSER.declareObjectArray(QuerySqlResponse::setValues, (p, t) -> null /* TODO List<SqlValue> */, VALUES);
   }
 
 }

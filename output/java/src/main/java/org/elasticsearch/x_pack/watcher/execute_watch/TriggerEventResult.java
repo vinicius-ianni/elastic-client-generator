@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.trigger.*;
 import org.elasticsearch.internal.*;
 
@@ -35,6 +35,7 @@ public class TriggerEventResult  implements XContentable<TriggerEventResult> {
   public TriggerEventResult setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class TriggerEventResult  implements XContentable<TriggerEventResult> {
     new ConstructingObjectParser<>(TriggerEventResult.class.getName(), false, args -> new TriggerEventResult());
 
   static {
-    PARSER.declareObject(TriggerEventResult::setManual, (p, t) -> TriggerEventContainer.PARSER.apply(p, null), MANUAL);
-    PARSER.declareDate(TriggerEventResult::setTriggeredTime, (p, t) -> Date.createFrom(p), TRIGGERED_TIME);
+    PARSER.declareObject(TriggerEventResult::setManual, (p, t) -> TriggerEventContainer.PARSER.apply(p, t), MANUAL);
+    PARSER.declareObject(TriggerEventResult::setTriggeredTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TRIGGERED_TIME);
     PARSER.declareString(TriggerEventResult::setType, TYPE);
   }
 

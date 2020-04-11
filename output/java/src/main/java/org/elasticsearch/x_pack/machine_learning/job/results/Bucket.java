@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.results.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -84,6 +84,7 @@ public class Bucket  implements XContentable<Bucket> {
   public Bucket setTimestamp(Date val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -99,16 +100,16 @@ public class Bucket  implements XContentable<Bucket> {
 
   static {
     PARSER.declareDouble(Bucket::setAnomalyScore, ANOMALY_SCORE);
-    PARSER.declareObjectArray(Bucket::setBucketInfluencers, (p, t) -> BucketInfluencer.PARSER.apply(p), BUCKET_INFLUENCERS);
-    PARSER.declareObject(Bucket::setBucketSpan, (p, t) -> Time.PARSER.apply(p, null), BUCKET_SPAN);
+    PARSER.declareObjectArray(Bucket::setBucketInfluencers, (p, t) -> BucketInfluencer.PARSER.apply(p, t), BUCKET_INFLUENCERS);
+    PARSER.declareObject(Bucket::setBucketSpan, (p, t) -> Time.PARSER.apply(p, t), BUCKET_SPAN);
     PARSER.declareLong(Bucket::setEventCount, EVENT_COUNT);
     PARSER.declareDouble(Bucket::setInitialAnomalyScore, INITIAL_ANOMALY_SCORE);
     PARSER.declareBoolean(Bucket::setIsInterim, IS_INTERIM);
     PARSER.declareString(Bucket::setJobId, JOB_ID);
-    PARSER.declareObjectArray(Bucket::setPartitionScores, (p, t) -> PartitionScore.PARSER.apply(p), PARTITION_SCORES);
+    PARSER.declareObjectArray(Bucket::setPartitionScores, (p, t) -> PartitionScore.PARSER.apply(p, t), PARTITION_SCORES);
     PARSER.declareDouble(Bucket::setProcessingTimeMs, PROCESSING_TIME_MS);
     PARSER.declareString(Bucket::setResultType, RESULT_TYPE);
-    PARSER.declareDate(Bucket::setTimestamp, (p, t) -> Date.createFrom(p), TIMESTAMP);
+    PARSER.declareObject(Bucket::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
   }
 
 }

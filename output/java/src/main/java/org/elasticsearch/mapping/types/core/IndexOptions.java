@@ -2,6 +2,7 @@
 package org.elasticsearch.mapping.types.core;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum IndexOptions implements XContentable<IndexOptions> {
       case "positions": return IndexOptions.Positions;
       case "offsets": return IndexOptions.Offsets;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, IndexOptions.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, IndexOptions.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

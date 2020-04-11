@@ -2,6 +2,7 @@
 package org.elasticsearch.common_options.geo;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum GeoShapeRelation implements XContentable<GeoShapeRelation> {
       case "within": return GeoShapeRelation.Within;
       case "contains": return GeoShapeRelation.Contains;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, GeoShapeRelation.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, GeoShapeRelation.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

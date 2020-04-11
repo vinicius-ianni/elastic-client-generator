@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.full_text.intervals.*;
 import org.elasticsearch.internal.*;
 
@@ -35,6 +35,7 @@ public class IntervalsAllOf  implements XContentable<IntervalsAllOf> {
   public IntervalsAllOf setOrdered(Boolean val) { this._ordered = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,8 +50,8 @@ public class IntervalsAllOf  implements XContentable<IntervalsAllOf> {
     new ConstructingObjectParser<>(IntervalsAllOf.class.getName(), false, args -> new IntervalsAllOf());
 
   static {
-    PARSER.declareObjectArray(IntervalsAllOf::setIntervals, (p, t) -> IntervalsContainer.PARSER.apply(p), INTERVALS);
-    PARSER.declareInteger(IntervalsAllOf::setMaxGaps, MAX_GAPS);
+    PARSER.declareObjectArray(IntervalsAllOf::setIntervals, (p, t) -> IntervalsContainer.PARSER.apply(p, t), INTERVALS);
+    PARSER.declareInt(IntervalsAllOf::setMaxGaps, MAX_GAPS);
     PARSER.declareBoolean(IntervalsAllOf::setOrdered, ORDERED);
   }
 

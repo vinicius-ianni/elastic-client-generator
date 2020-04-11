@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.plugins.kuromoji.*;
 import org.elasticsearch.internal.*;
 
@@ -53,6 +53,7 @@ public class KuromojiTokenizer  implements XContentable<KuromojiTokenizer> {
   public KuromojiTokenizer setUserDictionaryRules(List<String> val) { this._userDictionaryRules = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -68,8 +69,8 @@ public class KuromojiTokenizer  implements XContentable<KuromojiTokenizer> {
 
   static {
     PARSER.declareBoolean(KuromojiTokenizer::setDiscardPunctuation, DISCARD_PUNCTUATION);
-    PARSER.declareObject(KuromojiTokenizer::setMode, (p, t) -> KuromojiTokenizationMode.PARSER.apply(p, null), MODE);
-    PARSER.declareInteger(KuromojiTokenizer::setNbestCost, NBEST_COST);
+    PARSER.declareObject(KuromojiTokenizer::setMode, (p, t) -> KuromojiTokenizationMode.PARSER.apply(p), MODE);
+    PARSER.declareInt(KuromojiTokenizer::setNbestCost, NBEST_COST);
     PARSER.declareString(KuromojiTokenizer::setNbestExamples, NBEST_EXAMPLES);
     PARSER.declareString(KuromojiTokenizer::setUserDictionary, USER_DICTIONARY);
     PARSER.declareStringArray(KuromojiTokenizer::setUserDictionaryRules, USER_DICTIONARY_RULES);

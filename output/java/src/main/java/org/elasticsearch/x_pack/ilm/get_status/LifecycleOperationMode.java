@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.ilm.get_status;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public enum LifecycleOperationMode implements XContentable<LifecycleOperationMod
       case "STOPPING": return LifecycleOperationMode.Stopping;
       case "STOPPED": return LifecycleOperationMode.Stopped;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, LifecycleOperationMode.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, LifecycleOperationMode.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.search.search.sort.*;
 
@@ -47,6 +47,7 @@ public class CompositeAggregationSource  implements XContentable<CompositeAggreg
   public CompositeAggregationSource setSourceType(String val) { this._sourceType = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,10 +62,10 @@ public class CompositeAggregationSource  implements XContentable<CompositeAggreg
     new ConstructingObjectParser<>(CompositeAggregationSource.class.getName(), false, args -> new CompositeAggregationSource());
 
   static {
-    PARSER.declareField(CompositeAggregationSource::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(CompositeAggregationSource::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareBoolean(CompositeAggregationSource::setMissingBucket, MISSING_BUCKET);
     PARSER.declareString(CompositeAggregationSource::setName, NAME);
-    PARSER.declareObject(CompositeAggregationSource::setOrder, (p, t) -> SortOrder.PARSER.apply(p, null), ORDER);
+    PARSER.declareObject(CompositeAggregationSource::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER);
     PARSER.declareString(CompositeAggregationSource::setSourceType, SOURCE_TYPE);
   }
 

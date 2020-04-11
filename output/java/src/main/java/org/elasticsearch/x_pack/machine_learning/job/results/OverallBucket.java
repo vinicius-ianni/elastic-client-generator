@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.results.*;
 
@@ -53,6 +53,7 @@ public class OverallBucket  implements XContentable<OverallBucket> {
   public OverallBucket setTimestamp(Date val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -69,10 +70,10 @@ public class OverallBucket  implements XContentable<OverallBucket> {
   static {
     PARSER.declareLong(OverallBucket::setBucketSpan, BUCKET_SPAN);
     PARSER.declareBoolean(OverallBucket::setIsInterim, IS_INTERIM);
-    PARSER.declareObjectArray(OverallBucket::setJobs, (p, t) -> OverallBucketJobInfo.PARSER.apply(p), JOBS);
+    PARSER.declareObjectArray(OverallBucket::setJobs, (p, t) -> OverallBucketJobInfo.PARSER.apply(p, t), JOBS);
     PARSER.declareDouble(OverallBucket::setOverallScore, OVERALL_SCORE);
     PARSER.declareString(OverallBucket::setResultType, RESULT_TYPE);
-    PARSER.declareDate(OverallBucket::setTimestamp, (p, t) -> Date.createFrom(p), TIMESTAMP);
+    PARSER.declareObject(OverallBucket::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
   }
 
 }

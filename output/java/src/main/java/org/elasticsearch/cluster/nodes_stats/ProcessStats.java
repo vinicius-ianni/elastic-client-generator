@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_stats.*;
 import org.elasticsearch.internal.*;
 
@@ -41,6 +41,7 @@ public class ProcessStats  implements XContentable<ProcessStats> {
   public ProcessStats setTimestamp(Long val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,9 +56,9 @@ public class ProcessStats  implements XContentable<ProcessStats> {
     new ConstructingObjectParser<>(ProcessStats.class.getName(), false, args -> new ProcessStats());
 
   static {
-    PARSER.declareObject(ProcessStats::setCpu, (p, t) -> CpuStats.PARSER.apply(p, null), CPU);
-    PARSER.declareObject(ProcessStats::setMem, (p, t) -> MemoryStats.PARSER.apply(p, null), MEM);
-    PARSER.declareInteger(ProcessStats::setOpenFileDescriptors, OPEN_FILE_DESCRIPTORS);
+    PARSER.declareObject(ProcessStats::setCpu, (p, t) -> CpuStats.PARSER.apply(p, t), CPU);
+    PARSER.declareObject(ProcessStats::setMem, (p, t) -> MemoryStats.PARSER.apply(p, t), MEM);
+    PARSER.declareInt(ProcessStats::setOpenFileDescriptors, OPEN_FILE_DESCRIPTORS);
     PARSER.declareLong(ProcessStats::setTimestamp, TIMESTAMP);
   }
 

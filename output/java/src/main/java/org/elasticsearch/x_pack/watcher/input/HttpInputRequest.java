@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.input.*;
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
@@ -96,6 +96,7 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
   public HttpInputRequest setUrl(String val) { this._url = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -110,18 +111,18 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
     new ConstructingObjectParser<>(HttpInputRequest.class.getName(), false, args -> new HttpInputRequest());
 
   static {
-    PARSER.declareObject(HttpInputRequest::setAuth, (p, t) -> HttpInputAuthentication.PARSER.apply(p, null), AUTH);
+    PARSER.declareObject(HttpInputRequest::setAuth, (p, t) -> HttpInputAuthentication.PARSER.apply(p, t), AUTH);
     PARSER.declareString(HttpInputRequest::setBody, BODY);
-    PARSER.declareObject(HttpInputRequest::setConnectionTimeout, (p, t) -> Time.PARSER.apply(p, null), CONNECTION_TIMEOUT);
-    PARSER.declareObject(HttpInputRequest::setHeaders, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), HEADERS);;
+    PARSER.declareObject(HttpInputRequest::setConnectionTimeout, (p, t) -> Time.PARSER.apply(p, t), CONNECTION_TIMEOUT);
+    PARSER.declareObject(HttpInputRequest::setHeaders, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), HEADERS);
     PARSER.declareString(HttpInputRequest::setHost, HOST);
-    PARSER.declareObject(HttpInputRequest::setMethod, (p, t) -> HttpInputMethod.PARSER.apply(p, null), METHOD);
-    PARSER.declareObject(HttpInputRequest::setParams, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), PARAMS);;
+    PARSER.declareObject(HttpInputRequest::setMethod, (p, t) -> HttpInputMethod.PARSER.apply(p), METHOD);
+    PARSER.declareObject(HttpInputRequest::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), PARAMS);
     PARSER.declareString(HttpInputRequest::setPath, PATH);
-    PARSER.declareInteger(HttpInputRequest::setPort, PORT);
-    PARSER.declareObject(HttpInputRequest::setProxy, (p, t) -> HttpInputProxy.PARSER.apply(p, null), PROXY);
-    PARSER.declareObject(HttpInputRequest::setReadTimeout, (p, t) -> Time.PARSER.apply(p, null), READ_TIMEOUT);
-    PARSER.declareObject(HttpInputRequest::setScheme, (p, t) -> ConnectionScheme.PARSER.apply(p, null), SCHEME);
+    PARSER.declareInt(HttpInputRequest::setPort, PORT);
+    PARSER.declareObject(HttpInputRequest::setProxy, (p, t) -> HttpInputProxy.PARSER.apply(p, t), PROXY);
+    PARSER.declareObject(HttpInputRequest::setReadTimeout, (p, t) -> Time.PARSER.apply(p, t), READ_TIMEOUT);
+    PARSER.declareObject(HttpInputRequest::setScheme, (p, t) -> ConnectionScheme.PARSER.apply(p), SCHEME);
     PARSER.declareString(HttpInputRequest::setUrl, URL);
   }
 

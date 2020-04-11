@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class TermVectorFilter  implements XContentable<TermVectorFilter> {
@@ -58,6 +58,7 @@ public class TermVectorFilter  implements XContentable<TermVectorFilter> {
   public TermVectorFilter setMinWordLength(Integer val) { this._minWordLength = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -72,13 +73,13 @@ public class TermVectorFilter  implements XContentable<TermVectorFilter> {
     new ConstructingObjectParser<>(TermVectorFilter.class.getName(), false, args -> new TermVectorFilter());
 
   static {
-    PARSER.declareInteger(TermVectorFilter::setMaxDocFreq, MAX_DOC_FREQ);
-    PARSER.declareInteger(TermVectorFilter::setMaxNumTerms, MAX_NUM_TERMS);
-    PARSER.declareInteger(TermVectorFilter::setMaxTermFreq, MAX_TERM_FREQ);
-    PARSER.declareInteger(TermVectorFilter::setMaxWordLength, MAX_WORD_LENGTH);
-    PARSER.declareInteger(TermVectorFilter::setMinDocFreq, MIN_DOC_FREQ);
-    PARSER.declareInteger(TermVectorFilter::setMinTermFreq, MIN_TERM_FREQ);
-    PARSER.declareInteger(TermVectorFilter::setMinWordLength, MIN_WORD_LENGTH);
+    PARSER.declareInt(TermVectorFilter::setMaxDocFreq, MAX_DOC_FREQ);
+    PARSER.declareInt(TermVectorFilter::setMaxNumTerms, MAX_NUM_TERMS);
+    PARSER.declareInt(TermVectorFilter::setMaxTermFreq, MAX_TERM_FREQ);
+    PARSER.declareInt(TermVectorFilter::setMaxWordLength, MAX_WORD_LENGTH);
+    PARSER.declareInt(TermVectorFilter::setMinDocFreq, MIN_DOC_FREQ);
+    PARSER.declareInt(TermVectorFilter::setMinTermFreq, MIN_TERM_FREQ);
+    PARSER.declareInt(TermVectorFilter::setMinWordLength, MIN_WORD_LENGTH);
   }
 
 }

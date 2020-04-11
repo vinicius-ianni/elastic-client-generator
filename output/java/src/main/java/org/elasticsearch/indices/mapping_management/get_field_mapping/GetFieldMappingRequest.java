@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 
 public class GetFieldMappingRequest  implements XContentable<GetFieldMappingRequest> {
@@ -52,6 +52,7 @@ public class GetFieldMappingRequest  implements XContentable<GetFieldMappingRequ
   public GetFieldMappingRequest setLocal(Boolean val) { this._local = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -67,7 +68,7 @@ public class GetFieldMappingRequest  implements XContentable<GetFieldMappingRequ
 
   static {
     PARSER.declareBoolean(GetFieldMappingRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(GetFieldMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
+    PARSER.declareObject(GetFieldMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
     PARSER.declareBoolean(GetFieldMappingRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(GetFieldMappingRequest::setIncludeDefaults, INCLUDE_DEFAULTS);
     PARSER.declareBoolean(GetFieldMappingRequest::setIncludeTypeName, INCLUDE_TYPE_NAME);

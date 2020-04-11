@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 
@@ -47,6 +47,7 @@ public class FieldCapabilitiesRequest  implements XContentable<FieldCapabilities
   public FieldCapabilitiesRequest setIncludeUnmapped(Boolean val) { this._includeUnmapped = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,8 +63,8 @@ public class FieldCapabilitiesRequest  implements XContentable<FieldCapabilities
 
   static {
     PARSER.declareBoolean(FieldCapabilitiesRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(FieldCapabilitiesRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p, null), EXPAND_WILDCARDS);
-    PARSER.declareObjectArray(FieldCapabilitiesRequest::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
+    PARSER.declareObject(FieldCapabilitiesRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareObjectArray(FieldCapabilitiesRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(FieldCapabilitiesRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(FieldCapabilitiesRequest::setIncludeUnmapped, INCLUDE_UNMAPPED);
   }

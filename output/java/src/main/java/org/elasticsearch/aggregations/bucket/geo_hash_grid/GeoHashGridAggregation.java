@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.aggregations.bucket.geo_hash_grid.*;
 import org.elasticsearch.internal.*;
@@ -42,6 +42,7 @@ public class GeoHashGridAggregation  implements XContentable<GeoHashGridAggregat
   public GeoHashGridAggregation setSize(Integer val) { this._size = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,10 +57,10 @@ public class GeoHashGridAggregation  implements XContentable<GeoHashGridAggregat
     new ConstructingObjectParser<>(GeoHashGridAggregation.class.getName(), false, args -> new GeoHashGridAggregation());
 
   static {
-    PARSER.declareField(GeoHashGridAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObject(GeoHashGridAggregation::setPrecision, (p, t) -> GeoHashPrecision.PARSER.apply(p, null), PRECISION);
-    PARSER.declareInteger(GeoHashGridAggregation::setShardSize, SHARD_SIZE);
-    PARSER.declareInteger(GeoHashGridAggregation::setSize, SIZE);
+    PARSER.declareObject(GeoHashGridAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObject(GeoHashGridAggregation::setPrecision, (p, t) -> GeoHashPrecision.PARSER.apply(p), PRECISION);
+    PARSER.declareInt(GeoHashGridAggregation::setShardSize, SHARD_SIZE);
+    PARSER.declareInt(GeoHashGridAggregation::setSize, SIZE);
   }
 
 }

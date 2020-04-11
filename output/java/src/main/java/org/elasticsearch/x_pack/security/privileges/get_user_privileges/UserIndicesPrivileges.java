@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.security.privileges.get_user_privileges.*;
 
 public class UserIndicesPrivileges  implements XContentable<UserIndicesPrivileges> {
@@ -40,6 +40,7 @@ public class UserIndicesPrivileges  implements XContentable<UserIndicesPrivilege
   public UserIndicesPrivileges setQuery(QueryUserPrivileges val) { this._query = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,10 +55,10 @@ public class UserIndicesPrivileges  implements XContentable<UserIndicesPrivilege
     new ConstructingObjectParser<>(UserIndicesPrivileges.class.getName(), false, args -> new UserIndicesPrivileges());
 
   static {
-    PARSER.declareObject(UserIndicesPrivileges::setFieldSecurity, (p, t) -> FieldSecuritySettings.PARSER.apply(p, null), FIELD_SECURITY);
+    PARSER.declareObject(UserIndicesPrivileges::setFieldSecurity, (p, t) -> FieldSecuritySettings.PARSER.apply(p, t), FIELD_SECURITY);
     PARSER.declareStringArray(UserIndicesPrivileges::setNames, NAMES);
     PARSER.declareStringArray(UserIndicesPrivileges::setPrivileges, PRIVILEGES);
-    PARSER.declareObject(UserIndicesPrivileges::setQuery, (p, t) -> QueryUserPrivileges.PARSER.apply(p, null), QUERY);
+    PARSER.declareObject(UserIndicesPrivileges::setQuery, (p, t) -> QueryUserPrivileges.PARSER.apply(p, t), QUERY);
   }
 
 }

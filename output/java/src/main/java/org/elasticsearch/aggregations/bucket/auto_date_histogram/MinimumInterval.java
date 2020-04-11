@@ -2,6 +2,7 @@
 package org.elasticsearch.aggregations.bucket.auto_date_histogram;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -39,7 +40,7 @@ public enum MinimumInterval implements XContentable<MinimumInterval> {
       case "month": return MinimumInterval.Month;
       case "year": return MinimumInterval.Year;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, MinimumInterval.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, MinimumInterval.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

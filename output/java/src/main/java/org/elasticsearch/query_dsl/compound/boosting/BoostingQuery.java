@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
@@ -35,6 +35,7 @@ public class BoostingQuery  implements XContentable<BoostingQuery> {
   public BoostingQuery setPositive(QueryContainer val) { this._positive = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,8 +51,8 @@ public class BoostingQuery  implements XContentable<BoostingQuery> {
 
   static {
     PARSER.declareDouble(BoostingQuery::setNegativeBoost, NEGATIVE_BOOST);
-    PARSER.declareObject(BoostingQuery::setNegative, (p, t) -> QueryContainer.PARSER.apply(p, null), NEGATIVE);
-    PARSER.declareObject(BoostingQuery::setPositive, (p, t) -> QueryContainer.PARSER.apply(p, null), POSITIVE);
+    PARSER.declareObject(BoostingQuery::setNegative, (p, t) -> QueryContainer.PARSER.apply(p, t), NEGATIVE);
+    PARSER.declareObject(BoostingQuery::setPositive, (p, t) -> QueryContainer.PARSER.apply(p, t), POSITIVE);
   }
 
 }

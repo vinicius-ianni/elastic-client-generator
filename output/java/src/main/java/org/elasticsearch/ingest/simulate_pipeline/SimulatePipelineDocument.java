@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.id.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 
@@ -35,6 +35,7 @@ public class SimulatePipelineDocument  implements XContentable<SimulatePipelineD
   public SimulatePipelineDocument setSource(Object val) { this._source = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class SimulatePipelineDocument  implements XContentable<SimulatePipelineD
     new ConstructingObjectParser<>(SimulatePipelineDocument.class.getName(), false, args -> new SimulatePipelineDocument());
 
   static {
-    PARSER.declareId(SimulatePipelineDocument::setId, (p, t) -> Id.createFrom(p), ID);
-    PARSER.declareIndexName(SimulatePipelineDocument::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareObject(SimulatePipelineDocument::setSource, (p, t) -> Object.PARSER.apply(p, null), SOURCE);
+    PARSER.declareObject(SimulatePipelineDocument::setId, (p, t) -> Id.createFrom(p), ID);
+    PARSER.declareObject(SimulatePipelineDocument::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(SimulatePipelineDocument::setSource, (p, t) -> p.objectText(), SOURCE);
   }
 
 }

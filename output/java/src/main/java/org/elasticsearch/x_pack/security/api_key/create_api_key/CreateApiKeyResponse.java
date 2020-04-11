@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class CreateApiKeyResponse  implements XContentable<CreateApiKeyResponse> {
@@ -40,6 +40,7 @@ public class CreateApiKeyResponse  implements XContentable<CreateApiKeyResponse>
   public CreateApiKeyResponse setApiKey(String val) { this._apiKey = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,7 +57,7 @@ public class CreateApiKeyResponse  implements XContentable<CreateApiKeyResponse>
   static {
     PARSER.declareString(CreateApiKeyResponse::setId, ID);
     PARSER.declareString(CreateApiKeyResponse::setName, NAME);
-    PARSER.declareDate(CreateApiKeyResponse::setExpiration, (p, t) -> Date.createFrom(p), EXPIRATION);
+    PARSER.declareObject(CreateApiKeyResponse::setExpiration, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXPIRATION);
     PARSER.declareString(CreateApiKeyResponse::setApiKey, API_KEY);
   }
 

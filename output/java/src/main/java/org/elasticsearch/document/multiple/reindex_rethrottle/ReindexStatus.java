@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.document.multiple.*;
 
@@ -83,6 +83,7 @@ public class ReindexStatus  implements XContentable<ReindexStatus> {
   public ReindexStatus setVersionConflicts(Long val) { this._versionConflicts = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -102,7 +103,7 @@ public class ReindexStatus  implements XContentable<ReindexStatus> {
     PARSER.declareLong(ReindexStatus::setDeleted, DELETED);
     PARSER.declareLong(ReindexStatus::setNoops, NOOPS);
     PARSER.declareFloat(ReindexStatus::setRequestsPerSecond, REQUESTS_PER_SECOND);
-    PARSER.declareObject(ReindexStatus::setRetries, (p, t) -> Retries.PARSER.apply(p, null), RETRIES);
+    PARSER.declareObject(ReindexStatus::setRetries, (p, t) -> Retries.PARSER.apply(p, t), RETRIES);
     PARSER.declareLong(ReindexStatus::setThrottledMillis, THROTTLED_MILLIS);
     PARSER.declareLong(ReindexStatus::setThrottledUntilMillis, THROTTLED_UNTIL_MILLIS);
     PARSER.declareLong(ReindexStatus::setTotal, TOTAL);

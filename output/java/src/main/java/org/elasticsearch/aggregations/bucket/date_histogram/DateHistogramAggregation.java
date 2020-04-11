@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.bucket.histogram.*;
 import org.elasticsearch.common_options.date_math.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
@@ -100,6 +100,7 @@ public class DateHistogramAggregation  implements XContentable<DateHistogramAggr
   public DateHistogramAggregation setTimeZone(String val) { this._timeZone = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -114,18 +115,19 @@ public class DateHistogramAggregation  implements XContentable<DateHistogramAggr
     new ConstructingObjectParser<>(DateHistogramAggregation.class.getName(), false, args -> new DateHistogramAggregation());
 
   static {
-    PARSER.declareObject(DateHistogramAggregation::setExtendedBounds, (p, t) -> ExtendedBounds<DateMath>.PARSER.apply(p, null), EXTENDED_BOUNDS);
-    PARSER.declareField(DateHistogramAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    ExtendedBounds<DateMath> _extendedBounds = new ExtendedBounds<DateMath>();
+    PARSER.declareObject(DateHistogramAggregation::setExtendedBounds, (p, t) -> _extendedBounds.PARSER.apply(p, t), EXTENDED_BOUNDS);
+    PARSER.declareObject(DateHistogramAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareString(DateHistogramAggregation::setFormat, FORMAT);
-    PARSER.declareObject(DateHistogramAggregation::setInterval, (p, t) -> null, INTERVAL);
-    PARSER.declareObject(DateHistogramAggregation::setCalendarInterval, (p, t) -> null, CALENDAR_INTERVAL);
-    PARSER.declareObject(DateHistogramAggregation::setFixedInterval, (p, t) -> null, FIXED_INTERVAL);
-    PARSER.declareInteger(DateHistogramAggregation::setMinDocCount, MIN_DOC_COUNT);
-    PARSER.declareDate(DateHistogramAggregation::setMissing, (p, t) -> Date.createFrom(p), MISSING);
+    PARSER.declareObject(DateHistogramAggregation::setInterval, (p, t) ->  new Either<DateInterval, Time>() /* TODO UnionOf */, INTERVAL);
+    PARSER.declareObject(DateHistogramAggregation::setCalendarInterval, (p, t) ->  new Either<DateInterval, Time>() /* TODO UnionOf */, CALENDAR_INTERVAL);
+    PARSER.declareObject(DateHistogramAggregation::setFixedInterval, (p, t) ->  new Either<DateInterval, Time>() /* TODO UnionOf */, FIXED_INTERVAL);
+    PARSER.declareInt(DateHistogramAggregation::setMinDocCount, MIN_DOC_COUNT);
+    PARSER.declareObject(DateHistogramAggregation::setMissing, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), MISSING);
     PARSER.declareString(DateHistogramAggregation::setOffset, OFFSET);
-    PARSER.declareObject(DateHistogramAggregation::setOrder, (p, t) -> HistogramOrder.PARSER.apply(p, null), ORDER);
-    PARSER.declareObject(DateHistogramAggregation::setParams, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);;
-    PARSER.declareObject(DateHistogramAggregation::setScript, (p, t) -> Script.PARSER.apply(p, null), SCRIPT);
+    PARSER.declareObject(DateHistogramAggregation::setOrder, (p, t) -> HistogramOrder.PARSER.apply(p, t), ORDER);
+    PARSER.declareObject(DateHistogramAggregation::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);
+    PARSER.declareObject(DateHistogramAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareString(DateHistogramAggregation::setTimeZone, TIME_ZONE);
   }
 

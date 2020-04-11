@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.indices.alias_management.alias.actions.*;
 import org.elasticsearch.common_options.time_unit.*;
 
@@ -35,6 +35,7 @@ public class BulkAliasRequest  implements XContentable<BulkAliasRequest> {
   public BulkAliasRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -49,9 +50,9 @@ public class BulkAliasRequest  implements XContentable<BulkAliasRequest> {
     new ConstructingObjectParser<>(BulkAliasRequest.class.getName(), false, args -> new BulkAliasRequest());
 
   static {
-    PARSER.declareObjectArray(BulkAliasRequest::setActions, (p, t) -> AliasAction.PARSER.apply(p), ACTIONS);
-    PARSER.declareObject(BulkAliasRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, null), MASTER_TIMEOUT);
-    PARSER.declareObject(BulkAliasRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObjectArray(BulkAliasRequest::setActions, (p, t) -> AliasAction.PARSER.apply(p, t), ACTIONS);
+    PARSER.declareObject(BulkAliasRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
+    PARSER.declareObject(BulkAliasRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

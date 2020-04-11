@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.cluster_allocation_explain.*;
 import org.elasticsearch.internal.*;
 
@@ -65,6 +65,7 @@ public class NodeAllocationExplanation  implements XContentable<NodeAllocationEx
   public NodeAllocationExplanation setWeightRanking(Integer val) { this._weightRanking = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -79,14 +80,14 @@ public class NodeAllocationExplanation  implements XContentable<NodeAllocationEx
     new ConstructingObjectParser<>(NodeAllocationExplanation.class.getName(), false, args -> new NodeAllocationExplanation());
 
   static {
-    PARSER.declareObjectArray(NodeAllocationExplanation::setDeciders, (p, t) -> AllocationDecision.PARSER.apply(p), DECIDERS);
-    PARSER.declareObject(NodeAllocationExplanation::setNodeAttributes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), NODE_ATTRIBUTES);;
-    PARSER.declareObject(NodeAllocationExplanation::setNodeDecision, (p, t) -> Decision.PARSER.apply(p, null), NODE_DECISION);
+    PARSER.declareObjectArray(NodeAllocationExplanation::setDeciders, (p, t) -> AllocationDecision.PARSER.apply(p, t), DECIDERS);
+    PARSER.declareObject(NodeAllocationExplanation::setNodeAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), NODE_ATTRIBUTES);
+    PARSER.declareObject(NodeAllocationExplanation::setNodeDecision, (p, t) -> Decision.PARSER.apply(p), NODE_DECISION);
     PARSER.declareString(NodeAllocationExplanation::setNodeId, NODE_ID);
     PARSER.declareString(NodeAllocationExplanation::setNodeName, NODE_NAME);
-    PARSER.declareObject(NodeAllocationExplanation::setStore, (p, t) -> AllocationStore.PARSER.apply(p, null), STORE);
+    PARSER.declareObject(NodeAllocationExplanation::setStore, (p, t) -> AllocationStore.PARSER.apply(p, t), STORE);
     PARSER.declareString(NodeAllocationExplanation::setTransportAddress, TRANSPORT_ADDRESS);
-    PARSER.declareInteger(NodeAllocationExplanation::setWeightRanking, WEIGHT_RANKING);
+    PARSER.declareInt(NodeAllocationExplanation::setWeightRanking, WEIGHT_RANKING);
   }
 
 }

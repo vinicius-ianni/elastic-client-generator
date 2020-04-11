@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.info.x_pack_usage.*;
 import org.elasticsearch.internal.*;
 
@@ -47,6 +47,7 @@ public class JobForecastStatistics  implements XContentable<JobForecastStatistic
   public JobForecastStatistics setTotal(Long val) { this._total = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -61,10 +62,10 @@ public class JobForecastStatistics  implements XContentable<JobForecastStatistic
     new ConstructingObjectParser<>(JobForecastStatistics.class.getName(), false, args -> new JobForecastStatistics());
 
   static {
-    PARSER.declareObject(JobForecastStatistics::setMemoryBytes, (p, t) -> JobStatistics.PARSER.apply(p, null), MEMORY_BYTES);
-    PARSER.declareObject(JobForecastStatistics::setProcessingTimeMs, (p, t) -> JobStatistics.PARSER.apply(p, null), PROCESSING_TIME_MS);
-    PARSER.declareObject(JobForecastStatistics::setRecords, (p, t) -> JobStatistics.PARSER.apply(p, null), RECORDS);
-    PARSER.declareObject(JobForecastStatistics::setStatus, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> Long.PARSER.apply(pp, null)), STATUS);;
+    PARSER.declareObject(JobForecastStatistics::setMemoryBytes, (p, t) -> JobStatistics.PARSER.apply(p, t), MEMORY_BYTES);
+    PARSER.declareObject(JobForecastStatistics::setProcessingTimeMs, (p, t) -> JobStatistics.PARSER.apply(p, t), PROCESSING_TIME_MS);
+    PARSER.declareObject(JobForecastStatistics::setRecords, (p, t) -> JobStatistics.PARSER.apply(p, t), RECORDS);
+    PARSER.declareObject(JobForecastStatistics::setStatus, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.longValue()), STATUS);
     PARSER.declareLong(JobForecastStatistics::setTotal, TOTAL);
   }
 

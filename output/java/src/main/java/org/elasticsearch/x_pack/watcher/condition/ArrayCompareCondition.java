@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.condition.*;
 
 public class ArrayCompareCondition  implements XContentable<ArrayCompareCondition> {
@@ -46,6 +46,7 @@ public class ArrayCompareCondition  implements XContentable<ArrayCompareConditio
   public ArrayCompareCondition setValue(Object val) { this._value = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -63,8 +64,8 @@ public class ArrayCompareCondition  implements XContentable<ArrayCompareConditio
     PARSER.declareString(ArrayCompareCondition::setArrayPath, ARRAY_PATH);
     PARSER.declareString(ArrayCompareCondition::setComparison, COMPARISON);
     PARSER.declareString(ArrayCompareCondition::setPath, PATH);
-    PARSER.declareObject(ArrayCompareCondition::setQuantifier, (p, t) -> Quantifier.PARSER.apply(p, null), QUANTIFIER);
-    PARSER.declareObject(ArrayCompareCondition::setValue, (p, t) -> Object.PARSER.apply(p, null), VALUE);
+    PARSER.declareObject(ArrayCompareCondition::setQuantifier, (p, t) -> Quantifier.PARSER.apply(p), QUANTIFIER);
+    PARSER.declareObject(ArrayCompareCondition::setValue, (p, t) -> p.objectText(), VALUE);
   }
 
 }

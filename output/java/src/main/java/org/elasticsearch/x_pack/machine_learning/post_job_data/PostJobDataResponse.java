@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class PostJobDataResponse  implements XContentable<PostJobDataResponse> {
@@ -106,6 +106,7 @@ public class PostJobDataResponse  implements XContentable<PostJobDataResponse> {
   public PostJobDataResponse setSparseBucketCount(Long val) { this._sparseBucketCount = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -121,15 +122,15 @@ public class PostJobDataResponse  implements XContentable<PostJobDataResponse> {
 
   static {
     PARSER.declareLong(PostJobDataResponse::setBucketCount, BUCKET_COUNT);
-    PARSER.declareDate(PostJobDataResponse::setEarliestRecordTimestamp, (p, t) -> Date.createFrom(p), EARLIEST_RECORD_TIMESTAMP);
+    PARSER.declareObject(PostJobDataResponse::setEarliestRecordTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EARLIEST_RECORD_TIMESTAMP);
     PARSER.declareLong(PostJobDataResponse::setEmptyBucketCount, EMPTY_BUCKET_COUNT);
     PARSER.declareLong(PostJobDataResponse::setInputBytes, INPUT_BYTES);
     PARSER.declareLong(PostJobDataResponse::setInputFieldCount, INPUT_FIELD_COUNT);
     PARSER.declareLong(PostJobDataResponse::setInputRecordCount, INPUT_RECORD_COUNT);
     PARSER.declareLong(PostJobDataResponse::setInvalidDateCount, INVALID_DATE_COUNT);
     PARSER.declareString(PostJobDataResponse::setJobId, JOB_ID);
-    PARSER.declareDate(PostJobDataResponse::setLastDataTime, (p, t) -> Date.createFrom(p), LAST_DATA_TIME);
-    PARSER.declareDate(PostJobDataResponse::setLatestRecordTimestamp, (p, t) -> Date.createFrom(p), LATEST_RECORD_TIMESTAMP);
+    PARSER.declareObject(PostJobDataResponse::setLastDataTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LAST_DATA_TIME);
+    PARSER.declareObject(PostJobDataResponse::setLatestRecordTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LATEST_RECORD_TIMESTAMP);
     PARSER.declareLong(PostJobDataResponse::setMissingFieldCount, MISSING_FIELD_COUNT);
     PARSER.declareLong(PostJobDataResponse::setOutOfOrderTimestampCount, OUT_OF_ORDER_TIMESTAMP_COUNT);
     PARSER.declareLong(PostJobDataResponse::setProcessedFieldCount, PROCESSED_FIELD_COUNT);

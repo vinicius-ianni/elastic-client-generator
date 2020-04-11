@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class Segment  implements XContentable<Segment> {
@@ -76,6 +76,7 @@ public class Segment  implements XContentable<Segment> {
   public Segment setVersion(String val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -90,11 +91,11 @@ public class Segment  implements XContentable<Segment> {
     new ConstructingObjectParser<>(Segment.class.getName(), false, args -> new Segment());
 
   static {
-    PARSER.declareObject(Segment::setAttributes, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), ATTRIBUTES);;
+    PARSER.declareObject(Segment::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), ATTRIBUTES);
     PARSER.declareBoolean(Segment::setCommitted, COMMITTED);
     PARSER.declareBoolean(Segment::setCompound, COMPOUND);
     PARSER.declareLong(Segment::setDeletedDocs, DELETED_DOCS);
-    PARSER.declareInteger(Segment::setGeneration, GENERATION);
+    PARSER.declareInt(Segment::setGeneration, GENERATION);
     PARSER.declareDouble(Segment::setMemoryInBytes, MEMORY_IN_BYTES);
     PARSER.declareBoolean(Segment::setSearch, SEARCH);
     PARSER.declareDouble(Segment::setSizeInBytes, SIZE_IN_BYTES);

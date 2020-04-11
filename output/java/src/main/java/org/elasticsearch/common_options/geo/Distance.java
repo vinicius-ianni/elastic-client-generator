@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_options.geo.*;
 
@@ -29,6 +29,7 @@ public class Distance  implements XContentable<Distance> {
   public Distance setUnit(DistanceUnit val) { this._unit = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -44,7 +45,7 @@ public class Distance  implements XContentable<Distance> {
 
   static {
     PARSER.declareDouble(Distance::setPrecision, PRECISION);
-    PARSER.declareObject(Distance::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p, null), UNIT);
+    PARSER.declareObject(Distance::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p), UNIT);
   }
 
 }

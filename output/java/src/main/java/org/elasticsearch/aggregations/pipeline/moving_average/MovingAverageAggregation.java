@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.aggregations.pipeline.moving_average.models.*;
 import org.elasticsearch.internal.*;
 
@@ -41,6 +41,7 @@ public class MovingAverageAggregation  implements XContentable<MovingAverageAggr
   public MovingAverageAggregation setWindow(Integer val) { this._window = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -56,9 +57,9 @@ public class MovingAverageAggregation  implements XContentable<MovingAverageAggr
 
   static {
     PARSER.declareBoolean(MovingAverageAggregation::setMinimize, MINIMIZE);
-    PARSER.declareObject(MovingAverageAggregation::setModel, (p, t) -> MovingAverageModel.PARSER.apply(p, null), MODEL);
-    PARSER.declareInteger(MovingAverageAggregation::setPredict, PREDICT);
-    PARSER.declareInteger(MovingAverageAggregation::setWindow, WINDOW);
+    PARSER.declareObject(MovingAverageAggregation::setModel, (p, t) -> MovingAverageModel.PARSER.apply(p, t), MODEL);
+    PARSER.declareInt(MovingAverageAggregation::setPredict, PREDICT);
+    PARSER.declareInt(MovingAverageAggregation::setWindow, WINDOW);
   }
 
 }

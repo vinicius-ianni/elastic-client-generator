@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.graph.explore.response.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.internal.*;
@@ -48,6 +48,7 @@ public class GraphExploreResponse  implements XContentable<GraphExploreResponse>
   public GraphExploreResponse setVertices(List<GraphVertex> val) { this._vertices = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -62,11 +63,11 @@ public class GraphExploreResponse  implements XContentable<GraphExploreResponse>
     new ConstructingObjectParser<>(GraphExploreResponse.class.getName(), false, args -> new GraphExploreResponse());
 
   static {
-    PARSER.declareObjectArray(GraphExploreResponse::setConnections, (p, t) -> GraphConnection.PARSER.apply(p), CONNECTIONS);
-    PARSER.declareObjectArray(GraphExploreResponse::setFailures, (p, t) -> ShardFailure.PARSER.apply(p), FAILURES);
+    PARSER.declareObjectArray(GraphExploreResponse::setConnections, (p, t) -> GraphConnection.PARSER.apply(p, t), CONNECTIONS);
+    PARSER.declareObjectArray(GraphExploreResponse::setFailures, (p, t) -> ShardFailure.PARSER.apply(p, t), FAILURES);
     PARSER.declareBoolean(GraphExploreResponse::setTimedOut, TIMED_OUT);
     PARSER.declareLong(GraphExploreResponse::setTook, TOOK);
-    PARSER.declareObjectArray(GraphExploreResponse::setVertices, (p, t) -> GraphVertex.PARSER.apply(p), VERTICES);
+    PARSER.declareObjectArray(GraphExploreResponse::setVertices, (p, t) -> GraphVertex.PARSER.apply(p, t), VERTICES);
   }
 
 }

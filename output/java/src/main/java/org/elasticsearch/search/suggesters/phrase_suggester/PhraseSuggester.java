@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.search.suggesters.phrase_suggester.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.search.suggesters.phrase_suggester.smoothing_model.*;
@@ -96,6 +96,7 @@ public class PhraseSuggester  implements XContentable<PhraseSuggester> {
   public PhraseSuggester setTokenLimit(Integer val) { this._tokenLimit = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -110,19 +111,19 @@ public class PhraseSuggester  implements XContentable<PhraseSuggester> {
     new ConstructingObjectParser<>(PhraseSuggester.class.getName(), false, args -> new PhraseSuggester());
 
   static {
-    PARSER.declareObject(PhraseSuggester::setCollate, (p, t) -> PhraseSuggestCollate.PARSER.apply(p, null), COLLATE);
+    PARSER.declareObject(PhraseSuggester::setCollate, (p, t) -> PhraseSuggestCollate.PARSER.apply(p, t), COLLATE);
     PARSER.declareDouble(PhraseSuggester::setConfidence, CONFIDENCE);
-    PARSER.declareObjectArray(PhraseSuggester::setDirectGenerator, (p, t) -> DirectGenerator.PARSER.apply(p), DIRECT_GENERATOR);
+    PARSER.declareObjectArray(PhraseSuggester::setDirectGenerator, (p, t) -> DirectGenerator.PARSER.apply(p, t), DIRECT_GENERATOR);
     PARSER.declareBoolean(PhraseSuggester::setForceUnigrams, FORCE_UNIGRAMS);
-    PARSER.declareInteger(PhraseSuggester::setGramSize, GRAM_SIZE);
-    PARSER.declareObject(PhraseSuggester::setHighlight, (p, t) -> PhraseSuggestHighlight.PARSER.apply(p, null), HIGHLIGHT);
+    PARSER.declareInt(PhraseSuggester::setGramSize, GRAM_SIZE);
+    PARSER.declareObject(PhraseSuggester::setHighlight, (p, t) -> PhraseSuggestHighlight.PARSER.apply(p, t), HIGHLIGHT);
     PARSER.declareDouble(PhraseSuggester::setMaxErrors, MAX_ERRORS);
     PARSER.declareDouble(PhraseSuggester::setRealWordErrorLikelihood, REAL_WORD_ERROR_LIKELIHOOD);
     PARSER.declareString(PhraseSuggester::setSeparator, SEPARATOR);
-    PARSER.declareInteger(PhraseSuggester::setShardSize, SHARD_SIZE);
-    PARSER.declareObject(PhraseSuggester::setSmoothing, (p, t) -> SmoothingModelContainer.PARSER.apply(p, null), SMOOTHING);
+    PARSER.declareInt(PhraseSuggester::setShardSize, SHARD_SIZE);
+    PARSER.declareObject(PhraseSuggester::setSmoothing, (p, t) -> SmoothingModelContainer.PARSER.apply(p, t), SMOOTHING);
     PARSER.declareString(PhraseSuggester::setText, TEXT);
-    PARSER.declareInteger(PhraseSuggester::setTokenLimit, TOKEN_LIMIT);
+    PARSER.declareInt(PhraseSuggester::setTokenLimit, TOKEN_LIMIT);
   }
 
 }

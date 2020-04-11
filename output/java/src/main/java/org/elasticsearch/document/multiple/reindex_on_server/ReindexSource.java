@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.indices.*;
 import org.elasticsearch.query_dsl.abstractions.container.*;
 import org.elasticsearch.document.multiple.reindex_on_server.*;
@@ -64,6 +64,7 @@ public class ReindexSource  implements XContentable<ReindexSource> {
   public ReindexSource setSource(List<Field> val) { this._source = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -78,13 +79,13 @@ public class ReindexSource  implements XContentable<ReindexSource> {
     new ConstructingObjectParser<>(ReindexSource.class.getName(), false, args -> new ReindexSource());
 
   static {
-    PARSER.declareIndices(ReindexSource::setIndex, (p, t) -> Indices.createFrom(p), INDEX);
-    PARSER.declareObject(ReindexSource::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, null), QUERY);
-    PARSER.declareObject(ReindexSource::setRemote, (p, t) -> RemoteSource.PARSER.apply(p, null), REMOTE);
-    PARSER.declareInteger(ReindexSource::setSize, SIZE);
-    PARSER.declareObject(ReindexSource::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, null), SLICE);
-    PARSER.declareObjectArray(ReindexSource::setSort, (p, t) -> Sort.PARSER.apply(p), SORT);
-    PARSER.declareObjectArray(ReindexSource::setSource, (p, t) -> Field.PARSER.apply(p), SOURCE);
+    PARSER.declareObject(ReindexSource::setIndex, (p, t) -> Indices.createFrom(p), INDEX);
+    PARSER.declareObject(ReindexSource::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
+    PARSER.declareObject(ReindexSource::setRemote, (p, t) -> RemoteSource.PARSER.apply(p, t), REMOTE);
+    PARSER.declareInt(ReindexSource::setSize, SIZE);
+    PARSER.declareObject(ReindexSource::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, t), SLICE);
+    PARSER.declareObjectArray(ReindexSource::setSort, (p, t) -> Sort.PARSER.apply(p, t), SORT);
+    PARSER.declareObjectArray(ReindexSource::setSource, (p, t) -> Field.createFrom(p), SOURCE);
   }
 
 }

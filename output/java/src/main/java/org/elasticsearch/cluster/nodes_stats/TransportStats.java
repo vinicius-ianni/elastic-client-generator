@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class TransportStats  implements XContentable<TransportStats> {
@@ -58,6 +58,7 @@ public class TransportStats  implements XContentable<TransportStats> {
   public TransportStats setTxSizeInBytes(Long val) { this._txSizeInBytes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -75,7 +76,7 @@ public class TransportStats  implements XContentable<TransportStats> {
     PARSER.declareLong(TransportStats::setRxCount, RX_COUNT);
     PARSER.declareString(TransportStats::setRxSize, RX_SIZE);
     PARSER.declareLong(TransportStats::setRxSizeInBytes, RX_SIZE_IN_BYTES);
-    PARSER.declareInteger(TransportStats::setServerOpen, SERVER_OPEN);
+    PARSER.declareInt(TransportStats::setServerOpen, SERVER_OPEN);
     PARSER.declareLong(TransportStats::setTxCount, TX_COUNT);
     PARSER.declareString(TransportStats::setTxSize, TX_SIZE);
     PARSER.declareLong(TransportStats::setTxSizeInBytes, TX_SIZE_IN_BYTES);

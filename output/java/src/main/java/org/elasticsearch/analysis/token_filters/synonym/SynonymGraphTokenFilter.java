@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.token_filters.synonym.*;
 
 public class SynonymGraphTokenFilter  implements XContentable<SynonymGraphTokenFilter> {
@@ -52,6 +52,7 @@ public class SynonymGraphTokenFilter  implements XContentable<SynonymGraphTokenF
   public SynonymGraphTokenFilter setTokenizer(String val) { this._tokenizer = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -67,7 +68,7 @@ public class SynonymGraphTokenFilter  implements XContentable<SynonymGraphTokenF
 
   static {
     PARSER.declareBoolean(SynonymGraphTokenFilter::setExpand, EXPAND);
-    PARSER.declareObject(SynonymGraphTokenFilter::setFormat, (p, t) -> SynonymFormat.PARSER.apply(p, null), FORMAT);
+    PARSER.declareObject(SynonymGraphTokenFilter::setFormat, (p, t) -> SynonymFormat.PARSER.apply(p), FORMAT);
     PARSER.declareBoolean(SynonymGraphTokenFilter::setLenient, LENIENT);
     PARSER.declareStringArray(SynonymGraphTokenFilter::setSynonyms, SYNONYMS);
     PARSER.declareString(SynonymGraphTokenFilter::setSynonymsPath, SYNONYMS_PATH);

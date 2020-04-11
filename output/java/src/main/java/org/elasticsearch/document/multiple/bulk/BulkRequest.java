@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.document.multiple.bulk.bulk_operation.*;
 import org.elasticsearch.common.*;
 import org.elasticsearch.common_abstractions.infer.join_field_routing.*;
@@ -80,6 +80,7 @@ public class BulkRequest  implements XContentable<BulkRequest> {
   public BulkRequest setWaitForActiveShards(String val) { this._waitForActiveShards = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -94,14 +95,14 @@ public class BulkRequest  implements XContentable<BulkRequest> {
     new ConstructingObjectParser<>(BulkRequest.class.getName(), false, args -> new BulkRequest());
 
   static {
-    PARSER.declareObjectArray(BulkRequest::setOperations, (p, t) -> BulkOperation.PARSER.apply(p), OPERATIONS);
+    PARSER.declareObjectArray(BulkRequest::setOperations, (p, t) -> BulkOperation.PARSER.apply(p, t), OPERATIONS);
     PARSER.declareString(BulkRequest::setPipeline, PIPELINE);
-    PARSER.declareObject(BulkRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p, null), REFRESH);
-    PARSER.declareRouting(BulkRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
+    PARSER.declareObject(BulkRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareObject(BulkRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(BulkRequest::setSourceEnabled, SOURCE_ENABLED);
-    PARSER.declareObjectArray(BulkRequest::setSourceExcludes, (p, t) -> Field.PARSER.apply(p), SOURCE_EXCLUDES);
-    PARSER.declareObjectArray(BulkRequest::setSourceIncludes, (p, t) -> Field.PARSER.apply(p), SOURCE_INCLUDES);
-    PARSER.declareObject(BulkRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObjectArray(BulkRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
+    PARSER.declareObjectArray(BulkRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
+    PARSER.declareObject(BulkRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareString(BulkRequest::setTypeQueryString, TYPE_QUERY_STRING);
     PARSER.declareString(BulkRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.task_management.get_task.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.task_management.list_tasks.*;
@@ -84,6 +84,7 @@ public class TaskInfo  implements XContentable<TaskInfo> {
   public TaskInfo setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -100,14 +101,14 @@ public class TaskInfo  implements XContentable<TaskInfo> {
   static {
     PARSER.declareString(TaskInfo::setAction, ACTION);
     PARSER.declareBoolean(TaskInfo::setCancellable, CANCELLABLE);
-    PARSER.declareObjectArray(TaskInfo::setChildren, (p, t) -> TaskInfo.PARSER.apply(p), CHILDREN);
+    PARSER.declareObjectArray(TaskInfo::setChildren, (p, t) -> TaskInfo.PARSER.apply(p, t), CHILDREN);
     PARSER.declareString(TaskInfo::setDescription, DESCRIPTION);
-    PARSER.declareObject(TaskInfo::setHeaders, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), HEADERS);;
+    PARSER.declareObject(TaskInfo::setHeaders, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), HEADERS);
     PARSER.declareLong(TaskInfo::setId, ID);
     PARSER.declareString(TaskInfo::setNode, NODE);
     PARSER.declareLong(TaskInfo::setRunningTimeInNanos, RUNNING_TIME_IN_NANOS);
     PARSER.declareLong(TaskInfo::setStartTimeInMillis, START_TIME_IN_MILLIS);
-    PARSER.declareObject(TaskInfo::setStatus, (p, t) -> TaskStatus.PARSER.apply(p, null), STATUS);
+    PARSER.declareObject(TaskInfo::setStatus, (p, t) -> TaskStatus.PARSER.apply(p, t), STATUS);
     PARSER.declareString(TaskInfo::setType, TYPE);
   }
 

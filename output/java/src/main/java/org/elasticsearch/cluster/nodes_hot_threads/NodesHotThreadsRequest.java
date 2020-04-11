@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_options.time_unit.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
@@ -54,6 +54,7 @@ public class NodesHotThreadsRequest  implements XContentable<NodesHotThreadsRequ
   public NodesHotThreadsRequest setTimeout(Time val) { this._timeout = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -69,11 +70,11 @@ public class NodesHotThreadsRequest  implements XContentable<NodesHotThreadsRequ
 
   static {
     PARSER.declareBoolean(NodesHotThreadsRequest::setIgnoreIdleThreads, IGNORE_IDLE_THREADS);
-    PARSER.declareObject(NodesHotThreadsRequest::setInterval, (p, t) -> Time.PARSER.apply(p, null), INTERVAL);
+    PARSER.declareObject(NodesHotThreadsRequest::setInterval, (p, t) -> Time.PARSER.apply(p, t), INTERVAL);
     PARSER.declareLong(NodesHotThreadsRequest::setSnapshots, SNAPSHOTS);
-    PARSER.declareObject(NodesHotThreadsRequest::setThreadType, (p, t) -> ThreadType.PARSER.apply(p, null), THREAD_TYPE);
+    PARSER.declareObject(NodesHotThreadsRequest::setThreadType, (p, t) -> ThreadType.PARSER.apply(p), THREAD_TYPE);
     PARSER.declareLong(NodesHotThreadsRequest::setThreads, THREADS);
-    PARSER.declareObject(NodesHotThreadsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, null), TIMEOUT);
+    PARSER.declareObject(NodesHotThreadsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }
 
 }

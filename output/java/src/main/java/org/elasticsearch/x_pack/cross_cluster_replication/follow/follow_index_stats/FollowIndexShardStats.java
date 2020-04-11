@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.cross_cluster_replication.follow.follow_index_stats.*;
 import org.elasticsearch.common.*;
@@ -192,6 +192,7 @@ public class FollowIndexShardStats  implements XContentable<FollowIndexShardStat
   public FollowIndexShardStats setFatalException(ErrorCause val) { this._fatalException = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -221,10 +222,10 @@ public class FollowIndexShardStats  implements XContentable<FollowIndexShardStat
     PARSER.declareLong(FollowIndexShardStats::setLeaderMaxSeqNo, LEADER_MAX_SEQ_NO);
     PARSER.declareLong(FollowIndexShardStats::setOperationsRead, OPERATIONS_READ);
     PARSER.declareLong(FollowIndexShardStats::setOperationsWritten, OPERATIONS_WRITTEN);
-    PARSER.declareInteger(FollowIndexShardStats::setOutstandingReadRequests, OUTSTANDING_READ_REQUESTS);
-    PARSER.declareInteger(FollowIndexShardStats::setOutstandingWriteRequests, OUTSTANDING_WRITE_REQUESTS);
+    PARSER.declareInt(FollowIndexShardStats::setOutstandingReadRequests, OUTSTANDING_READ_REQUESTS);
+    PARSER.declareInt(FollowIndexShardStats::setOutstandingWriteRequests, OUTSTANDING_WRITE_REQUESTS);
     PARSER.declareString(FollowIndexShardStats::setRemoteCluster, REMOTE_CLUSTER);
-    PARSER.declareInteger(FollowIndexShardStats::setShardId, SHARD_ID);
+    PARSER.declareInt(FollowIndexShardStats::setShardId, SHARD_ID);
     PARSER.declareLong(FollowIndexShardStats::setSuccessfulReadRequests, SUCCESSFUL_READ_REQUESTS);
     PARSER.declareLong(FollowIndexShardStats::setSuccessfulWriteRequests, SUCCESSFUL_WRITE_REQUESTS);
     PARSER.declareLong(FollowIndexShardStats::setTotalReadRemoteExecTimeMillis, TOTAL_READ_REMOTE_EXEC_TIME_MILLIS);
@@ -232,9 +233,9 @@ public class FollowIndexShardStats  implements XContentable<FollowIndexShardStat
     PARSER.declareLong(FollowIndexShardStats::setTotalWriteTimeMillis, TOTAL_WRITE_TIME_MILLIS);
     PARSER.declareLong(FollowIndexShardStats::setWriteBufferOperationCount, WRITE_BUFFER_OPERATION_COUNT);
     PARSER.declareLong(FollowIndexShardStats::setWriteBufferSizeInBytes, WRITE_BUFFER_SIZE_IN_BYTES);
-    PARSER.declareObjectArray(FollowIndexShardStats::setReadExceptions, (p, t) -> FollowIndexReadException.PARSER.apply(p), READ_EXCEPTIONS);
+    PARSER.declareObjectArray(FollowIndexShardStats::setReadExceptions, (p, t) -> FollowIndexReadException.PARSER.apply(p, t), READ_EXCEPTIONS);
     PARSER.declareLong(FollowIndexShardStats::setTimeSinceLastReadMillis, TIME_SINCE_LAST_READ_MILLIS);
-    PARSER.declareObject(FollowIndexShardStats::setFatalException, (p, t) -> ErrorCause.PARSER.apply(p, null), FATAL_EXCEPTION);
+    PARSER.declareObject(FollowIndexShardStats::setFatalException, (p, t) -> ErrorCause.PARSER.apply(p, t), FATAL_EXCEPTION);
   }
 
 }

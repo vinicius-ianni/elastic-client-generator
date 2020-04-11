@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.abstractions.container.*;
 
 public class FiltersAggregation  implements XContentable<FiltersAggregation> {
@@ -34,6 +34,7 @@ public class FiltersAggregation  implements XContentable<FiltersAggregation> {
   public FiltersAggregation setOtherBucketKey(String val) { this._otherBucketKey = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,7 +49,7 @@ public class FiltersAggregation  implements XContentable<FiltersAggregation> {
     new ConstructingObjectParser<>(FiltersAggregation.class.getName(), false, args -> new FiltersAggregation());
 
   static {
-    PARSER.declareObject(FiltersAggregation::setFilters, (p, t) -> null, FILTERS);
+    PARSER.declareObject(FiltersAggregation::setFilters, (p, t) ->  new Either<NamedContainer<String, QueryContainer>, List<QueryContainer>>() /* TODO UnionOf */, FILTERS);
     PARSER.declareBoolean(FiltersAggregation::setOtherBucket, OTHER_BUCKET);
     PARSER.declareString(FiltersAggregation::setOtherBucketKey, OTHER_BUCKET_KEY);
   }

@@ -2,6 +2,7 @@
 package org.elasticsearch.common_options.date_math;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum DateMathOperation implements XContentable<DateMathOperation> {
       case "+": return DateMathOperation.Add;
       case "-": return DateMathOperation.Subtract;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, DateMathOperation.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, DateMathOperation.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

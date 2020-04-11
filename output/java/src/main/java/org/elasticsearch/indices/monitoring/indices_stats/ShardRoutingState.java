@@ -2,6 +2,7 @@
 package org.elasticsearch.indices.monitoring.indices_stats;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum ShardRoutingState implements XContentable<ShardRoutingState> {
       case "STARTED": return ShardRoutingState.Started;
       case "RELOCATING": return ShardRoutingState.Relocating;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, ShardRoutingState.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, ShardRoutingState.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

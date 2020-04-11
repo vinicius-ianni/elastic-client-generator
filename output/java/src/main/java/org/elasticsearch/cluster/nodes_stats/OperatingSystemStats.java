@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.cluster.nodes_stats.*;
 import org.elasticsearch.internal.*;
 
@@ -41,6 +41,7 @@ public class OperatingSystemStats  implements XContentable<OperatingSystemStats>
   public OperatingSystemStats setTimestamp(Long val) { this._timestamp = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -55,9 +56,9 @@ public class OperatingSystemStats  implements XContentable<OperatingSystemStats>
     new ConstructingObjectParser<>(OperatingSystemStats.class.getName(), false, args -> new OperatingSystemStats());
 
   static {
-    PARSER.declareObject(OperatingSystemStats::setCpu, (p, t) -> CpuStats.PARSER.apply(p, null), CPU);
-    PARSER.declareObject(OperatingSystemStats::setMem, (p, t) -> ExtendedMemoryStats.PARSER.apply(p, null), MEM);
-    PARSER.declareObject(OperatingSystemStats::setSwap, (p, t) -> MemoryStats.PARSER.apply(p, null), SWAP);
+    PARSER.declareObject(OperatingSystemStats::setCpu, (p, t) -> CpuStats.PARSER.apply(p, t), CPU);
+    PARSER.declareObject(OperatingSystemStats::setMem, (p, t) -> ExtendedMemoryStats.PARSER.apply(p, t), MEM);
+    PARSER.declareObject(OperatingSystemStats::setSwap, (p, t) -> MemoryStats.PARSER.apply(p, t), SWAP);
     PARSER.declareLong(OperatingSystemStats::setTimestamp, TIMESTAMP);
   }
 

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.query_dsl.full_text.intervals.*;
 
 public class IntervalsContainer  implements XContentable<IntervalsContainer> {
@@ -46,6 +46,7 @@ public class IntervalsContainer  implements XContentable<IntervalsContainer> {
   public IntervalsContainer setWildcard(IntervalsWildcard val) { this._wildcard = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,11 +61,11 @@ public class IntervalsContainer  implements XContentable<IntervalsContainer> {
     new ConstructingObjectParser<>(IntervalsContainer.class.getName(), false, args -> new IntervalsContainer());
 
   static {
-    PARSER.declareObject(IntervalsContainer::setAllOf, (p, t) -> IntervalsAllOf.PARSER.apply(p, null), ALL_OF);
-    PARSER.declareObject(IntervalsContainer::setAnyOf, (p, t) -> IntervalsAnyOf.PARSER.apply(p, null), ANY_OF);
-    PARSER.declareObject(IntervalsContainer::setMatch, (p, t) -> IntervalsMatch.PARSER.apply(p, null), MATCH);
-    PARSER.declareObject(IntervalsContainer::setPrefix, (p, t) -> IntervalsPrefix.PARSER.apply(p, null), PREFIX);
-    PARSER.declareObject(IntervalsContainer::setWildcard, (p, t) -> IntervalsWildcard.PARSER.apply(p, null), WILDCARD);
+    PARSER.declareObject(IntervalsContainer::setAllOf, (p, t) -> IntervalsAllOf.PARSER.apply(p, t), ALL_OF);
+    PARSER.declareObject(IntervalsContainer::setAnyOf, (p, t) -> IntervalsAnyOf.PARSER.apply(p, t), ANY_OF);
+    PARSER.declareObject(IntervalsContainer::setMatch, (p, t) -> IntervalsMatch.PARSER.apply(p, t), MATCH);
+    PARSER.declareObject(IntervalsContainer::setPrefix, (p, t) -> IntervalsPrefix.PARSER.apply(p, t), PREFIX);
+    PARSER.declareObject(IntervalsContainer::setWildcard, (p, t) -> IntervalsWildcard.PARSER.apply(p, t), WILDCARD);
   }
 
 }

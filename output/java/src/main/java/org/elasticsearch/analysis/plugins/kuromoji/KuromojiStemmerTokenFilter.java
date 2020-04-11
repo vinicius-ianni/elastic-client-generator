@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class KuromojiStemmerTokenFilter  implements XContentable<KuromojiStemmerTokenFilter> {
@@ -22,6 +22,7 @@ public class KuromojiStemmerTokenFilter  implements XContentable<KuromojiStemmer
   public KuromojiStemmerTokenFilter setMinimumLength(Integer val) { this._minimumLength = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class KuromojiStemmerTokenFilter  implements XContentable<KuromojiStemmer
     new ConstructingObjectParser<>(KuromojiStemmerTokenFilter.class.getName(), false, args -> new KuromojiStemmerTokenFilter());
 
   static {
-    PARSER.declareInteger(KuromojiStemmerTokenFilter::setMinimumLength, MINIMUM_LENGTH);
+    PARSER.declareInt(KuromojiStemmerTokenFilter::setMinimumLength, MINIMUM_LENGTH);
   }
 
 }

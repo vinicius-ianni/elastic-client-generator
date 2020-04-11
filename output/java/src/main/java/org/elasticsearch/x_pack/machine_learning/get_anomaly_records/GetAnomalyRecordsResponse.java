@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.x_pack.machine_learning.job.results.*;
 
@@ -29,6 +29,7 @@ public class GetAnomalyRecordsResponse  implements XContentable<GetAnomalyRecord
   public GetAnomalyRecordsResponse setRecords(List<AnomalyRecord> val) { this._records = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -44,7 +45,7 @@ public class GetAnomalyRecordsResponse  implements XContentable<GetAnomalyRecord
 
   static {
     PARSER.declareLong(GetAnomalyRecordsResponse::setCount, COUNT);
-    PARSER.declareObjectArray(GetAnomalyRecordsResponse::setRecords, (p, t) -> AnomalyRecord.PARSER.apply(p), RECORDS);
+    PARSER.declareObjectArray(GetAnomalyRecordsResponse::setRecords, (p, t) -> AnomalyRecord.PARSER.apply(p, t), RECORDS);
   }
 
 }

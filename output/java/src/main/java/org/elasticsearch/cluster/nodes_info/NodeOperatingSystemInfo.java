@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.cluster.nodes_info.*;
 
@@ -71,6 +71,7 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
   public NodeOperatingSystemInfo setVersion(String val) { this._version = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -86,13 +87,13 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
 
   static {
     PARSER.declareString(NodeOperatingSystemInfo::setArch, ARCH);
-    PARSER.declareInteger(NodeOperatingSystemInfo::setAvailableProcessors, AVAILABLE_PROCESSORS);
-    PARSER.declareObject(NodeOperatingSystemInfo::setCpu, (p, t) -> NodeInfoOscpu.PARSER.apply(p, null), CPU);
-    PARSER.declareObject(NodeOperatingSystemInfo::setMem, (p, t) -> NodeInfoMemory.PARSER.apply(p, null), MEM);
+    PARSER.declareInt(NodeOperatingSystemInfo::setAvailableProcessors, AVAILABLE_PROCESSORS);
+    PARSER.declareObject(NodeOperatingSystemInfo::setCpu, (p, t) -> NodeInfoOscpu.PARSER.apply(p, t), CPU);
+    PARSER.declareObject(NodeOperatingSystemInfo::setMem, (p, t) -> NodeInfoMemory.PARSER.apply(p, t), MEM);
     PARSER.declareString(NodeOperatingSystemInfo::setName, NAME);
     PARSER.declareString(NodeOperatingSystemInfo::setPrettyName, PRETTY_NAME);
-    PARSER.declareInteger(NodeOperatingSystemInfo::setRefreshIntervalInMillis, REFRESH_INTERVAL_IN_MILLIS);
-    PARSER.declareObject(NodeOperatingSystemInfo::setSwap, (p, t) -> NodeInfoMemory.PARSER.apply(p, null), SWAP);
+    PARSER.declareInt(NodeOperatingSystemInfo::setRefreshIntervalInMillis, REFRESH_INTERVAL_IN_MILLIS);
+    PARSER.declareObject(NodeOperatingSystemInfo::setSwap, (p, t) -> NodeInfoMemory.PARSER.apply(p, t), SWAP);
     PARSER.declareString(NodeOperatingSystemInfo::setVersion, VERSION);
   }
 

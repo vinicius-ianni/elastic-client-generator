@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
 import org.elasticsearch.common_options.time_unit.*;
@@ -96,6 +96,7 @@ public class LifecycleExplain  implements XContentable<LifecycleExplain> {
   public LifecycleExplain setAge(Time val) { this._age = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -111,18 +112,18 @@ public class LifecycleExplain  implements XContentable<LifecycleExplain> {
 
   static {
     PARSER.declareString(LifecycleExplain::setAction, ACTION);
-    PARSER.declareDate(LifecycleExplain::setActionTimeMillis, (p, t) -> Date.createFrom(p), ACTION_TIME_MILLIS);
+    PARSER.declareObject(LifecycleExplain::setActionTimeMillis, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), ACTION_TIME_MILLIS);
     PARSER.declareString(LifecycleExplain::setFailedStep, FAILED_STEP);
-    PARSER.declareIndexName(LifecycleExplain::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareDate(LifecycleExplain::setLifecycleDateMillis, (p, t) -> Date.createFrom(p), LIFECYCLE_DATE_MILLIS);
+    PARSER.declareObject(LifecycleExplain::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
+    PARSER.declareObject(LifecycleExplain::setLifecycleDateMillis, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LIFECYCLE_DATE_MILLIS);
     PARSER.declareBoolean(LifecycleExplain::setManaged, MANAGED);
     PARSER.declareString(LifecycleExplain::setPhase, PHASE);
-    PARSER.declareDate(LifecycleExplain::setPhaseTimeMillis, (p, t) -> Date.createFrom(p), PHASE_TIME_MILLIS);
+    PARSER.declareObject(LifecycleExplain::setPhaseTimeMillis, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), PHASE_TIME_MILLIS);
     PARSER.declareString(LifecycleExplain::setPolicy, POLICY);
     PARSER.declareString(LifecycleExplain::setStep, STEP);
-    PARSER.declareObject(LifecycleExplain::setStepInfo, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), STEP_INFO);;
-    PARSER.declareDate(LifecycleExplain::setStepTimeMillis, (p, t) -> Date.createFrom(p), STEP_TIME_MILLIS);
-    PARSER.declareObject(LifecycleExplain::setAge, (p, t) -> Time.PARSER.apply(p, null), AGE);
+    PARSER.declareObject(LifecycleExplain::setStepInfo, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), STEP_INFO);
+    PARSER.declareObject(LifecycleExplain::setStepTimeMillis, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), STEP_TIME_MILLIS);
+    PARSER.declareObject(LifecycleExplain::setAge, (p, t) -> Time.PARSER.apply(p, t), AGE);
   }
 
 }

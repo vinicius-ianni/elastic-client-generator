@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.modules.indices.fielddata.*;
 import org.elasticsearch.mapping.types.core.*;
@@ -103,6 +103,7 @@ public class TextProperty  implements XContentable<TextProperty> {
   public TextProperty setTermVector(TermVectorOption val) { this._termVector = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -121,16 +122,16 @@ public class TextProperty  implements XContentable<TextProperty> {
     PARSER.declareDouble(TextProperty::setBoost, BOOST);
     PARSER.declareBoolean(TextProperty::setEagerGlobalOrdinals, EAGER_GLOBAL_ORDINALS);
     PARSER.declareBoolean(TextProperty::setFielddata, FIELDDATA);
-    PARSER.declareObject(TextProperty::setFielddataFrequencyFilter, (p, t) -> FielddataFrequencyFilter.PARSER.apply(p, null), FIELDDATA_FREQUENCY_FILTER);
+    PARSER.declareObject(TextProperty::setFielddataFrequencyFilter, (p, t) -> FielddataFrequencyFilter.PARSER.apply(p, t), FIELDDATA_FREQUENCY_FILTER);
     PARSER.declareBoolean(TextProperty::setIndex, INDEX);
-    PARSER.declareObject(TextProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p, null), INDEX_OPTIONS);
+    PARSER.declareObject(TextProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
     PARSER.declareBoolean(TextProperty::setIndexPhrases, INDEX_PHRASES);
-    PARSER.declareObject(TextProperty::setIndexPrefixes, (p, t) -> TextIndexPrefixes.PARSER.apply(p, null), INDEX_PREFIXES);
+    PARSER.declareObject(TextProperty::setIndexPrefixes, (p, t) -> TextIndexPrefixes.PARSER.apply(p, t), INDEX_PREFIXES);
     PARSER.declareBoolean(TextProperty::setNorms, NORMS);
-    PARSER.declareInteger(TextProperty::setPositionIncrementGap, POSITION_INCREMENT_GAP);
+    PARSER.declareInt(TextProperty::setPositionIncrementGap, POSITION_INCREMENT_GAP);
     PARSER.declareString(TextProperty::setSearchAnalyzer, SEARCH_ANALYZER);
     PARSER.declareString(TextProperty::setSearchQuoteAnalyzer, SEARCH_QUOTE_ANALYZER);
-    PARSER.declareObject(TextProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p, null), TERM_VECTOR);
+    PARSER.declareObject(TextProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR);
   }
 
 }

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.modules.indices.fielddata.*;
 
 public class Fielddata  implements XContentable<Fielddata> {
@@ -28,6 +28,7 @@ public class Fielddata  implements XContentable<Fielddata> {
   public Fielddata setLoading(FielddataLoading val) { this._loading = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class Fielddata  implements XContentable<Fielddata> {
     new ConstructingObjectParser<>(Fielddata.class.getName(), false, args -> new Fielddata());
 
   static {
-    PARSER.declareObject(Fielddata::setFilter, (p, t) -> FielddataFilter.PARSER.apply(p, null), FILTER);
-    PARSER.declareObject(Fielddata::setLoading, (p, t) -> FielddataLoading.PARSER.apply(p, null), LOADING);
+    PARSER.declareObject(Fielddata::setFilter, (p, t) -> FielddataFilter.PARSER.apply(p, t), FILTER);
+    PARSER.declareObject(Fielddata::setLoading, (p, t) -> FielddataLoading.PARSER.apply(p), LOADING);
   }
 
 }

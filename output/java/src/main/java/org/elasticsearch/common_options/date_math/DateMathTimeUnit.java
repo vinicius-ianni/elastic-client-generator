@@ -2,6 +2,7 @@
 package org.elasticsearch.common_options.date_math;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -41,7 +42,7 @@ public enum DateMathTimeUnit implements XContentable<DateMathTimeUnit> {
       case "M": return DateMathTimeUnit.Months;
       case "y": return DateMathTimeUnit.Years;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, DateMathTimeUnit.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, DateMathTimeUnit.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

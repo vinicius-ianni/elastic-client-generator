@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.common_options.fuzziness.*;
@@ -130,6 +130,7 @@ public class MultiMatchQuery  implements XContentable<MultiMatchQuery> {
   public MultiMatchQuery setZeroTermsQuery(ZeroTermsQuery val) { this._zeroTermsQuery = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -147,21 +148,21 @@ public class MultiMatchQuery  implements XContentable<MultiMatchQuery> {
     PARSER.declareString(MultiMatchQuery::setAnalyzer, ANALYZER);
     PARSER.declareBoolean(MultiMatchQuery::setAutoGenerateSynonymsPhraseQuery, AUTO_GENERATE_SYNONYMS_PHRASE_QUERY);
     PARSER.declareDouble(MultiMatchQuery::setCutoffFrequency, CUTOFF_FREQUENCY);
-    PARSER.declareObjectArray(MultiMatchQuery::setFields, (p, t) -> Field.PARSER.apply(p), FIELDS);
-    PARSER.declareObject(MultiMatchQuery::setFuzziness, (p, t) -> Fuzziness.PARSER.apply(p, null), FUZZINESS);
-    PARSER.declareObject(MultiMatchQuery::setFuzzyRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, null), FUZZY_REWRITE);
+    PARSER.declareObjectArray(MultiMatchQuery::setFields, (p, t) -> Field.createFrom(p), FIELDS);
+    PARSER.declareObject(MultiMatchQuery::setFuzziness, (p, t) -> Fuzziness.PARSER.apply(p, t), FUZZINESS);
+    PARSER.declareObject(MultiMatchQuery::setFuzzyRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), FUZZY_REWRITE);
     PARSER.declareBoolean(MultiMatchQuery::setFuzzyTranspositions, FUZZY_TRANSPOSITIONS);
     PARSER.declareBoolean(MultiMatchQuery::setLenient, LENIENT);
-    PARSER.declareInteger(MultiMatchQuery::setMaxExpansions, MAX_EXPANSIONS);
-    PARSER.declareObject(MultiMatchQuery::setMinimumShouldMatch, (p, t) -> MinimumShouldMatch.PARSER.apply(p, null), MINIMUM_SHOULD_MATCH);
-    PARSER.declareObject(MultiMatchQuery::setOperator, (p, t) -> Operator.PARSER.apply(p, null), OPERATOR);
-    PARSER.declareInteger(MultiMatchQuery::setPrefixLength, PREFIX_LENGTH);
+    PARSER.declareInt(MultiMatchQuery::setMaxExpansions, MAX_EXPANSIONS);
+    PARSER.declareObject(MultiMatchQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
+    PARSER.declareObject(MultiMatchQuery::setOperator, (p, t) -> Operator.PARSER.apply(p), OPERATOR);
+    PARSER.declareInt(MultiMatchQuery::setPrefixLength, PREFIX_LENGTH);
     PARSER.declareString(MultiMatchQuery::setQuery, QUERY);
-    PARSER.declareInteger(MultiMatchQuery::setSlop, SLOP);
+    PARSER.declareInt(MultiMatchQuery::setSlop, SLOP);
     PARSER.declareDouble(MultiMatchQuery::setTieBreaker, TIE_BREAKER);
-    PARSER.declareObject(MultiMatchQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p, null), TYPE);
+    PARSER.declareObject(MultiMatchQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p), TYPE);
     PARSER.declareBoolean(MultiMatchQuery::setUseDisMax, USE_DIS_MAX);
-    PARSER.declareObject(MultiMatchQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p, null), ZERO_TERMS_QUERY);
+    PARSER.declareObject(MultiMatchQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY);
   }
 
 }

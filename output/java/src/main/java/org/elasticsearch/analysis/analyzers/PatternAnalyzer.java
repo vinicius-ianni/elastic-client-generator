@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.*;
 
 public class PatternAnalyzer  implements XContentable<PatternAnalyzer> {
@@ -40,6 +40,7 @@ public class PatternAnalyzer  implements XContentable<PatternAnalyzer> {
   public PatternAnalyzer setStopwords(StopWords val) { this._stopwords = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -57,7 +58,7 @@ public class PatternAnalyzer  implements XContentable<PatternAnalyzer> {
     PARSER.declareString(PatternAnalyzer::setFlags, FLAGS);
     PARSER.declareBoolean(PatternAnalyzer::setLowercase, LOWERCASE);
     PARSER.declareString(PatternAnalyzer::setPattern, PATTERN);
-    PARSER.declareObject(PatternAnalyzer::setStopwords, (p, t) -> StopWords.PARSER.apply(p, null), STOPWORDS);
+    PARSER.declareObject(PatternAnalyzer::setStopwords, (p, t) -> new StopWords().fromXContent(p), STOPWORDS);
   }
 
 }

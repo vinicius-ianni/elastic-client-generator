@@ -2,6 +2,7 @@
 package org.elasticsearch.x_pack.machine_learning.job.detectors;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -35,7 +36,7 @@ public enum AppliesTo implements XContentable<AppliesTo> {
       case "diff_from_typical": return AppliesTo.DiffFromTypical;
       case "time": return AppliesTo.Time;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, AppliesTo.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, AppliesTo.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

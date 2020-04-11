@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.types.core.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.mapping.*;
@@ -66,6 +66,7 @@ public class SearchAsYouTypeProperty  implements XContentable<SearchAsYouTypePro
   public SearchAsYouTypeProperty setTermVector(TermVectorOption val) { this._termVector = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -82,12 +83,12 @@ public class SearchAsYouTypeProperty  implements XContentable<SearchAsYouTypePro
   static {
     PARSER.declareString(SearchAsYouTypeProperty::setAnalyzer, ANALYZER);
     PARSER.declareBoolean(SearchAsYouTypeProperty::setIndex, INDEX);
-    PARSER.declareObject(SearchAsYouTypeProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p, null), INDEX_OPTIONS);
-    PARSER.declareInteger(SearchAsYouTypeProperty::setMaxShingleSize, MAX_SHINGLE_SIZE);
+    PARSER.declareObject(SearchAsYouTypeProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
+    PARSER.declareInt(SearchAsYouTypeProperty::setMaxShingleSize, MAX_SHINGLE_SIZE);
     PARSER.declareBoolean(SearchAsYouTypeProperty::setNorms, NORMS);
     PARSER.declareString(SearchAsYouTypeProperty::setSearchAnalyzer, SEARCH_ANALYZER);
     PARSER.declareString(SearchAsYouTypeProperty::setSearchQuoteAnalyzer, SEARCH_QUOTE_ANALYZER);
-    PARSER.declareObject(SearchAsYouTypeProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p, null), TERM_VECTOR);
+    PARSER.declareObject(SearchAsYouTypeProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR);
   }
 
 }

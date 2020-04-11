@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 
 
 public class GrokProcessorPatternsResponse  implements XContentable<GrokProcessorPatternsResponse> {
@@ -22,6 +22,7 @@ public class GrokProcessorPatternsResponse  implements XContentable<GrokProcesso
   public GrokProcessorPatternsResponse setPatterns(NamedContainer<String, String> val) { this._patterns = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class GrokProcessorPatternsResponse  implements XContentable<GrokProcesso
     new ConstructingObjectParser<>(GrokProcessorPatternsResponse.class.getName(), false, args -> new GrokProcessorPatternsResponse());
 
   static {
-    PARSER.declareObject(GrokProcessorPatternsResponse::setPatterns, (p, t) ->  new NamedContainer<>(n -> () -> n,pp -> String.PARSER.apply(pp, null)), PATTERNS);;
+    PARSER.declareObject(GrokProcessorPatternsResponse::setPatterns, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), PATTERNS);
   }
 
 }

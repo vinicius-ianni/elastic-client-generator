@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.mapping.*;
 import org.elasticsearch.common_abstractions.infer.property_name.*;
 import org.elasticsearch.mapping.types.*;
@@ -36,6 +36,7 @@ public class ObjectProperty  implements XContentable<ObjectProperty> {
   public ObjectProperty setProperties(NamedContainer<PropertyName, IProperty> val) { this._properties = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -50,9 +51,9 @@ public class ObjectProperty  implements XContentable<ObjectProperty> {
     new ConstructingObjectParser<>(ObjectProperty.class.getName(), false, args -> new ObjectProperty());
 
   static {
-    PARSER.declareObject(ObjectProperty::setDynamic, (p, t) -> null, DYNAMIC);
+    PARSER.declareObject(ObjectProperty::setDynamic, (p, t) ->  new Either<Boolean, DynamicMapping>() /* TODO UnionOf */, DYNAMIC);
     PARSER.declareBoolean(ObjectProperty::setEnabled, ENABLED);
-    PARSER.declareObject(ObjectProperty::setProperties, (p, t) ->  new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), PROPERTIES);;
+    PARSER.declareObject(ObjectProperty::setProperties, (p, t) -> new NamedContainer<>(n -> () -> new PropertyName(n),pp -> IProperty.PARSER.apply(pp, null)), PROPERTIES);
   }
 
 }

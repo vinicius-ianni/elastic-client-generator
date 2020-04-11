@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
 
@@ -143,6 +143,7 @@ public class ErrorCause  implements XContentable<ErrorCause> {
   public ErrorCause setType(String val) { this._type = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -157,25 +158,25 @@ public class ErrorCause  implements XContentable<ErrorCause> {
     new ConstructingObjectParser<>(ErrorCause.class.getName(), false, args -> new ErrorCause());
 
   static {
-    PARSER.declareObject(ErrorCause::setAdditionalProperties, (p, t) ->  new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ADDITIONAL_PROPERTIES);;
+    PARSER.declareObject(ErrorCause::setAdditionalProperties, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ADDITIONAL_PROPERTIES);
     PARSER.declareLong(ErrorCause::setBytesLimit, BYTES_LIMIT);
     PARSER.declareLong(ErrorCause::setBytesWanted, BYTES_WANTED);
-    PARSER.declareObject(ErrorCause::setCausedBy, (p, t) -> ErrorCause.PARSER.apply(p, null), CAUSED_BY);
-    PARSER.declareInteger(ErrorCause::setColumn, COLUMN);
-    PARSER.declareObjectArray(ErrorCause::setFailedShards, (p, t) -> ShardFailure.PARSER.apply(p), FAILED_SHARDS);
+    PARSER.declareObject(ErrorCause::setCausedBy, (p, t) -> ErrorCause.PARSER.apply(p, t), CAUSED_BY);
+    PARSER.declareInt(ErrorCause::setColumn, COLUMN);
+    PARSER.declareObjectArray(ErrorCause::setFailedShards, (p, t) -> ShardFailure.PARSER.apply(p, t), FAILED_SHARDS);
     PARSER.declareBoolean(ErrorCause::setGrouped, GROUPED);
     PARSER.declareString(ErrorCause::setIndex, INDEX);
     PARSER.declareString(ErrorCause::setIndexUUID, INDEX_U_U_I_D);
     PARSER.declareString(ErrorCause::setLanguage, LANGUAGE);
     PARSER.declareString(ErrorCause::setLicensedExpiredFeature, LICENSED_EXPIRED_FEATURE);
-    PARSER.declareInteger(ErrorCause::setLine, LINE);
+    PARSER.declareInt(ErrorCause::setLine, LINE);
     PARSER.declareString(ErrorCause::setPhase, PHASE);
     PARSER.declareString(ErrorCause::setReason, REASON);
     PARSER.declareStringArray(ErrorCause::setResourceId, RESOURCE_ID);
     PARSER.declareString(ErrorCause::setResourceType, RESOURCE_TYPE);
     PARSER.declareString(ErrorCause::setScript, SCRIPT);
     PARSER.declareStringArray(ErrorCause::setScriptStack, SCRIPT_STACK);
-    PARSER.declareInteger(ErrorCause::setShard, SHARD);
+    PARSER.declareInt(ErrorCause::setShard, SHARD);
     PARSER.declareString(ErrorCause::setStackTrace, STACK_TRACE);
     PARSER.declareString(ErrorCause::setType, TYPE);
   }

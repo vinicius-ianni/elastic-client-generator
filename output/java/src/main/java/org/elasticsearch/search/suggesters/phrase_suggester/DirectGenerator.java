@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common.*;
@@ -84,6 +84,7 @@ public class DirectGenerator  implements XContentable<DirectGenerator> {
   public DirectGenerator setSuggestMode(SuggestMode val) { this._suggestMode = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -98,17 +99,17 @@ public class DirectGenerator  implements XContentable<DirectGenerator> {
     new ConstructingObjectParser<>(DirectGenerator.class.getName(), false, args -> new DirectGenerator());
 
   static {
-    PARSER.declareField(DirectGenerator::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareInteger(DirectGenerator::setMaxEdits, MAX_EDITS);
+    PARSER.declareObject(DirectGenerator::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareInt(DirectGenerator::setMaxEdits, MAX_EDITS);
     PARSER.declareFloat(DirectGenerator::setMaxInspections, MAX_INSPECTIONS);
     PARSER.declareFloat(DirectGenerator::setMaxTermFreq, MAX_TERM_FREQ);
     PARSER.declareFloat(DirectGenerator::setMinDocFreq, MIN_DOC_FREQ);
-    PARSER.declareInteger(DirectGenerator::setMinWordLength, MIN_WORD_LENGTH);
+    PARSER.declareInt(DirectGenerator::setMinWordLength, MIN_WORD_LENGTH);
     PARSER.declareString(DirectGenerator::setPostFilter, POST_FILTER);
     PARSER.declareString(DirectGenerator::setPreFilter, PRE_FILTER);
-    PARSER.declareInteger(DirectGenerator::setPrefixLength, PREFIX_LENGTH);
-    PARSER.declareInteger(DirectGenerator::setSize, SIZE);
-    PARSER.declareObject(DirectGenerator::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p, null), SUGGEST_MODE);
+    PARSER.declareInt(DirectGenerator::setPrefixLength, PREFIX_LENGTH);
+    PARSER.declareInt(DirectGenerator::setSize, SIZE);
+    PARSER.declareObject(DirectGenerator::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE);
   }
 
 }

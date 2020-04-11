@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class CatPendingTasksRecord  implements XContentable<CatPendingTasksRecord> {
@@ -40,6 +40,7 @@ public class CatPendingTasksRecord  implements XContentable<CatPendingTasksRecor
   public CatPendingTasksRecord setTimeInQueue(String val) { this._timeInQueue = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -54,7 +55,7 @@ public class CatPendingTasksRecord  implements XContentable<CatPendingTasksRecor
     new ConstructingObjectParser<>(CatPendingTasksRecord.class.getName(), false, args -> new CatPendingTasksRecord());
 
   static {
-    PARSER.declareInteger(CatPendingTasksRecord::setInsertOrder, INSERT_ORDER);
+    PARSER.declareInt(CatPendingTasksRecord::setInsertOrder, INSERT_ORDER);
     PARSER.declareString(CatPendingTasksRecord::setPriority, PRIORITY);
     PARSER.declareString(CatPendingTasksRecord::setSource, SOURCE);
     PARSER.declareString(CatPendingTasksRecord::setTimeInQueue, TIME_IN_QUEUE);

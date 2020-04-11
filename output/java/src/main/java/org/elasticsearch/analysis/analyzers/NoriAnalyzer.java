@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.analysis.tokenizers.*;
 
 public class NoriAnalyzer  implements XContentable<NoriAnalyzer> {
@@ -34,6 +34,7 @@ public class NoriAnalyzer  implements XContentable<NoriAnalyzer> {
   public NoriAnalyzer setUserDictionary(String val) { this._userDictionary = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -48,7 +49,7 @@ public class NoriAnalyzer  implements XContentable<NoriAnalyzer> {
     new ConstructingObjectParser<>(NoriAnalyzer.class.getName(), false, args -> new NoriAnalyzer());
 
   static {
-    PARSER.declareObject(NoriAnalyzer::setDecompoundMode, (p, t) -> NoriDecompoundMode.PARSER.apply(p, null), DECOMPOUND_MODE);
+    PARSER.declareObject(NoriAnalyzer::setDecompoundMode, (p, t) -> NoriDecompoundMode.PARSER.apply(p), DECOMPOUND_MODE);
     PARSER.declareStringArray(NoriAnalyzer::setStoptags, STOPTAGS);
     PARSER.declareString(NoriAnalyzer::setUserDictionary, USER_DICTIONARY);
   }

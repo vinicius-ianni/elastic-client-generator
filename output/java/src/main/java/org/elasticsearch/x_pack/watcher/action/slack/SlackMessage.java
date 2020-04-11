@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.watcher.action.slack.*;
 
 public class SlackMessage  implements XContentable<SlackMessage> {
@@ -52,6 +52,7 @@ public class SlackMessage  implements XContentable<SlackMessage> {
   public SlackMessage setTo(List<String> val) { this._to = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -66,8 +67,8 @@ public class SlackMessage  implements XContentable<SlackMessage> {
     new ConstructingObjectParser<>(SlackMessage.class.getName(), false, args -> new SlackMessage());
 
   static {
-    PARSER.declareObjectArray(SlackMessage::setAttachments, (p, t) -> SlackAttachment.PARSER.apply(p), ATTACHMENTS);
-    PARSER.declareObject(SlackMessage::setDynamicAttachments, (p, t) -> SlackDynamicAttachment.PARSER.apply(p, null), DYNAMIC_ATTACHMENTS);
+    PARSER.declareObjectArray(SlackMessage::setAttachments, (p, t) -> SlackAttachment.PARSER.apply(p, t), ATTACHMENTS);
+    PARSER.declareObject(SlackMessage::setDynamicAttachments, (p, t) -> SlackDynamicAttachment.PARSER.apply(p, t), DYNAMIC_ATTACHMENTS);
     PARSER.declareString(SlackMessage::setFrom, FROM);
     PARSER.declareString(SlackMessage::setIcon, ICON);
     PARSER.declareString(SlackMessage::setText, TEXT);

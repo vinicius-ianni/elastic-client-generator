@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 import org.elasticsearch.aggregations.bucket.ip_range.*;
 
@@ -29,6 +29,7 @@ public class IpRangeAggregation  implements XContentable<IpRangeAggregation> {
   public IpRangeAggregation setRanges(List<IpRangeAggregationRange> val) { this._ranges = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -43,8 +44,8 @@ public class IpRangeAggregation  implements XContentable<IpRangeAggregation> {
     new ConstructingObjectParser<>(IpRangeAggregation.class.getName(), false, args -> new IpRangeAggregation());
 
   static {
-    PARSER.declareField(IpRangeAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObjectArray(IpRangeAggregation::setRanges, (p, t) -> IpRangeAggregationRange.PARSER.apply(p), RANGES);
+    PARSER.declareObject(IpRangeAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
+    PARSER.declareObjectArray(IpRangeAggregation::setRanges, (p, t) -> IpRangeAggregationRange.PARSER.apply(p, t), RANGES);
   }
 
 }

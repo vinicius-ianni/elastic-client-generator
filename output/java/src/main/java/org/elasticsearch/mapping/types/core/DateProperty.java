@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 import org.elasticsearch.modules.indices.fielddata.numeric.*;
 
@@ -59,6 +59,7 @@ public class DateProperty  implements XContentable<DateProperty> {
   public DateProperty setPrecisionStep(Integer val) { this._precisionStep = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -74,12 +75,12 @@ public class DateProperty  implements XContentable<DateProperty> {
 
   static {
     PARSER.declareDouble(DateProperty::setBoost, BOOST);
-    PARSER.declareObject(DateProperty::setFielddata, (p, t) -> NumericFielddata.PARSER.apply(p, null), FIELDDATA);
+    PARSER.declareObject(DateProperty::setFielddata, (p, t) -> NumericFielddata.PARSER.apply(p, t), FIELDDATA);
     PARSER.declareString(DateProperty::setFormat, FORMAT);
     PARSER.declareBoolean(DateProperty::setIgnoreMalformed, IGNORE_MALFORMED);
     PARSER.declareBoolean(DateProperty::setIndex, INDEX);
-    PARSER.declareDate(DateProperty::setNullValue, (p, t) -> Date.createFrom(p), NULL_VALUE);
-    PARSER.declareInteger(DateProperty::setPrecisionStep, PRECISION_STEP);
+    PARSER.declareObject(DateProperty::setNullValue, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), NULL_VALUE);
+    PARSER.declareInt(DateProperty::setPrecisionStep, PRECISION_STEP);
   }
 
 }

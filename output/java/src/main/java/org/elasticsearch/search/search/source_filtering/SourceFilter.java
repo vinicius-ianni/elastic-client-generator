@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.common_abstractions.infer.field.*;
 
 public class SourceFilter  implements XContentable<SourceFilter> {
@@ -28,6 +28,7 @@ public class SourceFilter  implements XContentable<SourceFilter> {
   public SourceFilter setIncludes(List<Field> val) { this._includes = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -42,8 +43,8 @@ public class SourceFilter  implements XContentable<SourceFilter> {
     new ConstructingObjectParser<>(SourceFilter.class.getName(), false, args -> new SourceFilter());
 
   static {
-    PARSER.declareObjectArray(SourceFilter::setExcludes, (p, t) -> Field.PARSER.apply(p), EXCLUDES);
-    PARSER.declareObjectArray(SourceFilter::setIncludes, (p, t) -> Field.PARSER.apply(p), INCLUDES);
+    PARSER.declareObjectArray(SourceFilter::setExcludes, (p, t) -> Field.createFrom(p), EXCLUDES);
+    PARSER.declareObjectArray(SourceFilter::setIncludes, (p, t) -> Field.createFrom(p), INCLUDES);
   }
 
 }

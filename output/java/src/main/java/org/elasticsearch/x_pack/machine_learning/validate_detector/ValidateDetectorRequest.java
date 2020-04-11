@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.detectors.*;
 
 public class ValidateDetectorRequest  implements XContentable<ValidateDetectorRequest> {
@@ -22,6 +22,7 @@ public class ValidateDetectorRequest  implements XContentable<ValidateDetectorRe
   public ValidateDetectorRequest setDetector(Detector val) { this._detector = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -36,7 +37,7 @@ public class ValidateDetectorRequest  implements XContentable<ValidateDetectorRe
     new ConstructingObjectParser<>(ValidateDetectorRequest.class.getName(), false, args -> new ValidateDetectorRequest());
 
   static {
-    PARSER.declareObject(ValidateDetectorRequest::setDetector, (p, t) -> Detector.PARSER.apply(p, null), DETECTOR);
+    PARSER.declareObject(ValidateDetectorRequest::setDetector, (p, t) -> Detector.PARSER.apply(p, t), DETECTOR);
   }
 
 }

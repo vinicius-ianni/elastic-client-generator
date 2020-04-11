@@ -2,6 +2,7 @@
 package org.elasticsearch.query_dsl;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -31,7 +32,7 @@ public enum Operator implements XContentable<Operator> {
       case "and": return Operator.And;
       case "or": return Operator.Or;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, Operator.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, Operator.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

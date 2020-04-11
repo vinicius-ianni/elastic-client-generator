@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.internal.*;
 
 public class GetCalendarEventsRequest  implements XContentable<GetCalendarEventsRequest> {
@@ -46,6 +46,7 @@ public class GetCalendarEventsRequest  implements XContentable<GetCalendarEvents
   public GetCalendarEventsRequest setSize(Integer val) { this._size = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -60,11 +61,11 @@ public class GetCalendarEventsRequest  implements XContentable<GetCalendarEvents
     new ConstructingObjectParser<>(GetCalendarEventsRequest.class.getName(), false, args -> new GetCalendarEventsRequest());
 
   static {
-    PARSER.declareDate(GetCalendarEventsRequest::setEnd, (p, t) -> Date.createFrom(p), END);
+    PARSER.declareObject(GetCalendarEventsRequest::setEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END);
     PARSER.declareString(GetCalendarEventsRequest::setJobId, JOB_ID);
     PARSER.declareString(GetCalendarEventsRequest::setStart, START);
-    PARSER.declareInteger(GetCalendarEventsRequest::setFrom, FROM);
-    PARSER.declareInteger(GetCalendarEventsRequest::setSize, SIZE);
+    PARSER.declareInt(GetCalendarEventsRequest::setFrom, FROM);
+    PARSER.declareInt(GetCalendarEventsRequest::setSize, SIZE);
   }
 
 }

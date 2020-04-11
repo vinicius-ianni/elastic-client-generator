@@ -2,6 +2,7 @@
 package org.elasticsearch.common_options.geo;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -45,7 +46,7 @@ public enum DistanceUnit implements XContentable<DistanceUnit> {
       case "cm": return DistanceUnit.Cm;
       case "mm": return DistanceUnit.Mm;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, DistanceUnit.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, DistanceUnit.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

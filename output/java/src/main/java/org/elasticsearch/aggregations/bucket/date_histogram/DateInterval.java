@@ -2,6 +2,7 @@
 package org.elasticsearch.aggregations.bucket.date_histogram;
 
 import org.elasticsearch.XContentable;
+import org.elasticsearch.common.CheckedFunction;
 import org.elasticsearch.common.xcontent.*;
 import java.io.IOException;
 
@@ -43,7 +44,7 @@ public enum DateInterval implements XContentable<DateInterval> {
       case "quarter": return DateInterval.Quarter;
       case "year": return DateInterval.Year;
       default:
-        String message = String.format("'%s' not a valid value for enum '%s'", text, DateInterval.class.getName());
+        String message = java.lang.String.format("'%s' not a valid value for enum '%s'", text, DateInterval.class.getName());
         throw new XContentParseException(parser.getTokenLocation(), message);
     }
   };

@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.HashMap;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import org.elasticsearch.Either;
 import org.elasticsearch.XContentable;
 import org.elasticsearch.NamedContainer;
 import org.elasticsearch.common.ParseField;
 import org.elasticsearch.common.xcontent.*;
-
-
 import org.elasticsearch.x_pack.machine_learning.job.config.*;
 import org.elasticsearch.internal.*;
 import org.elasticsearch.common_abstractions.infer.index_name.*;
@@ -60,6 +60,7 @@ public class ValidateJobRequest  implements XContentable<ValidateJobRequest> {
   public ValidateJobRequest setResultsIndexName(IndexName val) { this._resultsIndexName = val; return this; }
 
 
+  
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     return null;
@@ -74,13 +75,13 @@ public class ValidateJobRequest  implements XContentable<ValidateJobRequest> {
     new ConstructingObjectParser<>(ValidateJobRequest.class.getName(), false, args -> new ValidateJobRequest());
 
   static {
-    PARSER.declareObject(ValidateJobRequest::setAnalysisConfig, (p, t) -> AnalysisConfig.PARSER.apply(p, null), ANALYSIS_CONFIG);
-    PARSER.declareObject(ValidateJobRequest::setAnalysisLimits, (p, t) -> AnalysisLimits.PARSER.apply(p, null), ANALYSIS_LIMITS);
-    PARSER.declareObject(ValidateJobRequest::setDataDescription, (p, t) -> DataDescription.PARSER.apply(p, null), DATA_DESCRIPTION);
+    PARSER.declareObject(ValidateJobRequest::setAnalysisConfig, (p, t) -> AnalysisConfig.PARSER.apply(p, t), ANALYSIS_CONFIG);
+    PARSER.declareObject(ValidateJobRequest::setAnalysisLimits, (p, t) -> AnalysisLimits.PARSER.apply(p, t), ANALYSIS_LIMITS);
+    PARSER.declareObject(ValidateJobRequest::setDataDescription, (p, t) -> DataDescription.PARSER.apply(p, t), DATA_DESCRIPTION);
     PARSER.declareString(ValidateJobRequest::setDescription, DESCRIPTION);
-    PARSER.declareObject(ValidateJobRequest::setModelPlot, (p, t) -> ModelPlotConfig.PARSER.apply(p, null), MODEL_PLOT);
+    PARSER.declareObject(ValidateJobRequest::setModelPlot, (p, t) -> ModelPlotConfig.PARSER.apply(p, t), MODEL_PLOT);
     PARSER.declareLong(ValidateJobRequest::setModelSnapshotRetentionDays, MODEL_SNAPSHOT_RETENTION_DAYS);
-    PARSER.declareIndexName(ValidateJobRequest::setResultsIndexName, (p, t) -> IndexName.createFrom(p), RESULTS_INDEX_NAME);
+    PARSER.declareObject(ValidateJobRequest::setResultsIndexName, (p, t) -> IndexName.createFrom(p), RESULTS_INDEX_NAME);
   }
 
 }
