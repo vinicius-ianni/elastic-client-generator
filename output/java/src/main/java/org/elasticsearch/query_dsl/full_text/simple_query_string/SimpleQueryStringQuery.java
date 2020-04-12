@@ -101,6 +101,7 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
     builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
@@ -125,6 +126,7 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
     }
     builder.field(QUERY.getPreferredName(), _query);
     builder.field(QUOTE_FIELD_SUFFIX.getPreferredName(), _quoteFieldSuffix);
+    builder.endObject();
     return builder;
   }
 

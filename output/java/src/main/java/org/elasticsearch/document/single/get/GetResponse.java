@@ -80,6 +80,7 @@ public class GetResponse<TDocument>  implements XContentable<GetResponse<TDocume
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_fields != null) {
       builder.field(FIELDS.getPreferredName());
       _fields.toXContent(builder, params);
@@ -93,6 +94,7 @@ public class GetResponse<TDocument>  implements XContentable<GetResponse<TDocume
     builder.field(SOURCE.getPreferredName(), _source);
     builder.field(TYPE.getPreferredName(), _type);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

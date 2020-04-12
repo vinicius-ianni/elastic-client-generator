@@ -25,10 +25,12 @@ public class Intervals  implements XContentable<Intervals> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -31,8 +31,10 @@ public class StartTrialLicenseRequest  implements XContentable<StartTrialLicense
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACKNOWLEDGE.getPreferredName(), _acknowledge);
     builder.field(TYPE_QUERY_STRING.getPreferredName(), _typeQueryString);
+    builder.endObject();
     return builder;
   }
 

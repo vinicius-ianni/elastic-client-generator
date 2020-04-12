@@ -55,6 +55,7 @@ public class SlackMessage  implements XContentable<SlackMessage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_attachments != null) {
       builder.array(ATTACHMENTS.getPreferredName(), _attachments);
     }
@@ -68,6 +69,7 @@ public class SlackMessage  implements XContentable<SlackMessage> {
     if (_to != null) {
       builder.array(TO.getPreferredName(), _to);
     }
+    builder.endObject();
     return builder;
   }
 

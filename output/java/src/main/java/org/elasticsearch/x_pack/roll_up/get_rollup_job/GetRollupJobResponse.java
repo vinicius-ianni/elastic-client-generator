@@ -25,9 +25,11 @@ public class GetRollupJobResponse  implements XContentable<GetRollupJobResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_jobs != null) {
       builder.array(JOBS.getPreferredName(), _jobs);
     }
+    builder.endObject();
     return builder;
   }
 

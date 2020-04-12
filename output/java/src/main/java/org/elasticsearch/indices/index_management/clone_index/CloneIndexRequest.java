@@ -51,6 +51,7 @@ public class CloneIndexRequest  implements XContentable<CloneIndexRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_aliases != null) {
       builder.field(ALIASES.getPreferredName());
       _aliases.toXContent(builder, params);
@@ -68,6 +69,7 @@ public class CloneIndexRequest  implements XContentable<CloneIndexRequest> {
       _timeout.toXContent(builder, params);
     }
     builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    builder.endObject();
     return builder;
   }
 

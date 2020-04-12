@@ -25,9 +25,11 @@ public class ManageUserPrivileges  implements XContentable<ManageUserPrivileges>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_applications != null) {
       builder.array(APPLICATIONS.getPreferredName(), _applications);
     }
+    builder.endObject();
     return builder;
   }
 

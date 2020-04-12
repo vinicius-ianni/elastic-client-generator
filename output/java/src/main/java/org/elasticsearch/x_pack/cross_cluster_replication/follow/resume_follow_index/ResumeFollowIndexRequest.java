@@ -80,6 +80,7 @@ public class ResumeFollowIndexRequest  implements XContentable<ResumeFollowIndex
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MAX_READ_REQUEST_OPERATION_COUNT.getPreferredName(), _maxReadRequestOperationCount);
     builder.field(MAX_OUTSTANDING_READ_REQUESTS.getPreferredName(), _maxOutstandingReadRequests);
     builder.field(MAX_READ_REQUEST_SIZE.getPreferredName(), _maxReadRequestSize);
@@ -96,6 +97,7 @@ public class ResumeFollowIndexRequest  implements XContentable<ResumeFollowIndex
       builder.field(READ_POLL_TIMEOUT.getPreferredName());
       _readPollTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

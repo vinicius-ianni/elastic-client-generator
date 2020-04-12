@@ -49,6 +49,7 @@ public class ArrayCompareCondition  implements XContentable<ArrayCompareConditio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ARRAY_PATH.getPreferredName(), _arrayPath);
     builder.field(COMPARISON.getPreferredName(), _comparison);
     builder.field(PATH.getPreferredName(), _path);
@@ -57,6 +58,7 @@ public class ArrayCompareCondition  implements XContentable<ArrayCompareConditio
       _quantifier.toXContent(builder, params);
     }
     builder.field(VALUE.getPreferredName(), _value);
+    builder.endObject();
     return builder;
   }
 

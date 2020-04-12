@@ -102,6 +102,7 @@ public class MultiTermVectorsRequest  implements XContentable<MultiTermVectorsRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_docs != null) {
       builder.array(DOCS.getPreferredName(), _docs);
     }
@@ -117,14 +118,17 @@ public class MultiTermVectorsRequest  implements XContentable<MultiTermVectorsRe
     builder.field(POSITIONS.getPreferredName(), _positions);
     builder.field(PREFERENCE.getPreferredName(), _preference);
     builder.field(REALTIME.getPreferredName(), _realtime);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     builder.field(TERM_STATISTICS.getPreferredName(), _termStatistics);
     builder.field(VERSION.getPreferredName(), _version);
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

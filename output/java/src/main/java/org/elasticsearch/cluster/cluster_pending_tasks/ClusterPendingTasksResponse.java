@@ -25,9 +25,11 @@ public class ClusterPendingTasksResponse  implements XContentable<ClusterPending
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_tasks != null) {
       builder.array(TASKS.getPreferredName(), _tasks);
     }
+    builder.endObject();
     return builder;
   }
 

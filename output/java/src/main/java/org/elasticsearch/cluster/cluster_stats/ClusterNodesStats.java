@@ -81,6 +81,7 @@ public class ClusterNodesStats  implements XContentable<ClusterNodesStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_count != null) {
       builder.field(COUNT.getPreferredName());
       _count.toXContent(builder, params);
@@ -118,6 +119,7 @@ public class ClusterNodesStats  implements XContentable<ClusterNodesStats> {
     if (_versions != null) {
       builder.array(VERSIONS.getPreferredName(), _versions);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -31,8 +31,10 @@ public class AcknowledgedResponseBase  implements XContentable<AcknowledgedRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACKNOWLEDGED.getPreferredName(), _acknowledged);
     builder.field(IS_VALID.getPreferredName(), _isValid);
+    builder.endObject();
     return builder;
   }
 

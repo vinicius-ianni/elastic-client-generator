@@ -50,6 +50,7 @@ public class CompletionSuggester  implements XContentable<CompletionSuggester> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_contexts != null) {
       builder.field(CONTEXTS.getPreferredName());
       _contexts.toXContent(builder, params);
@@ -61,6 +62,7 @@ public class CompletionSuggester  implements XContentable<CompletionSuggester> {
     builder.field(PREFIX.getPreferredName(), _prefix);
     builder.field(REGEX.getPreferredName(), _regex);
     builder.field(SKIP_DUPLICATES.getPreferredName(), _skipDuplicates);
+    builder.endObject();
     return builder;
   }
 

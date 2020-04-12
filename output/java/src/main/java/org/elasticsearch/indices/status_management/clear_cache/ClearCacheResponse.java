@@ -20,7 +20,9 @@ public class ClearCacheResponse  implements XContentable<ClearCacheResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     
+    builder.endObject();
     return builder;
   }
 

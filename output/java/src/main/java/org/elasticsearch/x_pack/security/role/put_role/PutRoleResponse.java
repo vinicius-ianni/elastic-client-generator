@@ -25,10 +25,12 @@ public class PutRoleResponse  implements XContentable<PutRoleResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_role != null) {
       builder.field(ROLE.getPreferredName());
       _role.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -86,6 +86,7 @@ public class ReindexStatus  implements XContentable<ReindexStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BATCHES.getPreferredName(), _batches);
     builder.field(CREATED.getPreferredName(), _created);
     builder.field(DELETED.getPreferredName(), _deleted);
@@ -100,6 +101,7 @@ public class ReindexStatus  implements XContentable<ReindexStatus> {
     builder.field(TOTAL.getPreferredName(), _total);
     builder.field(UPDATED.getPreferredName(), _updated);
     builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    builder.endObject();
     return builder;
   }
 

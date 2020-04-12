@@ -56,6 +56,7 @@ public class GetMappingRequest  implements XContentable<GetMappingRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -68,6 +69,7 @@ public class GetMappingRequest  implements XContentable<GetMappingRequest> {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

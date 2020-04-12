@@ -43,6 +43,7 @@ public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_columns != null) {
       builder.array(COLUMNS.getPreferredName(), _columns);
     }
@@ -53,6 +54,7 @@ public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
     if (_values != null) {
       builder.array(VALUES.getPreferredName(), _values);
     }
+    builder.endObject();
     return builder;
   }
 

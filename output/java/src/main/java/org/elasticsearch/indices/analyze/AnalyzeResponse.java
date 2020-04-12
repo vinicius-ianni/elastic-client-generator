@@ -31,6 +31,7 @@ public class AnalyzeResponse  implements XContentable<AnalyzeResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_detail != null) {
       builder.field(DETAIL.getPreferredName());
       _detail.toXContent(builder, params);
@@ -38,6 +39,7 @@ public class AnalyzeResponse  implements XContentable<AnalyzeResponse> {
     if (_tokens != null) {
       builder.array(TOKENS.getPreferredName(), _tokens);
     }
+    builder.endObject();
     return builder;
   }
 

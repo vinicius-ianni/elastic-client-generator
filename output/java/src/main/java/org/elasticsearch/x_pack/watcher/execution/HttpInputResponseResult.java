@@ -37,12 +37,14 @@ public class HttpInputResponseResult  implements XContentable<HttpInputResponseR
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BODY.getPreferredName(), _body);
     if (_headers != null) {
       builder.field(HEADERS.getPreferredName());
       _headers.toXContent(builder, params);
     }
     builder.field(STATUS.getPreferredName(), _status);
+    builder.endObject();
     return builder;
   }
 

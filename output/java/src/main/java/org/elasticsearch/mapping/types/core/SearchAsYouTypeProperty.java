@@ -69,6 +69,7 @@ public class SearchAsYouTypeProperty  implements XContentable<SearchAsYouTypePro
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(INDEX.getPreferredName(), _index);
     if (_indexOptions != null) {
@@ -83,6 +84,7 @@ public class SearchAsYouTypeProperty  implements XContentable<SearchAsYouTypePro
       builder.field(TERM_VECTOR.getPreferredName());
       _termVector.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

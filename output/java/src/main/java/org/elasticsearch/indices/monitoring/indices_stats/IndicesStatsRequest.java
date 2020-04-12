@@ -74,6 +74,7 @@ public class IndicesStatsRequest  implements XContentable<IndicesStatsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_completionFields != null) {
       builder.array(COMPLETION_FIELDS.getPreferredName(), _completionFields);
     }
@@ -97,6 +98,7 @@ public class IndicesStatsRequest  implements XContentable<IndicesStatsRequest> {
       builder.field(LEVEL.getPreferredName());
       _level.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

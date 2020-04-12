@@ -31,11 +31,13 @@ public class CloseIndexResult  implements XContentable<CloseIndexResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CLOSED.getPreferredName(), _closed);
     if (_shards != null) {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

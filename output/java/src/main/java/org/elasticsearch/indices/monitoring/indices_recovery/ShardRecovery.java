@@ -98,6 +98,7 @@ public class ShardRecovery  implements XContentable<ShardRecovery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ID.getPreferredName(), _id);
     if (_index != null) {
       builder.field(INDEX.getPreferredName());
@@ -131,6 +132,7 @@ public class ShardRecovery  implements XContentable<ShardRecovery> {
       builder.field(VERIFY_INDEX.getPreferredName());
       _verifyIndex.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -41,8 +41,10 @@ const $writeProperty = (prop, parent) => {
         ];
     if (naming_1.stringTypes.includes(typeSymbol))
         return [
-            `builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
-            `${naming_1.$fieldName(prop.name)}.toXContent(builder, params);`
+            `if (${naming_1.$fieldName(prop.name)} != null) {`,
+            `  builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
+            `  ${naming_1.$fieldName(prop.name)}.toXContent(builder, params);`,
+            `}`
         ];
     if (["TDocument", "TPartialDocument", "TResult", "T", "TCatRecord"].includes(typeSymbol))
         return [`builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName(), ${naming_1.$fieldName(prop.name)});`];

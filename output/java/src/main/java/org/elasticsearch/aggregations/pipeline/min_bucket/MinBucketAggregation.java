@@ -20,7 +20,9 @@ public class MinBucketAggregation  implements XContentable<MinBucketAggregation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     
+    builder.endObject();
     return builder;
   }
 

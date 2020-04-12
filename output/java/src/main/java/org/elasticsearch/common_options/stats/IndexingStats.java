@@ -98,6 +98,7 @@ public class IndexingStats  implements XContentable<IndexingStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(INDEX_CURRENT.getPreferredName(), _indexCurrent);
     builder.field(DELETE_CURRENT.getPreferredName(), _deleteCurrent);
     builder.field(DELETE_TIME.getPreferredName(), _deleteTime);
@@ -114,6 +115,7 @@ public class IndexingStats  implements XContentable<IndexingStats> {
       builder.field(TYPES.getPreferredName());
       _types.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

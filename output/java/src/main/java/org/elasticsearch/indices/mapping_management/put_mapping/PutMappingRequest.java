@@ -144,6 +144,7 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_allField != null) {
       builder.field(ALL_FIELD.getPreferredName());
       _allField.toXContent(builder, params);
@@ -204,6 +205,7 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

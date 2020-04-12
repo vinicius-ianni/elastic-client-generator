@@ -25,7 +25,9 @@ public class DeleteByQueryRethrottleRequest  implements XContentable<DeleteByQue
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    builder.endObject();
     return builder;
   }
 

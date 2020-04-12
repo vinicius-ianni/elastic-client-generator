@@ -31,12 +31,14 @@ public class FieldSecuritySettings  implements XContentable<FieldSecuritySetting
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_except != null) {
       builder.array(EXCEPT.getPreferredName(), _except);
     }
     if (_grant != null) {
       builder.array(GRANT.getPreferredName(), _grant);
     }
+    builder.endObject();
     return builder;
   }
 

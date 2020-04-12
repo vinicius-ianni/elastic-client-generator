@@ -26,10 +26,12 @@ public class GetSnapshotLifecycleResponse extends DictionaryResponseBase<String,
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_policies != null) {
       builder.field(POLICIES.getPreferredName());
       _policies.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

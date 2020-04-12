@@ -31,12 +31,14 @@ public class ApiKeyRole  implements XContentable<ApiKeyRole> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_cluster != null) {
       builder.array(CLUSTER.getPreferredName(), _cluster);
     }
     if (_index != null) {
       builder.array(INDEX.getPreferredName(), _index);
     }
+    builder.endObject();
     return builder;
   }
 

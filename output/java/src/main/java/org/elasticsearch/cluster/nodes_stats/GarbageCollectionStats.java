@@ -25,10 +25,12 @@ public class GarbageCollectionStats  implements XContentable<GarbageCollectionSt
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_collectors != null) {
       builder.field(COLLECTORS.getPreferredName());
       _collectors.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

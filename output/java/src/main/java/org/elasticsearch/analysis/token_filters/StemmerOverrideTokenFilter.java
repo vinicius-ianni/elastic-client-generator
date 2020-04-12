@@ -31,10 +31,12 @@ public class StemmerOverrideTokenFilter  implements XContentable<StemmerOverride
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_rules != null) {
       builder.array(RULES.getPreferredName(), _rules);
     }
     builder.field(RULES_PATH.getPreferredName(), _rulesPath);
+    builder.endObject();
     return builder;
   }
 

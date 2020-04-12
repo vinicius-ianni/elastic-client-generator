@@ -105,6 +105,7 @@ public class PutJobResponse  implements XContentable<PutJobResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_analysisConfig != null) {
       builder.field(ANALYSIS_CONFIG.getPreferredName());
       _analysisConfig.toXContent(builder, params);
@@ -135,6 +136,7 @@ public class PutJobResponse  implements XContentable<PutJobResponse> {
     builder.field(RENORMALIZATION_WINDOW_DAYS.getPreferredName(), _renormalizationWindowDays);
     builder.field(RESULTS_INDEX_NAME.getPreferredName(), _resultsIndexName);
     builder.field(RESULTS_RETENTION_DAYS.getPreferredName(), _resultsRetentionDays);
+    builder.endObject();
     return builder;
   }
 

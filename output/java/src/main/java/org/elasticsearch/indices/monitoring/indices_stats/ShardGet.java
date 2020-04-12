@@ -61,6 +61,7 @@ public class ShardGet  implements XContentable<ShardGet> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CURRENT.getPreferredName(), _current);
     builder.field(EXISTS_TIME_IN_MILLIS.getPreferredName(), _existsTimeInMillis);
     builder.field(EXISTS_TOTAL.getPreferredName(), _existsTotal);
@@ -68,6 +69,7 @@ public class ShardGet  implements XContentable<ShardGet> {
     builder.field(MISSING_TOTAL.getPreferredName(), _missingTotal);
     builder.field(TIME_IN_MILLIS.getPreferredName(), _timeInMillis);
     builder.field(TOTAL.getPreferredName(), _total);
+    builder.endObject();
     return builder;
   }
 

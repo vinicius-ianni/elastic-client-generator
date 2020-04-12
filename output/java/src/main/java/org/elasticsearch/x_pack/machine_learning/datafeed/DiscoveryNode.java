@@ -49,6 +49,7 @@ public class DiscoveryNode  implements XContentable<DiscoveryNode> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_attributes != null) {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
@@ -57,6 +58,7 @@ public class DiscoveryNode  implements XContentable<DiscoveryNode> {
     builder.field(ID.getPreferredName(), _id);
     builder.field(NAME.getPreferredName(), _name);
     builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    builder.endObject();
     return builder;
   }
 

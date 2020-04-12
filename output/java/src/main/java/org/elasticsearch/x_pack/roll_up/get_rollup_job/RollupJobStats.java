@@ -79,6 +79,7 @@ public class RollupJobStats  implements XContentable<RollupJobStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DOCUMENTS_PROCESSED.getPreferredName(), _documentsProcessed);
     builder.field(PAGES_PROCESSED.getPreferredName(), _pagesProcessed);
     builder.field(ROLLUPS_INDEXED.getPreferredName(), _rollupsIndexed);
@@ -89,6 +90,7 @@ public class RollupJobStats  implements XContentable<RollupJobStats> {
     builder.field(INDEX_TOTAL.getPreferredName(), _indexTotal);
     builder.field(SEARCH_TIME_IN_MS.getPreferredName(), _searchTimeInMs);
     builder.field(SEARCH_TOTAL.getPreferredName(), _searchTotal);
+    builder.endObject();
     return builder;
   }
 

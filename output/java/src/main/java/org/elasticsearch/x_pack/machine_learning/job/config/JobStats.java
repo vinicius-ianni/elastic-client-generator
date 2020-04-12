@@ -76,6 +76,7 @@ public class JobStats  implements XContentable<JobStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ASSIGNMENT_EXPLANATION.getPreferredName(), _assignmentExplanation);
     if (_dataCounts != null) {
       builder.field(DATA_COUNTS.getPreferredName());
@@ -106,6 +107,7 @@ public class JobStats  implements XContentable<JobStats> {
       builder.field(TIMING_STATS.getPreferredName());
       _timingStats.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

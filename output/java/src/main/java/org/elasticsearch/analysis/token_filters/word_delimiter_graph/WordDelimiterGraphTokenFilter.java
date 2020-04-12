@@ -103,6 +103,7 @@ public class WordDelimiterGraphTokenFilter  implements XContentable<WordDelimite
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ADJUST_OFFSETS.getPreferredName(), _adjustOffsets);
     builder.field(CATENATE_ALL.getPreferredName(), _catenateAll);
     builder.field(CATENATE_NUMBERS.getPreferredName(), _catenateNumbers);
@@ -121,6 +122,7 @@ public class WordDelimiterGraphTokenFilter  implements XContentable<WordDelimite
       builder.array(TYPE_TABLE.getPreferredName(), _typeTable);
     }
     builder.field(TYPE_TABLE_PATH.getPreferredName(), _typeTablePath);
+    builder.endObject();
     return builder;
   }
 

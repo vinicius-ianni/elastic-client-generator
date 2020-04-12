@@ -99,6 +99,7 @@ public class PhraseSuggester  implements XContentable<PhraseSuggester> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_collate != null) {
       builder.field(COLLATE.getPreferredName());
       _collate.toXContent(builder, params);
@@ -123,6 +124,7 @@ public class PhraseSuggester  implements XContentable<PhraseSuggester> {
     }
     builder.field(TEXT.getPreferredName(), _text);
     builder.field(TOKEN_LIMIT.getPreferredName(), _tokenLimit);
+    builder.endObject();
     return builder;
   }
 

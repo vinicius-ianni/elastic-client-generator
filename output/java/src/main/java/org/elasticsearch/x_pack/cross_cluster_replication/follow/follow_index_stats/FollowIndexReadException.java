@@ -38,12 +38,14 @@ public class FollowIndexReadException  implements XContentable<FollowIndexReadEx
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FROM_SEQ_NO.getPreferredName(), _fromSeqNo);
     builder.field(RETRIES.getPreferredName(), _retries);
     if (_exception != null) {
       builder.field(EXCEPTION.getPreferredName());
       _exception.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

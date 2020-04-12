@@ -49,11 +49,13 @@ public class Fuzziness  implements XContentable<Fuzziness> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AUTO.getPreferredName(), _auto);
     builder.field(LOW.getPreferredName(), _low);
     builder.field(HIGH.getPreferredName(), _high);
     builder.field(EDIT_DISTANCE.getPreferredName(), _editDistance);
     builder.field(RATIO.getPreferredName(), _ratio);
+    builder.endObject();
     return builder;
   }
 

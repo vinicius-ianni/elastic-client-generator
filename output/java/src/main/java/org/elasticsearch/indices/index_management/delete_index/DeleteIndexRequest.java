@@ -50,6 +50,7 @@ public class DeleteIndexRequest  implements XContentable<DeleteIndexRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -64,6 +65,7 @@ public class DeleteIndexRequest  implements XContentable<DeleteIndexRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

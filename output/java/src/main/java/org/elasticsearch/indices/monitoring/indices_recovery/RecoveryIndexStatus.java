@@ -56,6 +56,7 @@ public class RecoveryIndexStatus  implements XContentable<RecoveryIndexStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_bytes != null) {
       builder.field(BYTES.getPreferredName());
       _bytes.toXContent(builder, params);
@@ -71,6 +72,7 @@ public class RecoveryIndexStatus  implements XContentable<RecoveryIndexStatus> {
     builder.field(SOURCE_THROTTLE_TIME_IN_MILLIS.getPreferredName(), _sourceThrottleTimeInMillis);
     builder.field(TARGET_THROTTLE_TIME_IN_MILLIS.getPreferredName(), _targetThrottleTimeInMillis);
     builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    builder.endObject();
     return builder;
   }
 

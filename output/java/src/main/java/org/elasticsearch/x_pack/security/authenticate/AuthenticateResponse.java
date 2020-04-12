@@ -61,6 +61,7 @@ public class AuthenticateResponse  implements XContentable<AuthenticateResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(EMAIL.getPreferredName(), _email);
     builder.field(FULL_NAME.getPreferredName(), _fullName);
     if (_metadata != null) {
@@ -79,6 +80,7 @@ public class AuthenticateResponse  implements XContentable<AuthenticateResponse>
       builder.field(LOOKUP_REALM.getPreferredName());
       _lookupRealm.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

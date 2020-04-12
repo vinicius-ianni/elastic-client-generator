@@ -88,6 +88,7 @@ public class Snapshot  implements XContentable<Snapshot> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DURATION_IN_MILLIS.getPreferredName(), _durationInMillis);
     builder.field(END_TIME.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_endTime.toInstant()));
@@ -111,6 +112,7 @@ public class Snapshot  implements XContentable<Snapshot> {
       builder.field(METADATA.getPreferredName());
       _metadata.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

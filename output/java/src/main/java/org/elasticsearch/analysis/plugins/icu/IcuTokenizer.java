@@ -25,7 +25,9 @@ public class IcuTokenizer  implements XContentable<IcuTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(RULE_FILES.getPreferredName(), _ruleFiles);
+    builder.endObject();
     return builder;
   }
 

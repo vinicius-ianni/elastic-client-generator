@@ -43,10 +43,12 @@ public class RecoveryBytes  implements XContentable<RecoveryBytes> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(PERCENT.getPreferredName(), _percent);
     builder.field(RECOVERED.getPreferredName(), _recovered);
     builder.field(REUSED.getPreferredName(), _reused);
     builder.field(TOTAL.getPreferredName(), _total);
+    builder.endObject();
     return builder;
   }
 

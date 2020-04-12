@@ -25,10 +25,12 @@ public class TriggerContainer  implements XContentable<TriggerContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_schedule != null) {
       builder.field(SCHEDULE.getPreferredName());
       _schedule.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

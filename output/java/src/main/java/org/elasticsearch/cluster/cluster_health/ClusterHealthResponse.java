@@ -118,6 +118,7 @@ public class ClusterHealthResponse  implements XContentable<ClusterHealthRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACTIVE_PRIMARY_SHARDS.getPreferredName(), _activePrimaryShards);
     builder.field(ACTIVE_SHARDS.getPreferredName(), _activeShards);
     builder.field(ACTIVE_SHARDS_PERCENT_AS_NUMBER.getPreferredName(), _activeShardsPercentAsNumber);
@@ -140,6 +141,7 @@ public class ClusterHealthResponse  implements XContentable<ClusterHealthRespons
     builder.field(TASK_MAX_WAITING_IN_QUEUE_MILLIS.getPreferredName(), _taskMaxWaitingInQueueMillis);
     builder.field(TIMED_OUT.getPreferredName(), _timedOut);
     builder.field(UNASSIGNED_SHARDS.getPreferredName(), _unassignedShards);
+    builder.endObject();
     return builder;
   }
 

@@ -32,11 +32,13 @@ public class DateMathTime  implements XContentable<DateMathTime> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FACTOR.getPreferredName(), _factor);
     if (_interval != null) {
       builder.field(INTERVAL.getPreferredName());
       _interval.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

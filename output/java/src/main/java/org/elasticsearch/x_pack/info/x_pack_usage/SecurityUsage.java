@@ -67,6 +67,7 @@ public class SecurityUsage  implements XContentable<SecurityUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_anonymous != null) {
       builder.field(ANONYMOUS.getPreferredName());
       _anonymous.toXContent(builder, params);
@@ -99,6 +100,7 @@ public class SecurityUsage  implements XContentable<SecurityUsage> {
       builder.field(SYSTEM_KEY.getPreferredName());
       _systemKey.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

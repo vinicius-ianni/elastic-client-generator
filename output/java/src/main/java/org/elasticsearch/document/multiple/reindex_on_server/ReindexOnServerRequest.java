@@ -101,6 +101,7 @@ public class ReindexOnServerRequest  implements XContentable<ReindexOnServerRequ
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_conflicts != null) {
       builder.field(CONFLICTS.getPreferredName());
       _conflicts.toXContent(builder, params);
@@ -132,6 +133,7 @@ public class ReindexOnServerRequest  implements XContentable<ReindexOnServerRequ
     }
     builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
     builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    builder.endObject();
     return builder;
   }
 

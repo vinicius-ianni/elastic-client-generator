@@ -31,6 +31,7 @@ public class FielddataFilter  implements XContentable<FielddataFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_frequency != null) {
       builder.field(FREQUENCY.getPreferredName());
       _frequency.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class FielddataFilter  implements XContentable<FielddataFilter> {
       builder.field(REGEX.getPreferredName());
       _regex.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -43,6 +43,7 @@ public class XPackInfoResponse  implements XContentable<XPackInfoResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_build != null) {
       builder.field(BUILD.getPreferredName());
       _build.toXContent(builder, params);
@@ -56,6 +57,7 @@ public class XPackInfoResponse  implements XContentable<XPackInfoResponse> {
       _license.toXContent(builder, params);
     }
     builder.field(TAGLINE.getPreferredName(), _tagline);
+    builder.endObject();
     return builder;
   }
 

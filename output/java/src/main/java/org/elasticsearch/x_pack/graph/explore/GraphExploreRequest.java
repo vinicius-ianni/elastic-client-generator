@@ -58,8 +58,11 @@ public class GraphExploreRequest  implements XContentable<GraphExploreRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    builder.startObject();
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
@@ -79,6 +82,7 @@ public class GraphExploreRequest  implements XContentable<GraphExploreRequest> {
     if (_vertices != null) {
       builder.array(VERTICES.getPreferredName(), _vertices);
     }
+    builder.endObject();
     return builder;
   }
 

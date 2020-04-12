@@ -31,8 +31,10 @@ public class ExecutionThreadPool  implements XContentable<ExecutionThreadPool> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MAX_SIZE.getPreferredName(), _maxSize);
     builder.field(QUEUE_SIZE.getPreferredName(), _queueSize);
+    builder.endObject();
     return builder;
   }
 

@@ -86,6 +86,7 @@ public class ClusterHealthRequest  implements XContentable<ClusterHealthRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
@@ -115,6 +116,7 @@ public class ClusterHealthRequest  implements XContentable<ClusterHealthRequest>
       builder.field(WAIT_FOR_STATUS.getPreferredName());
       _waitForStatus.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

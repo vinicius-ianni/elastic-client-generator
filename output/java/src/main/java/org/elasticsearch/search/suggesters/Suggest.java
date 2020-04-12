@@ -44,12 +44,14 @@ public class Suggest<T>  implements XContentable<Suggest<T>> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LENGTH.getPreferredName(), _length);
     builder.field(OFFSET.getPreferredName(), _offset);
     if (_options != null) {
       builder.array(OPTIONS.getPreferredName(), _options);
     }
     builder.field(TEXT.getPreferredName(), _text);
+    builder.endObject();
     return builder;
   }
 

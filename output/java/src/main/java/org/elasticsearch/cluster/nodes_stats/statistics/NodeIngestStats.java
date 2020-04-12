@@ -31,6 +31,7 @@ public class NodeIngestStats  implements XContentable<NodeIngestStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_pipelines != null) {
       builder.field(PIPELINES.getPreferredName());
       _pipelines.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class NodeIngestStats  implements XContentable<NodeIngestStats> {
       builder.field(TOTAL.getPreferredName());
       _total.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

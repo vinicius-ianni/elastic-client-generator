@@ -31,8 +31,10 @@ public class CleanupRepositoryResults  implements XContentable<CleanupRepository
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DELETED_BYTES.getPreferredName(), _deletedBytes);
     builder.field(DELETED_BLOBS.getPreferredName(), _deletedBlobs);
+    builder.endObject();
     return builder;
   }
 

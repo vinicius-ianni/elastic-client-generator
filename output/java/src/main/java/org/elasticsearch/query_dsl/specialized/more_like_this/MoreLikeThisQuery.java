@@ -133,6 +133,7 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(BOOST_TERMS.getPreferredName(), _boostTerms);
     if (_fields != null) {
@@ -156,8 +157,10 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
       builder.field(PER_FIELD_ANALYZER.getPreferredName());
       _perFieldAnalyzer.toXContent(builder, params);
     }
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     if (_stopWords != null) {
       builder.field(STOP_WORDS.getPreferredName());
       _stopWords.toXContent(builder, params);
@@ -170,6 +173,7 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

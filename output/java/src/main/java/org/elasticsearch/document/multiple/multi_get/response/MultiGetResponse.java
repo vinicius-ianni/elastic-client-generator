@@ -31,10 +31,12 @@ public class MultiGetResponse  implements XContentable<MultiGetResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_hits != null) {
       builder.array(HITS.getPreferredName(), _hits);
     }
     builder.field(IS_VALID.getPreferredName(), _isValid);
+    builder.endObject();
     return builder;
   }
 

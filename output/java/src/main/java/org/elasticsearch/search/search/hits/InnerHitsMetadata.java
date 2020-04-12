@@ -39,6 +39,7 @@ public class InnerHitsMetadata  implements XContentable<InnerHitsMetadata> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_hits != null) {
       builder.array(HITS.getPreferredName(), _hits);
     }
@@ -47,6 +48,7 @@ public class InnerHitsMetadata  implements XContentable<InnerHitsMetadata> {
       builder.field(TOTAL.getPreferredName());
       _total.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

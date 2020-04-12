@@ -104,6 +104,7 @@ public class SegmentsStats  implements XContentable<SegmentsStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COUNT.getPreferredName(), _count);
     builder.field(DOC_VALUES_MEMORY_IN_BYTES.getPreferredName(), _docValuesMemoryInBytes);
     builder.field(FIXED_BIT_SET_MEMORY_IN_BYTES.getPreferredName(), _fixedBitSetMemoryInBytes);
@@ -121,6 +122,7 @@ public class SegmentsStats  implements XContentable<SegmentsStats> {
       builder.field(FILE_SIZES.getPreferredName());
       _fileSizes.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

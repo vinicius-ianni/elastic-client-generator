@@ -50,6 +50,7 @@ public class WatchStatus  implements XContentable<WatchStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.field(ACTIONS.getPreferredName());
       _actions.toXContent(builder, params);
@@ -63,6 +64,7 @@ public class WatchStatus  implements XContentable<WatchStatus> {
       _state.toXContent(builder, params);
     }
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

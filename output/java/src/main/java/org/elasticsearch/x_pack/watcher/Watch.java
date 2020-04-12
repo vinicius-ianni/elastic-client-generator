@@ -72,6 +72,7 @@ public class Watch  implements XContentable<Watch> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.field(ACTIONS.getPreferredName());
       _actions.toXContent(builder, params);
@@ -101,6 +102,7 @@ public class Watch  implements XContentable<Watch> {
       builder.field(TRIGGER.getPreferredName());
       _trigger.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

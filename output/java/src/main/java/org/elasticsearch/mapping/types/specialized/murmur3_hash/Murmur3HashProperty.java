@@ -20,7 +20,9 @@ public class Murmur3HashProperty  implements XContentable<Murmur3HashProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     
+    builder.endObject();
     return builder;
   }
 

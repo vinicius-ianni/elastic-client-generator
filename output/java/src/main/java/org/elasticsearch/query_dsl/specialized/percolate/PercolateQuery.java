@@ -71,20 +71,30 @@ public class PercolateQuery  implements XContentable<PercolateQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DOCUMENT.getPreferredName(), _document);
     if (_documents != null) {
       builder.array(DOCUMENTS.getPreferredName(), _documents);
     }
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
-    builder.field(ID.getPreferredName());
-    _id.toXContent(builder, params);
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName());
+      _id.toXContent(builder, params);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     builder.field(PREFERENCE.getPreferredName(), _preference);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

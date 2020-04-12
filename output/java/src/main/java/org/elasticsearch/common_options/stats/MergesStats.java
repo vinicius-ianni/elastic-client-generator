@@ -115,6 +115,7 @@ public class MergesStats  implements XContentable<MergesStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CURRENT.getPreferredName(), _current);
     builder.field(CURRENT_DOCS.getPreferredName(), _currentDocs);
     builder.field(CURRENT_SIZE.getPreferredName(), _currentSize);
@@ -131,6 +132,7 @@ public class MergesStats  implements XContentable<MergesStats> {
     builder.field(TOTAL_THROTTLED_TIME_IN_MILLIS.getPreferredName(), _totalThrottledTimeInMillis);
     builder.field(TOTAL_TIME.getPreferredName(), _totalTime);
     builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    builder.endObject();
     return builder;
   }
 

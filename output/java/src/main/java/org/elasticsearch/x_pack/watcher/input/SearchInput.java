@@ -38,6 +38,7 @@ public class SearchInput  implements XContentable<SearchInput> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_extract != null) {
       builder.array(EXTRACT.getPreferredName(), _extract);
     }
@@ -49,6 +50,7 @@ public class SearchInput  implements XContentable<SearchInput> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

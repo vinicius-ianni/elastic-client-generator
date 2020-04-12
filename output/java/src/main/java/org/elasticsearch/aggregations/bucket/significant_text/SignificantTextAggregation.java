@@ -120,6 +120,7 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_backgroundFilter != null) {
       builder.field(BACKGROUND_FILTER.getPreferredName());
       _backgroundFilter.toXContent(builder, params);
@@ -136,8 +137,10 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
       builder.field(EXECUTION_HINT.getPreferredName());
       _executionHint.toXContent(builder, params);
     }
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     builder.field(FILTER_DUPLICATE_TEXT.getPreferredName(), _filterDuplicateText);
     if (_gnd != null) {
       builder.field(GND.getPreferredName());
@@ -166,6 +169,7 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
     if (_sourceFields != null) {
       builder.array(SOURCE_FIELDS.getPreferredName(), _sourceFields);
     }
+    builder.endObject();
     return builder;
   }
 

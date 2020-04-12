@@ -25,7 +25,9 @@ public class Datafeeds  implements XContentable<Datafeeds> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    builder.endObject();
     return builder;
   }
 

@@ -86,6 +86,7 @@ public class CatSnapshotsRecord  implements XContentable<CatSnapshotsRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_duration != null) {
       builder.field(DURATION.getPreferredName());
       _duration.toXContent(builder, params);
@@ -100,6 +101,7 @@ public class CatSnapshotsRecord  implements XContentable<CatSnapshotsRecord> {
     builder.field(STATUS.getPreferredName(), _status);
     builder.field(SUCCESSFUL_SHARDS.getPreferredName(), _successfulShards);
     builder.field(TOTAL_SHARDS.getPreferredName(), _totalShards);
+    builder.endObject();
     return builder;
   }
 

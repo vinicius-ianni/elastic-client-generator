@@ -68,6 +68,7 @@ public class NodeAllocationExplanation  implements XContentable<NodeAllocationEx
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_deciders != null) {
       builder.array(DECIDERS.getPreferredName(), _deciders);
     }
@@ -87,6 +88,7 @@ public class NodeAllocationExplanation  implements XContentable<NodeAllocationEx
     }
     builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
     builder.field(WEIGHT_RANKING.getPreferredName(), _weightRanking);
+    builder.endObject();
     return builder;
   }
 

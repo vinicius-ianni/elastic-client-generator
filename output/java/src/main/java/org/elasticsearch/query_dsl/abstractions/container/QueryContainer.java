@@ -398,6 +398,7 @@ public class QueryContainer  implements XContentable<QueryContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_bool != null) {
       builder.field(BOOL.getPreferredName());
       _bool.toXContent(builder, params);
@@ -606,6 +607,7 @@ public class QueryContainer  implements XContentable<QueryContainer> {
       builder.field(PINNED.getPreferredName());
       _pinned.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

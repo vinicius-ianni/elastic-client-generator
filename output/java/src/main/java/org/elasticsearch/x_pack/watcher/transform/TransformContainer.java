@@ -37,6 +37,7 @@ public class TransformContainer  implements XContentable<TransformContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_chain != null) {
       builder.field(CHAIN.getPreferredName());
       _chain.toXContent(builder, params);
@@ -49,6 +50,7 @@ public class TransformContainer  implements XContentable<TransformContainer> {
       builder.field(SEARCH.getPreferredName());
       _search.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

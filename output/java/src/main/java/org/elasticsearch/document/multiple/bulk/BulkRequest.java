@@ -83,6 +83,7 @@ public class BulkRequest  implements XContentable<BulkRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_operations != null) {
       builder.array(OPERATIONS.getPreferredName(), _operations);
     }
@@ -91,8 +92,10 @@ public class BulkRequest  implements XContentable<BulkRequest> {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
     }
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
     if (_sourceExcludes != null) {
       builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
@@ -106,6 +109,7 @@ public class BulkRequest  implements XContentable<BulkRequest> {
     }
     builder.field(TYPE_QUERY_STRING.getPreferredName(), _typeQueryString);
     builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    builder.endObject();
     return builder;
   }
 

@@ -62,6 +62,7 @@ public class DynamicTemplate  implements XContentable<DynamicTemplate> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_mapping != null) {
       builder.field(MAPPING.getPreferredName());
       _mapping.toXContent(builder, params);
@@ -75,6 +76,7 @@ public class DynamicTemplate  implements XContentable<DynamicTemplate> {
     builder.field(PATH_MATCH.getPreferredName(), _pathMatch);
     builder.field(PATH_UNMATCH.getPreferredName(), _pathUnmatch);
     builder.field(UNMATCH.getPreferredName(), _unmatch);
+    builder.endObject();
     return builder;
   }
 

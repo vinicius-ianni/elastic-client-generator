@@ -25,10 +25,12 @@ public class Policy  implements XContentable<Policy> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_phases != null) {
       builder.field(PHASES.getPreferredName());
       _phases.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

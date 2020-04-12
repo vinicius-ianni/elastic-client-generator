@@ -39,6 +39,7 @@ public class NestedSort  implements XContentable<NestedSort> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
@@ -47,8 +48,11 @@ public class NestedSort  implements XContentable<NestedSort> {
       builder.field(NESTED.getPreferredName());
       _nested.toXContent(builder, params);
     }
-    builder.field(PATH.getPreferredName());
-    _path.toXContent(builder, params);
+    if (_path != null) {
+      builder.field(PATH.getPreferredName());
+      _path.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

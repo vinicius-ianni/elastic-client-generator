@@ -139,6 +139,7 @@ public class ShardStats  implements XContentable<ShardStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_commit != null) {
       builder.field(COMMIT.getPreferredName());
       _commit.toXContent(builder, params);
@@ -219,6 +220,7 @@ public class ShardStats  implements XContentable<ShardStats> {
       builder.field(WARMER.getPreferredName());
       _warmer.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -31,10 +31,12 @@ public class TermsExclude  implements XContentable<TermsExclude> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(PATTERN.getPreferredName(), _pattern);
     if (_values != null) {
       builder.array(VALUES.getPreferredName(), _values);
     }
+    builder.endObject();
     return builder;
   }
 

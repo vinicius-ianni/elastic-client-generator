@@ -109,6 +109,7 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_aggregations != null) {
       builder.field(AGGREGATIONS.getPreferredName());
       _aggregations.toXContent(builder, params);
@@ -144,6 +145,7 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
     builder.field(TIMED_OUT.getPreferredName(), _timedOut);
     builder.field(TOOK.getPreferredName(), _took);
     builder.field(TOTAL.getPreferredName(), _total);
+    builder.endObject();
     return builder;
   }
 

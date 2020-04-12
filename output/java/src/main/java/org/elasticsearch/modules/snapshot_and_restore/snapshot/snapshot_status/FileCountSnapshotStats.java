@@ -31,8 +31,10 @@ public class FileCountSnapshotStats  implements XContentable<FileCountSnapshotSt
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FILE_COUNT.getPreferredName(), _fileCount);
     builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    builder.endObject();
     return builder;
   }
 

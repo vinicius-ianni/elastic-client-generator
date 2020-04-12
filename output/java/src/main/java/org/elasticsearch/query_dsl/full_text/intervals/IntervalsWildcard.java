@@ -37,10 +37,14 @@ public class IntervalsWildcard  implements XContentable<IntervalsWildcard> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(PATTERN.getPreferredName(), _pattern);
-    builder.field(USE_FIELD.getPreferredName());
-    _useField.toXContent(builder, params);
+    if (_useField != null) {
+      builder.field(USE_FIELD.getPreferredName());
+      _useField.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

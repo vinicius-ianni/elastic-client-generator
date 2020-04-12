@@ -25,7 +25,9 @@ public class TruncateTokenFilter  implements XContentable<TruncateTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LENGTH.getPreferredName(), _length);
+    builder.endObject();
     return builder;
   }
 

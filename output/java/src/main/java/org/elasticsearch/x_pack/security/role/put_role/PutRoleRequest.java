@@ -62,6 +62,7 @@ public class PutRoleRequest  implements XContentable<PutRoleRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
@@ -86,6 +87,7 @@ public class PutRoleRequest  implements XContentable<PutRoleRequest> {
     if (_runAs != null) {
       builder.array(RUN_AS.getPreferredName(), _runAs);
     }
+    builder.endObject();
     return builder;
   }
 

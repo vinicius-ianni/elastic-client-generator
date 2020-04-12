@@ -26,10 +26,12 @@ public class GetPipelineResponse extends DictionaryResponseBase<String, Pipeline
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_pipelines != null) {
       builder.field(PIPELINES.getPreferredName());
       _pipelines.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

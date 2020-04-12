@@ -67,6 +67,7 @@ public class CatNodeAttributesRecord  implements XContentable<CatNodeAttributesR
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ATTR.getPreferredName(), _attr);
     builder.field(HOST.getPreferredName(), _host);
     builder.field(ID.getPreferredName(), _id);
@@ -75,6 +76,7 @@ public class CatNodeAttributesRecord  implements XContentable<CatNodeAttributesR
     builder.field(PORT.getPreferredName(), _port);
     builder.field(PID.getPreferredName(), _pid);
     builder.field(VALUE.getPreferredName(), _value);
+    builder.endObject();
     return builder;
   }
 

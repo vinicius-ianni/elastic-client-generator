@@ -37,6 +37,7 @@ public class DeprecationInfoResponse  implements XContentable<DeprecationInfoRes
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_clusterSettings != null) {
       builder.array(CLUSTER_SETTINGS.getPreferredName(), _clusterSettings);
     }
@@ -47,6 +48,7 @@ public class DeprecationInfoResponse  implements XContentable<DeprecationInfoRes
     if (_nodeSettings != null) {
       builder.array(NODE_SETTINGS.getPreferredName(), _nodeSettings);
     }
+    builder.endObject();
     return builder;
   }
 

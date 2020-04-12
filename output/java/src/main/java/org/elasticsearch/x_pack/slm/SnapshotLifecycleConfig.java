@@ -37,10 +37,14 @@ public class SnapshotLifecycleConfig  implements XContentable<SnapshotLifecycleC
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
     builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
-    builder.field(INDICES.getPreferredName());
-    _indices.toXContent(builder, params);
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName());
+      _indices.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

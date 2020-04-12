@@ -61,6 +61,7 @@ public class CpuStats  implements XContentable<CpuStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(PERCENT.getPreferredName(), _percent);
     builder.field(SYS.getPreferredName(), _sys);
     builder.field(SYS_IN_MILLIS.getPreferredName(), _sysInMillis);
@@ -68,6 +69,7 @@ public class CpuStats  implements XContentable<CpuStats> {
     builder.field(TOTAL_IN_MILLIS.getPreferredName(), _totalInMillis);
     builder.field(USER.getPreferredName(), _user);
     builder.field(USER_IN_MILLIS.getPreferredName(), _userInMillis);
+    builder.endObject();
     return builder;
   }
 

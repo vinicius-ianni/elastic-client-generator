@@ -50,6 +50,7 @@ public class SuggestFuzziness  implements XContentable<SuggestFuzziness> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_fuzziness != null) {
       builder.field(FUZZINESS.getPreferredName());
       _fuzziness.toXContent(builder, params);
@@ -58,6 +59,7 @@ public class SuggestFuzziness  implements XContentable<SuggestFuzziness> {
     builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
     builder.field(TRANSPOSITIONS.getPreferredName(), _transpositions);
     builder.field(UNICODE_AWARE.getPreferredName(), _unicodeAware);
+    builder.endObject();
     return builder;
   }
 

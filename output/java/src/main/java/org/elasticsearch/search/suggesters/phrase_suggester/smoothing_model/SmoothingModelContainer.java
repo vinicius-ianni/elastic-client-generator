@@ -37,6 +37,7 @@ public class SmoothingModelContainer  implements XContentable<SmoothingModelCont
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_laplace != null) {
       builder.field(LAPLACE.getPreferredName());
       _laplace.toXContent(builder, params);
@@ -49,6 +50,7 @@ public class SmoothingModelContainer  implements XContentable<SmoothingModelCont
       builder.field(STUPID_BACKOFF.getPreferredName());
       _stupidBackoff.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

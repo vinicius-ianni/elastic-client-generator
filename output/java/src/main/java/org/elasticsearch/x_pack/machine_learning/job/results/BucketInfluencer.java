@@ -79,6 +79,7 @@ public class BucketInfluencer  implements XContentable<BucketInfluencer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BUCKET_SPAN.getPreferredName(), _bucketSpan);
     builder.field(INFLUENCER_FIELD_NAME.getPreferredName(), _influencerFieldName);
     builder.field(INFLUENCER_FIELD_VALUE.getPreferredName(), _influencerFieldValue);
@@ -90,6 +91,7 @@ public class BucketInfluencer  implements XContentable<BucketInfluencer> {
     builder.field(RESULT_TYPE.getPreferredName(), _resultType);
     builder.field(TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.endObject();
     return builder;
   }
 

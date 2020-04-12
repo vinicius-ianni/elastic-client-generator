@@ -89,6 +89,7 @@ public class PutIndexTemplateRequest  implements XContentable<PutIndexTemplateRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_aliases != null) {
       builder.field(ALIASES.getPreferredName());
       _aliases.toXContent(builder, params);
@@ -117,6 +118,7 @@ public class PutIndexTemplateRequest  implements XContentable<PutIndexTemplateRe
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

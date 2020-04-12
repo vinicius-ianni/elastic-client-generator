@@ -25,10 +25,12 @@ public class FilterAggregation  implements XContentable<FilterAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

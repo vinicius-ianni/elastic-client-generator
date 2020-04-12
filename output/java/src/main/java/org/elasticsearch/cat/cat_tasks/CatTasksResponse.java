@@ -25,9 +25,11 @@ public class CatTasksResponse  implements XContentable<CatTasksResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_records != null) {
       builder.array(RECORDS.getPreferredName(), _records);
     }
+    builder.endObject();
     return builder;
   }
 

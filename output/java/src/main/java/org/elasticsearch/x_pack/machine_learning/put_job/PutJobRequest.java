@@ -63,6 +63,7 @@ public class PutJobRequest  implements XContentable<PutJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_analysisConfig != null) {
       builder.field(ANALYSIS_CONFIG.getPreferredName());
       _analysisConfig.toXContent(builder, params);
@@ -81,8 +82,11 @@ public class PutJobRequest  implements XContentable<PutJobRequest> {
       _modelPlot.toXContent(builder, params);
     }
     builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
-    builder.field(RESULTS_INDEX_NAME.getPreferredName());
-    _resultsIndexName.toXContent(builder, params);
+    if (_resultsIndexName != null) {
+      builder.field(RESULTS_INDEX_NAME.getPreferredName());
+      _resultsIndexName.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

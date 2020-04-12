@@ -58,6 +58,7 @@ public class TemplateMapping  implements XContentable<TemplateMapping> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_aliases != null) {
       builder.field(ALIASES.getPreferredName());
       _aliases.toXContent(builder, params);
@@ -75,6 +76,7 @@ public class TemplateMapping  implements XContentable<TemplateMapping> {
       _settings.toXContent(builder, params);
     }
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

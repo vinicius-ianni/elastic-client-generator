@@ -31,8 +31,10 @@ public class SearchNode  implements XContentable<SearchNode> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NAME.getPreferredName(), _name);
     builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    builder.endObject();
     return builder;
   }
 

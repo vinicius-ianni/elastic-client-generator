@@ -102,6 +102,7 @@ public class MatchQuery  implements XContentable<MatchQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
     builder.field(CUTOFF_FREQUENCY.getPreferredName(), _cutoffFrequency);
@@ -130,6 +131,7 @@ public class MatchQuery  implements XContentable<MatchQuery> {
       builder.field(ZERO_TERMS_QUERY.getPreferredName());
       _zeroTermsQuery.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

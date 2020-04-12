@@ -37,9 +37,11 @@ public class IpProperty  implements XContentable<IpProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BOOST.getPreferredName(), _boost);
     builder.field(INDEX.getPreferredName(), _index);
     builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    builder.endObject();
     return builder;
   }
 

@@ -37,11 +37,13 @@ public class PutCalendarResponse  implements XContentable<PutCalendarResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CALENDAR_ID.getPreferredName(), _calendarId);
     builder.field(DESCRIPTION.getPreferredName(), _description);
     if (_jobIds != null) {
       builder.array(JOB_IDS.getPreferredName(), _jobIds);
     }
+    builder.endObject();
     return builder;
   }
 

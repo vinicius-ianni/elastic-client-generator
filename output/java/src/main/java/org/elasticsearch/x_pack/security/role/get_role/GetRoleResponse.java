@@ -26,10 +26,12 @@ public class GetRoleResponse extends DictionaryResponseBase<String, XPackRole> i
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_roles != null) {
       builder.field(ROLES.getPreferredName());
       _roles.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

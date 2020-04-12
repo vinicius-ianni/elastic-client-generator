@@ -90,6 +90,7 @@ public class PutWatchRequest  implements XContentable<PutWatchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACTIVE.getPreferredName(), _active);
     builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
     builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
@@ -119,6 +120,7 @@ public class PutWatchRequest  implements XContentable<PutWatchRequest> {
       builder.field(TRIGGER.getPreferredName());
       _trigger.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -62,6 +62,7 @@ public class DateProperty  implements XContentable<DateProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BOOST.getPreferredName(), _boost);
     if (_fielddata != null) {
       builder.field(FIELDDATA.getPreferredName());
@@ -73,6 +74,7 @@ public class DateProperty  implements XContentable<DateProperty> {
     builder.field(NULL_VALUE.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_nullValue.toInstant()));
     builder.field(PRECISION_STEP.getPreferredName(), _precisionStep);
+    builder.endObject();
     return builder;
   }
 

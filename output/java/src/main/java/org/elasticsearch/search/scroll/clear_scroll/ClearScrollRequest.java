@@ -25,9 +25,11 @@ public class ClearScrollRequest  implements XContentable<ClearScrollRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_scrollId != null) {
       builder.array(SCROLL_ID.getPreferredName(), _scrollId);
     }
+    builder.endObject();
     return builder;
   }
 

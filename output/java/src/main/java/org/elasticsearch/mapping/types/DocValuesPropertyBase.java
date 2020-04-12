@@ -25,7 +25,9 @@ public class DocValuesPropertyBase  implements XContentable<DocValuesPropertyBas
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DOC_VALUES.getPreferredName(), _docValues);
+    builder.endObject();
     return builder;
   }
 

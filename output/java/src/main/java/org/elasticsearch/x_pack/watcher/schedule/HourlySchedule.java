@@ -25,9 +25,11 @@ public class HourlySchedule  implements XContentable<HourlySchedule> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_minute != null) {
       builder.array(MINUTE.getPreferredName(), _minute);
     }
+    builder.endObject();
     return builder;
   }
 

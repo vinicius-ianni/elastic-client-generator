@@ -31,8 +31,10 @@ public class StoredScript  implements XContentable<StoredScript> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LANG.getPreferredName(), _lang);
     builder.field(SOURCE.getPreferredName(), _source);
+    builder.endObject();
     return builder;
   }
 

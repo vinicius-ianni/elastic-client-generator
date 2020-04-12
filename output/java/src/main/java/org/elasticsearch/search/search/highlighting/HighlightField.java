@@ -148,6 +148,7 @@ public class HighlightField  implements XContentable<HighlightField> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BOUNDARY_CHARS.getPreferredName(), _boundaryChars);
     builder.field(BOUNDARY_MAX_SCAN.getPreferredName(), _boundaryMaxScan);
     if (_boundaryScanner != null) {
@@ -155,8 +156,10 @@ public class HighlightField  implements XContentable<HighlightField> {
       _boundaryScanner.toXContent(builder, params);
     }
     builder.field(BOUNDARY_SCANNER_LOCALE.getPreferredName(), _boundaryScannerLocale);
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     builder.field(FORCE_SOURCE.getPreferredName(), _forceSource);
     if (_fragmenter != null) {
       builder.field(FRAGMENTER.getPreferredName());
@@ -194,6 +197,7 @@ public class HighlightField  implements XContentable<HighlightField> {
       builder.field(TYPE.getPreferredName());
       _type.map(r-> r.toXContent(builder, params), builder::value);
     }
+    builder.endObject();
     return builder;
   }
 

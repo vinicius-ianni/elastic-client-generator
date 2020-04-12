@@ -49,14 +49,22 @@ public class FieldCapabilities  implements XContentable<FieldCapabilities> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AGGREGATABLE.getPreferredName(), _aggregatable);
-    builder.field(INDICES.getPreferredName());
-    _indices.toXContent(builder, params);
-    builder.field(NON_AGGREGATABLE_INDICES.getPreferredName());
-    _nonAggregatableIndices.toXContent(builder, params);
-    builder.field(NON_SEARCHABLE_INDICES.getPreferredName());
-    _nonSearchableIndices.toXContent(builder, params);
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName());
+      _indices.toXContent(builder, params);
+    }
+    if (_nonAggregatableIndices != null) {
+      builder.field(NON_AGGREGATABLE_INDICES.getPreferredName());
+      _nonAggregatableIndices.toXContent(builder, params);
+    }
+    if (_nonSearchableIndices != null) {
+      builder.field(NON_SEARCHABLE_INDICES.getPreferredName());
+      _nonSearchableIndices.toXContent(builder, params);
+    }
     builder.field(SEARCHABLE.getPreferredName(), _searchable);
+    builder.endObject();
     return builder;
   }
 

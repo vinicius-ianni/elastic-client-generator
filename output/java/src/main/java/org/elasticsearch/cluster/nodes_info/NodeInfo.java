@@ -116,6 +116,7 @@ public class NodeInfo  implements XContentable<NodeInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BUILD_HASH.getPreferredName(), _buildHash);
     builder.field(HOST.getPreferredName(), _host);
     if (_http != null) {
@@ -159,6 +160,7 @@ public class NodeInfo  implements XContentable<NodeInfo> {
     }
     builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

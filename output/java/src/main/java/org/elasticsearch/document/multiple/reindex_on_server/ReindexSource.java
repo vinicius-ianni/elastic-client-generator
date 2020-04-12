@@ -67,8 +67,11 @@ public class ReindexSource  implements XContentable<ReindexSource> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    builder.startObject();
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
@@ -88,6 +91,7 @@ public class ReindexSource  implements XContentable<ReindexSource> {
     if (_source != null) {
       builder.array(SOURCE.getPreferredName(), _source);
     }
+    builder.endObject();
     return builder;
   }
 

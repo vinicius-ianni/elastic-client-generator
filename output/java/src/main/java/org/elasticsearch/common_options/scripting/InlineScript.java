@@ -25,7 +25,9 @@ public class InlineScript  implements XContentable<InlineScript> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SOURCE.getPreferredName(), _source);
+    builder.endObject();
     return builder;
   }
 

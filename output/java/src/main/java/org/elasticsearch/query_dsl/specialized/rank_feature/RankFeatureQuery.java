@@ -25,10 +25,12 @@ public class RankFeatureQuery  implements XContentable<RankFeatureQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_function != null) {
       builder.field(FUNCTION.getPreferredName());
       _function.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

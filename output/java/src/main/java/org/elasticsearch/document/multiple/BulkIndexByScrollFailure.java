@@ -50,6 +50,7 @@ public class BulkIndexByScrollFailure  implements XContentable<BulkIndexByScroll
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_cause != null) {
       builder.field(CAUSE.getPreferredName());
       _cause.toXContent(builder, params);
@@ -58,6 +59,7 @@ public class BulkIndexByScrollFailure  implements XContentable<BulkIndexByScroll
     builder.field(INDEX.getPreferredName(), _index);
     builder.field(STATUS.getPreferredName(), _status);
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

@@ -37,9 +37,11 @@ public class DeleteWatchResponse  implements XContentable<DeleteWatchResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FOUND.getPreferredName(), _found);
     builder.field(ID.getPreferredName(), _id);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

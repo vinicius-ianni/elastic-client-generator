@@ -49,6 +49,7 @@ public class FlushRequest  implements XContentable<FlushRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -57,6 +58,7 @@ public class FlushRequest  implements XContentable<FlushRequest> {
     builder.field(FORCE.getPreferredName(), _force);
     builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
     builder.field(WAIT_IF_ONGOING.getPreferredName(), _waitIfOngoing);
+    builder.endObject();
     return builder;
   }
 

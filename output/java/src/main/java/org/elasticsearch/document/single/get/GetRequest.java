@@ -82,11 +82,14 @@ public class GetRequest  implements XContentable<GetRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(PREFERENCE.getPreferredName(), _preference);
     builder.field(REALTIME.getPreferredName(), _realtime);
     builder.field(REFRESH.getPreferredName(), _refresh);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
     if (_sourceExcludes != null) {
       builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
@@ -102,6 +105,7 @@ public class GetRequest  implements XContentable<GetRequest> {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

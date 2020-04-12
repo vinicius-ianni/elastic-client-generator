@@ -103,21 +103,28 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DOC.getPreferredName(), _doc);
     builder.field(FIELD_STATISTICS.getPreferredName(), _fieldStatistics);
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName());
-    _id.toXContent(builder, params);
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    if (_id != null) {
+      builder.field(ID.getPreferredName());
+      _id.toXContent(builder, params);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     builder.field(OFFSETS.getPreferredName(), _offsets);
     builder.field(PAYLOADS.getPreferredName(), _payloads);
     builder.field(POSITIONS.getPreferredName(), _positions);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
@@ -127,6 +134,7 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

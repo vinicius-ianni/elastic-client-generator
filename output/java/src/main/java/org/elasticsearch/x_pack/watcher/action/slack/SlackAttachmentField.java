@@ -37,9 +37,11 @@ public class SlackAttachmentField  implements XContentable<SlackAttachmentField>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SHORT.getPreferredName(), _short);
     builder.field(TITLE.getPreferredName(), _title);
     builder.field(VALUE.getPreferredName(), _value);
+    builder.endObject();
     return builder;
   }
 

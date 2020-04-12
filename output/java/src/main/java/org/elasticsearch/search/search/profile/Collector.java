@@ -44,12 +44,14 @@ public class Collector  implements XContentable<Collector> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_children != null) {
       builder.array(CHILDREN.getPreferredName(), _children);
     }
     builder.field(NAME.getPreferredName(), _name);
     builder.field(REASON.getPreferredName(), _reason);
     builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
+    builder.endObject();
     return builder;
   }
 

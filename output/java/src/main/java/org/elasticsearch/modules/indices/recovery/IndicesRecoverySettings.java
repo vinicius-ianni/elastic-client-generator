@@ -61,6 +61,7 @@ public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySet
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COMPRESS.getPreferredName(), _compress);
     builder.field(CONCURRENT_SMALL_FILE_STREAMS.getPreferredName(), _concurrentSmallFileStreams);
     builder.field(CONCURRENT_STREAMS.getPreferredName(), _concurrentStreams);
@@ -68,6 +69,7 @@ public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySet
     builder.field(MAX_BYTES_PER_SECOND.getPreferredName(), _maxBytesPerSecond);
     builder.field(TRANSLOG_OPERATIONS.getPreferredName(), _translogOperations);
     builder.field(TRANSLOG_SIZE.getPreferredName(), _translogSize);
+    builder.endObject();
     return builder;
   }
 

@@ -43,6 +43,7 @@ public class IndicesShardStoresRequest  implements XContentable<IndicesShardStor
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -52,6 +53,7 @@ public class IndicesShardStoresRequest  implements XContentable<IndicesShardStor
     if (_status != null) {
       builder.array(STATUS.getPreferredName(), _status);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -38,13 +38,17 @@ public class PainlessContextSetup  implements XContentable<PainlessContextSetup>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DOCUMENT.getPreferredName(), _document);
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

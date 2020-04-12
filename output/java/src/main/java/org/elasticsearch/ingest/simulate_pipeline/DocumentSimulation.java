@@ -62,6 +62,7 @@ public class DocumentSimulation  implements XContentable<DocumentSimulation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ID.getPreferredName(), _id);
     builder.field(INDEX.getPreferredName(), _index);
     if (_ingest != null) {
@@ -75,6 +76,7 @@ public class DocumentSimulation  implements XContentable<DocumentSimulation> {
       _source.toXContent(builder, params);
     }
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

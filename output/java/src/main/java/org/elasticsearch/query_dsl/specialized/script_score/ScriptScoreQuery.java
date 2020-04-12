@@ -32,6 +32,7 @@ public class ScriptScoreQuery  implements XContentable<ScriptScoreQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
@@ -40,6 +41,7 @@ public class ScriptScoreQuery  implements XContentable<ScriptScoreQuery> {
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

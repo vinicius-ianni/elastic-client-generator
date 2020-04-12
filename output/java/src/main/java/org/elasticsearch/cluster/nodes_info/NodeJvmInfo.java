@@ -74,6 +74,7 @@ public class NodeJvmInfo  implements XContentable<NodeJvmInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_gcCollectors != null) {
       builder.array(GC_COLLECTORS.getPreferredName(), _gcCollectors);
     }
@@ -90,6 +91,7 @@ public class NodeJvmInfo  implements XContentable<NodeJvmInfo> {
     builder.field(VM_NAME.getPreferredName(), _vmName);
     builder.field(VM_VENDOR.getPreferredName(), _vmVendor);
     builder.field(VM_VERSION.getPreferredName(), _vmVersion);
+    builder.endObject();
     return builder;
   }
 

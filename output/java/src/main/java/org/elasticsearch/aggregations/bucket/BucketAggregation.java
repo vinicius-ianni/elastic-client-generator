@@ -25,10 +25,12 @@ public class BucketAggregation  implements XContentable<BucketAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_aggregations != null) {
       builder.field(AGGREGATIONS.getPreferredName());
       _aggregations.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

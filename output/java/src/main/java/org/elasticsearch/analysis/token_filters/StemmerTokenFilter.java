@@ -25,7 +25,9 @@ public class StemmerTokenFilter  implements XContentable<StemmerTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LANGUAGE.getPreferredName(), _language);
+    builder.endObject();
     return builder;
   }
 

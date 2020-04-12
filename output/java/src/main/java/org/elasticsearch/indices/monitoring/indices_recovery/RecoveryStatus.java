@@ -25,9 +25,11 @@ public class RecoveryStatus  implements XContentable<RecoveryStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_shards != null) {
       builder.array(SHARDS.getPreferredName(), _shards);
     }
+    builder.endObject();
     return builder;
   }
 

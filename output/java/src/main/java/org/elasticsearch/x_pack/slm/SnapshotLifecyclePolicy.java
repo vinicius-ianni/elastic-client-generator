@@ -44,6 +44,7 @@ public class SnapshotLifecyclePolicy  implements XContentable<SnapshotLifecycleP
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_config != null) {
       builder.field(CONFIG.getPreferredName());
       _config.toXContent(builder, params);
@@ -54,6 +55,7 @@ public class SnapshotLifecyclePolicy  implements XContentable<SnapshotLifecycleP
       builder.field(SCHEDULE.getPreferredName());
       _schedule.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

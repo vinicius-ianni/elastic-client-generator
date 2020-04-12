@@ -25,9 +25,11 @@ public class CcrFollowStats  implements XContentable<CcrFollowStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_indices != null) {
       builder.array(INDICES.getPreferredName(), _indices);
     }
+    builder.endObject();
     return builder;
   }
 

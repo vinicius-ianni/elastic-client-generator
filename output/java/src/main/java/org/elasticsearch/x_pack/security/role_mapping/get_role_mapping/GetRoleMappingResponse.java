@@ -26,10 +26,12 @@ public class GetRoleMappingResponse extends DictionaryResponseBase<String, XPack
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_roleMappings != null) {
       builder.field(ROLE_MAPPINGS.getPreferredName());
       _roleMappings.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

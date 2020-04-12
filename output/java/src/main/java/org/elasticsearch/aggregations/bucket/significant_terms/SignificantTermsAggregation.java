@@ -108,6 +108,7 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_backgroundFilter != null) {
       builder.field(BACKGROUND_FILTER.getPreferredName());
       _backgroundFilter.toXContent(builder, params);
@@ -124,8 +125,10 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
       builder.field(EXECUTION_HINT.getPreferredName());
       _executionHint.toXContent(builder, params);
     }
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     if (_gnd != null) {
       builder.field(GND.getPreferredName());
       _gnd.toXContent(builder, params);
@@ -150,6 +153,7 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
     builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
     builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
     builder.field(SIZE.getPreferredName(), _size);
+    builder.endObject();
     return builder;
   }
 

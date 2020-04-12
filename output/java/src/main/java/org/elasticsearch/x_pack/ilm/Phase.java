@@ -32,6 +32,7 @@ public class Phase  implements XContentable<Phase> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.field(ACTIONS.getPreferredName());
       _actions.toXContent(builder, params);
@@ -40,6 +41,7 @@ public class Phase  implements XContentable<Phase> {
       builder.field(MIN_AGE.getPreferredName());
       _minAge.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -37,9 +37,11 @@ public class ClusterFileSystem  implements XContentable<ClusterFileSystem> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AVAILABLE_IN_BYTES.getPreferredName(), _availableInBytes);
     builder.field(FREE_IN_BYTES.getPreferredName(), _freeInBytes);
     builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
+    builder.endObject();
     return builder;
   }
 

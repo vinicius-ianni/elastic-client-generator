@@ -44,12 +44,14 @@ public class ShardStatistics  implements XContentable<ShardStatistics> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FAILED.getPreferredName(), _failed);
     if (_failures != null) {
       builder.array(FAILURES.getPreferredName(), _failures);
     }
     builder.field(SUCCESSFUL.getPreferredName(), _successful);
     builder.field(TOTAL.getPreferredName(), _total);
+    builder.endObject();
     return builder;
   }
 

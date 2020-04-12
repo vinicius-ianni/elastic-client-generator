@@ -98,6 +98,7 @@ public class ShardSegments  implements XContentable<ShardSegments> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COUNT.getPreferredName(), _count);
     builder.field(DOC_VALUES_MEMORY_IN_BYTES.getPreferredName(), _docValuesMemoryInBytes);
     if (_fileSizes != null) {
@@ -114,6 +115,7 @@ public class ShardSegments  implements XContentable<ShardSegments> {
     builder.field(TERMS_MEMORY_IN_BYTES.getPreferredName(), _termsMemoryInBytes);
     builder.field(TERM_VECTORS_MEMORY_IN_BYTES.getPreferredName(), _termVectorsMemoryInBytes);
     builder.field(VERSION_MAP_MEMORY_IN_BYTES.getPreferredName(), _versionMapMemoryInBytes);
+    builder.endObject();
     return builder;
   }
 

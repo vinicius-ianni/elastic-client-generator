@@ -43,6 +43,7 @@ public class HotThreadInformation  implements XContentable<HotThreadInformation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_hosts != null) {
       builder.array(HOSTS.getPreferredName(), _hosts);
     }
@@ -51,6 +52,7 @@ public class HotThreadInformation  implements XContentable<HotThreadInformation>
     if (_threads != null) {
       builder.array(THREADS.getPreferredName(), _threads);
     }
+    builder.endObject();
     return builder;
   }
 

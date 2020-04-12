@@ -25,10 +25,12 @@ public class HttpInputAuthentication  implements XContentable<HttpInputAuthentic
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_basic != null) {
       builder.field(BASIC.getPreferredName());
       _basic.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

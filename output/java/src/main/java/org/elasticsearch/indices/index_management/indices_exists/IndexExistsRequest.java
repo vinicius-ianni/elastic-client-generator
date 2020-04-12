@@ -55,6 +55,7 @@ public class IndexExistsRequest  implements XContentable<IndexExistsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -64,6 +65,7 @@ public class IndexExistsRequest  implements XContentable<IndexExistsRequest> {
     builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
     builder.field(INCLUDE_DEFAULTS.getPreferredName(), _includeDefaults);
     builder.field(LOCAL.getPreferredName(), _local);
+    builder.endObject();
     return builder;
   }
 

@@ -31,10 +31,12 @@ public class MultiplexerTokenFilter  implements XContentable<MultiplexerTokenFil
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filters != null) {
       builder.array(FILTERS.getPreferredName(), _filters);
     }
     builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    builder.endObject();
     return builder;
   }
 

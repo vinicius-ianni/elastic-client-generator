@@ -38,6 +38,7 @@ public class ValidateQueryResponse  implements XContentable<ValidateQueryRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_explanations != null) {
       builder.array(EXPLANATIONS.getPreferredName(), _explanations);
     }
@@ -46,6 +47,7 @@ public class ValidateQueryResponse  implements XContentable<ValidateQueryRespons
       _shards.toXContent(builder, params);
     }
     builder.field(VALID.getPreferredName(), _valid);
+    builder.endObject();
     return builder;
   }
 

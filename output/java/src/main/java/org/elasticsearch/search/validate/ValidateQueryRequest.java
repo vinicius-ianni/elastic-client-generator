@@ -98,6 +98,7 @@ public class ValidateQueryRequest  implements XContentable<ValidateQueryRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALL_SHARDS.getPreferredName(), _allShards);
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
@@ -120,6 +121,7 @@ public class ValidateQueryRequest  implements XContentable<ValidateQueryRequest>
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -76,6 +76,7 @@ public class AnalyzeRequest  implements XContentable<AnalyzeRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     if (_attributes != null) {
       builder.array(ATTRIBUTES.getPreferredName(), _attributes);
@@ -84,8 +85,10 @@ public class AnalyzeRequest  implements XContentable<AnalyzeRequest> {
       builder.array(CHAR_FILTER.getPreferredName(), _charFilter);
     }
     builder.field(EXPLAIN.getPreferredName(), _explain);
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     if (_filter != null) {
       builder.array(FILTER.getPreferredName(), _filter);
     }
@@ -97,6 +100,7 @@ public class AnalyzeRequest  implements XContentable<AnalyzeRequest> {
       builder.field(TOKENIZER.getPreferredName());
       _tokenizer.map(builder::value, r-> r.toXContent(builder, params));
     }
+    builder.endObject();
     return builder;
   }
 

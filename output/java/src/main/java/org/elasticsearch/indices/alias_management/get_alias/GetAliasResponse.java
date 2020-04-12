@@ -33,11 +33,13 @@ public class GetAliasResponse extends DictionaryResponseBase<IndexName, IndexAli
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_indices != null) {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
     builder.field(IS_VALID.getPreferredName(), _isValid);
+    builder.endObject();
     return builder;
   }
 

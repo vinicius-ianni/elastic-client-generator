@@ -235,6 +235,7 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
@@ -268,8 +269,10 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
     builder.field(REFRESH.getPreferredName(), _refresh);
     builder.field(REQUEST_CACHE.getPreferredName(), _requestCache);
     builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     if (_scroll != null) {
       builder.field(SCROLL.getPreferredName());
       _scroll.toXContent(builder, params);
@@ -306,6 +309,7 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
     builder.field(VERSION.getPreferredName(), _version);
     builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
     builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    builder.endObject();
     return builder;
   }
 

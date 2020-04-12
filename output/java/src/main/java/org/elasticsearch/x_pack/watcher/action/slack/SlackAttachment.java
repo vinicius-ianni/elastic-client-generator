@@ -110,6 +110,7 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AUTHOR_ICON.getPreferredName(), _authorIcon);
     builder.field(AUTHOR_LINK.getPreferredName(), _authorLink);
     builder.field(AUTHOR_NAME.getPreferredName(), _authorName);
@@ -128,6 +129,7 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
     builder.field(TITLE_LINK.getPreferredName(), _titleLink);
     builder.field(TS.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_ts.toInstant()));
+    builder.endObject();
     return builder;
   }
 

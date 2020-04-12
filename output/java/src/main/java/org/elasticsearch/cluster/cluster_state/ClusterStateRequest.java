@@ -69,6 +69,7 @@ public class ClusterStateRequest  implements XContentable<ClusterStateRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -86,6 +87,7 @@ public class ClusterStateRequest  implements XContentable<ClusterStateRequest> {
       builder.field(WAIT_FOR_TIMEOUT.getPreferredName());
       _waitForTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -20,7 +20,9 @@ public class UppercaseTokenFilter  implements XContentable<UppercaseTokenFilter>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     
+    builder.endObject();
     return builder;
   }
 

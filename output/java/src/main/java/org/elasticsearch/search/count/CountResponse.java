@@ -32,11 +32,13 @@ public class CountResponse  implements XContentable<CountResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COUNT.getPreferredName(), _count);
     if (_shards != null) {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

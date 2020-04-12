@@ -25,7 +25,9 @@ public class StartRollupJobResponse  implements XContentable<StartRollupJobRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(STARTED.getPreferredName(), _started);
+    builder.endObject();
     return builder;
   }
 

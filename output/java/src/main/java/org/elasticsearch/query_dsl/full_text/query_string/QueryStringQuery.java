@@ -175,12 +175,15 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_LEADING_WILDCARD.getPreferredName(), _allowLeadingWildcard);
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
     builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
-    builder.field(DEFAULT_FIELD.getPreferredName());
-    _defaultField.toXContent(builder, params);
+    if (_defaultField != null) {
+      builder.field(DEFAULT_FIELD.getPreferredName());
+      _defaultField.toXContent(builder, params);
+    }
     if (_defaultOperator != null) {
       builder.field(DEFAULT_OPERATOR.getPreferredName());
       _defaultOperator.toXContent(builder, params);
@@ -221,6 +224,7 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
       builder.field(TYPE.getPreferredName());
       _type.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -57,6 +57,7 @@ public class FunctionScoreQuery  implements XContentable<FunctionScoreQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_boostMode != null) {
       builder.field(BOOST_MODE.getPreferredName());
       _boostMode.toXContent(builder, params);
@@ -74,6 +75,7 @@ public class FunctionScoreQuery  implements XContentable<FunctionScoreQuery> {
       builder.field(SCORE_MODE.getPreferredName());
       _scoreMode.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

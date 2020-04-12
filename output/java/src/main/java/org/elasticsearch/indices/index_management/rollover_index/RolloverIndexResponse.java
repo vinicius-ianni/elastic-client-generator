@@ -55,6 +55,7 @@ public class RolloverIndexResponse  implements XContentable<RolloverIndexRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_conditions != null) {
       builder.field(CONDITIONS.getPreferredName());
       _conditions.toXContent(builder, params);
@@ -64,6 +65,7 @@ public class RolloverIndexResponse  implements XContentable<RolloverIndexRespons
     builder.field(OLD_INDEX.getPreferredName(), _oldIndex);
     builder.field(ROLLED_OVER.getPreferredName(), _rolledOver);
     builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    builder.endObject();
     return builder;
   }
 

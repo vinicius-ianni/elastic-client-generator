@@ -55,12 +55,14 @@ public class SearchShard  implements XContentable<SearchShard> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(INDEX.getPreferredName(), _index);
     builder.field(NODE.getPreferredName(), _node);
     builder.field(PRIMARY.getPreferredName(), _primary);
     builder.field(RELOCATING_NODE.getPreferredName(), _relocatingNode);
     builder.field(SHARD.getPreferredName(), _shard);
     builder.field(STATE.getPreferredName(), _state);
+    builder.endObject();
     return builder;
   }
 

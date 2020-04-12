@@ -43,6 +43,7 @@ public class SegmentsRequest  implements XContentable<SegmentsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -50,6 +51,7 @@ public class SegmentsRequest  implements XContentable<SegmentsRequest> {
     }
     builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
     builder.field(VERBOSE.getPreferredName(), _verbose);
+    builder.endObject();
     return builder;
   }
 

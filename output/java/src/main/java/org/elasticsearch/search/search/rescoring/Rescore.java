@@ -32,11 +32,13 @@ public class Rescore  implements XContentable<Rescore> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
     }
     builder.field(WINDOW_SIZE.getPreferredName(), _windowSize);
+    builder.endObject();
     return builder;
   }
 

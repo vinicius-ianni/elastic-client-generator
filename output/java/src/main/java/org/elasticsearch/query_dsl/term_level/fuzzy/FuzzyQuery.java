@@ -44,6 +44,7 @@ public class FuzzyQuery  implements XContentable<FuzzyQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MAX_EXPANSIONS.getPreferredName(), _maxExpansions);
     builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
     if (_rewrite != null) {
@@ -51,6 +52,7 @@ public class FuzzyQuery  implements XContentable<FuzzyQuery> {
       _rewrite.toXContent(builder, params);
     }
     builder.field(TRANSPOSITIONS.getPreferredName(), _transpositions);
+    builder.endObject();
     return builder;
   }
 

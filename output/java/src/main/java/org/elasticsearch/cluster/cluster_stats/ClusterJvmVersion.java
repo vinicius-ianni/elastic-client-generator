@@ -61,6 +61,7 @@ public class ClusterJvmVersion  implements XContentable<ClusterJvmVersion> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BUNDLED_JDK.getPreferredName(), _bundledJdk);
     builder.field(COUNT.getPreferredName(), _count);
     builder.field(USING_BUNDLED_JDK.getPreferredName(), _usingBundledJdk);
@@ -68,6 +69,7 @@ public class ClusterJvmVersion  implements XContentable<ClusterJvmVersion> {
     builder.field(VM_NAME.getPreferredName(), _vmName);
     builder.field(VM_VENDOR.getPreferredName(), _vmVendor);
     builder.field(VM_VERSION.getPreferredName(), _vmVersion);
+    builder.endObject();
     return builder;
   }
 

@@ -31,8 +31,10 @@ public class CreateIndexResponse  implements XContentable<CreateIndexResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
     builder.field(INDEX.getPreferredName(), _index);
+    builder.endObject();
     return builder;
   }
 

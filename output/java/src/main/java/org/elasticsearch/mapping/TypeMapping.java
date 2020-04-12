@@ -106,6 +106,7 @@ public class TypeMapping  implements XContentable<TypeMapping> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_allField != null) {
       builder.field(ALL_FIELD.getPreferredName());
       _allField.toXContent(builder, params);
@@ -151,6 +152,7 @@ public class TypeMapping  implements XContentable<TypeMapping> {
       builder.field(SOURCE.getPreferredName());
       _source.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

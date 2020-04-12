@@ -39,13 +39,17 @@ public class NestedIdentity  implements XContentable<NestedIdentity> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    builder.startObject();
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     if (_nested != null) {
       builder.field(NESTED.getPreferredName());
       _nested.toXContent(builder, params);
     }
     builder.field(OFFSET.getPreferredName(), _offset);
+    builder.endObject();
     return builder;
   }
 

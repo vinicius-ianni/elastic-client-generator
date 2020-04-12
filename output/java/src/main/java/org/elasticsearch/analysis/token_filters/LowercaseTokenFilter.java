@@ -25,7 +25,9 @@ public class LowercaseTokenFilter  implements XContentable<LowercaseTokenFilter>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LANGUAGE.getPreferredName(), _language);
+    builder.endObject();
     return builder;
   }
 

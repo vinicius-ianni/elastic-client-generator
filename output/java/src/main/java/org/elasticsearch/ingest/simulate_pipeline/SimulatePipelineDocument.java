@@ -38,11 +38,17 @@ public class SimulatePipelineDocument  implements XContentable<SimulatePipelineD
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(ID.getPreferredName());
-    _id.toXContent(builder, params);
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    builder.startObject();
+    if (_id != null) {
+      builder.field(ID.getPreferredName());
+      _id.toXContent(builder, params);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     builder.field(SOURCE.getPreferredName(), _source);
+    builder.endObject();
     return builder;
   }
 

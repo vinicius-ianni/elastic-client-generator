@@ -25,7 +25,9 @@ public class UaxEmailUrlTokenizer  implements XContentable<UaxEmailUrlTokenizer>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MAX_TOKEN_LENGTH.getPreferredName(), _maxTokenLength);
+    builder.endObject();
     return builder;
   }
 

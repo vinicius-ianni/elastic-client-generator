@@ -56,6 +56,7 @@ public class OpenIndexRequest  implements XContentable<OpenIndexRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -71,6 +72,7 @@ public class OpenIndexRequest  implements XContentable<OpenIndexRequest> {
       _timeout.toXContent(builder, params);
     }
     builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    builder.endObject();
     return builder;
   }
 

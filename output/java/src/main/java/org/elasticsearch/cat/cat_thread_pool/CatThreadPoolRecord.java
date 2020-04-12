@@ -140,6 +140,7 @@ public class CatThreadPoolRecord  implements XContentable<CatThreadPoolRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACTIVE.getPreferredName(), _active);
     builder.field(COMPLETED.getPreferredName(), _completed);
     builder.field(CORE.getPreferredName(), _core);
@@ -163,6 +164,7 @@ public class CatThreadPoolRecord  implements XContentable<CatThreadPoolRecord> {
     builder.field(REJECTED.getPreferredName(), _rejected);
     builder.field(SIZE.getPreferredName(), _size);
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

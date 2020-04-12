@@ -31,11 +31,13 @@ public class ResourcePrivileges  implements XContentable<ResourcePrivileges> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_privileges != null) {
       builder.field(PRIVILEGES.getPreferredName());
       _privileges.toXContent(builder, params);
     }
     builder.field(RESOURCE.getPreferredName(), _resource);
+    builder.endObject();
     return builder;
   }
 

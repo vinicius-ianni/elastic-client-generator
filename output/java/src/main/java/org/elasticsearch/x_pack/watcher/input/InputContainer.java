@@ -43,6 +43,7 @@ public class InputContainer  implements XContentable<InputContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_chain != null) {
       builder.field(CHAIN.getPreferredName());
       _chain.toXContent(builder, params);
@@ -59,6 +60,7 @@ public class InputContainer  implements XContentable<InputContainer> {
       builder.field(SIMPLE.getPreferredName());
       _simple.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

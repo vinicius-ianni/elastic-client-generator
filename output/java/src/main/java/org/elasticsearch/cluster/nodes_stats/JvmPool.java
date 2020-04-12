@@ -67,6 +67,7 @@ public class JvmPool  implements XContentable<JvmPool> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MAX.getPreferredName(), _max);
     builder.field(MAX_IN_BYTES.getPreferredName(), _maxInBytes);
     builder.field(PEAK_MAX.getPreferredName(), _peakMax);
@@ -75,6 +76,7 @@ public class JvmPool  implements XContentable<JvmPool> {
     builder.field(PEAK_USED_IN_BYTES.getPreferredName(), _peakUsedInBytes);
     builder.field(USED.getPreferredName(), _used);
     builder.field(USED_IN_BYTES.getPreferredName(), _usedInBytes);
+    builder.endObject();
     return builder;
   }
 

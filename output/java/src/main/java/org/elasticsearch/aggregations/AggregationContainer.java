@@ -430,6 +430,7 @@ public class AggregationContainer  implements XContentable<AggregationContainer>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_adjacencyMatrix != null) {
       builder.field(ADJACENCY_MATRIX.getPreferredName());
       _adjacencyMatrix.toXContent(builder, params);
@@ -666,6 +667,7 @@ public class AggregationContainer  implements XContentable<AggregationContainer>
       builder.field(MEDIAN_ABSOLUTE_DEVIATION.getPreferredName());
       _medianAbsoluteDeviation.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

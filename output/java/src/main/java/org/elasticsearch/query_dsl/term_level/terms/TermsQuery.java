@@ -31,6 +31,7 @@ public class TermsQuery  implements XContentable<TermsQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_terms != null) {
       builder.array(TERMS.getPreferredName(), _terms);
     }
@@ -38,6 +39,7 @@ public class TermsQuery  implements XContentable<TermsQuery> {
       builder.field(TERMS_LOOKUP.getPreferredName());
       _termsLookup.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

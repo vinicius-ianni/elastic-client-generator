@@ -49,6 +49,7 @@ public class ScriptedMetricAggregation  implements XContentable<ScriptedMetricAg
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_combineScript != null) {
       builder.field(COMBINE_SCRIPT.getPreferredName());
       _combineScript.toXContent(builder, params);
@@ -69,6 +70,7 @@ public class ScriptedMetricAggregation  implements XContentable<ScriptedMetricAg
       builder.field(REDUCE_SCRIPT.getPreferredName());
       _reduceScript.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

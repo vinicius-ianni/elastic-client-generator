@@ -87,6 +87,7 @@ public class TaskInfo  implements XContentable<TaskInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACTION.getPreferredName(), _action);
     builder.field(CANCELLABLE.getPreferredName(), _cancellable);
     if (_children != null) {
@@ -106,6 +107,7 @@ public class TaskInfo  implements XContentable<TaskInfo> {
       _status.toXContent(builder, params);
     }
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

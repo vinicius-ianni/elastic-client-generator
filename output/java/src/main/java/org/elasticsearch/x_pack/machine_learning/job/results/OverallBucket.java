@@ -56,6 +56,7 @@ public class OverallBucket  implements XContentable<OverallBucket> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BUCKET_SPAN.getPreferredName(), _bucketSpan);
     builder.field(IS_INTERIM.getPreferredName(), _isInterim);
     if (_jobs != null) {
@@ -65,6 +66,7 @@ public class OverallBucket  implements XContentable<OverallBucket> {
     builder.field(RESULT_TYPE.getPreferredName(), _resultType);
     builder.field(TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.endObject();
     return builder;
   }
 

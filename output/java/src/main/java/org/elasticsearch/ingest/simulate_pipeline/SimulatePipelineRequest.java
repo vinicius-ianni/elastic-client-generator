@@ -38,6 +38,7 @@ public class SimulatePipelineRequest  implements XContentable<SimulatePipelineRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_docs != null) {
       builder.array(DOCS.getPreferredName(), _docs);
     }
@@ -46,6 +47,7 @@ public class SimulatePipelineRequest  implements XContentable<SimulatePipelineRe
       _pipeline.toXContent(builder, params);
     }
     builder.field(VERBOSE.getPreferredName(), _verbose);
+    builder.endObject();
     return builder;
   }
 

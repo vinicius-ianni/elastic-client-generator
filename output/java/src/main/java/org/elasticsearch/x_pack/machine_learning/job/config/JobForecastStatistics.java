@@ -50,6 +50,7 @@ public class JobForecastStatistics  implements XContentable<JobForecastStatistic
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_memoryBytes != null) {
       builder.field(MEMORY_BYTES.getPreferredName());
       _memoryBytes.toXContent(builder, params);
@@ -67,6 +68,7 @@ public class JobForecastStatistics  implements XContentable<JobForecastStatistic
       _status.toXContent(builder, params);
     }
     builder.field(TOTAL.getPreferredName(), _total);
+    builder.endObject();
     return builder;
   }
 

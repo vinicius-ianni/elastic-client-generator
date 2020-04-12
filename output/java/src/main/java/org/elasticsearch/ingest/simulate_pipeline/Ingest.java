@@ -25,8 +25,10 @@ public class Ingest  implements XContentable<Ingest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.endObject();
     return builder;
   }
 

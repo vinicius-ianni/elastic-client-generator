@@ -69,6 +69,7 @@ public class UpdateJobRequest  implements XContentable<UpdateJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_analysisLimits != null) {
       builder.field(ANALYSIS_LIMITS.getPreferredName());
       _analysisLimits.toXContent(builder, params);
@@ -89,6 +90,7 @@ public class UpdateJobRequest  implements XContentable<UpdateJobRequest> {
     builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
     builder.field(RENORMALIZATION_WINDOW_DAYS.getPreferredName(), _renormalizationWindowDays);
     builder.field(RESULTS_RETENTION_DAYS.getPreferredName(), _resultsRetentionDays);
+    builder.endObject();
     return builder;
   }
 

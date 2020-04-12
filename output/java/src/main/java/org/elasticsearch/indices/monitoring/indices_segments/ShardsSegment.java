@@ -44,6 +44,7 @@ public class ShardsSegment  implements XContentable<ShardsSegment> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NUM_COMMITTED_SEGMENTS.getPreferredName(), _numCommittedSegments);
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
@@ -54,6 +55,7 @@ public class ShardsSegment  implements XContentable<ShardsSegment> {
       builder.field(SEGMENTS.getPreferredName());
       _segments.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

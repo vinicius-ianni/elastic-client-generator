@@ -31,8 +31,10 @@ public class ShardStoreException  implements XContentable<ShardStoreException> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(REASON.getPreferredName(), _reason);
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

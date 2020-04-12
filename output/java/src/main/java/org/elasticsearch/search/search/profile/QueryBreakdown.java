@@ -55,12 +55,14 @@ public class QueryBreakdown  implements XContentable<QueryBreakdown> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ADVANCE.getPreferredName(), _advance);
     builder.field(BUILD_SCORER.getPreferredName(), _buildScorer);
     builder.field(CREATE_WEIGHT.getPreferredName(), _createWeight);
     builder.field(MATCH.getPreferredName(), _match);
     builder.field(NEXT_DOC.getPreferredName(), _nextDoc);
     builder.field(SCORE.getPreferredName(), _score);
+    builder.endObject();
     return builder;
   }
 

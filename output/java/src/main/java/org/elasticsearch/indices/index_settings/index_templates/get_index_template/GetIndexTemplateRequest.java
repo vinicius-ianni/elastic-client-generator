@@ -43,6 +43,7 @@ public class GetIndexTemplateRequest  implements XContentable<GetIndexTemplateRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
     builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
     builder.field(LOCAL.getPreferredName(), _local);
@@ -50,6 +51,7 @@ public class GetIndexTemplateRequest  implements XContentable<GetIndexTemplateRe
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

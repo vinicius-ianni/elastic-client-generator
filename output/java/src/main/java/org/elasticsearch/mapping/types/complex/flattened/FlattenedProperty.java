@@ -80,6 +80,7 @@ public class FlattenedProperty  implements XContentable<FlattenedProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BOOST.getPreferredName(), _boost);
     builder.field(DEPTH_LIMIT.getPreferredName(), _depthLimit);
     builder.field(DOC_VALUES.getPreferredName(), _docValues);
@@ -93,6 +94,7 @@ public class FlattenedProperty  implements XContentable<FlattenedProperty> {
     builder.field(NULL_VALUE.getPreferredName(), _nullValue);
     builder.field(SIMILARITY.getPreferredName(), _similarity);
     builder.field(SPLIT_QUERIES_ON_WHITESPACE.getPreferredName(), _splitQueriesOnWhitespace);
+    builder.endObject();
     return builder;
   }
 

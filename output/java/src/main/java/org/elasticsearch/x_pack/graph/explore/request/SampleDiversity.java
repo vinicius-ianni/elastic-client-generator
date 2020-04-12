@@ -32,9 +32,13 @@ public class SampleDiversity  implements XContentable<SampleDiversity> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    builder.startObject();
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     builder.field(MAX_DOCS_PER_VALUE.getPreferredName(), _maxDocsPerValue);
+    builder.endObject();
     return builder;
   }
 

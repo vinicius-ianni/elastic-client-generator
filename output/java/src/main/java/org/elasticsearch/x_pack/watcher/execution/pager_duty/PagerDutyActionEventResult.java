@@ -44,6 +44,7 @@ public class PagerDutyActionEventResult  implements XContentable<PagerDutyAction
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_event != null) {
       builder.field(EVENT.getPreferredName());
       _event.toXContent(builder, params);
@@ -57,6 +58,7 @@ public class PagerDutyActionEventResult  implements XContentable<PagerDutyAction
       builder.field(RESPONSE.getPreferredName());
       _response.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

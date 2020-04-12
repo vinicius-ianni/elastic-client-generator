@@ -68,6 +68,7 @@ public class CatThreadPoolRequest  implements XContentable<CatThreadPoolRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FORMAT.getPreferredName(), _format);
     if (_headers != null) {
       builder.array(HEADERS.getPreferredName(), _headers);
@@ -86,6 +87,7 @@ public class CatThreadPoolRequest  implements XContentable<CatThreadPoolRequest>
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
     builder.field(VERBOSE.getPreferredName(), _verbose);
+    builder.endObject();
     return builder;
   }
 

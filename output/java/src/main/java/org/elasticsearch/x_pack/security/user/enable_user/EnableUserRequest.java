@@ -25,10 +25,12 @@ public class EnableUserRequest  implements XContentable<EnableUserRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

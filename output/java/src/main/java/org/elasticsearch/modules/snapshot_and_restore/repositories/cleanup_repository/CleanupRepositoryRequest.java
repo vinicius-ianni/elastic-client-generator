@@ -31,6 +31,7 @@ public class CleanupRepositoryRequest  implements XContentable<CleanupRepository
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class CleanupRepositoryRequest  implements XContentable<CleanupRepository
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

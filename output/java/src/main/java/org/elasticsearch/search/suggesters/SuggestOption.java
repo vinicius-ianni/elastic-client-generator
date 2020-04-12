@@ -83,6 +83,7 @@ public class SuggestOption<TDocument>  implements XContentable<SuggestOption<TDo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COLLATE_MATCH.getPreferredName(), _collateMatch);
     if (_contexts != null) {
       builder.field(CONTEXTS.getPreferredName());
@@ -96,10 +97,13 @@ public class SuggestOption<TDocument>  implements XContentable<SuggestOption<TDo
     builder.field(FREQ.getPreferredName(), _freq);
     builder.field(HIGHLIGHTED.getPreferredName(), _highlighted);
     builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     builder.field(SOURCE.getPreferredName(), _source);
     builder.field(TEXT.getPreferredName(), _text);
+    builder.endObject();
     return builder;
   }
 

@@ -81,6 +81,7 @@ public class WatchRecord  implements XContentable<WatchRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_condition != null) {
       builder.field(CONDITION.getPreferredName());
       _condition.toXContent(builder, params);
@@ -111,6 +112,7 @@ public class WatchRecord  implements XContentable<WatchRecord> {
     builder.field(USER.getPreferredName(), _user);
     builder.field(NODE.getPreferredName(), _node);
     builder.field(WATCH_ID.getPreferredName(), _watchId);
+    builder.endObject();
     return builder;
   }
 

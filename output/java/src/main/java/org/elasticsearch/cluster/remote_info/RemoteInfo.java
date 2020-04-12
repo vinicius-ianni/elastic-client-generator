@@ -56,6 +56,7 @@ public class RemoteInfo  implements XContentable<RemoteInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CONNECTED.getPreferredName(), _connected);
     builder.field(SKIP_UNAVAILABLE.getPreferredName(), _skipUnavailable);
     if (_initialConnectTimeout != null) {
@@ -67,6 +68,7 @@ public class RemoteInfo  implements XContentable<RemoteInfo> {
     if (_seeds != null) {
       builder.array(SEEDS.getPreferredName(), _seeds);
     }
+    builder.endObject();
     return builder;
   }
 

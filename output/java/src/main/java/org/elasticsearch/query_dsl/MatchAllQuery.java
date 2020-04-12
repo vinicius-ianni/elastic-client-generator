@@ -25,7 +25,9 @@ public class MatchAllQuery  implements XContentable<MatchAllQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NORM_FIELD.getPreferredName(), _normField);
+    builder.endObject();
     return builder;
   }
 

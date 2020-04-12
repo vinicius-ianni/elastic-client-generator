@@ -37,9 +37,11 @@ public class MovingFunctionAggregation  implements XContentable<MovingFunctionAg
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SCRIPT.getPreferredName(), _script);
     builder.field(WINDOW.getPreferredName(), _window);
     builder.field(SHIFT.getPreferredName(), _shift);
+    builder.endObject();
     return builder;
   }
 

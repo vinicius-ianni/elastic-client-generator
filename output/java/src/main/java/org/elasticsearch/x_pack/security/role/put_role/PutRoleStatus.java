@@ -25,7 +25,9 @@ public class PutRoleStatus  implements XContentable<PutRoleStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CREATED.getPreferredName(), _created);
+    builder.endObject();
     return builder;
   }
 

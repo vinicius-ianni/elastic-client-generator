@@ -25,9 +25,11 @@ public class ShardStoreWrapper  implements XContentable<ShardStoreWrapper> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_stores != null) {
       builder.array(STORES.getPreferredName(), _stores);
     }
+    builder.endObject();
     return builder;
   }
 

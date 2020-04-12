@@ -27,7 +27,9 @@ const $xCContentImplementation = (type) => {
     return `
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     ${types_parser_write_1.$writeProperties(type)}
+    builder.endObject();
     return builder;
   }
 

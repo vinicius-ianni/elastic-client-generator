@@ -25,10 +25,12 @@ public class ResponseBase  implements XContentable<ResponseBase> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_error != null) {
       builder.field(ERROR.getPreferredName());
       _error.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

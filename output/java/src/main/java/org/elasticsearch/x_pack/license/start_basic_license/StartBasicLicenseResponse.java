@@ -37,12 +37,14 @@ public class StartBasicLicenseResponse  implements XContentable<StartBasicLicens
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_acknowledge != null) {
       builder.field(ACKNOWLEDGE.getPreferredName());
       _acknowledge.toXContent(builder, params);
     }
     builder.field(BASIC_WAS_STARTED.getPreferredName(), _basicWasStarted);
     builder.field(ERROR_MESSAGE.getPreferredName(), _errorMessage);
+    builder.endObject();
     return builder;
   }
 

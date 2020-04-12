@@ -38,6 +38,7 @@ public class GeoBoundingBoxQuery  implements XContentable<GeoBoundingBoxQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_boundingBox != null) {
       builder.field(BOUNDING_BOX.getPreferredName());
       _boundingBox.toXContent(builder, params);
@@ -50,6 +51,7 @@ public class GeoBoundingBoxQuery  implements XContentable<GeoBoundingBoxQuery> {
       builder.field(VALIDATION_METHOD.getPreferredName());
       _validationMethod.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -50,8 +50,11 @@ public class CompositeAggregationSource  implements XContentable<CompositeAggreg
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    builder.startObject();
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     builder.field(MISSING_BUCKET.getPreferredName(), _missingBucket);
     builder.field(NAME.getPreferredName(), _name);
     if (_order != null) {
@@ -59,6 +62,7 @@ public class CompositeAggregationSource  implements XContentable<CompositeAggreg
       _order.toXContent(builder, params);
     }
     builder.field(SOURCE_TYPE.getPreferredName(), _sourceType);
+    builder.endObject();
     return builder;
   }
 

@@ -31,6 +31,7 @@ public class ClusterProcess  implements XContentable<ClusterProcess> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_cpu != null) {
       builder.field(CPU.getPreferredName());
       _cpu.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class ClusterProcess  implements XContentable<ClusterProcess> {
       builder.field(OPEN_FILE_DESCRIPTORS.getPreferredName());
       _openFileDescriptors.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

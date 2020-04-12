@@ -37,9 +37,11 @@ public class ClusterRerouteDecision  implements XContentable<ClusterRerouteDecis
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DECIDER.getPreferredName(), _decider);
     builder.field(DECISION.getPreferredName(), _decision);
     builder.field(EXPLANATION.getPreferredName(), _explanation);
+    builder.endObject();
     return builder;
   }
 

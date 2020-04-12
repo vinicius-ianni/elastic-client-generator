@@ -43,12 +43,14 @@ public class KeywordMarkerTokenFilter  implements XContentable<KeywordMarkerToke
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(IGNORE_CASE.getPreferredName(), _ignoreCase);
     if (_keywords != null) {
       builder.array(KEYWORDS.getPreferredName(), _keywords);
     }
     builder.field(KEYWORDS_PATH.getPreferredName(), _keywordsPath);
     builder.field(KEYWORDS_PATTERN.getPreferredName(), _keywordsPattern);
+    builder.endObject();
     return builder;
   }
 

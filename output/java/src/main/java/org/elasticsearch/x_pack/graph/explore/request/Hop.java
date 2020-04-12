@@ -38,6 +38,7 @@ public class Hop  implements XContentable<Hop> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_connections != null) {
       builder.field(CONNECTIONS.getPreferredName());
       _connections.toXContent(builder, params);
@@ -49,6 +50,7 @@ public class Hop  implements XContentable<Hop> {
     if (_vertices != null) {
       builder.array(VERTICES.getPreferredName(), _vertices);
     }
+    builder.endObject();
     return builder;
   }
 

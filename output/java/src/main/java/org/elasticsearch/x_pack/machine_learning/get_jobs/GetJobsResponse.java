@@ -32,10 +32,12 @@ public class GetJobsResponse  implements XContentable<GetJobsResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COUNT.getPreferredName(), _count);
     if (_jobs != null) {
       builder.array(JOBS.getPreferredName(), _jobs);
     }
+    builder.endObject();
     return builder;
   }
 

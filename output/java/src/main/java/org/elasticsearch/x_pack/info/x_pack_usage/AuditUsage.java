@@ -25,9 +25,11 @@ public class AuditUsage  implements XContentable<AuditUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_outputs != null) {
       builder.array(OUTPUTS.getPreferredName(), _outputs);
     }
+    builder.endObject();
     return builder;
   }
 

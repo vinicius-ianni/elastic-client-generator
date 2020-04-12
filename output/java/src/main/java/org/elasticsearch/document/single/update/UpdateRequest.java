@@ -120,6 +120,7 @@ public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DETECT_NOOP.getPreferredName(), _detectNoop);
     builder.field(DOC.getPreferredName(), _doc);
     builder.field(DOC_AS_UPSERT.getPreferredName(), _docAsUpsert);
@@ -141,14 +142,17 @@ public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable
       _refresh.toXContent(builder, params);
     }
     builder.field(RETRY_ON_CONFLICT.getPreferredName(), _retryOnConflict);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
     builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    builder.endObject();
     return builder;
   }
 

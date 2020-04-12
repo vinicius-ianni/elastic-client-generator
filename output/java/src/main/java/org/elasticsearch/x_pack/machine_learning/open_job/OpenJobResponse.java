@@ -25,7 +25,9 @@ public class OpenJobResponse  implements XContentable<OpenJobResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(OPENED.getPreferredName(), _opened);
+    builder.endObject();
     return builder;
   }
 

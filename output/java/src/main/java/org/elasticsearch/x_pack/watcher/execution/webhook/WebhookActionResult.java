@@ -31,6 +31,7 @@ public class WebhookActionResult  implements XContentable<WebhookActionResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_request != null) {
       builder.field(REQUEST.getPreferredName());
       _request.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class WebhookActionResult  implements XContentable<WebhookActionResult> {
       builder.field(RESPONSE.getPreferredName());
       _response.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

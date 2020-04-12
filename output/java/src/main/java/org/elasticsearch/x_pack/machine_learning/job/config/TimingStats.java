@@ -61,6 +61,7 @@ public class TimingStats  implements XContentable<TimingStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(JOB_ID.getPreferredName(), _jobId);
     builder.field(BUCKET_COUNT.getPreferredName(), _bucketCount);
     builder.field(MINIMUM_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _minimumBucketProcessingTimeMs);
@@ -68,6 +69,7 @@ public class TimingStats  implements XContentable<TimingStats> {
     builder.field(AVERAGE_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _averageBucketProcessingTimeMs);
     builder.field(EXPONENTIAL_AVERAGE_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _exponentialAverageBucketProcessingTimeMs);
     builder.field(EXPONENTIAL_AVERAGE_BUCKET_PROCESSING_TIME_PER_HOUR_MS.getPreferredName(), _exponentialAverageBucketProcessingTimePerHourMs);
+    builder.endObject();
     return builder;
   }
 

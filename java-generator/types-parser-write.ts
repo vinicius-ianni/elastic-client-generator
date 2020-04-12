@@ -42,8 +42,10 @@ const $writeProperty = (prop: Domain.InterfaceProperty, parent: Domain.Interface
 
   if (stringTypes.includes(typeSymbol))
     return [
-      `builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
-      `${$fieldName(prop.name)}.toXContent(builder, params);`
+      `if (${$fieldName(prop.name)} != null) {`,
+      `  builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
+      `  ${$fieldName(prop.name)}.toXContent(builder, params);`,
+      `}`
     ];
 
   if (["TDocument", "TPartialDocument", "TResult", "T", "TCatRecord"].includes(typeSymbol))

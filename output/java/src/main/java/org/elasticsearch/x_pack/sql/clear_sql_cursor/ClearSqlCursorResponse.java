@@ -25,7 +25,9 @@ public class ClearSqlCursorResponse  implements XContentable<ClearSqlCursorRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SUCCEEDED.getPreferredName(), _succeeded);
+    builder.endObject();
     return builder;
   }
 

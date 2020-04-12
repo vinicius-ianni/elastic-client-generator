@@ -25,9 +25,11 @@ public class KuromojiPartOfSpeechTokenFilter  implements XContentable<KuromojiPa
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_stoptags != null) {
       builder.array(STOPTAGS.getPreferredName(), _stoptags);
     }
+    builder.endObject();
     return builder;
   }
 

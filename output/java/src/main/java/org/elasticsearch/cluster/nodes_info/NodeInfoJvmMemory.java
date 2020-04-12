@@ -79,6 +79,7 @@ public class NodeInfoJvmMemory  implements XContentable<NodeInfoJvmMemory> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DIRECT_MAX.getPreferredName(), _directMax);
     builder.field(DIRECT_MAX_IN_BYTES.getPreferredName(), _directMaxInBytes);
     builder.field(HEAP_INIT.getPreferredName(), _heapInit);
@@ -89,6 +90,7 @@ public class NodeInfoJvmMemory  implements XContentable<NodeInfoJvmMemory> {
     builder.field(NON_HEAP_INIT_IN_BYTES.getPreferredName(), _nonHeapInitInBytes);
     builder.field(NON_HEAP_MAX.getPreferredName(), _nonHeapMax);
     builder.field(NON_HEAP_MAX_IN_BYTES.getPreferredName(), _nonHeapMaxInBytes);
+    builder.endObject();
     return builder;
   }
 

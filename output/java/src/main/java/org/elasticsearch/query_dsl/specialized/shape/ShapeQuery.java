@@ -45,6 +45,7 @@ public class ShapeQuery  implements XContentable<ShapeQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
     if (_indexedShape != null) {
       builder.field(INDEXED_SHAPE.getPreferredName());
@@ -58,6 +59,7 @@ public class ShapeQuery  implements XContentable<ShapeQuery> {
       builder.field(SHAPE.getPreferredName());
       _shape.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

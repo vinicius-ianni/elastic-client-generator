@@ -37,6 +37,7 @@ public class CancelTasksRequest  implements XContentable<CancelTasksRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.array(ACTIONS.getPreferredName(), _actions);
     }
@@ -44,6 +45,7 @@ public class CancelTasksRequest  implements XContentable<CancelTasksRequest> {
       builder.array(NODES.getPreferredName(), _nodes);
     }
     builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
+    builder.endObject();
     return builder;
   }
 

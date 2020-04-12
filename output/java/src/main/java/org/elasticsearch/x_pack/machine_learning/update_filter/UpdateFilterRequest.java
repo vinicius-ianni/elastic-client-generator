@@ -37,6 +37,7 @@ public class UpdateFilterRequest  implements XContentable<UpdateFilterRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_addItems != null) {
       builder.array(ADD_ITEMS.getPreferredName(), _addItems);
     }
@@ -44,6 +45,7 @@ public class UpdateFilterRequest  implements XContentable<UpdateFilterRequest> {
     if (_removeItems != null) {
       builder.array(REMOVE_ITEMS.getPreferredName(), _removeItems);
     }
+    builder.endObject();
     return builder;
   }
 

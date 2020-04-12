@@ -61,6 +61,7 @@ public class ScheduleContainer  implements XContentable<ScheduleContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_cron != null) {
       builder.field(CRON.getPreferredName());
       _cron.toXContent(builder, params);
@@ -86,6 +87,7 @@ public class ScheduleContainer  implements XContentable<ScheduleContainer> {
     if (_yearly != null) {
       builder.array(YEARLY.getPreferredName(), _yearly);
     }
+    builder.endObject();
     return builder;
   }
 

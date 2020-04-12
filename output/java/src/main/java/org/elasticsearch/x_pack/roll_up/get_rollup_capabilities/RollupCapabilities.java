@@ -25,9 +25,11 @@ public class RollupCapabilities  implements XContentable<RollupCapabilities> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_rollupJobs != null) {
       builder.array(ROLLUP_JOBS.getPreferredName(), _rollupJobs);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -31,8 +31,10 @@ public class ExplainLifecycleRequest  implements XContentable<ExplainLifecycleRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ONLY_ERRORS.getPreferredName(), _onlyErrors);
     builder.field(ONLY_MANAGED.getPreferredName(), _onlyManaged);
+    builder.endObject();
     return builder;
   }
 

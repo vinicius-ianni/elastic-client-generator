@@ -57,6 +57,7 @@ public class MultiSearchTemplateRequest  implements XContentable<MultiSearchTemp
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
     builder.field(MAX_CONCURRENT_SEARCHES.getPreferredName(), _maxConcurrentSearches);
     if (_searchType != null) {
@@ -69,6 +70,7 @@ public class MultiSearchTemplateRequest  implements XContentable<MultiSearchTemp
       builder.field(OPERATIONS.getPreferredName());
       _operations.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

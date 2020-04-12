@@ -62,6 +62,7 @@ public class ListTasksRequest  implements XContentable<ListTasksRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.array(ACTIONS.getPreferredName(), _actions);
     }
@@ -79,6 +80,7 @@ public class ListTasksRequest  implements XContentable<ListTasksRequest> {
       _timeout.toXContent(builder, params);
     }
     builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    builder.endObject();
     return builder;
   }
 

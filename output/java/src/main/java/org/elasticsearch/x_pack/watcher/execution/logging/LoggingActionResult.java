@@ -25,7 +25,9 @@ public class LoggingActionResult  implements XContentable<LoggingActionResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LOGGED_TEXT.getPreferredName(), _loggedText);
+    builder.endObject();
     return builder;
   }
 

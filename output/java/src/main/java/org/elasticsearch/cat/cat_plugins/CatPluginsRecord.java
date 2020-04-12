@@ -67,6 +67,7 @@ public class CatPluginsRecord  implements XContentable<CatPluginsRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COMPONENT.getPreferredName(), _component);
     builder.field(DESCRIPTION.getPreferredName(), _description);
     builder.field(ID.getPreferredName(), _id);
@@ -75,6 +76,7 @@ public class CatPluginsRecord  implements XContentable<CatPluginsRecord> {
     builder.field(TYPE.getPreferredName(), _type);
     builder.field(URL.getPreferredName(), _url);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

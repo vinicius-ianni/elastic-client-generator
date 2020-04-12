@@ -195,6 +195,7 @@ public class FollowIndexShardStats  implements XContentable<FollowIndexShardStat
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BYTES_READ.getPreferredName(), _bytesRead);
     builder.field(FAILED_READ_REQUESTS.getPreferredName(), _failedReadRequests);
     builder.field(FAILED_WRITE_REQUESTS.getPreferredName(), _failedWriteRequests);
@@ -229,6 +230,7 @@ public class FollowIndexShardStats  implements XContentable<FollowIndexShardStat
       builder.field(FATAL_EXCEPTION.getPreferredName());
       _fatalException.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

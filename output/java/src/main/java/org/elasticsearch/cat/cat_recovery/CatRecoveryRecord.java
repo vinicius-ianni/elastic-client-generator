@@ -151,6 +151,7 @@ public class CatRecoveryRecord  implements XContentable<CatRecoveryRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BYTES.getPreferredName(), _bytes);
     builder.field(BYTES_PERCENT.getPreferredName(), _bytesPercent);
     builder.field(BYTES_RECOVERED.getPreferredName(), _bytesRecovered);
@@ -173,6 +174,7 @@ public class CatRecoveryRecord  implements XContentable<CatRecoveryRecord> {
     builder.field(TRANSLOG_OPS_PERCENT.getPreferredName(), _translogOpsPercent);
     builder.field(TRANSLOG_OPS_RECOVERED.getPreferredName(), _translogOpsRecovered);
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

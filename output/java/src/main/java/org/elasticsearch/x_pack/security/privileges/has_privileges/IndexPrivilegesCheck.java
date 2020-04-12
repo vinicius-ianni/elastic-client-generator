@@ -31,12 +31,14 @@ public class IndexPrivilegesCheck  implements XContentable<IndexPrivilegesCheck>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_names != null) {
       builder.array(NAMES.getPreferredName(), _names);
     }
     if (_privileges != null) {
       builder.array(PRIVILEGES.getPreferredName(), _privileges);
     }
+    builder.endObject();
     return builder;
   }
 

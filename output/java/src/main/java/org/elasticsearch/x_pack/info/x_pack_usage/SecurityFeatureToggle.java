@@ -25,7 +25,9 @@ public class SecurityFeatureToggle  implements XContentable<SecurityFeatureToggl
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ENABLED.getPreferredName(), _enabled);
+    builder.endObject();
     return builder;
   }
 

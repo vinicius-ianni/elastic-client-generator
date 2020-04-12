@@ -31,6 +31,7 @@ public class KeepTypesTokenFilter  implements XContentable<KeepTypesTokenFilter>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_mode != null) {
       builder.field(MODE.getPreferredName());
       _mode.toXContent(builder, params);
@@ -38,6 +39,7 @@ public class KeepTypesTokenFilter  implements XContentable<KeepTypesTokenFilter>
     if (_types != null) {
       builder.array(TYPES.getPreferredName(), _types);
     }
+    builder.endObject();
     return builder;
   }
 

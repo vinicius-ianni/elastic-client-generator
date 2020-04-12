@@ -74,6 +74,7 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ARCH.getPreferredName(), _arch);
     builder.field(AVAILABLE_PROCESSORS.getPreferredName(), _availableProcessors);
     if (_cpu != null) {
@@ -92,6 +93,7 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
       _swap.toXContent(builder, params);
     }
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

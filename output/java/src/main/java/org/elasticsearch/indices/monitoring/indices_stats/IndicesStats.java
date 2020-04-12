@@ -43,6 +43,7 @@ public class IndicesStats  implements XContentable<IndicesStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_primaries != null) {
       builder.field(PRIMARIES.getPreferredName());
       _primaries.toXContent(builder, params);
@@ -56,6 +57,7 @@ public class IndicesStats  implements XContentable<IndicesStats> {
       _total.toXContent(builder, params);
     }
     builder.field(UUID.getPreferredName(), _uuid);
+    builder.endObject();
     return builder;
   }
 

@@ -31,6 +31,7 @@ public class SearchShardsResponse  implements XContentable<SearchShardsResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_nodes != null) {
       builder.field(NODES.getPreferredName());
       _nodes.toXContent(builder, params);
@@ -38,6 +39,7 @@ public class SearchShardsResponse  implements XContentable<SearchShardsResponse>
     if (_shards != null) {
       builder.array(SHARDS.getPreferredName(), _shards);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -31,8 +31,10 @@ public class LimitTokenCountTokenFilter  implements XContentable<LimitTokenCount
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CONSUME_ALL_TOKENS.getPreferredName(), _consumeAllTokens);
     builder.field(MAX_TOKEN_COUNT.getPreferredName(), _maxTokenCount);
+    builder.endObject();
     return builder;
   }
 

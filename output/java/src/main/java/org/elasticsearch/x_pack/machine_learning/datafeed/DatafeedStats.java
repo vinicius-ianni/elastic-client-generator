@@ -49,6 +49,7 @@ public class DatafeedStats  implements XContentable<DatafeedStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ASSIGNMENT_EXPLANATION.getPreferredName(), _assignmentExplanation);
     builder.field(DATAFEED_ID.getPreferredName(), _datafeedId);
     if (_node != null) {
@@ -63,6 +64,7 @@ public class DatafeedStats  implements XContentable<DatafeedStats> {
       builder.field(TIMING_STATS.getPreferredName());
       _timingStats.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

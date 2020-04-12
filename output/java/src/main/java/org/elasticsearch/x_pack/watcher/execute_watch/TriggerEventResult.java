@@ -38,6 +38,7 @@ public class TriggerEventResult  implements XContentable<TriggerEventResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_manual != null) {
       builder.field(MANUAL.getPreferredName());
       _manual.toXContent(builder, params);
@@ -45,6 +46,7 @@ public class TriggerEventResult  implements XContentable<TriggerEventResult> {
     builder.field(TRIGGERED_TIME.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_triggeredTime.toInstant()));
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

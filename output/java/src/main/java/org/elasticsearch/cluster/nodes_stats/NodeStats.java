@@ -131,6 +131,7 @@ public class NodeStats  implements XContentable<NodeStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_adaptiveSelection != null) {
       builder.field(ADAPTIVE_SELECTION.getPreferredName());
       _adaptiveSelection.toXContent(builder, params);
@@ -189,6 +190,7 @@ public class NodeStats  implements XContentable<NodeStats> {
       _transport.toXContent(builder, params);
     }
     builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    builder.endObject();
     return builder;
   }
 

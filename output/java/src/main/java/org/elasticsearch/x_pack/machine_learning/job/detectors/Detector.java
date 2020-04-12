@@ -57,6 +57,7 @@ public class Detector  implements XContentable<Detector> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_customRules != null) {
       builder.array(CUSTOM_RULES.getPreferredName(), _customRules);
     }
@@ -68,6 +69,7 @@ public class Detector  implements XContentable<Detector> {
     }
     builder.field(FUNCTION.getPreferredName(), _function);
     builder.field(USE_NULL.getPreferredName(), _useNull);
+    builder.endObject();
     return builder;
   }
 

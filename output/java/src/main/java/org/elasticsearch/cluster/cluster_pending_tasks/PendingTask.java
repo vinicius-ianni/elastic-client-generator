@@ -49,11 +49,13 @@ public class PendingTask  implements XContentable<PendingTask> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(INSERT_ORDER.getPreferredName(), _insertOrder);
     builder.field(PRIORITY.getPreferredName(), _priority);
     builder.field(SOURCE.getPreferredName(), _source);
     builder.field(TIME_IN_QUEUE.getPreferredName(), _timeInQueue);
     builder.field(TIME_IN_QUEUE_MILLIS.getPreferredName(), _timeInQueueMillis);
+    builder.endObject();
     return builder;
   }
 

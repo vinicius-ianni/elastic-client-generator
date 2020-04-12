@@ -49,11 +49,13 @@ public class DatafeedTimingStats  implements XContentable<DatafeedTimingStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BUCKET_COUNT.getPreferredName(), _bucketCount);
     builder.field(EXPONENTIAL_AVERAGE_SEARCH_TIME_PER_HOUR_MS.getPreferredName(), _exponentialAverageSearchTimePerHourMs);
     builder.field(JOB_ID.getPreferredName(), _jobId);
     builder.field(SEARCH_COUNT.getPreferredName(), _searchCount);
     builder.field(TOTAL_SEARCH_TIME_MS.getPreferredName(), _totalSearchTimeMs);
+    builder.endObject();
     return builder;
   }
 

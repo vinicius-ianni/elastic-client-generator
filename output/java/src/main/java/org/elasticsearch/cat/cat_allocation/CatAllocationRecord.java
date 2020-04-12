@@ -55,12 +55,14 @@ public class CatAllocationRecord  implements XContentable<CatAllocationRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DISK_AVAIL.getPreferredName(), _diskAvail);
     builder.field(DISK_RATIO.getPreferredName(), _diskRatio);
     builder.field(DISK_USED.getPreferredName(), _diskUsed);
     builder.field(IP.getPreferredName(), _ip);
     builder.field(NODE.getPreferredName(), _node);
     builder.field(SHARDS.getPreferredName(), _shards);
+    builder.endObject();
     return builder;
   }
 

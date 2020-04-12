@@ -37,10 +37,14 @@ public class RemoteSource  implements XContentable<RemoteSource> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(HOST.getPreferredName());
-    _host.toXContent(builder, params);
+    builder.startObject();
+    if (_host != null) {
+      builder.field(HOST.getPreferredName());
+      _host.toXContent(builder, params);
+    }
     builder.field(PASSWORD.getPreferredName(), _password);
     builder.field(USERNAME.getPreferredName(), _username);
+    builder.endObject();
     return builder;
   }
 

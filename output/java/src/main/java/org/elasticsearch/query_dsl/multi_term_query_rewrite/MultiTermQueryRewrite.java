@@ -50,6 +50,7 @@ public class MultiTermQueryRewrite  implements XContentable<MultiTermQueryRewrit
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_constantScore != null) {
       builder.field(CONSTANT_SCORE.getPreferredName());
       _constantScore.toXContent(builder, params);
@@ -67,6 +68,7 @@ public class MultiTermQueryRewrite  implements XContentable<MultiTermQueryRewrit
       _scoringBoolean.toXContent(builder, params);
     }
     builder.field(SIZE.getPreferredName(), _size);
+    builder.endObject();
     return builder;
   }
 

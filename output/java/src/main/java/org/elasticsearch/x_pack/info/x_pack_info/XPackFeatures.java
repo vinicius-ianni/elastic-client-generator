@@ -103,6 +103,7 @@ public class XPackFeatures  implements XContentable<XPackFeatures> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_ccr != null) {
       builder.field(CCR.getPreferredName());
       _ccr.toXContent(builder, params);
@@ -159,6 +160,7 @@ public class XPackFeatures  implements XContentable<XPackFeatures> {
       builder.field(WATCHER.getPreferredName());
       _watcher.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

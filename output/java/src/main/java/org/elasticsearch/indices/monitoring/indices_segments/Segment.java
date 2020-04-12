@@ -79,6 +79,7 @@ public class Segment  implements XContentable<Segment> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_attributes != null) {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
@@ -92,6 +93,7 @@ public class Segment  implements XContentable<Segment> {
     builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
     builder.field(NUM_DOCS.getPreferredName(), _numDocs);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

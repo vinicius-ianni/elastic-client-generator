@@ -69,6 +69,7 @@ public class ExecuteWatchRequest  implements XContentable<ExecuteWatchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DEBUG.getPreferredName(), _debug);
     if (_actionModes != null) {
       builder.field(ACTION_MODES.getPreferredName());
@@ -92,6 +93,7 @@ public class ExecuteWatchRequest  implements XContentable<ExecuteWatchRequest> {
       builder.field(WATCH.getPreferredName());
       _watch.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

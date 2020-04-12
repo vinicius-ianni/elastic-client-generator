@@ -115,6 +115,7 @@ public class DataPathStats  implements XContentable<DataPathStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AVAILABLE.getPreferredName(), _available);
     builder.field(AVAILABLE_IN_BYTES.getPreferredName(), _availableInBytes);
     builder.field(DISK_QUEUE.getPreferredName(), _diskQueue);
@@ -131,6 +132,7 @@ public class DataPathStats  implements XContentable<DataPathStats> {
     builder.field(TOTAL.getPreferredName(), _total);
     builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

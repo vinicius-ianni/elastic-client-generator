@@ -31,11 +31,13 @@ public class StopAnalyzer  implements XContentable<StopAnalyzer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_stopwords != null) {
       builder.field(STOPWORDS.getPreferredName());
       _stopwords.toXContent(builder, params);
     }
     builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    builder.endObject();
     return builder;
   }
 

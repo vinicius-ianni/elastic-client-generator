@@ -57,6 +57,7 @@ public class ClusterStatsResponse  implements XContentable<ClusterStatsResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
     builder.field(CLUSTER_UUID.getPreferredName(), _clusterUuid);
     if (_indices != null) {
@@ -72,6 +73,7 @@ public class ClusterStatsResponse  implements XContentable<ClusterStatsResponse>
       _status.toXContent(builder, params);
     }
     builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    builder.endObject();
     return builder;
   }
 

@@ -45,8 +45,11 @@ public class ReindexDestination  implements XContentable<ReindexDestination> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    builder.startObject();
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     if (_opType != null) {
       builder.field(OP_TYPE.getPreferredName());
       _opType.toXContent(builder, params);
@@ -59,6 +62,7 @@ public class ReindexDestination  implements XContentable<ReindexDestination> {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

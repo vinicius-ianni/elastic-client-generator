@@ -37,6 +37,7 @@ public class SuggestDictionary<T>  implements XContentable<SuggestDictionary<T>>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_item != null) {
       builder.array(ITEM.getPreferredName(), _item);
     }
@@ -46,6 +47,7 @@ public class SuggestDictionary<T>  implements XContentable<SuggestDictionary<T>>
     if (_values != null) {
       builder.array(VALUES.getPreferredName(), _values);
     }
+    builder.endObject();
     return builder;
   }
 

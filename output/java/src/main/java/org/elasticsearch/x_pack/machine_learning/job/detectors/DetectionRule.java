@@ -38,6 +38,7 @@ public class DetectionRule  implements XContentable<DetectionRule> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.array(ACTIONS.getPreferredName(), _actions);
     }
@@ -48,6 +49,7 @@ public class DetectionRule  implements XContentable<DetectionRule> {
       builder.field(SCOPE.getPreferredName());
       _scope.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -26,10 +26,12 @@ public class GetPrivilegesResponse extends DictionaryResponseBase<String, NamedC
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_applications != null) {
       builder.field(APPLICATIONS.getPreferredName());
       _applications.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

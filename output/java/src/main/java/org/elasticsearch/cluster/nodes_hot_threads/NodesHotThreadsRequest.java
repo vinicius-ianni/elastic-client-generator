@@ -57,6 +57,7 @@ public class NodesHotThreadsRequest  implements XContentable<NodesHotThreadsRequ
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(IGNORE_IDLE_THREADS.getPreferredName(), _ignoreIdleThreads);
     if (_interval != null) {
       builder.field(INTERVAL.getPreferredName());
@@ -72,6 +73,7 @@ public class NodesHotThreadsRequest  implements XContentable<NodesHotThreadsRequ
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

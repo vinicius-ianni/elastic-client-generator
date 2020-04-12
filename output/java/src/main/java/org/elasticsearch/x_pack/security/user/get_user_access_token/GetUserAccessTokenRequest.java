@@ -31,11 +31,13 @@ public class GetUserAccessTokenRequest  implements XContentable<GetUserAccessTok
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_grantType != null) {
       builder.field(GRANT_TYPE.getPreferredName());
       _grantType.toXContent(builder, params);
     }
     builder.field(SCOPE.getPreferredName(), _scope);
+    builder.endObject();
     return builder;
   }
 

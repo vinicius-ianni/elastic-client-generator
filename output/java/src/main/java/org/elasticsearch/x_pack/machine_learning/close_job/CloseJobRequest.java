@@ -37,12 +37,14 @@ public class CloseJobRequest  implements XContentable<CloseJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_JOBS.getPreferredName(), _allowNoJobs);
     builder.field(FORCE.getPreferredName(), _force);
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

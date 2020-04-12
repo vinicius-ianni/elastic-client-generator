@@ -32,12 +32,14 @@ public class AcknowledgeState  implements XContentable<AcknowledgeState> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_state != null) {
       builder.field(STATE.getPreferredName());
       _state.toXContent(builder, params);
     }
     builder.field(TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.endObject();
     return builder;
   }
 

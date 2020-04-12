@@ -37,6 +37,7 @@ public class RealmUsage  implements XContentable<RealmUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_name != null) {
       builder.array(NAME.getPreferredName(), _name);
     }
@@ -46,6 +47,7 @@ public class RealmUsage  implements XContentable<RealmUsage> {
     if (_size != null) {
       builder.array(SIZE.getPreferredName(), _size);
     }
+    builder.endObject();
     return builder;
   }
 

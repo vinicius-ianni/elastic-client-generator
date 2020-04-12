@@ -106,6 +106,7 @@ public class TextProperty  implements XContentable<TextProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(BOOST.getPreferredName(), _boost);
     builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
@@ -132,6 +133,7 @@ public class TextProperty  implements XContentable<TextProperty> {
       builder.field(TERM_VECTOR.getPreferredName());
       _termVector.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

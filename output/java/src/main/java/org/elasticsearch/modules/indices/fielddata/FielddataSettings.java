@@ -31,11 +31,13 @@ public class FielddataSettings  implements XContentable<FielddataSettings> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_cacheExpire != null) {
       builder.field(CACHE_EXPIRE.getPreferredName());
       _cacheExpire.toXContent(builder, params);
     }
     builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
+    builder.endObject();
     return builder;
   }
 

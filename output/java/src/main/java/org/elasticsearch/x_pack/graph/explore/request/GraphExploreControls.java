@@ -45,6 +45,7 @@ public class GraphExploreControls  implements XContentable<GraphExploreControls>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_sampleDiversity != null) {
       builder.field(SAMPLE_DIVERSITY.getPreferredName());
       _sampleDiversity.toXContent(builder, params);
@@ -55,6 +56,7 @@ public class GraphExploreControls  implements XContentable<GraphExploreControls>
       _timeout.toXContent(builder, params);
     }
     builder.field(USE_SIGNIFICANCE.getPreferredName(), _useSignificance);
+    builder.endObject();
     return builder;
   }
 

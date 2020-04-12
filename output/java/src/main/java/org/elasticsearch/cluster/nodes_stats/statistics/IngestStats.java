@@ -50,6 +50,7 @@ public class IngestStats  implements XContentable<IngestStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COUNT.getPreferredName(), _count);
     builder.field(CURRENT.getPreferredName(), _current);
     builder.field(FAILED.getPreferredName(), _failed);
@@ -57,6 +58,7 @@ public class IngestStats  implements XContentable<IngestStats> {
     if (_processors != null) {
       builder.array(PROCESSORS.getPreferredName(), _processors);
     }
+    builder.endObject();
     return builder;
   }
 

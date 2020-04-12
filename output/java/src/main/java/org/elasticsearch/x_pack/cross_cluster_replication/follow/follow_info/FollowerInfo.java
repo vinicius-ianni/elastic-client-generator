@@ -49,6 +49,7 @@ public class FollowerInfo  implements XContentable<FollowerInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FOLLOWER_INDEX.getPreferredName(), _followerIndex);
     builder.field(REMOTE_CLUSTER.getPreferredName(), _remoteCluster);
     builder.field(LEADER_INDEX.getPreferredName(), _leaderIndex);
@@ -60,6 +61,7 @@ public class FollowerInfo  implements XContentable<FollowerInfo> {
       builder.field(PARAMETERS.getPreferredName());
       _parameters.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

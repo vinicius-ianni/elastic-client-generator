@@ -43,10 +43,12 @@ public class CatTemplatesRecord  implements XContentable<CatTemplatesRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(INDEX_PATTERNS.getPreferredName(), _indexPatterns);
     builder.field(NAME.getPreferredName(), _name);
     builder.field(ORDER.getPreferredName(), _order);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

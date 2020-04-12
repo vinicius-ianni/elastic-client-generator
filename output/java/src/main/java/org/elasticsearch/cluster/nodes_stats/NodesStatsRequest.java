@@ -69,6 +69,7 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_completionFields != null) {
       builder.array(COMPLETION_FIELDS.getPreferredName(), _completionFields);
     }
@@ -91,6 +92,7 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
     if (_types != null) {
       builder.array(TYPES.getPreferredName(), _types);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -99,6 +99,7 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_auth != null) {
       builder.field(AUTH.getPreferredName());
       _auth.toXContent(builder, params);
@@ -136,6 +137,7 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
       _scheme.toXContent(builder, params);
     }
     builder.field(URL.getPreferredName(), _url);
+    builder.endObject();
     return builder;
   }
 

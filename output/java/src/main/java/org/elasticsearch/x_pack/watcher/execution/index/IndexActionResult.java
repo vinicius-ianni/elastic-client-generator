@@ -31,11 +31,13 @@ public class IndexActionResult  implements XContentable<IndexActionResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ID.getPreferredName(), _id);
     if (_response != null) {
       builder.field(RESPONSE.getPreferredName());
       _response.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

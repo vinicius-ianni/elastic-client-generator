@@ -62,6 +62,7 @@ public class ClusterRerouteRequest  implements XContentable<ClusterRerouteReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_commands != null) {
       builder.array(COMMANDS.getPreferredName(), _commands);
     }
@@ -79,6 +80,7 @@ public class ClusterRerouteRequest  implements XContentable<ClusterRerouteReques
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

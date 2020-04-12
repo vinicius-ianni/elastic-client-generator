@@ -38,6 +38,7 @@ public class BoostingQuery  implements XContentable<BoostingQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NEGATIVE_BOOST.getPreferredName(), _negativeBoost);
     if (_negative != null) {
       builder.field(NEGATIVE.getPreferredName());
@@ -47,6 +48,7 @@ public class BoostingQuery  implements XContentable<BoostingQuery> {
       builder.field(POSITIVE.getPreferredName());
       _positive.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

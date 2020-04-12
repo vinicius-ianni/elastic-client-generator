@@ -69,12 +69,15 @@ public class AnalysisConfig  implements XContentable<AnalysisConfig> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_bucketSpan != null) {
       builder.field(BUCKET_SPAN.getPreferredName());
       _bucketSpan.toXContent(builder, params);
     }
-    builder.field(CATEGORIZATION_FIELD_NAME.getPreferredName());
-    _categorizationFieldName.toXContent(builder, params);
+    if (_categorizationFieldName != null) {
+      builder.field(CATEGORIZATION_FIELD_NAME.getPreferredName());
+      _categorizationFieldName.toXContent(builder, params);
+    }
     if (_categorizationFilters != null) {
       builder.array(CATEGORIZATION_FILTERS.getPreferredName(), _categorizationFilters);
     }
@@ -89,8 +92,11 @@ public class AnalysisConfig  implements XContentable<AnalysisConfig> {
       _latency.toXContent(builder, params);
     }
     builder.field(MULTIVARIATE_BY_FIELDS.getPreferredName(), _multivariateByFields);
-    builder.field(SUMMARY_COUNT_FIELD_NAME.getPreferredName());
-    _summaryCountFieldName.toXContent(builder, params);
+    if (_summaryCountFieldName != null) {
+      builder.field(SUMMARY_COUNT_FIELD_NAME.getPreferredName());
+      _summaryCountFieldName.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

@@ -31,6 +31,7 @@ public class AlertingInput  implements XContentable<AlertingInput> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_input != null) {
       builder.field(INPUT.getPreferredName());
       _input.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class AlertingInput  implements XContentable<AlertingInput> {
       builder.field(TRIGGER.getPreferredName());
       _trigger.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

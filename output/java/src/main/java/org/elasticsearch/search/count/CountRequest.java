@@ -112,6 +112,7 @@ public class CountRequest  implements XContentable<CountRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
     builder.field(ANALYZER.getPreferredName(), _analyzer);
@@ -130,13 +131,16 @@ public class CountRequest  implements XContentable<CountRequest> {
     builder.field(MIN_SCORE.getPreferredName(), _minScore);
     builder.field(PREFERENCE.getPreferredName(), _preference);
     builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     builder.field(TERMINATE_AFTER.getPreferredName(), _terminateAfter);
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

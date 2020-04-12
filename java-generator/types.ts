@@ -30,7 +30,9 @@ const $xCContentImplementation = (type: Domain.Interface) => {
   return `
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     ${$writeProperties(type)}
+    builder.endObject();
     return builder;
   }
 

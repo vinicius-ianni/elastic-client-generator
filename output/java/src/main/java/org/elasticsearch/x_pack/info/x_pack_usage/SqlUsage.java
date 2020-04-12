@@ -32,6 +32,7 @@ public class SqlUsage  implements XContentable<SqlUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_features != null) {
       builder.field(FEATURES.getPreferredName());
       _features.toXContent(builder, params);
@@ -40,6 +41,7 @@ public class SqlUsage  implements XContentable<SqlUsage> {
       builder.field(QUERIES.getPreferredName());
       _queries.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

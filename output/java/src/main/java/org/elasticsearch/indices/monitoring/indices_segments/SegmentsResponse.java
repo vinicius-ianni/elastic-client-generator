@@ -32,6 +32,7 @@ public class SegmentsResponse  implements XContentable<SegmentsResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_indices != null) {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
@@ -40,6 +41,7 @@ public class SegmentsResponse  implements XContentable<SegmentsResponse> {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

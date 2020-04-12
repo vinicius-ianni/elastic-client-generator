@@ -68,6 +68,7 @@ public class UpdateIndexSettingsRequest  implements XContentable<UpdateIndexSett
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_indexSettings != null) {
       builder.field(INDEX_SETTINGS.getPreferredName());
       _indexSettings.toXContent(builder, params);
@@ -88,6 +89,7 @@ public class UpdateIndexSettingsRequest  implements XContentable<UpdateIndexSett
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -25,10 +25,12 @@ public class NodesResponseBase  implements XContentable<NodesResponseBase> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_nodes != null) {
       builder.field(NODES.getPreferredName());
       _nodes.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

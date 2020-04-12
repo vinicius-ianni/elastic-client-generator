@@ -98,6 +98,7 @@ public class AutoFollowPattern  implements XContentable<AutoFollowPattern> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FOLLOW_INDEX_PATTERN.getPreferredName(), _followIndexPattern);
     if (_leaderIndexPatterns != null) {
       builder.array(LEADER_INDEX_PATTERNS.getPreferredName(), _leaderIndexPatterns);
@@ -119,6 +120,7 @@ public class AutoFollowPattern  implements XContentable<AutoFollowPattern> {
     builder.field(MAX_WRITE_REQUEST_OPERATION_COUNT.getPreferredName(), _maxWriteRequestOperationCount);
     builder.field(MAX_WRITE_REQUEST_SIZE.getPreferredName(), _maxWriteRequestSize);
     builder.field(REMOTE_CLUSTER.getPreferredName(), _remoteCluster);
+    builder.endObject();
     return builder;
   }
 

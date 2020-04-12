@@ -74,6 +74,7 @@ public class ReindexTask  implements XContentable<ReindexTask> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACTION.getPreferredName(), _action);
     builder.field(CANCELLABLE.getPreferredName(), _cancellable);
     builder.field(DESCRIPTION.getPreferredName(), _description);
@@ -86,6 +87,7 @@ public class ReindexTask  implements XContentable<ReindexTask> {
       _status.toXContent(builder, params);
     }
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

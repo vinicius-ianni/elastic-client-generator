@@ -25,9 +25,11 @@ public class GetApiKeyResponse  implements XContentable<GetApiKeyResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_apiKeys != null) {
       builder.array(API_KEYS.getPreferredName(), _apiKeys);
     }
+    builder.endObject();
     return builder;
   }
 

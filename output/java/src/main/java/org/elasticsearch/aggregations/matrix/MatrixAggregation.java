@@ -32,6 +32,7 @@ public class MatrixAggregation  implements XContentable<MatrixAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
@@ -39,6 +40,7 @@ public class MatrixAggregation  implements XContentable<MatrixAggregation> {
       builder.field(MISSING.getPreferredName());
       _missing.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

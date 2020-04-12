@@ -62,6 +62,7 @@ public class SnapshotLifecyclePolicyMetadata  implements XContentable<SnapshotLi
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MODIFIED_DATE_MILLIS.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_modifiedDateMillis.toInstant()));
     builder.field(NEXT_EXECUTION_MILLIS.getPreferredName(),
@@ -83,6 +84,7 @@ public class SnapshotLifecyclePolicyMetadata  implements XContentable<SnapshotLi
       builder.field(LAST_FAILURE.getPreferredName());
       _lastFailure.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

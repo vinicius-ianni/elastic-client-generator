@@ -31,11 +31,13 @@ public class Aggregation  implements XContentable<Aggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_meta != null) {
       builder.field(META.getPreferredName());
       _meta.toXContent(builder, params);
     }
     builder.field(NAME.getPreferredName(), _name);
+    builder.endObject();
     return builder;
   }
 

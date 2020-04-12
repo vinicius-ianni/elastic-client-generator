@@ -56,6 +56,7 @@ public class HistogramOrder  implements XContentable<HistogramOrder> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_countAscending != null) {
       builder.field(COUNT_ASCENDING.getPreferredName());
       _countAscending.toXContent(builder, params);
@@ -77,6 +78,7 @@ public class HistogramOrder  implements XContentable<HistogramOrder> {
       builder.field(ORDER.getPreferredName());
       _order.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

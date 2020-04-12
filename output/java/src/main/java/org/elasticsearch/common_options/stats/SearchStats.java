@@ -97,6 +97,7 @@ public class SearchStats  implements XContentable<SearchStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FETCH_CURRENT.getPreferredName(), _fetchCurrent);
     builder.field(FETCH_TIME_IN_MILLIS.getPreferredName(), _fetchTimeInMillis);
     builder.field(FETCH_TOTAL.getPreferredName(), _fetchTotal);
@@ -110,6 +111,7 @@ public class SearchStats  implements XContentable<SearchStats> {
     builder.field(SUGGEST_CURRENT.getPreferredName(), _suggestCurrent);
     builder.field(SUGGEST_TIME_IN_MILLIS.getPreferredName(), _suggestTimeInMillis);
     builder.field(SUGGEST_TOTAL.getPreferredName(), _suggestTotal);
+    builder.endObject();
     return builder;
   }
 

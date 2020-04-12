@@ -37,9 +37,11 @@ public class LoadAverageStats  implements XContentable<LoadAverageStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AVERAGE15M.getPreferredName(), _average15m);
     builder.field(AVERAGE5M.getPreferredName(), _average5m);
     builder.field(AVERAGE1M.getPreferredName(), _average1m);
+    builder.endObject();
     return builder;
   }
 

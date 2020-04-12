@@ -25,9 +25,11 @@ public class IdsQuery  implements XContentable<IdsQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_values != null) {
       builder.array(VALUES.getPreferredName(), _values);
     }
+    builder.endObject();
     return builder;
   }
 

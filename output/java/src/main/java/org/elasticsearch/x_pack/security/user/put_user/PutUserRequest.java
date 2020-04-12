@@ -61,6 +61,7 @@ public class PutUserRequest  implements XContentable<PutUserRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
@@ -76,6 +77,7 @@ public class PutUserRequest  implements XContentable<PutUserRequest> {
     if (_roles != null) {
       builder.array(ROLES.getPreferredName(), _roles);
     }
+    builder.endObject();
     return builder;
   }
 

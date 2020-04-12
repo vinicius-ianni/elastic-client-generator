@@ -43,12 +43,14 @@ public class TermsInclude  implements XContentable<TermsInclude> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NUM_PARTITIONS.getPreferredName(), _numPartitions);
     builder.field(PARTITION.getPreferredName(), _partition);
     builder.field(PATTERN.getPreferredName(), _pattern);
     if (_values != null) {
       builder.array(VALUES.getPreferredName(), _values);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -25,9 +25,11 @@ public class GetCertificatesResponse  implements XContentable<GetCertificatesRes
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_certificates != null) {
       builder.array(CERTIFICATES.getPreferredName(), _certificates);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -25,10 +25,12 @@ public class ApplicationGlobalUserPrivileges  implements XContentable<Applicatio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_manage != null) {
       builder.field(MANAGE.getPreferredName());
       _manage.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

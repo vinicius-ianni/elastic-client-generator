@@ -38,11 +38,13 @@ public class IntervalsAllOf  implements XContentable<IntervalsAllOf> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_intervals != null) {
       builder.array(INTERVALS.getPreferredName(), _intervals);
     }
     builder.field(MAX_GAPS.getPreferredName(), _maxGaps);
     builder.field(ORDERED.getPreferredName(), _ordered);
+    builder.endObject();
     return builder;
   }
 

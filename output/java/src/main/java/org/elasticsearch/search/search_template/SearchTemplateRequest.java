@@ -117,6 +117,7 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
     if (_expandWildcards != null) {
@@ -128,8 +129,10 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
     builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
     builder.field(PREFERENCE.getPreferredName(), _preference);
     builder.field(PROFILE.getPreferredName(), _profile);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     if (_scroll != null) {
       builder.field(SCROLL.getPreferredName());
       _scroll.toXContent(builder, params);
@@ -146,6 +149,7 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
       _params.toXContent(builder, params);
     }
     builder.field(SOURCE.getPreferredName(), _source);
+    builder.endObject();
     return builder;
   }
 

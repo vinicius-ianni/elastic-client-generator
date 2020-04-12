@@ -31,8 +31,10 @@ public class LengthTokenFilter  implements XContentable<LengthTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MAX.getPreferredName(), _max);
     builder.field(MIN.getPreferredName(), _min);
+    builder.endObject();
     return builder;
   }
 

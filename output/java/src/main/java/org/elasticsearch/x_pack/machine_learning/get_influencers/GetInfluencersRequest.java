@@ -63,6 +63,7 @@ public class GetInfluencersRequest  implements XContentable<GetInfluencersReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DESCENDING.getPreferredName(), _descending);
     builder.field(END.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
@@ -72,10 +73,13 @@ public class GetInfluencersRequest  implements XContentable<GetInfluencersReques
       builder.field(PAGE.getPreferredName());
       _page.toXContent(builder, params);
     }
-    builder.field(SORT.getPreferredName());
-    _sort.toXContent(builder, params);
+    if (_sort != null) {
+      builder.field(SORT.getPreferredName());
+      _sort.toXContent(builder, params);
+    }
     builder.field(START.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    builder.endObject();
     return builder;
   }
 

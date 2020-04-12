@@ -38,6 +38,7 @@ public class UnassignedInformation  implements XContentable<UnassignedInformatio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AT.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_at.toInstant()));
     builder.field(LAST_ALLOCATION_STATUS.getPreferredName(), _lastAllocationStatus);
@@ -45,6 +46,7 @@ public class UnassignedInformation  implements XContentable<UnassignedInformatio
       builder.field(REASON.getPreferredName());
       _reason.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

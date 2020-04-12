@@ -367,6 +367,7 @@ public class CatShardsRecord  implements XContentable<CatShardsRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COMPLETION_SIZE.getPreferredName(), _completionSize);
     builder.field(DOCS.getPreferredName(), _docs);
     builder.field(FIELDDATA_EVICTIONS.getPreferredName(), _fielddataEvictions);
@@ -425,6 +426,7 @@ public class CatShardsRecord  implements XContentable<CatShardsRecord> {
     builder.field(WARMER_CURRENT.getPreferredName(), _warmerCurrent);
     builder.field(WARMER_TOTAL.getPreferredName(), _warmerTotal);
     builder.field(WARMER_TOTAL_TIME.getPreferredName(), _warmerTotalTime);
+    builder.endObject();
     return builder;
   }
 

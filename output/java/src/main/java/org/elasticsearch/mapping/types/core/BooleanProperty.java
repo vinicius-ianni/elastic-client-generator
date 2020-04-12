@@ -44,6 +44,7 @@ public class BooleanProperty  implements XContentable<BooleanProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BOOST.getPreferredName(), _boost);
     if (_fielddata != null) {
       builder.field(FIELDDATA.getPreferredName());
@@ -51,6 +52,7 @@ public class BooleanProperty  implements XContentable<BooleanProperty> {
     }
     builder.field(INDEX.getPreferredName(), _index);
     builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    builder.endObject();
     return builder;
   }
 

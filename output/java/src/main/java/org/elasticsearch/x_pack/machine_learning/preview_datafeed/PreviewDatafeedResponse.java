@@ -25,9 +25,11 @@ public class PreviewDatafeedResponse<TDocument>  implements XContentable<Preview
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_data != null) {
       builder.array(DATA.getPreferredName(), _data);
     }
+    builder.endObject();
     return builder;
   }
 

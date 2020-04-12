@@ -49,11 +49,13 @@ public class PartitionScore  implements XContentable<PartitionScore> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(INITIAL_RECORD_SCORE.getPreferredName(), _initialRecordScore);
     builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
     builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
     builder.field(PROBABILITY.getPreferredName(), _probability);
     builder.field(RECORD_SCORE.getPreferredName(), _recordScore);
+    builder.endObject();
     return builder;
   }
 

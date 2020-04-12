@@ -38,6 +38,7 @@ public class PostLicenseResponse  implements XContentable<PostLicenseResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_acknowledge != null) {
       builder.field(ACKNOWLEDGE.getPreferredName());
       _acknowledge.toXContent(builder, params);
@@ -47,6 +48,7 @@ public class PostLicenseResponse  implements XContentable<PostLicenseResponse> {
       builder.field(LICENSE_STATUS.getPreferredName());
       _licenseStatus.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

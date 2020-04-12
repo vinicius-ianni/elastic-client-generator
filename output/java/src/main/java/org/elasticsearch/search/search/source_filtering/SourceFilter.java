@@ -31,12 +31,14 @@ public class SourceFilter  implements XContentable<SourceFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_excludes != null) {
       builder.array(EXCLUDES.getPreferredName(), _excludes);
     }
     if (_includes != null) {
       builder.array(INCLUDES.getPreferredName(), _includes);
     }
+    builder.endObject();
     return builder;
   }
 

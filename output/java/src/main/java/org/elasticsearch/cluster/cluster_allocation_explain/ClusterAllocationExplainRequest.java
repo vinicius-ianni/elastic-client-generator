@@ -50,12 +50,16 @@ public class ClusterAllocationExplainRequest  implements XContentable<ClusterAll
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(INDEX.getPreferredName());
-    _index.toXContent(builder, params);
+    builder.startObject();
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
     builder.field(PRIMARY.getPreferredName(), _primary);
     builder.field(SHARD.getPreferredName(), _shard);
     builder.field(INCLUDE_DISK_INFO.getPreferredName(), _includeDiskInfo);
     builder.field(INCLUDE_YES_DECISIONS.getPreferredName(), _includeYesDecisions);
+    builder.endObject();
     return builder;
   }
 

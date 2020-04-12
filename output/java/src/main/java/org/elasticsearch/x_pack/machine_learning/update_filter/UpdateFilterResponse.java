@@ -37,11 +37,13 @@ public class UpdateFilterResponse  implements XContentable<UpdateFilterResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DESCRIPTION.getPreferredName(), _description);
     builder.field(FILTER_ID.getPreferredName(), _filterId);
     if (_items != null) {
       builder.array(ITEMS.getPreferredName(), _items);
     }
+    builder.endObject();
     return builder;
   }
 

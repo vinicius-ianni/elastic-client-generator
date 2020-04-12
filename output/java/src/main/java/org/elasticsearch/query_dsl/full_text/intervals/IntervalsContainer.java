@@ -49,6 +49,7 @@ public class IntervalsContainer  implements XContentable<IntervalsContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_allOf != null) {
       builder.field(ALL_OF.getPreferredName());
       _allOf.toXContent(builder, params);
@@ -69,6 +70,7 @@ public class IntervalsContainer  implements XContentable<IntervalsContainer> {
       builder.field(WILDCARD.getPreferredName());
       _wildcard.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

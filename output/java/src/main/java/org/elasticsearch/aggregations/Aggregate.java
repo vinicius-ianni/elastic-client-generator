@@ -25,10 +25,12 @@ public class Aggregate  implements XContentable<Aggregate> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_meta != null) {
       builder.field(META.getPreferredName());
       _meta.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

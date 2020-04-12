@@ -38,11 +38,17 @@ public class ParentIdQuery  implements XContentable<ParentIdQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(ID.getPreferredName());
-    _id.toXContent(builder, params);
+    builder.startObject();
+    if (_id != null) {
+      builder.field(ID.getPreferredName());
+      _id.toXContent(builder, params);
+    }
     builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
-    builder.field(TYPE.getPreferredName());
-    _type.toXContent(builder, params);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

@@ -74,6 +74,7 @@ public class ModelSnapshot  implements XContentable<ModelSnapshot> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DESCRIPTION.getPreferredName(), _description);
     builder.field(JOB_ID.getPreferredName(), _jobId);
     builder.field(LATEST_RECORD_TIME_STAMP.getPreferredName(),
@@ -89,6 +90,7 @@ public class ModelSnapshot  implements XContentable<ModelSnapshot> {
     builder.field(SNAPSHOT_ID.getPreferredName(), _snapshotId);
     builder.field(TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.endObject();
     return builder;
   }
 

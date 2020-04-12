@@ -38,6 +38,7 @@ public class TimeOfYear  implements XContentable<TimeOfYear> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_at != null) {
       builder.array(AT.getPreferredName(), _at);
     }
@@ -47,6 +48,7 @@ public class TimeOfYear  implements XContentable<TimeOfYear> {
     if (_on != null) {
       builder.array(ON.getPreferredName(), _on);
     }
+    builder.endObject();
     return builder;
   }
 

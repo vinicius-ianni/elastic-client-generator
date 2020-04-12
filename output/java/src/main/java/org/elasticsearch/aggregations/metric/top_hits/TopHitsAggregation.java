@@ -90,6 +90,7 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_docvalueFields != null) {
       builder.array(DOCVALUE_FIELDS.getPreferredName(), _docvalueFields);
     }
@@ -116,6 +117,7 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
     }
     builder.field(TRACK_SCORES.getPreferredName(), _trackScores);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

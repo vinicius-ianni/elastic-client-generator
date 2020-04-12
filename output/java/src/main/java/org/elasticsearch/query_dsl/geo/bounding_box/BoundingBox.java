@@ -37,6 +37,7 @@ public class BoundingBox  implements XContentable<BoundingBox> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_bottomRight != null) {
       builder.field(BOTTOM_RIGHT.getPreferredName());
       _bottomRight.toXContent(builder, params);
@@ -46,6 +47,7 @@ public class BoundingBox  implements XContentable<BoundingBox> {
       _topLeft.toXContent(builder, params);
     }
     builder.field(WKT.getPreferredName(), _wkt);
+    builder.endObject();
     return builder;
   }
 

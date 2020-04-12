@@ -25,10 +25,12 @@ public class JoinProperty  implements XContentable<JoinProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_relations != null) {
       builder.field(RELATIONS.getPreferredName());
       _relations.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -44,6 +44,7 @@ public class CreateRepositoryRequest  implements XContentable<CreateRepositoryRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_repository != null) {
       builder.field(REPOSITORY.getPreferredName());
       _repository.toXContent(builder, params);
@@ -57,6 +58,7 @@ public class CreateRepositoryRequest  implements XContentable<CreateRepositoryRe
       _timeout.toXContent(builder, params);
     }
     builder.field(VERIFY.getPreferredName(), _verify);
+    builder.endObject();
     return builder;
   }
 

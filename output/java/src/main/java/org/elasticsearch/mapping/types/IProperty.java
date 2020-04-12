@@ -37,13 +37,17 @@ public class IProperty  implements XContentable<IProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_localMetadata != null) {
       builder.field(LOCAL_METADATA.getPreferredName());
       _localMetadata.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName());
-    _name.toXContent(builder, params);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName());
+      _name.toXContent(builder, params);
+    }
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

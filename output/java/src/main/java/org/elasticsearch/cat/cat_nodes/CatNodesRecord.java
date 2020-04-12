@@ -445,6 +445,7 @@ public class CatNodesRecord  implements XContentable<CatNodesRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BUILD.getPreferredName(), _build);
     builder.field(COMPLETION_SIZE.getPreferredName(), _completionSize);
     builder.field(CPU.getPreferredName(), _cpu);
@@ -516,6 +517,7 @@ public class CatNodesRecord  implements XContentable<CatNodesRecord> {
     builder.field(SEGMENTS_VERSION_MAP_MEMORY.getPreferredName(), _segmentsVersionMapMemory);
     builder.field(UPTIME.getPreferredName(), _uptime);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

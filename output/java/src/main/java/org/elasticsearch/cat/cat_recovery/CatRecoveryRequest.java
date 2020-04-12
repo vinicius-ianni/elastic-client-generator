@@ -62,6 +62,7 @@ public class CatRecoveryRequest  implements XContentable<CatRecoveryRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_bytes != null) {
       builder.field(BYTES.getPreferredName());
       _bytes.toXContent(builder, params);
@@ -79,6 +80,7 @@ public class CatRecoveryRequest  implements XContentable<CatRecoveryRequest> {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
     builder.field(VERBOSE.getPreferredName(), _verbose);
+    builder.endObject();
     return builder;
   }
 

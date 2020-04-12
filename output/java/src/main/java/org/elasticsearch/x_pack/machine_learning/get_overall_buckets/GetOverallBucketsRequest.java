@@ -62,6 +62,7 @@ public class GetOverallBucketsRequest  implements XContentable<GetOverallBuckets
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_JOBS.getPreferredName(), _allowNoJobs);
     if (_bucketSpan != null) {
       builder.field(BUCKET_SPAN.getPreferredName());
@@ -74,6 +75,7 @@ public class GetOverallBucketsRequest  implements XContentable<GetOverallBuckets
     builder.field(START.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
     builder.field(TOP_N.getPreferredName(), _topN);
+    builder.endObject();
     return builder;
   }
 

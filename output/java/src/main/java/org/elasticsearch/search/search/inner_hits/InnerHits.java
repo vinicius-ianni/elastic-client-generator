@@ -97,6 +97,7 @@ public class InnerHits  implements XContentable<InnerHits> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_collapse != null) {
       builder.field(COLLAPSE.getPreferredName());
       _collapse.toXContent(builder, params);
@@ -125,6 +126,7 @@ public class InnerHits  implements XContentable<InnerHits> {
       _source.map(builder::value, r-> r.toXContent(builder, params));
     }
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

@@ -43,12 +43,14 @@ public class CommonGramsTokenFilter  implements XContentable<CommonGramsTokenFil
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_commonWords != null) {
       builder.array(COMMON_WORDS.getPreferredName(), _commonWords);
     }
     builder.field(COMMON_WORDS_PATH.getPreferredName(), _commonWordsPath);
     builder.field(IGNORE_CASE.getPreferredName(), _ignoreCase);
     builder.field(QUERY_MODE.getPreferredName(), _queryMode);
+    builder.endObject();
     return builder;
   }
 

@@ -94,6 +94,7 @@ public class GenericProperty  implements XContentable<GenericProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(BOOST.getPreferredName(), _boost);
     if (_fielddata != null) {
@@ -115,6 +116,7 @@ public class GenericProperty  implements XContentable<GenericProperty> {
       _termVector.toXContent(builder, params);
     }
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

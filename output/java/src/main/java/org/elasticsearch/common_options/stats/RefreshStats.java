@@ -49,11 +49,13 @@ public class RefreshStats  implements XContentable<RefreshStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(TOTAL.getPreferredName(), _total);
     builder.field(TOTAL_TIME.getPreferredName(), _totalTime);
     builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
     builder.field(EXTERNAL_TOTAL.getPreferredName(), _externalTotal);
     builder.field(EXTERNAL_TOTAL_TIME_IN_MILLIS.getPreferredName(), _externalTotalTimeInMillis);
+    builder.endObject();
     return builder;
   }
 

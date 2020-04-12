@@ -25,10 +25,12 @@ public class SnowballTokenFilter  implements XContentable<SnowballTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_language != null) {
       builder.field(LANGUAGE.getPreferredName());
       _language.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

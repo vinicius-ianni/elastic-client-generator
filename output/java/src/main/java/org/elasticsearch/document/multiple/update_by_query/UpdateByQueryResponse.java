@@ -93,6 +93,7 @@ public class UpdateByQueryResponse  implements XContentable<UpdateByQueryRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(IS_VALID.getPreferredName(), _isValid);
     builder.field(BATCHES.getPreferredName(), _batches);
     if (_failures != null) {
@@ -104,13 +105,16 @@ public class UpdateByQueryResponse  implements XContentable<UpdateByQueryRespons
       builder.field(RETRIES.getPreferredName());
       _retries.toXContent(builder, params);
     }
-    builder.field(TASK.getPreferredName());
-    _task.toXContent(builder, params);
+    if (_task != null) {
+      builder.field(TASK.getPreferredName());
+      _task.toXContent(builder, params);
+    }
     builder.field(TIMED_OUT.getPreferredName(), _timedOut);
     builder.field(TOOK.getPreferredName(), _took);
     builder.field(TOTAL.getPreferredName(), _total);
     builder.field(UPDATED.getPreferredName(), _updated);
     builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    builder.endObject();
     return builder;
   }
 

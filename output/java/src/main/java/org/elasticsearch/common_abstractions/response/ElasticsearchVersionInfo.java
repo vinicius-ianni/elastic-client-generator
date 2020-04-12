@@ -73,6 +73,7 @@ public class ElasticsearchVersionInfo  implements XContentable<ElasticsearchVers
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LUCENE_VERSION.getPreferredName(), _luceneVersion);
     builder.field(NUMBER.getPreferredName(), _number);
     builder.field(BUILD_FLAVOR.getPreferredName(), _buildFlavor);
@@ -83,6 +84,7 @@ public class ElasticsearchVersionInfo  implements XContentable<ElasticsearchVers
     builder.field(BUILD_SNAPSHOT.getPreferredName(), _buildSnapshot);
     builder.field(MINIMUM_WIRE_COMPATIBILITY_VERSION.getPreferredName(), _minimumWireCompatibilityVersion);
     builder.field(MINIMUM_INDEX_COMPATIBILITY_VERSION.getPreferredName(), _minimumIndexCompatibilityVersion);
+    builder.endObject();
     return builder;
   }
 

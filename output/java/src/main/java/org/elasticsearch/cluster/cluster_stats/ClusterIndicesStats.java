@@ -69,6 +69,7 @@ public class ClusterIndicesStats  implements XContentable<ClusterIndicesStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_completion != null) {
       builder.field(COMPLETION.getPreferredName());
       _completion.toXContent(builder, params);
@@ -98,6 +99,7 @@ public class ClusterIndicesStats  implements XContentable<ClusterIndicesStats> {
       builder.field(STORE.getPreferredName());
       _store.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

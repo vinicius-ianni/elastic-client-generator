@@ -62,6 +62,7 @@ public class ReindexNode  implements XContentable<ReindexNode> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_attributes != null) {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
@@ -77,6 +78,7 @@ public class ReindexNode  implements XContentable<ReindexNode> {
       _tasks.toXContent(builder, params);
     }
     builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    builder.endObject();
     return builder;
   }
 

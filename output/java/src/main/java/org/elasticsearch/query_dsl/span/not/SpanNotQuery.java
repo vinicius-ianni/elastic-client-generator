@@ -50,6 +50,7 @@ public class SpanNotQuery  implements XContentable<SpanNotQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DIST.getPreferredName(), _dist);
     if (_exclude != null) {
       builder.field(EXCLUDE.getPreferredName());
@@ -61,6 +62,7 @@ public class SpanNotQuery  implements XContentable<SpanNotQuery> {
     }
     builder.field(POST.getPreferredName(), _post);
     builder.field(PRE.getPreferredName(), _pre);
+    builder.endObject();
     return builder;
   }
 

@@ -85,6 +85,7 @@ public class PutDatafeedResponse  implements XContentable<PutDatafeedResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_aggregations != null) {
       builder.field(AGGREGATIONS.getPreferredName());
       _aggregations.toXContent(builder, params);
@@ -98,8 +99,10 @@ public class PutDatafeedResponse  implements XContentable<PutDatafeedResponse> {
       builder.field(FREQUENCY.getPreferredName());
       _frequency.toXContent(builder, params);
     }
-    builder.field(INDICES.getPreferredName());
-    _indices.toXContent(builder, params);
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName());
+      _indices.toXContent(builder, params);
+    }
     builder.field(JOB_ID.getPreferredName(), _jobId);
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
@@ -114,6 +117,7 @@ public class PutDatafeedResponse  implements XContentable<PutDatafeedResponse> {
       _scriptFields.toXContent(builder, params);
     }
     builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    builder.endObject();
     return builder;
   }
 

@@ -38,8 +38,11 @@ public class TermsSetQuery  implements XContentable<TermsSetQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(MINIMUM_SHOULD_MATCH_FIELD.getPreferredName());
-    _minimumShouldMatchField.toXContent(builder, params);
+    builder.startObject();
+    if (_minimumShouldMatchField != null) {
+      builder.field(MINIMUM_SHOULD_MATCH_FIELD.getPreferredName());
+      _minimumShouldMatchField.toXContent(builder, params);
+    }
     if (_minimumShouldMatchScript != null) {
       builder.field(MINIMUM_SHOULD_MATCH_SCRIPT.getPreferredName());
       _minimumShouldMatchScript.toXContent(builder, params);
@@ -47,6 +50,7 @@ public class TermsSetQuery  implements XContentable<TermsSetQuery> {
     if (_terms != null) {
       builder.array(TERMS.getPreferredName(), _terms);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -38,6 +38,7 @@ public class PutScriptRequest  implements XContentable<PutScriptRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_script != null) {
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
@@ -50,6 +51,7 @@ public class PutScriptRequest  implements XContentable<PutScriptRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

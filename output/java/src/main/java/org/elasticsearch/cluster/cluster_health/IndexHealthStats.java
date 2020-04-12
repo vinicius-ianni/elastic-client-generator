@@ -75,6 +75,7 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACTIVE_PRIMARY_SHARDS.getPreferredName(), _activePrimaryShards);
     builder.field(ACTIVE_SHARDS.getPreferredName(), _activeShards);
     builder.field(INITIALIZING_SHARDS.getPreferredName(), _initializingShards);
@@ -90,6 +91,7 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
       _status.toXContent(builder, params);
     }
     builder.field(UNASSIGNED_SHARDS.getPreferredName(), _unassignedShards);
+    builder.endObject();
     return builder;
   }
 

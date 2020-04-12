@@ -56,6 +56,7 @@ public class Sort  implements XContentable<Sort> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MISSING.getPreferredName(), _missing);
     if (_mode != null) {
       builder.field(MODE.getPreferredName());
@@ -73,8 +74,11 @@ public class Sort  implements XContentable<Sort> {
       builder.field(ORDER.getPreferredName());
       _order.toXContent(builder, params);
     }
-    builder.field(SORT_KEY.getPreferredName());
-    _sortKey.toXContent(builder, params);
+    if (_sortKey != null) {
+      builder.field(SORT_KEY.getPreferredName());
+      _sortKey.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

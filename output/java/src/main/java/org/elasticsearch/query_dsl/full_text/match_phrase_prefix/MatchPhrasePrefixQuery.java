@@ -50,6 +50,7 @@ public class MatchPhrasePrefixQuery  implements XContentable<MatchPhrasePrefixQu
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     builder.field(MAX_EXPANSIONS.getPreferredName(), _maxExpansions);
     builder.field(QUERY.getPreferredName(), _query);
@@ -58,6 +59,7 @@ public class MatchPhrasePrefixQuery  implements XContentable<MatchPhrasePrefixQu
       builder.field(ZERO_TERMS_QUERY.getPreferredName());
       _zeroTermsQuery.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

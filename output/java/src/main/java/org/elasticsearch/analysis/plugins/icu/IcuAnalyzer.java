@@ -31,6 +31,7 @@ public class IcuAnalyzer  implements XContentable<IcuAnalyzer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_method != null) {
       builder.field(METHOD.getPreferredName());
       _method.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class IcuAnalyzer  implements XContentable<IcuAnalyzer> {
       builder.field(MODE.getPreferredName());
       _mode.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

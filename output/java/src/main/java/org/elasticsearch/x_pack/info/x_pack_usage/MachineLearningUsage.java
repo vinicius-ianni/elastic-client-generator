@@ -38,6 +38,7 @@ public class MachineLearningUsage  implements XContentable<MachineLearningUsage>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NODE_COUNT.getPreferredName(), _nodeCount);
     if (_datafeeds != null) {
       builder.field(DATAFEEDS.getPreferredName());
@@ -47,6 +48,7 @@ public class MachineLearningUsage  implements XContentable<MachineLearningUsage>
       builder.field(JOBS.getPreferredName());
       _jobs.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

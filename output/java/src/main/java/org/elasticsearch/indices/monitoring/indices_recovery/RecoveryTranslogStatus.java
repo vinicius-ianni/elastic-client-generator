@@ -55,12 +55,14 @@ public class RecoveryTranslogStatus  implements XContentable<RecoveryTranslogSta
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(PERCENT.getPreferredName(), _percent);
     builder.field(RECOVERED.getPreferredName(), _recovered);
     builder.field(TOTAL.getPreferredName(), _total);
     builder.field(TOTAL_ON_START.getPreferredName(), _totalOnStart);
     builder.field(TOTAL_TIME.getPreferredName(), _totalTime);
     builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    builder.endObject();
     return builder;
   }
 

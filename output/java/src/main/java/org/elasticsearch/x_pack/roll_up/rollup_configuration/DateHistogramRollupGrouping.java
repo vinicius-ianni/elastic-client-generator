@@ -50,18 +50,22 @@ public class DateHistogramRollupGrouping  implements XContentable<DateHistogramR
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_delay != null) {
       builder.field(DELAY.getPreferredName());
       _delay.toXContent(builder, params);
     }
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     builder.field(FORMAT.getPreferredName(), _format);
     if (_interval != null) {
       builder.field(INTERVAL.getPreferredName());
       _interval.toXContent(builder, params);
     }
     builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    builder.endObject();
     return builder;
   }
 

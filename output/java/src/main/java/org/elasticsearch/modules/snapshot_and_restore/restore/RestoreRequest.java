@@ -87,6 +87,7 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_ignoreIndexSettings != null) {
       builder.array(IGNORE_INDEX_SETTINGS.getPreferredName(), _ignoreIndexSettings);
     }
@@ -97,8 +98,10 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
       builder.field(INDEX_SETTINGS.getPreferredName());
       _indexSettings.toXContent(builder, params);
     }
-    builder.field(INDICES.getPreferredName());
-    _indices.toXContent(builder, params);
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName());
+      _indices.toXContent(builder, params);
+    }
     builder.field(PARTIAL.getPreferredName(), _partial);
     builder.field(RENAME_PATTERN.getPreferredName(), _renamePattern);
     builder.field(RENAME_REPLACEMENT.getPreferredName(), _renameReplacement);
@@ -107,6 +110,7 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
       _masterTimeout.toXContent(builder, params);
     }
     builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    builder.endObject();
     return builder;
   }
 

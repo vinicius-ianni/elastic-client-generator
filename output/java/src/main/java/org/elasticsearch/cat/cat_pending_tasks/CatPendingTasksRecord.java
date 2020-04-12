@@ -43,10 +43,12 @@ public class CatPendingTasksRecord  implements XContentable<CatPendingTasksRecor
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(INSERT_ORDER.getPreferredName(), _insertOrder);
     builder.field(PRIORITY.getPreferredName(), _priority);
     builder.field(SOURCE.getPreferredName(), _source);
     builder.field(TIME_IN_QUEUE.getPreferredName(), _timeInQueue);
+    builder.endObject();
     return builder;
   }
 

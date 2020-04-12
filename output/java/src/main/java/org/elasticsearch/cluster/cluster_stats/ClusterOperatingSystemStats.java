@@ -51,6 +51,7 @@ public class ClusterOperatingSystemStats  implements XContentable<ClusterOperati
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOCATED_PROCESSORS.getPreferredName(), _allocatedProcessors);
     builder.field(AVAILABLE_PROCESSORS.getPreferredName(), _availableProcessors);
     if (_mem != null) {
@@ -63,6 +64,7 @@ public class ClusterOperatingSystemStats  implements XContentable<ClusterOperati
     if (_prettyNames != null) {
       builder.array(PRETTY_NAMES.getPreferredName(), _prettyNames);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -85,6 +85,7 @@ public class CatIndicesRecord  implements XContentable<CatIndicesRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DOCS_COUNT.getPreferredName(), _docsCount);
     builder.field(DOCS_DELETED.getPreferredName(), _docsDeleted);
     builder.field(HEALTH.getPreferredName(), _health);
@@ -96,6 +97,7 @@ public class CatIndicesRecord  implements XContentable<CatIndicesRecord> {
     builder.field(STATUS.getPreferredName(), _status);
     builder.field(STORE_SIZE.getPreferredName(), _storeSize);
     builder.field(TM.getPreferredName(), _tm);
+    builder.endObject();
     return builder;
   }
 

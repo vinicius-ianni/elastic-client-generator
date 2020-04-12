@@ -25,7 +25,9 @@ public class IcuFoldingTokenFilter  implements XContentable<IcuFoldingTokenFilte
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(UNICODE_SET_FILTER.getPreferredName(), _unicodeSetFilter);
+    builder.endObject();
     return builder;
   }
 

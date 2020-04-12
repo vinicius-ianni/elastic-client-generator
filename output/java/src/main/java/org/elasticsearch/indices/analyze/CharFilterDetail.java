@@ -31,10 +31,12 @@ public class CharFilterDetail  implements XContentable<CharFilterDetail> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filteredText != null) {
       builder.array(FILTERED_TEXT.getPreferredName(), _filteredText);
     }
     builder.field(NAME.getPreferredName(), _name);
+    builder.endObject();
     return builder;
   }
 

@@ -25,7 +25,9 @@ public class ClusterRerouteCommand  implements XContentable<ClusterRerouteComman
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NAME.getPreferredName(), _name);
+    builder.endObject();
     return builder;
   }
 

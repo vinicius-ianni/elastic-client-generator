@@ -27,10 +27,12 @@ public class GetIndexSettingsResponse extends DictionaryResponseBase<IndexName, 
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_indices != null) {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -79,6 +79,7 @@ public class GetStats  implements XContentable<GetStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CURRENT.getPreferredName(), _current);
     builder.field(EXISTS_TIME.getPreferredName(), _existsTime);
     builder.field(EXISTS_TIME_IN_MILLIS.getPreferredName(), _existsTimeInMillis);
@@ -89,6 +90,7 @@ public class GetStats  implements XContentable<GetStats> {
     builder.field(TIME.getPreferredName(), _time);
     builder.field(TIME_IN_MILLIS.getPreferredName(), _timeInMillis);
     builder.field(TOTAL.getPreferredName(), _total);
+    builder.endObject();
     return builder;
   }
 

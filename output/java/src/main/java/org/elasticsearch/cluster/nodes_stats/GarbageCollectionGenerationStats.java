@@ -37,9 +37,11 @@ public class GarbageCollectionGenerationStats  implements XContentable<GarbageCo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COLLECTION_COUNT.getPreferredName(), _collectionCount);
     builder.field(COLLECTION_TIME.getPreferredName(), _collectionTime);
     builder.field(COLLECTION_TIME_IN_MILLIS.getPreferredName(), _collectionTimeInMillis);
+    builder.endObject();
     return builder;
   }
 

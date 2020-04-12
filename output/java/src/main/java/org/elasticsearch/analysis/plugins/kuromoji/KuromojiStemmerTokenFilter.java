@@ -25,7 +25,9 @@ public class KuromojiStemmerTokenFilter  implements XContentable<KuromojiStemmer
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MINIMUM_LENGTH.getPreferredName(), _minimumLength);
+    builder.endObject();
     return builder;
   }
 

@@ -49,6 +49,7 @@ public class Processor  implements XContentable<Processor> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NAME.getPreferredName(), _name);
     if (_onFailure != null) {
       builder.array(ON_FAILURE.getPreferredName(), _onFailure);
@@ -56,6 +57,7 @@ public class Processor  implements XContentable<Processor> {
     builder.field(IF.getPreferredName(), _if);
     builder.field(TAG.getPreferredName(), _tag);
     builder.field(IGNORE_FAILURE.getPreferredName(), _ignoreFailure);
+    builder.endObject();
     return builder;
   }
 

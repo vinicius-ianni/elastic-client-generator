@@ -50,6 +50,7 @@ public class FieldCapabilitiesRequest  implements XContentable<FieldCapabilities
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
@@ -60,6 +61,7 @@ public class FieldCapabilitiesRequest  implements XContentable<FieldCapabilities
     }
     builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
     builder.field(INCLUDE_UNMAPPED.getPreferredName(), _includeUnmapped);
+    builder.endObject();
     return builder;
   }
 

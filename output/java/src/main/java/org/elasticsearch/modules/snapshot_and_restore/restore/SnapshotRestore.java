@@ -38,6 +38,7 @@ public class SnapshotRestore  implements XContentable<SnapshotRestore> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_indices != null) {
       builder.array(INDICES.getPreferredName(), _indices);
     }
@@ -46,6 +47,7 @@ public class SnapshotRestore  implements XContentable<SnapshotRestore> {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

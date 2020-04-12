@@ -31,11 +31,13 @@ public class Script  implements XContentable<Script> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LANG.getPreferredName(), _lang);
     if (_params != null) {
       builder.field(PARAMS.getPreferredName());
       _params.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

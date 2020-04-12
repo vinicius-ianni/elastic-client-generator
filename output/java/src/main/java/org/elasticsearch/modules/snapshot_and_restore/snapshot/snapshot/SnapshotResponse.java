@@ -31,11 +31,13 @@ public class SnapshotResponse  implements XContentable<SnapshotResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ACCEPTED.getPreferredName(), _accepted);
     if (_snapshot != null) {
       builder.field(SNAPSHOT.getPreferredName());
       _snapshot.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

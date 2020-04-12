@@ -346,6 +346,7 @@ public class SearchRequest  implements XContentable<SearchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
     builder.field(ALLOW_PARTIAL_SEARCH_RESULTS.getPreferredName(), _allowPartialSearchResults);
     builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
@@ -368,8 +369,10 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     builder.field(PRE_FILTER_SHARD_SIZE.getPreferredName(), _preFilterShardSize);
     builder.field(PREFERENCE.getPreferredName(), _preference);
     builder.field(REQUEST_CACHE.getPreferredName(), _requestCache);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     if (_scroll != null) {
       builder.field(SCROLL.getPreferredName());
       _scroll.toXContent(builder, params);
@@ -382,8 +385,10 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     if (_stats != null) {
       builder.array(STATS.getPreferredName(), _stats);
     }
-    builder.field(SUGGEST_FIELD.getPreferredName());
-    _suggestField.toXContent(builder, params);
+    if (_suggestField != null) {
+      builder.field(SUGGEST_FIELD.getPreferredName());
+      _suggestField.toXContent(builder, params);
+    }
     if (_suggestMode != null) {
       builder.field(SUGGEST_MODE.getPreferredName());
       _suggestMode.toXContent(builder, params);
@@ -457,6 +462,7 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     builder.field(TRACK_SCORES.getPreferredName(), _trackScores);
     builder.field(TRACK_TOTAL_HITS.getPreferredName(), _trackTotalHits);
     builder.field(VERSION.getPreferredName(), _version);
+    builder.endObject();
     return builder;
   }
 

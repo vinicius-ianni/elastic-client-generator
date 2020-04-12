@@ -25,10 +25,12 @@ public class UpdateModelSnapshotResponse  implements XContentable<UpdateModelSna
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_model != null) {
       builder.field(MODEL.getPreferredName());
       _model.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

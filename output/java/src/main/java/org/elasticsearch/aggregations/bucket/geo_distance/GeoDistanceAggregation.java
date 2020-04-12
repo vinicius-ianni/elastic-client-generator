@@ -52,12 +52,15 @@ public class GeoDistanceAggregation  implements XContentable<GeoDistanceAggregat
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_distanceType != null) {
       builder.field(DISTANCE_TYPE.getPreferredName());
       _distanceType.toXContent(builder, params);
     }
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     if (_origin != null) {
       builder.field(ORIGIN.getPreferredName());
       _origin.toXContent(builder, params);
@@ -69,6 +72,7 @@ public class GeoDistanceAggregation  implements XContentable<GeoDistanceAggregat
       builder.field(UNIT.getPreferredName());
       _unit.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -55,12 +55,14 @@ public class TotalFileSystemStats  implements XContentable<TotalFileSystemStats>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(AVAILABLE.getPreferredName(), _available);
     builder.field(AVAILABLE_IN_BYTES.getPreferredName(), _availableInBytes);
     builder.field(FREE.getPreferredName(), _free);
     builder.field(FREE_IN_BYTES.getPreferredName(), _freeInBytes);
     builder.field(TOTAL.getPreferredName(), _total);
     builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
+    builder.endObject();
     return builder;
   }
 

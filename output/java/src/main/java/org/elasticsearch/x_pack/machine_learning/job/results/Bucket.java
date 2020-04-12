@@ -87,6 +87,7 @@ public class Bucket  implements XContentable<Bucket> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANOMALY_SCORE.getPreferredName(), _anomalyScore);
     if (_bucketInfluencers != null) {
       builder.array(BUCKET_INFLUENCERS.getPreferredName(), _bucketInfluencers);
@@ -106,6 +107,7 @@ public class Bucket  implements XContentable<Bucket> {
     builder.field(RESULT_TYPE.getPreferredName(), _resultType);
     builder.field(TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.endObject();
     return builder;
   }
 

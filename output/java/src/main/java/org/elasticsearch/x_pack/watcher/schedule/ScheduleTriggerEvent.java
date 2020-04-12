@@ -31,6 +31,7 @@ public class ScheduleTriggerEvent  implements XContentable<ScheduleTriggerEvent>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_scheduledTime != null) {
       builder.field(SCHEDULED_TIME.getPreferredName());
       _scheduledTime.map(r -> builder.value(DateTimeFormatter.ISO_DATE.format(r.toInstant())), builder::value);
@@ -39,6 +40,7 @@ public class ScheduleTriggerEvent  implements XContentable<ScheduleTriggerEvent>
       builder.field(TRIGGERED_TIME.getPreferredName());
       _triggeredTime.map(r -> builder.value(DateTimeFormatter.ISO_DATE.format(r.toInstant())), builder::value);
     }
+    builder.endObject();
     return builder;
   }
 

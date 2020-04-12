@@ -39,8 +39,11 @@ public class RangeAggregation  implements XContentable<RangeAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    builder.startObject();
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     if (_ranges != null) {
       builder.array(RANGES.getPreferredName(), _ranges);
     }
@@ -48,6 +51,7 @@ public class RangeAggregation  implements XContentable<RangeAggregation> {
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

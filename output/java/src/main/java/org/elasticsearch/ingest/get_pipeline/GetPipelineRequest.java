@@ -25,10 +25,12 @@ public class GetPipelineRequest  implements XContentable<GetPipelineRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

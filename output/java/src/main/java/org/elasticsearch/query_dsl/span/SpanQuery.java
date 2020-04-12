@@ -88,6 +88,7 @@ public class SpanQuery  implements XContentable<SpanQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_spanContaining != null) {
       builder.field(SPAN_CONTAINING.getPreferredName());
       _spanContaining.toXContent(builder, params);
@@ -128,6 +129,7 @@ public class SpanQuery  implements XContentable<SpanQuery> {
       builder.field(SPAN_WITHIN.getPreferredName());
       _spanWithin.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

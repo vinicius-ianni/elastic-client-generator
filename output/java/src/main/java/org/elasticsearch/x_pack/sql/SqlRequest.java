@@ -44,6 +44,7 @@ public class SqlRequest  implements XContentable<SqlRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FETCH_SIZE.getPreferredName(), _fetchSize);
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
@@ -51,6 +52,7 @@ public class SqlRequest  implements XContentable<SqlRequest> {
     }
     builder.field(QUERY.getPreferredName(), _query);
     builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    builder.endObject();
     return builder;
   }
 

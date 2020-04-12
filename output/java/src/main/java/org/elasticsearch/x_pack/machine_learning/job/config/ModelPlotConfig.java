@@ -25,9 +25,11 @@ public class ModelPlotConfig  implements XContentable<ModelPlotConfig> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_terms != null) {
       builder.array(TERMS.getPreferredName(), _terms);
     }
+    builder.endObject();
     return builder;
   }
 

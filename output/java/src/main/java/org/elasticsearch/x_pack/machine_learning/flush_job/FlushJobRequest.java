@@ -49,6 +49,7 @@ public class FlushJobRequest  implements XContentable<FlushJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SKIP_TIME.getPreferredName(), _skipTime);
     builder.field(ADVANCE_TIME.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_advanceTime.toInstant()));
@@ -57,6 +58,7 @@ public class FlushJobRequest  implements XContentable<FlushJobRequest> {
       DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
     builder.field(START.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    builder.endObject();
     return builder;
   }
 

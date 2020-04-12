@@ -98,6 +98,7 @@ public class CreateAutoFollowPatternRequest  implements XContentable<CreateAutoF
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(REMOTE_CLUSTER.getPreferredName(), _remoteCluster);
     if (_leaderIndexPatterns != null) {
       builder.array(LEADER_INDEX_PATTERNS.getPreferredName(), _leaderIndexPatterns);
@@ -119,6 +120,7 @@ public class CreateAutoFollowPatternRequest  implements XContentable<CreateAutoF
       builder.field(MAX_POLL_TIMEOUT.getPreferredName());
       _maxPollTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

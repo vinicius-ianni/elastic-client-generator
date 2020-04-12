@@ -38,6 +38,7 @@ public class HitsMetadata<T>  implements XContentable<HitsMetadata<T>> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_hits != null) {
       builder.array(HITS.getPreferredName(), _hits);
     }
@@ -46,6 +47,7 @@ public class HitsMetadata<T>  implements XContentable<HitsMetadata<T>> {
       builder.field(TOTAL.getPreferredName());
       _total.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

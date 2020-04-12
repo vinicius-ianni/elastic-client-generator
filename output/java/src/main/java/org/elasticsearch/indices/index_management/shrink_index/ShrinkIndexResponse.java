@@ -25,7 +25,9 @@ public class ShrinkIndexResponse  implements XContentable<ShrinkIndexResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    builder.endObject();
     return builder;
   }
 

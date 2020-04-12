@@ -25,7 +25,9 @@ public class ExecuteSnapshotLifecycleResponse  implements XContentable<ExecuteSn
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(SNAPSHOT_NAME.getPreferredName(), _snapshotName);
+    builder.endObject();
     return builder;
   }
 

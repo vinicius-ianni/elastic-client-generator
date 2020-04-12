@@ -25,7 +25,9 @@ public class StupidBackoffSmoothingModel  implements XContentable<StupidBackoffS
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DISCOUNT.getPreferredName(), _discount);
+    builder.endObject();
     return builder;
   }
 

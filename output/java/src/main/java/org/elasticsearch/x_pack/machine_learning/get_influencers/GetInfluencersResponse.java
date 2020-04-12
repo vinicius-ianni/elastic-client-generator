@@ -32,10 +32,12 @@ public class GetInfluencersResponse  implements XContentable<GetInfluencersRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COUNT.getPreferredName(), _count);
     if (_influencers != null) {
       builder.array(INFLUENCERS.getPreferredName(), _influencers);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -38,6 +38,7 @@ public class ListTasksResponse  implements XContentable<ListTasksResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(IS_VALID.getPreferredName(), _isValid);
     if (_nodeFailures != null) {
       builder.array(NODE_FAILURES.getPreferredName(), _nodeFailures);
@@ -46,6 +47,7 @@ public class ListTasksResponse  implements XContentable<ListTasksResponse> {
       builder.field(NODES.getPreferredName());
       _nodes.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

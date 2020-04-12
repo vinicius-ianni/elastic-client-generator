@@ -25,8 +25,12 @@ public class FieldAliasProperty  implements XContentable<FieldAliasProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(PATH.getPreferredName());
-    _path.toXContent(builder, params);
+    builder.startObject();
+    if (_path != null) {
+      builder.field(PATH.getPreferredName());
+      _path.toXContent(builder, params);
+    }
+    builder.endObject();
     return builder;
   }
 

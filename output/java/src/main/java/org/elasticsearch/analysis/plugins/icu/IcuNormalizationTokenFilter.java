@@ -25,10 +25,12 @@ public class IcuNormalizationTokenFilter  implements XContentable<IcuNormalizati
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_name != null) {
       builder.field(NAME.getPreferredName());
       _name.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

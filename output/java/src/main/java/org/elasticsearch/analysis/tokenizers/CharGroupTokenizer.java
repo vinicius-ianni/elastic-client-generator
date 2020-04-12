@@ -25,9 +25,11 @@ public class CharGroupTokenizer  implements XContentable<CharGroupTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_tokenizeOnChars != null) {
       builder.array(TOKENIZE_ON_CHARS.getPreferredName(), _tokenizeOnChars);
     }
+    builder.endObject();
     return builder;
   }
 

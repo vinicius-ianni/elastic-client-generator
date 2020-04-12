@@ -25,10 +25,12 @@ public class WildcardQuery  implements XContentable<WildcardQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_rewrite != null) {
       builder.field(REWRITE.getPreferredName());
       _rewrite.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

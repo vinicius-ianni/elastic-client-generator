@@ -56,6 +56,7 @@ public class PhoneticTokenFilter  implements XContentable<PhoneticTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_encoder != null) {
       builder.field(ENCODER.getPreferredName());
       _encoder.toXContent(builder, params);
@@ -73,6 +74,7 @@ public class PhoneticTokenFilter  implements XContentable<PhoneticTokenFilter> {
       builder.field(RULE_TYPE.getPreferredName());
       _ruleType.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

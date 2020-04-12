@@ -20,7 +20,9 @@ public class RetryIlmResponse  implements XContentable<RetryIlmResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     
+    builder.endObject();
     return builder;
   }
 

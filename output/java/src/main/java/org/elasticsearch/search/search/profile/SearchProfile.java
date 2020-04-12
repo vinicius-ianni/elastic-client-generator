@@ -38,6 +38,7 @@ public class SearchProfile  implements XContentable<SearchProfile> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_collector != null) {
       builder.array(COLLECTOR.getPreferredName(), _collector);
     }
@@ -45,6 +46,7 @@ public class SearchProfile  implements XContentable<SearchProfile> {
       builder.array(QUERY.getPreferredName(), _query);
     }
     builder.field(REWRITE_TIME.getPreferredName(), _rewriteTime);
+    builder.endObject();
     return builder;
   }
 

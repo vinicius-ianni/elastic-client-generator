@@ -109,6 +109,7 @@ public class XPackUsageResponse  implements XContentable<XPackUsageResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_sql != null) {
       builder.field(SQL.getPreferredName());
       _sql.toXContent(builder, params);
@@ -169,6 +170,7 @@ public class XPackUsageResponse  implements XContentable<XPackUsageResponse> {
       builder.field(VOTING_ONLY.getPreferredName());
       _votingOnly.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

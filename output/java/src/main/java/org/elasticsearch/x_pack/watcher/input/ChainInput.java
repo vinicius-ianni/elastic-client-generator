@@ -25,10 +25,12 @@ public class ChainInput  implements XContentable<ChainInput> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_inputs != null) {
       builder.field(INPUTS.getPreferredName());
       _inputs.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

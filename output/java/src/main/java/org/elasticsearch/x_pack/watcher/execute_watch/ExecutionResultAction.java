@@ -86,6 +86,7 @@ public class ExecutionResultAction  implements XContentable<ExecutionResultActio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_email != null) {
       builder.field(EMAIL.getPreferredName());
       _email.toXContent(builder, params);
@@ -120,6 +121,7 @@ public class ExecutionResultAction  implements XContentable<ExecutionResultActio
       builder.field(WEBHOOK.getPreferredName());
       _webhook.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

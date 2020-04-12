@@ -57,6 +57,7 @@ public class BoolQuery  implements XContentable<BoolQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filter != null) {
       builder.array(FILTER.getPreferredName(), _filter);
     }
@@ -74,6 +75,7 @@ public class BoolQuery  implements XContentable<BoolQuery> {
     if (_should != null) {
       builder.array(SHOULD.getPreferredName(), _should);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -25,9 +25,11 @@ public class PostCalendarEventsRequest  implements XContentable<PostCalendarEven
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_events != null) {
       builder.array(EVENTS.getPreferredName(), _events);
     }
+    builder.endObject();
     return builder;
   }
 

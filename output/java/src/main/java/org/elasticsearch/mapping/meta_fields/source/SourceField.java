@@ -49,6 +49,7 @@ public class SourceField  implements XContentable<SourceField> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(COMPRESS.getPreferredName(), _compress);
     builder.field(COMPRESS_THRESHOLD.getPreferredName(), _compressThreshold);
     builder.field(ENABLED.getPreferredName(), _enabled);
@@ -58,6 +59,7 @@ public class SourceField  implements XContentable<SourceField> {
     if (_includes != null) {
       builder.array(INCLUDES.getPreferredName(), _includes);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -45,6 +45,7 @@ public class IndicesModuleSettings  implements XContentable<IndicesModuleSetting
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_circuitBreakerSettings != null) {
       builder.field(CIRCUIT_BREAKER_SETTINGS.getPreferredName());
       _circuitBreakerSettings.toXContent(builder, params);
@@ -58,6 +59,7 @@ public class IndicesModuleSettings  implements XContentable<IndicesModuleSetting
       builder.field(RECOVERY_SETTINGS.getPreferredName());
       _recoverySettings.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

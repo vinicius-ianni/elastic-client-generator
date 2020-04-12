@@ -37,6 +37,7 @@ public class Pipeline  implements XContentable<Pipeline> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DESCRIPTION.getPreferredName(), _description);
     if (_onFailure != null) {
       builder.array(ON_FAILURE.getPreferredName(), _onFailure);
@@ -44,6 +45,7 @@ public class Pipeline  implements XContentable<Pipeline> {
     if (_processors != null) {
       builder.array(PROCESSORS.getPreferredName(), _processors);
     }
+    builder.endObject();
     return builder;
   }
 

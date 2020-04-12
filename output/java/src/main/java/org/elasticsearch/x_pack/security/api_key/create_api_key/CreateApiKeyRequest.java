@@ -45,6 +45,7 @@ public class CreateApiKeyRequest  implements XContentable<CreateApiKeyRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
@@ -58,6 +59,7 @@ public class CreateApiKeyRequest  implements XContentable<CreateApiKeyRequest> {
       builder.field(ROLE_DESCRIPTORS.getPreferredName());
       _roleDescriptors.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

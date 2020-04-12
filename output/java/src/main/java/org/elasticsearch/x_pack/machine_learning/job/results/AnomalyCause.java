@@ -104,6 +104,7 @@ public class AnomalyCause  implements XContentable<AnomalyCause> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actual != null) {
       builder.array(ACTUAL.getPreferredName(), _actual);
     }
@@ -124,6 +125,7 @@ public class AnomalyCause  implements XContentable<AnomalyCause> {
     if (_typical != null) {
       builder.array(TYPICAL.getPreferredName(), _typical);
     }
+    builder.endObject();
     return builder;
   }
 

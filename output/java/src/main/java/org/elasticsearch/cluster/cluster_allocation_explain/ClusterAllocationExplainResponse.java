@@ -158,6 +158,7 @@ public class ClusterAllocationExplainResponse  implements XContentable<ClusterAl
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ALLOCATE_EXPLANATION.getPreferredName(), _allocateExplanation);
     builder.field(ALLOCATION_DELAY.getPreferredName(), _allocationDelay);
     builder.field(ALLOCATION_DELAY_IN_MILLIS.getPreferredName(), _allocationDelayInMillis);
@@ -208,6 +209,7 @@ public class ClusterAllocationExplainResponse  implements XContentable<ClusterAl
       builder.field(UNASSIGNED_INFO.getPreferredName());
       _unassignedInfo.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

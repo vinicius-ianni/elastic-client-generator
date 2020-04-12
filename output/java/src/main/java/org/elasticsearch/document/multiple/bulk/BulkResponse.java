@@ -50,6 +50,7 @@ public class BulkResponse  implements XContentable<BulkResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ERRORS.getPreferredName(), _errors);
     builder.field(IS_VALID.getPreferredName(), _isValid);
     if (_items != null) {
@@ -59,6 +60,7 @@ public class BulkResponse  implements XContentable<BulkResponse> {
       builder.array(ITEMS_WITH_ERRORS.getPreferredName(), _itemsWithErrors);
     }
     builder.field(TOOK.getPreferredName(), _took);
+    builder.endObject();
     return builder;
   }
 

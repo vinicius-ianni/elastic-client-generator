@@ -38,6 +38,7 @@ public class PercentilesAggregation  implements XContentable<PercentilesAggregat
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_method != null) {
       builder.field(METHOD.getPreferredName());
       _method.toXContent(builder, params);
@@ -46,6 +47,7 @@ public class PercentilesAggregation  implements XContentable<PercentilesAggregat
       builder.array(PERCENTS.getPreferredName(), _percents);
     }
     builder.field(KEYED.getPreferredName(), _keyed);
+    builder.endObject();
     return builder;
   }
 

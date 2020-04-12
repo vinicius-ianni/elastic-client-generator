@@ -37,6 +37,7 @@ public class ClusterIndicesShardsIndexStats  implements XContentable<ClusterIndi
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_primaries != null) {
       builder.field(PRIMARIES.getPreferredName());
       _primaries.toXContent(builder, params);
@@ -49,6 +50,7 @@ public class ClusterIndicesShardsIndexStats  implements XContentable<ClusterIndi
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -25,10 +25,12 @@ public class AdjacencyMatrixAggregation  implements XContentable<AdjacencyMatrix
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filters != null) {
       builder.field(FILTERS.getPreferredName());
       _filters.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

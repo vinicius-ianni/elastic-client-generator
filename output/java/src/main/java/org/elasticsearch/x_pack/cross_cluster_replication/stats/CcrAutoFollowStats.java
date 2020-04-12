@@ -51,6 +51,7 @@ public class CcrAutoFollowStats  implements XContentable<CcrAutoFollowStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NUMBER_OF_FAILED_FOLLOW_INDICES.getPreferredName(), _numberOfFailedFollowIndices);
     builder.field(NUMBER_OF_FAILED_REMOTE_CLUSTER_STATE_REQUESTS.getPreferredName(), _numberOfFailedRemoteClusterStateRequests);
     builder.field(NUMBER_OF_SUCCESSFUL_FOLLOW_INDICES.getPreferredName(), _numberOfSuccessfulFollowIndices);
@@ -60,6 +61,7 @@ public class CcrAutoFollowStats  implements XContentable<CcrAutoFollowStats> {
     if (_autoFollowedClusters != null) {
       builder.array(AUTO_FOLLOWED_CLUSTERS.getPreferredName(), _autoFollowedClusters);
     }
+    builder.endObject();
     return builder;
   }
 

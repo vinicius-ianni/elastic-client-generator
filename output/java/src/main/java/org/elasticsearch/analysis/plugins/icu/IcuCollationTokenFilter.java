@@ -85,6 +85,7 @@ public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenF
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_alternate != null) {
       builder.field(ALTERNATE.getPreferredName());
       _alternate.toXContent(builder, params);
@@ -108,6 +109,7 @@ public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenF
     }
     builder.field(VARIABLE_TOP.getPreferredName(), _variableTop);
     builder.field(VARIANT.getPreferredName(), _variant);
+    builder.endObject();
     return builder;
   }
 

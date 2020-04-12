@@ -25,10 +25,12 @@ public class GlobalPrivileges  implements XContentable<GlobalPrivileges> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_application != null) {
       builder.field(APPLICATION.getPreferredName());
       _application.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

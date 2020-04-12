@@ -25,9 +25,11 @@ public class NodesHotThreadsResponse  implements XContentable<NodesHotThreadsRes
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_hotThreads != null) {
       builder.array(HOT_THREADS.getPreferredName(), _hotThreads);
     }
+    builder.endObject();
     return builder;
   }
 

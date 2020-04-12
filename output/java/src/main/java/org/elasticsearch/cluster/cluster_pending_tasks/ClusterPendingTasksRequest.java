@@ -31,11 +31,13 @@ public class ClusterPendingTasksRequest  implements XContentable<ClusterPendingT
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(LOCAL.getPreferredName(), _local);
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

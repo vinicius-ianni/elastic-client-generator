@@ -43,11 +43,13 @@ public class SnapshotLifecycleInProgress  implements XContentable<SnapshotLifecy
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(NAME.getPreferredName(), _name);
     builder.field(UUID.getPreferredName(), _uuid);
     builder.field(STATE.getPreferredName(), _state);
     builder.field(START_TIME_MILLIS.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_startTimeMillis.toInstant()));
+    builder.endObject();
     return builder;
   }
 

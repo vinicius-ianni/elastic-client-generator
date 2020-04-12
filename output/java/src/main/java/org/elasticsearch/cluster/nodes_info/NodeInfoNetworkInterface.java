@@ -37,9 +37,11 @@ public class NodeInfoNetworkInterface  implements XContentable<NodeInfoNetworkIn
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ADDRESS.getPreferredName(), _address);
     builder.field(MAC_ADDRESS.getPreferredName(), _macAddress);
     builder.field(NAME.getPreferredName(), _name);
+    builder.endObject();
     return builder;
   }
 

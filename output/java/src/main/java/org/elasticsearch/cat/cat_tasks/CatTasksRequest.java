@@ -73,6 +73,7 @@ public class CatTasksRequest  implements XContentable<CatTasksRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.array(ACTIONS.getPreferredName(), _actions);
     }
@@ -90,6 +91,7 @@ public class CatTasksRequest  implements XContentable<CatTasksRequest> {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
     builder.field(VERBOSE.getPreferredName(), _verbose);
+    builder.endObject();
     return builder;
   }
 

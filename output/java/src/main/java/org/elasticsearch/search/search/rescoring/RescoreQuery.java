@@ -45,6 +45,7 @@ public class RescoreQuery  implements XContentable<RescoreQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_rescoreQuery != null) {
       builder.field(RESCORE_QUERY.getPreferredName());
       _rescoreQuery.toXContent(builder, params);
@@ -55,6 +56,7 @@ public class RescoreQuery  implements XContentable<RescoreQuery> {
       builder.field(SCORE_MODE.getPreferredName());
       _scoreMode.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

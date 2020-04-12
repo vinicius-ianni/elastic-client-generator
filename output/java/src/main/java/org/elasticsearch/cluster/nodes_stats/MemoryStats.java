@@ -55,12 +55,14 @@ public class MemoryStats  implements XContentable<MemoryStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(RESIDENT.getPreferredName(), _resident);
     builder.field(RESIDENT_IN_BYTES.getPreferredName(), _residentInBytes);
     builder.field(SHARE.getPreferredName(), _share);
     builder.field(SHARE_IN_BYTES.getPreferredName(), _shareInBytes);
     builder.field(TOTAL_VIRTUAL.getPreferredName(), _totalVirtual);
     builder.field(TOTAL_VIRTUAL_IN_BYTES.getPreferredName(), _totalVirtualInBytes);
+    builder.endObject();
     return builder;
   }
 

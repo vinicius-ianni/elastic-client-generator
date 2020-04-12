@@ -31,10 +31,12 @@ public class RemovePolicyResponse  implements XContentable<RemovePolicyResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_failedIndexes != null) {
       builder.array(FAILED_INDEXES.getPreferredName(), _failedIndexes);
     }
     builder.field(HAS_FAILURES.getPreferredName(), _hasFailures);
+    builder.endObject();
     return builder;
   }
 

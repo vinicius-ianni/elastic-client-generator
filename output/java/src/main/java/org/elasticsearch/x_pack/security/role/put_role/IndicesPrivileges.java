@@ -45,12 +45,15 @@ public class IndicesPrivileges  implements XContentable<IndicesPrivileges> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_fieldSecurity != null) {
       builder.field(FIELD_SECURITY.getPreferredName());
       _fieldSecurity.toXContent(builder, params);
     }
-    builder.field(NAMES.getPreferredName());
-    _names.toXContent(builder, params);
+    if (_names != null) {
+      builder.field(NAMES.getPreferredName());
+      _names.toXContent(builder, params);
+    }
     if (_privileges != null) {
       builder.array(PRIVILEGES.getPreferredName(), _privileges);
     }
@@ -58,6 +61,7 @@ public class IndicesPrivileges  implements XContentable<IndicesPrivileges> {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

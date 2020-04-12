@@ -31,6 +31,7 @@ public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_autoFollowStats != null) {
       builder.field(AUTO_FOLLOW_STATS.getPreferredName());
       _autoFollowStats.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
       builder.field(FOLLOW_STATS.getPreferredName());
       _followStats.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -38,6 +38,7 @@ public class RuleCondition  implements XContentable<RuleCondition> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_appliesTo != null) {
       builder.field(APPLIES_TO.getPreferredName());
       _appliesTo.toXContent(builder, params);
@@ -47,6 +48,7 @@ public class RuleCondition  implements XContentable<RuleCondition> {
       _operator.toXContent(builder, params);
     }
     builder.field(VALUE.getPreferredName(), _value);
+    builder.endObject();
     return builder;
   }
 

@@ -115,6 +115,7 @@ public class IndexStats  implements XContentable<IndexStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_completion != null) {
       builder.field(COMPLETION.getPreferredName());
       _completion.toXContent(builder, params);
@@ -179,6 +180,7 @@ public class IndexStats  implements XContentable<IndexStats> {
       builder.field(WARMER.getPreferredName());
       _warmer.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

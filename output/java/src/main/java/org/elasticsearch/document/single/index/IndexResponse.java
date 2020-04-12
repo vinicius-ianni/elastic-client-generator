@@ -25,7 +25,9 @@ public class IndexResponse  implements XContentable<IndexResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(IS_VALID.getPreferredName(), _isValid);
+    builder.endObject();
     return builder;
   }
 

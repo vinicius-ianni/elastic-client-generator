@@ -43,10 +43,12 @@ public class ShardRequestCache  implements XContentable<ShardRequestCache> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(EVICTIONS.getPreferredName(), _evictions);
     builder.field(HIT_COUNT.getPreferredName(), _hitCount);
     builder.field(MEMORY_SIZE_IN_BYTES.getPreferredName(), _memorySizeInBytes);
     builder.field(MISS_COUNT.getPreferredName(), _missCount);
+    builder.endObject();
     return builder;
   }
 

@@ -69,6 +69,7 @@ public class GetBucketsRequest  implements XContentable<GetBucketsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANOMALY_SCORE.getPreferredName(), _anomalyScore);
     builder.field(DESC.getPreferredName(), _desc);
     builder.field(END.getPreferredName(),
@@ -79,10 +80,13 @@ public class GetBucketsRequest  implements XContentable<GetBucketsRequest> {
       builder.field(PAGE.getPreferredName());
       _page.toXContent(builder, params);
     }
-    builder.field(SORT.getPreferredName());
-    _sort.toXContent(builder, params);
+    if (_sort != null) {
+      builder.field(SORT.getPreferredName());
+      _sort.toXContent(builder, params);
+    }
     builder.field(START.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    builder.endObject();
     return builder;
   }
 

@@ -55,6 +55,7 @@ public class DateNanosProperty  implements XContentable<DateNanosProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BOOST.getPreferredName(), _boost);
     builder.field(FORMAT.getPreferredName(), _format);
     builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
@@ -62,6 +63,7 @@ public class DateNanosProperty  implements XContentable<DateNanosProperty> {
     builder.field(NULL_VALUE.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_nullValue.toInstant()));
     builder.field(PRECISION_STEP.getPreferredName(), _precisionStep);
+    builder.endObject();
     return builder;
   }
 

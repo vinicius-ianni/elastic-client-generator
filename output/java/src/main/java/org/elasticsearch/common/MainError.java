@@ -31,6 +31,7 @@ public class MainError  implements XContentable<MainError> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_headers != null) {
       builder.field(HEADERS.getPreferredName());
       _headers.toXContent(builder, params);
@@ -38,6 +39,7 @@ public class MainError  implements XContentable<MainError> {
     if (_rootCause != null) {
       builder.array(ROOT_CAUSE.getPreferredName(), _rootCause);
     }
+    builder.endObject();
     return builder;
   }
 

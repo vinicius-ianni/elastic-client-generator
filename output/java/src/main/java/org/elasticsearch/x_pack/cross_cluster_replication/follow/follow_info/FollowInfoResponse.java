@@ -25,9 +25,11 @@ public class FollowInfoResponse  implements XContentable<FollowInfoResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_followerIndices != null) {
       builder.array(FOLLOWER_INDICES.getPreferredName(), _followerIndices);
     }
+    builder.endObject();
     return builder;
   }
 

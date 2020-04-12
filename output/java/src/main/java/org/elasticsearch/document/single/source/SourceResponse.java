@@ -25,7 +25,9 @@ public class SourceResponse<TDocument>  implements XContentable<SourceResponse<T
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BODY.getPreferredName(), _body);
+    builder.endObject();
     return builder;
   }
 

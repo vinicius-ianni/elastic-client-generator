@@ -50,6 +50,7 @@ public class ExecutionResult  implements XContentable<ExecutionResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.array(ACTIONS.getPreferredName(), _actions);
     }
@@ -64,6 +65,7 @@ public class ExecutionResult  implements XContentable<ExecutionResult> {
       builder.field(INPUT.getPreferredName());
       _input.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

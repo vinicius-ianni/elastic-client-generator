@@ -37,6 +37,7 @@ public class AlertingUsage  implements XContentable<AlertingUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_count != null) {
       builder.field(COUNT.getPreferredName());
       _count.toXContent(builder, params);
@@ -49,6 +50,7 @@ public class AlertingUsage  implements XContentable<AlertingUsage> {
       builder.field(WATCH.getPreferredName());
       _watch.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

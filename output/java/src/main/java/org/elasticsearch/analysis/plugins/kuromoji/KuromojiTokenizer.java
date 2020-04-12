@@ -56,6 +56,7 @@ public class KuromojiTokenizer  implements XContentable<KuromojiTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(DISCARD_PUNCTUATION.getPreferredName(), _discardPunctuation);
     if (_mode != null) {
       builder.field(MODE.getPreferredName());
@@ -67,6 +68,7 @@ public class KuromojiTokenizer  implements XContentable<KuromojiTokenizer> {
     if (_userDictionaryRules != null) {
       builder.array(USER_DICTIONARY_RULES.getPreferredName(), _userDictionaryRules);
     }
+    builder.endObject();
     return builder;
   }
 

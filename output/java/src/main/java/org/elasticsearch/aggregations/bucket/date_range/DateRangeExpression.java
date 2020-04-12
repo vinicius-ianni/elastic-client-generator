@@ -37,6 +37,7 @@ public class DateRangeExpression  implements XContentable<DateRangeExpression> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_from != null) {
       builder.field(FROM.getPreferredName());
       _from.toXContent(builder, params);
@@ -46,6 +47,7 @@ public class DateRangeExpression  implements XContentable<DateRangeExpression> {
       builder.field(TO.getPreferredName());
       _to.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

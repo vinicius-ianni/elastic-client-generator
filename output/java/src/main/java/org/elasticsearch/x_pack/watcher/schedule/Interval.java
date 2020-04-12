@@ -32,11 +32,13 @@ public class Interval  implements XContentable<Interval> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FACTOR.getPreferredName(), _factor);
     if (_unit != null) {
       builder.field(UNIT.getPreferredName());
       _unit.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

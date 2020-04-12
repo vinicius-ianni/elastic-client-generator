@@ -32,11 +32,13 @@ public class IlmPolicyStatistics  implements XContentable<IlmPolicyStatistics> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_phases != null) {
       builder.field(PHASES.getPreferredName());
       _phases.toXContent(builder, params);
     }
     builder.field(INDICES_MANAGED.getPreferredName(), _indicesManaged);
+    builder.endObject();
     return builder;
   }
 

@@ -31,6 +31,7 @@ public class ClusterGetSettingsResponse  implements XContentable<ClusterGetSetti
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_persistent != null) {
       builder.field(PERSISTENT.getPreferredName());
       _persistent.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class ClusterGetSettingsResponse  implements XContentable<ClusterGetSetti
       builder.field(TRANSIENT.getPreferredName());
       _transient.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -37,6 +37,7 @@ public class NodeUsageInformation  implements XContentable<NodeUsageInformation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_restActions != null) {
       builder.field(REST_ACTIONS.getPreferredName());
       _restActions.toXContent(builder, params);
@@ -45,6 +46,7 @@ public class NodeUsageInformation  implements XContentable<NodeUsageInformation>
       DateTimeFormatter.ISO_DATE.format(_since.toInstant()));
     builder.field(TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.endObject();
     return builder;
   }
 

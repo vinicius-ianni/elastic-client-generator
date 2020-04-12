@@ -53,6 +53,7 @@ public class SearchInputRequest  implements XContentable<SearchInputRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_body != null) {
       builder.field(BODY.getPreferredName());
       _body.toXContent(builder, params);
@@ -72,6 +73,7 @@ public class SearchInputRequest  implements XContentable<SearchInputRequest> {
       builder.field(TEMPLATE.getPreferredName());
       _template.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

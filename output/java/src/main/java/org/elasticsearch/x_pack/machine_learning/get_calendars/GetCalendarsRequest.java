@@ -25,10 +25,12 @@ public class GetCalendarsRequest  implements XContentable<GetCalendarsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_page != null) {
       builder.field(PAGE.getPreferredName());
       _page.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

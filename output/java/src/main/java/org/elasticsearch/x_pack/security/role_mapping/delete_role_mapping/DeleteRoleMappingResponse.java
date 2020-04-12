@@ -25,7 +25,9 @@ public class DeleteRoleMappingResponse  implements XContentable<DeleteRoleMappin
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(FOUND.getPreferredName(), _found);
+    builder.endObject();
     return builder;
   }
 

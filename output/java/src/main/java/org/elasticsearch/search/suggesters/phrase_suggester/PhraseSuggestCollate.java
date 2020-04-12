@@ -37,6 +37,7 @@ public class PhraseSuggestCollate  implements XContentable<PhraseSuggestCollate>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_params != null) {
       builder.field(PARAMS.getPreferredName());
       _params.toXContent(builder, params);
@@ -46,6 +47,7 @@ public class PhraseSuggestCollate  implements XContentable<PhraseSuggestCollate>
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

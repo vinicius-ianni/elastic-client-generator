@@ -74,6 +74,7 @@ public class IntervalsFilter  implements XContentable<IntervalsFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_after != null) {
       builder.field(AFTER.getPreferredName());
       _after.toXContent(builder, params);
@@ -110,6 +111,7 @@ public class IntervalsFilter  implements XContentable<IntervalsFilter> {
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

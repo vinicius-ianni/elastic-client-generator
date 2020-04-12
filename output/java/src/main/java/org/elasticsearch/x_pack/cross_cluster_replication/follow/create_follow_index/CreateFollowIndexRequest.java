@@ -99,10 +99,13 @@ public class CreateFollowIndexRequest  implements XContentable<CreateFollowIndex
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
     builder.field(REMOTE_CLUSTER.getPreferredName(), _remoteCluster);
-    builder.field(LEADER_INDEX.getPreferredName());
-    _leaderIndex.toXContent(builder, params);
+    if (_leaderIndex != null) {
+      builder.field(LEADER_INDEX.getPreferredName());
+      _leaderIndex.toXContent(builder, params);
+    }
     builder.field(MAX_READ_REQUEST_OPERATION_COUNT.getPreferredName(), _maxReadRequestOperationCount);
     builder.field(MAX_OUTSTANDING_READ_REQUESTS.getPreferredName(), _maxOutstandingReadRequests);
     builder.field(MAX_READ_REQUEST_SIZE.getPreferredName(), _maxReadRequestSize);
@@ -119,6 +122,7 @@ public class CreateFollowIndexRequest  implements XContentable<CreateFollowIndex
       builder.field(READ_POLL_TIMEOUT.getPreferredName());
       _readPollTimeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -55,12 +55,14 @@ public class AnalyzeToken  implements XContentable<AnalyzeToken> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(END_OFFSET.getPreferredName(), _endOffset);
     builder.field(POSITION.getPreferredName(), _position);
     builder.field(POSITION_LENGTH.getPreferredName(), _positionLength);
     builder.field(START_OFFSET.getPreferredName(), _startOffset);
     builder.field(TOKEN.getPreferredName(), _token);
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

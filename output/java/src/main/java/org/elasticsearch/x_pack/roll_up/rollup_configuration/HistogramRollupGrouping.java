@@ -32,10 +32,12 @@ public class HistogramRollupGrouping  implements XContentable<HistogramRollupGro
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
     builder.field(INTERVAL.getPreferredName(), _interval);
+    builder.endObject();
     return builder;
   }
 

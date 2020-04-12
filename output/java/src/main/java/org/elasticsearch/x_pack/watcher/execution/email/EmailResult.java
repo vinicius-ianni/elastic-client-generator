@@ -80,6 +80,7 @@ public class EmailResult  implements XContentable<EmailResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_bcc != null) {
       builder.array(BCC.getPreferredName(), _bcc);
     }
@@ -105,6 +106,7 @@ public class EmailResult  implements XContentable<EmailResult> {
     if (_to != null) {
       builder.array(TO.getPreferredName(), _to);
     }
+    builder.endObject();
     return builder;
   }
 

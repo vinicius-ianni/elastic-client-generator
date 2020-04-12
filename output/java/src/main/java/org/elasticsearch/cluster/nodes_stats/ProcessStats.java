@@ -44,6 +44,7 @@ public class ProcessStats  implements XContentable<ProcessStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_cpu != null) {
       builder.field(CPU.getPreferredName());
       _cpu.toXContent(builder, params);
@@ -54,6 +55,7 @@ public class ProcessStats  implements XContentable<ProcessStats> {
     }
     builder.field(OPEN_FILE_DESCRIPTORS.getPreferredName(), _openFileDescriptors);
     builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    builder.endObject();
     return builder;
   }
 

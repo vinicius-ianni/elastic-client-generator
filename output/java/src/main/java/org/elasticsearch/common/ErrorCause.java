@@ -146,6 +146,7 @@ public class ErrorCause  implements XContentable<ErrorCause> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_additionalProperties != null) {
       builder.field(ADDITIONAL_PROPERTIES.getPreferredName());
       _additionalProperties.toXContent(builder, params);
@@ -179,6 +180,7 @@ public class ErrorCause  implements XContentable<ErrorCause> {
     builder.field(SHARD.getPreferredName(), _shard);
     builder.field(STACK_TRACE.getPreferredName(), _stackTrace);
     builder.field(TYPE.getPreferredName(), _type);
+    builder.endObject();
     return builder;
   }
 

@@ -25,7 +25,9 @@ public class Limits  implements XContentable<Limits> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(MAX_MODEL_MEMORY_LIMIT.getPreferredName(), _maxModelMemoryLimit);
+    builder.endObject();
     return builder;
   }
 

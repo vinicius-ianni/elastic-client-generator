@@ -70,6 +70,7 @@ public class RollupJobConfiguration  implements XContentable<RollupJobConfigurat
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(CRON.getPreferredName(), _cron);
     if (_groups != null) {
       builder.field(GROUPS.getPreferredName());
@@ -81,12 +82,15 @@ public class RollupJobConfiguration  implements XContentable<RollupJobConfigurat
       builder.array(METRICS.getPreferredName(), _metrics);
     }
     builder.field(PAGE_SIZE.getPreferredName(), _pageSize);
-    builder.field(ROLLUP_INDEX.getPreferredName());
-    _rollupIndex.toXContent(builder, params);
+    if (_rollupIndex != null) {
+      builder.field(ROLLUP_INDEX.getPreferredName());
+      _rollupIndex.toXContent(builder, params);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -25,10 +25,12 @@ public class WatchRecordStats  implements XContentable<WatchRecordStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_executionPhase != null) {
       builder.field(EXECUTION_PHASE.getPreferredName());
       _executionPhase.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

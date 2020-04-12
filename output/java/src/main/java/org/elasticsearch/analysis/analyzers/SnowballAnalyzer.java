@@ -32,6 +32,7 @@ public class SnowballAnalyzer  implements XContentable<SnowballAnalyzer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_language != null) {
       builder.field(LANGUAGE.getPreferredName());
       _language.toXContent(builder, params);
@@ -40,6 +41,7 @@ public class SnowballAnalyzer  implements XContentable<SnowballAnalyzer> {
       builder.field(STOPWORDS.getPreferredName());
       _stopwords.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -109,6 +109,7 @@ public class PostJobDataResponse  implements XContentable<PostJobDataResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BUCKET_COUNT.getPreferredName(), _bucketCount);
     builder.field(EARLIEST_RECORD_TIMESTAMP.getPreferredName(),
       DateTimeFormatter.ISO_DATE.format(_earliestRecordTimestamp.toInstant()));
@@ -127,6 +128,7 @@ public class PostJobDataResponse  implements XContentable<PostJobDataResponse> {
     builder.field(PROCESSED_FIELD_COUNT.getPreferredName(), _processedFieldCount);
     builder.field(PROCESSED_RECORD_COUNT.getPreferredName(), _processedRecordCount);
     builder.field(SPARSE_BUCKET_COUNT.getPreferredName(), _sparseBucketCount);
+    builder.endObject();
     return builder;
   }
 

@@ -44,6 +44,7 @@ public class PutSnapshotLifecycleRequest  implements XContentable<PutSnapshotLif
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_config != null) {
       builder.field(CONFIG.getPreferredName());
       _config.toXContent(builder, params);
@@ -54,6 +55,7 @@ public class PutSnapshotLifecycleRequest  implements XContentable<PutSnapshotLif
       builder.field(SCHEDULE.getPreferredName());
       _schedule.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -37,6 +37,7 @@ public class HttpInput  implements XContentable<HttpInput> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_extract != null) {
       builder.array(EXTRACT.getPreferredName(), _extract);
     }
@@ -48,6 +49,7 @@ public class HttpInput  implements XContentable<HttpInput> {
       builder.field(RESPONSE_CONTENT_TYPE.getPreferredName());
       _responseContentType.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

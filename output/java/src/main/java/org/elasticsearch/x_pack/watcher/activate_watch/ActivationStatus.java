@@ -31,6 +31,7 @@ public class ActivationStatus  implements XContentable<ActivationStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actions != null) {
       builder.field(ACTIONS.getPreferredName());
       _actions.toXContent(builder, params);
@@ -39,6 +40,7 @@ public class ActivationStatus  implements XContentable<ActivationStatus> {
       builder.field(STATE.getPreferredName());
       _state.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

@@ -39,13 +39,17 @@ public class FieldCollapse  implements XContentable<FieldCollapse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    builder.field(FIELD.getPreferredName());
-    _field.toXContent(builder, params);
+    builder.startObject();
+    if (_field != null) {
+      builder.field(FIELD.getPreferredName());
+      _field.toXContent(builder, params);
+    }
     if (_innerHits != null) {
       builder.field(INNER_HITS.getPreferredName());
       _innerHits.toXContent(builder, params);
     }
     builder.field(MAX_CONCURRENT_GROUP_SEARCHES.getPreferredName(), _maxConcurrentGroupSearches);
+    builder.endObject();
     return builder;
   }
 

@@ -43,10 +43,12 @@ public class Token  implements XContentable<Token> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(END_OFFSET.getPreferredName(), _endOffset);
     builder.field(PAYLOAD.getPreferredName(), _payload);
     builder.field(POSITION.getPreferredName(), _position);
     builder.field(START_OFFSET.getPreferredName(), _startOffset);
+    builder.endObject();
     return builder;
   }
 

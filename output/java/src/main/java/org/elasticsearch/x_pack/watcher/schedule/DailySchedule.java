@@ -25,10 +25,12 @@ public class DailySchedule  implements XContentable<DailySchedule> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_at != null) {
       builder.field(AT.getPreferredName());
       _at.map(builder::value /* TODO List<String> */, r-> r.toXContent(builder, params));
     }
+    builder.endObject();
     return builder;
   }
 

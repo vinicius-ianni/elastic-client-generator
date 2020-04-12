@@ -25,10 +25,12 @@ public class IndexAliases  implements XContentable<IndexAliases> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_aliases != null) {
       builder.field(ALIASES.getPreferredName());
       _aliases.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

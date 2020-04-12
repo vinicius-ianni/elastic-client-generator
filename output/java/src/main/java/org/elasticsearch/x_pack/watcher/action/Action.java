@@ -65,6 +65,7 @@ public class Action  implements XContentable<Action> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_actionType != null) {
       builder.field(ACTION_TYPE.getPreferredName());
       _actionType.toXContent(builder, params);
@@ -84,6 +85,7 @@ public class Action  implements XContentable<Action> {
       builder.field(CONDITION.getPreferredName());
       _condition.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

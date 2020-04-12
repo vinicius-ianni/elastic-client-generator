@@ -70,6 +70,7 @@ public class Hit<TDocument>  implements XContentable<Hit<TDocument>> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_explanation != null) {
       builder.field(EXPLANATION.getPreferredName());
       _explanation.toXContent(builder, params);
@@ -97,6 +98,7 @@ public class Hit<TDocument>  implements XContentable<Hit<TDocument>> {
     if (_sort != null) {
       builder.array(SORT.getPreferredName(), _sort);
     }
+    builder.endObject();
     return builder;
   }
 

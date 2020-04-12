@@ -20,7 +20,9 @@ public class RestartWatcherResponse  implements XContentable<RestartWatcherRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     
+    builder.endObject();
     return builder;
   }
 

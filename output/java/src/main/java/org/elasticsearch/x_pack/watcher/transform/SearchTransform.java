@@ -32,6 +32,7 @@ public class SearchTransform  implements XContentable<SearchTransform> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_request != null) {
       builder.field(REQUEST.getPreferredName());
       _request.toXContent(builder, params);
@@ -40,6 +41,7 @@ public class SearchTransform  implements XContentable<SearchTransform> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

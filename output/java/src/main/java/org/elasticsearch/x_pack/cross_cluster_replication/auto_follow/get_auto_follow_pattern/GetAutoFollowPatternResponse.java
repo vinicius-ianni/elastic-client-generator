@@ -25,10 +25,12 @@ public class GetAutoFollowPatternResponse  implements XContentable<GetAutoFollow
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_patterns != null) {
       builder.field(PATTERNS.getPreferredName());
       _patterns.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

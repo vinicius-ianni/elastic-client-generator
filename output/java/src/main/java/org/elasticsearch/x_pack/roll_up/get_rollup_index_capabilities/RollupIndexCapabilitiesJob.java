@@ -43,6 +43,7 @@ public class RollupIndexCapabilitiesJob  implements XContentable<RollupIndexCapa
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_fields != null) {
       builder.field(FIELDS.getPreferredName());
       _fields.toXContent(builder, params);
@@ -50,6 +51,7 @@ public class RollupIndexCapabilitiesJob  implements XContentable<RollupIndexCapa
     builder.field(INDEX_PATTERN.getPreferredName(), _indexPattern);
     builder.field(JOB_ID.getPreferredName(), _jobId);
     builder.field(ROLLUP_INDEX.getPreferredName(), _rollupIndex);
+    builder.endObject();
     return builder;
   }
 

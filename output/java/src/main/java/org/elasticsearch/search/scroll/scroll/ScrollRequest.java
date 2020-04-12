@@ -37,12 +37,14 @@ public class ScrollRequest  implements XContentable<ScrollRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
     if (_scroll != null) {
       builder.field(SCROLL.getPreferredName());
       _scroll.toXContent(builder, params);
     }
     builder.field(SCROLL_ID.getPreferredName(), _scrollId);
+    builder.endObject();
     return builder;
   }
 

@@ -123,6 +123,7 @@ public class Highlight  implements XContentable<Highlight> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(BOUNDARY_CHARS.getPreferredName(), _boundaryChars);
     builder.field(BOUNDARY_MAX_SCAN.getPreferredName(), _boundaryMaxScan);
     if (_boundaryScanner != null) {
@@ -162,6 +163,7 @@ public class Highlight  implements XContentable<Highlight> {
       builder.field(TAGS_SCHEMA.getPreferredName());
       _tagsSchema.toXContent(builder, params);
     }
+    builder.endObject();
     return builder;
   }
 

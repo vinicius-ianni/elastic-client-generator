@@ -49,6 +49,7 @@ public class AliasDefinition  implements XContentable<AliasDefinition> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
@@ -57,6 +58,7 @@ public class AliasDefinition  implements XContentable<AliasDefinition> {
     builder.field(IS_WRITE_INDEX.getPreferredName(), _isWriteIndex);
     builder.field(ROUTING.getPreferredName(), _routing);
     builder.field(SEARCH_ROUTING.getPreferredName(), _searchRouting);
+    builder.endObject();
     return builder;
   }
 

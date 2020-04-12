@@ -31,10 +31,12 @@ public class LicenseAcknowledgement  implements XContentable<LicenseAcknowledgem
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     if (_license != null) {
       builder.array(LICENSE.getPreferredName(), _license);
     }
     builder.field(MESSAGE.getPreferredName(), _message);
+    builder.endObject();
     return builder;
   }
 

@@ -100,6 +100,7 @@ public class ExplainRequest  implements XContentable<ExplainRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
+    builder.startObject();
     builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
     builder.field(ANALYZER.getPreferredName(), _analyzer);
     if (_defaultOperator != null) {
@@ -110,8 +111,10 @@ public class ExplainRequest  implements XContentable<ExplainRequest> {
     builder.field(LENIENT.getPreferredName(), _lenient);
     builder.field(PREFERENCE.getPreferredName(), _preference);
     builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
-    builder.field(ROUTING.getPreferredName());
-    _routing.toXContent(builder, params);
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
     builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
     if (_sourceExcludes != null) {
       builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
@@ -126,6 +129,7 @@ public class ExplainRequest  implements XContentable<ExplainRequest> {
     if (_storedFields != null) {
       builder.array(STORED_FIELDS.getPreferredName(), _storedFields);
     }
+    builder.endObject();
     return builder;
   }
 
