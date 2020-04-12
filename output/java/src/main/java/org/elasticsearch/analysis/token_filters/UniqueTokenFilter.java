@@ -25,7 +25,8 @@ public class UniqueTokenFilter  implements XContentable<UniqueTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ONLY_ON_SAME_POSITION.getPreferredName(), _onlyOnSamePosition);
+    return builder;
   }
 
   @Override

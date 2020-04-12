@@ -38,7 +38,15 @@ public class CompositeAggregation  implements XContentable<CompositeAggregation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_after != null) {
+      builder.field(AFTER.getPreferredName());
+      _after.toXContent(builder, params);
+    }
+    builder.field(SIZE.getPreferredName(), _size);
+    if (_sources != null) {
+      builder.array(SOURCES.getPreferredName(), _sources);
+    }
+    return builder;
   }
 
   @Override

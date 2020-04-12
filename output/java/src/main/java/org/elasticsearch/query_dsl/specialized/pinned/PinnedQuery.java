@@ -32,7 +32,14 @@ public class PinnedQuery  implements XContentable<PinnedQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_ids != null) {
+      builder.array(IDS.getPreferredName(), _ids);
+    }
+    if (_organic != null) {
+      builder.field(ORGANIC.getPreferredName());
+      _organic.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -72,7 +72,36 @@ public class Watch  implements XContentable<Watch> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.field(ACTIONS.getPreferredName());
+      _actions.toXContent(builder, params);
+    }
+    if (_condition != null) {
+      builder.field(CONDITION.getPreferredName());
+      _condition.toXContent(builder, params);
+    }
+    if (_input != null) {
+      builder.field(INPUT.getPreferredName());
+      _input.toXContent(builder, params);
+    }
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    builder.field(THROTTLE_PERIOD.getPreferredName(), _throttlePeriod);
+    if (_transform != null) {
+      builder.field(TRANSFORM.getPreferredName());
+      _transform.toXContent(builder, params);
+    }
+    if (_trigger != null) {
+      builder.field(TRIGGER.getPreferredName());
+      _trigger.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

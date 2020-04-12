@@ -57,7 +57,19 @@ public class CreateRollupJobRequest  implements XContentable<CreateRollupJobRequ
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CRON.getPreferredName(), _cron);
+    if (_groups != null) {
+      builder.field(GROUPS.getPreferredName());
+      _groups.toXContent(builder, params);
+    }
+    builder.field(INDEX_PATTERN.getPreferredName(), _indexPattern);
+    if (_metrics != null) {
+      builder.array(METRICS.getPreferredName(), _metrics);
+    }
+    builder.field(PAGE_SIZE.getPreferredName(), _pageSize);
+    builder.field(ROLLUP_INDEX.getPreferredName());
+    _rollupIndex.toXContent(builder, params);
+    return builder;
   }
 
   @Override

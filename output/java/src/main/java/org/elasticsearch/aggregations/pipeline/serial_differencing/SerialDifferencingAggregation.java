@@ -25,7 +25,8 @@ public class SerialDifferencingAggregation  implements XContentable<SerialDiffer
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(LAG.getPreferredName(), _lag);
+    return builder;
   }
 
   @Override

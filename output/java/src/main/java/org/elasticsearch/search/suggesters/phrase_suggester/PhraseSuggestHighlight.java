@@ -31,7 +31,9 @@ public class PhraseSuggestHighlight  implements XContentable<PhraseSuggestHighli
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(POST_TAG.getPreferredName(), _postTag);
+    builder.field(PRE_TAG.getPreferredName(), _preTag);
+    return builder;
   }
 
   @Override

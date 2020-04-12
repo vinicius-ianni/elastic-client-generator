@@ -25,7 +25,11 @@ public class CleanupRepositoryResponse  implements XContentable<CleanupRepositor
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_results != null) {
+      builder.field(RESULTS.getPreferredName());
+      _results.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

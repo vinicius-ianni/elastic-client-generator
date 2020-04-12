@@ -43,7 +43,11 @@ public class RecoveryOrigin  implements XContentable<RecoveryOrigin> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(HOSTNAME.getPreferredName(), _hostname);
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(IP.getPreferredName(), _ip);
+    builder.field(NAME.getPreferredName(), _name);
+    return builder;
   }
 
   @Override

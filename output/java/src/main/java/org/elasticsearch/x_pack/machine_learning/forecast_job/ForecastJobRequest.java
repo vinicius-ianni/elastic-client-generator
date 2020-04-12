@@ -31,7 +31,15 @@ public class ForecastJobRequest  implements XContentable<ForecastJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_duration != null) {
+      builder.field(DURATION.getPreferredName());
+      _duration.toXContent(builder, params);
+    }
+    if (_expiresIn != null) {
+      builder.field(EXPIRES_IN.getPreferredName());
+      _expiresIn.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -79,7 +79,20 @@ public class Segment  implements XContentable<Segment> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_attributes != null) {
+      builder.field(ATTRIBUTES.getPreferredName());
+      _attributes.toXContent(builder, params);
+    }
+    builder.field(COMMITTED.getPreferredName(), _committed);
+    builder.field(COMPOUND.getPreferredName(), _compound);
+    builder.field(DELETED_DOCS.getPreferredName(), _deletedDocs);
+    builder.field(GENERATION.getPreferredName(), _generation);
+    builder.field(MEMORY_IN_BYTES.getPreferredName(), _memoryInBytes);
+    builder.field(SEARCH.getPreferredName(), _search);
+    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    builder.field(NUM_DOCS.getPreferredName(), _numDocs);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

@@ -346,7 +346,118 @@ public class SearchRequest  implements XContentable<SearchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    builder.field(ALLOW_PARTIAL_SEARCH_RESULTS.getPreferredName(), _allowPartialSearchResults);
+    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(BATCHED_REDUCE_SIZE.getPreferredName(), _batchedReduceSize);
+    builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
+    if (_defaultOperator != null) {
+      builder.field(DEFAULT_OPERATOR.getPreferredName());
+      _defaultOperator.toXContent(builder, params);
+    }
+    builder.field(DF.getPreferredName(), _df);
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    builder.field(IGNORE_THROTTLED.getPreferredName(), _ignoreThrottled);
+    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    builder.field(LENIENT.getPreferredName(), _lenient);
+    builder.field(MAX_CONCURRENT_SHARD_REQUESTS.getPreferredName(), _maxConcurrentShardRequests);
+    builder.field(PRE_FILTER_SHARD_SIZE.getPreferredName(), _preFilterShardSize);
+    builder.field(PREFERENCE.getPreferredName(), _preference);
+    builder.field(REQUEST_CACHE.getPreferredName(), _requestCache);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    if (_scroll != null) {
+      builder.field(SCROLL.getPreferredName());
+      _scroll.toXContent(builder, params);
+    }
+    if (_searchType != null) {
+      builder.field(SEARCH_TYPE.getPreferredName());
+      _searchType.toXContent(builder, params);
+    }
+    builder.field(SEQUENCE_NUMBER_PRIMARY_TERM.getPreferredName(), _sequenceNumberPrimaryTerm);
+    if (_stats != null) {
+      builder.array(STATS.getPreferredName(), _stats);
+    }
+    builder.field(SUGGEST_FIELD.getPreferredName());
+    _suggestField.toXContent(builder, params);
+    if (_suggestMode != null) {
+      builder.field(SUGGEST_MODE.getPreferredName());
+      _suggestMode.toXContent(builder, params);
+    }
+    builder.field(SUGGEST_SIZE.getPreferredName(), _suggestSize);
+    builder.field(SUGGEST_TEXT.getPreferredName(), _suggestText);
+    builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
+    builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    if (_aggs != null) {
+      builder.field(AGGS.getPreferredName());
+      _aggs.toXContent(builder, params);
+    }
+    if (_collapse != null) {
+      builder.field(COLLAPSE.getPreferredName());
+      _collapse.toXContent(builder, params);
+    }
+    if (_docvalueFields != null) {
+      builder.array(DOCVALUE_FIELDS.getPreferredName(), _docvalueFields);
+    }
+    builder.field(EXPLAIN.getPreferredName(), _explain);
+    builder.field(FROM.getPreferredName(), _from);
+    if (_highlight != null) {
+      builder.field(HIGHLIGHT.getPreferredName());
+      _highlight.toXContent(builder, params);
+    }
+    if (_indicesBoost != null) {
+      builder.field(INDICES_BOOST.getPreferredName());
+      _indicesBoost.toXContent(builder, params);
+    }
+    builder.field(MIN_SCORE.getPreferredName(), _minScore);
+    if (_postFilter != null) {
+      builder.field(POST_FILTER.getPreferredName());
+      _postFilter.toXContent(builder, params);
+    }
+    builder.field(PROFILE.getPreferredName(), _profile);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    if (_rescore != null) {
+      builder.array(RESCORE.getPreferredName(), _rescore);
+    }
+    if (_scriptFields != null) {
+      builder.field(SCRIPT_FIELDS.getPreferredName());
+      _scriptFields.toXContent(builder, params);
+    }
+    if (_searchAfter != null) {
+      builder.array(SEARCH_AFTER.getPreferredName(), _searchAfter);
+    }
+    builder.field(SIZE.getPreferredName(), _size);
+    if (_slice != null) {
+      builder.field(SLICE.getPreferredName());
+      _slice.toXContent(builder, params);
+    }
+    if (_sort != null) {
+      builder.array(SORT.getPreferredName(), _sort);
+    }
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName());
+      _source.map(builder::value, r-> r.toXContent(builder, params));
+    }
+    if (_storedFields != null) {
+      builder.array(STORED_FIELDS.getPreferredName(), _storedFields);
+    }
+    if (_suggest != null) {
+      builder.field(SUGGEST.getPreferredName());
+      _suggest.toXContent(builder, params);
+    }
+    builder.field(TERMINATE_AFTER.getPreferredName(), _terminateAfter);
+    builder.field(TIMEOUT.getPreferredName(), _timeout);
+    builder.field(TRACK_SCORES.getPreferredName(), _trackScores);
+    builder.field(TRACK_TOTAL_HITS.getPreferredName(), _trackTotalHits);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

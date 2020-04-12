@@ -70,7 +70,25 @@ public class DeleteRequest  implements XContentable<DeleteRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
+    builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    if (_versionType != null) {
+      builder.field(VERSION_TYPE.getPreferredName());
+      _versionType.toXContent(builder, params);
+    }
+    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    return builder;
   }
 
   @Override

@@ -93,7 +93,25 @@ public class BulkResponseItemBase  implements XContentable<BulkResponseItemBase>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_error != null) {
+      builder.field(ERROR.getPreferredName());
+      _error.toXContent(builder, params);
+    }
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(OPERATION.getPreferredName(), _operation);
+    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    builder.field(RESULT.getPreferredName(), _result);
+    builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName());
+      _shards.toXContent(builder, params);
+    }
+    builder.field(STATUS.getPreferredName(), _status);
+    builder.field(TYPE.getPreferredName(), _type);
+    builder.field(VERSION.getPreferredName(), _version);
+    builder.field(IS_VALID.getPreferredName(), _isValid);
+    return builder;
   }
 
   @Override

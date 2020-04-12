@@ -44,7 +44,20 @@ public class OperatingSystemStats  implements XContentable<OperatingSystemStats>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_cpu != null) {
+      builder.field(CPU.getPreferredName());
+      _cpu.toXContent(builder, params);
+    }
+    if (_mem != null) {
+      builder.field(MEM.getPreferredName());
+      _mem.toXContent(builder, params);
+    }
+    if (_swap != null) {
+      builder.field(SWAP.getPreferredName());
+      _swap.toXContent(builder, params);
+    }
+    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    return builder;
   }
 
   @Override

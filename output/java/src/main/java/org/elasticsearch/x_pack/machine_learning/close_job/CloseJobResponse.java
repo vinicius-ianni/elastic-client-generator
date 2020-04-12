@@ -25,7 +25,8 @@ public class CloseJobResponse  implements XContentable<CloseJobResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CLOSED.getPreferredName(), _closed);
+    return builder;
   }
 
   @Override

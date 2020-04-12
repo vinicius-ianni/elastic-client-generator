@@ -49,7 +49,12 @@ public class SnapshotShardFailure  implements XContentable<SnapshotShardFailure>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(NODE_ID.getPreferredName(), _nodeId);
+    builder.field(REASON.getPreferredName(), _reason);
+    builder.field(SHARD_ID.getPreferredName(), _shardId);
+    builder.field(STATUS.getPreferredName(), _status);
+    return builder;
   }
 
   @Override

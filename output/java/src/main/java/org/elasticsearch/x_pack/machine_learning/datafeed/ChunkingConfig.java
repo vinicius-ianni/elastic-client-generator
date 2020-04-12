@@ -32,7 +32,15 @@ public class ChunkingConfig  implements XContentable<ChunkingConfig> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_mode != null) {
+      builder.field(MODE.getPreferredName());
+      _mode.toXContent(builder, params);
+    }
+    if (_timeSpan != null) {
+      builder.field(TIME_SPAN.getPreferredName());
+      _timeSpan.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

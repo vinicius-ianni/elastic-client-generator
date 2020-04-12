@@ -25,7 +25,8 @@ public class AsciiFoldingTokenFilter  implements XContentable<AsciiFoldingTokenF
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    return builder;
   }
 
   @Override

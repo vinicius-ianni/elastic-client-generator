@@ -51,7 +51,19 @@ public class HasParentQuery  implements XContentable<HasParentQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    if (_innerHits != null) {
+      builder.field(INNER_HITS.getPreferredName());
+      _innerHits.toXContent(builder, params);
+    }
+    builder.field(PARENT_TYPE.getPreferredName());
+    _parentType.toXContent(builder, params);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    builder.field(SCORE.getPreferredName(), _score);
+    return builder;
   }
 
   @Override

@@ -37,7 +37,11 @@ public class SuggestContext  implements XContentable<SuggestContext> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(NAME.getPreferredName(), _name);
+    builder.field(PATH.getPreferredName());
+    _path.toXContent(builder, params);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

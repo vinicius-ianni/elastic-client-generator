@@ -25,7 +25,9 @@ public class NestedAggregation  implements XContentable<NestedAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(PATH.getPreferredName());
+    _path.toXContent(builder, params);
+    return builder;
   }
 
   @Override

@@ -37,7 +37,10 @@ public class ShardSegmentRouting  implements XContentable<ShardSegmentRouting> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(NODE.getPreferredName(), _node);
+    builder.field(PRIMARY.getPreferredName(), _primary);
+    builder.field(STATE.getPreferredName(), _state);
+    return builder;
   }
 
   @Override

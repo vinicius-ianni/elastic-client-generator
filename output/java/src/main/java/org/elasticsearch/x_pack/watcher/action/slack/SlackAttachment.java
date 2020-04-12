@@ -110,7 +110,25 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(AUTHOR_ICON.getPreferredName(), _authorIcon);
+    builder.field(AUTHOR_LINK.getPreferredName(), _authorLink);
+    builder.field(AUTHOR_NAME.getPreferredName(), _authorName);
+    builder.field(COLOR.getPreferredName(), _color);
+    builder.field(FALLBACK.getPreferredName(), _fallback);
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    builder.field(FOOTER.getPreferredName(), _footer);
+    builder.field(FOOTER_ICON.getPreferredName(), _footerIcon);
+    builder.field(IMAGE_URL.getPreferredName(), _imageUrl);
+    builder.field(PRETEXT.getPreferredName(), _pretext);
+    builder.field(TEXT.getPreferredName(), _text);
+    builder.field(THUMB_URL.getPreferredName(), _thumbUrl);
+    builder.field(TITLE.getPreferredName(), _title);
+    builder.field(TITLE_LINK.getPreferredName(), _titleLink);
+    builder.field(TS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_ts.toInstant()));
+    return builder;
   }
 
   @Override

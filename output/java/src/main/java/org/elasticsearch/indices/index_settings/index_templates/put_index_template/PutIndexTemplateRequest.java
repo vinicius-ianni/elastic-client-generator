@@ -89,7 +89,35 @@ public class PutIndexTemplateRequest  implements XContentable<PutIndexTemplateRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_aliases != null) {
+      builder.field(ALIASES.getPreferredName());
+      _aliases.toXContent(builder, params);
+    }
+    if (_indexPatterns != null) {
+      builder.array(INDEX_PATTERNS.getPreferredName(), _indexPatterns);
+    }
+    if (_mappings != null) {
+      builder.field(MAPPINGS.getPreferredName());
+      _mappings.toXContent(builder, params);
+    }
+    builder.field(ORDER.getPreferredName(), _order);
+    if (_settings != null) {
+      builder.field(SETTINGS.getPreferredName());
+      _settings.toXContent(builder, params);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    builder.field(CREATE.getPreferredName(), _create);
+    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

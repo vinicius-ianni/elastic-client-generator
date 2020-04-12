@@ -67,7 +67,15 @@ public class NodeInfoOscpu  implements XContentable<NodeInfoOscpu> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
+    builder.field(CACHE_SIZE_IN_BYTES.getPreferredName(), _cacheSizeInBytes);
+    builder.field(CORES_PER_SOCKET.getPreferredName(), _coresPerSocket);
+    builder.field(MHZ.getPreferredName(), _mhz);
+    builder.field(MODEL.getPreferredName(), _model);
+    builder.field(TOTAL_CORES.getPreferredName(), _totalCores);
+    builder.field(TOTAL_SOCKETS.getPreferredName(), _totalSockets);
+    builder.field(VENDOR.getPreferredName(), _vendor);
+    return builder;
   }
 
   @Override

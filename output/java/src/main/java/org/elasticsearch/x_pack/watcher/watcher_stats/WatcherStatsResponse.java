@@ -37,7 +37,12 @@ public class WatcherStatsResponse  implements XContentable<WatcherStatsResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    builder.field(MANUALLY_STOPPED.getPreferredName(), _manuallyStopped);
+    if (_stats != null) {
+      builder.array(STATS.getPreferredName(), _stats);
+    }
+    return builder;
   }
 
   @Override

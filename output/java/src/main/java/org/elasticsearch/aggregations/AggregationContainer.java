@@ -430,7 +430,243 @@ public class AggregationContainer  implements XContentable<AggregationContainer>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_adjacencyMatrix != null) {
+      builder.field(ADJACENCY_MATRIX.getPreferredName());
+      _adjacencyMatrix.toXContent(builder, params);
+    }
+    if (_aggs != null) {
+      builder.field(AGGS.getPreferredName());
+      _aggs.toXContent(builder, params);
+    }
+    if (_avg != null) {
+      builder.field(AVG.getPreferredName());
+      _avg.toXContent(builder, params);
+    }
+    if (_avgBucket != null) {
+      builder.field(AVG_BUCKET.getPreferredName());
+      _avgBucket.toXContent(builder, params);
+    }
+    if (_bucketScript != null) {
+      builder.field(BUCKET_SCRIPT.getPreferredName());
+      _bucketScript.toXContent(builder, params);
+    }
+    if (_bucketSelector != null) {
+      builder.field(BUCKET_SELECTOR.getPreferredName());
+      _bucketSelector.toXContent(builder, params);
+    }
+    if (_bucketSort != null) {
+      builder.field(BUCKET_SORT.getPreferredName());
+      _bucketSort.toXContent(builder, params);
+    }
+    if (_cardinality != null) {
+      builder.field(CARDINALITY.getPreferredName());
+      _cardinality.toXContent(builder, params);
+    }
+    if (_children != null) {
+      builder.field(CHILDREN.getPreferredName());
+      _children.toXContent(builder, params);
+    }
+    if (_composite != null) {
+      builder.field(COMPOSITE.getPreferredName());
+      _composite.toXContent(builder, params);
+    }
+    if (_cumulativeSum != null) {
+      builder.field(CUMULATIVE_SUM.getPreferredName());
+      _cumulativeSum.toXContent(builder, params);
+    }
+    if (_cumulativeCardinality != null) {
+      builder.field(CUMULATIVE_CARDINALITY.getPreferredName());
+      _cumulativeCardinality.toXContent(builder, params);
+    }
+    if (_dateHistogram != null) {
+      builder.field(DATE_HISTOGRAM.getPreferredName());
+      _dateHistogram.toXContent(builder, params);
+    }
+    if (_autoDateHistogram != null) {
+      builder.field(AUTO_DATE_HISTOGRAM.getPreferredName());
+      _autoDateHistogram.toXContent(builder, params);
+    }
+    if (_dateRange != null) {
+      builder.field(DATE_RANGE.getPreferredName());
+      _dateRange.toXContent(builder, params);
+    }
+    if (_derivative != null) {
+      builder.field(DERIVATIVE.getPreferredName());
+      _derivative.toXContent(builder, params);
+    }
+    if (_extendedStats != null) {
+      builder.field(EXTENDED_STATS.getPreferredName());
+      _extendedStats.toXContent(builder, params);
+    }
+    if (_extendedStatsBucket != null) {
+      builder.field(EXTENDED_STATS_BUCKET.getPreferredName());
+      _extendedStatsBucket.toXContent(builder, params);
+    }
+    if (_filter != null) {
+      builder.field(FILTER.getPreferredName());
+      _filter.toXContent(builder, params);
+    }
+    if (_filters != null) {
+      builder.field(FILTERS.getPreferredName());
+      _filters.toXContent(builder, params);
+    }
+    if (_geoBounds != null) {
+      builder.field(GEO_BOUNDS.getPreferredName());
+      _geoBounds.toXContent(builder, params);
+    }
+    if (_geoCentroid != null) {
+      builder.field(GEO_CENTROID.getPreferredName());
+      _geoCentroid.toXContent(builder, params);
+    }
+    if (_geoDistance != null) {
+      builder.field(GEO_DISTANCE.getPreferredName());
+      _geoDistance.toXContent(builder, params);
+    }
+    if (_geohashGrid != null) {
+      builder.field(GEOHASH_GRID.getPreferredName());
+      _geohashGrid.toXContent(builder, params);
+    }
+    if (_geotileGrid != null) {
+      builder.field(GEOTILE_GRID.getPreferredName());
+      _geotileGrid.toXContent(builder, params);
+    }
+    if (_global != null) {
+      builder.field(GLOBAL.getPreferredName());
+      _global.toXContent(builder, params);
+    }
+    if (_histogram != null) {
+      builder.field(HISTOGRAM.getPreferredName());
+      _histogram.toXContent(builder, params);
+    }
+    if (_ipRange != null) {
+      builder.field(IP_RANGE.getPreferredName());
+      _ipRange.toXContent(builder, params);
+    }
+    if (_matrixStats != null) {
+      builder.field(MATRIX_STATS.getPreferredName());
+      _matrixStats.toXContent(builder, params);
+    }
+    if (_max != null) {
+      builder.field(MAX.getPreferredName());
+      _max.toXContent(builder, params);
+    }
+    if (_maxBucket != null) {
+      builder.field(MAX_BUCKET.getPreferredName());
+      _maxBucket.toXContent(builder, params);
+    }
+    if (_meta != null) {
+      builder.field(META.getPreferredName());
+      _meta.toXContent(builder, params);
+    }
+    if (_min != null) {
+      builder.field(MIN.getPreferredName());
+      _min.toXContent(builder, params);
+    }
+    if (_minBucket != null) {
+      builder.field(MIN_BUCKET.getPreferredName());
+      _minBucket.toXContent(builder, params);
+    }
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName());
+      _missing.toXContent(builder, params);
+    }
+    if (_movingAvg != null) {
+      builder.field(MOVING_AVG.getPreferredName());
+      _movingAvg.toXContent(builder, params);
+    }
+    if (_movingFn != null) {
+      builder.field(MOVING_FN.getPreferredName());
+      _movingFn.toXContent(builder, params);
+    }
+    if (_nested != null) {
+      builder.field(NESTED.getPreferredName());
+      _nested.toXContent(builder, params);
+    }
+    if (_parent != null) {
+      builder.field(PARENT.getPreferredName());
+      _parent.toXContent(builder, params);
+    }
+    if (_percentileRanks != null) {
+      builder.field(PERCENTILE_RANKS.getPreferredName());
+      _percentileRanks.toXContent(builder, params);
+    }
+    if (_percentiles != null) {
+      builder.field(PERCENTILES.getPreferredName());
+      _percentiles.toXContent(builder, params);
+    }
+    if (_percentilesBucket != null) {
+      builder.field(PERCENTILES_BUCKET.getPreferredName());
+      _percentilesBucket.toXContent(builder, params);
+    }
+    if (_range != null) {
+      builder.field(RANGE.getPreferredName());
+      _range.toXContent(builder, params);
+    }
+    if (_rareTerms != null) {
+      builder.field(RARE_TERMS.getPreferredName());
+      _rareTerms.toXContent(builder, params);
+    }
+    if (_reverseNested != null) {
+      builder.field(REVERSE_NESTED.getPreferredName());
+      _reverseNested.toXContent(builder, params);
+    }
+    if (_sampler != null) {
+      builder.field(SAMPLER.getPreferredName());
+      _sampler.toXContent(builder, params);
+    }
+    if (_scriptedMetric != null) {
+      builder.field(SCRIPTED_METRIC.getPreferredName());
+      _scriptedMetric.toXContent(builder, params);
+    }
+    if (_serialDiff != null) {
+      builder.field(SERIAL_DIFF.getPreferredName());
+      _serialDiff.toXContent(builder, params);
+    }
+    if (_significantTerms != null) {
+      builder.field(SIGNIFICANT_TERMS.getPreferredName());
+      _significantTerms.toXContent(builder, params);
+    }
+    if (_significantText != null) {
+      builder.field(SIGNIFICANT_TEXT.getPreferredName());
+      _significantText.toXContent(builder, params);
+    }
+    if (_stats != null) {
+      builder.field(STATS.getPreferredName());
+      _stats.toXContent(builder, params);
+    }
+    if (_statsBucket != null) {
+      builder.field(STATS_BUCKET.getPreferredName());
+      _statsBucket.toXContent(builder, params);
+    }
+    if (_sum != null) {
+      builder.field(SUM.getPreferredName());
+      _sum.toXContent(builder, params);
+    }
+    if (_sumBucket != null) {
+      builder.field(SUM_BUCKET.getPreferredName());
+      _sumBucket.toXContent(builder, params);
+    }
+    if (_terms != null) {
+      builder.field(TERMS.getPreferredName());
+      _terms.toXContent(builder, params);
+    }
+    if (_topHits != null) {
+      builder.field(TOP_HITS.getPreferredName());
+      _topHits.toXContent(builder, params);
+    }
+    if (_valueCount != null) {
+      builder.field(VALUE_COUNT.getPreferredName());
+      _valueCount.toXContent(builder, params);
+    }
+    if (_weightedAvg != null) {
+      builder.field(WEIGHTED_AVG.getPreferredName());
+      _weightedAvg.toXContent(builder, params);
+    }
+    if (_medianAbsoluteDeviation != null) {
+      builder.field(MEDIAN_ABSOLUTE_DEVIATION.getPreferredName());
+      _medianAbsoluteDeviation.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

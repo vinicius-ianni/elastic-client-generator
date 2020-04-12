@@ -25,7 +25,11 @@ public class PrefixQuery  implements XContentable<PrefixQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_rewrite != null) {
+      builder.field(REWRITE.getPreferredName());
+      _rewrite.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

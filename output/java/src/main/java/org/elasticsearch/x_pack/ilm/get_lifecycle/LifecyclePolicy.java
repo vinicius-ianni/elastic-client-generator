@@ -38,7 +38,14 @@ public class LifecyclePolicy  implements XContentable<LifecyclePolicy> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MODIFIED_DATE.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_modifiedDate.toInstant()));
+    if (_policy != null) {
+      builder.field(POLICY.getPreferredName());
+      _policy.toXContent(builder, params);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

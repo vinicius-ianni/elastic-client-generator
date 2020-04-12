@@ -31,7 +31,14 @@ public class PrivilegesActions  implements XContentable<PrivilegesActions> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.array(ACTIONS.getPreferredName(), _actions);
+    }
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -68,7 +68,25 @@ public class CatShardsRequest  implements XContentable<CatShardsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_bytes != null) {
+      builder.field(BYTES.getPreferredName());
+      _bytes.toXContent(builder, params);
+    }
+    builder.field(FORMAT.getPreferredName(), _format);
+    if (_headers != null) {
+      builder.array(HEADERS.getPreferredName(), _headers);
+    }
+    builder.field(HELP.getPreferredName(), _help);
+    builder.field(LOCAL.getPreferredName(), _local);
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    if (_sortByColumns != null) {
+      builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
+    }
+    builder.field(VERBOSE.getPreferredName(), _verbose);
+    return builder;
   }
 
   @Override

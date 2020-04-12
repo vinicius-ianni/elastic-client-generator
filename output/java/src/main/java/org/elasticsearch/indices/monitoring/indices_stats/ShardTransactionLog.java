@@ -43,7 +43,11 @@ public class ShardTransactionLog  implements XContentable<ShardTransactionLog> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(OPERATIONS.getPreferredName(), _operations);
+    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    builder.field(UNCOMMITTED_OPERATIONS.getPreferredName(), _uncommittedOperations);
+    builder.field(UNCOMMITTED_SIZE_IN_BYTES.getPreferredName(), _uncommittedSizeInBytes);
+    return builder;
   }
 
   @Override

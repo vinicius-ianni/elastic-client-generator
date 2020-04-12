@@ -25,7 +25,11 @@ public class PredicateTokenFilter  implements XContentable<PredicateTokenFilter>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

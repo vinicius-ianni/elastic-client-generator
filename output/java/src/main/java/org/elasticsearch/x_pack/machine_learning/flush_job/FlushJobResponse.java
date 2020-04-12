@@ -25,7 +25,8 @@ public class FlushJobResponse  implements XContentable<FlushJobResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FLUSHED.getPreferredName(), _flushed);
+    return builder;
   }
 
   @Override

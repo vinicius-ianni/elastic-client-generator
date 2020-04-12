@@ -37,7 +37,16 @@ public class PipelineAggregation  implements XContentable<PipelineAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_bucketsPath != null) {
+      builder.field(BUCKETS_PATH.getPreferredName());
+      _bucketsPath.toXContent(builder, params);
+    }
+    builder.field(FORMAT.getPreferredName(), _format);
+    if (_gapPolicy != null) {
+      builder.field(GAP_POLICY.getPreferredName());
+      _gapPolicy.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

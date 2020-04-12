@@ -94,7 +94,37 @@ public class TermsAggregation  implements XContentable<TermsAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_collectMode != null) {
+      builder.field(COLLECT_MODE.getPreferredName());
+      _collectMode.toXContent(builder, params);
+    }
+    if (_exclude != null) {
+      builder.field(EXCLUDE.getPreferredName());
+      _exclude.toXContent(builder, params);
+    }
+    if (_executionHint != null) {
+      builder.field(EXECUTION_HINT.getPreferredName());
+      _executionHint.toXContent(builder, params);
+    }
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    if (_include != null) {
+      builder.field(INCLUDE.getPreferredName());
+      _include.toXContent(builder, params);
+    }
+    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    builder.field(MISSING.getPreferredName(), _missing);
+    if (_order != null) {
+      builder.array(ORDER.getPreferredName(), _order);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    builder.field(SHOW_TERM_DOC_COUNT_ERROR.getPreferredName(), _showTermDocCountError);
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

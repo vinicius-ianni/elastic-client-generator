@@ -74,7 +74,43 @@ public class IntervalsFilter  implements XContentable<IntervalsFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_after != null) {
+      builder.field(AFTER.getPreferredName());
+      _after.toXContent(builder, params);
+    }
+    if (_before != null) {
+      builder.field(BEFORE.getPreferredName());
+      _before.toXContent(builder, params);
+    }
+    if (_containedBy != null) {
+      builder.field(CONTAINED_BY.getPreferredName());
+      _containedBy.toXContent(builder, params);
+    }
+    if (_containing != null) {
+      builder.field(CONTAINING.getPreferredName());
+      _containing.toXContent(builder, params);
+    }
+    if (_notContainedBy != null) {
+      builder.field(NOT_CONTAINED_BY.getPreferredName());
+      _notContainedBy.toXContent(builder, params);
+    }
+    if (_notContaining != null) {
+      builder.field(NOT_CONTAINING.getPreferredName());
+      _notContaining.toXContent(builder, params);
+    }
+    if (_notOverlapping != null) {
+      builder.field(NOT_OVERLAPPING.getPreferredName());
+      _notOverlapping.toXContent(builder, params);
+    }
+    if (_overlapping != null) {
+      builder.field(OVERLAPPING.getPreferredName());
+      _overlapping.toXContent(builder, params);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

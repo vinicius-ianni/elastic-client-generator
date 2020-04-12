@@ -37,7 +37,19 @@ public class RollupGroupings  implements XContentable<RollupGroupings> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_dateHistogram != null) {
+      builder.field(DATE_HISTOGRAM.getPreferredName());
+      _dateHistogram.toXContent(builder, params);
+    }
+    if (_histogram != null) {
+      builder.field(HISTOGRAM.getPreferredName());
+      _histogram.toXContent(builder, params);
+    }
+    if (_terms != null) {
+      builder.field(TERMS.getPreferredName());
+      _terms.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

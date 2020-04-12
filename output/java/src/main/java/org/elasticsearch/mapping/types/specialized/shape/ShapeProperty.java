@@ -43,7 +43,14 @@ public class ShapeProperty  implements XContentable<ShapeProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
+    builder.field(IGNORE_Z_VALUE.getPreferredName(), _ignoreZValue);
+    if (_orientation != null) {
+      builder.field(ORIENTATION.getPreferredName());
+      _orientation.toXContent(builder, params);
+    }
+    builder.field(COERCE.getPreferredName(), _coerce);
+    return builder;
   }
 
   @Override

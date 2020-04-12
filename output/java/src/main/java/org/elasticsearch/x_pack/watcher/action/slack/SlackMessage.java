@@ -55,7 +55,20 @@ public class SlackMessage  implements XContentable<SlackMessage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_attachments != null) {
+      builder.array(ATTACHMENTS.getPreferredName(), _attachments);
+    }
+    if (_dynamicAttachments != null) {
+      builder.field(DYNAMIC_ATTACHMENTS.getPreferredName());
+      _dynamicAttachments.toXContent(builder, params);
+    }
+    builder.field(FROM.getPreferredName(), _from);
+    builder.field(ICON.getPreferredName(), _icon);
+    builder.field(TEXT.getPreferredName(), _text);
+    if (_to != null) {
+      builder.array(TO.getPreferredName(), _to);
+    }
+    return builder;
   }
 
   @Override

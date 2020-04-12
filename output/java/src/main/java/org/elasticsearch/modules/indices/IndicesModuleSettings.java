@@ -45,7 +45,20 @@ public class IndicesModuleSettings  implements XContentable<IndicesModuleSetting
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_circuitBreakerSettings != null) {
+      builder.field(CIRCUIT_BREAKER_SETTINGS.getPreferredName());
+      _circuitBreakerSettings.toXContent(builder, params);
+    }
+    if (_fielddataSettings != null) {
+      builder.field(FIELDDATA_SETTINGS.getPreferredName());
+      _fielddataSettings.toXContent(builder, params);
+    }
+    builder.field(QEUERIES_CACHE_SIZE.getPreferredName(), _qeueriesCacheSize);
+    if (_recoverySettings != null) {
+      builder.field(RECOVERY_SETTINGS.getPreferredName());
+      _recoverySettings.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

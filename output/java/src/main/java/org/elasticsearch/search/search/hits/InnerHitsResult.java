@@ -25,7 +25,11 @@ public class InnerHitsResult  implements XContentable<InnerHitsResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_hits != null) {
+      builder.field(HITS.getPreferredName());
+      _hits.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

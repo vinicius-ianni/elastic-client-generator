@@ -25,7 +25,11 @@ public class ActivateWatchResponse  implements XContentable<ActivateWatchRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

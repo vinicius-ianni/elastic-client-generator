@@ -61,7 +61,22 @@ public class PutUserRequest  implements XContentable<PutUserRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    builder.field(EMAIL.getPreferredName(), _email);
+    builder.field(FULL_NAME.getPreferredName(), _fullName);
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    builder.field(PASSWORD.getPreferredName(), _password);
+    builder.field(PASSWORD_HASH.getPreferredName(), _passwordHash);
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    return builder;
   }
 
   @Override

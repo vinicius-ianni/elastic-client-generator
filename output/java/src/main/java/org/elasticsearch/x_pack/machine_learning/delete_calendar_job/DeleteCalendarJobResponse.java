@@ -37,7 +37,12 @@ public class DeleteCalendarJobResponse  implements XContentable<DeleteCalendarJo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CALENDAR_ID.getPreferredName(), _calendarId);
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_jobIds != null) {
+      builder.array(JOB_IDS.getPreferredName(), _jobIds);
+    }
+    return builder;
   }
 
   @Override

@@ -25,7 +25,10 @@ public class NoriPartOfSpeechTokenFilter  implements XContentable<NoriPartOfSpee
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_stoptags != null) {
+      builder.array(STOPTAGS.getPreferredName(), _stoptags);
+    }
+    return builder;
   }
 
   @Override

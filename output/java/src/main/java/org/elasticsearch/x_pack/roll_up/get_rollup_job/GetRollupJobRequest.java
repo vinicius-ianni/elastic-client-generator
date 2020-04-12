@@ -20,7 +20,8 @@ public class GetRollupJobRequest  implements XContentable<GetRollupJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

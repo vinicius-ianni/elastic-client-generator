@@ -131,7 +131,65 @@ public class NodeStats  implements XContentable<NodeStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_adaptiveSelection != null) {
+      builder.field(ADAPTIVE_SELECTION.getPreferredName());
+      _adaptiveSelection.toXContent(builder, params);
+    }
+    if (_breakers != null) {
+      builder.field(BREAKERS.getPreferredName());
+      _breakers.toXContent(builder, params);
+    }
+    if (_fs != null) {
+      builder.field(FS.getPreferredName());
+      _fs.toXContent(builder, params);
+    }
+    builder.field(HOST.getPreferredName(), _host);
+    if (_http != null) {
+      builder.field(HTTP.getPreferredName());
+      _http.toXContent(builder, params);
+    }
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName());
+      _indices.toXContent(builder, params);
+    }
+    if (_ingest != null) {
+      builder.field(INGEST.getPreferredName());
+      _ingest.toXContent(builder, params);
+    }
+    if (_ip != null) {
+      builder.array(IP.getPreferredName(), _ip);
+    }
+    if (_jvm != null) {
+      builder.field(JVM.getPreferredName());
+      _jvm.toXContent(builder, params);
+    }
+    builder.field(NAME.getPreferredName(), _name);
+    if (_os != null) {
+      builder.field(OS.getPreferredName());
+      _os.toXContent(builder, params);
+    }
+    if (_process != null) {
+      builder.field(PROCESS.getPreferredName());
+      _process.toXContent(builder, params);
+    }
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    if (_threadPool != null) {
+      builder.field(THREAD_POOL.getPreferredName());
+      _threadPool.toXContent(builder, params);
+    }
+    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    if (_transport != null) {
+      builder.field(TRANSPORT.getPreferredName());
+      _transport.toXContent(builder, params);
+    }
+    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    return builder;
   }
 
   @Override

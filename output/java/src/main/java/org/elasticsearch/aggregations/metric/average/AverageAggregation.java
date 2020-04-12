@@ -20,7 +20,8 @@ public class AverageAggregation  implements XContentable<AverageAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

@@ -31,7 +31,12 @@ public class PutRoleMappingResponse  implements XContentable<PutRoleMappingRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CREATED.getPreferredName(), _created);
+    if (_roleMapping != null) {
+      builder.field(ROLE_MAPPING.getPreferredName());
+      _roleMapping.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

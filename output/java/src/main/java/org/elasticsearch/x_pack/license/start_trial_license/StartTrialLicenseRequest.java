@@ -31,7 +31,9 @@ public class StartTrialLicenseRequest  implements XContentable<StartTrialLicense
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACKNOWLEDGE.getPreferredName(), _acknowledge);
+    builder.field(TYPE_QUERY_STRING.getPreferredName(), _typeQueryString);
+    return builder;
   }
 
   @Override

@@ -3,6 +3,7 @@ import {$fieldName, $instanceOf, $parseFieldName, $propertyName, $typeName} from
 import * as changeCase from "change-case";
 import {$imports} from "./imports";
 import {$parseProperties} from "./types-parser-read";
+import {$writeProperties} from "./types-parser-write";
 
 const $typeExtends = (type: Domain.Interface) => {
   return type.inherits.length === 0
@@ -29,7 +30,8 @@ const $xCContentImplementation = (type: Domain.Interface) => {
   return `
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    ${$writeProperties(type)}
+    return builder;
   }
 
   @Override

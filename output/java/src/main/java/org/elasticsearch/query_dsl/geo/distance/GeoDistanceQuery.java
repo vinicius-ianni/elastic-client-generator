@@ -44,7 +44,23 @@ public class GeoDistanceQuery  implements XContentable<GeoDistanceQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_distance != null) {
+      builder.field(DISTANCE.getPreferredName());
+      _distance.toXContent(builder, params);
+    }
+    if (_distanceType != null) {
+      builder.field(DISTANCE_TYPE.getPreferredName());
+      _distanceType.toXContent(builder, params);
+    }
+    if (_location != null) {
+      builder.field(LOCATION.getPreferredName());
+      _location.toXContent(builder, params);
+    }
+    if (_validationMethod != null) {
+      builder.field(VALIDATION_METHOD.getPreferredName());
+      _validationMethod.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

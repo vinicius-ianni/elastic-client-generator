@@ -38,7 +38,18 @@ public class SearchInput  implements XContentable<SearchInput> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_extract != null) {
+      builder.array(EXTRACT.getPreferredName(), _extract);
+    }
+    if (_request != null) {
+      builder.field(REQUEST.getPreferredName());
+      _request.toXContent(builder, params);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

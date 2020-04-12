@@ -44,7 +44,13 @@ public class InvalidateUserAccessTokenResponse  implements XContentable<Invalida
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(INVALIDATED_TOKENS.getPreferredName(), _invalidatedTokens);
+    builder.field(PREVIOUSLY_INVALIDATED_TOKENS.getPreferredName(), _previouslyInvalidatedTokens);
+    builder.field(ERROR_COUNT.getPreferredName(), _errorCount);
+    if (_errorDetails != null) {
+      builder.array(ERROR_DETAILS.getPreferredName(), _errorDetails);
+    }
+    return builder;
   }
 
   @Override

@@ -56,7 +56,26 @@ public class Sort  implements XContentable<Sort> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MISSING.getPreferredName(), _missing);
+    if (_mode != null) {
+      builder.field(MODE.getPreferredName());
+      _mode.toXContent(builder, params);
+    }
+    if (_numericType != null) {
+      builder.field(NUMERIC_TYPE.getPreferredName());
+      _numericType.toXContent(builder, params);
+    }
+    if (_nested != null) {
+      builder.field(NESTED.getPreferredName());
+      _nested.toXContent(builder, params);
+    }
+    if (_order != null) {
+      builder.field(ORDER.getPreferredName());
+      _order.toXContent(builder, params);
+    }
+    builder.field(SORT_KEY.getPreferredName());
+    _sortKey.toXContent(builder, params);
+    return builder;
   }
 
   @Override

@@ -37,7 +37,10 @@ public class ShardStatsRecovery  implements XContentable<ShardStatsRecovery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CURRENT_AS_SOURCE.getPreferredName(), _currentAsSource);
+    builder.field(CURRENT_AS_TARGET.getPreferredName(), _currentAsTarget);
+    builder.field(THROTTLE_TIME_IN_MILLIS.getPreferredName(), _throttleTimeInMillis);
+    return builder;
   }
 
   @Override

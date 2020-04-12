@@ -50,7 +50,14 @@ public class RecoveryFiles  implements XContentable<RecoveryFiles> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_details != null) {
+      builder.array(DETAILS.getPreferredName(), _details);
+    }
+    builder.field(PERCENT.getPreferredName(), _percent);
+    builder.field(RECOVERED.getPreferredName(), _recovered);
+    builder.field(REUSED.getPreferredName(), _reused);
+    builder.field(TOTAL.getPreferredName(), _total);
+    return builder;
   }
 
   @Override

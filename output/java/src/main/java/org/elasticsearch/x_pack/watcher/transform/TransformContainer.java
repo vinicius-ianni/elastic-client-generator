@@ -37,7 +37,19 @@ public class TransformContainer  implements XContentable<TransformContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_chain != null) {
+      builder.field(CHAIN.getPreferredName());
+      _chain.toXContent(builder, params);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    if (_search != null) {
+      builder.field(SEARCH.getPreferredName());
+      _search.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

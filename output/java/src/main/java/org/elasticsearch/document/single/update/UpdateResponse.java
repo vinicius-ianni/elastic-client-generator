@@ -31,7 +31,12 @@ public class UpdateResponse<TDocument>  implements XContentable<UpdateResponse<T
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IS_VALID.getPreferredName(), _isValid);
+    if (_get != null) {
+      builder.field(GET.getPreferredName());
+      _get.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

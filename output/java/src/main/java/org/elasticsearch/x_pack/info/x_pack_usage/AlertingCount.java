@@ -31,7 +31,9 @@ public class AlertingCount  implements XContentable<AlertingCount> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTIVE.getPreferredName(), _active);
+    builder.field(TOTAL.getPreferredName(), _total);
+    return builder;
   }
 
   @Override

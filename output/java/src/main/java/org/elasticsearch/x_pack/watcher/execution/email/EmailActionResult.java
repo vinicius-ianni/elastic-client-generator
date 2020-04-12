@@ -37,7 +37,13 @@ public class EmailActionResult  implements XContentable<EmailActionResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACCOUNT.getPreferredName(), _account);
+    if (_message != null) {
+      builder.field(MESSAGE.getPreferredName());
+      _message.toXContent(builder, params);
+    }
+    builder.field(REASON.getPreferredName(), _reason);
+    return builder;
   }
 
   @Override

@@ -98,7 +98,28 @@ public class CreateAutoFollowPatternRequest  implements XContentable<CreateAutoF
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(REMOTE_CLUSTER.getPreferredName(), _remoteCluster);
+    if (_leaderIndexPatterns != null) {
+      builder.array(LEADER_INDEX_PATTERNS.getPreferredName(), _leaderIndexPatterns);
+    }
+    builder.field(FOLLOW_INDEX_PATTERN.getPreferredName(), _followIndexPattern);
+    builder.field(MAX_READ_REQUEST_OPERATION_COUNT.getPreferredName(), _maxReadRequestOperationCount);
+    builder.field(MAX_OUTSTANDING_READ_REQUESTS.getPreferredName(), _maxOutstandingReadRequests);
+    builder.field(MAX_READ_REQUEST_SIZE.getPreferredName(), _maxReadRequestSize);
+    builder.field(MAX_WRITE_REQUEST_OPERATION_COUNT.getPreferredName(), _maxWriteRequestOperationCount);
+    builder.field(MAX_WRITE_REQUEST_SIZE.getPreferredName(), _maxWriteRequestSize);
+    builder.field(MAX_OUTSTANDING_WRITE_REQUESTS.getPreferredName(), _maxOutstandingWriteRequests);
+    builder.field(MAX_WRITE_BUFFER_COUNT.getPreferredName(), _maxWriteBufferCount);
+    builder.field(MAX_WRITE_BUFFER_SIZE.getPreferredName(), _maxWriteBufferSize);
+    if (_maxRetryDelay != null) {
+      builder.field(MAX_RETRY_DELAY.getPreferredName());
+      _maxRetryDelay.toXContent(builder, params);
+    }
+    if (_maxPollTimeout != null) {
+      builder.field(MAX_POLL_TIMEOUT.getPreferredName());
+      _maxPollTimeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

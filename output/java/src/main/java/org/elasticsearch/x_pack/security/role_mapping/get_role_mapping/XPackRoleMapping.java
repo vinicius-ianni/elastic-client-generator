@@ -43,7 +43,19 @@ public class XPackRoleMapping  implements XContentable<XPackRoleMapping> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ENABLED.getPreferredName(), _enabled);
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    if (_rules != null) {
+      builder.field(RULES.getPreferredName());
+      _rules.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -37,7 +37,12 @@ public class PutFilterResponse  implements XContentable<PutFilterResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    builder.field(FILTER_ID.getPreferredName(), _filterId);
+    if (_items != null) {
+      builder.array(ITEMS.getPreferredName(), _items);
+    }
+    return builder;
   }
 
   @Override

@@ -175,7 +175,53 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ALLOW_LEADING_WILDCARD.getPreferredName(), _allowLeadingWildcard);
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
+    builder.field(DEFAULT_FIELD.getPreferredName());
+    _defaultField.toXContent(builder, params);
+    if (_defaultOperator != null) {
+      builder.field(DEFAULT_OPERATOR.getPreferredName());
+      _defaultOperator.toXContent(builder, params);
+    }
+    builder.field(ENABLE_POSITION_INCREMENTS.getPreferredName(), _enablePositionIncrements);
+    builder.field(ESCAPE.getPreferredName(), _escape);
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    if (_fuzziness != null) {
+      builder.field(FUZZINESS.getPreferredName());
+      _fuzziness.toXContent(builder, params);
+    }
+    builder.field(FUZZY_MAX_EXPANSIONS.getPreferredName(), _fuzzyMaxExpansions);
+    builder.field(FUZZY_PREFIX_LENGTH.getPreferredName(), _fuzzyPrefixLength);
+    if (_fuzzyRewrite != null) {
+      builder.field(FUZZY_REWRITE.getPreferredName());
+      _fuzzyRewrite.toXContent(builder, params);
+    }
+    builder.field(FUZZY_TRANSPOSITIONS.getPreferredName(), _fuzzyTranspositions);
+    builder.field(LENIENT.getPreferredName(), _lenient);
+    builder.field(MAX_DETERMINIZED_STATES.getPreferredName(), _maxDeterminizedStates);
+    if (_minimumShouldMatch != null) {
+      builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
+      _minimumShouldMatch.toXContent(builder, params);
+    }
+    builder.field(PHRASE_SLOP.getPreferredName(), _phraseSlop);
+    builder.field(QUERY.getPreferredName(), _query);
+    builder.field(QUOTE_ANALYZER.getPreferredName(), _quoteAnalyzer);
+    builder.field(QUOTE_FIELD_SUFFIX.getPreferredName(), _quoteFieldSuffix);
+    if (_rewrite != null) {
+      builder.field(REWRITE.getPreferredName());
+      _rewrite.toXContent(builder, params);
+    }
+    builder.field(TIE_BREAKER.getPreferredName(), _tieBreaker);
+    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

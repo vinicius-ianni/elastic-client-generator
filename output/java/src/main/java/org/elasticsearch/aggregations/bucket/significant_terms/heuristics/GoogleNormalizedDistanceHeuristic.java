@@ -25,7 +25,8 @@ public class GoogleNormalizedDistanceHeuristic  implements XContentable<GoogleNo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BACKGROUND_IS_SUPERSET.getPreferredName(), _backgroundIsSuperset);
+    return builder;
   }
 
   @Override

@@ -32,7 +32,12 @@ public class TotalHits  implements XContentable<TotalHits> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_relation != null) {
+      builder.field(RELATION.getPreferredName());
+      _relation.toXContent(builder, params);
+    }
+    builder.field(VALUE.getPreferredName(), _value);
+    return builder;
   }
 
   @Override

@@ -37,7 +37,10 @@ public class FielddataFrequencyFilter  implements XContentable<FielddataFrequenc
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MAX.getPreferredName(), _max);
+    builder.field(MIN.getPreferredName(), _min);
+    builder.field(MIN_SEGMENT_SIZE.getPreferredName(), _minSegmentSize);
+    return builder;
   }
 
   @Override

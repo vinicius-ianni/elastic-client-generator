@@ -50,7 +50,18 @@ public class CompletionSuggester  implements XContentable<CompletionSuggester> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_contexts != null) {
+      builder.field(CONTEXTS.getPreferredName());
+      _contexts.toXContent(builder, params);
+    }
+    if (_fuzzy != null) {
+      builder.field(FUZZY.getPreferredName());
+      _fuzzy.toXContent(builder, params);
+    }
+    builder.field(PREFIX.getPreferredName(), _prefix);
+    builder.field(REGEX.getPreferredName(), _regex);
+    builder.field(SKIP_DUPLICATES.getPreferredName(), _skipDuplicates);
+    return builder;
   }
 
   @Override

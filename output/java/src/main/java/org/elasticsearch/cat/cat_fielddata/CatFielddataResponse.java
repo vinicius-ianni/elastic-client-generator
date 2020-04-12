@@ -25,7 +25,10 @@ public class CatFielddataResponse  implements XContentable<CatFielddataResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_records != null) {
+      builder.array(RECORDS.getPreferredName(), _records);
+    }
+    return builder;
   }
 
   @Override

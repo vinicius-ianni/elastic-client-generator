@@ -31,7 +31,12 @@ public class IndexActionResult  implements XContentable<IndexActionResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ID.getPreferredName(), _id);
+    if (_response != null) {
+      builder.field(RESPONSE.getPreferredName());
+      _response.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -25,7 +25,8 @@ public class StartDatafeedResponse  implements XContentable<StartDatafeedRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(STARTED.getPreferredName(), _started);
+    return builder;
   }
 
   @Override

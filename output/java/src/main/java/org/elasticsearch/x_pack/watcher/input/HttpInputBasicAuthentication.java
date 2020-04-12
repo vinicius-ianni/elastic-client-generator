@@ -31,7 +31,9 @@ public class HttpInputBasicAuthentication  implements XContentable<HttpInputBasi
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(PASSWORD.getPreferredName(), _password);
+    builder.field(USERNAME.getPreferredName(), _username);
+    return builder;
   }
 
   @Override

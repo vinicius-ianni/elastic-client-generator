@@ -31,7 +31,9 @@ public class GraphVertexInclude  implements XContentable<GraphVertexInclude> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BOOST.getPreferredName(), _boost);
+    builder.field(TERM.getPreferredName(), _term);
+    return builder;
   }
 
   @Override

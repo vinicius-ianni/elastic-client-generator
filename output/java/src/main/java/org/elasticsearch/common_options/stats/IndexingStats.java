@@ -98,7 +98,23 @@ public class IndexingStats  implements XContentable<IndexingStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(INDEX_CURRENT.getPreferredName(), _indexCurrent);
+    builder.field(DELETE_CURRENT.getPreferredName(), _deleteCurrent);
+    builder.field(DELETE_TIME.getPreferredName(), _deleteTime);
+    builder.field(DELETE_TIME_IN_MILLIS.getPreferredName(), _deleteTimeInMillis);
+    builder.field(DELETE_TOTAL.getPreferredName(), _deleteTotal);
+    builder.field(IS_THROTTLED.getPreferredName(), _isThrottled);
+    builder.field(NOOP_UPDATE_TOTAL.getPreferredName(), _noopUpdateTotal);
+    builder.field(THROTTLE_TIME.getPreferredName(), _throttleTime);
+    builder.field(THROTTLE_TIME_IN_MILLIS.getPreferredName(), _throttleTimeInMillis);
+    builder.field(INDEX_TIME.getPreferredName(), _indexTime);
+    builder.field(INDEX_TIME_IN_MILLIS.getPreferredName(), _indexTimeInMillis);
+    builder.field(INDEX_TOTAL.getPreferredName(), _indexTotal);
+    if (_types != null) {
+      builder.field(TYPES.getPreferredName());
+      _types.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -31,7 +31,11 @@ public class TokenDetail  implements XContentable<TokenDetail> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(NAME.getPreferredName(), _name);
+    if (_tokens != null) {
+      builder.array(TOKENS.getPreferredName(), _tokens);
+    }
+    return builder;
   }
 
   @Override

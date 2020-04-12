@@ -39,7 +39,19 @@ public class IndexState  implements XContentable<IndexState> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_aliases != null) {
+      builder.field(ALIASES.getPreferredName());
+      _aliases.toXContent(builder, params);
+    }
+    if (_mappings != null) {
+      builder.field(MAPPINGS.getPreferredName());
+      _mappings.toXContent(builder, params);
+    }
+    if (_settings != null) {
+      builder.field(SETTINGS.getPreferredName());
+      _settings.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

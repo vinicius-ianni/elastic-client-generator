@@ -43,7 +43,11 @@ public class GraphVertex  implements XContentable<GraphVertex> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DEPTH.getPreferredName(), _depth);
+    builder.field(FIELD.getPreferredName(), _field);
+    builder.field(TERM.getPreferredName(), _term);
+    builder.field(WEIGHT.getPreferredName(), _weight);
+    return builder;
   }
 
   @Override

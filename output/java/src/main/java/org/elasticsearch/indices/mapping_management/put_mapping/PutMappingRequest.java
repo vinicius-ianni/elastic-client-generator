@@ -144,7 +144,67 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_allField != null) {
+      builder.field(ALL_FIELD.getPreferredName());
+      _allField.toXContent(builder, params);
+    }
+    builder.field(DATE_DETECTION.getPreferredName(), _dateDetection);
+    if (_dynamic != null) {
+      builder.field(DYNAMIC.getPreferredName());
+      _dynamic.map(builder::value, r-> r.toXContent(builder, params));
+    }
+    if (_dynamicDateFormats != null) {
+      builder.array(DYNAMIC_DATE_FORMATS.getPreferredName(), _dynamicDateFormats);
+    }
+    if (_dynamicTemplates != null) {
+      builder.field(DYNAMIC_TEMPLATES.getPreferredName());
+      _dynamicTemplates.toXContent(builder, params);
+    }
+    if (_fieldNamesField != null) {
+      builder.field(FIELD_NAMES_FIELD.getPreferredName());
+      _fieldNamesField.toXContent(builder, params);
+    }
+    if (_indexField != null) {
+      builder.field(INDEX_FIELD.getPreferredName());
+      _indexField.toXContent(builder, params);
+    }
+    if (_meta != null) {
+      builder.field(META.getPreferredName());
+      _meta.toXContent(builder, params);
+    }
+    builder.field(NUMERIC_DETECTION.getPreferredName(), _numericDetection);
+    if (_properties != null) {
+      builder.field(PROPERTIES.getPreferredName());
+      _properties.toXContent(builder, params);
+    }
+    if (_routingField != null) {
+      builder.field(ROUTING_FIELD.getPreferredName());
+      _routingField.toXContent(builder, params);
+    }
+    if (_sizeField != null) {
+      builder.field(SIZE_FIELD.getPreferredName());
+      _sizeField.toXContent(builder, params);
+    }
+    if (_sourceField != null) {
+      builder.field(SOURCE_FIELD.getPreferredName());
+      _sourceField.toXContent(builder, params);
+    }
+    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -25,7 +25,10 @@ public class TermsRollupGrouping  implements XContentable<TermsRollupGrouping> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    return builder;
   }
 
   @Override

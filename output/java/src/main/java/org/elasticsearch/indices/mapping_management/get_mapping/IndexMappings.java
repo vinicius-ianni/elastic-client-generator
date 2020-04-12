@@ -31,7 +31,15 @@ public class IndexMappings  implements XContentable<IndexMappings> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_item != null) {
+      builder.field(ITEM.getPreferredName());
+      _item.toXContent(builder, params);
+    }
+    if (_mappings != null) {
+      builder.field(MAPPINGS.getPreferredName());
+      _mappings.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

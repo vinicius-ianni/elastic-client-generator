@@ -79,7 +79,17 @@ public class AllField  implements XContentable<AllField> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(ENABLED.getPreferredName(), _enabled);
+    builder.field(OMIT_NORMS.getPreferredName(), _omitNorms);
+    builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    builder.field(SIMILARITY.getPreferredName(), _similarity);
+    builder.field(STORE.getPreferredName(), _store);
+    builder.field(STORE_TERM_VECTOR_OFFSETS.getPreferredName(), _storeTermVectorOffsets);
+    builder.field(STORE_TERM_VECTOR_PAYLOADS.getPreferredName(), _storeTermVectorPayloads);
+    builder.field(STORE_TERM_VECTOR_POSITIONS.getPreferredName(), _storeTermVectorPositions);
+    builder.field(STORE_TERM_VECTORS.getPreferredName(), _storeTermVectors);
+    return builder;
   }
 
   @Override

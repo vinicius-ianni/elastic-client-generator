@@ -25,7 +25,8 @@ public class StandardTokenizer  implements XContentable<StandardTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MAX_TOKEN_LENGTH.getPreferredName(), _maxTokenLength);
+    return builder;
   }
 
   @Override

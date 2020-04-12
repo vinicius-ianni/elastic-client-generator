@@ -31,7 +31,10 @@ public class XPackBuildInformation  implements XContentable<XPackBuildInformatio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DATE.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_date.toInstant()));
+    builder.field(HASH.getPreferredName(), _hash);
+    return builder;
   }
 
   @Override

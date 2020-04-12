@@ -37,7 +37,10 @@ public class PatternReplaceCharFilter  implements XContentable<PatternReplaceCha
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FLAGS.getPreferredName(), _flags);
+    builder.field(PATTERN.getPreferredName(), _pattern);
+    builder.field(REPLACEMENT.getPreferredName(), _replacement);
+    return builder;
   }
 
   @Override

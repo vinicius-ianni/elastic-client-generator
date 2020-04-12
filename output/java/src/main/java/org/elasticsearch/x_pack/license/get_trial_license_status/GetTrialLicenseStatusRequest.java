@@ -20,7 +20,8 @@ public class GetTrialLicenseStatusRequest  implements XContentable<GetTrialLicen
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

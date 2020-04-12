@@ -25,7 +25,8 @@ public class DeleteExpiredDataResponse  implements XContentable<DeleteExpiredDat
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DELETED.getPreferredName(), _deleted);
+    return builder;
   }
 
   @Override

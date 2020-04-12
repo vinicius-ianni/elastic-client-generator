@@ -37,7 +37,10 @@ public class IpRangeAggregationRange  implements XContentable<IpRangeAggregation
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FROM.getPreferredName(), _from);
+    builder.field(MASK.getPreferredName(), _mask);
+    builder.field(TO.getPreferredName(), _to);
+    return builder;
   }
 
   @Override

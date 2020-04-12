@@ -32,7 +32,12 @@ public class NodeInfoNetwork  implements XContentable<NodeInfoNetwork> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_primaryInterface != null) {
+      builder.field(PRIMARY_INTERFACE.getPreferredName());
+      _primaryInterface.toXContent(builder, params);
+    }
+    builder.field(REFRESH_INTERVAL.getPreferredName(), _refreshInterval);
+    return builder;
   }
 
   @Override

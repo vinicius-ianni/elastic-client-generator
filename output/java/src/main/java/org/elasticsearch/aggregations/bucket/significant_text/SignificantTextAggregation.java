@@ -120,7 +120,53 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_backgroundFilter != null) {
+      builder.field(BACKGROUND_FILTER.getPreferredName());
+      _backgroundFilter.toXContent(builder, params);
+    }
+    if (_chiSquare != null) {
+      builder.field(CHI_SQUARE.getPreferredName());
+      _chiSquare.toXContent(builder, params);
+    }
+    if (_exclude != null) {
+      builder.field(EXCLUDE.getPreferredName());
+      _exclude.toXContent(builder, params);
+    }
+    if (_executionHint != null) {
+      builder.field(EXECUTION_HINT.getPreferredName());
+      _executionHint.toXContent(builder, params);
+    }
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(FILTER_DUPLICATE_TEXT.getPreferredName(), _filterDuplicateText);
+    if (_gnd != null) {
+      builder.field(GND.getPreferredName());
+      _gnd.toXContent(builder, params);
+    }
+    if (_include != null) {
+      builder.field(INCLUDE.getPreferredName());
+      _include.toXContent(builder, params);
+    }
+    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    if (_mutualInformation != null) {
+      builder.field(MUTUAL_INFORMATION.getPreferredName());
+      _mutualInformation.toXContent(builder, params);
+    }
+    if (_percentage != null) {
+      builder.field(PERCENTAGE.getPreferredName());
+      _percentage.toXContent(builder, params);
+    }
+    if (_scriptHeuristic != null) {
+      builder.field(SCRIPT_HEURISTIC.getPreferredName());
+      _scriptHeuristic.toXContent(builder, params);
+    }
+    builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
+    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    builder.field(SIZE.getPreferredName(), _size);
+    if (_sourceFields != null) {
+      builder.array(SOURCE_FIELDS.getPreferredName(), _sourceFields);
+    }
+    return builder;
   }
 
   @Override

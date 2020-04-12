@@ -45,7 +45,20 @@ public class GeoShapeQuery  implements XContentable<GeoShapeQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    if (_indexedShape != null) {
+      builder.field(INDEXED_SHAPE.getPreferredName());
+      _indexedShape.toXContent(builder, params);
+    }
+    if (_relation != null) {
+      builder.field(RELATION.getPreferredName());
+      _relation.toXContent(builder, params);
+    }
+    if (_shape != null) {
+      builder.field(SHAPE.getPreferredName());
+      _shape.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

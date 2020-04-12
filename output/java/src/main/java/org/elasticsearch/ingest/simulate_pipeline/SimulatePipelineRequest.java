@@ -38,7 +38,15 @@ public class SimulatePipelineRequest  implements XContentable<SimulatePipelineRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_docs != null) {
+      builder.array(DOCS.getPreferredName(), _docs);
+    }
+    if (_pipeline != null) {
+      builder.field(PIPELINE.getPreferredName());
+      _pipeline.toXContent(builder, params);
+    }
+    builder.field(VERBOSE.getPreferredName(), _verbose);
+    return builder;
   }
 
   @Override

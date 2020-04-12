@@ -62,7 +62,17 @@ public class QuerySqlRequest  implements XContentable<QuerySqlRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FORMAT.getPreferredName(), _format);
+    builder.field(CURSOR.getPreferredName(), _cursor);
+    builder.field(COLUMNAR.getPreferredName(), _columnar);
+    builder.field(FETCH_SIZE.getPreferredName(), _fetchSize);
+    if (_filter != null) {
+      builder.field(FILTER.getPreferredName());
+      _filter.toXContent(builder, params);
+    }
+    builder.field(QUERY.getPreferredName(), _query);
+    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    return builder;
   }
 
   @Override

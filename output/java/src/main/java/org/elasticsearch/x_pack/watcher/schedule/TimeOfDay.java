@@ -31,7 +31,13 @@ public class TimeOfDay  implements XContentable<TimeOfDay> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_hour != null) {
+      builder.array(HOUR.getPreferredName(), _hour);
+    }
+    if (_minute != null) {
+      builder.array(MINUTE.getPreferredName(), _minute);
+    }
+    return builder;
   }
 
   @Override

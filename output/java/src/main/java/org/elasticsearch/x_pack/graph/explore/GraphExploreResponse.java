@@ -51,7 +51,18 @@ public class GraphExploreResponse  implements XContentable<GraphExploreResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_connections != null) {
+      builder.array(CONNECTIONS.getPreferredName(), _connections);
+    }
+    if (_failures != null) {
+      builder.array(FAILURES.getPreferredName(), _failures);
+    }
+    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    builder.field(TOOK.getPreferredName(), _took);
+    if (_vertices != null) {
+      builder.array(VERTICES.getPreferredName(), _vertices);
+    }
+    return builder;
   }
 
   @Override

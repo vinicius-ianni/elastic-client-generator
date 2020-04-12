@@ -31,7 +31,15 @@ public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_autoFollowStats != null) {
+      builder.field(AUTO_FOLLOW_STATS.getPreferredName());
+      _autoFollowStats.toXContent(builder, params);
+    }
+    if (_followStats != null) {
+      builder.field(FOLLOW_STATS.getPreferredName());
+      _followStats.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

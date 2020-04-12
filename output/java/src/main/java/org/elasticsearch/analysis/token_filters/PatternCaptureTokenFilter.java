@@ -31,7 +31,11 @@ public class PatternCaptureTokenFilter  implements XContentable<PatternCaptureTo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_patterns != null) {
+      builder.array(PATTERNS.getPreferredName(), _patterns);
+    }
+    builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    return builder;
   }
 
   @Override

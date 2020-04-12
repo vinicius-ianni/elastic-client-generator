@@ -31,7 +31,9 @@ public class MutualInformationHeuristic  implements XContentable<MutualInformati
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BACKGROUND_IS_SUPERSET.getPreferredName(), _backgroundIsSuperset);
+    builder.field(INCLUDE_NEGATIVES.getPreferredName(), _includeNegatives);
+    return builder;
   }
 
   @Override

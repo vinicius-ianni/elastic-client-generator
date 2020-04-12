@@ -31,7 +31,15 @@ public class Fielddata  implements XContentable<Fielddata> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_filter != null) {
+      builder.field(FILTER.getPreferredName());
+      _filter.toXContent(builder, params);
+    }
+    if (_loading != null) {
+      builder.field(LOADING.getPreferredName());
+      _loading.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

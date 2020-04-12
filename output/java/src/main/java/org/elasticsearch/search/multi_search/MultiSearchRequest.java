@@ -69,7 +69,21 @@ public class MultiSearchRequest  implements XContentable<MultiSearchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
+    builder.field(MAX_CONCURRENT_SEARCHES.getPreferredName(), _maxConcurrentSearches);
+    builder.field(MAX_CONCURRENT_SHARD_REQUESTS.getPreferredName(), _maxConcurrentShardRequests);
+    builder.field(PRE_FILTER_SHARD_SIZE.getPreferredName(), _preFilterShardSize);
+    if (_searchType != null) {
+      builder.field(SEARCH_TYPE.getPreferredName());
+      _searchType.toXContent(builder, params);
+    }
+    builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
+    builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    if (_operations != null) {
+      builder.field(OPERATIONS.getPreferredName());
+      _operations.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

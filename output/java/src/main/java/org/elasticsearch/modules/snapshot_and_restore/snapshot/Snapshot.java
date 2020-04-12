@@ -88,7 +88,30 @@ public class Snapshot  implements XContentable<Snapshot> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DURATION_IN_MILLIS.getPreferredName(), _durationInMillis);
+    builder.field(END_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_endTime.toInstant()));
+    builder.field(END_TIME_IN_MILLIS.getPreferredName(), _endTimeInMillis);
+    if (_failures != null) {
+      builder.array(FAILURES.getPreferredName(), _failures);
+    }
+    if (_indices != null) {
+      builder.array(INDICES.getPreferredName(), _indices);
+    }
+    builder.field(SNAPSHOT.getPreferredName(), _snapshot);
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName());
+      _shards.toXContent(builder, params);
+    }
+    builder.field(START_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_startTime.toInstant()));
+    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    builder.field(STATE.getPreferredName(), _state);
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -109,7 +109,42 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_aggregations != null) {
+      builder.field(AGGREGATIONS.getPreferredName());
+      _aggregations.toXContent(builder, params);
+    }
+    if (_clusters != null) {
+      builder.field(CLUSTERS.getPreferredName());
+      _clusters.toXContent(builder, params);
+    }
+    if (_fields != null) {
+      builder.field(FIELDS.getPreferredName());
+      _fields.toXContent(builder, params);
+    }
+    if (_hits != null) {
+      builder.field(HITS.getPreferredName());
+      _hits.toXContent(builder, params);
+    }
+    builder.field(MAX_SCORE.getPreferredName(), _maxScore);
+    builder.field(NUM_REDUCE_PHASES.getPreferredName(), _numReducePhases);
+    if (_profile != null) {
+      builder.field(PROFILE.getPreferredName());
+      _profile.toXContent(builder, params);
+    }
+    builder.field(SCROLL_ID.getPreferredName(), _scrollId);
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName());
+      _shards.toXContent(builder, params);
+    }
+    if (_suggest != null) {
+      builder.field(SUGGEST.getPreferredName());
+      _suggest.toXContent(builder, params);
+    }
+    builder.field(TERMINATED_EARLY.getPreferredName(), _terminatedEarly);
+    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    builder.field(TOOK.getPreferredName(), _took);
+    builder.field(TOTAL.getPreferredName(), _total);
+    return builder;
   }
 
   @Override

@@ -62,7 +62,31 @@ public class PutRoleRequest  implements XContentable<PutRoleRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    if (_applications != null) {
+      builder.array(APPLICATIONS.getPreferredName(), _applications);
+    }
+    if (_cluster != null) {
+      builder.array(CLUSTER.getPreferredName(), _cluster);
+    }
+    if (_global != null) {
+      builder.field(GLOBAL.getPreferredName());
+      _global.toXContent(builder, params);
+    }
+    if (_indices != null) {
+      builder.array(INDICES.getPreferredName(), _indices);
+    }
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_runAs != null) {
+      builder.array(RUN_AS.getPreferredName(), _runAs);
+    }
+    return builder;
   }
 
   @Override

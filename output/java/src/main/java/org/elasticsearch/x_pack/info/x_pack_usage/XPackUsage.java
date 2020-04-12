@@ -31,7 +31,9 @@ public class XPackUsage  implements XContentable<XPackUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(AVAILABLE.getPreferredName(), _available);
+    builder.field(ENABLED.getPreferredName(), _enabled);
+    return builder;
   }
 
   @Override

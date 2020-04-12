@@ -44,7 +44,17 @@ public class GetWatchResponse  implements XContentable<GetWatchResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FOUND.getPreferredName(), _found);
+    builder.field(ID.getPreferredName(), _id);
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    if (_watch != null) {
+      builder.field(WATCH.getPreferredName());
+      _watch.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

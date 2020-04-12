@@ -67,7 +67,15 @@ public class AggregationBreakdown  implements XContentable<AggregationBreakdown>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUILD_AGGREGATION.getPreferredName(), _buildAggregation);
+    builder.field(BUILD_AGGREGATION_COUNT.getPreferredName(), _buildAggregationCount);
+    builder.field(COLLECT.getPreferredName(), _collect);
+    builder.field(COLLECT_COUNT.getPreferredName(), _collectCount);
+    builder.field(INITIALIZE.getPreferredName(), _initialize);
+    builder.field(INTIALIZE_COUNT.getPreferredName(), _intializeCount);
+    builder.field(REDUCE.getPreferredName(), _reduce);
+    builder.field(REDUCE_COUNT.getPreferredName(), _reduceCount);
+    return builder;
   }
 
   @Override

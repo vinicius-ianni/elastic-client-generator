@@ -398,7 +398,215 @@ public class QueryContainer  implements XContentable<QueryContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_bool != null) {
+      builder.field(BOOL.getPreferredName());
+      _bool.toXContent(builder, params);
+    }
+    if (_boosting != null) {
+      builder.field(BOOSTING.getPreferredName());
+      _boosting.toXContent(builder, params);
+    }
+    if (_common != null) {
+      builder.field(COMMON.getPreferredName());
+      _common.toXContent(builder, params);
+    }
+    if (_constantScore != null) {
+      builder.field(CONSTANT_SCORE.getPreferredName());
+      _constantScore.toXContent(builder, params);
+    }
+    if (_disMax != null) {
+      builder.field(DIS_MAX.getPreferredName());
+      _disMax.toXContent(builder, params);
+    }
+    if (_exists != null) {
+      builder.field(EXISTS.getPreferredName());
+      _exists.toXContent(builder, params);
+    }
+    if (_functionScore != null) {
+      builder.field(FUNCTION_SCORE.getPreferredName());
+      _functionScore.toXContent(builder, params);
+    }
+    if (_fuzzy != null) {
+      builder.field(FUZZY.getPreferredName());
+      _fuzzy.toXContent(builder, params);
+    }
+    if (_geoBoundingBox != null) {
+      builder.field(GEO_BOUNDING_BOX.getPreferredName());
+      _geoBoundingBox.toXContent(builder, params);
+    }
+    if (_geoDistance != null) {
+      builder.field(GEO_DISTANCE.getPreferredName());
+      _geoDistance.toXContent(builder, params);
+    }
+    if (_geoPolygon != null) {
+      builder.field(GEO_POLYGON.getPreferredName());
+      _geoPolygon.toXContent(builder, params);
+    }
+    if (_geoShape != null) {
+      builder.field(GEO_SHAPE.getPreferredName());
+      _geoShape.toXContent(builder, params);
+    }
+    if (_shape != null) {
+      builder.field(SHAPE.getPreferredName());
+      _shape.toXContent(builder, params);
+    }
+    if (_hasChild != null) {
+      builder.field(HAS_CHILD.getPreferredName());
+      _hasChild.toXContent(builder, params);
+    }
+    if (_hasParent != null) {
+      builder.field(HAS_PARENT.getPreferredName());
+      _hasParent.toXContent(builder, params);
+    }
+    if (_ids != null) {
+      builder.field(IDS.getPreferredName());
+      _ids.toXContent(builder, params);
+    }
+    if (_intervals != null) {
+      builder.field(INTERVALS.getPreferredName());
+      _intervals.toXContent(builder, params);
+    }
+    builder.field(IS_CONDITIONLESS.getPreferredName(), _isConditionless);
+    builder.field(IS_STRICT.getPreferredName(), _isStrict);
+    builder.field(IS_VERBATIM.getPreferredName(), _isVerbatim);
+    builder.field(IS_WRITABLE.getPreferredName(), _isWritable);
+    if (_match != null) {
+      builder.field(MATCH.getPreferredName());
+      _match.toXContent(builder, params);
+    }
+    if (_matchAll != null) {
+      builder.field(MATCH_ALL.getPreferredName());
+      _matchAll.toXContent(builder, params);
+    }
+    if (_matchNone != null) {
+      builder.field(MATCH_NONE.getPreferredName());
+      _matchNone.toXContent(builder, params);
+    }
+    if (_matchPhrase != null) {
+      builder.field(MATCH_PHRASE.getPreferredName());
+      _matchPhrase.toXContent(builder, params);
+    }
+    if (_matchPhrasePrefix != null) {
+      builder.field(MATCH_PHRASE_PREFIX.getPreferredName());
+      _matchPhrasePrefix.toXContent(builder, params);
+    }
+    if (_moreLikeThis != null) {
+      builder.field(MORE_LIKE_THIS.getPreferredName());
+      _moreLikeThis.toXContent(builder, params);
+    }
+    if (_multiMatch != null) {
+      builder.field(MULTI_MATCH.getPreferredName());
+      _multiMatch.toXContent(builder, params);
+    }
+    if (_nested != null) {
+      builder.field(NESTED.getPreferredName());
+      _nested.toXContent(builder, params);
+    }
+    if (_parentId != null) {
+      builder.field(PARENT_ID.getPreferredName());
+      _parentId.toXContent(builder, params);
+    }
+    if (_percolate != null) {
+      builder.field(PERCOLATE.getPreferredName());
+      _percolate.toXContent(builder, params);
+    }
+    if (_prefix != null) {
+      builder.field(PREFIX.getPreferredName());
+      _prefix.toXContent(builder, params);
+    }
+    if (_queryString != null) {
+      builder.field(QUERY_STRING.getPreferredName());
+      _queryString.toXContent(builder, params);
+    }
+    if (_range != null) {
+      builder.field(RANGE.getPreferredName());
+      _range.toXContent(builder, params);
+    }
+    if (_rawQuery != null) {
+      builder.field(RAW_QUERY.getPreferredName());
+      _rawQuery.toXContent(builder, params);
+    }
+    if (_regexp != null) {
+      builder.field(REGEXP.getPreferredName());
+      _regexp.toXContent(builder, params);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    if (_scriptScore != null) {
+      builder.field(SCRIPT_SCORE.getPreferredName());
+      _scriptScore.toXContent(builder, params);
+    }
+    if (_simpleQueryString != null) {
+      builder.field(SIMPLE_QUERY_STRING.getPreferredName());
+      _simpleQueryString.toXContent(builder, params);
+    }
+    if (_spanContaining != null) {
+      builder.field(SPAN_CONTAINING.getPreferredName());
+      _spanContaining.toXContent(builder, params);
+    }
+    if (_fieldMaskingSpan != null) {
+      builder.field(FIELD_MASKING_SPAN.getPreferredName());
+      _fieldMaskingSpan.toXContent(builder, params);
+    }
+    if (_spanFirst != null) {
+      builder.field(SPAN_FIRST.getPreferredName());
+      _spanFirst.toXContent(builder, params);
+    }
+    if (_spanMulti != null) {
+      builder.field(SPAN_MULTI.getPreferredName());
+      _spanMulti.toXContent(builder, params);
+    }
+    if (_spanNear != null) {
+      builder.field(SPAN_NEAR.getPreferredName());
+      _spanNear.toXContent(builder, params);
+    }
+    if (_spanNot != null) {
+      builder.field(SPAN_NOT.getPreferredName());
+      _spanNot.toXContent(builder, params);
+    }
+    if (_spanOr != null) {
+      builder.field(SPAN_OR.getPreferredName());
+      _spanOr.toXContent(builder, params);
+    }
+    if (_spanTerm != null) {
+      builder.field(SPAN_TERM.getPreferredName());
+      _spanTerm.toXContent(builder, params);
+    }
+    if (_spanWithin != null) {
+      builder.field(SPAN_WITHIN.getPreferredName());
+      _spanWithin.toXContent(builder, params);
+    }
+    if (_term != null) {
+      builder.field(TERM.getPreferredName());
+      _term.toXContent(builder, params);
+    }
+    if (_terms != null) {
+      builder.field(TERMS.getPreferredName());
+      _terms.toXContent(builder, params);
+    }
+    if (_termsSet != null) {
+      builder.field(TERMS_SET.getPreferredName());
+      _termsSet.toXContent(builder, params);
+    }
+    if (_wildcard != null) {
+      builder.field(WILDCARD.getPreferredName());
+      _wildcard.toXContent(builder, params);
+    }
+    if (_rankFeature != null) {
+      builder.field(RANK_FEATURE.getPreferredName());
+      _rankFeature.toXContent(builder, params);
+    }
+    if (_distanceFeature != null) {
+      builder.field(DISTANCE_FEATURE.getPreferredName());
+      _distanceFeature.toXContent(builder, params);
+    }
+    if (_pinned != null) {
+      builder.field(PINNED.getPreferredName());
+      _pinned.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

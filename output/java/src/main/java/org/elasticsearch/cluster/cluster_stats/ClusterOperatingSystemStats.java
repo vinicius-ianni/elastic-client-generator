@@ -51,7 +51,19 @@ public class ClusterOperatingSystemStats  implements XContentable<ClusterOperati
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ALLOCATED_PROCESSORS.getPreferredName(), _allocatedProcessors);
+    builder.field(AVAILABLE_PROCESSORS.getPreferredName(), _availableProcessors);
+    if (_mem != null) {
+      builder.field(MEM.getPreferredName());
+      _mem.toXContent(builder, params);
+    }
+    if (_names != null) {
+      builder.array(NAMES.getPreferredName(), _names);
+    }
+    if (_prettyNames != null) {
+      builder.array(PRETTY_NAMES.getPreferredName(), _prettyNames);
+    }
+    return builder;
   }
 
   @Override

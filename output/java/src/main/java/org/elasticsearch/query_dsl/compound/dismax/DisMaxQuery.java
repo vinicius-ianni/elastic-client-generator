@@ -32,7 +32,11 @@ public class DisMaxQuery  implements XContentable<DisMaxQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_queries != null) {
+      builder.array(QUERIES.getPreferredName(), _queries);
+    }
+    builder.field(TIE_BREAKER.getPreferredName(), _tieBreaker);
+    return builder;
   }
 
   @Override

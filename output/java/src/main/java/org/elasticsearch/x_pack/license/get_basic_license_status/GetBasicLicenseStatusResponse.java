@@ -25,7 +25,8 @@ public class GetBasicLicenseStatusResponse  implements XContentable<GetBasicLice
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ELIGIBLE_TO_START_BASIC.getPreferredName(), _eligibleToStartBasic);
+    return builder;
   }
 
   @Override

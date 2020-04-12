@@ -43,7 +43,13 @@ public class WatchRecordQueuedStats  implements XContentable<WatchRecordQueuedSt
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(EXECUTION_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_executionTime.toInstant()));
+    builder.field(TRIGGERED_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_triggeredTime.toInstant()));
+    builder.field(WATCH_ID.getPreferredName(), _watchId);
+    builder.field(WATCH_RECORD_ID.getPreferredName(), _watchRecordId);
+    return builder;
   }
 
   @Override

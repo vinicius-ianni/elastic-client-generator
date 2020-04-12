@@ -61,7 +61,14 @@ public class TranslogStats  implements XContentable<TranslogStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(EARLIEST_LAST_MODIFIED_AGE.getPreferredName(), _earliestLastModifiedAge);
+    builder.field(OPERATIONS.getPreferredName(), _operations);
+    builder.field(SIZE.getPreferredName(), _size);
+    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    builder.field(UNCOMMITTED_OPERATIONS.getPreferredName(), _uncommittedOperations);
+    builder.field(UNCOMMITTED_SIZE.getPreferredName(), _uncommittedSize);
+    builder.field(UNCOMMITTED_SIZE_IN_BYTES.getPreferredName(), _uncommittedSizeInBytes);
+    return builder;
   }
 
   @Override

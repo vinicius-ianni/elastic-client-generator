@@ -31,7 +31,12 @@ public class ClearCachedRolesResponse  implements XContentable<ClearCachedRolesR
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    if (_nodes != null) {
+      builder.field(NODES.getPreferredName());
+      _nodes.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

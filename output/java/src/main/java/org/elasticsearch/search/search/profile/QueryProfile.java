@@ -50,7 +50,17 @@ public class QueryProfile  implements XContentable<QueryProfile> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_breakdown != null) {
+      builder.field(BREAKDOWN.getPreferredName());
+      _breakdown.toXContent(builder, params);
+    }
+    if (_children != null) {
+      builder.array(CHILDREN.getPreferredName(), _children);
+    }
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

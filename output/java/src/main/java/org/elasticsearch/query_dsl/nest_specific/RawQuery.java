@@ -25,7 +25,8 @@ public class RawQuery  implements XContentable<RawQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(RAW.getPreferredName(), _raw);
+    return builder;
   }
 
   @Override

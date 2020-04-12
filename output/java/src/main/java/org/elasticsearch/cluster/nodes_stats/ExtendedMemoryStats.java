@@ -31,7 +31,9 @@ public class ExtendedMemoryStats  implements XContentable<ExtendedMemoryStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FREE_PERCENT.getPreferredName(), _freePercent);
+    builder.field(USED_PERCENT.getPreferredName(), _usedPercent);
+    return builder;
   }
 
   @Override

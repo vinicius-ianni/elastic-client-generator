@@ -25,7 +25,8 @@ public class GetDatafeedsRequest  implements XContentable<GetDatafeedsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ALLOW_NO_DATAFEEDS.getPreferredName(), _allowNoDatafeeds);
+    return builder;
   }
 
   @Override

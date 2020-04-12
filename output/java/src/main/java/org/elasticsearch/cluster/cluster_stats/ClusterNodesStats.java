@@ -81,7 +81,44 @@ public class ClusterNodesStats  implements XContentable<ClusterNodesStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName());
+      _count.toXContent(builder, params);
+    }
+    if (_discoveryTypes != null) {
+      builder.field(DISCOVERY_TYPES.getPreferredName());
+      _discoveryTypes.toXContent(builder, params);
+    }
+    if (_fs != null) {
+      builder.field(FS.getPreferredName());
+      _fs.toXContent(builder, params);
+    }
+    if (_jvm != null) {
+      builder.field(JVM.getPreferredName());
+      _jvm.toXContent(builder, params);
+    }
+    if (_networkTypes != null) {
+      builder.field(NETWORK_TYPES.getPreferredName());
+      _networkTypes.toXContent(builder, params);
+    }
+    if (_os != null) {
+      builder.field(OS.getPreferredName());
+      _os.toXContent(builder, params);
+    }
+    if (_packagingTypes != null) {
+      builder.array(PACKAGING_TYPES.getPreferredName(), _packagingTypes);
+    }
+    if (_plugins != null) {
+      builder.array(PLUGINS.getPreferredName(), _plugins);
+    }
+    if (_process != null) {
+      builder.field(PROCESS.getPreferredName());
+      _process.toXContent(builder, params);
+    }
+    if (_versions != null) {
+      builder.array(VERSIONS.getPreferredName(), _versions);
+    }
+    return builder;
   }
 
   @Override

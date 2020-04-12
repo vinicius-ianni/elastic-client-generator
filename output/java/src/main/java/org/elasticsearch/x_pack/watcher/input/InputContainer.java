@@ -43,7 +43,23 @@ public class InputContainer  implements XContentable<InputContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_chain != null) {
+      builder.field(CHAIN.getPreferredName());
+      _chain.toXContent(builder, params);
+    }
+    if (_http != null) {
+      builder.field(HTTP.getPreferredName());
+      _http.toXContent(builder, params);
+    }
+    if (_search != null) {
+      builder.field(SEARCH.getPreferredName());
+      _search.toXContent(builder, params);
+    }
+    if (_simple != null) {
+      builder.field(SIMPLE.getPreferredName());
+      _simple.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

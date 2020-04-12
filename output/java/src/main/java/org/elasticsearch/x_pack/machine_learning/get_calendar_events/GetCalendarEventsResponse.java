@@ -32,7 +32,11 @@ public class GetCalendarEventsResponse  implements XContentable<GetCalendarEvent
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    if (_events != null) {
+      builder.array(EVENTS.getPreferredName(), _events);
+    }
+    return builder;
   }
 
   @Override

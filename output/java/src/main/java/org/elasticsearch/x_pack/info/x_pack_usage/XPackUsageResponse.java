@@ -109,7 +109,67 @@ public class XPackUsageResponse  implements XContentable<XPackUsageResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_sql != null) {
+      builder.field(SQL.getPreferredName());
+      _sql.toXContent(builder, params);
+    }
+    if (_rollup != null) {
+      builder.field(ROLLUP.getPreferredName());
+      _rollup.toXContent(builder, params);
+    }
+    if (_dataFrame != null) {
+      builder.field(DATA_FRAME.getPreferredName());
+      _dataFrame.toXContent(builder, params);
+    }
+    if (_flattened != null) {
+      builder.field(FLATTENED.getPreferredName());
+      _flattened.toXContent(builder, params);
+    }
+    if (_dataScience != null) {
+      builder.field(DATA_SCIENCE.getPreferredName());
+      _dataScience.toXContent(builder, params);
+    }
+    if (_ilm != null) {
+      builder.field(ILM.getPreferredName());
+      _ilm.toXContent(builder, params);
+    }
+    if (_ccr != null) {
+      builder.field(CCR.getPreferredName());
+      _ccr.toXContent(builder, params);
+    }
+    if (_watcher != null) {
+      builder.field(WATCHER.getPreferredName());
+      _watcher.toXContent(builder, params);
+    }
+    if (_graph != null) {
+      builder.field(GRAPH.getPreferredName());
+      _graph.toXContent(builder, params);
+    }
+    if (_logstash != null) {
+      builder.field(LOGSTASH.getPreferredName());
+      _logstash.toXContent(builder, params);
+    }
+    if (_ml != null) {
+      builder.field(ML.getPreferredName());
+      _ml.toXContent(builder, params);
+    }
+    if (_monitoring != null) {
+      builder.field(MONITORING.getPreferredName());
+      _monitoring.toXContent(builder, params);
+    }
+    if (_security != null) {
+      builder.field(SECURITY.getPreferredName());
+      _security.toXContent(builder, params);
+    }
+    if (_vectors != null) {
+      builder.field(VECTORS.getPreferredName());
+      _vectors.toXContent(builder, params);
+    }
+    if (_votingOnly != null) {
+      builder.field(VOTING_ONLY.getPreferredName());
+      _votingOnly.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

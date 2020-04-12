@@ -37,7 +37,10 @@ public class ShardPath  implements XContentable<ShardPath> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DATA_PATH.getPreferredName(), _dataPath);
+    builder.field(IS_CUSTOM_DATA_PATH.getPreferredName(), _isCustomDataPath);
+    builder.field(STATE_PATH.getPreferredName(), _statePath);
+    return builder;
   }
 
   @Override

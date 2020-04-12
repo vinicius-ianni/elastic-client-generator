@@ -25,7 +25,11 @@ public class GetCategoriesRequest  implements XContentable<GetCategoriesRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_page != null) {
+      builder.field(PAGE.getPreferredName());
+      _page.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

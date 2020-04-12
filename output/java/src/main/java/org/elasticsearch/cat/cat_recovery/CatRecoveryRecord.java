@@ -151,7 +151,29 @@ public class CatRecoveryRecord  implements XContentable<CatRecoveryRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BYTES.getPreferredName(), _bytes);
+    builder.field(BYTES_PERCENT.getPreferredName(), _bytesPercent);
+    builder.field(BYTES_RECOVERED.getPreferredName(), _bytesRecovered);
+    builder.field(BYTES_TOTAL.getPreferredName(), _bytesTotal);
+    builder.field(FILES.getPreferredName(), _files);
+    builder.field(FILES_PERCENT.getPreferredName(), _filesPercent);
+    builder.field(FILES_RECOVERED.getPreferredName(), _filesRecovered);
+    builder.field(FILES_TOTAL.getPreferredName(), _filesTotal);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(REPOSITORY.getPreferredName(), _repository);
+    builder.field(SHARD.getPreferredName(), _shard);
+    builder.field(SNAPSHOT.getPreferredName(), _snapshot);
+    builder.field(SOURCE_HOST.getPreferredName(), _sourceHost);
+    builder.field(SOURCE_NODE.getPreferredName(), _sourceNode);
+    builder.field(STAGE.getPreferredName(), _stage);
+    builder.field(TARGET_HOST.getPreferredName(), _targetHost);
+    builder.field(TARGET_NODE.getPreferredName(), _targetNode);
+    builder.field(TIME.getPreferredName(), _time);
+    builder.field(TRANSLOG_OPS.getPreferredName(), _translogOps);
+    builder.field(TRANSLOG_OPS_PERCENT.getPreferredName(), _translogOpsPercent);
+    builder.field(TRANSLOG_OPS_RECOVERED.getPreferredName(), _translogOpsRecovered);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

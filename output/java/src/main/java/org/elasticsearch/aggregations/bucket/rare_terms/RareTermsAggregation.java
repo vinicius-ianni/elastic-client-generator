@@ -57,7 +57,20 @@ public class RareTermsAggregation  implements XContentable<RareTermsAggregation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_exclude != null) {
+      builder.field(EXCLUDE.getPreferredName());
+      _exclude.toXContent(builder, params);
+    }
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    if (_include != null) {
+      builder.field(INCLUDE.getPreferredName());
+      _include.toXContent(builder, params);
+    }
+    builder.field(MAX_DOC_COUNT.getPreferredName(), _maxDocCount);
+    builder.field(MISSING.getPreferredName(), _missing);
+    builder.field(PRECISION.getPreferredName(), _precision);
+    return builder;
   }
 
   @Override

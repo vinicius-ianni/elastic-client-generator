@@ -31,7 +31,9 @@ public class FingerprintTokenFilter  implements XContentable<FingerprintTokenFil
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MAX_OUTPUT_SIZE.getPreferredName(), _maxOutputSize);
+    builder.field(SEPARATOR.getPreferredName(), _separator);
+    return builder;
   }
 
   @Override

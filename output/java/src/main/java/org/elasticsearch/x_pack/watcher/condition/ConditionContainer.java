@@ -49,7 +49,27 @@ public class ConditionContainer  implements XContentable<ConditionContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_always != null) {
+      builder.field(ALWAYS.getPreferredName());
+      _always.toXContent(builder, params);
+    }
+    if (_arrayCompare != null) {
+      builder.field(ARRAY_COMPARE.getPreferredName());
+      _arrayCompare.toXContent(builder, params);
+    }
+    if (_compare != null) {
+      builder.field(COMPARE.getPreferredName());
+      _compare.toXContent(builder, params);
+    }
+    if (_never != null) {
+      builder.field(NEVER.getPreferredName());
+      _never.toXContent(builder, params);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -25,7 +25,8 @@ public class KeywordTokenizer  implements XContentable<KeywordTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUFFER_SIZE.getPreferredName(), _bufferSize);
+    return builder;
   }
 
   @Override

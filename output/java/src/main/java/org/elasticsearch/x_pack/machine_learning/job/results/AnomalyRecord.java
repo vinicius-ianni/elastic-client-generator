@@ -153,7 +153,41 @@ public class AnomalyRecord  implements XContentable<AnomalyRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actual != null) {
+      builder.array(ACTUAL.getPreferredName(), _actual);
+    }
+    if (_bucketSpan != null) {
+      builder.field(BUCKET_SPAN.getPreferredName());
+      _bucketSpan.toXContent(builder, params);
+    }
+    builder.field(BY_FIELD_NAME.getPreferredName(), _byFieldName);
+    builder.field(BY_FIELD_VALUE.getPreferredName(), _byFieldValue);
+    if (_causes != null) {
+      builder.array(CAUSES.getPreferredName(), _causes);
+    }
+    builder.field(DETECTOR_INDEX.getPreferredName(), _detectorIndex);
+    builder.field(FIELD_NAME.getPreferredName(), _fieldName);
+    builder.field(FUNCTION.getPreferredName(), _function);
+    builder.field(FUNCTION_DESCRIPTION.getPreferredName(), _functionDescription);
+    if (_influencers != null) {
+      builder.array(INFLUENCERS.getPreferredName(), _influencers);
+    }
+    builder.field(INITIAL_RECORD_SCORE.getPreferredName(), _initialRecordScore);
+    builder.field(IS_INTERIM.getPreferredName(), _isInterim);
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    builder.field(OVER_FIELD_NAME.getPreferredName(), _overFieldName);
+    builder.field(OVER_FIELD_VALUE.getPreferredName(), _overFieldValue);
+    builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
+    builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
+    builder.field(PROBABILITY.getPreferredName(), _probability);
+    builder.field(RECORD_SCORE.getPreferredName(), _recordScore);
+    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    builder.field(TIMESTAMP.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_typical != null) {
+      builder.array(TYPICAL.getPreferredName(), _typical);
+    }
+    return builder;
   }
 
   @Override

@@ -39,7 +39,16 @@ public class ObjectProperty  implements XContentable<ObjectProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_dynamic != null) {
+      builder.field(DYNAMIC.getPreferredName());
+      _dynamic.map(builder::value, r-> r.toXContent(builder, params));
+    }
+    builder.field(ENABLED.getPreferredName(), _enabled);
+    if (_properties != null) {
+      builder.field(PROPERTIES.getPreferredName());
+      _properties.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -74,7 +74,23 @@ public class NodeJvmInfo  implements XContentable<NodeJvmInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_gcCollectors != null) {
+      builder.array(GC_COLLECTORS.getPreferredName(), _gcCollectors);
+    }
+    if (_mem != null) {
+      builder.field(MEM.getPreferredName());
+      _mem.toXContent(builder, params);
+    }
+    if (_memoryPools != null) {
+      builder.array(MEMORY_POOLS.getPreferredName(), _memoryPools);
+    }
+    builder.field(PID.getPreferredName(), _pid);
+    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    builder.field(VERSION.getPreferredName(), _version);
+    builder.field(VM_NAME.getPreferredName(), _vmName);
+    builder.field(VM_VENDOR.getPreferredName(), _vmVendor);
+    builder.field(VM_VERSION.getPreferredName(), _vmVersion);
+    return builder;
   }
 
   @Override

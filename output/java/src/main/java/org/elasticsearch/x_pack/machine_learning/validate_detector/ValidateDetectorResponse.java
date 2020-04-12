@@ -20,7 +20,8 @@ public class ValidateDetectorResponse  implements XContentable<ValidateDetectorR
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

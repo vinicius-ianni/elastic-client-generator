@@ -68,7 +68,30 @@ public class NodeJvmStats  implements XContentable<NodeJvmStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_bufferPools != null) {
+      builder.field(BUFFER_POOLS.getPreferredName());
+      _bufferPools.toXContent(builder, params);
+    }
+    if (_classes != null) {
+      builder.field(CLASSES.getPreferredName());
+      _classes.toXContent(builder, params);
+    }
+    if (_gc != null) {
+      builder.field(GC.getPreferredName());
+      _gc.toXContent(builder, params);
+    }
+    if (_mem != null) {
+      builder.field(MEM.getPreferredName());
+      _mem.toXContent(builder, params);
+    }
+    if (_threads != null) {
+      builder.field(THREADS.getPreferredName());
+      _threads.toXContent(builder, params);
+    }
+    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    builder.field(UPTIME.getPreferredName(), _uptime);
+    builder.field(UPTIME_IN_MILLIS.getPreferredName(), _uptimeInMillis);
+    return builder;
   }
 
   @Override

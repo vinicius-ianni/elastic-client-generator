@@ -109,7 +109,22 @@ public class CatSegmentsRecord  implements XContentable<CatSegmentsRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COMMITTED.getPreferredName(), _committed);
+    builder.field(COMPOUND.getPreferredName(), _compound);
+    builder.field(DOCS_COUNT.getPreferredName(), _docsCount);
+    builder.field(DOCS_DELETED.getPreferredName(), _docsDeleted);
+    builder.field(GENERATION.getPreferredName(), _generation);
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(IP.getPreferredName(), _ip);
+    builder.field(PRIREP.getPreferredName(), _prirep);
+    builder.field(SEARCHABLE.getPreferredName(), _searchable);
+    builder.field(SEGMENT.getPreferredName(), _segment);
+    builder.field(SHARD.getPreferredName(), _shard);
+    builder.field(SIZE.getPreferredName(), _size);
+    builder.field(SIZE_MEMORY.getPreferredName(), _sizeMemory);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

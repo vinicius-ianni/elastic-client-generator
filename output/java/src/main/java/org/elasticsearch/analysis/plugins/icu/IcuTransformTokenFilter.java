@@ -31,7 +31,12 @@ public class IcuTransformTokenFilter  implements XContentable<IcuTransformTokenF
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_dir != null) {
+      builder.field(DIR.getPreferredName());
+      _dir.toXContent(builder, params);
+    }
+    builder.field(ID.getPreferredName(), _id);
+    return builder;
   }
 
   @Override

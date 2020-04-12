@@ -31,7 +31,11 @@ public class NodeInfoTransport  implements XContentable<NodeInfoTransport> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_boundAddress != null) {
+      builder.array(BOUND_ADDRESS.getPreferredName(), _boundAddress);
+    }
+    builder.field(PUBLISH_ADDRESS.getPreferredName(), _publishAddress);
+    return builder;
   }
 
   @Override

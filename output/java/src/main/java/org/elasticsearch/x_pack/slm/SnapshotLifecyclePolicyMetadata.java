@@ -62,7 +62,28 @@ public class SnapshotLifecyclePolicyMetadata  implements XContentable<SnapshotLi
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MODIFIED_DATE_MILLIS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_modifiedDateMillis.toInstant()));
+    builder.field(NEXT_EXECUTION_MILLIS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_nextExecutionMillis.toInstant()));
+    if (_policy != null) {
+      builder.field(POLICY.getPreferredName());
+      _policy.toXContent(builder, params);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    if (_inProgress != null) {
+      builder.field(IN_PROGRESS.getPreferredName());
+      _inProgress.toXContent(builder, params);
+    }
+    if (_lastSuccess != null) {
+      builder.field(LAST_SUCCESS.getPreferredName());
+      _lastSuccess.toXContent(builder, params);
+    }
+    if (_lastFailure != null) {
+      builder.field(LAST_FAILURE.getPreferredName());
+      _lastFailure.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

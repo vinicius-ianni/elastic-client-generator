@@ -31,7 +31,9 @@ public class CcrUsage  implements XContentable<CcrUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(AUTO_FOLLOW_PATTERNS_COUNT.getPreferredName(), _autoFollowPatternsCount);
+    builder.field(FOLLOWER_INDICES_COUNT.getPreferredName(), _followerIndicesCount);
+    return builder;
   }
 
   @Override

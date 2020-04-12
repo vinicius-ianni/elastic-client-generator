@@ -39,7 +39,14 @@ public class WeightedAverageValue  implements XContentable<WeightedAverageValue>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(MISSING.getPreferredName(), _missing);
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

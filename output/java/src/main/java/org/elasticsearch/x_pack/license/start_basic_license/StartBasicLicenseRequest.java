@@ -25,7 +25,8 @@ public class StartBasicLicenseRequest  implements XContentable<StartBasicLicense
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACKNOWLEDGE.getPreferredName(), _acknowledge);
+    return builder;
   }
 
   @Override

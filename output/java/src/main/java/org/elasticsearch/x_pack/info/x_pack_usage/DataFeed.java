@@ -25,7 +25,8 @@ public class DataFeed  implements XContentable<DataFeed> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    return builder;
   }
 
   @Override

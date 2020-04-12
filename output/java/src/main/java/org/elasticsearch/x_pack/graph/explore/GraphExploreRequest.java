@@ -58,7 +58,28 @@ public class GraphExploreRequest  implements XContentable<GraphExploreRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    if (_connections != null) {
+      builder.field(CONNECTIONS.getPreferredName());
+      _connections.toXContent(builder, params);
+    }
+    if (_controls != null) {
+      builder.field(CONTROLS.getPreferredName());
+      _controls.toXContent(builder, params);
+    }
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    if (_vertices != null) {
+      builder.array(VERTICES.getPreferredName(), _vertices);
+    }
+    return builder;
   }
 
   @Override

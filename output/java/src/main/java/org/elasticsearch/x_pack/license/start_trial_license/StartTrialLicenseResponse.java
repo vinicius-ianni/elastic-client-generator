@@ -31,7 +31,9 @@ public class StartTrialLicenseResponse  implements XContentable<StartTrialLicens
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ERROR_MESSAGE.getPreferredName(), _errorMessage);
+    builder.field(TRIAL_WAS_STARTED.getPreferredName(), _trialWasStarted);
+    return builder;
   }
 
   @Override

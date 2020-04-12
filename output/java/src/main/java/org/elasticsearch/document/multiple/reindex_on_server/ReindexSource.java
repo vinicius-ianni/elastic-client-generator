@@ -67,7 +67,28 @@ public class ReindexSource  implements XContentable<ReindexSource> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(INDEX.getPreferredName());
+    _index.toXContent(builder, params);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    if (_remote != null) {
+      builder.field(REMOTE.getPreferredName());
+      _remote.toXContent(builder, params);
+    }
+    builder.field(SIZE.getPreferredName(), _size);
+    if (_slice != null) {
+      builder.field(SLICE.getPreferredName());
+      _slice.toXContent(builder, params);
+    }
+    if (_sort != null) {
+      builder.array(SORT.getPreferredName(), _sort);
+    }
+    if (_source != null) {
+      builder.array(SOURCE.getPreferredName(), _source);
+    }
+    return builder;
   }
 
   @Override

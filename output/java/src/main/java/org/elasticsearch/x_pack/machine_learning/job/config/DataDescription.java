@@ -37,7 +37,11 @@ public class DataDescription  implements XContentable<DataDescription> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FORMAT.getPreferredName(), _format);
+    builder.field(TIME_FIELD.getPreferredName());
+    _timeField.toXContent(builder, params);
+    builder.field(TIME_FORMAT.getPreferredName(), _timeFormat);
+    return builder;
   }
 
   @Override

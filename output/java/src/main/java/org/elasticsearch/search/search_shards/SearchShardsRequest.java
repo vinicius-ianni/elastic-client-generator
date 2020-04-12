@@ -56,7 +56,17 @@ public class SearchShardsRequest  implements XContentable<SearchShardsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    builder.field(LOCAL.getPreferredName(), _local);
+    builder.field(PREFERENCE.getPreferredName(), _preference);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    return builder;
   }
 
   @Override

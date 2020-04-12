@@ -111,7 +111,28 @@ public class DeleteByQueryResponse  implements XContentable<DeleteByQueryRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IS_VALID.getPreferredName(), _isValid);
+    builder.field(BATCHES.getPreferredName(), _batches);
+    builder.field(DELETED.getPreferredName(), _deleted);
+    if (_failures != null) {
+      builder.array(FAILURES.getPreferredName(), _failures);
+    }
+    builder.field(NOOPS.getPreferredName(), _noops);
+    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    if (_retries != null) {
+      builder.field(RETRIES.getPreferredName());
+      _retries.toXContent(builder, params);
+    }
+    builder.field(SLICE_ID.getPreferredName(), _sliceId);
+    builder.field(TASK.getPreferredName());
+    _task.toXContent(builder, params);
+    builder.field(THROTTLED_MILLIS.getPreferredName(), _throttledMillis);
+    builder.field(THROTTLED_UNTIL_MILLIS.getPreferredName(), _throttledUntilMillis);
+    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    builder.field(TOOK.getPreferredName(), _took);
+    builder.field(TOTAL.getPreferredName(), _total);
+    builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    return builder;
   }
 
   @Override

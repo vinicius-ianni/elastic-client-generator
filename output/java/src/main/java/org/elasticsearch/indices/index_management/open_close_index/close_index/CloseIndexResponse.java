@@ -31,7 +31,12 @@ public class CloseIndexResponse  implements XContentable<CloseIndexResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName());
+      _indices.toXContent(builder, params);
+    }
+    builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    return builder;
   }
 
   @Override

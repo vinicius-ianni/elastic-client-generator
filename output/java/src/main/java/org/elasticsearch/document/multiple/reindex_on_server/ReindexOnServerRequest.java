@@ -101,7 +101,38 @@ public class ReindexOnServerRequest  implements XContentable<ReindexOnServerRequ
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_conflicts != null) {
+      builder.field(CONFLICTS.getPreferredName());
+      _conflicts.toXContent(builder, params);
+    }
+    if (_dest != null) {
+      builder.field(DEST.getPreferredName());
+      _dest.toXContent(builder, params);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    builder.field(SIZE.getPreferredName(), _size);
+    builder.field(MAX_DOCS.getPreferredName(), _maxDocs);
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName());
+      _source.toXContent(builder, params);
+    }
+    builder.field(REFRESH.getPreferredName(), _refresh);
+    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    if (_scroll != null) {
+      builder.field(SCROLL.getPreferredName());
+      _scroll.toXContent(builder, params);
+    }
+    builder.field(SLICES.getPreferredName(), _slices);
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    return builder;
   }
 
   @Override

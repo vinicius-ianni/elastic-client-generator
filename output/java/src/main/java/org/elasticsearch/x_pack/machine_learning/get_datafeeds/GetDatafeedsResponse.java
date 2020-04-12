@@ -32,7 +32,11 @@ public class GetDatafeedsResponse  implements XContentable<GetDatafeedsResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    if (_datafeeds != null) {
+      builder.array(DATAFEEDS.getPreferredName(), _datafeeds);
+    }
+    return builder;
   }
 
   @Override

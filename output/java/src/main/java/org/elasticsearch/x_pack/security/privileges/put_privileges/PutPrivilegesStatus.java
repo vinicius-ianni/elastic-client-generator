@@ -25,7 +25,8 @@ public class PutPrivilegesStatus  implements XContentable<PutPrivilegesStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CREATED.getPreferredName(), _created);
+    return builder;
   }
 
   @Override

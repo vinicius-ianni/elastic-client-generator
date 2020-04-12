@@ -26,7 +26,11 @@ public class GetIndexTemplateResponse extends DictionaryResponseBase<String, Tem
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_templateMappings != null) {
+      builder.field(TEMPLATE_MAPPINGS.getPreferredName());
+      _templateMappings.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

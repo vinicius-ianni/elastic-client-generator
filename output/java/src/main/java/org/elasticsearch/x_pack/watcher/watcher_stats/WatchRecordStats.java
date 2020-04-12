@@ -25,7 +25,11 @@ public class WatchRecordStats  implements XContentable<WatchRecordStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_executionPhase != null) {
+      builder.field(EXECUTION_PHASE.getPreferredName());
+      _executionPhase.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

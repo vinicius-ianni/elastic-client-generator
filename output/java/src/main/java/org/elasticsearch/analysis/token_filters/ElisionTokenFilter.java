@@ -31,7 +31,11 @@ public class ElisionTokenFilter  implements XContentable<ElisionTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_articles != null) {
+      builder.array(ARTICLES.getPreferredName(), _articles);
+    }
+    builder.field(ARTICLES_CASE.getPreferredName(), _articlesCase);
+    return builder;
   }
 
   @Override

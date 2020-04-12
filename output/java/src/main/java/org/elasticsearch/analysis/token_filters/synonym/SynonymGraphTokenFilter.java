@@ -55,7 +55,18 @@ public class SynonymGraphTokenFilter  implements XContentable<SynonymGraphTokenF
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(EXPAND.getPreferredName(), _expand);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName());
+      _format.toXContent(builder, params);
+    }
+    builder.field(LENIENT.getPreferredName(), _lenient);
+    if (_synonyms != null) {
+      builder.array(SYNONYMS.getPreferredName(), _synonyms);
+    }
+    builder.field(SYNONYMS_PATH.getPreferredName(), _synonymsPath);
+    builder.field(TOKENIZER.getPreferredName(), _tokenizer);
+    return builder;
   }
 
   @Override

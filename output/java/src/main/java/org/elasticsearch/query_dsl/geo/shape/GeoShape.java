@@ -25,7 +25,8 @@ public class GeoShape  implements XContentable<GeoShape> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

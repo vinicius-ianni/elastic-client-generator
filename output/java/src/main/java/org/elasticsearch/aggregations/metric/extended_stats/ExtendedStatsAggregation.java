@@ -25,7 +25,8 @@ public class ExtendedStatsAggregation  implements XContentable<ExtendedStatsAggr
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(SIGMA.getPreferredName(), _sigma);
+    return builder;
   }
 
   @Override

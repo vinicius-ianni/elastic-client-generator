@@ -37,7 +37,10 @@ public class LinearInterpolationSmoothingModel  implements XContentable<LinearIn
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BIGRAM_LAMBDA.getPreferredName(), _bigramLambda);
+    builder.field(TRIGRAM_LAMBDA.getPreferredName(), _trigramLambda);
+    builder.field(UNIGRAM_LAMBDA.getPreferredName(), _unigramLambda);
+    return builder;
   }
 
   @Override

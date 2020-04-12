@@ -69,7 +69,27 @@ public class UpdateJobRequest  implements XContentable<UpdateJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_analysisLimits != null) {
+      builder.field(ANALYSIS_LIMITS.getPreferredName());
+      _analysisLimits.toXContent(builder, params);
+    }
+    if (_backgroundPersistInterval != null) {
+      builder.field(BACKGROUND_PERSIST_INTERVAL.getPreferredName());
+      _backgroundPersistInterval.toXContent(builder, params);
+    }
+    if (_customSettings != null) {
+      builder.field(CUSTOM_SETTINGS.getPreferredName());
+      _customSettings.toXContent(builder, params);
+    }
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_modelPlotConfig != null) {
+      builder.field(MODEL_PLOT_CONFIG.getPreferredName());
+      _modelPlotConfig.toXContent(builder, params);
+    }
+    builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
+    builder.field(RENORMALIZATION_WINDOW_DAYS.getPreferredName(), _renormalizationWindowDays);
+    builder.field(RESULTS_RETENTION_DAYS.getPreferredName(), _resultsRetentionDays);
+    return builder;
   }
 
   @Override

@@ -38,7 +38,16 @@ public class TermsSetQuery  implements XContentable<TermsSetQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MINIMUM_SHOULD_MATCH_FIELD.getPreferredName());
+    _minimumShouldMatchField.toXContent(builder, params);
+    if (_minimumShouldMatchScript != null) {
+      builder.field(MINIMUM_SHOULD_MATCH_SCRIPT.getPreferredName());
+      _minimumShouldMatchScript.toXContent(builder, params);
+    }
+    if (_terms != null) {
+      builder.array(TERMS.getPreferredName(), _terms);
+    }
+    return builder;
   }
 
   @Override

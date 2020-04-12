@@ -25,7 +25,11 @@ public class TranslateSqlResponse  implements XContentable<TranslateSqlResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_result != null) {
+      builder.field(RESULT.getPreferredName());
+      _result.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

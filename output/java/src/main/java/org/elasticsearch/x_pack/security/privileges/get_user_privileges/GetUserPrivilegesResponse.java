@@ -49,7 +49,22 @@ public class GetUserPrivilegesResponse  implements XContentable<GetUserPrivilege
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_applications != null) {
+      builder.array(APPLICATIONS.getPreferredName(), _applications);
+    }
+    if (_cluster != null) {
+      builder.array(CLUSTER.getPreferredName(), _cluster);
+    }
+    if (_global != null) {
+      builder.array(GLOBAL.getPreferredName(), _global);
+    }
+    if (_indices != null) {
+      builder.array(INDICES.getPreferredName(), _indices);
+    }
+    if (_runAs != null) {
+      builder.array(RUN_AS.getPreferredName(), _runAs);
+    }
+    return builder;
   }
 
   @Override

@@ -86,7 +86,21 @@ public class TaskStatus  implements XContentable<TaskStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BATCHES.getPreferredName(), _batches);
+    builder.field(CREATED.getPreferredName(), _created);
+    builder.field(DELETED.getPreferredName(), _deleted);
+    builder.field(NOOPS.getPreferredName(), _noops);
+    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    if (_retries != null) {
+      builder.field(RETRIES.getPreferredName());
+      _retries.toXContent(builder, params);
+    }
+    builder.field(THROTTLED_MILLIS.getPreferredName(), _throttledMillis);
+    builder.field(THROTTLED_UNTIL_MILLIS.getPreferredName(), _throttledUntilMillis);
+    builder.field(TOTAL.getPreferredName(), _total);
+    builder.field(UPDATED.getPreferredName(), _updated);
+    builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    return builder;
   }
 
   @Override

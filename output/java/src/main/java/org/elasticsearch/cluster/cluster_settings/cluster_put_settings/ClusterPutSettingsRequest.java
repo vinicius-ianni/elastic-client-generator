@@ -49,7 +49,24 @@ public class ClusterPutSettingsRequest  implements XContentable<ClusterPutSettin
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_persistent != null) {
+      builder.field(PERSISTENT.getPreferredName());
+      _persistent.toXContent(builder, params);
+    }
+    if (_transient != null) {
+      builder.field(TRANSIENT.getPreferredName());
+      _transient.toXContent(builder, params);
+    }
+    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

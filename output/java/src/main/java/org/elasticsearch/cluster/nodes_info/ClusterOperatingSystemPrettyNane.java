@@ -31,7 +31,9 @@ public class ClusterOperatingSystemPrettyNane  implements XContentable<ClusterOp
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    builder.field(PRETTY_NAME.getPreferredName(), _prettyName);
+    return builder;
   }
 
   @Override

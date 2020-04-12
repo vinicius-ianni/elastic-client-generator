@@ -31,7 +31,13 @@ public class ClusterRerouteResponse  implements XContentable<ClusterRerouteRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_explanations != null) {
+      builder.array(EXPLANATIONS.getPreferredName(), _explanations);
+    }
+    if (_state != null) {
+      builder.array(STATE.getPreferredName(), _state);
+    }
+    return builder;
   }
 
   @Override

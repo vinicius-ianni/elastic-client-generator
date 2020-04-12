@@ -31,7 +31,9 @@ public class RoleMappingUsage  implements XContentable<RoleMappingUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ENABLED.getPreferredName(), _enabled);
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

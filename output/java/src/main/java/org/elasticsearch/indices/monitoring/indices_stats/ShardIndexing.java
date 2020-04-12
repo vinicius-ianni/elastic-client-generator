@@ -79,7 +79,17 @@ public class ShardIndexing  implements XContentable<ShardIndexing> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DELETE_CURRENT.getPreferredName(), _deleteCurrent);
+    builder.field(DELETE_TIME_IN_MILLIS.getPreferredName(), _deleteTimeInMillis);
+    builder.field(DELETE_TOTAL.getPreferredName(), _deleteTotal);
+    builder.field(INDEX_CURRENT.getPreferredName(), _indexCurrent);
+    builder.field(INDEX_FAILED.getPreferredName(), _indexFailed);
+    builder.field(INDEX_TIME_IN_MILLIS.getPreferredName(), _indexTimeInMillis);
+    builder.field(INDEX_TOTAL.getPreferredName(), _indexTotal);
+    builder.field(IS_THROTTLED.getPreferredName(), _isThrottled);
+    builder.field(NOOP_UPDATE_TOTAL.getPreferredName(), _noopUpdateTotal);
+    builder.field(THROTTLE_TIME_IN_MILLIS.getPreferredName(), _throttleTimeInMillis);
+    return builder;
   }
 
   @Override

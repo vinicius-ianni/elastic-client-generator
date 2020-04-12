@@ -43,7 +43,14 @@ public class StopTokenFilter  implements XContentable<StopTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IGNORE_CASE.getPreferredName(), _ignoreCase);
+    builder.field(REMOVE_TRAILING.getPreferredName(), _removeTrailing);
+    if (_stopwords != null) {
+      builder.field(STOPWORDS.getPreferredName());
+      _stopwords.toXContent(builder, params);
+    }
+    builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    return builder;
   }
 
   @Override

@@ -99,7 +99,31 @@ public class LifecycleExplain  implements XContentable<LifecycleExplain> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTION.getPreferredName(), _action);
+    builder.field(ACTION_TIME_MILLIS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_actionTimeMillis.toInstant()));
+    builder.field(FAILED_STEP.getPreferredName(), _failedStep);
+    builder.field(INDEX.getPreferredName());
+    _index.toXContent(builder, params);
+    builder.field(LIFECYCLE_DATE_MILLIS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_lifecycleDateMillis.toInstant()));
+    builder.field(MANAGED.getPreferredName(), _managed);
+    builder.field(PHASE.getPreferredName(), _phase);
+    builder.field(PHASE_TIME_MILLIS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_phaseTimeMillis.toInstant()));
+    builder.field(POLICY.getPreferredName(), _policy);
+    builder.field(STEP.getPreferredName(), _step);
+    if (_stepInfo != null) {
+      builder.field(STEP_INFO.getPreferredName());
+      _stepInfo.toXContent(builder, params);
+    }
+    builder.field(STEP_TIME_MILLIS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_stepTimeMillis.toInstant()));
+    if (_age != null) {
+      builder.field(AGE.getPreferredName());
+      _age.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

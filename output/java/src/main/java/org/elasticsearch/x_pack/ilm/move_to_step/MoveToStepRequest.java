@@ -31,7 +31,15 @@ public class MoveToStepRequest  implements XContentable<MoveToStepRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_currentStep != null) {
+      builder.field(CURRENT_STEP.getPreferredName());
+      _currentStep.toXContent(builder, params);
+    }
+    if (_nextStep != null) {
+      builder.field(NEXT_STEP.getPreferredName());
+      _nextStep.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

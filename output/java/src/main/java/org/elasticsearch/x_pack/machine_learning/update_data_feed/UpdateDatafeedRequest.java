@@ -80,7 +80,36 @@ public class UpdateDatafeedRequest  implements XContentable<UpdateDatafeedReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_aggregations != null) {
+      builder.field(AGGREGATIONS.getPreferredName());
+      _aggregations.toXContent(builder, params);
+    }
+    if (_chunkingConfig != null) {
+      builder.field(CHUNKING_CONFIG.getPreferredName());
+      _chunkingConfig.toXContent(builder, params);
+    }
+    if (_frequency != null) {
+      builder.field(FREQUENCY.getPreferredName());
+      _frequency.toXContent(builder, params);
+    }
+    builder.field(INDICES.getPreferredName());
+    _indices.toXContent(builder, params);
+    builder.field(JOB_ID.getPreferredName());
+    _jobId.toXContent(builder, params);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    if (_queryDelay != null) {
+      builder.field(QUERY_DELAY.getPreferredName());
+      _queryDelay.toXContent(builder, params);
+    }
+    if (_scriptFields != null) {
+      builder.field(SCRIPT_FIELDS.getPreferredName());
+      _scriptFields.toXContent(builder, params);
+    }
+    builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    return builder;
   }
 
   @Override

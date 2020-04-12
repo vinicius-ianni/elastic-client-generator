@@ -20,7 +20,8 @@ public class SpanSubQuery  implements XContentable<SpanSubQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

@@ -57,7 +57,24 @@ public class BoolQuery  implements XContentable<BoolQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_filter != null) {
+      builder.array(FILTER.getPreferredName(), _filter);
+    }
+    builder.field(LOCKED.getPreferredName(), _locked);
+    if (_minimumShouldMatch != null) {
+      builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
+      _minimumShouldMatch.toXContent(builder, params);
+    }
+    if (_must != null) {
+      builder.array(MUST.getPreferredName(), _must);
+    }
+    if (_mustNot != null) {
+      builder.array(MUST_NOT.getPreferredName(), _mustNot);
+    }
+    if (_should != null) {
+      builder.array(SHOULD.getPreferredName(), _should);
+    }
+    return builder;
   }
 
   @Override

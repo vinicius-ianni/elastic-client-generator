@@ -116,7 +116,50 @@ public class NodeInfo  implements XContentable<NodeInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUILD_HASH.getPreferredName(), _buildHash);
+    builder.field(HOST.getPreferredName(), _host);
+    if (_http != null) {
+      builder.field(HTTP.getPreferredName());
+      _http.toXContent(builder, params);
+    }
+    builder.field(IP.getPreferredName(), _ip);
+    if (_jvm != null) {
+      builder.field(JVM.getPreferredName());
+      _jvm.toXContent(builder, params);
+    }
+    builder.field(NAME.getPreferredName(), _name);
+    if (_network != null) {
+      builder.field(NETWORK.getPreferredName());
+      _network.toXContent(builder, params);
+    }
+    if (_os != null) {
+      builder.field(OS.getPreferredName());
+      _os.toXContent(builder, params);
+    }
+    if (_plugins != null) {
+      builder.array(PLUGINS.getPreferredName(), _plugins);
+    }
+    if (_process != null) {
+      builder.field(PROCESS.getPreferredName());
+      _process.toXContent(builder, params);
+    }
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    if (_settings != null) {
+      builder.array(SETTINGS.getPreferredName(), _settings);
+    }
+    if (_threadPool != null) {
+      builder.field(THREAD_POOL.getPreferredName());
+      _threadPool.toXContent(builder, params);
+    }
+    if (_transport != null) {
+      builder.field(TRANSPORT.getPreferredName());
+      _transport.toXContent(builder, params);
+    }
+    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

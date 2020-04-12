@@ -25,7 +25,10 @@ public class XPackInfoRequest  implements XContentable<XPackInfoRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_categories != null) {
+      builder.array(CATEGORIES.getPreferredName(), _categories);
+    }
+    return builder;
   }
 
   @Override

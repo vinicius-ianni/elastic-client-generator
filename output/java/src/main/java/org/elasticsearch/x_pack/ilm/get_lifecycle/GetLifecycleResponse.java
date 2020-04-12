@@ -26,7 +26,11 @@ public class GetLifecycleResponse extends DictionaryResponseBase<String, Lifecyc
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_policies != null) {
+      builder.field(POLICIES.getPreferredName());
+      _policies.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

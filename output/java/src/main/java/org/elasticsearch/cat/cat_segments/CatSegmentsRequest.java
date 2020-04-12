@@ -55,7 +55,20 @@ public class CatSegmentsRequest  implements XContentable<CatSegmentsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_bytes != null) {
+      builder.field(BYTES.getPreferredName());
+      _bytes.toXContent(builder, params);
+    }
+    builder.field(FORMAT.getPreferredName(), _format);
+    if (_headers != null) {
+      builder.array(HEADERS.getPreferredName(), _headers);
+    }
+    builder.field(HELP.getPreferredName(), _help);
+    if (_sortByColumns != null) {
+      builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
+    }
+    builder.field(VERBOSE.getPreferredName(), _verbose);
+    return builder;
   }
 
   @Override

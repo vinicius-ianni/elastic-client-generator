@@ -37,7 +37,15 @@ public class SimulatedActions  implements XContentable<SimulatedActions> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.array(ACTIONS.getPreferredName(), _actions);
+    }
+    if (_all != null) {
+      builder.field(ALL.getPreferredName());
+      _all.toXContent(builder, params);
+    }
+    builder.field(USE_ALL.getPreferredName(), _useAll);
+    return builder;
   }
 
   @Override

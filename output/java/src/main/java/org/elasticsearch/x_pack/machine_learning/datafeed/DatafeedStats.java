@@ -49,7 +49,21 @@ public class DatafeedStats  implements XContentable<DatafeedStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ASSIGNMENT_EXPLANATION.getPreferredName(), _assignmentExplanation);
+    builder.field(DATAFEED_ID.getPreferredName(), _datafeedId);
+    if (_node != null) {
+      builder.field(NODE.getPreferredName());
+      _node.toXContent(builder, params);
+    }
+    if (_state != null) {
+      builder.field(STATE.getPreferredName());
+      _state.toXContent(builder, params);
+    }
+    if (_timingStats != null) {
+      builder.field(TIMING_STATS.getPreferredName());
+      _timingStats.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

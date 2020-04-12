@@ -32,7 +32,13 @@ public class FilterRef  implements XContentable<FilterRef> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FILTER_ID.getPreferredName());
+    _filterId.toXContent(builder, params);
+    if (_filterType != null) {
+      builder.field(FILTER_TYPE.getPreferredName());
+      _filterType.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -25,7 +25,8 @@ public class UpdateByQueryRethrottleRequest  implements XContentable<UpdateByQue
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    return builder;
   }
 
   @Override

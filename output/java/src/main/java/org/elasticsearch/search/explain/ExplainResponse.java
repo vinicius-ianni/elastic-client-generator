@@ -37,7 +37,16 @@ public class ExplainResponse<TDocument>  implements XContentable<ExplainResponse
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_explanation != null) {
+      builder.field(EXPLANATION.getPreferredName());
+      _explanation.toXContent(builder, params);
+    }
+    if (_get != null) {
+      builder.field(GET.getPreferredName());
+      _get.toXContent(builder, params);
+    }
+    builder.field(MATCHED.getPreferredName(), _matched);
+    return builder;
   }
 
   @Override

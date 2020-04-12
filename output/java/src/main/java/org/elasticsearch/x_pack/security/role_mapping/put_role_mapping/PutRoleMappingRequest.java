@@ -56,7 +56,26 @@ public class PutRoleMappingRequest  implements XContentable<PutRoleMappingReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    builder.field(ENABLED.getPreferredName(), _enabled);
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    if (_rules != null) {
+      builder.field(RULES.getPreferredName());
+      _rules.toXContent(builder, params);
+    }
+    if (_runAs != null) {
+      builder.array(RUN_AS.getPreferredName(), _runAs);
+    }
+    return builder;
   }
 
   @Override

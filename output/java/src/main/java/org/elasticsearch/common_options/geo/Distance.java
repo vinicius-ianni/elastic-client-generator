@@ -32,7 +32,12 @@ public class Distance  implements XContentable<Distance> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(PRECISION.getPreferredName(), _precision);
+    if (_unit != null) {
+      builder.field(UNIT.getPreferredName());
+      _unit.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

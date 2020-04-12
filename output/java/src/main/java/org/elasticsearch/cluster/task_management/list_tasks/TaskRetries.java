@@ -31,7 +31,9 @@ public class TaskRetries  implements XContentable<TaskRetries> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BULK.getPreferredName(), _bulk);
+    builder.field(SEARCH.getPreferredName(), _search);
+    return builder;
   }
 
   @Override

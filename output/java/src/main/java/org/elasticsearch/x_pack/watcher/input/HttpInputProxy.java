@@ -31,7 +31,9 @@ public class HttpInputProxy  implements XContentable<HttpInputProxy> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(HOST.getPreferredName(), _host);
+    builder.field(PORT.getPreferredName(), _port);
+    return builder;
   }
 
   @Override

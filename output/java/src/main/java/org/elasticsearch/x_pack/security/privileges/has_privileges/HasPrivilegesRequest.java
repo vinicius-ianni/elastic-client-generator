@@ -37,7 +37,16 @@ public class HasPrivilegesRequest  implements XContentable<HasPrivilegesRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_application != null) {
+      builder.array(APPLICATION.getPreferredName(), _application);
+    }
+    if (_cluster != null) {
+      builder.array(CLUSTER.getPreferredName(), _cluster);
+    }
+    if (_index != null) {
+      builder.array(INDEX.getPreferredName(), _index);
+    }
+    return builder;
   }
 
   @Override

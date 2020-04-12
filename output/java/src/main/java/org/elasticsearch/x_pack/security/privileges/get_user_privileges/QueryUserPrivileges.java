@@ -25,7 +25,11 @@ public class QueryUserPrivileges  implements XContentable<QueryUserPrivileges> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_term != null) {
+      builder.field(TERM.getPreferredName());
+      _term.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

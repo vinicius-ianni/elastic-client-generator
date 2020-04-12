@@ -31,7 +31,12 @@ public class SlackDynamicAttachment  implements XContentable<SlackDynamicAttachm
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_attachmentTemplate != null) {
+      builder.field(ATTACHMENT_TEMPLATE.getPreferredName());
+      _attachmentTemplate.toXContent(builder, params);
+    }
+    builder.field(LIST_PATH.getPreferredName(), _listPath);
+    return builder;
   }
 
   @Override

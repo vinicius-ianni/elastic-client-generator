@@ -25,7 +25,10 @@ public class CloseShardResult  implements XContentable<CloseShardResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_failures != null) {
+      builder.array(FAILURES.getPreferredName(), _failures);
+    }
+    return builder;
   }
 
   @Override

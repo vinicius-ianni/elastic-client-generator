@@ -31,7 +31,9 @@ public class OverallBucketJobInfo  implements XContentable<OverallBucketJobInfo>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    builder.field(MAX_ANOMALY_SCORE.getPreferredName(), _maxAnomalyScore);
+    return builder;
   }
 
   @Override

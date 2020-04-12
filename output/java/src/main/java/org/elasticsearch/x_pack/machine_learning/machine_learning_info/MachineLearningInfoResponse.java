@@ -37,7 +37,16 @@ public class MachineLearningInfoResponse  implements XContentable<MachineLearnin
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_defaults != null) {
+      builder.field(DEFAULTS.getPreferredName());
+      _defaults.toXContent(builder, params);
+    }
+    if (_limits != null) {
+      builder.field(LIMITS.getPreferredName());
+      _limits.toXContent(builder, params);
+    }
+    builder.field(UPGRADE_MODE.getPreferredName(), _upgradeMode);
+    return builder;
   }
 
   @Override

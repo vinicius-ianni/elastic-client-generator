@@ -68,7 +68,27 @@ public class UpdateIndexSettingsRequest  implements XContentable<UpdateIndexSett
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_indexSettings != null) {
+      builder.field(INDEX_SETTINGS.getPreferredName());
+      _indexSettings.toXContent(builder, params);
+    }
+    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    builder.field(PRESERVE_EXISTING.getPreferredName(), _preserveExisting);
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

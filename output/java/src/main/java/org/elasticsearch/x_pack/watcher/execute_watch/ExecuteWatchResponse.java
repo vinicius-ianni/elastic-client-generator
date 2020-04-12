@@ -31,7 +31,12 @@ public class ExecuteWatchResponse  implements XContentable<ExecuteWatchResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ID.getPreferredName(), _id);
+    if (_watchRecord != null) {
+      builder.field(WATCH_RECORD.getPreferredName());
+      _watchRecord.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

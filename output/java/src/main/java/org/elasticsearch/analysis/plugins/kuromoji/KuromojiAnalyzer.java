@@ -31,7 +31,12 @@ public class KuromojiAnalyzer  implements XContentable<KuromojiAnalyzer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_mode != null) {
+      builder.field(MODE.getPreferredName());
+      _mode.toXContent(builder, params);
+    }
+    builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    return builder;
   }
 
   @Override

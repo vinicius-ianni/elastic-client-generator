@@ -37,7 +37,15 @@ public class NoriTokenizer  implements XContentable<NoriTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_decompoundMode != null) {
+      builder.field(DECOMPOUND_MODE.getPreferredName());
+      _decompoundMode.toXContent(builder, params);
+    }
+    builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    if (_userDictionaryRules != null) {
+      builder.array(USER_DICTIONARY_RULES.getPreferredName(), _userDictionaryRules);
+    }
+    return builder;
   }
 
   @Override

@@ -25,7 +25,10 @@ public class SpanOrQuery  implements XContentable<SpanOrQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_clauses != null) {
+      builder.array(CLAUSES.getPreferredName(), _clauses);
+    }
+    return builder;
   }
 
   @Override

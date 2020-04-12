@@ -80,7 +80,32 @@ public class EmailResult  implements XContentable<EmailResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_bcc != null) {
+      builder.array(BCC.getPreferredName(), _bcc);
+    }
+    if (_body != null) {
+      builder.field(BODY.getPreferredName());
+      _body.toXContent(builder, params);
+    }
+    if (_cc != null) {
+      builder.array(CC.getPreferredName(), _cc);
+    }
+    builder.field(FROM.getPreferredName(), _from);
+    builder.field(ID.getPreferredName(), _id);
+    if (_priority != null) {
+      builder.field(PRIORITY.getPreferredName());
+      _priority.toXContent(builder, params);
+    }
+    if (_replyTo != null) {
+      builder.array(REPLY_TO.getPreferredName(), _replyTo);
+    }
+    builder.field(SENT_DATE.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_sentDate.toInstant()));
+    builder.field(SUBJECT.getPreferredName(), _subject);
+    if (_to != null) {
+      builder.array(TO.getPreferredName(), _to);
+    }
+    return builder;
   }
 
   @Override

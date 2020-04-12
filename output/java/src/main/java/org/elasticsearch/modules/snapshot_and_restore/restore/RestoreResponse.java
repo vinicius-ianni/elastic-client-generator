@@ -25,7 +25,11 @@ public class RestoreResponse  implements XContentable<RestoreResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_snapshot != null) {
+      builder.field(SNAPSHOT.getPreferredName());
+      _snapshot.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

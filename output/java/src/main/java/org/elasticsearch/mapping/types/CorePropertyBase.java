@@ -45,7 +45,16 @@ public class CorePropertyBase  implements XContentable<CorePropertyBase> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_copyTo != null) {
+      builder.array(COPY_TO.getPreferredName(), _copyTo);
+    }
+    if (_fields != null) {
+      builder.field(FIELDS.getPreferredName());
+      _fields.toXContent(builder, params);
+    }
+    builder.field(SIMILARITY.getPreferredName(), _similarity);
+    builder.field(STORE.getPreferredName(), _store);
+    return builder;
   }
 
   @Override

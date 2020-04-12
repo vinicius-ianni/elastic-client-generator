@@ -87,7 +87,25 @@ public class TaskState  implements XContentable<TaskState> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTION.getPreferredName(), _action);
+    builder.field(CANCELLABLE.getPreferredName(), _cancellable);
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_headers != null) {
+      builder.field(HEADERS.getPreferredName());
+      _headers.toXContent(builder, params);
+    }
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(NODE.getPreferredName(), _node);
+    builder.field(PARENT_TASK_ID.getPreferredName());
+    _parentTaskId.toXContent(builder, params);
+    builder.field(RUNNING_TIME_IN_NANOS.getPreferredName(), _runningTimeInNanos);
+    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

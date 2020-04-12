@@ -73,7 +73,16 @@ public class ExplainAnalyzeToken  implements XContentable<ExplainAnalyzeToken> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BYTES.getPreferredName(), _bytes);
+    builder.field(END_OFFSET.getPreferredName(), _endOffset);
+    builder.field(KEYWORD.getPreferredName(), _keyword);
+    builder.field(POSITION.getPreferredName(), _position);
+    builder.field(POSITION_LENGTH.getPreferredName(), _positionLength);
+    builder.field(START_OFFSET.getPreferredName(), _startOffset);
+    builder.field(TERM_FREQUENCY.getPreferredName(), _termFrequency);
+    builder.field(TOKEN.getPreferredName(), _token);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

@@ -37,7 +37,16 @@ public class ClusterPutSettingsResponse  implements XContentable<ClusterPutSetti
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACKNOWLEDGED.getPreferredName(), _acknowledged);
+    if (_persistent != null) {
+      builder.field(PERSISTENT.getPreferredName());
+      _persistent.toXContent(builder, params);
+    }
+    if (_transient != null) {
+      builder.field(TRANSIENT.getPreferredName());
+      _transient.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

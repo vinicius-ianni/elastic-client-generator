@@ -44,7 +44,17 @@ public class InvalidateApiKeyResponse  implements XContentable<InvalidateApiKeyR
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ERROR_COUNT.getPreferredName(), _errorCount);
+    if (_errorDetails != null) {
+      builder.array(ERROR_DETAILS.getPreferredName(), _errorDetails);
+    }
+    if (_invalidatedApiKeys != null) {
+      builder.array(INVALIDATED_API_KEYS.getPreferredName(), _invalidatedApiKeys);
+    }
+    if (_previouslyInvalidatedApiKeys != null) {
+      builder.array(PREVIOUSLY_INVALIDATED_API_KEYS.getPreferredName(), _previouslyInvalidatedApiKeys);
+    }
+    return builder;
   }
 
   @Override

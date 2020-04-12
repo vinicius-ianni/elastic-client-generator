@@ -100,7 +100,29 @@ public class ReindexOnServerResponse  implements XContentable<ReindexOnServerRes
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IS_VALID.getPreferredName(), _isValid);
+    builder.field(BATCHES.getPreferredName(), _batches);
+    builder.field(CREATED.getPreferredName(), _created);
+    if (_failures != null) {
+      builder.array(FAILURES.getPreferredName(), _failures);
+    }
+    builder.field(NOOPS.getPreferredName(), _noops);
+    if (_retries != null) {
+      builder.field(RETRIES.getPreferredName());
+      _retries.toXContent(builder, params);
+    }
+    builder.field(SLICE_ID.getPreferredName(), _sliceId);
+    builder.field(TASK.getPreferredName());
+    _task.toXContent(builder, params);
+    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    if (_took != null) {
+      builder.field(TOOK.getPreferredName());
+      _took.toXContent(builder, params);
+    }
+    builder.field(TOTAL.getPreferredName(), _total);
+    builder.field(UPDATED.getPreferredName(), _updated);
+    builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    return builder;
   }
 
   @Override

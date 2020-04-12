@@ -62,7 +62,22 @@ public class TaskExecutingNode  implements XContentable<TaskExecutingNode> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_attributes != null) {
+      builder.field(ATTRIBUTES.getPreferredName());
+      _attributes.toXContent(builder, params);
+    }
+    builder.field(HOST.getPreferredName(), _host);
+    builder.field(IP.getPreferredName(), _ip);
+    builder.field(NAME.getPreferredName(), _name);
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    if (_tasks != null) {
+      builder.field(TASKS.getPreferredName());
+      _tasks.toXContent(builder, params);
+    }
+    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    return builder;
   }
 
   @Override

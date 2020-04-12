@@ -38,7 +38,15 @@ public class SnapshotRestore  implements XContentable<SnapshotRestore> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_indices != null) {
+      builder.array(INDICES.getPreferredName(), _indices);
+    }
+    builder.field(SNAPSHOT.getPreferredName(), _snapshot);
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName());
+      _shards.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

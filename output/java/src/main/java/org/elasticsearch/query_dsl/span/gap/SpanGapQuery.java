@@ -32,7 +32,10 @@ public class SpanGapQuery  implements XContentable<SpanGapQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(WIDTH.getPreferredName(), _width);
+    return builder;
   }
 
   @Override

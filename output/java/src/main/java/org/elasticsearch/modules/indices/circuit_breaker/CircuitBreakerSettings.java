@@ -49,7 +49,12 @@ public class CircuitBreakerSettings  implements XContentable<CircuitBreakerSetti
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELDDATA_LIMIT.getPreferredName(), _fielddataLimit);
+    builder.field(FIELDDATA_OVERHEAD.getPreferredName(), _fielddataOverhead);
+    builder.field(REQUEST_LIMIT.getPreferredName(), _requestLimit);
+    builder.field(REQUEST_OVERHEAD.getPreferredName(), _requestOverhead);
+    builder.field(TOTAL_LIMIT.getPreferredName(), _totalLimit);
+    return builder;
   }
 
   @Override

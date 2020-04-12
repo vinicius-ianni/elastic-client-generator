@@ -31,7 +31,9 @@ public class ClusterOperatingSystemName  implements XContentable<ClusterOperatin
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    builder.field(NAME.getPreferredName(), _name);
+    return builder;
   }
 
   @Override

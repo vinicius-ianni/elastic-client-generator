@@ -106,7 +106,52 @@ public class TypeMapping  implements XContentable<TypeMapping> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_allField != null) {
+      builder.field(ALL_FIELD.getPreferredName());
+      _allField.toXContent(builder, params);
+    }
+    builder.field(DATE_DETECTION.getPreferredName(), _dateDetection);
+    if (_dynamic != null) {
+      builder.field(DYNAMIC.getPreferredName());
+      _dynamic.map(builder::value, r-> r.toXContent(builder, params));
+    }
+    if (_dynamicDateFormats != null) {
+      builder.array(DYNAMIC_DATE_FORMATS.getPreferredName(), _dynamicDateFormats);
+    }
+    if (_dynamicTemplates != null) {
+      builder.field(DYNAMIC_TEMPLATES.getPreferredName());
+      _dynamicTemplates.toXContent(builder, params);
+    }
+    if (_fieldNames != null) {
+      builder.field(FIELD_NAMES.getPreferredName());
+      _fieldNames.toXContent(builder, params);
+    }
+    if (_indexField != null) {
+      builder.field(INDEX_FIELD.getPreferredName());
+      _indexField.toXContent(builder, params);
+    }
+    if (_meta != null) {
+      builder.field(META.getPreferredName());
+      _meta.toXContent(builder, params);
+    }
+    builder.field(NUMERIC_DETECTION.getPreferredName(), _numericDetection);
+    if (_properties != null) {
+      builder.field(PROPERTIES.getPreferredName());
+      _properties.toXContent(builder, params);
+    }
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName());
+      _routing.toXContent(builder, params);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName());
+      _size.toXContent(builder, params);
+    }
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName());
+      _source.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

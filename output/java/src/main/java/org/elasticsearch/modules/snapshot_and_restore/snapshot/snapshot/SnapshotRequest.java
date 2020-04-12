@@ -62,7 +62,21 @@ public class SnapshotRequest  implements XContentable<SnapshotRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
+    builder.field(INDICES.getPreferredName());
+    _indices.toXContent(builder, params);
+    builder.field(PARTIAL.getPreferredName(), _partial);
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    return builder;
   }
 
   @Override

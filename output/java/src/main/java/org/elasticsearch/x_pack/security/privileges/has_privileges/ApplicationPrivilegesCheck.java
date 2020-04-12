@@ -37,7 +37,14 @@ public class ApplicationPrivilegesCheck  implements XContentable<ApplicationPriv
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(APPLICATION.getPreferredName(), _application);
+    if (_privileges != null) {
+      builder.array(PRIVILEGES.getPreferredName(), _privileges);
+    }
+    if (_resources != null) {
+      builder.array(RESOURCES.getPreferredName(), _resources);
+    }
+    return builder;
   }
 
   @Override

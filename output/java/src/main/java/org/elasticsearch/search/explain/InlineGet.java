@@ -37,7 +37,13 @@ public class InlineGet<TDocument>  implements XContentable<InlineGet<TDocument>>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_fields != null) {
+      builder.field(FIELDS.getPreferredName());
+      _fields.toXContent(builder, params);
+    }
+    builder.field(FOUND.getPreferredName(), _found);
+    builder.field(SOURCE.getPreferredName(), _source);
+    return builder;
   }
 
   @Override

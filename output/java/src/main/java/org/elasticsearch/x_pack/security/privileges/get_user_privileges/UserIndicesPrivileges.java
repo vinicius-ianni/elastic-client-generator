@@ -43,7 +43,21 @@ public class UserIndicesPrivileges  implements XContentable<UserIndicesPrivilege
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_fieldSecurity != null) {
+      builder.field(FIELD_SECURITY.getPreferredName());
+      _fieldSecurity.toXContent(builder, params);
+    }
+    if (_names != null) {
+      builder.array(NAMES.getPreferredName(), _names);
+    }
+    if (_privileges != null) {
+      builder.array(PRIVILEGES.getPreferredName(), _privileges);
+    }
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

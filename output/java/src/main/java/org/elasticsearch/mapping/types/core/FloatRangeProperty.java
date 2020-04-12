@@ -20,7 +20,8 @@ public class FloatRangeProperty  implements XContentable<FloatRangeProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

@@ -67,7 +67,17 @@ public class PluginStats  implements XContentable<PluginStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CLASSNAME.getPreferredName(), _classname);
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    builder.field(ELASTICSEARCH_VERSION.getPreferredName(), _elasticsearchVersion);
+    if (_extendedPlugins != null) {
+      builder.array(EXTENDED_PLUGINS.getPreferredName(), _extendedPlugins);
+    }
+    builder.field(NAME.getPreferredName(), _name);
+    builder.field(HAS_NATIVE_CONTROLLER.getPreferredName(), _hasNativeController);
+    builder.field(JAVA_VERSION.getPreferredName(), _javaVersion);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

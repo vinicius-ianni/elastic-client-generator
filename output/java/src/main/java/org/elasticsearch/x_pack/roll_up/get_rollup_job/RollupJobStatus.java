@@ -37,7 +37,16 @@ public class RollupJobStatus  implements XContentable<RollupJobStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_currentPosition != null) {
+      builder.field(CURRENT_POSITION.getPreferredName());
+      _currentPosition.toXContent(builder, params);
+    }
+    if (_jobState != null) {
+      builder.field(JOB_STATE.getPreferredName());
+      _jobState.toXContent(builder, params);
+    }
+    builder.field(UPGRADED_DOC_ID.getPreferredName(), _upgradedDocId);
+    return builder;
   }
 
   @Override

@@ -31,7 +31,12 @@ public class ScriptTransform  implements XContentable<ScriptTransform> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(LANG.getPreferredName(), _lang);
+    if (_params != null) {
+      builder.field(PARAMS.getPreferredName());
+      _params.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

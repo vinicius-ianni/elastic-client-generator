@@ -31,7 +31,9 @@ public class UpdateModelSnapshotRequest  implements XContentable<UpdateModelSnap
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    builder.field(RETAIN.getPreferredName(), _retain);
+    return builder;
   }
 
   @Override

@@ -32,7 +32,12 @@ public class SpanFirstQuery  implements XContentable<SpanFirstQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(END.getPreferredName(), _end);
+    if (_match != null) {
+      builder.field(MATCH.getPreferredName());
+      _match.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

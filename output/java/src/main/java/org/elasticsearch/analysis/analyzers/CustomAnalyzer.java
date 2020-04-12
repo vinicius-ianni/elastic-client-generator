@@ -43,7 +43,15 @@ public class CustomAnalyzer  implements XContentable<CustomAnalyzer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_charFilter != null) {
+      builder.array(CHAR_FILTER.getPreferredName(), _charFilter);
+    }
+    if (_filter != null) {
+      builder.array(FILTER.getPreferredName(), _filter);
+    }
+    builder.field(POSITION_OFFSET_GAP.getPreferredName(), _positionOffsetGap);
+    builder.field(TOKENIZER.getPreferredName(), _tokenizer);
+    return builder;
   }
 
   @Override

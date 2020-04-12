@@ -53,7 +53,26 @@ public class SearchInputRequest  implements XContentable<SearchInputRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_body != null) {
+      builder.field(BODY.getPreferredName());
+      _body.toXContent(builder, params);
+    }
+    if (_indices != null) {
+      builder.array(INDICES.getPreferredName(), _indices);
+    }
+    if (_indicesOptions != null) {
+      builder.field(INDICES_OPTIONS.getPreferredName());
+      _indicesOptions.toXContent(builder, params);
+    }
+    if (_searchType != null) {
+      builder.field(SEARCH_TYPE.getPreferredName());
+      _searchType.toXContent(builder, params);
+    }
+    if (_template != null) {
+      builder.field(TEMPLATE.getPreferredName());
+      _template.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -37,7 +37,16 @@ public class BoundingBox  implements XContentable<BoundingBox> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_bottomRight != null) {
+      builder.field(BOTTOM_RIGHT.getPreferredName());
+      _bottomRight.toXContent(builder, params);
+    }
+    if (_topLeft != null) {
+      builder.field(TOP_LEFT.getPreferredName());
+      _topLeft.toXContent(builder, params);
+    }
+    builder.field(WKT.getPreferredName(), _wkt);
+    return builder;
   }
 
   @Override

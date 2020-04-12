@@ -52,7 +52,21 @@ public class SuggestContextQuery  implements XContentable<SuggestContextQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BOOST.getPreferredName(), _boost);
+    if (_context != null) {
+      builder.field(CONTEXT.getPreferredName());
+      _context.toXContent(builder, params);
+    }
+    if (_neighbours != null) {
+      builder.field(NEIGHBOURS.getPreferredName());
+      _neighbours.map(builder::value /* TODO List<Distance> */, builder::value /* TODO List<Integer> */);
+    }
+    if (_precision != null) {
+      builder.field(PRECISION.getPreferredName());
+      _precision.map(r-> r.toXContent(builder, params), builder::value);
+    }
+    builder.field(PREFIX.getPreferredName(), _prefix);
+    return builder;
   }
 
   @Override

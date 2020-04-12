@@ -73,7 +73,16 @@ public class CatTasksRecord  implements XContentable<CatTasksRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTION.getPreferredName(), _action);
+    builder.field(IP.getPreferredName(), _ip);
+    builder.field(NODE.getPreferredName(), _node);
+    builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
+    builder.field(RUNNING_TIME.getPreferredName(), _runningTime);
+    builder.field(START_TIME.getPreferredName(), _startTime);
+    builder.field(TASK_ID.getPreferredName(), _taskId);
+    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

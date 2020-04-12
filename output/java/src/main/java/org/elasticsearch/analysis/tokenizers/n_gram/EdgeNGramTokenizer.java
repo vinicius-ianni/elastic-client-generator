@@ -38,7 +38,12 @@ public class EdgeNGramTokenizer  implements XContentable<EdgeNGramTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MAX_GRAM.getPreferredName(), _maxGram);
+    builder.field(MIN_GRAM.getPreferredName(), _minGram);
+    if (_tokenChars != null) {
+      builder.array(TOKEN_CHARS.getPreferredName(), _tokenChars);
+    }
+    return builder;
   }
 
   @Override

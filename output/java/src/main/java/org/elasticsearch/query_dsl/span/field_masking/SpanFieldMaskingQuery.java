@@ -32,7 +32,13 @@ public class SpanFieldMaskingQuery  implements XContentable<SpanFieldMaskingQuer
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

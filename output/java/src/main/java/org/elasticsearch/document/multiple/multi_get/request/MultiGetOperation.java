@@ -72,7 +72,25 @@ public class MultiGetOperation  implements XContentable<MultiGetOperation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CAN_BE_FLATTENED.getPreferredName(), _canBeFlattened);
+    builder.field(ID.getPreferredName());
+    _id.toXContent(builder, params);
+    builder.field(INDEX.getPreferredName());
+    _index.toXContent(builder, params);
+    builder.field(ROUTING.getPreferredName(), _routing);
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName());
+      _source.map(builder::value, r-> r.toXContent(builder, params));
+    }
+    if (_storedFields != null) {
+      builder.array(STORED_FIELDS.getPreferredName(), _storedFields);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    if (_versionType != null) {
+      builder.field(VERSION_TYPE.getPreferredName());
+      _versionType.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

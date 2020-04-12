@@ -43,7 +43,20 @@ public class XPackRole  implements XContentable<XPackRole> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_cluster != null) {
+      builder.array(CLUSTER.getPreferredName(), _cluster);
+    }
+    if (_indices != null) {
+      builder.array(INDICES.getPreferredName(), _indices);
+    }
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_runAs != null) {
+      builder.array(RUN_AS.getPreferredName(), _runAs);
+    }
+    return builder;
   }
 
   @Override

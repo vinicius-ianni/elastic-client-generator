@@ -115,7 +115,71 @@ public class IndexStats  implements XContentable<IndexStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_completion != null) {
+      builder.field(COMPLETION.getPreferredName());
+      _completion.toXContent(builder, params);
+    }
+    if (_docs != null) {
+      builder.field(DOCS.getPreferredName());
+      _docs.toXContent(builder, params);
+    }
+    if (_fielddata != null) {
+      builder.field(FIELDDATA.getPreferredName());
+      _fielddata.toXContent(builder, params);
+    }
+    if (_flush != null) {
+      builder.field(FLUSH.getPreferredName());
+      _flush.toXContent(builder, params);
+    }
+    if (_get != null) {
+      builder.field(GET.getPreferredName());
+      _get.toXContent(builder, params);
+    }
+    if (_indexing != null) {
+      builder.field(INDEXING.getPreferredName());
+      _indexing.toXContent(builder, params);
+    }
+    if (_merges != null) {
+      builder.field(MERGES.getPreferredName());
+      _merges.toXContent(builder, params);
+    }
+    if (_queryCache != null) {
+      builder.field(QUERY_CACHE.getPreferredName());
+      _queryCache.toXContent(builder, params);
+    }
+    if (_recovery != null) {
+      builder.field(RECOVERY.getPreferredName());
+      _recovery.toXContent(builder, params);
+    }
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    if (_requestCache != null) {
+      builder.field(REQUEST_CACHE.getPreferredName());
+      _requestCache.toXContent(builder, params);
+    }
+    if (_search != null) {
+      builder.field(SEARCH.getPreferredName());
+      _search.toXContent(builder, params);
+    }
+    if (_segments != null) {
+      builder.field(SEGMENTS.getPreferredName());
+      _segments.toXContent(builder, params);
+    }
+    if (_store != null) {
+      builder.field(STORE.getPreferredName());
+      _store.toXContent(builder, params);
+    }
+    if (_translog != null) {
+      builder.field(TRANSLOG.getPreferredName());
+      _translog.toXContent(builder, params);
+    }
+    if (_warmer != null) {
+      builder.field(WARMER.getPreferredName());
+      _warmer.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

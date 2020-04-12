@@ -367,7 +367,65 @@ public class CatShardsRecord  implements XContentable<CatShardsRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COMPLETION_SIZE.getPreferredName(), _completionSize);
+    builder.field(DOCS.getPreferredName(), _docs);
+    builder.field(FIELDDATA_EVICTIONS.getPreferredName(), _fielddataEvictions);
+    builder.field(FIELDDATA_MEMORY_SIZE.getPreferredName(), _fielddataMemorySize);
+    builder.field(FILTER_CACHE_MEMORY_SIZE.getPreferredName(), _filterCacheMemorySize);
+    builder.field(FLUSH_TOTAL.getPreferredName(), _flushTotal);
+    builder.field(FLUSH_TOTAL_TIME.getPreferredName(), _flushTotalTime);
+    builder.field(GET_CURRENT.getPreferredName(), _getCurrent);
+    builder.field(GET_EXISTS_TIME.getPreferredName(), _getExistsTime);
+    builder.field(GET_EXISTS_TOTAL.getPreferredName(), _getExistsTotal);
+    builder.field(GET_MISSING_TIME.getPreferredName(), _getMissingTime);
+    builder.field(GET_MISSING_TOTAL.getPreferredName(), _getMissingTotal);
+    builder.field(GET_TIME.getPreferredName(), _getTime);
+    builder.field(GET_TOTAL.getPreferredName(), _getTotal);
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(ID_CACHE_MEMORY_SIZE.getPreferredName(), _idCacheMemorySize);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(INDEXING_DELETE_CURRENT.getPreferredName(), _indexingDeleteCurrent);
+    builder.field(INDEXING_DELETE_TIME.getPreferredName(), _indexingDeleteTime);
+    builder.field(INDEXING_DELETE_TOTAL.getPreferredName(), _indexingDeleteTotal);
+    builder.field(INDEXING_INDEX_CURRENT.getPreferredName(), _indexingIndexCurrent);
+    builder.field(INDEXING_INDEX_TIME.getPreferredName(), _indexingIndexTime);
+    builder.field(INDEXING_INDEX_TOTAL.getPreferredName(), _indexingIndexTotal);
+    builder.field(IP.getPreferredName(), _ip);
+    builder.field(MERGES_CURRENT.getPreferredName(), _mergesCurrent);
+    builder.field(MERGES_CURRENT_DOCS.getPreferredName(), _mergesCurrentDocs);
+    builder.field(MERGES_CURRENT_SIZE.getPreferredName(), _mergesCurrentSize);
+    builder.field(MERGES_TOTAL_DOCS.getPreferredName(), _mergesTotalDocs);
+    builder.field(MERGES_TOTAL_SIZE.getPreferredName(), _mergesTotalSize);
+    builder.field(MERGES_TOTAL_TIME.getPreferredName(), _mergesTotalTime);
+    builder.field(NODE.getPreferredName(), _node);
+    builder.field(PERCOLATE_CURRENT.getPreferredName(), _percolateCurrent);
+    builder.field(PERCOLATE_MEMORY_SIZE.getPreferredName(), _percolateMemorySize);
+    builder.field(PERCOLATE_QUERIES.getPreferredName(), _percolateQueries);
+    builder.field(PERCOLATE_TIME.getPreferredName(), _percolateTime);
+    builder.field(PERCOLATE_TOTAL.getPreferredName(), _percolateTotal);
+    builder.field(PRIREP.getPreferredName(), _prirep);
+    builder.field(REFRESH_TIME.getPreferredName(), _refreshTime);
+    builder.field(REFRESH_TOTAL.getPreferredName(), _refreshTotal);
+    builder.field(SEARCH_FETCH_CURRENT.getPreferredName(), _searchFetchCurrent);
+    builder.field(SEARCH_FETCH_TIME.getPreferredName(), _searchFetchTime);
+    builder.field(SEARCH_FETCH_TOTAL.getPreferredName(), _searchFetchTotal);
+    builder.field(SEARCH_OPEN_CONTEXTS.getPreferredName(), _searchOpenContexts);
+    builder.field(SEARCH_QUERY_CURRENT.getPreferredName(), _searchQueryCurrent);
+    builder.field(SEARCH_QUERY_TIME.getPreferredName(), _searchQueryTime);
+    builder.field(SEARCH_QUERY_TOTAL.getPreferredName(), _searchQueryTotal);
+    builder.field(SEGMENTS_COUNT.getPreferredName(), _segmentsCount);
+    builder.field(SEGMENTS_FIXED_BITSET_MEMORY.getPreferredName(), _segmentsFixedBitsetMemory);
+    builder.field(SEGMENTS_INDEX_WRITER_MAX_MEMORY.getPreferredName(), _segmentsIndexWriterMaxMemory);
+    builder.field(SEGMENTS_INDEX_WRITER_MEMORY.getPreferredName(), _segmentsIndexWriterMemory);
+    builder.field(SEGMENTS_MEMORY.getPreferredName(), _segmentsMemory);
+    builder.field(SEGMENTS_VERSION_MAP_MEMORY.getPreferredName(), _segmentsVersionMapMemory);
+    builder.field(SHARD.getPreferredName(), _shard);
+    builder.field(STATE.getPreferredName(), _state);
+    builder.field(STORE.getPreferredName(), _store);
+    builder.field(WARMER_CURRENT.getPreferredName(), _warmerCurrent);
+    builder.field(WARMER_TOTAL.getPreferredName(), _warmerTotal);
+    builder.field(WARMER_TOTAL_TIME.getPreferredName(), _warmerTotalTime);
+    return builder;
   }
 
   @Override

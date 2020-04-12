@@ -43,7 +43,11 @@ public class ValidationExplanation  implements XContentable<ValidationExplanatio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ERROR.getPreferredName(), _error);
+    builder.field(EXPLANATION.getPreferredName(), _explanation);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(VALID.getPreferredName(), _valid);
+    return builder;
   }
 
   @Override

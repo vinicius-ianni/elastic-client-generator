@@ -43,7 +43,18 @@ public class AnalyzeDetail  implements XContentable<AnalyzeDetail> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_charfilters != null) {
+      builder.array(CHARFILTERS.getPreferredName(), _charfilters);
+    }
+    builder.field(CUSTOM_ANALYZER.getPreferredName(), _customAnalyzer);
+    if (_tokenfilters != null) {
+      builder.array(TOKENFILTERS.getPreferredName(), _tokenfilters);
+    }
+    if (_tokenizer != null) {
+      builder.field(TOKENIZER.getPreferredName());
+      _tokenizer.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

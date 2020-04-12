@@ -43,7 +43,14 @@ public class DeprecationInfo  implements XContentable<DeprecationInfo> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DETAILS.getPreferredName(), _details);
+    if (_level != null) {
+      builder.field(LEVEL.getPreferredName());
+      _level.toXContent(builder, params);
+    }
+    builder.field(MESSAGE.getPreferredName(), _message);
+    builder.field(URL.getPreferredName(), _url);
+    return builder;
   }
 
   @Override

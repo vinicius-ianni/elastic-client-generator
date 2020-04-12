@@ -43,7 +43,11 @@ public class GraphConnection  implements XContentable<GraphConnection> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DOC_COUNT.getPreferredName(), _docCount);
+    builder.field(SOURCE.getPreferredName(), _source);
+    builder.field(TARGET.getPreferredName(), _target);
+    builder.field(WEIGHT.getPreferredName(), _weight);
+    return builder;
   }
 
   @Override

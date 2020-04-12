@@ -65,7 +65,20 @@ public class BulkOperation  implements XContentable<BulkOperation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ID.getPreferredName());
+    _id.toXContent(builder, params);
+    builder.field(INDEX.getPreferredName());
+    _index.toXContent(builder, params);
+    builder.field(OPERATION.getPreferredName(), _operation);
+    builder.field(RETRY_ON_CONFLICT.getPreferredName(), _retryOnConflict);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    builder.field(VERSION.getPreferredName(), _version);
+    if (_versionType != null) {
+      builder.field(VERSION_TYPE.getPreferredName());
+      _versionType.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

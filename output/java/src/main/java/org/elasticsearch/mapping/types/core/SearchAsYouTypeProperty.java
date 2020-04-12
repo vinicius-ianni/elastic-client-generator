@@ -69,7 +69,21 @@ public class SearchAsYouTypeProperty  implements XContentable<SearchAsYouTypePro
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(INDEX.getPreferredName(), _index);
+    if (_indexOptions != null) {
+      builder.field(INDEX_OPTIONS.getPreferredName());
+      _indexOptions.toXContent(builder, params);
+    }
+    builder.field(MAX_SHINGLE_SIZE.getPreferredName(), _maxShingleSize);
+    builder.field(NORMS.getPreferredName(), _norms);
+    builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    builder.field(SEARCH_QUOTE_ANALYZER.getPreferredName(), _searchQuoteAnalyzer);
+    if (_termVector != null) {
+      builder.field(TERM_VECTOR.getPreferredName());
+      _termVector.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -37,7 +37,10 @@ public class ShardRefresh  implements XContentable<ShardRefresh> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(LISTENERS.getPreferredName(), _listeners);
+    builder.field(TOTAL.getPreferredName(), _total);
+    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    return builder;
   }
 
   @Override

@@ -31,7 +31,9 @@ public class DocStats  implements XContentable<DocStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    builder.field(DELETED.getPreferredName(), _deleted);
+    return builder;
   }
 
   @Override

@@ -31,7 +31,15 @@ public class AlertingInput  implements XContentable<AlertingInput> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_input != null) {
+      builder.field(INPUT.getPreferredName());
+      _input.toXContent(builder, params);
+    }
+    if (_trigger != null) {
+      builder.field(TRIGGER.getPreferredName());
+      _trigger.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

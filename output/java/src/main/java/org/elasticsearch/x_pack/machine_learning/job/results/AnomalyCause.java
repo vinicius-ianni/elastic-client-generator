@@ -104,7 +104,27 @@ public class AnomalyCause  implements XContentable<AnomalyCause> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actual != null) {
+      builder.array(ACTUAL.getPreferredName(), _actual);
+    }
+    builder.field(BY_FIELD_NAME.getPreferredName(), _byFieldName);
+    builder.field(BY_FIELD_VALUE.getPreferredName(), _byFieldValue);
+    builder.field(CORRELATED_BY_FIELD_VALUE.getPreferredName(), _correlatedByFieldValue);
+    builder.field(FIELD_NAME.getPreferredName(), _fieldName);
+    builder.field(FUNCTION.getPreferredName(), _function);
+    builder.field(FUNCTION_DESCRIPTION.getPreferredName(), _functionDescription);
+    if (_influencers != null) {
+      builder.array(INFLUENCERS.getPreferredName(), _influencers);
+    }
+    builder.field(OVER_FIELD_NAME.getPreferredName(), _overFieldName);
+    builder.field(OVER_FIELD_VALUE.getPreferredName(), _overFieldValue);
+    builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
+    builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
+    builder.field(PROBABILITY.getPreferredName(), _probability);
+    if (_typical != null) {
+      builder.array(TYPICAL.getPreferredName(), _typical);
+    }
+    return builder;
   }
 
   @Override

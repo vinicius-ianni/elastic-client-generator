@@ -37,7 +37,10 @@ public class RangePropertyBase  implements XContentable<RangePropertyBase> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BOOST.getPreferredName(), _boost);
+    builder.field(COERCE.getPreferredName(), _coerce);
+    builder.field(INDEX.getPreferredName(), _index);
+    return builder;
   }
 
   @Override

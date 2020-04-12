@@ -49,7 +49,12 @@ public class PutWatchResponse  implements XContentable<PutWatchResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CREATED.getPreferredName(), _created);
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(VERSION.getPreferredName(), _version);
+    builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    return builder;
   }
 
   @Override

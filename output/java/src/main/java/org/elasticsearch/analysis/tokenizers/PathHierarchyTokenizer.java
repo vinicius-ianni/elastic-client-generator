@@ -49,7 +49,12 @@ public class PathHierarchyTokenizer  implements XContentable<PathHierarchyTokeni
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUFFER_SIZE.getPreferredName(), _bufferSize);
+    builder.field(DELIMITER.getPreferredName(), _delimiter);
+    builder.field(REPLACEMENT.getPreferredName(), _replacement);
+    builder.field(REVERSE.getPreferredName(), _reverse);
+    builder.field(SKIP.getPreferredName(), _skip);
+    return builder;
   }
 
   @Override

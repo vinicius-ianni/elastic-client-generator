@@ -20,7 +20,8 @@ public class DeleteCalendarRequest  implements XContentable<DeleteCalendarReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

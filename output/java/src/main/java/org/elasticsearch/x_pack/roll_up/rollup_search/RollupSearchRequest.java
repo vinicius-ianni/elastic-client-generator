@@ -51,7 +51,18 @@ public class RollupSearchRequest  implements XContentable<RollupSearchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
+    builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    if (_aggs != null) {
+      builder.field(AGGS.getPreferredName());
+      _aggs.toXContent(builder, params);
+    }
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

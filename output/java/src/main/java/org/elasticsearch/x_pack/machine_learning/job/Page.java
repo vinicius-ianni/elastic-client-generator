@@ -31,7 +31,9 @@ public class Page  implements XContentable<Page> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FROM.getPreferredName(), _from);
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

@@ -31,7 +31,12 @@ public class GetLicenseResponse  implements XContentable<GetLicenseResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IS_VALID.getPreferredName(), _isValid);
+    if (_license != null) {
+      builder.field(LICENSE.getPreferredName());
+      _license.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

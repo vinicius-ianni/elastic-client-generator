@@ -31,7 +31,15 @@ public class ClusterNetworkTypes  implements XContentable<ClusterNetworkTypes> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_httpTypes != null) {
+      builder.field(HTTP_TYPES.getPreferredName());
+      _httpTypes.toXContent(builder, params);
+    }
+    if (_transportTypes != null) {
+      builder.field(TRANSPORT_TYPES.getPreferredName());
+      _transportTypes.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -61,7 +61,14 @@ public class TransportStats  implements XContentable<TransportStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(RX_COUNT.getPreferredName(), _rxCount);
+    builder.field(RX_SIZE.getPreferredName(), _rxSize);
+    builder.field(RX_SIZE_IN_BYTES.getPreferredName(), _rxSizeInBytes);
+    builder.field(SERVER_OPEN.getPreferredName(), _serverOpen);
+    builder.field(TX_COUNT.getPreferredName(), _txCount);
+    builder.field(TX_SIZE.getPreferredName(), _txSize);
+    builder.field(TX_SIZE_IN_BYTES.getPreferredName(), _txSizeInBytes);
+    return builder;
   }
 
   @Override

@@ -25,7 +25,8 @@ public class RevertModelSnapshotRequest  implements XContentable<RevertModelSnap
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DELETE_INTERVENING_RESULTS.getPreferredName(), _deleteInterveningResults);
+    return builder;
   }
 
   @Override

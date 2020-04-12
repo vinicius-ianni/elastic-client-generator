@@ -25,7 +25,11 @@ public class DeleteRoleRequest  implements XContentable<DeleteRoleRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

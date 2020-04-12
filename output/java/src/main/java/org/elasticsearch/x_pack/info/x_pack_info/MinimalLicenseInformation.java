@@ -50,7 +50,21 @@ public class MinimalLicenseInformation  implements XContentable<MinimalLicenseIn
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(EXPIRY_DATE_IN_MILLIS.getPreferredName(), _expiryDateInMillis);
+    if (_mode != null) {
+      builder.field(MODE.getPreferredName());
+      _mode.toXContent(builder, params);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    builder.field(UID.getPreferredName(), _uid);
+    return builder;
   }
 
   @Override

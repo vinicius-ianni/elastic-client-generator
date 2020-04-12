@@ -85,7 +85,30 @@ public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenF
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_alternate != null) {
+      builder.field(ALTERNATE.getPreferredName());
+      _alternate.toXContent(builder, params);
+    }
+    if (_caseFirst != null) {
+      builder.field(CASE_FIRST.getPreferredName());
+      _caseFirst.toXContent(builder, params);
+    }
+    builder.field(CASE_LEVEL.getPreferredName(), _caseLevel);
+    builder.field(COUNTRY.getPreferredName(), _country);
+    if (_decomposition != null) {
+      builder.field(DECOMPOSITION.getPreferredName());
+      _decomposition.toXContent(builder, params);
+    }
+    builder.field(HIRAGANA_QUATERNARY_MODE.getPreferredName(), _hiraganaQuaternaryMode);
+    builder.field(LANGUAGE.getPreferredName(), _language);
+    builder.field(NUMERIC.getPreferredName(), _numeric);
+    if (_strength != null) {
+      builder.field(STRENGTH.getPreferredName());
+      _strength.toXContent(builder, params);
+    }
+    builder.field(VARIABLE_TOP.getPreferredName(), _variableTop);
+    builder.field(VARIANT.getPreferredName(), _variant);
+    return builder;
   }
 
   @Override

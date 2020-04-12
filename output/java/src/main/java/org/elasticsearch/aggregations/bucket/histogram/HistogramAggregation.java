@@ -70,7 +70,25 @@ public class HistogramAggregation  implements XContentable<HistogramAggregation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_extendedBounds != null) {
+      builder.field(EXTENDED_BOUNDS.getPreferredName());
+      _extendedBounds.toXContent(builder, params);
+    }
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(INTERVAL.getPreferredName(), _interval);
+    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    builder.field(MISSING.getPreferredName(), _missing);
+    builder.field(OFFSET.getPreferredName(), _offset);
+    if (_order != null) {
+      builder.field(ORDER.getPreferredName());
+      _order.toXContent(builder, params);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

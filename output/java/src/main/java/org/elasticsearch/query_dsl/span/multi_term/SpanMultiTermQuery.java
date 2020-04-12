@@ -25,7 +25,11 @@ public class SpanMultiTermQuery  implements XContentable<SpanMultiTermQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_match != null) {
+      builder.field(MATCH.getPreferredName());
+      _match.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

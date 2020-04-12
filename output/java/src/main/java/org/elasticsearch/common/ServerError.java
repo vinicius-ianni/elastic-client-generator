@@ -32,7 +32,12 @@ public class ServerError  implements XContentable<ServerError> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_error != null) {
+      builder.field(ERROR.getPreferredName());
+      _error.toXContent(builder, params);
+    }
+    builder.field(STATUS.getPreferredName(), _status);
+    return builder;
   }
 
   @Override

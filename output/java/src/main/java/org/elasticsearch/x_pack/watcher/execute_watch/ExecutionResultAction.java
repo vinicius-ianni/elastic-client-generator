@@ -86,7 +86,41 @@ public class ExecutionResultAction  implements XContentable<ExecutionResultActio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_email != null) {
+      builder.field(EMAIL.getPreferredName());
+      _email.toXContent(builder, params);
+    }
+    builder.field(ID.getPreferredName(), _id);
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName());
+      _index.toXContent(builder, params);
+    }
+    if (_logging != null) {
+      builder.field(LOGGING.getPreferredName());
+      _logging.toXContent(builder, params);
+    }
+    if (_pagerduty != null) {
+      builder.field(PAGERDUTY.getPreferredName());
+      _pagerduty.toXContent(builder, params);
+    }
+    builder.field(REASON.getPreferredName(), _reason);
+    if (_slack != null) {
+      builder.field(SLACK.getPreferredName());
+      _slack.toXContent(builder, params);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    if (_webhook != null) {
+      builder.field(WEBHOOK.getPreferredName());
+      _webhook.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

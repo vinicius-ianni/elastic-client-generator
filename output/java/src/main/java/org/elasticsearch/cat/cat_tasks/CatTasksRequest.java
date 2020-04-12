@@ -73,7 +73,24 @@ public class CatTasksRequest  implements XContentable<CatTasksRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.array(ACTIONS.getPreferredName(), _actions);
+    }
+    builder.field(DETAILED.getPreferredName(), _detailed);
+    builder.field(FORMAT.getPreferredName(), _format);
+    if (_headers != null) {
+      builder.array(HEADERS.getPreferredName(), _headers);
+    }
+    builder.field(HELP.getPreferredName(), _help);
+    if (_nodeId != null) {
+      builder.array(NODE_ID.getPreferredName(), _nodeId);
+    }
+    builder.field(PARENT_TASK.getPreferredName(), _parentTask);
+    if (_sortByColumns != null) {
+      builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
+    }
+    builder.field(VERBOSE.getPreferredName(), _verbose);
+    return builder;
   }
 
   @Override

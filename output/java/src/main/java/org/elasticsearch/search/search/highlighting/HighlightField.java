@@ -148,7 +148,53 @@ public class HighlightField  implements XContentable<HighlightField> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BOUNDARY_CHARS.getPreferredName(), _boundaryChars);
+    builder.field(BOUNDARY_MAX_SCAN.getPreferredName(), _boundaryMaxScan);
+    if (_boundaryScanner != null) {
+      builder.field(BOUNDARY_SCANNER.getPreferredName());
+      _boundaryScanner.toXContent(builder, params);
+    }
+    builder.field(BOUNDARY_SCANNER_LOCALE.getPreferredName(), _boundaryScannerLocale);
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(FORCE_SOURCE.getPreferredName(), _forceSource);
+    if (_fragmenter != null) {
+      builder.field(FRAGMENTER.getPreferredName());
+      _fragmenter.toXContent(builder, params);
+    }
+    builder.field(FRAGMENT_OFFSET.getPreferredName(), _fragmentOffset);
+    builder.field(FRAGMENT_SIZE.getPreferredName(), _fragmentSize);
+    if (_highlightQuery != null) {
+      builder.field(HIGHLIGHT_QUERY.getPreferredName());
+      _highlightQuery.toXContent(builder, params);
+    }
+    if (_matchedFields != null) {
+      builder.array(MATCHED_FIELDS.getPreferredName(), _matchedFields);
+    }
+    builder.field(MAX_FRAGMENT_LENGTH.getPreferredName(), _maxFragmentLength);
+    builder.field(NO_MATCH_SIZE.getPreferredName(), _noMatchSize);
+    builder.field(NUMBER_OF_FRAGMENTS.getPreferredName(), _numberOfFragments);
+    if (_order != null) {
+      builder.field(ORDER.getPreferredName());
+      _order.toXContent(builder, params);
+    }
+    builder.field(PHRASE_LIMIT.getPreferredName(), _phraseLimit);
+    if (_postTags != null) {
+      builder.array(POST_TAGS.getPreferredName(), _postTags);
+    }
+    if (_preTags != null) {
+      builder.array(PRE_TAGS.getPreferredName(), _preTags);
+    }
+    builder.field(REQUIRE_FIELD_MATCH.getPreferredName(), _requireFieldMatch);
+    if (_tagsSchema != null) {
+      builder.field(TAGS_SCHEMA.getPreferredName());
+      _tagsSchema.toXContent(builder, params);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.map(r-> r.toXContent(builder, params), builder::value);
+    }
+    return builder;
   }
 
   @Override

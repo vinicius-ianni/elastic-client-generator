@@ -37,7 +37,14 @@ public class ShardProfile  implements XContentable<ShardProfile> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_aggregations != null) {
+      builder.array(AGGREGATIONS.getPreferredName(), _aggregations);
+    }
+    builder.field(ID.getPreferredName(), _id);
+    if (_searches != null) {
+      builder.array(SEARCHES.getPreferredName(), _searches);
+    }
+    return builder;
   }
 
   @Override

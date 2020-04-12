@@ -25,7 +25,8 @@ public class UnfreezeIndexResponse  implements XContentable<UnfreezeIndexRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    return builder;
   }
 
   @Override

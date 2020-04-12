@@ -50,7 +50,21 @@ public class ExecutionResult  implements XContentable<ExecutionResult> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.array(ACTIONS.getPreferredName(), _actions);
+    }
+    if (_condition != null) {
+      builder.field(CONDITION.getPreferredName());
+      _condition.toXContent(builder, params);
+    }
+    builder.field(EXECUTION_DURATION.getPreferredName(), _executionDuration);
+    builder.field(EXECUTION_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_executionTime.toInstant()));
+    if (_input != null) {
+      builder.field(INPUT.getPreferredName());
+      _input.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

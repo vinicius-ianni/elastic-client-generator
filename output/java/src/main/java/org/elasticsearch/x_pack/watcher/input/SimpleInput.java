@@ -25,7 +25,11 @@ public class SimpleInput  implements XContentable<SimpleInput> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_payload != null) {
+      builder.field(PAYLOAD.getPreferredName());
+      _payload.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

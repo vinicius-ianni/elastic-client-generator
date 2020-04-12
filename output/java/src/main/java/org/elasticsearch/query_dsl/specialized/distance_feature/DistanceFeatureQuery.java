@@ -34,7 +34,15 @@ public class DistanceFeatureQuery  implements XContentable<DistanceFeatureQuery>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_origin != null) {
+      builder.field(ORIGIN.getPreferredName());
+      _origin.map(r-> r.toXContent(builder, params), r-> r.toXContent(builder, params));
+    }
+    if (_pivot != null) {
+      builder.field(PIVOT.getPreferredName());
+      _pivot.map(r-> r.toXContent(builder, params), r-> r.toXContent(builder, params));
+    }
+    return builder;
   }
 
   @Override

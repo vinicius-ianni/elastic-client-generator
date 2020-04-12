@@ -52,7 +52,22 @@ public class NestedQuery  implements XContentable<NestedQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    if (_innerHits != null) {
+      builder.field(INNER_HITS.getPreferredName());
+      _innerHits.toXContent(builder, params);
+    }
+    builder.field(PATH.getPreferredName());
+    _path.toXContent(builder, params);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    if (_scoreMode != null) {
+      builder.field(SCORE_MODE.getPreferredName());
+      _scoreMode.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -25,7 +25,10 @@ public class IntervalsAnyOf  implements XContentable<IntervalsAnyOf> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_intervals != null) {
+      builder.array(INTERVALS.getPreferredName(), _intervals);
+    }
+    return builder;
   }
 
   @Override

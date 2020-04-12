@@ -25,7 +25,9 @@ public class FieldNameQuery  implements XContentable<FieldNameQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    return builder;
   }
 
   @Override

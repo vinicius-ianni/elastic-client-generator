@@ -133,7 +133,45 @@ public class MultiMatchQuery  implements XContentable<MultiMatchQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
+    builder.field(CUTOFF_FREQUENCY.getPreferredName(), _cutoffFrequency);
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    if (_fuzziness != null) {
+      builder.field(FUZZINESS.getPreferredName());
+      _fuzziness.toXContent(builder, params);
+    }
+    if (_fuzzyRewrite != null) {
+      builder.field(FUZZY_REWRITE.getPreferredName());
+      _fuzzyRewrite.toXContent(builder, params);
+    }
+    builder.field(FUZZY_TRANSPOSITIONS.getPreferredName(), _fuzzyTranspositions);
+    builder.field(LENIENT.getPreferredName(), _lenient);
+    builder.field(MAX_EXPANSIONS.getPreferredName(), _maxExpansions);
+    if (_minimumShouldMatch != null) {
+      builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
+      _minimumShouldMatch.toXContent(builder, params);
+    }
+    if (_operator != null) {
+      builder.field(OPERATOR.getPreferredName());
+      _operator.toXContent(builder, params);
+    }
+    builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
+    builder.field(QUERY.getPreferredName(), _query);
+    builder.field(SLOP.getPreferredName(), _slop);
+    builder.field(TIE_BREAKER.getPreferredName(), _tieBreaker);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    builder.field(USE_DIS_MAX.getPreferredName(), _useDisMax);
+    if (_zeroTermsQuery != null) {
+      builder.field(ZERO_TERMS_QUERY.getPreferredName());
+      _zeroTermsQuery.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

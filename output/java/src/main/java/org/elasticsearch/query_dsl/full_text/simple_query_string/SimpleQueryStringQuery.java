@@ -101,7 +101,31 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
+    if (_defaultOperator != null) {
+      builder.field(DEFAULT_OPERATOR.getPreferredName());
+      _defaultOperator.toXContent(builder, params);
+    }
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    if (_flags != null) {
+      builder.field(FLAGS.getPreferredName());
+      _flags.toXContent(builder, params);
+    }
+    builder.field(FUZZY_MAX_EXPANSIONS.getPreferredName(), _fuzzyMaxExpansions);
+    builder.field(FUZZY_PREFIX_LENGTH.getPreferredName(), _fuzzyPrefixLength);
+    builder.field(FUZZY_TRANSPOSITIONS.getPreferredName(), _fuzzyTranspositions);
+    builder.field(LENIENT.getPreferredName(), _lenient);
+    if (_minimumShouldMatch != null) {
+      builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
+      _minimumShouldMatch.toXContent(builder, params);
+    }
+    builder.field(QUERY.getPreferredName(), _query);
+    builder.field(QUOTE_FIELD_SUFFIX.getPreferredName(), _quoteFieldSuffix);
+    return builder;
   }
 
   @Override

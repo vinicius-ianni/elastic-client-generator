@@ -25,7 +25,11 @@ public class GetIlmStatusResponse  implements XContentable<GetIlmStatusResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_operationMode != null) {
+      builder.field(OPERATION_MODE.getPreferredName());
+      _operationMode.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

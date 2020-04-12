@@ -57,7 +57,22 @@ public class SuggestBucket  implements XContentable<SuggestBucket> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_completion != null) {
+      builder.field(COMPLETION.getPreferredName());
+      _completion.toXContent(builder, params);
+    }
+    if (_phrase != null) {
+      builder.field(PHRASE.getPreferredName());
+      _phrase.toXContent(builder, params);
+    }
+    builder.field(PREFIX.getPreferredName(), _prefix);
+    builder.field(REGEX.getPreferredName(), _regex);
+    if (_term != null) {
+      builder.field(TERM.getPreferredName());
+      _term.toXContent(builder, params);
+    }
+    builder.field(TEXT.getPreferredName(), _text);
+    return builder;
   }
 
   @Override

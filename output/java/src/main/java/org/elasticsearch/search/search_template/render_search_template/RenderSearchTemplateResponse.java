@@ -25,7 +25,11 @@ public class RenderSearchTemplateResponse  implements XContentable<RenderSearchT
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_templateOutput != null) {
+      builder.field(TEMPLATE_OUTPUT.getPreferredName());
+      _templateOutput.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -31,7 +31,12 @@ public class GetTaskResponse  implements XContentable<GetTaskResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COMPLETED.getPreferredName(), _completed);
+    if (_task != null) {
+      builder.field(TASK.getPreferredName());
+      _task.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

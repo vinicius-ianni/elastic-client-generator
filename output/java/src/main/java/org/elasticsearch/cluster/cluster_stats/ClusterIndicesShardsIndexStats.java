@@ -37,7 +37,19 @@ public class ClusterIndicesShardsIndexStats  implements XContentable<ClusterIndi
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_primaries != null) {
+      builder.field(PRIMARIES.getPreferredName());
+      _primaries.toXContent(builder, params);
+    }
+    if (_replication != null) {
+      builder.field(REPLICATION.getPreferredName());
+      _replication.toXContent(builder, params);
+    }
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName());
+      _shards.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -45,7 +45,15 @@ public class GeoHashGridAggregation  implements XContentable<GeoHashGridAggregat
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    if (_precision != null) {
+      builder.field(PRECISION.getPreferredName());
+      _precision.toXContent(builder, params);
+    }
+    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

@@ -32,7 +32,15 @@ public class PutPrivilegesRequest  implements XContentable<PutPrivilegesRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    if (_applications != null) {
+      builder.field(APPLICATIONS.getPreferredName());
+      _applications.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

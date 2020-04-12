@@ -49,7 +49,17 @@ public class XPackUser  implements XContentable<XPackUser> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(EMAIL.getPreferredName(), _email);
+    builder.field(FULL_NAME.getPreferredName(), _fullName);
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    builder.field(USERNAME.getPreferredName(), _username);
+    return builder;
   }
 
   @Override

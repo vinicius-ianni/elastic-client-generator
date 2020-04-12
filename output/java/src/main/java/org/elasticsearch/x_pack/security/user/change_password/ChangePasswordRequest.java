@@ -31,7 +31,12 @@ public class ChangePasswordRequest  implements XContentable<ChangePasswordReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    builder.field(PASSWORD.getPreferredName(), _password);
+    return builder;
   }
 
   @Override

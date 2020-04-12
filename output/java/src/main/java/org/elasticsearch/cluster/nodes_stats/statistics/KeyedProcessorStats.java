@@ -31,7 +31,12 @@ public class KeyedProcessorStats  implements XContentable<KeyedProcessorStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(TYPE.getPreferredName(), _type);
+    if (_statistics != null) {
+      builder.field(STATISTICS.getPreferredName());
+      _statistics.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

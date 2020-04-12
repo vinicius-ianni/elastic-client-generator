@@ -31,7 +31,11 @@ public class CharFilterDetail  implements XContentable<CharFilterDetail> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_filteredText != null) {
+      builder.array(FILTERED_TEXT.getPreferredName(), _filteredText);
+    }
+    builder.field(NAME.getPreferredName(), _name);
+    return builder;
   }
 
   @Override

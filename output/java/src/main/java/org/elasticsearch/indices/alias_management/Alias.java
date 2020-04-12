@@ -50,7 +50,18 @@ public class Alias  implements XContentable<Alias> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_filter != null) {
+      builder.field(FILTER.getPreferredName());
+      _filter.toXContent(builder, params);
+    }
+    builder.field(INDEX_ROUTING.getPreferredName());
+    _indexRouting.toXContent(builder, params);
+    builder.field(IS_WRITE_INDEX.getPreferredName(), _isWriteIndex);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    builder.field(SEARCH_ROUTING.getPreferredName());
+    _searchRouting.toXContent(builder, params);
+    return builder;
   }
 
   @Override

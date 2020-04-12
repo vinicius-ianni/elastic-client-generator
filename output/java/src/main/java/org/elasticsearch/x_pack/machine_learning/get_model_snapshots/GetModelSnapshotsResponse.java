@@ -32,7 +32,11 @@ public class GetModelSnapshotsResponse  implements XContentable<GetModelSnapshot
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    if (_modelSnapshots != null) {
+      builder.array(MODEL_SNAPSHOTS.getPreferredName(), _modelSnapshots);
+    }
+    return builder;
   }
 
   @Override

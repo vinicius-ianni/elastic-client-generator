@@ -37,7 +37,10 @@ public class PatternTokenizer  implements XContentable<PatternTokenizer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FLAGS.getPreferredName(), _flags);
+    builder.field(GROUP.getPreferredName(), _group);
+    builder.field(PATTERN.getPreferredName(), _pattern);
+    return builder;
   }
 
   @Override

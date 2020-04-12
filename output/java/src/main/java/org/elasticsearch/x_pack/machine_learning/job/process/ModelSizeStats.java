@@ -80,7 +80,22 @@ public class ModelSizeStats  implements XContentable<ModelSizeStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUCKET_ALLOCATION_FAILURES_COUNT.getPreferredName(), _bucketAllocationFailuresCount);
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    builder.field(LOG_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_logTime.toInstant()));
+    if (_memoryStatus != null) {
+      builder.field(MEMORY_STATUS.getPreferredName());
+      _memoryStatus.toXContent(builder, params);
+    }
+    builder.field(MODEL_BYTES.getPreferredName(), _modelBytes);
+    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    builder.field(TIMESTAMP.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    builder.field(TOTAL_BY_FIELD_COUNT.getPreferredName(), _totalByFieldCount);
+    builder.field(TOTAL_OVER_FIELD_COUNT.getPreferredName(), _totalOverFieldCount);
+    builder.field(TOTAL_PARTITION_FIELD_COUNT.getPreferredName(), _totalPartitionFieldCount);
+    return builder;
   }
 
   @Override

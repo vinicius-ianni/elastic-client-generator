@@ -62,7 +62,24 @@ public class ClusterRerouteRequest  implements XContentable<ClusterRerouteReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_commands != null) {
+      builder.array(COMMANDS.getPreferredName(), _commands);
+    }
+    builder.field(DRY_RUN.getPreferredName(), _dryRun);
+    builder.field(EXPLAIN.getPreferredName(), _explain);
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    if (_metric != null) {
+      builder.array(METRIC.getPreferredName(), _metric);
+    }
+    builder.field(RETRY_FAILED.getPreferredName(), _retryFailed);
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

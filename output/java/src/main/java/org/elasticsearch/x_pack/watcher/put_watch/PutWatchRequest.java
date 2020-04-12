@@ -90,7 +90,36 @@ public class PutWatchRequest  implements XContentable<PutWatchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTIVE.getPreferredName(), _active);
+    builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
+    builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    builder.field(VERSION.getPreferredName(), _version);
+    if (_actions != null) {
+      builder.field(ACTIONS.getPreferredName());
+      _actions.toXContent(builder, params);
+    }
+    if (_condition != null) {
+      builder.field(CONDITION.getPreferredName());
+      _condition.toXContent(builder, params);
+    }
+    if (_input != null) {
+      builder.field(INPUT.getPreferredName());
+      _input.toXContent(builder, params);
+    }
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    builder.field(THROTTLE_PERIOD.getPreferredName(), _throttlePeriod);
+    if (_transform != null) {
+      builder.field(TRANSFORM.getPreferredName());
+      _transform.toXContent(builder, params);
+    }
+    if (_trigger != null) {
+      builder.field(TRIGGER.getPreferredName());
+      _trigger.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

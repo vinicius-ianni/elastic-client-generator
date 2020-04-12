@@ -79,7 +79,17 @@ public class ShardMerges  implements XContentable<ShardMerges> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CURRENT.getPreferredName(), _current);
+    builder.field(CURRENT_DOCS.getPreferredName(), _currentDocs);
+    builder.field(CURRENT_SIZE_IN_BYTES.getPreferredName(), _currentSizeInBytes);
+    builder.field(TOTAL.getPreferredName(), _total);
+    builder.field(TOTAL_AUTO_THROTTLE_IN_BYTES.getPreferredName(), _totalAutoThrottleInBytes);
+    builder.field(TOTAL_DOCS.getPreferredName(), _totalDocs);
+    builder.field(TOTAL_SIZE_IN_BYTES.getPreferredName(), _totalSizeInBytes);
+    builder.field(TOTAL_STOPPED_TIME_IN_MILLIS.getPreferredName(), _totalStoppedTimeInMillis);
+    builder.field(TOTAL_THROTTLED_TIME_IN_MILLIS.getPreferredName(), _totalThrottledTimeInMillis);
+    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    return builder;
   }
 
   @Override

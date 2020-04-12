@@ -123,7 +123,46 @@ public class Highlight  implements XContentable<Highlight> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BOUNDARY_CHARS.getPreferredName(), _boundaryChars);
+    builder.field(BOUNDARY_MAX_SCAN.getPreferredName(), _boundaryMaxScan);
+    if (_boundaryScanner != null) {
+      builder.field(BOUNDARY_SCANNER.getPreferredName());
+      _boundaryScanner.toXContent(builder, params);
+    }
+    builder.field(BOUNDARY_SCANNER_LOCALE.getPreferredName(), _boundaryScannerLocale);
+    if (_encoder != null) {
+      builder.field(ENCODER.getPreferredName());
+      _encoder.toXContent(builder, params);
+    }
+    if (_fields != null) {
+      builder.field(FIELDS.getPreferredName());
+      _fields.toXContent(builder, params);
+    }
+    if (_fragmenter != null) {
+      builder.field(FRAGMENTER.getPreferredName());
+      _fragmenter.toXContent(builder, params);
+    }
+    builder.field(FRAGMENT_OFFSET.getPreferredName(), _fragmentOffset);
+    builder.field(FRAGMENT_SIZE.getPreferredName(), _fragmentSize);
+    builder.field(MAX_FRAGMENT_LENGTH.getPreferredName(), _maxFragmentLength);
+    builder.field(NO_MATCH_SIZE.getPreferredName(), _noMatchSize);
+    builder.field(NUMBER_OF_FRAGMENTS.getPreferredName(), _numberOfFragments);
+    if (_order != null) {
+      builder.field(ORDER.getPreferredName());
+      _order.toXContent(builder, params);
+    }
+    if (_postTags != null) {
+      builder.array(POST_TAGS.getPreferredName(), _postTags);
+    }
+    if (_preTags != null) {
+      builder.array(PRE_TAGS.getPreferredName(), _preTags);
+    }
+    builder.field(REQUIRE_FIELD_MATCH.getPreferredName(), _requireFieldMatch);
+    if (_tagsSchema != null) {
+      builder.field(TAGS_SCHEMA.getPreferredName());
+      _tagsSchema.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

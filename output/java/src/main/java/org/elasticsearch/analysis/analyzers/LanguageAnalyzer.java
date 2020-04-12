@@ -50,7 +50,20 @@ public class LanguageAnalyzer  implements XContentable<LanguageAnalyzer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_language != null) {
+      builder.field(LANGUAGE.getPreferredName());
+      _language.toXContent(builder, params);
+    }
+    if (_stemExclusion != null) {
+      builder.array(STEM_EXCLUSION.getPreferredName(), _stemExclusion);
+    }
+    if (_stopwords != null) {
+      builder.field(STOPWORDS.getPreferredName());
+      _stopwords.toXContent(builder, params);
+    }
+    builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

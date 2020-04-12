@@ -45,7 +45,17 @@ public class SamplerAggregation  implements XContentable<SamplerAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_executionHint != null) {
+      builder.field(EXECUTION_HINT.getPreferredName());
+      _executionHint.toXContent(builder, params);
+    }
+    builder.field(MAX_DOCS_PER_VALUE.getPreferredName(), _maxDocsPerValue);
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    return builder;
   }
 
   @Override

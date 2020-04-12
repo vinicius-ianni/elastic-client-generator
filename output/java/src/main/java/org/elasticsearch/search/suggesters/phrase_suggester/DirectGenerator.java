@@ -87,7 +87,22 @@ public class DirectGenerator  implements XContentable<DirectGenerator> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(MAX_EDITS.getPreferredName(), _maxEdits);
+    builder.field(MAX_INSPECTIONS.getPreferredName(), _maxInspections);
+    builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
+    builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
+    builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    builder.field(POST_FILTER.getPreferredName(), _postFilter);
+    builder.field(PRE_FILTER.getPreferredName(), _preFilter);
+    builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
+    builder.field(SIZE.getPreferredName(), _size);
+    if (_suggestMode != null) {
+      builder.field(SUGGEST_MODE.getPreferredName());
+      _suggestMode.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

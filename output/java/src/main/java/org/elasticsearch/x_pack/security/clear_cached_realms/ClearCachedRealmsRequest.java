@@ -25,7 +25,10 @@ public class ClearCachedRealmsRequest  implements XContentable<ClearCachedRealms
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_usernames != null) {
+      builder.array(USERNAMES.getPreferredName(), _usernames);
+    }
+    return builder;
   }
 
   @Override

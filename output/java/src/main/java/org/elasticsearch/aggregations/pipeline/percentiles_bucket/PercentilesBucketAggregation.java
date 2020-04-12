@@ -25,7 +25,10 @@ public class PercentilesBucketAggregation  implements XContentable<PercentilesBu
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_percents != null) {
+      builder.array(PERCENTS.getPreferredName(), _percents);
+    }
+    return builder;
   }
 
   @Override

@@ -69,7 +69,30 @@ public class ExecuteWatchRequest  implements XContentable<ExecuteWatchRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DEBUG.getPreferredName(), _debug);
+    if (_actionModes != null) {
+      builder.field(ACTION_MODES.getPreferredName());
+      _actionModes.toXContent(builder, params);
+    }
+    if (_alternativeInput != null) {
+      builder.field(ALTERNATIVE_INPUT.getPreferredName());
+      _alternativeInput.toXContent(builder, params);
+    }
+    builder.field(IGNORE_CONDITION.getPreferredName(), _ignoreCondition);
+    builder.field(RECORD_EXECUTION.getPreferredName(), _recordExecution);
+    if (_simulatedActions != null) {
+      builder.field(SIMULATED_ACTIONS.getPreferredName());
+      _simulatedActions.toXContent(builder, params);
+    }
+    if (_triggerData != null) {
+      builder.field(TRIGGER_DATA.getPreferredName());
+      _triggerData.toXContent(builder, params);
+    }
+    if (_watch != null) {
+      builder.field(WATCH.getPreferredName());
+      _watch.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

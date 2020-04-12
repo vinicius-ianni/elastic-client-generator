@@ -32,7 +32,12 @@ public class ScoreFunction  implements XContentable<ScoreFunction> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_filter != null) {
+      builder.field(FILTER.getPreferredName());
+      _filter.toXContent(builder, params);
+    }
+    builder.field(WEIGHT.getPreferredName(), _weight);
+    return builder;
   }
 
   @Override

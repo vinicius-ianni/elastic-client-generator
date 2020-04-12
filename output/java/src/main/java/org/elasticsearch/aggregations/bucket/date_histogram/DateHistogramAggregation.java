@@ -103,7 +103,43 @@ public class DateHistogramAggregation  implements XContentable<DateHistogramAggr
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_extendedBounds != null) {
+      builder.field(EXTENDED_BOUNDS.getPreferredName());
+      _extendedBounds.toXContent(builder, params);
+    }
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(FORMAT.getPreferredName(), _format);
+    if (_interval != null) {
+      builder.field(INTERVAL.getPreferredName());
+      _interval.map(r-> r.toXContent(builder, params), r-> r.toXContent(builder, params));
+    }
+    if (_calendarInterval != null) {
+      builder.field(CALENDAR_INTERVAL.getPreferredName());
+      _calendarInterval.map(r-> r.toXContent(builder, params), r-> r.toXContent(builder, params));
+    }
+    if (_fixedInterval != null) {
+      builder.field(FIXED_INTERVAL.getPreferredName());
+      _fixedInterval.map(r-> r.toXContent(builder, params), r-> r.toXContent(builder, params));
+    }
+    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    builder.field(MISSING.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_missing.toInstant()));
+    builder.field(OFFSET.getPreferredName(), _offset);
+    if (_order != null) {
+      builder.field(ORDER.getPreferredName());
+      _order.toXContent(builder, params);
+    }
+    if (_params != null) {
+      builder.field(PARAMS.getPreferredName());
+      _params.toXContent(builder, params);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    return builder;
   }
 
   @Override

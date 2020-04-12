@@ -31,7 +31,15 @@ public class ActivationStatus  implements XContentable<ActivationStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.field(ACTIONS.getPreferredName());
+      _actions.toXContent(builder, params);
+    }
+    if (_state != null) {
+      builder.field(STATE.getPreferredName());
+      _state.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

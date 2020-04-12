@@ -117,7 +117,36 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    builder.field(EXPLAIN.getPreferredName(), _explain);
+    builder.field(IGNORE_THROTTLED.getPreferredName(), _ignoreThrottled);
+    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    builder.field(PREFERENCE.getPreferredName(), _preference);
+    builder.field(PROFILE.getPreferredName(), _profile);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    if (_scroll != null) {
+      builder.field(SCROLL.getPreferredName());
+      _scroll.toXContent(builder, params);
+    }
+    if (_searchType != null) {
+      builder.field(SEARCH_TYPE.getPreferredName());
+      _searchType.toXContent(builder, params);
+    }
+    builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
+    builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    builder.field(ID.getPreferredName(), _id);
+    if (_params != null) {
+      builder.field(PARAMS.getPreferredName());
+      _params.toXContent(builder, params);
+    }
+    builder.field(SOURCE.getPreferredName(), _source);
+    return builder;
   }
 
   @Override

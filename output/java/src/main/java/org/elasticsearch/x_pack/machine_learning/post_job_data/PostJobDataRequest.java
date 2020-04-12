@@ -37,7 +37,14 @@ public class PostJobDataRequest  implements XContentable<PostJobDataRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(RESET_END.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_resetEnd.toInstant()));
+    builder.field(RESET_START.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_resetStart.toInstant()));
+    if (_data != null) {
+      builder.array(DATA.getPreferredName(), _data);
+    }
+    return builder;
   }
 
   @Override

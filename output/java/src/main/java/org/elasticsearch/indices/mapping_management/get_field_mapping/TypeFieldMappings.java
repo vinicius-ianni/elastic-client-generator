@@ -26,7 +26,11 @@ public class TypeFieldMappings  implements XContentable<TypeFieldMappings> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_mappings != null) {
+      builder.field(MAPPINGS.getPreferredName());
+      _mappings.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -37,7 +37,10 @@ public class AnomalyDetectors  implements XContentable<AnomalyDetectors> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MODEL_MEMORY_LIMIT.getPreferredName(), _modelMemoryLimit);
+    builder.field(CATEGORIZATION_EXAMPLES_LIMIT.getPreferredName(), _categorizationExamplesLimit);
+    builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
+    return builder;
   }
 
   @Override

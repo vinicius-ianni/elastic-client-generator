@@ -43,7 +43,13 @@ public class NodeInfoHttp  implements XContentable<NodeInfoHttp> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_boundAddress != null) {
+      builder.array(BOUND_ADDRESS.getPreferredName(), _boundAddress);
+    }
+    builder.field(MAX_CONTENT_LENGTH.getPreferredName(), _maxContentLength);
+    builder.field(MAX_CONTENT_LENGTH_IN_BYTES.getPreferredName(), _maxContentLengthInBytes);
+    builder.field(PUBLISH_ADDRESS.getPreferredName(), _publishAddress);
+    return builder;
   }
 
   @Override

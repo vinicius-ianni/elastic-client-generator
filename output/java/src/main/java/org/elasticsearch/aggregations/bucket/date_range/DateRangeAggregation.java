@@ -50,7 +50,15 @@ public class DateRangeAggregation  implements XContentable<DateRangeAggregation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(FORMAT.getPreferredName(), _format);
+    builder.field(MISSING.getPreferredName(), _missing);
+    if (_ranges != null) {
+      builder.array(RANGES.getPreferredName(), _ranges);
+    }
+    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    return builder;
   }
 
   @Override

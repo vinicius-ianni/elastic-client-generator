@@ -61,7 +61,15 @@ public class ClusterCertificateInformation  implements XContentable<ClusterCerti
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(PATH.getPreferredName(), _path);
+    builder.field(ALIAS.getPreferredName(), _alias);
+    builder.field(FORMAT.getPreferredName(), _format);
+    builder.field(SUBJECT_DN.getPreferredName(), _subjectDn);
+    builder.field(SERIAL_NUMBER.getPreferredName(), _serialNumber);
+    builder.field(HAS_PRIVATE_KEY.getPreferredName(), _hasPrivateKey);
+    builder.field(EXPIRY.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_expiry.toInstant()));
+    return builder;
   }
 
   @Override

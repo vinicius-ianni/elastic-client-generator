@@ -61,7 +61,14 @@ public class AdaptiveSelectionStats  implements XContentable<AdaptiveSelectionSt
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(AVG_QUEUE_SIZE.getPreferredName(), _avgQueueSize);
+    builder.field(AVG_RESPONSE_TIME.getPreferredName(), _avgResponseTime);
+    builder.field(AVG_RESPONSE_TIME_NS.getPreferredName(), _avgResponseTimeNs);
+    builder.field(AVG_SERVICE_TIME.getPreferredName(), _avgServiceTime);
+    builder.field(AVG_SERVICE_TIME_NS.getPreferredName(), _avgServiceTimeNs);
+    builder.field(OUTGOING_SEARCHES.getPreferredName(), _outgoingSearches);
+    builder.field(RANK.getPreferredName(), _rank);
+    return builder;
   }
 
   @Override

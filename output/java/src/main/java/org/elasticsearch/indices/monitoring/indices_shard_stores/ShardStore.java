@@ -68,7 +68,24 @@ public class ShardStore  implements XContentable<ShardStore> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_allocation != null) {
+      builder.field(ALLOCATION.getPreferredName());
+      _allocation.toXContent(builder, params);
+    }
+    builder.field(ALLOCATION_ID.getPreferredName(), _allocationId);
+    if (_attributes != null) {
+      builder.field(ATTRIBUTES.getPreferredName());
+      _attributes.toXContent(builder, params);
+    }
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(LEGACY_VERSION.getPreferredName(), _legacyVersion);
+    builder.field(NAME.getPreferredName(), _name);
+    if (_storeException != null) {
+      builder.field(STORE_EXCEPTION.getPreferredName());
+      _storeException.toXContent(builder, params);
+    }
+    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    return builder;
   }
 
   @Override

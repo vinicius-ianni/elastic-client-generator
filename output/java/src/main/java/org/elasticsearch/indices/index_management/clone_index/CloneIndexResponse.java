@@ -31,7 +31,9 @@ public class CloneIndexResponse  implements XContentable<CloneIndexResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    builder.field(INDEX.getPreferredName(), _index);
+    return builder;
   }
 
   @Override

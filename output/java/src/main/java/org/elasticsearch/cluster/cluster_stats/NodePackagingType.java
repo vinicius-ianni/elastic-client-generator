@@ -37,7 +37,10 @@ public class NodePackagingType  implements XContentable<NodePackagingType> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    builder.field(FLAVOR.getPreferredName(), _flavor);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

@@ -57,7 +57,18 @@ public class GraphVertexDefinition  implements XContentable<GraphVertexDefinitio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_exclude != null) {
+      builder.array(EXCLUDE.getPreferredName(), _exclude);
+    }
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    if (_include != null) {
+      builder.array(INCLUDE.getPreferredName(), _include);
+    }
+    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

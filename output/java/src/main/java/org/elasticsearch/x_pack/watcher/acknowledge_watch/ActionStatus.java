@@ -43,7 +43,23 @@ public class ActionStatus  implements XContentable<ActionStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_ack != null) {
+      builder.field(ACK.getPreferredName());
+      _ack.toXContent(builder, params);
+    }
+    if (_lastExecution != null) {
+      builder.field(LAST_EXECUTION.getPreferredName());
+      _lastExecution.toXContent(builder, params);
+    }
+    if (_lastSuccessfulExecution != null) {
+      builder.field(LAST_SUCCESSFUL_EXECUTION.getPreferredName());
+      _lastSuccessfulExecution.toXContent(builder, params);
+    }
+    if (_lastThrottle != null) {
+      builder.field(LAST_THROTTLE.getPreferredName());
+      _lastThrottle.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

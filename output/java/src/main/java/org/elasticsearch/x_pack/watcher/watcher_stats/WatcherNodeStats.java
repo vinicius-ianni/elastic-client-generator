@@ -50,7 +50,22 @@ public class WatcherNodeStats  implements XContentable<WatcherNodeStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_currentWatches != null) {
+      builder.array(CURRENT_WATCHES.getPreferredName(), _currentWatches);
+    }
+    if (_executionThreadPool != null) {
+      builder.field(EXECUTION_THREAD_POOL.getPreferredName());
+      _executionThreadPool.toXContent(builder, params);
+    }
+    if (_queuedWatches != null) {
+      builder.array(QUEUED_WATCHES.getPreferredName(), _queuedWatches);
+    }
+    builder.field(WATCH_COUNT.getPreferredName(), _watchCount);
+    if (_watcherState != null) {
+      builder.field(WATCHER_STATE.getPreferredName());
+      _watcherState.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

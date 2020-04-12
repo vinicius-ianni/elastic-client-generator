@@ -68,7 +68,18 @@ public class License  implements XContentable<License> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(EXPIRY_DATE_IN_MILLIS.getPreferredName(), _expiryDateInMillis);
+    builder.field(ISSUE_DATE_IN_MILLIS.getPreferredName(), _issueDateInMillis);
+    builder.field(ISSUED_TO.getPreferredName(), _issuedTo);
+    builder.field(ISSUER.getPreferredName(), _issuer);
+    builder.field(MAX_NODES.getPreferredName(), _maxNodes);
+    builder.field(SIGNATURE.getPreferredName(), _signature);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    builder.field(UID.getPreferredName(), _uid);
+    return builder;
   }
 
   @Override

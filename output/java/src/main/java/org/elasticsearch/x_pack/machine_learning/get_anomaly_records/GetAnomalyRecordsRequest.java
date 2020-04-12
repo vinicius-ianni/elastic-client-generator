@@ -63,7 +63,20 @@ public class GetAnomalyRecordsRequest  implements XContentable<GetAnomalyRecords
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DESC.getPreferredName(), _desc);
+    builder.field(END.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    builder.field(EXCLUDE_INTERIM.getPreferredName(), _excludeInterim);
+    if (_page != null) {
+      builder.field(PAGE.getPreferredName());
+      _page.toXContent(builder, params);
+    }
+    builder.field(RECORD_SCORE.getPreferredName(), _recordScore);
+    builder.field(SORT.getPreferredName());
+    _sort.toXContent(builder, params);
+    builder.field(START.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    return builder;
   }
 
   @Override

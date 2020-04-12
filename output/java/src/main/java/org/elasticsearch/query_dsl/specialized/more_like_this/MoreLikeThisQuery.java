@@ -133,7 +133,44 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(BOOST_TERMS.getPreferredName(), _boostTerms);
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    builder.field(INCLUDE.getPreferredName(), _include);
+    if (_like != null) {
+      builder.array(LIKE.getPreferredName(), _like);
+    }
+    builder.field(MAX_DOC_FREQ.getPreferredName(), _maxDocFreq);
+    builder.field(MAX_QUERY_TERMS.getPreferredName(), _maxQueryTerms);
+    builder.field(MAX_WORD_LENGTH.getPreferredName(), _maxWordLength);
+    builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
+    if (_minimumShouldMatch != null) {
+      builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
+      _minimumShouldMatch.toXContent(builder, params);
+    }
+    builder.field(MIN_TERM_FREQ.getPreferredName(), _minTermFreq);
+    builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    if (_perFieldAnalyzer != null) {
+      builder.field(PER_FIELD_ANALYZER.getPreferredName());
+      _perFieldAnalyzer.toXContent(builder, params);
+    }
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    if (_stopWords != null) {
+      builder.field(STOP_WORDS.getPreferredName());
+      _stopWords.toXContent(builder, params);
+    }
+    if (_unlike != null) {
+      builder.array(UNLIKE.getPreferredName(), _unlike);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    if (_versionType != null) {
+      builder.field(VERSION_TYPE.getPreferredName());
+      _versionType.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

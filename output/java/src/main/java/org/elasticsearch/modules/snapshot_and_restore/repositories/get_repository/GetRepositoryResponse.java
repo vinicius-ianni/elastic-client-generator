@@ -25,7 +25,11 @@ public class GetRepositoryResponse  implements XContentable<GetRepositoryRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_repositories != null) {
+      builder.field(REPOSITORIES.getPreferredName());
+      _repositories.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -69,7 +69,29 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_completionFields != null) {
+      builder.array(COMPLETION_FIELDS.getPreferredName(), _completionFields);
+    }
+    if (_fielddataFields != null) {
+      builder.array(FIELDDATA_FIELDS.getPreferredName(), _fielddataFields);
+    }
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    builder.field(GROUPS.getPreferredName(), _groups);
+    builder.field(INCLUDE_SEGMENT_FILE_SIZES.getPreferredName(), _includeSegmentFileSizes);
+    if (_level != null) {
+      builder.field(LEVEL.getPreferredName());
+      _level.toXContent(builder, params);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    if (_types != null) {
+      builder.array(TYPES.getPreferredName(), _types);
+    }
+    return builder;
   }
 
   @Override

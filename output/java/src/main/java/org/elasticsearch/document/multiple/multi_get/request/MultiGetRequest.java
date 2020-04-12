@@ -75,7 +75,25 @@ public class MultiGetRequest  implements XContentable<MultiGetRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_storedFields != null) {
+      builder.array(STORED_FIELDS.getPreferredName(), _storedFields);
+    }
+    if (_docs != null) {
+      builder.array(DOCS.getPreferredName(), _docs);
+    }
+    builder.field(PREFERENCE.getPreferredName(), _preference);
+    builder.field(REALTIME.getPreferredName(), _realtime);
+    builder.field(REFRESH.getPreferredName(), _refresh);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    if (_sourceExcludes != null) {
+      builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
+    }
+    if (_sourceIncludes != null) {
+      builder.array(SOURCE_INCLUDES.getPreferredName(), _sourceIncludes);
+    }
+    return builder;
   }
 
   @Override

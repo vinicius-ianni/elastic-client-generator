@@ -49,7 +49,12 @@ public class NodeBufferPool  implements XContentable<NodeBufferPool> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    builder.field(TOTAL_CAPACITY.getPreferredName(), _totalCapacity);
+    builder.field(TOTAL_CAPACITY_IN_BYTES.getPreferredName(), _totalCapacityInBytes);
+    builder.field(USED.getPreferredName(), _used);
+    builder.field(USED_IN_BYTES.getPreferredName(), _usedInBytes);
+    return builder;
   }
 
   @Override

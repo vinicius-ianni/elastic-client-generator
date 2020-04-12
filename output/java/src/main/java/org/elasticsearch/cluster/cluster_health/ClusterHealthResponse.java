@@ -118,7 +118,29 @@ public class ClusterHealthResponse  implements XContentable<ClusterHealthRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTIVE_PRIMARY_SHARDS.getPreferredName(), _activePrimaryShards);
+    builder.field(ACTIVE_SHARDS.getPreferredName(), _activeShards);
+    builder.field(ACTIVE_SHARDS_PERCENT_AS_NUMBER.getPreferredName(), _activeShardsPercentAsNumber);
+    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    builder.field(DELAYED_UNASSIGNED_SHARDS.getPreferredName(), _delayedUnassignedShards);
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName());
+      _indices.toXContent(builder, params);
+    }
+    builder.field(INITIALIZING_SHARDS.getPreferredName(), _initializingShards);
+    builder.field(NUMBER_OF_DATA_NODES.getPreferredName(), _numberOfDataNodes);
+    builder.field(NUMBER_OF_IN_FLIGHT_FETCH.getPreferredName(), _numberOfInFlightFetch);
+    builder.field(NUMBER_OF_NODES.getPreferredName(), _numberOfNodes);
+    builder.field(NUMBER_OF_PENDING_TASKS.getPreferredName(), _numberOfPendingTasks);
+    builder.field(RELOCATING_SHARDS.getPreferredName(), _relocatingShards);
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    builder.field(TASK_MAX_WAITING_IN_QUEUE_MILLIS.getPreferredName(), _taskMaxWaitingInQueueMillis);
+    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    builder.field(UNASSIGNED_SHARDS.getPreferredName(), _unassignedShards);
+    return builder;
   }
 
   @Override

@@ -140,7 +140,30 @@ public class CatThreadPoolRecord  implements XContentable<CatThreadPoolRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTIVE.getPreferredName(), _active);
+    builder.field(COMPLETED.getPreferredName(), _completed);
+    builder.field(CORE.getPreferredName(), _core);
+    builder.field(EPHEMERAL_NODE_ID.getPreferredName(), _ephemeralNodeId);
+    builder.field(HOST.getPreferredName(), _host);
+    builder.field(IP.getPreferredName(), _ip);
+    if (_keepAlive != null) {
+      builder.field(KEEP_ALIVE.getPreferredName());
+      _keepAlive.toXContent(builder, params);
+    }
+    builder.field(LARGEST.getPreferredName(), _largest);
+    builder.field(MAX.getPreferredName(), _max);
+    builder.field(NAME.getPreferredName(), _name);
+    builder.field(NODE_ID.getPreferredName(), _nodeId);
+    builder.field(NODE_NAME.getPreferredName(), _nodeName);
+    builder.field(POOL_SIZE.getPreferredName(), _poolSize);
+    builder.field(PORT.getPreferredName(), _port);
+    builder.field(PID.getPreferredName(), _pid);
+    builder.field(QUEUE.getPreferredName(), _queue);
+    builder.field(QUEUE_SIZE.getPreferredName(), _queueSize);
+    builder.field(REJECTED.getPreferredName(), _rejected);
+    builder.field(SIZE.getPreferredName(), _size);
+    builder.field(TYPE.getPreferredName(), _type);
+    return builder;
   }
 
   @Override

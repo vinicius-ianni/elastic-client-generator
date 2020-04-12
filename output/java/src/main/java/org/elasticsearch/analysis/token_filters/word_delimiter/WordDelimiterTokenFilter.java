@@ -97,7 +97,24 @@ public class WordDelimiterTokenFilter  implements XContentable<WordDelimiterToke
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CATENATE_ALL.getPreferredName(), _catenateAll);
+    builder.field(CATENATE_NUMBERS.getPreferredName(), _catenateNumbers);
+    builder.field(CATENATE_WORDS.getPreferredName(), _catenateWords);
+    builder.field(GENERATE_NUMBER_PARTS.getPreferredName(), _generateNumberParts);
+    builder.field(GENERATE_WORD_PARTS.getPreferredName(), _generateWordParts);
+    builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    if (_protectedWords != null) {
+      builder.array(PROTECTED_WORDS.getPreferredName(), _protectedWords);
+    }
+    builder.field(PROTECTED_WORDS_PATH.getPreferredName(), _protectedWordsPath);
+    builder.field(SPLIT_ON_CASE_CHANGE.getPreferredName(), _splitOnCaseChange);
+    builder.field(SPLIT_ON_NUMERICS.getPreferredName(), _splitOnNumerics);
+    builder.field(STEM_ENGLISH_POSSESSIVE.getPreferredName(), _stemEnglishPossessive);
+    if (_typeTable != null) {
+      builder.array(TYPE_TABLE.getPreferredName(), _typeTable);
+    }
+    builder.field(TYPE_TABLE_PATH.getPreferredName(), _typeTablePath);
+    return builder;
   }
 
   @Override

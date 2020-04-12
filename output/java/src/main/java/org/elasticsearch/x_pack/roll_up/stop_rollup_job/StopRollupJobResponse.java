@@ -25,7 +25,8 @@ public class StopRollupJobResponse  implements XContentable<StopRollupJobRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(STOPPED.getPreferredName(), _stopped);
+    return builder;
   }
 
   @Override

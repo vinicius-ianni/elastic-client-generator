@@ -81,7 +81,37 @@ public class WatchRecord  implements XContentable<WatchRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_condition != null) {
+      builder.field(CONDITION.getPreferredName());
+      _condition.toXContent(builder, params);
+    }
+    if (_input != null) {
+      builder.field(INPUT.getPreferredName());
+      _input.toXContent(builder, params);
+    }
+    if (_messages != null) {
+      builder.array(MESSAGES.getPreferredName(), _messages);
+    }
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_result != null) {
+      builder.field(RESULT.getPreferredName());
+      _result.toXContent(builder, params);
+    }
+    if (_state != null) {
+      builder.field(STATE.getPreferredName());
+      _state.toXContent(builder, params);
+    }
+    if (_triggerEvent != null) {
+      builder.field(TRIGGER_EVENT.getPreferredName());
+      _triggerEvent.toXContent(builder, params);
+    }
+    builder.field(USER.getPreferredName(), _user);
+    builder.field(NODE.getPreferredName(), _node);
+    builder.field(WATCH_ID.getPreferredName(), _watchId);
+    return builder;
   }
 
   @Override

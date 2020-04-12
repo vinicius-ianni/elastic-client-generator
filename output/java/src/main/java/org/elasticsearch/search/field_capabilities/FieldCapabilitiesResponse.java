@@ -26,7 +26,11 @@ public class FieldCapabilitiesResponse  implements XContentable<FieldCapabilitie
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_fields != null) {
+      builder.field(FIELDS.getPreferredName());
+      _fields.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

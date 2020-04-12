@@ -31,7 +31,9 @@ public class RecoveryStatusRequest  implements XContentable<RecoveryStatusReques
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTIVE_ONLY.getPreferredName(), _activeOnly);
+    builder.field(DETAILED.getPreferredName(), _detailed);
+    return builder;
   }
 
   @Override

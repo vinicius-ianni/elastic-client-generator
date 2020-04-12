@@ -79,7 +79,18 @@ public class BucketInfluencer  implements XContentable<BucketInfluencer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUCKET_SPAN.getPreferredName(), _bucketSpan);
+    builder.field(INFLUENCER_FIELD_NAME.getPreferredName(), _influencerFieldName);
+    builder.field(INFLUENCER_FIELD_VALUE.getPreferredName(), _influencerFieldValue);
+    builder.field(INFLUENCER_SCORE.getPreferredName(), _influencerScore);
+    builder.field(INITIAL_INFLUENCER_SCORE.getPreferredName(), _initialInfluencerScore);
+    builder.field(IS_INTERIM.getPreferredName(), _isInterim);
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    builder.field(PROBABILITY.getPreferredName(), _probability);
+    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    builder.field(TIMESTAMP.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    return builder;
   }
 
   @Override

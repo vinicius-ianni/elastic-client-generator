@@ -87,7 +87,26 @@ public class Bucket  implements XContentable<Bucket> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANOMALY_SCORE.getPreferredName(), _anomalyScore);
+    if (_bucketInfluencers != null) {
+      builder.array(BUCKET_INFLUENCERS.getPreferredName(), _bucketInfluencers);
+    }
+    if (_bucketSpan != null) {
+      builder.field(BUCKET_SPAN.getPreferredName());
+      _bucketSpan.toXContent(builder, params);
+    }
+    builder.field(EVENT_COUNT.getPreferredName(), _eventCount);
+    builder.field(INITIAL_ANOMALY_SCORE.getPreferredName(), _initialAnomalyScore);
+    builder.field(IS_INTERIM.getPreferredName(), _isInterim);
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    if (_partitionScores != null) {
+      builder.array(PARTITION_SCORES.getPreferredName(), _partitionScores);
+    }
+    builder.field(PROCESSING_TIME_MS.getPreferredName(), _processingTimeMs);
+    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    builder.field(TIMESTAMP.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    return builder;
   }
 
   @Override

@@ -93,7 +93,28 @@ public class TermSuggester  implements XContentable<TermSuggester> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(LOWERCASE_TERMS.getPreferredName(), _lowercaseTerms);
+    builder.field(MAX_EDITS.getPreferredName(), _maxEdits);
+    builder.field(MAX_INSPECTIONS.getPreferredName(), _maxInspections);
+    builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
+    builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
+    builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
+    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    if (_sort != null) {
+      builder.field(SORT.getPreferredName());
+      _sort.toXContent(builder, params);
+    }
+    if (_stringDistance != null) {
+      builder.field(STRING_DISTANCE.getPreferredName());
+      _stringDistance.toXContent(builder, params);
+    }
+    if (_suggestMode != null) {
+      builder.field(SUGGEST_MODE.getPreferredName());
+      _suggestMode.toXContent(builder, params);
+    }
+    builder.field(TEXT.getPreferredName(), _text);
+    return builder;
   }
 
   @Override

@@ -25,7 +25,11 @@ public class NumericFielddata  implements XContentable<NumericFielddata> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName());
+      _format.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

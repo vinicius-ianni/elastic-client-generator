@@ -37,7 +37,15 @@ public class NoriAnalyzer  implements XContentable<NoriAnalyzer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_decompoundMode != null) {
+      builder.field(DECOMPOUND_MODE.getPreferredName());
+      _decompoundMode.toXContent(builder, params);
+    }
+    if (_stoptags != null) {
+      builder.array(STOPTAGS.getPreferredName(), _stoptags);
+    }
+    builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    return builder;
   }
 
   @Override

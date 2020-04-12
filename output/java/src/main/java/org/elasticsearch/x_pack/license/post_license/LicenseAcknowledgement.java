@@ -31,7 +31,11 @@ public class LicenseAcknowledgement  implements XContentable<LicenseAcknowledgem
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_license != null) {
+      builder.array(LICENSE.getPreferredName(), _license);
+    }
+    builder.field(MESSAGE.getPreferredName(), _message);
+    return builder;
   }
 
   @Override

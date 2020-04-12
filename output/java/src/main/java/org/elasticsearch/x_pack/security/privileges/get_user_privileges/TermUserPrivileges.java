@@ -25,7 +25,8 @@ public class TermUserPrivileges  implements XContentable<TermUserPrivileges> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(APPS.getPreferredName(), _apps);
+    return builder;
   }
 
   @Override

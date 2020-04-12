@@ -76,7 +76,37 @@ public class JobStats  implements XContentable<JobStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ASSIGNMENT_EXPLANATION.getPreferredName(), _assignmentExplanation);
+    if (_dataCounts != null) {
+      builder.field(DATA_COUNTS.getPreferredName());
+      _dataCounts.toXContent(builder, params);
+    }
+    if (_forecastsStats != null) {
+      builder.field(FORECASTS_STATS.getPreferredName());
+      _forecastsStats.toXContent(builder, params);
+    }
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    if (_modelSizeStats != null) {
+      builder.field(MODEL_SIZE_STATS.getPreferredName());
+      _modelSizeStats.toXContent(builder, params);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName());
+      _node.toXContent(builder, params);
+    }
+    if (_openTime != null) {
+      builder.field(OPEN_TIME.getPreferredName());
+      _openTime.toXContent(builder, params);
+    }
+    if (_state != null) {
+      builder.field(STATE.getPreferredName());
+      _state.toXContent(builder, params);
+    }
+    if (_timingStats != null) {
+      builder.field(TIMING_STATS.getPreferredName());
+      _timingStats.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

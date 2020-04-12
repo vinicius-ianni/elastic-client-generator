@@ -49,7 +49,27 @@ public class IntervalsContainer  implements XContentable<IntervalsContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_allOf != null) {
+      builder.field(ALL_OF.getPreferredName());
+      _allOf.toXContent(builder, params);
+    }
+    if (_anyOf != null) {
+      builder.field(ANY_OF.getPreferredName());
+      _anyOf.toXContent(builder, params);
+    }
+    if (_match != null) {
+      builder.field(MATCH.getPreferredName());
+      _match.toXContent(builder, params);
+    }
+    if (_prefix != null) {
+      builder.field(PREFIX.getPreferredName());
+      _prefix.toXContent(builder, params);
+    }
+    if (_wildcard != null) {
+      builder.field(WILDCARD.getPreferredName());
+      _wildcard.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

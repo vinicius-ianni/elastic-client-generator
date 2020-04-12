@@ -55,7 +55,15 @@ public class CategoryDefinition  implements XContentable<CategoryDefinition> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CATEGORY_ID.getPreferredName(), _categoryId);
+    if (_examples != null) {
+      builder.array(EXAMPLES.getPreferredName(), _examples);
+    }
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    builder.field(MAX_MATCHING_LENGTH.getPreferredName(), _maxMatchingLength);
+    builder.field(REGEX.getPreferredName(), _regex);
+    builder.field(TERMS.getPreferredName(), _terms);
+    return builder;
   }
 
   @Override

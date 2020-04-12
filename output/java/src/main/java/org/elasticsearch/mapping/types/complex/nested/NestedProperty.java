@@ -31,7 +31,9 @@ public class NestedProperty  implements XContentable<NestedProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(INCLUDE_IN_PARENT.getPreferredName(), _includeInParent);
+    builder.field(INCLUDE_IN_ROOT.getPreferredName(), _includeInRoot);
+    return builder;
   }
 
   @Override

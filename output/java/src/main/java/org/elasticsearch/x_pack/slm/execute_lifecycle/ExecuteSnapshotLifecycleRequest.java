@@ -20,7 +20,8 @@ public class ExecuteSnapshotLifecycleRequest  implements XContentable<ExecuteSna
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

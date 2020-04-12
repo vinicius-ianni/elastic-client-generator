@@ -62,7 +62,20 @@ public class DynamicTemplate  implements XContentable<DynamicTemplate> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_mapping != null) {
+      builder.field(MAPPING.getPreferredName());
+      _mapping.toXContent(builder, params);
+    }
+    builder.field(MATCH.getPreferredName(), _match);
+    builder.field(MATCH_MAPPING_TYPE.getPreferredName(), _matchMappingType);
+    if (_matchPattern != null) {
+      builder.field(MATCH_PATTERN.getPreferredName());
+      _matchPattern.toXContent(builder, params);
+    }
+    builder.field(PATH_MATCH.getPreferredName(), _pathMatch);
+    builder.field(PATH_UNMATCH.getPreferredName(), _pathUnmatch);
+    builder.field(UNMATCH.getPreferredName(), _unmatch);
+    return builder;
   }
 
   @Override

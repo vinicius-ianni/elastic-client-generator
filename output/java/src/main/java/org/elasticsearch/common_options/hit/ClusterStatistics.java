@@ -37,7 +37,10 @@ public class ClusterStatistics  implements XContentable<ClusterStatistics> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(SKIPPED.getPreferredName(), _skipped);
+    builder.field(SUCCESSFUL.getPreferredName(), _successful);
+    builder.field(TOTAL.getPreferredName(), _total);
+    return builder;
   }
 
   @Override

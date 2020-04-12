@@ -20,7 +20,8 @@ public class PauseFollowIndexRequest  implements XContentable<PauseFollowIndexRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

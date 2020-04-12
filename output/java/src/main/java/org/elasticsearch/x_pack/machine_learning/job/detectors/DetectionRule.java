@@ -38,7 +38,17 @@ public class DetectionRule  implements XContentable<DetectionRule> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.array(ACTIONS.getPreferredName(), _actions);
+    }
+    if (_conditions != null) {
+      builder.array(CONDITIONS.getPreferredName(), _conditions);
+    }
+    if (_scope != null) {
+      builder.field(SCOPE.getPreferredName());
+      _scope.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

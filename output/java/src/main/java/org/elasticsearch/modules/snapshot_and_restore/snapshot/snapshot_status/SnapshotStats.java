@@ -44,7 +44,17 @@ public class SnapshotStats  implements XContentable<SnapshotStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_incremental != null) {
+      builder.field(INCREMENTAL.getPreferredName());
+      _incremental.toXContent(builder, params);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName());
+      _total.toXContent(builder, params);
+    }
+    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    builder.field(TIME_IN_MILLIS.getPreferredName(), _timeInMillis);
+    return builder;
   }
 
   @Override

@@ -56,7 +56,24 @@ public class PhoneticTokenFilter  implements XContentable<PhoneticTokenFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_encoder != null) {
+      builder.field(ENCODER.getPreferredName());
+      _encoder.toXContent(builder, params);
+    }
+    if (_languageset != null) {
+      builder.array(LANGUAGESET.getPreferredName(), _languageset);
+    }
+    builder.field(MAX_CODE_LEN.getPreferredName(), _maxCodeLen);
+    if (_nameType != null) {
+      builder.field(NAME_TYPE.getPreferredName());
+      _nameType.toXContent(builder, params);
+    }
+    builder.field(REPLACE.getPreferredName(), _replace);
+    if (_ruleType != null) {
+      builder.field(RULE_TYPE.getPreferredName());
+      _ruleType.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

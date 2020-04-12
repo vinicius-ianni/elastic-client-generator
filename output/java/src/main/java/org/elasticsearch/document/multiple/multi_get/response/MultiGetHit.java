@@ -80,7 +80,20 @@ public class MultiGetHit<TDocument>  implements XContentable<MultiGetHit<TDocume
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_error != null) {
+      builder.field(ERROR.getPreferredName());
+      _error.toXContent(builder, params);
+    }
+    builder.field(FOUND.getPreferredName(), _found);
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(ROUTING.getPreferredName(), _routing);
+    builder.field(SOURCE.getPreferredName(), _source);
+    builder.field(TYPE.getPreferredName(), _type);
+    builder.field(VERSION.getPreferredName(), _version);
+    builder.field(SEQUENCE_NUMBER.getPreferredName(), _sequenceNumber);
+    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    return builder;
   }
 
   @Override

@@ -51,7 +51,24 @@ public class ShrinkIndexRequest  implements XContentable<ShrinkIndexRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_aliases != null) {
+      builder.field(ALIASES.getPreferredName());
+      _aliases.toXContent(builder, params);
+    }
+    if (_settings != null) {
+      builder.field(SETTINGS.getPreferredName());
+      _settings.toXContent(builder, params);
+    }
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    return builder;
   }
 
   @Override

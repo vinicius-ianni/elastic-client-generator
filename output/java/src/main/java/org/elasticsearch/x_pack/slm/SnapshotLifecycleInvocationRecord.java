@@ -31,7 +31,10 @@ public class SnapshotLifecycleInvocationRecord  implements XContentable<Snapshot
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(SNAPSHOT_NAME.getPreferredName(), _snapshotName);
+    builder.field(TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_time.toInstant()));
+    return builder;
   }
 
   @Override

@@ -74,7 +74,25 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ARCH.getPreferredName(), _arch);
+    builder.field(AVAILABLE_PROCESSORS.getPreferredName(), _availableProcessors);
+    if (_cpu != null) {
+      builder.field(CPU.getPreferredName());
+      _cpu.toXContent(builder, params);
+    }
+    if (_mem != null) {
+      builder.field(MEM.getPreferredName());
+      _mem.toXContent(builder, params);
+    }
+    builder.field(NAME.getPreferredName(), _name);
+    builder.field(PRETTY_NAME.getPreferredName(), _prettyName);
+    builder.field(REFRESH_INTERVAL_IN_MILLIS.getPreferredName(), _refreshIntervalInMillis);
+    if (_swap != null) {
+      builder.field(SWAP.getPreferredName());
+      _swap.toXContent(builder, params);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

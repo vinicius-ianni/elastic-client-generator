@@ -61,7 +61,25 @@ public class AuthenticateResponse  implements XContentable<AuthenticateResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(EMAIL.getPreferredName(), _email);
+    builder.field(FULL_NAME.getPreferredName(), _fullName);
+    if (_metadata != null) {
+      builder.field(METADATA.getPreferredName());
+      _metadata.toXContent(builder, params);
+    }
+    if (_roles != null) {
+      builder.array(ROLES.getPreferredName(), _roles);
+    }
+    builder.field(USERNAME.getPreferredName(), _username);
+    if (_authenticationRealm != null) {
+      builder.field(AUTHENTICATION_REALM.getPreferredName());
+      _authenticationRealm.toXContent(builder, params);
+    }
+    if (_lookupRealm != null) {
+      builder.field(LOOKUP_REALM.getPreferredName());
+      _lookupRealm.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

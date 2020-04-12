@@ -25,7 +25,8 @@ public class IndexField  implements XContentable<IndexField> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ENABLED.getPreferredName(), _enabled);
+    return builder;
   }
 
   @Override

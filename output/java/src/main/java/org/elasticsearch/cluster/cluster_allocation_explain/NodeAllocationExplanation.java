@@ -68,7 +68,26 @@ public class NodeAllocationExplanation  implements XContentable<NodeAllocationEx
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_deciders != null) {
+      builder.array(DECIDERS.getPreferredName(), _deciders);
+    }
+    if (_nodeAttributes != null) {
+      builder.field(NODE_ATTRIBUTES.getPreferredName());
+      _nodeAttributes.toXContent(builder, params);
+    }
+    if (_nodeDecision != null) {
+      builder.field(NODE_DECISION.getPreferredName());
+      _nodeDecision.toXContent(builder, params);
+    }
+    builder.field(NODE_ID.getPreferredName(), _nodeId);
+    builder.field(NODE_NAME.getPreferredName(), _nodeName);
+    if (_store != null) {
+      builder.field(STORE.getPreferredName());
+      _store.toXContent(builder, params);
+    }
+    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    builder.field(WEIGHT_RANKING.getPreferredName(), _weightRanking);
+    return builder;
   }
 
   @Override

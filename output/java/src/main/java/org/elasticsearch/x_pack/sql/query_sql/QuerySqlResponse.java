@@ -43,7 +43,17 @@ public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_columns != null) {
+      builder.array(COLUMNS.getPreferredName(), _columns);
+    }
+    builder.field(CURSOR.getPreferredName(), _cursor);
+    if (_rows != null) {
+      builder.array(ROWS.getPreferredName(), _rows);
+    }
+    if (_values != null) {
+      builder.array(VALUES.getPreferredName(), _values);
+    }
+    return builder;
   }
 
   @Override

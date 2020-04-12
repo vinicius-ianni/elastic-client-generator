@@ -25,7 +25,8 @@ public class CreateResponse  implements XContentable<CreateResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(IS_VALID.getPreferredName(), _isValid);
+    return builder;
   }
 
   @Override

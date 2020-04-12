@@ -25,7 +25,8 @@ public class TermQuery  implements XContentable<TermQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(VALUE.getPreferredName(), _value);
+    return builder;
   }
 
   @Override

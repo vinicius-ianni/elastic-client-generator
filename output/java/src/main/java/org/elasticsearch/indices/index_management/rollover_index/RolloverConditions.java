@@ -38,7 +38,13 @@ public class RolloverConditions  implements XContentable<RolloverConditions> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_maxAge != null) {
+      builder.field(MAX_AGE.getPreferredName());
+      _maxAge.toXContent(builder, params);
+    }
+    builder.field(MAX_DOCS.getPreferredName(), _maxDocs);
+    builder.field(MAX_SIZE.getPreferredName(), _maxSize);
+    return builder;
   }
 
   @Override

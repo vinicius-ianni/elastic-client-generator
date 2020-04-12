@@ -86,7 +86,36 @@ public class ClusterHealthRequest  implements XContentable<ClusterHealthRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    if (_level != null) {
+      builder.field(LEVEL.getPreferredName());
+      _level.toXContent(builder, params);
+    }
+    builder.field(LOCAL.getPreferredName(), _local);
+    if (_masterTimeout != null) {
+      builder.field(MASTER_TIMEOUT.getPreferredName());
+      _masterTimeout.toXContent(builder, params);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    if (_waitForEvents != null) {
+      builder.field(WAIT_FOR_EVENTS.getPreferredName());
+      _waitForEvents.toXContent(builder, params);
+    }
+    builder.field(WAIT_FOR_NO_INITIALIZING_SHARDS.getPreferredName(), _waitForNoInitializingShards);
+    builder.field(WAIT_FOR_NO_RELOCATING_SHARDS.getPreferredName(), _waitForNoRelocatingShards);
+    builder.field(WAIT_FOR_NODES.getPreferredName(), _waitForNodes);
+    if (_waitForStatus != null) {
+      builder.field(WAIT_FOR_STATUS.getPreferredName());
+      _waitForStatus.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

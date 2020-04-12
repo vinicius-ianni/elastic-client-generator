@@ -31,7 +31,15 @@ public class SslUsage  implements XContentable<SslUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_http != null) {
+      builder.field(HTTP.getPreferredName());
+      _http.toXContent(builder, params);
+    }
+    if (_transport != null) {
+      builder.field(TRANSPORT.getPreferredName());
+      _transport.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

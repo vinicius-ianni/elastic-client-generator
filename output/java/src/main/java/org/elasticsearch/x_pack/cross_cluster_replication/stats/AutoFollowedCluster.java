@@ -37,7 +37,11 @@ public class AutoFollowedCluster  implements XContentable<AutoFollowedCluster> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    builder.field(TIME_SINCE_LAST_CHECK_MILLIS.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_timeSinceLastCheckMillis.toInstant()));
+    builder.field(LAST_SEEN_METADATA_VERSION.getPreferredName(), _lastSeenMetadataVersion);
+    return builder;
   }
 
   @Override

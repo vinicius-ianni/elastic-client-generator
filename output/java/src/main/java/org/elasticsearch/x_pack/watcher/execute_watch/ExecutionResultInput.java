@@ -38,7 +38,19 @@ public class ExecutionResultInput  implements XContentable<ExecutionResultInput>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_payload != null) {
+      builder.field(PAYLOAD.getPreferredName());
+      _payload.toXContent(builder, params);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

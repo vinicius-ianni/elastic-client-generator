@@ -56,7 +56,25 @@ public class SlackActionMessageResult  implements XContentable<SlackActionMessag
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_message != null) {
+      builder.field(MESSAGE.getPreferredName());
+      _message.toXContent(builder, params);
+    }
+    builder.field(REASON.getPreferredName(), _reason);
+    if (_request != null) {
+      builder.field(REQUEST.getPreferredName());
+      _request.toXContent(builder, params);
+    }
+    if (_response != null) {
+      builder.field(RESPONSE.getPreferredName());
+      _response.toXContent(builder, params);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    builder.field(TO.getPreferredName(), _to);
+    return builder;
   }
 
   @Override

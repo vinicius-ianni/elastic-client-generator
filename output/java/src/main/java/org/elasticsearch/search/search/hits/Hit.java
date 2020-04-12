@@ -70,7 +70,34 @@ public class Hit<TDocument>  implements XContentable<Hit<TDocument>> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_explanation != null) {
+      builder.field(EXPLANATION.getPreferredName());
+      _explanation.toXContent(builder, params);
+    }
+    if (_fields != null) {
+      builder.field(FIELDS.getPreferredName());
+      _fields.toXContent(builder, params);
+    }
+    if (_highlight != null) {
+      builder.field(HIGHLIGHT.getPreferredName());
+      _highlight.toXContent(builder, params);
+    }
+    if (_innerHits != null) {
+      builder.field(INNER_HITS.getPreferredName());
+      _innerHits.toXContent(builder, params);
+    }
+    if (_matchedQueries != null) {
+      builder.array(MATCHED_QUERIES.getPreferredName(), _matchedQueries);
+    }
+    if (_nested != null) {
+      builder.field(NESTED.getPreferredName());
+      _nested.toXContent(builder, params);
+    }
+    builder.field(SCORE.getPreferredName(), _score);
+    if (_sort != null) {
+      builder.array(SORT.getPreferredName(), _sort);
+    }
+    return builder;
   }
 
   @Override

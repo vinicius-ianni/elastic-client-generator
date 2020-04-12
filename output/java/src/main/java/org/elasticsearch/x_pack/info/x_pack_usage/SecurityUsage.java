@@ -67,7 +67,39 @@ public class SecurityUsage  implements XContentable<SecurityUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_anonymous != null) {
+      builder.field(ANONYMOUS.getPreferredName());
+      _anonymous.toXContent(builder, params);
+    }
+    if (_audit != null) {
+      builder.field(AUDIT.getPreferredName());
+      _audit.toXContent(builder, params);
+    }
+    if (_ipfilter != null) {
+      builder.field(IPFILTER.getPreferredName());
+      _ipfilter.toXContent(builder, params);
+    }
+    if (_realms != null) {
+      builder.field(REALMS.getPreferredName());
+      _realms.toXContent(builder, params);
+    }
+    if (_roleMapping != null) {
+      builder.field(ROLE_MAPPING.getPreferredName());
+      _roleMapping.toXContent(builder, params);
+    }
+    if (_roles != null) {
+      builder.field(ROLES.getPreferredName());
+      _roles.toXContent(builder, params);
+    }
+    if (_ssl != null) {
+      builder.field(SSL.getPreferredName());
+      _ssl.toXContent(builder, params);
+    }
+    if (_systemKey != null) {
+      builder.field(SYSTEM_KEY.getPreferredName());
+      _systemKey.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

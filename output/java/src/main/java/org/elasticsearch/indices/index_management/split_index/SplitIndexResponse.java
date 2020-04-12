@@ -25,7 +25,8 @@ public class SplitIndexResponse  implements XContentable<SplitIndexResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    return builder;
   }
 
   @Override

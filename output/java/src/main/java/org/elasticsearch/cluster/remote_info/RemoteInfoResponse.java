@@ -26,7 +26,11 @@ public class RemoteInfoResponse extends DictionaryResponseBase<String, RemoteInf
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_remotes != null) {
+      builder.field(REMOTES.getPreferredName());
+      _remotes.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

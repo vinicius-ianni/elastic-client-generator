@@ -56,7 +56,16 @@ public class OverallBucket  implements XContentable<OverallBucket> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUCKET_SPAN.getPreferredName(), _bucketSpan);
+    builder.field(IS_INTERIM.getPreferredName(), _isInterim);
+    if (_jobs != null) {
+      builder.array(JOBS.getPreferredName(), _jobs);
+    }
+    builder.field(OVERALL_SCORE.getPreferredName(), _overallScore);
+    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    builder.field(TIMESTAMP.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    return builder;
   }
 
   @Override

@@ -25,7 +25,10 @@ public class FollowIndexStatsResponse  implements XContentable<FollowIndexStatsR
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_indices != null) {
+      builder.array(INDICES.getPreferredName(), _indices);
+    }
+    return builder;
   }
 
   @Override

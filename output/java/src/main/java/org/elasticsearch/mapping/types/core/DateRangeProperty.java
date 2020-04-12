@@ -25,7 +25,8 @@ public class DateRangeProperty  implements XContentable<DateRangeProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FORMAT.getPreferredName(), _format);
+    return builder;
   }
 
   @Override

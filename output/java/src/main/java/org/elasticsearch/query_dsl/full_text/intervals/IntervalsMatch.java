@@ -50,7 +50,13 @@ public class IntervalsMatch  implements XContentable<IntervalsMatch> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(MAX_GAPS.getPreferredName(), _maxGaps);
+    builder.field(ORDERED.getPreferredName(), _ordered);
+    builder.field(QUERY.getPreferredName(), _query);
+    builder.field(USE_FIELD.getPreferredName());
+    _useField.toXContent(builder, params);
+    return builder;
   }
 
   @Override

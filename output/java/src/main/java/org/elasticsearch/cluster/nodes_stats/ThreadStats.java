@@ -31,7 +31,9 @@ public class ThreadStats  implements XContentable<ThreadStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(COUNT.getPreferredName(), _count);
+    builder.field(PEAK_COUNT.getPreferredName(), _peakCount);
+    return builder;
   }
 
   @Override

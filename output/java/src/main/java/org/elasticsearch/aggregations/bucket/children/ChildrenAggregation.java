@@ -25,7 +25,9 @@ public class ChildrenAggregation  implements XContentable<ChildrenAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(TYPE.getPreferredName());
+    _type.toXContent(builder, params);
+    return builder;
   }
 
   @Override

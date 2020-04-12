@@ -25,7 +25,11 @@ public class PutLifecycleRequest  implements XContentable<PutLifecycleRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_policy != null) {
+      builder.field(POLICY.getPreferredName());
+      _policy.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

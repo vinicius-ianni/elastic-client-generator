@@ -235,7 +235,78 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName());
+      _query.toXContent(builder, params);
+    }
+    if (_slice != null) {
+      builder.field(SLICE.getPreferredName());
+      _slice.toXContent(builder, params);
+    }
+    builder.field(MAX_DOCS.getPreferredName(), _maxDocs);
+    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    if (_conflicts != null) {
+      builder.field(CONFLICTS.getPreferredName());
+      _conflicts.toXContent(builder, params);
+    }
+    if (_defaultOperator != null) {
+      builder.field(DEFAULT_OPERATOR.getPreferredName());
+      _defaultOperator.toXContent(builder, params);
+    }
+    builder.field(DF.getPreferredName(), _df);
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    builder.field(FROM.getPreferredName(), _from);
+    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    builder.field(LENIENT.getPreferredName(), _lenient);
+    builder.field(PREFERENCE.getPreferredName(), _preference);
+    builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
+    builder.field(REFRESH.getPreferredName(), _refresh);
+    builder.field(REQUEST_CACHE.getPreferredName(), _requestCache);
+    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    if (_scroll != null) {
+      builder.field(SCROLL.getPreferredName());
+      _scroll.toXContent(builder, params);
+    }
+    builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    if (_searchTimeout != null) {
+      builder.field(SEARCH_TIMEOUT.getPreferredName());
+      _searchTimeout.toXContent(builder, params);
+    }
+    if (_searchType != null) {
+      builder.field(SEARCH_TYPE.getPreferredName());
+      _searchType.toXContent(builder, params);
+    }
+    builder.field(SIZE.getPreferredName(), _size);
+    builder.field(SLICES.getPreferredName(), _slices);
+    if (_sort != null) {
+      builder.array(SORT.getPreferredName(), _sort);
+    }
+    builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    if (_sourceExcludes != null) {
+      builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
+    }
+    if (_sourceIncludes != null) {
+      builder.array(SOURCE_INCLUDES.getPreferredName(), _sourceIncludes);
+    }
+    if (_stats != null) {
+      builder.array(STATS.getPreferredName(), _stats);
+    }
+    builder.field(TERMINATE_AFTER.getPreferredName(), _terminateAfter);
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    return builder;
   }
 
   @Override

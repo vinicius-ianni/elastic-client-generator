@@ -25,7 +25,8 @@ public class CompletionStats  implements XContentable<CompletionStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    return builder;
   }
 
   @Override

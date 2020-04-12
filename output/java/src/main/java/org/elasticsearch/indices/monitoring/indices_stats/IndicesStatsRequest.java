@@ -74,7 +74,30 @@ public class IndicesStatsRequest  implements XContentable<IndicesStatsRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_completionFields != null) {
+      builder.array(COMPLETION_FIELDS.getPreferredName(), _completionFields);
+    }
+    if (_expandWildcards != null) {
+      builder.field(EXPAND_WILDCARDS.getPreferredName());
+      _expandWildcards.toXContent(builder, params);
+    }
+    if (_fielddataFields != null) {
+      builder.array(FIELDDATA_FIELDS.getPreferredName(), _fielddataFields);
+    }
+    if (_fields != null) {
+      builder.array(FIELDS.getPreferredName(), _fields);
+    }
+    builder.field(FORBID_CLOSED_INDICES.getPreferredName(), _forbidClosedIndices);
+    if (_groups != null) {
+      builder.array(GROUPS.getPreferredName(), _groups);
+    }
+    builder.field(INCLUDE_SEGMENT_FILE_SIZES.getPreferredName(), _includeSegmentFileSizes);
+    builder.field(INCLUDE_UNLOADED_SEGMENTS.getPreferredName(), _includeUnloadedSegments);
+    if (_level != null) {
+      builder.field(LEVEL.getPreferredName());
+      _level.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

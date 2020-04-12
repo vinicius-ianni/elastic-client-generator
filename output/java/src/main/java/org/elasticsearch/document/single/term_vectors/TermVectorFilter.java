@@ -61,7 +61,14 @@ public class TermVectorFilter  implements XContentable<TermVectorFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MAX_DOC_FREQ.getPreferredName(), _maxDocFreq);
+    builder.field(MAX_NUM_TERMS.getPreferredName(), _maxNumTerms);
+    builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
+    builder.field(MAX_WORD_LENGTH.getPreferredName(), _maxWordLength);
+    builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
+    builder.field(MIN_TERM_FREQ.getPreferredName(), _minTermFreq);
+    builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    return builder;
   }
 
   @Override

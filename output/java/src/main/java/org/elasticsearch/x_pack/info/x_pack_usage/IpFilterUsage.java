@@ -31,7 +31,9 @@ public class IpFilterUsage  implements XContentable<IpFilterUsage> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(HTTP.getPreferredName(), _http);
+    builder.field(TRANSPORT.getPreferredName(), _transport);
+    return builder;
   }
 
   @Override

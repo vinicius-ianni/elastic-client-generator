@@ -26,7 +26,11 @@ public class GetUserResponse extends DictionaryResponseBase<String, XPackUser> i
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_users != null) {
+      builder.field(USERS.getPreferredName());
+      _users.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

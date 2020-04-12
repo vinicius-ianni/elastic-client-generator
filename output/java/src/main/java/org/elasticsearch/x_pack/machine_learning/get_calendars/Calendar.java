@@ -37,7 +37,12 @@ public class Calendar  implements XContentable<Calendar> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CALENDAR_ID.getPreferredName(), _calendarId);
+    if (_jobIds != null) {
+      builder.array(JOB_IDS.getPreferredName(), _jobIds);
+    }
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    return builder;
   }
 
   @Override

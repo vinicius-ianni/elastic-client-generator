@@ -37,7 +37,10 @@ public class ShardSequenceNumber  implements XContentable<ShardSequenceNumber> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(GLOBAL_CHECKPOINT.getPreferredName(), _globalCheckpoint);
+    builder.field(LOCAL_CHECKPOINT.getPreferredName(), _localCheckpoint);
+    builder.field(MAX_SEQ_NO.getPreferredName(), _maxSeqNo);
+    return builder;
   }
 
   @Override

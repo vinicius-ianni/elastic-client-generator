@@ -111,7 +111,39 @@ public class Job  implements XContentable<Job> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_analysisConfig != null) {
+      builder.field(ANALYSIS_CONFIG.getPreferredName());
+      _analysisConfig.toXContent(builder, params);
+    }
+    if (_analysisLimits != null) {
+      builder.field(ANALYSIS_LIMITS.getPreferredName());
+      _analysisLimits.toXContent(builder, params);
+    }
+    if (_backgroundPersistInterval != null) {
+      builder.field(BACKGROUND_PERSIST_INTERVAL.getPreferredName());
+      _backgroundPersistInterval.toXContent(builder, params);
+    }
+    builder.field(CREATE_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_createTime.toInstant()));
+    if (_dataDescription != null) {
+      builder.field(DATA_DESCRIPTION.getPreferredName());
+      _dataDescription.toXContent(builder, params);
+    }
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    builder.field(FINISHED_TIME.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_finishedTime.toInstant()));
+    builder.field(JOB_ID.getPreferredName(), _jobId);
+    builder.field(JOB_TYPE.getPreferredName(), _jobType);
+    if (_modelPlot != null) {
+      builder.field(MODEL_PLOT.getPreferredName());
+      _modelPlot.toXContent(builder, params);
+    }
+    builder.field(MODEL_SNAPSHOT_ID.getPreferredName(), _modelSnapshotId);
+    builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
+    builder.field(RENORMALIZATION_WINDOW_DAYS.getPreferredName(), _renormalizationWindowDays);
+    builder.field(RESULTS_INDEX_NAME.getPreferredName(), _resultsIndexName);
+    builder.field(RESULTS_RETENTION_DAYS.getPreferredName(), _resultsRetentionDays);
+    return builder;
   }
 
   @Override

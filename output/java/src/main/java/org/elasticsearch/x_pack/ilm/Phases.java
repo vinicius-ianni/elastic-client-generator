@@ -43,7 +43,23 @@ public class Phases  implements XContentable<Phases> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_cold != null) {
+      builder.field(COLD.getPreferredName());
+      _cold.toXContent(builder, params);
+    }
+    if (_delete != null) {
+      builder.field(DELETE.getPreferredName());
+      _delete.toXContent(builder, params);
+    }
+    if (_hot != null) {
+      builder.field(HOT.getPreferredName());
+      _hot.toXContent(builder, params);
+    }
+    if (_warm != null) {
+      builder.field(WARM.getPreferredName());
+      _warm.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

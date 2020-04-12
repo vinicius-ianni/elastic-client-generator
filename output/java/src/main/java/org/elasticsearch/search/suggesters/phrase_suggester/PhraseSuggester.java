@@ -99,7 +99,31 @@ public class PhraseSuggester  implements XContentable<PhraseSuggester> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_collate != null) {
+      builder.field(COLLATE.getPreferredName());
+      _collate.toXContent(builder, params);
+    }
+    builder.field(CONFIDENCE.getPreferredName(), _confidence);
+    if (_directGenerator != null) {
+      builder.array(DIRECT_GENERATOR.getPreferredName(), _directGenerator);
+    }
+    builder.field(FORCE_UNIGRAMS.getPreferredName(), _forceUnigrams);
+    builder.field(GRAM_SIZE.getPreferredName(), _gramSize);
+    if (_highlight != null) {
+      builder.field(HIGHLIGHT.getPreferredName());
+      _highlight.toXContent(builder, params);
+    }
+    builder.field(MAX_ERRORS.getPreferredName(), _maxErrors);
+    builder.field(REAL_WORD_ERROR_LIKELIHOOD.getPreferredName(), _realWordErrorLikelihood);
+    builder.field(SEPARATOR.getPreferredName(), _separator);
+    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    if (_smoothing != null) {
+      builder.field(SMOOTHING.getPreferredName());
+      _smoothing.toXContent(builder, params);
+    }
+    builder.field(TEXT.getPreferredName(), _text);
+    builder.field(TOKEN_LIMIT.getPreferredName(), _tokenLimit);
+    return builder;
   }
 
   @Override

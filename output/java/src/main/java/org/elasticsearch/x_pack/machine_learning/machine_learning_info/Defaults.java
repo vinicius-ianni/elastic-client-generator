@@ -31,7 +31,15 @@ public class Defaults  implements XContentable<Defaults> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_anomalyDetectors != null) {
+      builder.field(ANOMALY_DETECTORS.getPreferredName());
+      _anomalyDetectors.toXContent(builder, params);
+    }
+    if (_datafeeds != null) {
+      builder.field(DATAFEEDS.getPreferredName());
+      _datafeeds.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

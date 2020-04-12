@@ -61,7 +61,16 @@ public class ApiKeys  implements XContentable<ApiKeys> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CREATION.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_creation.toInstant()));
+    builder.field(EXPIRATION.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_expiration.toInstant()));
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(INVALIDATED.getPreferredName(), _invalidated);
+    builder.field(NAME.getPreferredName(), _name);
+    builder.field(REALM.getPreferredName(), _realm);
+    builder.field(USERNAME.getPreferredName(), _username);
+    return builder;
   }
 
   @Override

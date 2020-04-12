@@ -31,7 +31,15 @@ public class TermVector  implements XContentable<TermVector> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_fieldStatistics != null) {
+      builder.field(FIELD_STATISTICS.getPreferredName());
+      _fieldStatistics.toXContent(builder, params);
+    }
+    if (_terms != null) {
+      builder.field(TERMS.getPreferredName());
+      _terms.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

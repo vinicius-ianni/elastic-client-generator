@@ -37,7 +37,12 @@ public class KeepWordsTokenFilter  implements XContentable<KeepWordsTokenFilter>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_keepWords != null) {
+      builder.array(KEEP_WORDS.getPreferredName(), _keepWords);
+    }
+    builder.field(KEEP_WORDS_CASE.getPreferredName(), _keepWordsCase);
+    builder.field(KEEP_WORDS_PATH.getPreferredName(), _keepWordsPath);
+    return builder;
   }
 
   @Override

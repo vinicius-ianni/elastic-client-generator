@@ -25,7 +25,8 @@ public class AnalysisMemoryLimit  implements XContentable<AnalysisMemoryLimit> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MODEL_MEMORY_LIMIT.getPreferredName(), _modelMemoryLimit);
+    return builder;
   }
 
   @Override

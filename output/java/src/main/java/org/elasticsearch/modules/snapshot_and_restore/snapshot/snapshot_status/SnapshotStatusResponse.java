@@ -25,7 +25,10 @@ public class SnapshotStatusResponse  implements XContentable<SnapshotStatusRespo
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_snapshots != null) {
+      builder.array(SNAPSHOTS.getPreferredName(), _snapshots);
+    }
+    return builder;
   }
 
   @Override

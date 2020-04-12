@@ -31,7 +31,11 @@ public class MappingCharFilter  implements XContentable<MappingCharFilter> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_mappings != null) {
+      builder.array(MAPPINGS.getPreferredName(), _mappings);
+    }
+    builder.field(MAPPINGS_PATH.getPreferredName(), _mappingsPath);
+    return builder;
   }
 
   @Override

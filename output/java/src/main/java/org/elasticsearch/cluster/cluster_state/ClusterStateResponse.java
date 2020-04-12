@@ -55,7 +55,15 @@ public class ClusterStateResponse  implements XContentable<ClusterStateResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_state != null) {
+      builder.array(STATE.getPreferredName(), _state);
+    }
+    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    builder.field(CLUSTER_UUID.getPreferredName(), _clusterUuid);
+    builder.field(MASTER_NODE.getPreferredName(), _masterNode);
+    builder.field(STATE_UUID.getPreferredName(), _stateUuid);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

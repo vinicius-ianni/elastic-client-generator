@@ -91,7 +91,19 @@ public class CatHealthRecord  implements XContentable<CatHealthRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CLUSTER.getPreferredName(), _cluster);
+    builder.field(EPOCH.getPreferredName(), _epoch);
+    builder.field(INIT.getPreferredName(), _init);
+    builder.field(NODE_DATA.getPreferredName(), _nodeData);
+    builder.field(NODE_TOTAL.getPreferredName(), _nodeTotal);
+    builder.field(PENDING_TASKS.getPreferredName(), _pendingTasks);
+    builder.field(PRI.getPreferredName(), _pri);
+    builder.field(RELO.getPreferredName(), _relo);
+    builder.field(SHARDS.getPreferredName(), _shards);
+    builder.field(STATUS.getPreferredName(), _status);
+    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    builder.field(UNASSIGN.getPreferredName(), _unassign);
+    return builder;
   }
 
   @Override

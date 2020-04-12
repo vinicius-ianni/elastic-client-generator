@@ -67,7 +67,15 @@ public class HitMetadata<TDocument>  implements XContentable<HitMetadata<TDocume
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    builder.field(ROUTING.getPreferredName(), _routing);
+    builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    builder.field(SOURCE.getPreferredName(), _source);
+    builder.field(TYPE.getPreferredName(), _type);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

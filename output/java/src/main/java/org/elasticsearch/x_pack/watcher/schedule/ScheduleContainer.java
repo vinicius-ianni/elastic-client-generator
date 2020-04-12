@@ -61,7 +61,32 @@ public class ScheduleContainer  implements XContentable<ScheduleContainer> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_cron != null) {
+      builder.field(CRON.getPreferredName());
+      _cron.toXContent(builder, params);
+    }
+    if (_daily != null) {
+      builder.field(DAILY.getPreferredName());
+      _daily.toXContent(builder, params);
+    }
+    if (_hourly != null) {
+      builder.field(HOURLY.getPreferredName());
+      _hourly.toXContent(builder, params);
+    }
+    if (_interval != null) {
+      builder.field(INTERVAL.getPreferredName());
+      _interval.toXContent(builder, params);
+    }
+    if (_monthly != null) {
+      builder.array(MONTHLY.getPreferredName(), _monthly);
+    }
+    if (_weekly != null) {
+      builder.array(WEEKLY.getPreferredName(), _weekly);
+    }
+    if (_yearly != null) {
+      builder.array(YEARLY.getPreferredName(), _yearly);
+    }
+    return builder;
   }
 
   @Override

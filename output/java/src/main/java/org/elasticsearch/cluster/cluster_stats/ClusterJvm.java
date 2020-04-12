@@ -44,7 +44,16 @@ public class ClusterJvm  implements XContentable<ClusterJvm> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MAX_UPTIME_IN_MILLIS.getPreferredName(), _maxUptimeInMillis);
+    if (_mem != null) {
+      builder.field(MEM.getPreferredName());
+      _mem.toXContent(builder, params);
+    }
+    builder.field(THREADS.getPreferredName(), _threads);
+    if (_versions != null) {
+      builder.array(VERSIONS.getPreferredName(), _versions);
+    }
+    return builder;
   }
 
   @Override

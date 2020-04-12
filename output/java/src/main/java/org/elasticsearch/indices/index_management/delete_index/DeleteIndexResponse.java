@@ -20,7 +20,8 @@ public class DeleteIndexResponse  implements XContentable<DeleteIndexResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    
+    return builder;
   }
 
   @Override

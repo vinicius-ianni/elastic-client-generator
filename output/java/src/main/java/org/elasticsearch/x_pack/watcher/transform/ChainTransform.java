@@ -25,7 +25,10 @@ public class ChainTransform  implements XContentable<ChainTransform> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_transforms != null) {
+      builder.array(TRANSFORMS.getPreferredName(), _transforms);
+    }
+    return builder;
   }
 
   @Override

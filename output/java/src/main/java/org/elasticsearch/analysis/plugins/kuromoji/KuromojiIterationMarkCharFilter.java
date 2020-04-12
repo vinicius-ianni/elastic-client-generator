@@ -31,7 +31,9 @@ public class KuromojiIterationMarkCharFilter  implements XContentable<KuromojiIt
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(NORMALIZE_KANA.getPreferredName(), _normalizeKana);
+    builder.field(NORMALIZE_KANJI.getPreferredName(), _normalizeKanji);
+    return builder;
   }
 
   @Override

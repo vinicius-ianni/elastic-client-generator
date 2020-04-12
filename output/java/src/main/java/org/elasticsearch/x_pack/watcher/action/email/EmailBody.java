@@ -31,7 +31,9 @@ public class EmailBody  implements XContentable<EmailBody> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(HTML.getPreferredName(), _html);
+    builder.field(TEXT.getPreferredName(), _text);
+    return builder;
   }
 
   @Override

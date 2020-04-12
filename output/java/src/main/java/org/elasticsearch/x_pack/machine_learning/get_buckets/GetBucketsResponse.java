@@ -32,7 +32,11 @@ public class GetBucketsResponse  implements XContentable<GetBucketsResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_buckets != null) {
+      builder.array(BUCKETS.getPreferredName(), _buckets);
+    }
+    builder.field(COUNT.getPreferredName(), _count);
+    return builder;
   }
 
   @Override

@@ -31,7 +31,14 @@ public class ConditionTokenFilter  implements XContentable<ConditionTokenFilter>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    if (_filter != null) {
+      builder.array(FILTER.getPreferredName(), _filter);
+    }
+    return builder;
   }
 
   @Override

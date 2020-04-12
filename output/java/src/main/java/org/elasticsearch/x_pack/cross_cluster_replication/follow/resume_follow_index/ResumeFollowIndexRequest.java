@@ -80,7 +80,23 @@ public class ResumeFollowIndexRequest  implements XContentable<ResumeFollowIndex
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(MAX_READ_REQUEST_OPERATION_COUNT.getPreferredName(), _maxReadRequestOperationCount);
+    builder.field(MAX_OUTSTANDING_READ_REQUESTS.getPreferredName(), _maxOutstandingReadRequests);
+    builder.field(MAX_READ_REQUEST_SIZE.getPreferredName(), _maxReadRequestSize);
+    builder.field(MAX_WRITE_REQUEST_OPERATION_COUNT.getPreferredName(), _maxWriteRequestOperationCount);
+    builder.field(MAX_WRITE_REQUEST_SIZE.getPreferredName(), _maxWriteRequestSize);
+    builder.field(MAX_OUTSTANDING_WRITE_REQUESTS.getPreferredName(), _maxOutstandingWriteRequests);
+    builder.field(MAX_WRITE_BUFFER_COUNT.getPreferredName(), _maxWriteBufferCount);
+    builder.field(MAX_WRITE_BUFFER_SIZE.getPreferredName(), _maxWriteBufferSize);
+    if (_maxRetryDelay != null) {
+      builder.field(MAX_RETRY_DELAY.getPreferredName());
+      _maxRetryDelay.toXContent(builder, params);
+    }
+    if (_readPollTimeout != null) {
+      builder.field(READ_POLL_TIMEOUT.getPreferredName());
+      _readPollTimeout.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

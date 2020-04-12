@@ -31,7 +31,9 @@ public class ScriptStats  implements XContentable<ScriptStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CACHE_EVICTIONS.getPreferredName(), _cacheEvictions);
+    builder.field(COMPILATIONS.getPreferredName(), _compilations);
+    return builder;
   }
 
   @Override

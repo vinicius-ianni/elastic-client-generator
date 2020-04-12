@@ -37,7 +37,13 @@ public class PagerDutyContext  implements XContentable<PagerDutyContext> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(HREF.getPreferredName(), _href);
+    builder.field(SRC.getPreferredName(), _src);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName());
+      _type.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

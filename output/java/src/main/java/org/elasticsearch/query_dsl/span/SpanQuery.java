@@ -88,7 +88,47 @@ public class SpanQuery  implements XContentable<SpanQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_spanContaining != null) {
+      builder.field(SPAN_CONTAINING.getPreferredName());
+      _spanContaining.toXContent(builder, params);
+    }
+    if (_fieldMaskingSpan != null) {
+      builder.field(FIELD_MASKING_SPAN.getPreferredName());
+      _fieldMaskingSpan.toXContent(builder, params);
+    }
+    if (_spanFirst != null) {
+      builder.field(SPAN_FIRST.getPreferredName());
+      _spanFirst.toXContent(builder, params);
+    }
+    if (_spanGap != null) {
+      builder.field(SPAN_GAP.getPreferredName());
+      _spanGap.toXContent(builder, params);
+    }
+    if (_spanMulti != null) {
+      builder.field(SPAN_MULTI.getPreferredName());
+      _spanMulti.toXContent(builder, params);
+    }
+    if (_spanNear != null) {
+      builder.field(SPAN_NEAR.getPreferredName());
+      _spanNear.toXContent(builder, params);
+    }
+    if (_spanNot != null) {
+      builder.field(SPAN_NOT.getPreferredName());
+      _spanNot.toXContent(builder, params);
+    }
+    if (_spanOr != null) {
+      builder.field(SPAN_OR.getPreferredName());
+      _spanOr.toXContent(builder, params);
+    }
+    if (_spanTerm != null) {
+      builder.field(SPAN_TERM.getPreferredName());
+      _spanTerm.toXContent(builder, params);
+    }
+    if (_spanWithin != null) {
+      builder.field(SPAN_WITHIN.getPreferredName());
+      _spanWithin.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

@@ -38,7 +38,11 @@ public class Suggester  implements XContentable<Suggester> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(FIELD.getPreferredName());
+    _field.toXContent(builder, params);
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

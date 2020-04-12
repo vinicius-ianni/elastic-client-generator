@@ -37,7 +37,10 @@ public class StepKey  implements XContentable<StepKey> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ACTION.getPreferredName(), _action);
+    builder.field(NAME.getPreferredName(), _name);
+    builder.field(PHASE.getPreferredName(), _phase);
+    return builder;
   }
 
   @Override

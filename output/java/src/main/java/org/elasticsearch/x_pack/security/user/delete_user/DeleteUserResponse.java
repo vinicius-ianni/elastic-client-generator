@@ -25,7 +25,8 @@ public class DeleteUserResponse  implements XContentable<DeleteUserResponse> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FOUND.getPreferredName(), _found);
+    return builder;
   }
 
   @Override

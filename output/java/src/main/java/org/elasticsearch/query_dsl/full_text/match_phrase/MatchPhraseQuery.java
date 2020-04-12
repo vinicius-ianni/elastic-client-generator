@@ -37,7 +37,10 @@ public class MatchPhraseQuery  implements XContentable<MatchPhraseQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(QUERY.getPreferredName(), _query);
+    builder.field(SLOP.getPreferredName(), _slop);
+    return builder;
   }
 
   @Override

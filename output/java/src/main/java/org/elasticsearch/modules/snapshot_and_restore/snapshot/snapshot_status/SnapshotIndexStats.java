@@ -37,7 +37,19 @@ public class SnapshotIndexStats  implements XContentable<SnapshotIndexStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName());
+      _shards.toXContent(builder, params);
+    }
+    if (_shardsStats != null) {
+      builder.field(SHARDS_STATS.getPreferredName());
+      _shardsStats.toXContent(builder, params);
+    }
+    if (_stats != null) {
+      builder.field(STATS.getPreferredName());
+      _stats.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

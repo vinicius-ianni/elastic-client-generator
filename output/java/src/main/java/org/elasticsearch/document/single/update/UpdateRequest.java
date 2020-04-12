@@ -120,7 +120,36 @@ public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(DETECT_NOOP.getPreferredName(), _detectNoop);
+    builder.field(DOC.getPreferredName(), _doc);
+    builder.field(DOC_AS_UPSERT.getPreferredName(), _docAsUpsert);
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName());
+      _script.toXContent(builder, params);
+    }
+    builder.field(SCRIPTED_UPSERT.getPreferredName(), _scriptedUpsert);
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName());
+      _source.map(builder::value, r-> r.toXContent(builder, params));
+    }
+    builder.field(UPSERT.getPreferredName(), _upsert);
+    builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
+    builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    builder.field(LANG.getPreferredName(), _lang);
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName());
+      _refresh.toXContent(builder, params);
+    }
+    builder.field(RETRY_ON_CONFLICT.getPreferredName(), _retryOnConflict);
+    builder.field(ROUTING.getPreferredName());
+    _routing.toXContent(builder, params);
+    builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName());
+      _timeout.toXContent(builder, params);
+    }
+    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    return builder;
   }
 
   @Override

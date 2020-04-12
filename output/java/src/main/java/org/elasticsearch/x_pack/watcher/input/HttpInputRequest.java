@@ -99,7 +99,44 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_auth != null) {
+      builder.field(AUTH.getPreferredName());
+      _auth.toXContent(builder, params);
+    }
+    builder.field(BODY.getPreferredName(), _body);
+    if (_connectionTimeout != null) {
+      builder.field(CONNECTION_TIMEOUT.getPreferredName());
+      _connectionTimeout.toXContent(builder, params);
+    }
+    if (_headers != null) {
+      builder.field(HEADERS.getPreferredName());
+      _headers.toXContent(builder, params);
+    }
+    builder.field(HOST.getPreferredName(), _host);
+    if (_method != null) {
+      builder.field(METHOD.getPreferredName());
+      _method.toXContent(builder, params);
+    }
+    if (_params != null) {
+      builder.field(PARAMS.getPreferredName());
+      _params.toXContent(builder, params);
+    }
+    builder.field(PATH.getPreferredName(), _path);
+    builder.field(PORT.getPreferredName(), _port);
+    if (_proxy != null) {
+      builder.field(PROXY.getPreferredName());
+      _proxy.toXContent(builder, params);
+    }
+    if (_readTimeout != null) {
+      builder.field(READ_TIMEOUT.getPreferredName());
+      _readTimeout.toXContent(builder, params);
+    }
+    if (_scheme != null) {
+      builder.field(SCHEME.getPreferredName());
+      _scheme.toXContent(builder, params);
+    }
+    builder.field(URL.getPreferredName(), _url);
+    return builder;
   }
 
   @Override

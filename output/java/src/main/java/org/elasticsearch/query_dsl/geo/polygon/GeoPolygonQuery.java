@@ -31,7 +31,14 @@ public class GeoPolygonQuery  implements XContentable<GeoPolygonQuery> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_points != null) {
+      builder.array(POINTS.getPreferredName(), _points);
+    }
+    if (_validationMethod != null) {
+      builder.field(VALIDATION_METHOD.getPreferredName());
+      _validationMethod.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

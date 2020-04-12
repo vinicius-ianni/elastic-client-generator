@@ -31,7 +31,9 @@ public class NativeCodeInformation  implements XContentable<NativeCodeInformatio
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BUILD_HASH.getPreferredName(), _buildHash);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

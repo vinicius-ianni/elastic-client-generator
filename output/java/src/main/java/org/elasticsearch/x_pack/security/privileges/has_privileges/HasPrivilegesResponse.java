@@ -49,7 +49,20 @@ public class HasPrivilegesResponse  implements XContentable<HasPrivilegesRespons
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_application != null) {
+      builder.field(APPLICATION.getPreferredName());
+      _application.toXContent(builder, params);
+    }
+    if (_cluster != null) {
+      builder.field(CLUSTER.getPreferredName());
+      _cluster.toXContent(builder, params);
+    }
+    builder.field(HAS_ALL_REQUESTED.getPreferredName(), _hasAllRequested);
+    if (_index != null) {
+      builder.array(INDEX.getPreferredName(), _index);
+    }
+    builder.field(USERNAME.getPreferredName(), _username);
+    return builder;
   }
 
   @Override

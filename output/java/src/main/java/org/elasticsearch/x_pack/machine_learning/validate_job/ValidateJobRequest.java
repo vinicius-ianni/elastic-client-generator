@@ -63,7 +63,27 @@ public class ValidateJobRequest  implements XContentable<ValidateJobRequest> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_analysisConfig != null) {
+      builder.field(ANALYSIS_CONFIG.getPreferredName());
+      _analysisConfig.toXContent(builder, params);
+    }
+    if (_analysisLimits != null) {
+      builder.field(ANALYSIS_LIMITS.getPreferredName());
+      _analysisLimits.toXContent(builder, params);
+    }
+    if (_dataDescription != null) {
+      builder.field(DATA_DESCRIPTION.getPreferredName());
+      _dataDescription.toXContent(builder, params);
+    }
+    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_modelPlot != null) {
+      builder.field(MODEL_PLOT.getPreferredName());
+      _modelPlot.toXContent(builder, params);
+    }
+    builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
+    builder.field(RESULTS_INDEX_NAME.getPreferredName());
+    _resultsIndexName.toXContent(builder, params);
+    return builder;
   }
 
   @Override

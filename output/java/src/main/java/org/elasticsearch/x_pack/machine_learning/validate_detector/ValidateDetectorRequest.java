@@ -25,7 +25,11 @@ public class ValidateDetectorRequest  implements XContentable<ValidateDetectorRe
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_detector != null) {
+      builder.field(DETECTOR.getPreferredName());
+      _detector.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

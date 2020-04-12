@@ -38,7 +38,15 @@ public class FileSystemStats  implements XContentable<FileSystemStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_data != null) {
+      builder.array(DATA.getPreferredName(), _data);
+    }
+    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName());
+      _total.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

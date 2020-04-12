@@ -43,7 +43,11 @@ public class TokenCountProperty  implements XContentable<TokenCountProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    builder.field(BOOST.getPreferredName(), _boost);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    return builder;
   }
 
   @Override

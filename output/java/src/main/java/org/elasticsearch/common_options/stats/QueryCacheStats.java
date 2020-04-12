@@ -61,7 +61,14 @@ public class QueryCacheStats  implements XContentable<QueryCacheStats> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(CACHE_COUNT.getPreferredName(), _cacheCount);
+    builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
+    builder.field(EVICTIONS.getPreferredName(), _evictions);
+    builder.field(HIT_COUNT.getPreferredName(), _hitCount);
+    builder.field(MEMORY_SIZE_IN_BYTES.getPreferredName(), _memorySizeInBytes);
+    builder.field(MISS_COUNT.getPreferredName(), _missCount);
+    builder.field(TOTAL_COUNT.getPreferredName(), _totalCount);
+    return builder;
   }
 
   @Override

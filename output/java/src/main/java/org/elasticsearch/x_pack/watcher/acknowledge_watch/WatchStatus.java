@@ -50,7 +50,20 @@ public class WatchStatus  implements XContentable<WatchStatus> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_actions != null) {
+      builder.field(ACTIONS.getPreferredName());
+      _actions.toXContent(builder, params);
+    }
+    builder.field(LAST_CHECKED.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_lastChecked.toInstant()));
+    builder.field(LAST_MET_CONDITION.getPreferredName(),
+      DateTimeFormatter.ISO_DATE.format(_lastMetCondition.toInstant()));
+    if (_state != null) {
+      builder.field(STATE.getPreferredName());
+      _state.toXContent(builder, params);
+    }
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

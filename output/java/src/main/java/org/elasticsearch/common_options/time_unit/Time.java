@@ -50,7 +50,21 @@ public class Time  implements XContentable<Time> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FACTOR.getPreferredName(), _factor);
+    if (_interval != null) {
+      builder.field(INTERVAL.getPreferredName());
+      _interval.toXContent(builder, params);
+    }
+    builder.field(MILLISECONDS.getPreferredName(), _milliseconds);
+    if (_minusOne != null) {
+      builder.field(MINUS_ONE.getPreferredName());
+      _minusOne.toXContent(builder, params);
+    }
+    if (_zero != null) {
+      builder.field(ZERO.getPreferredName());
+      _zero.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

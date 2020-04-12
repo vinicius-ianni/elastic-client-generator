@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const naming_1 = require("./naming");
 const imports_1 = require("./imports");
 const types_parser_read_1 = require("./types-parser-read");
+const types_parser_write_1 = require("./types-parser-write");
 const $typeExtends = (type) => {
     return type.inherits.length === 0
         ? ``
@@ -26,7 +27,8 @@ const $xCContentImplementation = (type) => {
     return `
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    ${types_parser_write_1.$writeProperties(type)}
+    return builder;
   }
 
   @Override

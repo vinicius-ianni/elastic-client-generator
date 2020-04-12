@@ -55,7 +55,13 @@ public class CatFielddataRecord  implements XContentable<CatFielddataRecord> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(FIELD.getPreferredName(), _field);
+    builder.field(HOST.getPreferredName(), _host);
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(IP.getPreferredName(), _ip);
+    builder.field(NODE.getPreferredName(), _node);
+    builder.field(SIZE.getPreferredName(), _size);
+    return builder;
   }
 
   @Override

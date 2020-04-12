@@ -31,7 +31,11 @@ public class StemmerOverrideTokenFilter  implements XContentable<StemmerOverride
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_rules != null) {
+      builder.array(RULES.getPreferredName(), _rules);
+    }
+    builder.field(RULES_PATH.getPreferredName(), _rulesPath);
+    return builder;
   }
 
   @Override

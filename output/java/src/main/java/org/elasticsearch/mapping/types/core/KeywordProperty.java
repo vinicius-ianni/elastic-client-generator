@@ -74,7 +74,19 @@ public class KeywordProperty  implements XContentable<KeywordProperty> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(BOOST.getPreferredName(), _boost);
+    builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
+    builder.field(IGNORE_ABOVE.getPreferredName(), _ignoreAbove);
+    builder.field(INDEX.getPreferredName(), _index);
+    if (_indexOptions != null) {
+      builder.field(INDEX_OPTIONS.getPreferredName());
+      _indexOptions.toXContent(builder, params);
+    }
+    builder.field(NORMALIZER.getPreferredName(), _normalizer);
+    builder.field(NORMS.getPreferredName(), _norms);
+    builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    builder.field(SPLIT_QUERIES_ON_WHITESPACE.getPreferredName(), _splitQueriesOnWhitespace);
+    return builder;
   }
 
   @Override

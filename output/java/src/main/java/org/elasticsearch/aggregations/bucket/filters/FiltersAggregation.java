@@ -37,7 +37,13 @@ public class FiltersAggregation  implements XContentable<FiltersAggregation> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_filters != null) {
+      builder.field(FILTERS.getPreferredName());
+      _filters.map(r-> r.toXContent(builder, params), builder::value /* TODO List<QueryContainer> */);
+    }
+    builder.field(OTHER_BUCKET.getPreferredName(), _otherBucket);
+    builder.field(OTHER_BUCKET_KEY.getPreferredName(), _otherBucketKey);
+    return builder;
   }
 
   @Override

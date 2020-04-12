@@ -37,7 +37,19 @@ public class RollupJobInformation  implements XContentable<RollupJobInformation>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_config != null) {
+      builder.field(CONFIG.getPreferredName());
+      _config.toXContent(builder, params);
+    }
+    if (_stats != null) {
+      builder.field(STATS.getPreferredName());
+      _stats.toXContent(builder, params);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName());
+      _status.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override

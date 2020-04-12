@@ -49,7 +49,15 @@ public class RootNodeInfoResponse  implements XContentable<RootNodeInfoResponse>
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(NAME.getPreferredName(), _name);
+    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    builder.field(CLUSTER_UUID.getPreferredName(), _clusterUuid);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName());
+      _version.toXContent(builder, params);
+    }
+    builder.field(TAGLINE.getPreferredName(), _tagline);
+    return builder;
   }
 
   @Override

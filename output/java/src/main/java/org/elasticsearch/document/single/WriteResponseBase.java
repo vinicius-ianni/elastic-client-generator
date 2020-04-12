@@ -69,7 +69,21 @@ public class WriteResponseBase  implements XContentable<WriteResponseBase> {
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    builder.field(ID.getPreferredName(), _id);
+    builder.field(INDEX.getPreferredName(), _index);
+    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    if (_result != null) {
+      builder.field(RESULT.getPreferredName());
+      _result.toXContent(builder, params);
+    }
+    builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName());
+      _shards.toXContent(builder, params);
+    }
+    builder.field(TYPE.getPreferredName(), _type);
+    builder.field(VERSION.getPreferredName(), _version);
+    return builder;
   }
 
   @Override

@@ -25,7 +25,11 @@ public class ReindexRethrottleResponse  implements XContentable<ReindexRethrottl
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
-    return null;
+    if (_nodes != null) {
+      builder.field(NODES.getPreferredName());
+      _nodes.toXContent(builder, params);
+    }
+    return builder;
   }
 
   @Override
