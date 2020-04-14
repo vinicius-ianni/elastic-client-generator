@@ -53,8 +53,8 @@ public class SnapshotLifecycleConfig  implements XContentable<SnapshotLifecycleC
     return SnapshotLifecycleConfig.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotLifecycleConfig, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotLifecycleConfig.class.getName(), false, args -> new SnapshotLifecycleConfig());
+  public static final ObjectParser<SnapshotLifecycleConfig, Void> PARSER =
+    new ObjectParser<>(SnapshotLifecycleConfig.class.getName(), false, SnapshotLifecycleConfig::new);
 
   static {
     PARSER.declareBoolean(SnapshotLifecycleConfig::setIgnoreUnavailable, IGNORE_UNAVAILABLE);

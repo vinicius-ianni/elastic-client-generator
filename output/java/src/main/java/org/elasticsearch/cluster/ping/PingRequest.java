@@ -31,8 +31,8 @@ public class PingRequest  implements XContentable<PingRequest> {
     return PingRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PingRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PingRequest.class.getName(), false, args -> new PingRequest());
+  public static final ObjectParser<PingRequest, Void> PARSER =
+    new ObjectParser<>(PingRequest.class.getName(), false, PingRequest::new);
 
   static {
     

@@ -65,8 +65,8 @@ public class GraphExploreControls  implements XContentable<GraphExploreControls>
     return GraphExploreControls.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GraphExploreControls, Void> PARSER =
-    new ConstructingObjectParser<>(GraphExploreControls.class.getName(), false, args -> new GraphExploreControls());
+  public static final ObjectParser<GraphExploreControls, Void> PARSER =
+    new ObjectParser<>(GraphExploreControls.class.getName(), false, GraphExploreControls::new);
 
   static {
     PARSER.declareObject(GraphExploreControls::setSampleDiversity, (p, t) -> SampleDiversity.PARSER.apply(p, t), SAMPLE_DIVERSITY);

@@ -61,8 +61,8 @@ public class FuzzyQuery  implements XContentable<FuzzyQuery> {
     return FuzzyQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FuzzyQuery, Void> PARSER =
-    new ConstructingObjectParser<>(FuzzyQuery.class.getName(), false, args -> new FuzzyQuery());
+  public static final ObjectParser<FuzzyQuery, Void> PARSER =
+    new ObjectParser<>(FuzzyQuery.class.getName(), false, FuzzyQuery::new);
 
   static {
     PARSER.declareInt(FuzzyQuery::setMaxExpansions, MAX_EXPANSIONS);

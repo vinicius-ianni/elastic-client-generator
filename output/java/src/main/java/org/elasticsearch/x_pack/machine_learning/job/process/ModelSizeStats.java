@@ -105,14 +105,14 @@ public class ModelSizeStats  implements XContentable<ModelSizeStats> {
     return ModelSizeStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ModelSizeStats, Void> PARSER =
-    new ConstructingObjectParser<>(ModelSizeStats.class.getName(), false, args -> new ModelSizeStats());
+  public static final ObjectParser<ModelSizeStats, Void> PARSER =
+    new ObjectParser<>(ModelSizeStats.class.getName(), false, ModelSizeStats::new);
 
   static {
     PARSER.declareLong(ModelSizeStats::setBucketAllocationFailuresCount, BUCKET_ALLOCATION_FAILURES_COUNT);
     PARSER.declareString(ModelSizeStats::setJobId, JOB_ID);
     PARSER.declareObject(ModelSizeStats::setLogTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), LOG_TIME);
-    PARSER.declareObject(ModelSizeStats::setMemoryStatus, (p, t) -> MemoryStatus.PARSER.apply(p), MEMORY_STATUS);
+    PARSER.declareField(ModelSizeStats::setMemoryStatus, (p, t) -> MemoryStatus.PARSER.apply(p), MEMORY_STATUS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(ModelSizeStats::setModelBytes, MODEL_BYTES);
     PARSER.declareString(ModelSizeStats::setResultType, RESULT_TYPE);
     PARSER.declareObject(ModelSizeStats::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);

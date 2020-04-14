@@ -72,8 +72,8 @@ public class RollupSearchRequest  implements XContentable<RollupSearchRequest> {
     return RollupSearchRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupSearchRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RollupSearchRequest.class.getName(), false, args -> new RollupSearchRequest());
+  public static final ObjectParser<RollupSearchRequest, Void> PARSER =
+    new ObjectParser<>(RollupSearchRequest.class.getName(), false, RollupSearchRequest::new);
 
   static {
     PARSER.declareBoolean(RollupSearchRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);

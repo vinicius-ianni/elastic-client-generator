@@ -189,8 +189,8 @@ public class IndexStats  implements XContentable<IndexStats> {
     return IndexStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexStats, Void> PARSER =
-    new ConstructingObjectParser<>(IndexStats.class.getName(), false, args -> new IndexStats());
+  public static final ObjectParser<IndexStats, Void> PARSER =
+    new ObjectParser<>(IndexStats.class.getName(), false, IndexStats::new);
 
   static {
     PARSER.declareObject(IndexStats::setCompletion, (p, t) -> CompletionStats.PARSER.apply(p, t), COMPLETION);

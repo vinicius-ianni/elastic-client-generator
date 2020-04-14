@@ -71,8 +71,8 @@ public class CatFielddataRecord  implements XContentable<CatFielddataRecord> {
     return CatFielddataRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatFielddataRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatFielddataRecord.class.getName(), false, args -> new CatFielddataRecord());
+  public static final ObjectParser<CatFielddataRecord, Void> PARSER =
+    new ObjectParser<>(CatFielddataRecord.class.getName(), false, CatFielddataRecord::new);
 
   static {
     PARSER.declareString(CatFielddataRecord::setField, FIELD);

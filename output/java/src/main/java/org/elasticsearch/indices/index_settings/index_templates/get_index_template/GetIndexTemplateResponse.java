@@ -40,8 +40,8 @@ public class GetIndexTemplateResponse extends DictionaryResponseBase<String, Tem
     return GetIndexTemplateResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetIndexTemplateResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetIndexTemplateResponse.class.getName(), false, args -> new GetIndexTemplateResponse());
+  public static final ObjectParser<GetIndexTemplateResponse, Void> PARSER =
+    new ObjectParser<>(GetIndexTemplateResponse.class.getName(), false, GetIndexTemplateResponse::new);
 
   static {
     PARSER.declareObject(GetIndexTemplateResponse::setTemplateMappings, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> TemplateMapping.PARSER.apply(pp, null)), TEMPLATE_MAPPINGS);

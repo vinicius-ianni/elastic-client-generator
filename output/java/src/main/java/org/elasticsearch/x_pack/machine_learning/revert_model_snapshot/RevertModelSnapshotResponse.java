@@ -39,8 +39,8 @@ public class RevertModelSnapshotResponse  implements XContentable<RevertModelSna
     return RevertModelSnapshotResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RevertModelSnapshotResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RevertModelSnapshotResponse.class.getName(), false, args -> new RevertModelSnapshotResponse());
+  public static final ObjectParser<RevertModelSnapshotResponse, Void> PARSER =
+    new ObjectParser<>(RevertModelSnapshotResponse.class.getName(), false, RevertModelSnapshotResponse::new);
 
   static {
     PARSER.declareObject(RevertModelSnapshotResponse::setModel, (p, t) -> ModelSnapshot.PARSER.apply(p, t), MODEL);

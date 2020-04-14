@@ -85,8 +85,8 @@ public class JvmPool  implements XContentable<JvmPool> {
     return JvmPool.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<JvmPool, Void> PARSER =
-    new ConstructingObjectParser<>(JvmPool.class.getName(), false, args -> new JvmPool());
+  public static final ObjectParser<JvmPool, Void> PARSER =
+    new ObjectParser<>(JvmPool.class.getName(), false, JvmPool::new);
 
   static {
     PARSER.declareString(JvmPool::setMax, MAX);

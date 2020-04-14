@@ -50,8 +50,8 @@ public class IpProperty  implements XContentable<IpProperty> {
     return IpProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IpProperty, Void> PARSER =
-    new ConstructingObjectParser<>(IpProperty.class.getName(), false, args -> new IpProperty());
+  public static final ObjectParser<IpProperty, Void> PARSER =
+    new ObjectParser<>(IpProperty.class.getName(), false, IpProperty::new);
 
   static {
     PARSER.declareDouble(IpProperty::setBoost, BOOST);

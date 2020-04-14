@@ -55,8 +55,8 @@ public class NodeUsageInformation  implements XContentable<NodeUsageInformation>
     return NodeUsageInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeUsageInformation, Void> PARSER =
-    new ConstructingObjectParser<>(NodeUsageInformation.class.getName(), false, args -> new NodeUsageInformation());
+  public static final ObjectParser<NodeUsageInformation, Void> PARSER =
+    new ObjectParser<>(NodeUsageInformation.class.getName(), false, NodeUsageInformation::new);
 
   static {
     PARSER.declareObject(NodeUsageInformation::setRestActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.intValue()), REST_ACTIONS);

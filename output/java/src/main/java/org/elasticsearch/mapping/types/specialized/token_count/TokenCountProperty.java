@@ -57,8 +57,8 @@ public class TokenCountProperty  implements XContentable<TokenCountProperty> {
     return TokenCountProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TokenCountProperty, Void> PARSER =
-    new ConstructingObjectParser<>(TokenCountProperty.class.getName(), false, args -> new TokenCountProperty());
+  public static final ObjectParser<TokenCountProperty, Void> PARSER =
+    new ObjectParser<>(TokenCountProperty.class.getName(), false, TokenCountProperty::new);
 
   static {
     PARSER.declareString(TokenCountProperty::setAnalyzer, ANALYZER);

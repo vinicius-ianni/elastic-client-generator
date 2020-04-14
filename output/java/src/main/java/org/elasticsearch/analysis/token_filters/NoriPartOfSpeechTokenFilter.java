@@ -38,8 +38,8 @@ public class NoriPartOfSpeechTokenFilter  implements XContentable<NoriPartOfSpee
     return NoriPartOfSpeechTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NoriPartOfSpeechTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(NoriPartOfSpeechTokenFilter.class.getName(), false, args -> new NoriPartOfSpeechTokenFilter());
+  public static final ObjectParser<NoriPartOfSpeechTokenFilter, Void> PARSER =
+    new ObjectParser<>(NoriPartOfSpeechTokenFilter.class.getName(), false, NoriPartOfSpeechTokenFilter::new);
 
   static {
     PARSER.declareStringArray(NoriPartOfSpeechTokenFilter::setStoptags, STOPTAGS);

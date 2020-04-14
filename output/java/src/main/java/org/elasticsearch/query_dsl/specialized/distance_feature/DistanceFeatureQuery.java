@@ -52,8 +52,8 @@ public class DistanceFeatureQuery  implements XContentable<DistanceFeatureQuery>
     return DistanceFeatureQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DistanceFeatureQuery, Void> PARSER =
-    new ConstructingObjectParser<>(DistanceFeatureQuery.class.getName(), false, args -> new DistanceFeatureQuery());
+  public static final ObjectParser<DistanceFeatureQuery, Void> PARSER =
+    new ObjectParser<>(DistanceFeatureQuery.class.getName(), false, DistanceFeatureQuery::new);
 
   static {
     PARSER.declareObject(DistanceFeatureQuery::setOrigin, (p, t) ->  new Either<GeoCoordinate, DateMath>() /* TODO UnionOf */, ORIGIN);

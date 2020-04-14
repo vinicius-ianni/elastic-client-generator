@@ -87,8 +87,8 @@ public class HistogramOrder  implements XContentable<HistogramOrder> {
     return HistogramOrder.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HistogramOrder, Void> PARSER =
-    new ConstructingObjectParser<>(HistogramOrder.class.getName(), false, args -> new HistogramOrder());
+  public static final ObjectParser<HistogramOrder, Void> PARSER =
+    new ObjectParser<>(HistogramOrder.class.getName(), false, HistogramOrder::new);
 
   static {
     PARSER.declareObject(HistogramOrder::setCountAscending, (p, t) -> HistogramOrder.PARSER.apply(p, t), COUNT_ASCENDING);
@@ -96,7 +96,7 @@ public class HistogramOrder  implements XContentable<HistogramOrder> {
     PARSER.declareString(HistogramOrder::setKey, KEY);
     PARSER.declareObject(HistogramOrder::setKeyAscending, (p, t) -> HistogramOrder.PARSER.apply(p, t), KEY_ASCENDING);
     PARSER.declareObject(HistogramOrder::setKeyDescending, (p, t) -> HistogramOrder.PARSER.apply(p, t), KEY_DESCENDING);
-    PARSER.declareObject(HistogramOrder::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER);
+    PARSER.declareField(HistogramOrder::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

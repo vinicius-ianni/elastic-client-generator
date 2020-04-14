@@ -71,8 +71,8 @@ public class CatAllocationRecord  implements XContentable<CatAllocationRecord> {
     return CatAllocationRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatAllocationRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatAllocationRecord.class.getName(), false, args -> new CatAllocationRecord());
+  public static final ObjectParser<CatAllocationRecord, Void> PARSER =
+    new ObjectParser<>(CatAllocationRecord.class.getName(), false, CatAllocationRecord::new);
 
   static {
     PARSER.declareString(CatAllocationRecord::setDiskAvail, DISK_AVAIL);

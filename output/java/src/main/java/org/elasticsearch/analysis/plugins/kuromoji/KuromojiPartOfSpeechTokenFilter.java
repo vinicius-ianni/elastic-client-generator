@@ -38,8 +38,8 @@ public class KuromojiPartOfSpeechTokenFilter  implements XContentable<KuromojiPa
     return KuromojiPartOfSpeechTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KuromojiPartOfSpeechTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KuromojiPartOfSpeechTokenFilter.class.getName(), false, args -> new KuromojiPartOfSpeechTokenFilter());
+  public static final ObjectParser<KuromojiPartOfSpeechTokenFilter, Void> PARSER =
+    new ObjectParser<>(KuromojiPartOfSpeechTokenFilter.class.getName(), false, KuromojiPartOfSpeechTokenFilter::new);
 
   static {
     PARSER.declareStringArray(KuromojiPartOfSpeechTokenFilter::setStoptags, STOPTAGS);

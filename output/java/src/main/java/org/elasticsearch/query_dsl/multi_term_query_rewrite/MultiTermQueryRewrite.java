@@ -77,13 +77,13 @@ public class MultiTermQueryRewrite  implements XContentable<MultiTermQueryRewrit
     return MultiTermQueryRewrite.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiTermQueryRewrite, Void> PARSER =
-    new ConstructingObjectParser<>(MultiTermQueryRewrite.class.getName(), false, args -> new MultiTermQueryRewrite());
+  public static final ObjectParser<MultiTermQueryRewrite, Void> PARSER =
+    new ObjectParser<>(MultiTermQueryRewrite.class.getName(), false, MultiTermQueryRewrite::new);
 
   static {
     PARSER.declareObject(MultiTermQueryRewrite::setConstantScore, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), CONSTANT_SCORE);
     PARSER.declareObject(MultiTermQueryRewrite::setConstantScoreBoolean, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), CONSTANT_SCORE_BOOLEAN);
-    PARSER.declareObject(MultiTermQueryRewrite::setRewrite, (p, t) -> RewriteMultiTerm.PARSER.apply(p), REWRITE);
+    PARSER.declareField(MultiTermQueryRewrite::setRewrite, (p, t) -> RewriteMultiTerm.PARSER.apply(p), REWRITE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(MultiTermQueryRewrite::setScoringBoolean, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), SCORING_BOOLEAN);
     PARSER.declareInt(MultiTermQueryRewrite::setSize, SIZE);
   }

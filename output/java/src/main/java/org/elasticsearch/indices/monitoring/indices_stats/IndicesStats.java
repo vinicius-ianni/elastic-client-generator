@@ -66,8 +66,8 @@ public class IndicesStats  implements XContentable<IndicesStats> {
     return IndicesStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesStats, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesStats.class.getName(), false, args -> new IndicesStats());
+  public static final ObjectParser<IndicesStats, Void> PARSER =
+    new ObjectParser<>(IndicesStats.class.getName(), false, IndicesStats::new);
 
   static {
     PARSER.declareObject(IndicesStats::setPrimaries, (p, t) -> IndexStats.PARSER.apply(p, t), PRIMARIES);

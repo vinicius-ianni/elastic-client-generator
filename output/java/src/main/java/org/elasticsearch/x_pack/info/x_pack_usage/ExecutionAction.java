@@ -43,8 +43,8 @@ public class ExecutionAction  implements XContentable<ExecutionAction> {
     return ExecutionAction.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutionAction, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutionAction.class.getName(), false, args -> new ExecutionAction());
+  public static final ObjectParser<ExecutionAction, Void> PARSER =
+    new ObjectParser<>(ExecutionAction.class.getName(), false, ExecutionAction::new);
 
   static {
     PARSER.declareLong(ExecutionAction::setTotal, TOTAL);

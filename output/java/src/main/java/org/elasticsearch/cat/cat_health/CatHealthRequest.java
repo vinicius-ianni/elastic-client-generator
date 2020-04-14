@@ -92,8 +92,8 @@ public class CatHealthRequest  implements XContentable<CatHealthRequest> {
     return CatHealthRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatHealthRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatHealthRequest.class.getName(), false, args -> new CatHealthRequest());
+  public static final ObjectParser<CatHealthRequest, Void> PARSER =
+    new ObjectParser<>(CatHealthRequest.class.getName(), false, CatHealthRequest::new);
 
   static {
     PARSER.declareString(CatHealthRequest::setFormat, FORMAT);

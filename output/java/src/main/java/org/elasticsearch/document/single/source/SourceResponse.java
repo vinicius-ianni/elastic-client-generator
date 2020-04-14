@@ -36,8 +36,8 @@ public class SourceResponse<TDocument>  implements XContentable<SourceResponse<T
     return SourceResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SourceResponse, Void> PARSER =
-    new ConstructingObjectParser<>(SourceResponse.class.getName(), false, args -> new SourceResponse());
+  public static final ObjectParser<SourceResponse, Void> PARSER =
+    new ObjectParser<>(SourceResponse.class.getName(), false, SourceResponse::new);
 
   static {
     PARSER.declareObject(SourceResponse::setBody, (p, t) -> null /* TODO TDocument */, BODY);

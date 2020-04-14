@@ -43,8 +43,8 @@ public class GetFiltersRequest  implements XContentable<GetFiltersRequest> {
     return GetFiltersRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetFiltersRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetFiltersRequest.class.getName(), false, args -> new GetFiltersRequest());
+  public static final ObjectParser<GetFiltersRequest, Void> PARSER =
+    new ObjectParser<>(GetFiltersRequest.class.getName(), false, GetFiltersRequest::new);
 
   static {
     PARSER.declareInt(GetFiltersRequest::setFrom, FROM);

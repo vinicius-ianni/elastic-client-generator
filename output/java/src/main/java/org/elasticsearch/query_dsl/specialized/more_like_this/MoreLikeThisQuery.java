@@ -182,8 +182,8 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
     return MoreLikeThisQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MoreLikeThisQuery, Void> PARSER =
-    new ConstructingObjectParser<>(MoreLikeThisQuery.class.getName(), false, args -> new MoreLikeThisQuery());
+  public static final ObjectParser<MoreLikeThisQuery, Void> PARSER =
+    new ObjectParser<>(MoreLikeThisQuery.class.getName(), false, MoreLikeThisQuery::new);
 
   static {
     PARSER.declareString(MoreLikeThisQuery::setAnalyzer, ANALYZER);
@@ -203,7 +203,7 @@ public class MoreLikeThisQuery  implements XContentable<MoreLikeThisQuery> {
     PARSER.declareObject(MoreLikeThisQuery::setStopWords, (p, t) -> new StopWords().fromXContent(p), STOP_WORDS);
     PARSER.declareObjectArray(MoreLikeThisQuery::setUnlike, (p, t) -> new Like().fromXContent(p), UNLIKE);
     PARSER.declareLong(MoreLikeThisQuery::setVersion, VERSION);
-    PARSER.declareObject(MoreLikeThisQuery::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(MoreLikeThisQuery::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

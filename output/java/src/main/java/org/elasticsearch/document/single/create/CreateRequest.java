@@ -100,17 +100,17 @@ public class CreateRequest<TDocument>  implements XContentable<CreateRequest<TDo
     return CreateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CreateRequest.class.getName(), false, args -> new CreateRequest());
+  public static final ObjectParser<CreateRequest, Void> PARSER =
+    new ObjectParser<>(CreateRequest.class.getName(), false, CreateRequest::new);
 
   static {
     PARSER.declareObject(CreateRequest::setDocument, (p, t) -> null /* TODO TDocument */, DOCUMENT);
     PARSER.declareString(CreateRequest::setPipeline, PIPELINE);
-    PARSER.declareObject(CreateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(CreateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(CreateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareObject(CreateRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareLong(CreateRequest::setVersion, VERSION);
-    PARSER.declareObject(CreateRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(CreateRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(CreateRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

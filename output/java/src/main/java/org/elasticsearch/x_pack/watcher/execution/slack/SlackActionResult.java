@@ -45,8 +45,8 @@ public class SlackActionResult  implements XContentable<SlackActionResult> {
     return SlackActionResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SlackActionResult, Void> PARSER =
-    new ConstructingObjectParser<>(SlackActionResult.class.getName(), false, args -> new SlackActionResult());
+  public static final ObjectParser<SlackActionResult, Void> PARSER =
+    new ObjectParser<>(SlackActionResult.class.getName(), false, SlackActionResult::new);
 
   static {
     PARSER.declareString(SlackActionResult::setAccount, ACCOUNT);

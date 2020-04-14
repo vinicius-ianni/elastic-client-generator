@@ -133,8 +133,8 @@ public class PhraseSuggester  implements XContentable<PhraseSuggester> {
     return PhraseSuggester.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PhraseSuggester, Void> PARSER =
-    new ConstructingObjectParser<>(PhraseSuggester.class.getName(), false, args -> new PhraseSuggester());
+  public static final ObjectParser<PhraseSuggester, Void> PARSER =
+    new ObjectParser<>(PhraseSuggester.class.getName(), false, PhraseSuggester::new);
 
   static {
     PARSER.declareObject(PhraseSuggester::setCollate, (p, t) -> PhraseSuggestCollate.PARSER.apply(p, t), COLLATE);

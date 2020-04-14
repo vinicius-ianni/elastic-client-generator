@@ -73,8 +73,8 @@ public class ScheduledEvent  implements XContentable<ScheduledEvent> {
     return ScheduledEvent.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScheduledEvent, Void> PARSER =
-    new ConstructingObjectParser<>(ScheduledEvent.class.getName(), false, args -> new ScheduledEvent());
+  public static final ObjectParser<ScheduledEvent, Void> PARSER =
+    new ObjectParser<>(ScheduledEvent.class.getName(), false, ScheduledEvent::new);
 
   static {
     PARSER.declareObject(ScheduledEvent::setCalendarId, (p, t) -> Id.createFrom(p), CALENDAR_ID);

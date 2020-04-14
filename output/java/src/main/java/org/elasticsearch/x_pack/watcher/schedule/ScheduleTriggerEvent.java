@@ -49,8 +49,8 @@ public class ScheduleTriggerEvent  implements XContentable<ScheduleTriggerEvent>
     return ScheduleTriggerEvent.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScheduleTriggerEvent, Void> PARSER =
-    new ConstructingObjectParser<>(ScheduleTriggerEvent.class.getName(), false, args -> new ScheduleTriggerEvent());
+  public static final ObjectParser<ScheduleTriggerEvent, Void> PARSER =
+    new ObjectParser<>(ScheduleTriggerEvent.class.getName(), false, ScheduleTriggerEvent::new);
 
   static {
     PARSER.declareObject(ScheduleTriggerEvent::setScheduledTime, (p, t) ->  new Either<Date, String>() /* TODO UnionOf */, SCHEDULED_TIME);

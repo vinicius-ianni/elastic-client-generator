@@ -50,8 +50,8 @@ public class ScriptScoreQuery  implements XContentable<ScriptScoreQuery> {
     return ScriptScoreQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptScoreQuery, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptScoreQuery.class.getName(), false, args -> new ScriptScoreQuery());
+  public static final ObjectParser<ScriptScoreQuery, Void> PARSER =
+    new ObjectParser<>(ScriptScoreQuery.class.getName(), false, ScriptScoreQuery::new);
 
   static {
     PARSER.declareObject(ScriptScoreQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);

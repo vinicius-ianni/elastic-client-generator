@@ -46,12 +46,12 @@ public class DelimitedPayloadTokenFilter  implements XContentable<DelimitedPaylo
     return DelimitedPayloadTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DelimitedPayloadTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(DelimitedPayloadTokenFilter.class.getName(), false, args -> new DelimitedPayloadTokenFilter());
+  public static final ObjectParser<DelimitedPayloadTokenFilter, Void> PARSER =
+    new ObjectParser<>(DelimitedPayloadTokenFilter.class.getName(), false, DelimitedPayloadTokenFilter::new);
 
   static {
     PARSER.declareString(DelimitedPayloadTokenFilter::setDelimiter, DELIMITER);
-    PARSER.declareObject(DelimitedPayloadTokenFilter::setEncoding, (p, t) -> DelimitedPayloadEncoding.PARSER.apply(p), ENCODING);
+    PARSER.declareField(DelimitedPayloadTokenFilter::setEncoding, (p, t) -> DelimitedPayloadEncoding.PARSER.apply(p), ENCODING, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

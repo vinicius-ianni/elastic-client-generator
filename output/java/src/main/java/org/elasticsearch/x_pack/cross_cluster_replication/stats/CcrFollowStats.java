@@ -38,8 +38,8 @@ public class CcrFollowStats  implements XContentable<CcrFollowStats> {
     return CcrFollowStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CcrFollowStats, Void> PARSER =
-    new ConstructingObjectParser<>(CcrFollowStats.class.getName(), false, args -> new CcrFollowStats());
+  public static final ObjectParser<CcrFollowStats, Void> PARSER =
+    new ObjectParser<>(CcrFollowStats.class.getName(), false, CcrFollowStats::new);
 
   static {
     PARSER.declareObjectArray(CcrFollowStats::setIndices, (p, t) -> FollowIndexStats.PARSER.apply(p, t), INDICES);

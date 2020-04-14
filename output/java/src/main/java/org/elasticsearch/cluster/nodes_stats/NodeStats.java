@@ -199,8 +199,8 @@ public class NodeStats  implements XContentable<NodeStats> {
     return NodeStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeStats, Void> PARSER =
-    new ConstructingObjectParser<>(NodeStats.class.getName(), false, args -> new NodeStats());
+  public static final ObjectParser<NodeStats, Void> PARSER =
+    new ObjectParser<>(NodeStats.class.getName(), false, NodeStats::new);
 
   static {
     PARSER.declareObject(NodeStats::setAdaptiveSelection, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AdaptiveSelectionStats.PARSER.apply(pp, null)), ADAPTIVE_SELECTION);
@@ -215,7 +215,7 @@ public class NodeStats  implements XContentable<NodeStats> {
     PARSER.declareString(NodeStats::setName, NAME);
     PARSER.declareObject(NodeStats::setOs, (p, t) -> OperatingSystemStats.PARSER.apply(p, t), OS);
     PARSER.declareObject(NodeStats::setProcess, (p, t) -> ProcessStats.PARSER.apply(p, t), PROCESS);
-    PARSER.declareObjectArray(NodeStats::setRoles, (p, t) -> NodeRole.PARSER.apply(p), ROLES);
+    PARSER.declareFieldArray(NodeStats::setRoles, (p, t) -> NodeRole.PARSER.apply(p), ROLES, ObjectParser.ValueType.STRING_ARRAY);
     PARSER.declareObject(NodeStats::setScript, (p, t) -> ScriptStats.PARSER.apply(p, t), SCRIPT);
     PARSER.declareObject(NodeStats::setThreadPool, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ThreadCountStats.PARSER.apply(pp, null)), THREAD_POOL);
     PARSER.declareLong(NodeStats::setTimestamp, TIMESTAMP);

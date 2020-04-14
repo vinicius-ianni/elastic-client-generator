@@ -84,8 +84,8 @@ public class GetOverallBucketsRequest  implements XContentable<GetOverallBuckets
     return GetOverallBucketsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetOverallBucketsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetOverallBucketsRequest.class.getName(), false, args -> new GetOverallBucketsRequest());
+  public static final ObjectParser<GetOverallBucketsRequest, Void> PARSER =
+    new ObjectParser<>(GetOverallBucketsRequest.class.getName(), false, GetOverallBucketsRequest::new);
 
   static {
     PARSER.declareBoolean(GetOverallBucketsRequest::setAllowNoJobs, ALLOW_NO_JOBS);

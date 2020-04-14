@@ -47,8 +47,8 @@ public class SourceFilter  implements XContentable<SourceFilter> {
     return SourceFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SourceFilter, Void> PARSER =
-    new ConstructingObjectParser<>(SourceFilter.class.getName(), false, args -> new SourceFilter());
+  public static final ObjectParser<SourceFilter, Void> PARSER =
+    new ObjectParser<>(SourceFilter.class.getName(), false, SourceFilter::new);
 
   static {
     PARSER.declareObjectArray(SourceFilter::setExcludes, (p, t) -> Field.createFrom(p), EXCLUDES);

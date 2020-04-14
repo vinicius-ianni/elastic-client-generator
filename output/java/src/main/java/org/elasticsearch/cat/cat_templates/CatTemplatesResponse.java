@@ -38,8 +38,8 @@ public class CatTemplatesResponse  implements XContentable<CatTemplatesResponse>
     return CatTemplatesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatTemplatesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CatTemplatesResponse.class.getName(), false, args -> new CatTemplatesResponse());
+  public static final ObjectParser<CatTemplatesResponse, Void> PARSER =
+    new ObjectParser<>(CatTemplatesResponse.class.getName(), false, CatTemplatesResponse::new);
 
   static {
     PARSER.declareObjectArray(CatTemplatesResponse::setRecords, (p, t) -> CatTemplatesRecord.PARSER.apply(p, t), RECORDS);

@@ -113,8 +113,8 @@ public class CatHealthRecord  implements XContentable<CatHealthRecord> {
     return CatHealthRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatHealthRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatHealthRecord.class.getName(), false, args -> new CatHealthRecord());
+  public static final ObjectParser<CatHealthRecord, Void> PARSER =
+    new ObjectParser<>(CatHealthRecord.class.getName(), false, CatHealthRecord::new);
 
   static {
     PARSER.declareString(CatHealthRecord::setCluster, CLUSTER);

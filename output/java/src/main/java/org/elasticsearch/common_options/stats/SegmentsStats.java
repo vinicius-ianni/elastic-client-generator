@@ -131,8 +131,8 @@ public class SegmentsStats  implements XContentable<SegmentsStats> {
     return SegmentsStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SegmentsStats, Void> PARSER =
-    new ConstructingObjectParser<>(SegmentsStats.class.getName(), false, args -> new SegmentsStats());
+  public static final ObjectParser<SegmentsStats, Void> PARSER =
+    new ObjectParser<>(SegmentsStats.class.getName(), false, SegmentsStats::new);
 
   static {
     PARSER.declareLong(SegmentsStats::setCount, COUNT);

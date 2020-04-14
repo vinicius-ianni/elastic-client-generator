@@ -36,8 +36,8 @@ public class IcuTokenizer  implements XContentable<IcuTokenizer> {
     return IcuTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IcuTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(IcuTokenizer.class.getName(), false, args -> new IcuTokenizer());
+  public static final ObjectParser<IcuTokenizer, Void> PARSER =
+    new ObjectParser<>(IcuTokenizer.class.getName(), false, IcuTokenizer::new);
 
   static {
     PARSER.declareString(IcuTokenizer::setRuleFiles, RULE_FILES);

@@ -31,8 +31,8 @@ public class SyncedFlushResponse  implements XContentable<SyncedFlushResponse> {
     return SyncedFlushResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SyncedFlushResponse, Void> PARSER =
-    new ConstructingObjectParser<>(SyncedFlushResponse.class.getName(), false, args -> new SyncedFlushResponse());
+  public static final ObjectParser<SyncedFlushResponse, Void> PARSER =
+    new ObjectParser<>(SyncedFlushResponse.class.getName(), false, SyncedFlushResponse::new);
 
   static {
     

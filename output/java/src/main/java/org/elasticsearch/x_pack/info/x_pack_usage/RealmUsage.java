@@ -56,8 +56,8 @@ public class RealmUsage  implements XContentable<RealmUsage> {
     return RealmUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RealmUsage, Void> PARSER =
-    new ConstructingObjectParser<>(RealmUsage.class.getName(), false, args -> new RealmUsage());
+  public static final ObjectParser<RealmUsage, Void> PARSER =
+    new ObjectParser<>(RealmUsage.class.getName(), false, RealmUsage::new);
 
   static {
     PARSER.declareStringArray(RealmUsage::setName, NAME);

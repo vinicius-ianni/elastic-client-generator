@@ -39,8 +39,8 @@ public class AdjacencyMatrixAggregation  implements XContentable<AdjacencyMatrix
     return AdjacencyMatrixAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AdjacencyMatrixAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(AdjacencyMatrixAggregation.class.getName(), false, args -> new AdjacencyMatrixAggregation());
+  public static final ObjectParser<AdjacencyMatrixAggregation, Void> PARSER =
+    new ObjectParser<>(AdjacencyMatrixAggregation.class.getName(), false, AdjacencyMatrixAggregation::new);
 
   static {
     PARSER.declareObject(AdjacencyMatrixAggregation::setFilters, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> QueryContainer.PARSER.apply(pp, null)), FILTERS);

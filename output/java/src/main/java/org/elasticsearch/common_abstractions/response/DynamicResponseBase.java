@@ -31,8 +31,8 @@ public class DynamicResponseBase  implements XContentable<DynamicResponseBase> {
     return DynamicResponseBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DynamicResponseBase, Void> PARSER =
-    new ConstructingObjectParser<>(DynamicResponseBase.class.getName(), false, args -> new DynamicResponseBase());
+  public static final ObjectParser<DynamicResponseBase, Void> PARSER =
+    new ObjectParser<>(DynamicResponseBase.class.getName(), false, DynamicResponseBase::new);
 
   static {
     

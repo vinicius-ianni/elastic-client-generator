@@ -146,8 +146,8 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
     return HttpInputRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HttpInputRequest, Void> PARSER =
-    new ConstructingObjectParser<>(HttpInputRequest.class.getName(), false, args -> new HttpInputRequest());
+  public static final ObjectParser<HttpInputRequest, Void> PARSER =
+    new ObjectParser<>(HttpInputRequest.class.getName(), false, HttpInputRequest::new);
 
   static {
     PARSER.declareObject(HttpInputRequest::setAuth, (p, t) -> HttpInputAuthentication.PARSER.apply(p, t), AUTH);
@@ -155,13 +155,13 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
     PARSER.declareObject(HttpInputRequest::setConnectionTimeout, (p, t) -> Time.PARSER.apply(p, t), CONNECTION_TIMEOUT);
     PARSER.declareObject(HttpInputRequest::setHeaders, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), HEADERS);
     PARSER.declareString(HttpInputRequest::setHost, HOST);
-    PARSER.declareObject(HttpInputRequest::setMethod, (p, t) -> HttpInputMethod.PARSER.apply(p), METHOD);
+    PARSER.declareField(HttpInputRequest::setMethod, (p, t) -> HttpInputMethod.PARSER.apply(p), METHOD, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(HttpInputRequest::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), PARAMS);
     PARSER.declareString(HttpInputRequest::setPath, PATH);
     PARSER.declareInt(HttpInputRequest::setPort, PORT);
     PARSER.declareObject(HttpInputRequest::setProxy, (p, t) -> HttpInputProxy.PARSER.apply(p, t), PROXY);
     PARSER.declareObject(HttpInputRequest::setReadTimeout, (p, t) -> Time.PARSER.apply(p, t), READ_TIMEOUT);
-    PARSER.declareObject(HttpInputRequest::setScheme, (p, t) -> ConnectionScheme.PARSER.apply(p), SCHEME);
+    PARSER.declareField(HttpInputRequest::setScheme, (p, t) -> ConnectionScheme.PARSER.apply(p), SCHEME, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(HttpInputRequest::setUrl, URL);
   }
 

@@ -54,8 +54,8 @@ public class Pipeline  implements XContentable<Pipeline> {
     return Pipeline.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Pipeline, Void> PARSER =
-    new ConstructingObjectParser<>(Pipeline.class.getName(), false, args -> new Pipeline());
+  public static final ObjectParser<Pipeline, Void> PARSER =
+    new ObjectParser<>(Pipeline.class.getName(), false, Pipeline::new);
 
   static {
     PARSER.declareString(Pipeline::setDescription, DESCRIPTION);

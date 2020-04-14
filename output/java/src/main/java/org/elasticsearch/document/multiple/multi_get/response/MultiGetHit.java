@@ -103,8 +103,8 @@ public class MultiGetHit<TDocument>  implements XContentable<MultiGetHit<TDocume
     return MultiGetHit.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiGetHit, Void> PARSER =
-    new ConstructingObjectParser<>(MultiGetHit.class.getName(), false, args -> new MultiGetHit());
+  public static final ObjectParser<MultiGetHit, Void> PARSER =
+    new ObjectParser<>(MultiGetHit.class.getName(), false, MultiGetHit::new);
 
   static {
     PARSER.declareObject(MultiGetHit::setError, (p, t) -> MainError.PARSER.apply(p, t), ERROR);

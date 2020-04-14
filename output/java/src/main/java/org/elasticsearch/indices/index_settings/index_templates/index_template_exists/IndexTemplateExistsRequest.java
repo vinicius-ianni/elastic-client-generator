@@ -53,8 +53,8 @@ public class IndexTemplateExistsRequest  implements XContentable<IndexTemplateEx
     return IndexTemplateExistsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexTemplateExistsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(IndexTemplateExistsRequest.class.getName(), false, args -> new IndexTemplateExistsRequest());
+  public static final ObjectParser<IndexTemplateExistsRequest, Void> PARSER =
+    new ObjectParser<>(IndexTemplateExistsRequest.class.getName(), false, IndexTemplateExistsRequest::new);
 
   static {
     PARSER.declareBoolean(IndexTemplateExistsRequest::setFlatSettings, FLAT_SETTINGS);

@@ -46,8 +46,8 @@ public class GetInfluencersResponse  implements XContentable<GetInfluencersRespo
     return GetInfluencersResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetInfluencersResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetInfluencersResponse.class.getName(), false, args -> new GetInfluencersResponse());
+  public static final ObjectParser<GetInfluencersResponse, Void> PARSER =
+    new ObjectParser<>(GetInfluencersResponse.class.getName(), false, GetInfluencersResponse::new);
 
   static {
     PARSER.declareLong(GetInfluencersResponse::setCount, COUNT);

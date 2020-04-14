@@ -67,8 +67,8 @@ public class FlushJobRequest  implements XContentable<FlushJobRequest> {
     return FlushJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FlushJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(FlushJobRequest.class.getName(), false, args -> new FlushJobRequest());
+  public static final ObjectParser<FlushJobRequest, Void> PARSER =
+    new ObjectParser<>(FlushJobRequest.class.getName(), false, FlushJobRequest::new);
 
   static {
     PARSER.declareString(FlushJobRequest::setSkipTime, SKIP_TIME);

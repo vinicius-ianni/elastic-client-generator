@@ -31,8 +31,8 @@ public class RollupSearchResponse<TDocument>  implements XContentable<RollupSear
     return RollupSearchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupSearchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RollupSearchResponse.class.getName(), false, args -> new RollupSearchResponse());
+  public static final ObjectParser<RollupSearchResponse, Void> PARSER =
+    new ObjectParser<>(RollupSearchResponse.class.getName(), false, RollupSearchResponse::new);
 
   static {
     

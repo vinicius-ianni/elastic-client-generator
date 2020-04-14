@@ -93,8 +93,8 @@ public class SnapshotLifecyclePolicyMetadata  implements XContentable<SnapshotLi
     return SnapshotLifecyclePolicyMetadata.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotLifecyclePolicyMetadata, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotLifecyclePolicyMetadata.class.getName(), false, args -> new SnapshotLifecyclePolicyMetadata());
+  public static final ObjectParser<SnapshotLifecyclePolicyMetadata, Void> PARSER =
+    new ObjectParser<>(SnapshotLifecyclePolicyMetadata.class.getName(), false, SnapshotLifecyclePolicyMetadata::new);
 
   static {
     PARSER.declareObject(SnapshotLifecyclePolicyMetadata::setModifiedDateMillis, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), MODIFIED_DATE_MILLIS);

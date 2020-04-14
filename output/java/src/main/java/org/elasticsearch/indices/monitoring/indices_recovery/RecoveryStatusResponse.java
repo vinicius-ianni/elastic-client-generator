@@ -41,8 +41,8 @@ public class RecoveryStatusResponse extends DictionaryResponseBase<IndexName, Re
     return RecoveryStatusResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryStatusResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryStatusResponse.class.getName(), false, args -> new RecoveryStatusResponse());
+  public static final ObjectParser<RecoveryStatusResponse, Void> PARSER =
+    new ObjectParser<>(RecoveryStatusResponse.class.getName(), false, RecoveryStatusResponse::new);
 
   static {
     PARSER.declareObject(RecoveryStatusResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> RecoveryStatus.PARSER.apply(pp, null)), INDICES);

@@ -39,8 +39,8 @@ public class IndexSegment  implements XContentable<IndexSegment> {
     return IndexSegment.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexSegment, Void> PARSER =
-    new ConstructingObjectParser<>(IndexSegment.class.getName(), false, args -> new IndexSegment());
+  public static final ObjectParser<IndexSegment, Void> PARSER =
+    new ObjectParser<>(IndexSegment.class.getName(), false, IndexSegment::new);
 
   static {
     PARSER.declareObject(IndexSegment::setShards, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ShardsSegment.PARSER.apply(pp, null)), SHARDS);

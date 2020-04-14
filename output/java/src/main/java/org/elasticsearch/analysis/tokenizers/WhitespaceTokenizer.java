@@ -36,8 +36,8 @@ public class WhitespaceTokenizer  implements XContentable<WhitespaceTokenizer> {
     return WhitespaceTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WhitespaceTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(WhitespaceTokenizer.class.getName(), false, args -> new WhitespaceTokenizer());
+  public static final ObjectParser<WhitespaceTokenizer, Void> PARSER =
+    new ObjectParser<>(WhitespaceTokenizer.class.getName(), false, WhitespaceTokenizer::new);
 
   static {
     PARSER.declareInt(WhitespaceTokenizer::setMaxTokenLength, MAX_TOKEN_LENGTH);

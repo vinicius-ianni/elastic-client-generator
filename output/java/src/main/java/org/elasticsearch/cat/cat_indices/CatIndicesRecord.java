@@ -106,8 +106,8 @@ public class CatIndicesRecord  implements XContentable<CatIndicesRecord> {
     return CatIndicesRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatIndicesRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatIndicesRecord.class.getName(), false, args -> new CatIndicesRecord());
+  public static final ObjectParser<CatIndicesRecord, Void> PARSER =
+    new ObjectParser<>(CatIndicesRecord.class.getName(), false, CatIndicesRecord::new);
 
   static {
     PARSER.declareString(CatIndicesRecord::setDocsCount, DOCS_COUNT);

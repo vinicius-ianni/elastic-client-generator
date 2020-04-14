@@ -31,8 +31,8 @@ public class SimpleAnalyzer  implements XContentable<SimpleAnalyzer> {
     return SimpleAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SimpleAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(SimpleAnalyzer.class.getName(), false, args -> new SimpleAnalyzer());
+  public static final ObjectParser<SimpleAnalyzer, Void> PARSER =
+    new ObjectParser<>(SimpleAnalyzer.class.getName(), false, SimpleAnalyzer::new);
 
   static {
     

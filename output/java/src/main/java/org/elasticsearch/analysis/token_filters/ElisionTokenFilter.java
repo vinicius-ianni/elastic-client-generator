@@ -45,8 +45,8 @@ public class ElisionTokenFilter  implements XContentable<ElisionTokenFilter> {
     return ElisionTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ElisionTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(ElisionTokenFilter.class.getName(), false, args -> new ElisionTokenFilter());
+  public static final ObjectParser<ElisionTokenFilter, Void> PARSER =
+    new ObjectParser<>(ElisionTokenFilter.class.getName(), false, ElisionTokenFilter::new);
 
   static {
     PARSER.declareStringArray(ElisionTokenFilter::setArticles, ARTICLES);

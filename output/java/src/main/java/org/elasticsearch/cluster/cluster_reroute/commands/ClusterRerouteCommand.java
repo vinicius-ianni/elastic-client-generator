@@ -36,8 +36,8 @@ public class ClusterRerouteCommand  implements XContentable<ClusterRerouteComman
     return ClusterRerouteCommand.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterRerouteCommand, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterRerouteCommand.class.getName(), false, args -> new ClusterRerouteCommand());
+  public static final ObjectParser<ClusterRerouteCommand, Void> PARSER =
+    new ObjectParser<>(ClusterRerouteCommand.class.getName(), false, ClusterRerouteCommand::new);
 
   static {
     PARSER.declareString(ClusterRerouteCommand::setName, NAME);

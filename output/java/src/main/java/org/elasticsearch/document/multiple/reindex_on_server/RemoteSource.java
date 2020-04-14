@@ -53,8 +53,8 @@ public class RemoteSource  implements XContentable<RemoteSource> {
     return RemoteSource.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RemoteSource, Void> PARSER =
-    new ConstructingObjectParser<>(RemoteSource.class.getName(), false, args -> new RemoteSource());
+  public static final ObjectParser<RemoteSource, Void> PARSER =
+    new ObjectParser<>(RemoteSource.class.getName(), false, RemoteSource::new);
 
   static {
     PARSER.declareObject(RemoteSource::setHost, (p, t) -> Uri.createFrom(p), HOST);

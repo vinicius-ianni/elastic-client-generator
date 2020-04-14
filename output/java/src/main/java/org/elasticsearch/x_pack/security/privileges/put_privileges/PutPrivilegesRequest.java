@@ -50,11 +50,11 @@ public class PutPrivilegesRequest  implements XContentable<PutPrivilegesRequest>
     return PutPrivilegesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutPrivilegesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutPrivilegesRequest.class.getName(), false, args -> new PutPrivilegesRequest());
+  public static final ObjectParser<PutPrivilegesRequest, Void> PARSER =
+    new ObjectParser<>(PutPrivilegesRequest.class.getName(), false, PutPrivilegesRequest::new);
 
   static {
-    PARSER.declareObject(PutPrivilegesRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(PutPrivilegesRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(PutPrivilegesRequest::setApplications, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO NamedContainer<String, PrivilegesActions> */), APPLICATIONS);
   }
 

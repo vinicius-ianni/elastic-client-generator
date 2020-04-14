@@ -75,8 +75,8 @@ public class PutPipelineRequest  implements XContentable<PutPipelineRequest> {
     return PutPipelineRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutPipelineRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutPipelineRequest.class.getName(), false, args -> new PutPipelineRequest());
+  public static final ObjectParser<PutPipelineRequest, Void> PARSER =
+    new ObjectParser<>(PutPipelineRequest.class.getName(), false, PutPipelineRequest::new);
 
   static {
     PARSER.declareString(PutPipelineRequest::setDescription, DESCRIPTION);

@@ -31,8 +31,8 @@ public class FlushResponse  implements XContentable<FlushResponse> {
     return FlushResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FlushResponse, Void> PARSER =
-    new ConstructingObjectParser<>(FlushResponse.class.getName(), false, args -> new FlushResponse());
+  public static final ObjectParser<FlushResponse, Void> PARSER =
+    new ObjectParser<>(FlushResponse.class.getName(), false, FlushResponse::new);
 
   static {
     

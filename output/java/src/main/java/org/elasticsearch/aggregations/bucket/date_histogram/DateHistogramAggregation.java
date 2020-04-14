@@ -151,8 +151,8 @@ public class DateHistogramAggregation  implements XContentable<DateHistogramAggr
     return DateHistogramAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateHistogramAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(DateHistogramAggregation.class.getName(), false, args -> new DateHistogramAggregation());
+  public static final ObjectParser<DateHistogramAggregation, Void> PARSER =
+    new ObjectParser<>(DateHistogramAggregation.class.getName(), false, DateHistogramAggregation::new);
 
   static {
     ExtendedBounds<DateMath> _extendedBounds = new ExtendedBounds<DateMath>();

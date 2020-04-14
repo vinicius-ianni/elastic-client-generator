@@ -71,8 +71,8 @@ public class ThreadCountStats  implements XContentable<ThreadCountStats> {
     return ThreadCountStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ThreadCountStats, Void> PARSER =
-    new ConstructingObjectParser<>(ThreadCountStats.class.getName(), false, args -> new ThreadCountStats());
+  public static final ObjectParser<ThreadCountStats, Void> PARSER =
+    new ObjectParser<>(ThreadCountStats.class.getName(), false, ThreadCountStats::new);
 
   static {
     PARSER.declareLong(ThreadCountStats::setActive, ACTIVE);

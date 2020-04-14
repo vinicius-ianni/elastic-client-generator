@@ -36,8 +36,8 @@ public class StemmerTokenFilter  implements XContentable<StemmerTokenFilter> {
     return StemmerTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StemmerTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(StemmerTokenFilter.class.getName(), false, args -> new StemmerTokenFilter());
+  public static final ObjectParser<StemmerTokenFilter, Void> PARSER =
+    new ObjectParser<>(StemmerTokenFilter.class.getName(), false, StemmerTokenFilter::new);
 
   static {
     PARSER.declareString(StemmerTokenFilter::setLanguage, LANGUAGE);

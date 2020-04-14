@@ -60,8 +60,8 @@ public class RollupCapabilitiesJob  implements XContentable<RollupCapabilitiesJo
     return RollupCapabilitiesJob.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupCapabilitiesJob, Void> PARSER =
-    new ConstructingObjectParser<>(RollupCapabilitiesJob.class.getName(), false, args -> new RollupCapabilitiesJob());
+  public static final ObjectParser<RollupCapabilitiesJob, Void> PARSER =
+    new ObjectParser<>(RollupCapabilitiesJob.class.getName(), false, RollupCapabilitiesJob::new);
 
   static {
     PARSER.declareObject(RollupCapabilitiesJob::setFields, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),null /* TODO NamedContainer<String, Object> */), FIELDS);

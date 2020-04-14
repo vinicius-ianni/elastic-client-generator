@@ -31,8 +31,8 @@ public class PutMappingResponse  implements XContentable<PutMappingResponse> {
     return PutMappingResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutMappingResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutMappingResponse.class.getName(), false, args -> new PutMappingResponse());
+  public static final ObjectParser<PutMappingResponse, Void> PARSER =
+    new ObjectParser<>(PutMappingResponse.class.getName(), false, PutMappingResponse::new);
 
   static {
     

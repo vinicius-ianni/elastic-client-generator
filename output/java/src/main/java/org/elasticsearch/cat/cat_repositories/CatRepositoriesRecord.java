@@ -43,8 +43,8 @@ public class CatRepositoriesRecord  implements XContentable<CatRepositoriesRecor
     return CatRepositoriesRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatRepositoriesRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatRepositoriesRecord.class.getName(), false, args -> new CatRepositoriesRecord());
+  public static final ObjectParser<CatRepositoriesRecord, Void> PARSER =
+    new ObjectParser<>(CatRepositoriesRecord.class.getName(), false, CatRepositoriesRecord::new);
 
   static {
     PARSER.declareString(CatRepositoriesRecord::setId, ID);

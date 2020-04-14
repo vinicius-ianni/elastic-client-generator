@@ -50,8 +50,8 @@ public class MatchPhraseQuery  implements XContentable<MatchPhraseQuery> {
     return MatchPhraseQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MatchPhraseQuery, Void> PARSER =
-    new ConstructingObjectParser<>(MatchPhraseQuery.class.getName(), false, args -> new MatchPhraseQuery());
+  public static final ObjectParser<MatchPhraseQuery, Void> PARSER =
+    new ObjectParser<>(MatchPhraseQuery.class.getName(), false, MatchPhraseQuery::new);
 
   static {
     PARSER.declareString(MatchPhraseQuery::setAnalyzer, ANALYZER);

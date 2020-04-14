@@ -36,8 +36,8 @@ public class Datafeeds  implements XContentable<Datafeeds> {
     return Datafeeds.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Datafeeds, Void> PARSER =
-    new ConstructingObjectParser<>(Datafeeds.class.getName(), false, args -> new Datafeeds());
+  public static final ObjectParser<Datafeeds, Void> PARSER =
+    new ObjectParser<>(Datafeeds.class.getName(), false, Datafeeds::new);
 
   static {
     PARSER.declareInt(Datafeeds::setScrollSize, SCROLL_SIZE);

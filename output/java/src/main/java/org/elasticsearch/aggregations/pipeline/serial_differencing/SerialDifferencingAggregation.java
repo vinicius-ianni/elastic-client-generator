@@ -36,8 +36,8 @@ public class SerialDifferencingAggregation  implements XContentable<SerialDiffer
     return SerialDifferencingAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SerialDifferencingAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(SerialDifferencingAggregation.class.getName(), false, args -> new SerialDifferencingAggregation());
+  public static final ObjectParser<SerialDifferencingAggregation, Void> PARSER =
+    new ObjectParser<>(SerialDifferencingAggregation.class.getName(), false, SerialDifferencingAggregation::new);
 
   static {
     PARSER.declareInt(SerialDifferencingAggregation::setLag, LAG);

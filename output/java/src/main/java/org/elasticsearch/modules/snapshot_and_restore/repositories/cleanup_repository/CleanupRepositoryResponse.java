@@ -39,8 +39,8 @@ public class CleanupRepositoryResponse  implements XContentable<CleanupRepositor
     return CleanupRepositoryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CleanupRepositoryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CleanupRepositoryResponse.class.getName(), false, args -> new CleanupRepositoryResponse());
+  public static final ObjectParser<CleanupRepositoryResponse, Void> PARSER =
+    new ObjectParser<>(CleanupRepositoryResponse.class.getName(), false, CleanupRepositoryResponse::new);
 
   static {
     PARSER.declareObject(CleanupRepositoryResponse::setResults, (p, t) -> CleanupRepositoryResults.PARSER.apply(p, t), RESULTS);

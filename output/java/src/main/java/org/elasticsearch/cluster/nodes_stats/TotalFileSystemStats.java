@@ -71,8 +71,8 @@ public class TotalFileSystemStats  implements XContentable<TotalFileSystemStats>
     return TotalFileSystemStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TotalFileSystemStats, Void> PARSER =
-    new ConstructingObjectParser<>(TotalFileSystemStats.class.getName(), false, args -> new TotalFileSystemStats());
+  public static final ObjectParser<TotalFileSystemStats, Void> PARSER =
+    new ObjectParser<>(TotalFileSystemStats.class.getName(), false, TotalFileSystemStats::new);
 
   static {
     PARSER.declareString(TotalFileSystemStats::setAvailable, AVAILABLE);

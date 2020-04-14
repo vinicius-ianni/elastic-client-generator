@@ -41,8 +41,8 @@ public class GetMappingResponse extends DictionaryResponseBase<IndexName, IndexM
     return GetMappingResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetMappingResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetMappingResponse.class.getName(), false, args -> new GetMappingResponse());
+  public static final ObjectParser<GetMappingResponse, Void> PARSER =
+    new ObjectParser<>(GetMappingResponse.class.getName(), false, GetMappingResponse::new);
 
   static {
     PARSER.declareObject(GetMappingResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> IndexMappings.PARSER.apply(pp, null)), INDICES);

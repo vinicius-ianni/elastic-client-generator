@@ -49,8 +49,8 @@ public class ClusterProcess  implements XContentable<ClusterProcess> {
     return ClusterProcess.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterProcess, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterProcess.class.getName(), false, args -> new ClusterProcess());
+  public static final ObjectParser<ClusterProcess, Void> PARSER =
+    new ObjectParser<>(ClusterProcess.class.getName(), false, ClusterProcess::new);
 
   static {
     PARSER.declareObject(ClusterProcess::setCpu, (p, t) -> ClusterProcessCpu.PARSER.apply(p, t), CPU);

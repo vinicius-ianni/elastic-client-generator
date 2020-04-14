@@ -50,8 +50,8 @@ public class SqlUsage  implements XContentable<SqlUsage> {
     return SqlUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SqlUsage, Void> PARSER =
-    new ConstructingObjectParser<>(SqlUsage.class.getName(), false, args -> new SqlUsage());
+  public static final ObjectParser<SqlUsage, Void> PARSER =
+    new ObjectParser<>(SqlUsage.class.getName(), false, SqlUsage::new);
 
   static {
     PARSER.declareObject(SqlUsage::setFeatures, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.intValue()), FEATURES);

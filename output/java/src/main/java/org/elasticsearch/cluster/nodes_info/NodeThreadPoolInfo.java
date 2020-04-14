@@ -71,8 +71,8 @@ public class NodeThreadPoolInfo  implements XContentable<NodeThreadPoolInfo> {
     return NodeThreadPoolInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeThreadPoolInfo, Void> PARSER =
-    new ConstructingObjectParser<>(NodeThreadPoolInfo.class.getName(), false, args -> new NodeThreadPoolInfo());
+  public static final ObjectParser<NodeThreadPoolInfo, Void> PARSER =
+    new ObjectParser<>(NodeThreadPoolInfo.class.getName(), false, NodeThreadPoolInfo::new);
 
   static {
     PARSER.declareString(NodeThreadPoolInfo::setKeepAlive, KEEP_ALIVE);

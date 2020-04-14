@@ -134,8 +134,8 @@ public class AnomalyCause  implements XContentable<AnomalyCause> {
     return AnomalyCause.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnomalyCause, Void> PARSER =
-    new ConstructingObjectParser<>(AnomalyCause.class.getName(), false, args -> new AnomalyCause());
+  public static final ObjectParser<AnomalyCause, Void> PARSER =
+    new ObjectParser<>(AnomalyCause.class.getName(), false, AnomalyCause::new);
 
   static {
     PARSER.declareDoubleArray(AnomalyCause::setActual, ACTUAL);

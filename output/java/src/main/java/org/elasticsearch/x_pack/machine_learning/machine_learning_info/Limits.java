@@ -36,8 +36,8 @@ public class Limits  implements XContentable<Limits> {
     return Limits.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Limits, Void> PARSER =
-    new ConstructingObjectParser<>(Limits.class.getName(), false, args -> new Limits());
+  public static final ObjectParser<Limits, Void> PARSER =
+    new ObjectParser<>(Limits.class.getName(), false, Limits::new);
 
   static {
     PARSER.declareString(Limits::setMaxModelMemoryLimit, MAX_MODEL_MEMORY_LIMIT);

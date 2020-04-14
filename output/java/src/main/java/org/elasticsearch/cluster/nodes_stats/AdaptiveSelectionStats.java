@@ -78,8 +78,8 @@ public class AdaptiveSelectionStats  implements XContentable<AdaptiveSelectionSt
     return AdaptiveSelectionStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AdaptiveSelectionStats, Void> PARSER =
-    new ConstructingObjectParser<>(AdaptiveSelectionStats.class.getName(), false, args -> new AdaptiveSelectionStats());
+  public static final ObjectParser<AdaptiveSelectionStats, Void> PARSER =
+    new ObjectParser<>(AdaptiveSelectionStats.class.getName(), false, AdaptiveSelectionStats::new);
 
   static {
     PARSER.declareLong(AdaptiveSelectionStats::setAvgQueueSize, AVG_QUEUE_SIZE);

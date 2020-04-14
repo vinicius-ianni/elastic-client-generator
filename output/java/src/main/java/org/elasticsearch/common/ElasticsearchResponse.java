@@ -31,8 +31,8 @@ public class ElasticsearchResponse  implements XContentable<ElasticsearchRespons
     return ElasticsearchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ElasticsearchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ElasticsearchResponse.class.getName(), false, args -> new ElasticsearchResponse());
+  public static final ObjectParser<ElasticsearchResponse, Void> PARSER =
+    new ObjectParser<>(ElasticsearchResponse.class.getName(), false, ElasticsearchResponse::new);
 
   static {
     

@@ -31,8 +31,8 @@ public class UnfollowIndexRequest  implements XContentable<UnfollowIndexRequest>
     return UnfollowIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UnfollowIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UnfollowIndexRequest.class.getName(), false, args -> new UnfollowIndexRequest());
+  public static final ObjectParser<UnfollowIndexRequest, Void> PARSER =
+    new ObjectParser<>(UnfollowIndexRequest.class.getName(), false, UnfollowIndexRequest::new);
 
   static {
     

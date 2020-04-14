@@ -121,8 +121,8 @@ public class Snapshot  implements XContentable<Snapshot> {
     return Snapshot.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Snapshot, Void> PARSER =
-    new ConstructingObjectParser<>(Snapshot.class.getName(), false, args -> new Snapshot());
+  public static final ObjectParser<Snapshot, Void> PARSER =
+    new ObjectParser<>(Snapshot.class.getName(), false, Snapshot::new);
 
   static {
     PARSER.declareLong(Snapshot::setDurationInMillis, DURATION_IN_MILLIS);

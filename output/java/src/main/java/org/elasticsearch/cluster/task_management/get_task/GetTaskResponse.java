@@ -46,8 +46,8 @@ public class GetTaskResponse  implements XContentable<GetTaskResponse> {
     return GetTaskResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetTaskResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetTaskResponse.class.getName(), false, args -> new GetTaskResponse());
+  public static final ObjectParser<GetTaskResponse, Void> PARSER =
+    new ObjectParser<>(GetTaskResponse.class.getName(), false, GetTaskResponse::new);
 
   static {
     PARSER.declareBoolean(GetTaskResponse::setCompleted, COMPLETED);

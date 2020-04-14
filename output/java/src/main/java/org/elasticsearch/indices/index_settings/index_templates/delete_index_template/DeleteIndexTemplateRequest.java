@@ -49,8 +49,8 @@ public class DeleteIndexTemplateRequest  implements XContentable<DeleteIndexTemp
     return DeleteIndexTemplateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteIndexTemplateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteIndexTemplateRequest.class.getName(), false, args -> new DeleteIndexTemplateRequest());
+  public static final ObjectParser<DeleteIndexTemplateRequest, Void> PARSER =
+    new ObjectParser<>(DeleteIndexTemplateRequest.class.getName(), false, DeleteIndexTemplateRequest::new);
 
   static {
     PARSER.declareObject(DeleteIndexTemplateRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

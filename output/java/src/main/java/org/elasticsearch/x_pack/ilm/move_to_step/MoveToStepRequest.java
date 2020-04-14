@@ -49,8 +49,8 @@ public class MoveToStepRequest  implements XContentable<MoveToStepRequest> {
     return MoveToStepRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MoveToStepRequest, Void> PARSER =
-    new ConstructingObjectParser<>(MoveToStepRequest.class.getName(), false, args -> new MoveToStepRequest());
+  public static final ObjectParser<MoveToStepRequest, Void> PARSER =
+    new ObjectParser<>(MoveToStepRequest.class.getName(), false, MoveToStepRequest::new);
 
   static {
     PARSER.declareObject(MoveToStepRequest::setCurrentStep, (p, t) -> StepKey.PARSER.apply(p, t), CURRENT_STEP);

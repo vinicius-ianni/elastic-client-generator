@@ -50,8 +50,8 @@ public class ShardWarmer  implements XContentable<ShardWarmer> {
     return ShardWarmer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardWarmer, Void> PARSER =
-    new ConstructingObjectParser<>(ShardWarmer.class.getName(), false, args -> new ShardWarmer());
+  public static final ObjectParser<ShardWarmer, Void> PARSER =
+    new ObjectParser<>(ShardWarmer.class.getName(), false, ShardWarmer::new);
 
   static {
     PARSER.declareLong(ShardWarmer::setCurrent, CURRENT);

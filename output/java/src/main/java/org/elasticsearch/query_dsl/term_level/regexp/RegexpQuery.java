@@ -50,8 +50,8 @@ public class RegexpQuery  implements XContentable<RegexpQuery> {
     return RegexpQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RegexpQuery, Void> PARSER =
-    new ConstructingObjectParser<>(RegexpQuery.class.getName(), false, args -> new RegexpQuery());
+  public static final ObjectParser<RegexpQuery, Void> PARSER =
+    new ObjectParser<>(RegexpQuery.class.getName(), false, RegexpQuery::new);
 
   static {
     PARSER.declareString(RegexpQuery::setFlags, FLAGS);

@@ -55,13 +55,13 @@ public class UnassignedInformation  implements XContentable<UnassignedInformatio
     return UnassignedInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UnassignedInformation, Void> PARSER =
-    new ConstructingObjectParser<>(UnassignedInformation.class.getName(), false, args -> new UnassignedInformation());
+  public static final ObjectParser<UnassignedInformation, Void> PARSER =
+    new ObjectParser<>(UnassignedInformation.class.getName(), false, UnassignedInformation::new);
 
   static {
     PARSER.declareObject(UnassignedInformation::setAt, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), AT);
     PARSER.declareString(UnassignedInformation::setLastAllocationStatus, LAST_ALLOCATION_STATUS);
-    PARSER.declareObject(UnassignedInformation::setReason, (p, t) -> UnassignedInformationReason.PARSER.apply(p), REASON);
+    PARSER.declareField(UnassignedInformation::setReason, (p, t) -> UnassignedInformationReason.PARSER.apply(p), REASON, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

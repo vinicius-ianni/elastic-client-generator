@@ -169,8 +169,8 @@ public class NodeInfo  implements XContentable<NodeInfo> {
     return NodeInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfo, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfo.class.getName(), false, args -> new NodeInfo());
+  public static final ObjectParser<NodeInfo, Void> PARSER =
+    new ObjectParser<>(NodeInfo.class.getName(), false, NodeInfo::new);
 
   static {
     PARSER.declareString(NodeInfo::setBuildHash, BUILD_HASH);
@@ -183,7 +183,7 @@ public class NodeInfo  implements XContentable<NodeInfo> {
     PARSER.declareObject(NodeInfo::setOs, (p, t) -> NodeOperatingSystemInfo.PARSER.apply(p, t), OS);
     PARSER.declareObjectArray(NodeInfo::setPlugins, (p, t) -> PluginStats.PARSER.apply(p, t), PLUGINS);
     PARSER.declareObject(NodeInfo::setProcess, (p, t) -> NodeProcessInfo.PARSER.apply(p, t), PROCESS);
-    PARSER.declareObjectArray(NodeInfo::setRoles, (p, t) -> NodeRole.PARSER.apply(p), ROLES);
+    PARSER.declareFieldArray(NodeInfo::setRoles, (p, t) -> NodeRole.PARSER.apply(p), ROLES, ObjectParser.ValueType.STRING_ARRAY);
     PARSER.declareStringArray(NodeInfo::setSettings, SETTINGS);
     PARSER.declareObject(NodeInfo::setThreadPool, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> NodeThreadPoolInfo.PARSER.apply(pp, null)), THREAD_POOL);
     PARSER.declareObject(NodeInfo::setTransport, (p, t) -> NodeInfoTransport.PARSER.apply(p, t), TRANSPORT);

@@ -59,8 +59,8 @@ public class SearchInput  implements XContentable<SearchInput> {
     return SearchInput.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchInput, Void> PARSER =
-    new ConstructingObjectParser<>(SearchInput.class.getName(), false, args -> new SearchInput());
+  public static final ObjectParser<SearchInput, Void> PARSER =
+    new ObjectParser<>(SearchInput.class.getName(), false, SearchInput::new);
 
   static {
     PARSER.declareStringArray(SearchInput::setExtract, EXTRACT);

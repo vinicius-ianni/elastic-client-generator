@@ -78,8 +78,8 @@ public class TranslogStats  implements XContentable<TranslogStats> {
     return TranslogStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TranslogStats, Void> PARSER =
-    new ConstructingObjectParser<>(TranslogStats.class.getName(), false, args -> new TranslogStats());
+  public static final ObjectParser<TranslogStats, Void> PARSER =
+    new ObjectParser<>(TranslogStats.class.getName(), false, TranslogStats::new);
 
   static {
     PARSER.declareLong(TranslogStats::setEarliestLastModifiedAge, EARLIEST_LAST_MODIFIED_AGE);

@@ -69,8 +69,8 @@ public class BulkResponse  implements XContentable<BulkResponse> {
     return BulkResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BulkResponse, Void> PARSER =
-    new ConstructingObjectParser<>(BulkResponse.class.getName(), false, args -> new BulkResponse());
+  public static final ObjectParser<BulkResponse, Void> PARSER =
+    new ObjectParser<>(BulkResponse.class.getName(), false, BulkResponse::new);
 
   static {
     PARSER.declareBoolean(BulkResponse::setErrors, ERRORS);

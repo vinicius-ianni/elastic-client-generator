@@ -112,8 +112,8 @@ public class SuggestOption<TDocument>  implements XContentable<SuggestOption<TDo
     return SuggestOption.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SuggestOption, Void> PARSER =
-    new ConstructingObjectParser<>(SuggestOption.class.getName(), false, args -> new SuggestOption());
+  public static final ObjectParser<SuggestOption, Void> PARSER =
+    new ObjectParser<>(SuggestOption.class.getName(), false, SuggestOption::new);
 
   static {
     PARSER.declareBoolean(SuggestOption::setCollateMatch, COLLATE_MATCH);

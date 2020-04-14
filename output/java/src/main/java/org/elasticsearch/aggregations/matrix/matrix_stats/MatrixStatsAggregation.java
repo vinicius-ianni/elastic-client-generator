@@ -39,11 +39,11 @@ public class MatrixStatsAggregation  implements XContentable<MatrixStatsAggregat
     return MatrixStatsAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MatrixStatsAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MatrixStatsAggregation.class.getName(), false, args -> new MatrixStatsAggregation());
+  public static final ObjectParser<MatrixStatsAggregation, Void> PARSER =
+    new ObjectParser<>(MatrixStatsAggregation.class.getName(), false, MatrixStatsAggregation::new);
 
   static {
-    PARSER.declareObject(MatrixStatsAggregation::setMode, (p, t) -> MatrixStatsMode.PARSER.apply(p), MODE);
+    PARSER.declareField(MatrixStatsAggregation::setMode, (p, t) -> MatrixStatsMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

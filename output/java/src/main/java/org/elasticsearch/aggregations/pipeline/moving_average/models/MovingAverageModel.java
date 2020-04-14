@@ -36,8 +36,8 @@ public class MovingAverageModel  implements XContentable<MovingAverageModel> {
     return MovingAverageModel.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MovingAverageModel, Void> PARSER =
-    new ConstructingObjectParser<>(MovingAverageModel.class.getName(), false, args -> new MovingAverageModel());
+  public static final ObjectParser<MovingAverageModel, Void> PARSER =
+    new ObjectParser<>(MovingAverageModel.class.getName(), false, MovingAverageModel::new);
 
   static {
     PARSER.declareString(MovingAverageModel::setName, NAME);

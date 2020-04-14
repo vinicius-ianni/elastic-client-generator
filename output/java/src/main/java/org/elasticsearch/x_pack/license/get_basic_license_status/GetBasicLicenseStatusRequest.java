@@ -31,8 +31,8 @@ public class GetBasicLicenseStatusRequest  implements XContentable<GetBasicLicen
     return GetBasicLicenseStatusRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetBasicLicenseStatusRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetBasicLicenseStatusRequest.class.getName(), false, args -> new GetBasicLicenseStatusRequest());
+  public static final ObjectParser<GetBasicLicenseStatusRequest, Void> PARSER =
+    new ObjectParser<>(GetBasicLicenseStatusRequest.class.getName(), false, GetBasicLicenseStatusRequest::new);
 
   static {
     

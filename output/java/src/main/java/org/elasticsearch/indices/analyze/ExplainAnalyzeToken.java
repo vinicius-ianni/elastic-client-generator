@@ -92,8 +92,8 @@ public class ExplainAnalyzeToken  implements XContentable<ExplainAnalyzeToken> {
     return ExplainAnalyzeToken.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExplainAnalyzeToken, Void> PARSER =
-    new ConstructingObjectParser<>(ExplainAnalyzeToken.class.getName(), false, args -> new ExplainAnalyzeToken());
+  public static final ObjectParser<ExplainAnalyzeToken, Void> PARSER =
+    new ObjectParser<>(ExplainAnalyzeToken.class.getName(), false, ExplainAnalyzeToken::new);
 
   static {
     PARSER.declareString(ExplainAnalyzeToken::setBytes, BYTES);

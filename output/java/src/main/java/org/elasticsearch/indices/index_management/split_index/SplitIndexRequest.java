@@ -78,8 +78,8 @@ public class SplitIndexRequest  implements XContentable<SplitIndexRequest> {
     return SplitIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SplitIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SplitIndexRequest.class.getName(), false, args -> new SplitIndexRequest());
+  public static final ObjectParser<SplitIndexRequest, Void> PARSER =
+    new ObjectParser<>(SplitIndexRequest.class.getName(), false, SplitIndexRequest::new);
 
   static {
     PARSER.declareObject(SplitIndexRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

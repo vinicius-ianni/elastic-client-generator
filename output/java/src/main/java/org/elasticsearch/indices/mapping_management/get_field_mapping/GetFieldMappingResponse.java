@@ -48,8 +48,8 @@ public class GetFieldMappingResponse extends DictionaryResponseBase<IndexName, T
     return GetFieldMappingResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetFieldMappingResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetFieldMappingResponse.class.getName(), false, args -> new GetFieldMappingResponse());
+  public static final ObjectParser<GetFieldMappingResponse, Void> PARSER =
+    new ObjectParser<>(GetFieldMappingResponse.class.getName(), false, GetFieldMappingResponse::new);
 
   static {
     PARSER.declareObject(GetFieldMappingResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> TypeFieldMappings.PARSER.apply(pp, null)), INDICES);

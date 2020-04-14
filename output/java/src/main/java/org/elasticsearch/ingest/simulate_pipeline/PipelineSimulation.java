@@ -55,8 +55,8 @@ public class PipelineSimulation  implements XContentable<PipelineSimulation> {
     return PipelineSimulation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PipelineSimulation, Void> PARSER =
-    new ConstructingObjectParser<>(PipelineSimulation.class.getName(), false, args -> new PipelineSimulation());
+  public static final ObjectParser<PipelineSimulation, Void> PARSER =
+    new ObjectParser<>(PipelineSimulation.class.getName(), false, PipelineSimulation::new);
 
   static {
     PARSER.declareObject(PipelineSimulation::setDoc, (p, t) -> DocumentSimulation.PARSER.apply(p, t), DOC);

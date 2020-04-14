@@ -141,8 +141,8 @@ public class DataPathStats  implements XContentable<DataPathStats> {
     return DataPathStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DataPathStats, Void> PARSER =
-    new ConstructingObjectParser<>(DataPathStats.class.getName(), false, args -> new DataPathStats());
+  public static final ObjectParser<DataPathStats, Void> PARSER =
+    new ObjectParser<>(DataPathStats.class.getName(), false, DataPathStats::new);
 
   static {
     PARSER.declareString(DataPathStats::setAvailable, AVAILABLE);

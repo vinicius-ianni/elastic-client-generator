@@ -31,8 +31,8 @@ public class HtmlStripCharFilter  implements XContentable<HtmlStripCharFilter> {
     return HtmlStripCharFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HtmlStripCharFilter, Void> PARSER =
-    new ConstructingObjectParser<>(HtmlStripCharFilter.class.getName(), false, args -> new HtmlStripCharFilter());
+  public static final ObjectParser<HtmlStripCharFilter, Void> PARSER =
+    new ObjectParser<>(HtmlStripCharFilter.class.getName(), false, HtmlStripCharFilter::new);
 
   static {
     

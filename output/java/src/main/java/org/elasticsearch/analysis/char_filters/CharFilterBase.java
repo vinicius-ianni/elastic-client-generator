@@ -43,8 +43,8 @@ public class CharFilterBase  implements XContentable<CharFilterBase> {
     return CharFilterBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CharFilterBase, Void> PARSER =
-    new ConstructingObjectParser<>(CharFilterBase.class.getName(), false, args -> new CharFilterBase());
+  public static final ObjectParser<CharFilterBase, Void> PARSER =
+    new ObjectParser<>(CharFilterBase.class.getName(), false, CharFilterBase::new);
 
   static {
     PARSER.declareString(CharFilterBase::setType, TYPE);

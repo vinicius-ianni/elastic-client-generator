@@ -31,8 +31,8 @@ public class GetCertificatesRequest  implements XContentable<GetCertificatesRequ
     return GetCertificatesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetCertificatesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetCertificatesRequest.class.getName(), false, args -> new GetCertificatesRequest());
+  public static final ObjectParser<GetCertificatesRequest, Void> PARSER =
+    new ObjectParser<>(GetCertificatesRequest.class.getName(), false, GetCertificatesRequest::new);
 
   static {
     

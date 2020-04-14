@@ -46,8 +46,8 @@ public class ClusterStatsRequest  implements XContentable<ClusterStatsRequest> {
     return ClusterStatsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterStatsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterStatsRequest.class.getName(), false, args -> new ClusterStatsRequest());
+  public static final ObjectParser<ClusterStatsRequest, Void> PARSER =
+    new ObjectParser<>(ClusterStatsRequest.class.getName(), false, ClusterStatsRequest::new);
 
   static {
     PARSER.declareBoolean(ClusterStatsRequest::setFlatSettings, FLAT_SETTINGS);

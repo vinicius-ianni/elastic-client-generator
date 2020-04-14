@@ -50,8 +50,8 @@ public class PatternReplaceTokenFilter  implements XContentable<PatternReplaceTo
     return PatternReplaceTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PatternReplaceTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(PatternReplaceTokenFilter.class.getName(), false, args -> new PatternReplaceTokenFilter());
+  public static final ObjectParser<PatternReplaceTokenFilter, Void> PARSER =
+    new ObjectParser<>(PatternReplaceTokenFilter.class.getName(), false, PatternReplaceTokenFilter::new);
 
   static {
     PARSER.declareString(PatternReplaceTokenFilter::setFlags, FLAGS);

@@ -85,14 +85,14 @@ public class DynamicTemplate  implements XContentable<DynamicTemplate> {
     return DynamicTemplate.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DynamicTemplate, Void> PARSER =
-    new ConstructingObjectParser<>(DynamicTemplate.class.getName(), false, args -> new DynamicTemplate());
+  public static final ObjectParser<DynamicTemplate, Void> PARSER =
+    new ObjectParser<>(DynamicTemplate.class.getName(), false, DynamicTemplate::new);
 
   static {
     PARSER.declareObject(DynamicTemplate::setMapping, (p, t) -> IProperty.PARSER.apply(p, t), MAPPING);
     PARSER.declareString(DynamicTemplate::setMatch, MATCH);
     PARSER.declareString(DynamicTemplate::setMatchMappingType, MATCH_MAPPING_TYPE);
-    PARSER.declareObject(DynamicTemplate::setMatchPattern, (p, t) -> MatchType.PARSER.apply(p), MATCH_PATTERN);
+    PARSER.declareField(DynamicTemplate::setMatchPattern, (p, t) -> MatchType.PARSER.apply(p), MATCH_PATTERN, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(DynamicTemplate::setPathMatch, PATH_MATCH);
     PARSER.declareString(DynamicTemplate::setPathUnmatch, PATH_UNMATCH);
     PARSER.declareString(DynamicTemplate::setUnmatch, UNMATCH);

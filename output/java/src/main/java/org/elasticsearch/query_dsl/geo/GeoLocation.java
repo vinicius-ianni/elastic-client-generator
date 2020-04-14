@@ -43,8 +43,8 @@ public class GeoLocation  implements XContentable<GeoLocation> {
     return GeoLocation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoLocation, Void> PARSER =
-    new ConstructingObjectParser<>(GeoLocation.class.getName(), false, args -> new GeoLocation());
+  public static final ObjectParser<GeoLocation, Void> PARSER =
+    new ObjectParser<>(GeoLocation.class.getName(), false, GeoLocation::new);
 
   static {
     PARSER.declareDouble(GeoLocation::setLat, LAT);

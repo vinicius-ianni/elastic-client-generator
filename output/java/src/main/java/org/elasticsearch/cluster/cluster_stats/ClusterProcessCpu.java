@@ -36,8 +36,8 @@ public class ClusterProcessCpu  implements XContentable<ClusterProcessCpu> {
     return ClusterProcessCpu.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterProcessCpu, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterProcessCpu.class.getName(), false, args -> new ClusterProcessCpu());
+  public static final ObjectParser<ClusterProcessCpu, Void> PARSER =
+    new ObjectParser<>(ClusterProcessCpu.class.getName(), false, ClusterProcessCpu::new);
 
   static {
     PARSER.declareInt(ClusterProcessCpu::setPercent, PERCENT);

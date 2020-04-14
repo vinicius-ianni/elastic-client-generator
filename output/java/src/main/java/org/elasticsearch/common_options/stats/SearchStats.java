@@ -120,8 +120,8 @@ public class SearchStats  implements XContentable<SearchStats> {
     return SearchStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchStats, Void> PARSER =
-    new ConstructingObjectParser<>(SearchStats.class.getName(), false, args -> new SearchStats());
+  public static final ObjectParser<SearchStats, Void> PARSER =
+    new ObjectParser<>(SearchStats.class.getName(), false, SearchStats::new);
 
   static {
     PARSER.declareLong(SearchStats::setFetchCurrent, FETCH_CURRENT);

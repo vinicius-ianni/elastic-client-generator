@@ -74,8 +74,8 @@ public class DateHistogramRollupGrouping  implements XContentable<DateHistogramR
     return DateHistogramRollupGrouping.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateHistogramRollupGrouping, Void> PARSER =
-    new ConstructingObjectParser<>(DateHistogramRollupGrouping.class.getName(), false, args -> new DateHistogramRollupGrouping());
+  public static final ObjectParser<DateHistogramRollupGrouping, Void> PARSER =
+    new ObjectParser<>(DateHistogramRollupGrouping.class.getName(), false, DateHistogramRollupGrouping::new);
 
   static {
     PARSER.declareObject(DateHistogramRollupGrouping::setDelay, (p, t) -> Time.PARSER.apply(p, t), DELAY);

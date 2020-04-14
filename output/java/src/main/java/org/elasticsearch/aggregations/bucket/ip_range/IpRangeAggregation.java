@@ -49,8 +49,8 @@ public class IpRangeAggregation  implements XContentable<IpRangeAggregation> {
     return IpRangeAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IpRangeAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(IpRangeAggregation.class.getName(), false, args -> new IpRangeAggregation());
+  public static final ObjectParser<IpRangeAggregation, Void> PARSER =
+    new ObjectParser<>(IpRangeAggregation.class.getName(), false, IpRangeAggregation::new);
 
   static {
     PARSER.declareObject(IpRangeAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);

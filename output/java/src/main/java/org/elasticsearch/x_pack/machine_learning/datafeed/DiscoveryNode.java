@@ -67,8 +67,8 @@ public class DiscoveryNode  implements XContentable<DiscoveryNode> {
     return DiscoveryNode.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DiscoveryNode, Void> PARSER =
-    new ConstructingObjectParser<>(DiscoveryNode.class.getName(), false, args -> new DiscoveryNode());
+  public static final ObjectParser<DiscoveryNode, Void> PARSER =
+    new ObjectParser<>(DiscoveryNode.class.getName(), false, DiscoveryNode::new);
 
   static {
     PARSER.declareObject(DiscoveryNode::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), ATTRIBUTES);

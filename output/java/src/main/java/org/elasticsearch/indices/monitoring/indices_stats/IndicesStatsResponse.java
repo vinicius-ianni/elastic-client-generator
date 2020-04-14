@@ -60,8 +60,8 @@ public class IndicesStatsResponse  implements XContentable<IndicesStatsResponse>
     return IndicesStatsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesStatsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesStatsResponse.class.getName(), false, args -> new IndicesStatsResponse());
+  public static final ObjectParser<IndicesStatsResponse, Void> PARSER =
+    new ObjectParser<>(IndicesStatsResponse.class.getName(), false, IndicesStatsResponse::new);
 
   static {
     PARSER.declareObject(IndicesStatsResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> IndicesStats.PARSER.apply(pp, null)), INDICES);

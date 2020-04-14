@@ -78,8 +78,8 @@ public class TransportStats  implements XContentable<TransportStats> {
     return TransportStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TransportStats, Void> PARSER =
-    new ConstructingObjectParser<>(TransportStats.class.getName(), false, args -> new TransportStats());
+  public static final ObjectParser<TransportStats, Void> PARSER =
+    new ObjectParser<>(TransportStats.class.getName(), false, TransportStats::new);
 
   static {
     PARSER.declareLong(TransportStats::setRxCount, RX_COUNT);

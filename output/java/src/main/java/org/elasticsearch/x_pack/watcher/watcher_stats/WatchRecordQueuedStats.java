@@ -59,8 +59,8 @@ public class WatchRecordQueuedStats  implements XContentable<WatchRecordQueuedSt
     return WatchRecordQueuedStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WatchRecordQueuedStats, Void> PARSER =
-    new ConstructingObjectParser<>(WatchRecordQueuedStats.class.getName(), false, args -> new WatchRecordQueuedStats());
+  public static final ObjectParser<WatchRecordQueuedStats, Void> PARSER =
+    new ObjectParser<>(WatchRecordQueuedStats.class.getName(), false, WatchRecordQueuedStats::new);
 
   static {
     PARSER.declareObject(WatchRecordQueuedStats::setExecutionTime, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXECUTION_TIME);

@@ -36,8 +36,8 @@ public class ShardStatsStore  implements XContentable<ShardStatsStore> {
     return ShardStatsStore.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardStatsStore, Void> PARSER =
-    new ConstructingObjectParser<>(ShardStatsStore.class.getName(), false, args -> new ShardStatsStore());
+  public static final ObjectParser<ShardStatsStore, Void> PARSER =
+    new ObjectParser<>(ShardStatsStore.class.getName(), false, ShardStatsStore::new);
 
   static {
     PARSER.declareLong(ShardStatsStore::setSizeInBytes, SIZE_IN_BYTES);

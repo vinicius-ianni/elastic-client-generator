@@ -39,8 +39,8 @@ public class WildcardQuery  implements XContentable<WildcardQuery> {
     return WildcardQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WildcardQuery, Void> PARSER =
-    new ConstructingObjectParser<>(WildcardQuery.class.getName(), false, args -> new WildcardQuery());
+  public static final ObjectParser<WildcardQuery, Void> PARSER =
+    new ObjectParser<>(WildcardQuery.class.getName(), false, WildcardQuery::new);
 
   static {
     PARSER.declareObject(WildcardQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), REWRITE);

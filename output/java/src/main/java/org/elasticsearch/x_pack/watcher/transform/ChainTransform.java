@@ -38,8 +38,8 @@ public class ChainTransform  implements XContentable<ChainTransform> {
     return ChainTransform.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ChainTransform, Void> PARSER =
-    new ConstructingObjectParser<>(ChainTransform.class.getName(), false, args -> new ChainTransform());
+  public static final ObjectParser<ChainTransform, Void> PARSER =
+    new ObjectParser<>(ChainTransform.class.getName(), false, ChainTransform::new);
 
   static {
     PARSER.declareObjectArray(ChainTransform::setTransforms, (p, t) -> TransformContainer.PARSER.apply(p, t), TRANSFORMS);

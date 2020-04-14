@@ -31,8 +31,8 @@ public class AverageBucketAggregation  implements XContentable<AverageBucketAggr
     return AverageBucketAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AverageBucketAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(AverageBucketAggregation.class.getName(), false, args -> new AverageBucketAggregation());
+  public static final ObjectParser<AverageBucketAggregation, Void> PARSER =
+    new ObjectParser<>(AverageBucketAggregation.class.getName(), false, AverageBucketAggregation::new);
 
   static {
     

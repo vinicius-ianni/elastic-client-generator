@@ -78,14 +78,14 @@ public class Detector  implements XContentable<Detector> {
     return Detector.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Detector, Void> PARSER =
-    new ConstructingObjectParser<>(Detector.class.getName(), false, args -> new Detector());
+  public static final ObjectParser<Detector, Void> PARSER =
+    new ObjectParser<>(Detector.class.getName(), false, Detector::new);
 
   static {
     PARSER.declareObjectArray(Detector::setCustomRules, (p, t) -> DetectionRule.PARSER.apply(p, t), CUSTOM_RULES);
     PARSER.declareString(Detector::setDetectorDescription, DETECTOR_DESCRIPTION);
     PARSER.declareInt(Detector::setDetectorIndex, DETECTOR_INDEX);
-    PARSER.declareObject(Detector::setExcludeFrequent, (p, t) -> ExcludeFrequent.PARSER.apply(p), EXCLUDE_FREQUENT);
+    PARSER.declareField(Detector::setExcludeFrequent, (p, t) -> ExcludeFrequent.PARSER.apply(p), EXCLUDE_FREQUENT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(Detector::setFunction, FUNCTION);
     PARSER.declareBoolean(Detector::setUseNull, USE_NULL);
   }

@@ -38,8 +38,8 @@ public class IdsQuery  implements XContentable<IdsQuery> {
     return IdsQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IdsQuery, Void> PARSER =
-    new ConstructingObjectParser<>(IdsQuery.class.getName(), false, args -> new IdsQuery());
+  public static final ObjectParser<IdsQuery, Void> PARSER =
+    new ObjectParser<>(IdsQuery.class.getName(), false, IdsQuery::new);
 
   static {
     PARSER.declareObjectArray(IdsQuery::setValues, (p, t) -> Id.createFrom(p), VALUES);

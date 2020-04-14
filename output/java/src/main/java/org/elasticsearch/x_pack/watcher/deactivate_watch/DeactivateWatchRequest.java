@@ -31,8 +31,8 @@ public class DeactivateWatchRequest  implements XContentable<DeactivateWatchRequ
     return DeactivateWatchRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeactivateWatchRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeactivateWatchRequest.class.getName(), false, args -> new DeactivateWatchRequest());
+  public static final ObjectParser<DeactivateWatchRequest, Void> PARSER =
+    new ObjectParser<>(DeactivateWatchRequest.class.getName(), false, DeactivateWatchRequest::new);
 
   static {
     

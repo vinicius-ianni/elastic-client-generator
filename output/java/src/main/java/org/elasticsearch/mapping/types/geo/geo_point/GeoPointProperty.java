@@ -53,8 +53,8 @@ public class GeoPointProperty  implements XContentable<GeoPointProperty> {
     return GeoPointProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoPointProperty, Void> PARSER =
-    new ConstructingObjectParser<>(GeoPointProperty.class.getName(), false, args -> new GeoPointProperty());
+  public static final ObjectParser<GeoPointProperty, Void> PARSER =
+    new ObjectParser<>(GeoPointProperty.class.getName(), false, GeoPointProperty::new);
 
   static {
     PARSER.declareBoolean(GeoPointProperty::setIgnoreMalformed, IGNORE_MALFORMED);

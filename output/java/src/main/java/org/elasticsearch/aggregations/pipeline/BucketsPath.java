@@ -31,8 +31,8 @@ public class BucketsPath  implements XContentable<BucketsPath> {
     return BucketsPath.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BucketsPath, Void> PARSER =
-    new ConstructingObjectParser<>(BucketsPath.class.getName(), false, args -> new BucketsPath());
+  public static final ObjectParser<BucketsPath, Void> PARSER =
+    new ObjectParser<>(BucketsPath.class.getName(), false, BucketsPath::new);
 
   static {
     

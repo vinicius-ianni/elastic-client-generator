@@ -64,8 +64,8 @@ public class PartitionScore  implements XContentable<PartitionScore> {
     return PartitionScore.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PartitionScore, Void> PARSER =
-    new ConstructingObjectParser<>(PartitionScore.class.getName(), false, args -> new PartitionScore());
+  public static final ObjectParser<PartitionScore, Void> PARSER =
+    new ObjectParser<>(PartitionScore.class.getName(), false, PartitionScore::new);
 
   static {
     PARSER.declareDouble(PartitionScore::setInitialRecordScore, INITIAL_RECORD_SCORE);

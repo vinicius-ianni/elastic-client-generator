@@ -43,8 +43,8 @@ public class GraphVertexInclude  implements XContentable<GraphVertexInclude> {
     return GraphVertexInclude.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GraphVertexInclude, Void> PARSER =
-    new ConstructingObjectParser<>(GraphVertexInclude.class.getName(), false, args -> new GraphVertexInclude());
+  public static final ObjectParser<GraphVertexInclude, Void> PARSER =
+    new ObjectParser<>(GraphVertexInclude.class.getName(), false, GraphVertexInclude::new);
 
   static {
     PARSER.declareDouble(GraphVertexInclude::setBoost, BOOST);

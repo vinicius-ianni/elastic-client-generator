@@ -43,8 +43,8 @@ public class ExplainLifecycleRequest  implements XContentable<ExplainLifecycleRe
     return ExplainLifecycleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExplainLifecycleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ExplainLifecycleRequest.class.getName(), false, args -> new ExplainLifecycleRequest());
+  public static final ObjectParser<ExplainLifecycleRequest, Void> PARSER =
+    new ObjectParser<>(ExplainLifecycleRequest.class.getName(), false, ExplainLifecycleRequest::new);
 
   static {
     PARSER.declareBoolean(ExplainLifecycleRequest::setOnlyErrors, ONLY_ERRORS);

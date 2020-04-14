@@ -57,13 +57,13 @@ public class PostLicenseResponse  implements XContentable<PostLicenseResponse> {
     return PostLicenseResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PostLicenseResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PostLicenseResponse.class.getName(), false, args -> new PostLicenseResponse());
+  public static final ObjectParser<PostLicenseResponse, Void> PARSER =
+    new ObjectParser<>(PostLicenseResponse.class.getName(), false, PostLicenseResponse::new);
 
   static {
     PARSER.declareObject(PostLicenseResponse::setAcknowledge, (p, t) -> LicenseAcknowledgement.PARSER.apply(p, t), ACKNOWLEDGE);
     PARSER.declareBoolean(PostLicenseResponse::setAcknowledged, ACKNOWLEDGED);
-    PARSER.declareObject(PostLicenseResponse::setLicenseStatus, (p, t) -> LicenseStatus.PARSER.apply(p), LICENSE_STATUS);
+    PARSER.declareField(PostLicenseResponse::setLicenseStatus, (p, t) -> LicenseStatus.PARSER.apply(p), LICENSE_STATUS, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

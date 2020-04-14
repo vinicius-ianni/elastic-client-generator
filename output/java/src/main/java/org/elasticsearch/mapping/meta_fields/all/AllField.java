@@ -99,8 +99,8 @@ public class AllField  implements XContentable<AllField> {
     return AllField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AllField, Void> PARSER =
-    new ConstructingObjectParser<>(AllField.class.getName(), false, args -> new AllField());
+  public static final ObjectParser<AllField, Void> PARSER =
+    new ObjectParser<>(AllField.class.getName(), false, AllField::new);
 
   static {
     PARSER.declareString(AllField::setAnalyzer, ANALYZER);

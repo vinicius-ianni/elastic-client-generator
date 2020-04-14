@@ -36,8 +36,8 @@ public class RoutingField  implements XContentable<RoutingField> {
     return RoutingField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RoutingField, Void> PARSER =
-    new ConstructingObjectParser<>(RoutingField.class.getName(), false, args -> new RoutingField());
+  public static final ObjectParser<RoutingField, Void> PARSER =
+    new ObjectParser<>(RoutingField.class.getName(), false, RoutingField::new);
 
   static {
     PARSER.declareBoolean(RoutingField::setRequired, REQUIRED);

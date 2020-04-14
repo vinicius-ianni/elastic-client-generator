@@ -50,8 +50,8 @@ public class AnomalyDetectors  implements XContentable<AnomalyDetectors> {
     return AnomalyDetectors.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnomalyDetectors, Void> PARSER =
-    new ConstructingObjectParser<>(AnomalyDetectors.class.getName(), false, args -> new AnomalyDetectors());
+  public static final ObjectParser<AnomalyDetectors, Void> PARSER =
+    new ObjectParser<>(AnomalyDetectors.class.getName(), false, AnomalyDetectors::new);
 
   static {
     PARSER.declareString(AnomalyDetectors::setModelMemoryLimit, MODEL_MEMORY_LIMIT);

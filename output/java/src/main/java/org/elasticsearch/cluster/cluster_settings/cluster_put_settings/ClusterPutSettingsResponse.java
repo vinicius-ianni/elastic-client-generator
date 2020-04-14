@@ -56,8 +56,8 @@ public class ClusterPutSettingsResponse  implements XContentable<ClusterPutSetti
     return ClusterPutSettingsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterPutSettingsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterPutSettingsResponse.class.getName(), false, args -> new ClusterPutSettingsResponse());
+  public static final ObjectParser<ClusterPutSettingsResponse, Void> PARSER =
+    new ObjectParser<>(ClusterPutSettingsResponse.class.getName(), false, ClusterPutSettingsResponse::new);
 
   static {
     PARSER.declareBoolean(ClusterPutSettingsResponse::setAcknowledged, ACKNOWLEDGED);

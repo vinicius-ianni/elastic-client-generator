@@ -57,8 +57,8 @@ public class CatTemplatesRecord  implements XContentable<CatTemplatesRecord> {
     return CatTemplatesRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatTemplatesRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatTemplatesRecord.class.getName(), false, args -> new CatTemplatesRecord());
+  public static final ObjectParser<CatTemplatesRecord, Void> PARSER =
+    new ObjectParser<>(CatTemplatesRecord.class.getName(), false, CatTemplatesRecord::new);
 
   static {
     PARSER.declareString(CatTemplatesRecord::setIndexPatterns, INDEX_PATTERNS);

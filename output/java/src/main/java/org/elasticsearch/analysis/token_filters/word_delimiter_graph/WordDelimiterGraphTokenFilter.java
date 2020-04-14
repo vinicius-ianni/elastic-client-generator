@@ -131,8 +131,8 @@ public class WordDelimiterGraphTokenFilter  implements XContentable<WordDelimite
     return WordDelimiterGraphTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WordDelimiterGraphTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(WordDelimiterGraphTokenFilter.class.getName(), false, args -> new WordDelimiterGraphTokenFilter());
+  public static final ObjectParser<WordDelimiterGraphTokenFilter, Void> PARSER =
+    new ObjectParser<>(WordDelimiterGraphTokenFilter.class.getName(), false, WordDelimiterGraphTokenFilter::new);
 
   static {
     PARSER.declareBoolean(WordDelimiterGraphTokenFilter::setAdjustOffsets, ADJUST_OFFSETS);

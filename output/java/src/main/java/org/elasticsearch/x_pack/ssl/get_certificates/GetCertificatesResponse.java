@@ -38,8 +38,8 @@ public class GetCertificatesResponse  implements XContentable<GetCertificatesRes
     return GetCertificatesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetCertificatesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetCertificatesResponse.class.getName(), false, args -> new GetCertificatesResponse());
+  public static final ObjectParser<GetCertificatesResponse, Void> PARSER =
+    new ObjectParser<>(GetCertificatesResponse.class.getName(), false, GetCertificatesResponse::new);
 
   static {
     PARSER.declareObjectArray(GetCertificatesResponse::setCertificates, (p, t) -> ClusterCertificateInformation.PARSER.apply(p, t), CERTIFICATES);

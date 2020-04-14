@@ -68,8 +68,8 @@ public class ClusterAllocationExplainRequest  implements XContentable<ClusterAll
     return ClusterAllocationExplainRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterAllocationExplainRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterAllocationExplainRequest.class.getName(), false, args -> new ClusterAllocationExplainRequest());
+  public static final ObjectParser<ClusterAllocationExplainRequest, Void> PARSER =
+    new ObjectParser<>(ClusterAllocationExplainRequest.class.getName(), false, ClusterAllocationExplainRequest::new);
 
   static {
     PARSER.declareObject(ClusterAllocationExplainRequest::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);

@@ -46,8 +46,8 @@ public class KeyedProcessorStats  implements XContentable<KeyedProcessorStats> {
     return KeyedProcessorStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KeyedProcessorStats, Void> PARSER =
-    new ConstructingObjectParser<>(KeyedProcessorStats.class.getName(), false, args -> new KeyedProcessorStats());
+  public static final ObjectParser<KeyedProcessorStats, Void> PARSER =
+    new ObjectParser<>(KeyedProcessorStats.class.getName(), false, KeyedProcessorStats::new);
 
   static {
     PARSER.declareString(KeyedProcessorStats::setType, TYPE);

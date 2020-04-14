@@ -53,13 +53,13 @@ public class EdgeNGramTokenizer  implements XContentable<EdgeNGramTokenizer> {
     return EdgeNGramTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<EdgeNGramTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(EdgeNGramTokenizer.class.getName(), false, args -> new EdgeNGramTokenizer());
+  public static final ObjectParser<EdgeNGramTokenizer, Void> PARSER =
+    new ObjectParser<>(EdgeNGramTokenizer.class.getName(), false, EdgeNGramTokenizer::new);
 
   static {
     PARSER.declareInt(EdgeNGramTokenizer::setMaxGram, MAX_GRAM);
     PARSER.declareInt(EdgeNGramTokenizer::setMinGram, MIN_GRAM);
-    PARSER.declareObjectArray(EdgeNGramTokenizer::setTokenChars, (p, t) -> TokenChar.PARSER.apply(p), TOKEN_CHARS);
+    PARSER.declareFieldArray(EdgeNGramTokenizer::setTokenChars, (p, t) -> TokenChar.PARSER.apply(p), TOKEN_CHARS, ObjectParser.ValueType.STRING_ARRAY);
   }
 
 }

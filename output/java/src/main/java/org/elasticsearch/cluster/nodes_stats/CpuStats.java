@@ -78,8 +78,8 @@ public class CpuStats  implements XContentable<CpuStats> {
     return CpuStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CpuStats, Void> PARSER =
-    new ConstructingObjectParser<>(CpuStats.class.getName(), false, args -> new CpuStats());
+  public static final ObjectParser<CpuStats, Void> PARSER =
+    new ObjectParser<>(CpuStats.class.getName(), false, CpuStats::new);
 
   static {
     PARSER.declareInt(CpuStats::setPercent, PERCENT);

@@ -39,8 +39,8 @@ public class TranslateSqlResponse  implements XContentable<TranslateSqlResponse>
     return TranslateSqlResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TranslateSqlResponse, Void> PARSER =
-    new ConstructingObjectParser<>(TranslateSqlResponse.class.getName(), false, args -> new TranslateSqlResponse());
+  public static final ObjectParser<TranslateSqlResponse, Void> PARSER =
+    new ObjectParser<>(TranslateSqlResponse.class.getName(), false, TranslateSqlResponse::new);
 
   static {
     PARSER.declareObject(TranslateSqlResponse::setResult, (p, t) -> SearchRequest.PARSER.apply(p, t), RESULT);

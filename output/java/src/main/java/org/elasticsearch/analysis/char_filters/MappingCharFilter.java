@@ -45,8 +45,8 @@ public class MappingCharFilter  implements XContentable<MappingCharFilter> {
     return MappingCharFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MappingCharFilter, Void> PARSER =
-    new ConstructingObjectParser<>(MappingCharFilter.class.getName(), false, args -> new MappingCharFilter());
+  public static final ObjectParser<MappingCharFilter, Void> PARSER =
+    new ObjectParser<>(MappingCharFilter.class.getName(), false, MappingCharFilter::new);
 
   static {
     PARSER.declareStringArray(MappingCharFilter::setMappings, MAPPINGS);

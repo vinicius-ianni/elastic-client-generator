@@ -49,8 +49,8 @@ public class DeleteAliasRequest  implements XContentable<DeleteAliasRequest> {
     return DeleteAliasRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteAliasRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteAliasRequest.class.getName(), false, args -> new DeleteAliasRequest());
+  public static final ObjectParser<DeleteAliasRequest, Void> PARSER =
+    new ObjectParser<>(DeleteAliasRequest.class.getName(), false, DeleteAliasRequest::new);
 
   static {
     PARSER.declareObject(DeleteAliasRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

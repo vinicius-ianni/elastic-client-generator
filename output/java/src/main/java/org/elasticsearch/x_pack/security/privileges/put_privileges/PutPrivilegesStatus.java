@@ -36,8 +36,8 @@ public class PutPrivilegesStatus  implements XContentable<PutPrivilegesStatus> {
     return PutPrivilegesStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutPrivilegesStatus, Void> PARSER =
-    new ConstructingObjectParser<>(PutPrivilegesStatus.class.getName(), false, args -> new PutPrivilegesStatus());
+  public static final ObjectParser<PutPrivilegesStatus, Void> PARSER =
+    new ObjectParser<>(PutPrivilegesStatus.class.getName(), false, PutPrivilegesStatus::new);
 
   static {
     PARSER.declareBoolean(PutPrivilegesStatus::setCreated, CREATED);

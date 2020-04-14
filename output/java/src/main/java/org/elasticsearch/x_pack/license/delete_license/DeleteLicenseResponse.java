@@ -31,8 +31,8 @@ public class DeleteLicenseResponse  implements XContentable<DeleteLicenseRespons
     return DeleteLicenseResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteLicenseResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteLicenseResponse.class.getName(), false, args -> new DeleteLicenseResponse());
+  public static final ObjectParser<DeleteLicenseResponse, Void> PARSER =
+    new ObjectParser<>(DeleteLicenseResponse.class.getName(), false, DeleteLicenseResponse::new);
 
   static {
     

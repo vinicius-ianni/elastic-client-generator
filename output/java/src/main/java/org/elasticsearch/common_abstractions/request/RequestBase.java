@@ -31,8 +31,8 @@ public class RequestBase  implements XContentable<RequestBase> {
     return RequestBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RequestBase, Void> PARSER =
-    new ConstructingObjectParser<>(RequestBase.class.getName(), false, args -> new RequestBase());
+  public static final ObjectParser<RequestBase, Void> PARSER =
+    new ObjectParser<>(RequestBase.class.getName(), false, RequestBase::new);
 
   static {
     

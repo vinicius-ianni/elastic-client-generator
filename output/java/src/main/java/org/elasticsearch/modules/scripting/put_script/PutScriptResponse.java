@@ -31,8 +31,8 @@ public class PutScriptResponse  implements XContentable<PutScriptResponse> {
     return PutScriptResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutScriptResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutScriptResponse.class.getName(), false, args -> new PutScriptResponse());
+  public static final ObjectParser<PutScriptResponse, Void> PARSER =
+    new ObjectParser<>(PutScriptResponse.class.getName(), false, PutScriptResponse::new);
 
   static {
     

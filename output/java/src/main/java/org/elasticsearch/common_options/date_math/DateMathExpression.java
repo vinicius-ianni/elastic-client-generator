@@ -31,8 +31,8 @@ public class DateMathExpression  implements XContentable<DateMathExpression> {
     return DateMathExpression.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateMathExpression, Void> PARSER =
-    new ConstructingObjectParser<>(DateMathExpression.class.getName(), false, args -> new DateMathExpression());
+  public static final ObjectParser<DateMathExpression, Void> PARSER =
+    new ObjectParser<>(DateMathExpression.class.getName(), false, DateMathExpression::new);
 
   static {
     

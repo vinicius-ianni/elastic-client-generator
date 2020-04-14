@@ -56,8 +56,8 @@ public class MachineLearningInfoResponse  implements XContentable<MachineLearnin
     return MachineLearningInfoResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MachineLearningInfoResponse, Void> PARSER =
-    new ConstructingObjectParser<>(MachineLearningInfoResponse.class.getName(), false, args -> new MachineLearningInfoResponse());
+  public static final ObjectParser<MachineLearningInfoResponse, Void> PARSER =
+    new ObjectParser<>(MachineLearningInfoResponse.class.getName(), false, MachineLearningInfoResponse::new);
 
   static {
     PARSER.declareObject(MachineLearningInfoResponse::setDefaults, (p, t) -> Defaults.PARSER.apply(p, t), DEFAULTS);

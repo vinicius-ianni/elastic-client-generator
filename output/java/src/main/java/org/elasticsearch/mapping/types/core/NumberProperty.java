@@ -82,8 +82,8 @@ public class NumberProperty  implements XContentable<NumberProperty> {
     return NumberProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NumberProperty, Void> PARSER =
-    new ConstructingObjectParser<>(NumberProperty.class.getName(), false, args -> new NumberProperty());
+  public static final ObjectParser<NumberProperty, Void> PARSER =
+    new ObjectParser<>(NumberProperty.class.getName(), false, NumberProperty::new);
 
   static {
     PARSER.declareDouble(NumberProperty::setBoost, BOOST);

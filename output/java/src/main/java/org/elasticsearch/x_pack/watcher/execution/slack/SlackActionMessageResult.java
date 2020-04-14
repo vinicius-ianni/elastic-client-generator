@@ -84,15 +84,15 @@ public class SlackActionMessageResult  implements XContentable<SlackActionMessag
     return SlackActionMessageResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SlackActionMessageResult, Void> PARSER =
-    new ConstructingObjectParser<>(SlackActionMessageResult.class.getName(), false, args -> new SlackActionMessageResult());
+  public static final ObjectParser<SlackActionMessageResult, Void> PARSER =
+    new ObjectParser<>(SlackActionMessageResult.class.getName(), false, SlackActionMessageResult::new);
 
   static {
     PARSER.declareObject(SlackActionMessageResult::setMessage, (p, t) -> SlackMessage.PARSER.apply(p, t), MESSAGE);
     PARSER.declareString(SlackActionMessageResult::setReason, REASON);
     PARSER.declareObject(SlackActionMessageResult::setRequest, (p, t) -> HttpInputRequestResult.PARSER.apply(p, t), REQUEST);
     PARSER.declareObject(SlackActionMessageResult::setResponse, (p, t) -> HttpInputResponseResult.PARSER.apply(p, t), RESPONSE);
-    PARSER.declareObject(SlackActionMessageResult::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS);
+    PARSER.declareField(SlackActionMessageResult::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(SlackActionMessageResult::setTo, TO);
   }
 

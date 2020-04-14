@@ -58,8 +58,8 @@ public class NestedIdentity  implements XContentable<NestedIdentity> {
     return NestedIdentity.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NestedIdentity, Void> PARSER =
-    new ConstructingObjectParser<>(NestedIdentity.class.getName(), false, args -> new NestedIdentity());
+  public static final ObjectParser<NestedIdentity, Void> PARSER =
+    new ObjectParser<>(NestedIdentity.class.getName(), false, NestedIdentity::new);
 
   static {
     PARSER.declareObject(NestedIdentity::setField, (p, t) -> Field.createFrom(p), FIELD);

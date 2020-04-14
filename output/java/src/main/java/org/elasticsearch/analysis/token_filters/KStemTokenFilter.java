@@ -31,8 +31,8 @@ public class KStemTokenFilter  implements XContentable<KStemTokenFilter> {
     return KStemTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KStemTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KStemTokenFilter.class.getName(), false, args -> new KStemTokenFilter());
+  public static final ObjectParser<KStemTokenFilter, Void> PARSER =
+    new ObjectParser<>(KStemTokenFilter.class.getName(), false, KStemTokenFilter::new);
 
   static {
     

@@ -64,8 +64,8 @@ public class InvalidateApiKeyResponse  implements XContentable<InvalidateApiKeyR
     return InvalidateApiKeyResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InvalidateApiKeyResponse, Void> PARSER =
-    new ConstructingObjectParser<>(InvalidateApiKeyResponse.class.getName(), false, args -> new InvalidateApiKeyResponse());
+  public static final ObjectParser<InvalidateApiKeyResponse, Void> PARSER =
+    new ObjectParser<>(InvalidateApiKeyResponse.class.getName(), false, InvalidateApiKeyResponse::new);
 
   static {
     PARSER.declareInt(InvalidateApiKeyResponse::setErrorCount, ERROR_COUNT);

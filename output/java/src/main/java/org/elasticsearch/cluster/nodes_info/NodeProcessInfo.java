@@ -50,8 +50,8 @@ public class NodeProcessInfo  implements XContentable<NodeProcessInfo> {
     return NodeProcessInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeProcessInfo, Void> PARSER =
-    new ConstructingObjectParser<>(NodeProcessInfo.class.getName(), false, args -> new NodeProcessInfo());
+  public static final ObjectParser<NodeProcessInfo, Void> PARSER =
+    new ObjectParser<>(NodeProcessInfo.class.getName(), false, NodeProcessInfo::new);
 
   static {
     PARSER.declareLong(NodeProcessInfo::setId, ID);

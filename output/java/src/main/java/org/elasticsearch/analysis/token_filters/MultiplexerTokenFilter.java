@@ -45,8 +45,8 @@ public class MultiplexerTokenFilter  implements XContentable<MultiplexerTokenFil
     return MultiplexerTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiplexerTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(MultiplexerTokenFilter.class.getName(), false, args -> new MultiplexerTokenFilter());
+  public static final ObjectParser<MultiplexerTokenFilter, Void> PARSER =
+    new ObjectParser<>(MultiplexerTokenFilter.class.getName(), false, MultiplexerTokenFilter::new);
 
   static {
     PARSER.declareStringArray(MultiplexerTokenFilter::setFilters, FILTERS);

@@ -99,8 +99,8 @@ public class NodeInfoJvmMemory  implements XContentable<NodeInfoJvmMemory> {
     return NodeInfoJvmMemory.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfoJvmMemory, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfoJvmMemory.class.getName(), false, args -> new NodeInfoJvmMemory());
+  public static final ObjectParser<NodeInfoJvmMemory, Void> PARSER =
+    new ObjectParser<>(NodeInfoJvmMemory.class.getName(), false, NodeInfoJvmMemory::new);
 
   static {
     PARSER.declareString(NodeInfoJvmMemory::setDirectMax, DIRECT_MAX);

@@ -56,8 +56,8 @@ public class PercentileRanksAggregation  implements XContentable<PercentileRanks
     return PercentileRanksAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PercentileRanksAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(PercentileRanksAggregation.class.getName(), false, args -> new PercentileRanksAggregation());
+  public static final ObjectParser<PercentileRanksAggregation, Void> PARSER =
+    new ObjectParser<>(PercentileRanksAggregation.class.getName(), false, PercentileRanksAggregation::new);
 
   static {
     PARSER.declareObject(PercentileRanksAggregation::setMethod, (p, t) -> PercentilesMethod.PARSER.apply(p, t), METHOD);

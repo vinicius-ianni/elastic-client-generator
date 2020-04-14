@@ -46,8 +46,8 @@ public class PutRoleMappingResponse  implements XContentable<PutRoleMappingRespo
     return PutRoleMappingResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutRoleMappingResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutRoleMappingResponse.class.getName(), false, args -> new PutRoleMappingResponse());
+  public static final ObjectParser<PutRoleMappingResponse, Void> PARSER =
+    new ObjectParser<>(PutRoleMappingResponse.class.getName(), false, PutRoleMappingResponse::new);
 
   static {
     PARSER.declareBoolean(PutRoleMappingResponse::setCreated, CREATED);

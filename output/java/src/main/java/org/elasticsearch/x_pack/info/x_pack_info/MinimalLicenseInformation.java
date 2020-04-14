@@ -74,14 +74,14 @@ public class MinimalLicenseInformation  implements XContentable<MinimalLicenseIn
     return MinimalLicenseInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MinimalLicenseInformation, Void> PARSER =
-    new ConstructingObjectParser<>(MinimalLicenseInformation.class.getName(), false, args -> new MinimalLicenseInformation());
+  public static final ObjectParser<MinimalLicenseInformation, Void> PARSER =
+    new ObjectParser<>(MinimalLicenseInformation.class.getName(), false, MinimalLicenseInformation::new);
 
   static {
     PARSER.declareLong(MinimalLicenseInformation::setExpiryDateInMillis, EXPIRY_DATE_IN_MILLIS);
-    PARSER.declareObject(MinimalLicenseInformation::setMode, (p, t) -> LicenseType.PARSER.apply(p), MODE);
-    PARSER.declareObject(MinimalLicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p), STATUS);
-    PARSER.declareObject(MinimalLicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE);
+    PARSER.declareField(MinimalLicenseInformation::setMode, (p, t) -> LicenseType.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(MinimalLicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(MinimalLicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(MinimalLicenseInformation::setUid, UID);
   }
 

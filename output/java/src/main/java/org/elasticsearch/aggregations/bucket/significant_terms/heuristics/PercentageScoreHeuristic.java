@@ -31,8 +31,8 @@ public class PercentageScoreHeuristic  implements XContentable<PercentageScoreHe
     return PercentageScoreHeuristic.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PercentageScoreHeuristic, Void> PARSER =
-    new ConstructingObjectParser<>(PercentageScoreHeuristic.class.getName(), false, args -> new PercentageScoreHeuristic());
+  public static final ObjectParser<PercentageScoreHeuristic, Void> PARSER =
+    new ObjectParser<>(PercentageScoreHeuristic.class.getName(), false, PercentageScoreHeuristic::new);
 
   static {
     

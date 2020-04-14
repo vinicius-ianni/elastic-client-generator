@@ -31,8 +31,8 @@ public class GrokProcessorPatternsRequest  implements XContentable<GrokProcessor
     return GrokProcessorPatternsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GrokProcessorPatternsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GrokProcessorPatternsRequest.class.getName(), false, args -> new GrokProcessorPatternsRequest());
+  public static final ObjectParser<GrokProcessorPatternsRequest, Void> PARSER =
+    new ObjectParser<>(GrokProcessorPatternsRequest.class.getName(), false, GrokProcessorPatternsRequest::new);
 
   static {
     

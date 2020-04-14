@@ -65,12 +65,12 @@ public class GeoHashGridAggregation  implements XContentable<GeoHashGridAggregat
     return GeoHashGridAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoHashGridAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(GeoHashGridAggregation.class.getName(), false, args -> new GeoHashGridAggregation());
+  public static final ObjectParser<GeoHashGridAggregation, Void> PARSER =
+    new ObjectParser<>(GeoHashGridAggregation.class.getName(), false, GeoHashGridAggregation::new);
 
   static {
     PARSER.declareObject(GeoHashGridAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObject(GeoHashGridAggregation::setPrecision, (p, t) -> GeoHashPrecision.PARSER.apply(p), PRECISION);
+    PARSER.declareField(GeoHashGridAggregation::setPrecision, (p, t) -> GeoHashPrecision.PARSER.apply(p), PRECISION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(GeoHashGridAggregation::setShardSize, SHARD_SIZE);
     PARSER.declareInt(GeoHashGridAggregation::setSize, SIZE);
   }

@@ -153,8 +153,8 @@ public class DataCounts  implements XContentable<DataCounts> {
     return DataCounts.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DataCounts, Void> PARSER =
-    new ConstructingObjectParser<>(DataCounts.class.getName(), false, args -> new DataCounts());
+  public static final ObjectParser<DataCounts, Void> PARSER =
+    new ObjectParser<>(DataCounts.class.getName(), false, DataCounts::new);
 
   static {
     PARSER.declareLong(DataCounts::setBucketCount, BUCKET_COUNT);

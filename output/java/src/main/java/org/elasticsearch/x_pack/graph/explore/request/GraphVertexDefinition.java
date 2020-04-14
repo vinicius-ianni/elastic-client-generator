@@ -80,8 +80,8 @@ public class GraphVertexDefinition  implements XContentable<GraphVertexDefinitio
     return GraphVertexDefinition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GraphVertexDefinition, Void> PARSER =
-    new ConstructingObjectParser<>(GraphVertexDefinition.class.getName(), false, args -> new GraphVertexDefinition());
+  public static final ObjectParser<GraphVertexDefinition, Void> PARSER =
+    new ObjectParser<>(GraphVertexDefinition.class.getName(), false, GraphVertexDefinition::new);
 
   static {
     PARSER.declareStringArray(GraphVertexDefinition::setExclude, EXCLUDE);

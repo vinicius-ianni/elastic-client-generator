@@ -124,20 +124,20 @@ public class IndexRequest<TDocument>  implements XContentable<IndexRequest<TDocu
     return IndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(IndexRequest.class.getName(), false, args -> new IndexRequest());
+  public static final ObjectParser<IndexRequest, Void> PARSER =
+    new ObjectParser<>(IndexRequest.class.getName(), false, IndexRequest::new);
 
   static {
     PARSER.declareObject(IndexRequest::setDocument, (p, t) -> null /* TODO TDocument */, DOCUMENT);
     PARSER.declareLong(IndexRequest::setIfPrimaryTerm, IF_PRIMARY_TERM);
     PARSER.declareLong(IndexRequest::setIfSequenceNumber, IF_SEQUENCE_NUMBER);
-    PARSER.declareObject(IndexRequest::setOpType, (p, t) -> OpType.PARSER.apply(p), OP_TYPE);
+    PARSER.declareField(IndexRequest::setOpType, (p, t) -> OpType.PARSER.apply(p), OP_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(IndexRequest::setPipeline, PIPELINE);
-    PARSER.declareObject(IndexRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(IndexRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(IndexRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareObject(IndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareLong(IndexRequest::setVersion, VERSION);
-    PARSER.declareObject(IndexRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(IndexRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(IndexRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

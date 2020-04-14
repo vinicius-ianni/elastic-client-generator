@@ -39,8 +39,8 @@ public class ExistsQuery  implements XContentable<ExistsQuery> {
     return ExistsQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExistsQuery, Void> PARSER =
-    new ConstructingObjectParser<>(ExistsQuery.class.getName(), false, args -> new ExistsQuery());
+  public static final ObjectParser<ExistsQuery, Void> PARSER =
+    new ObjectParser<>(ExistsQuery.class.getName(), false, ExistsQuery::new);
 
   static {
     PARSER.declareObject(ExistsQuery::setField, (p, t) -> Field.createFrom(p), FIELD);

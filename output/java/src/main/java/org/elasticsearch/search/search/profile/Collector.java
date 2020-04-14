@@ -60,8 +60,8 @@ public class Collector  implements XContentable<Collector> {
     return Collector.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Collector, Void> PARSER =
-    new ConstructingObjectParser<>(Collector.class.getName(), false, args -> new Collector());
+  public static final ObjectParser<Collector, Void> PARSER =
+    new ObjectParser<>(Collector.class.getName(), false, Collector::new);
 
   static {
     PARSER.declareObjectArray(Collector::setChildren, (p, t) -> Collector.PARSER.apply(p, t), CHILDREN);

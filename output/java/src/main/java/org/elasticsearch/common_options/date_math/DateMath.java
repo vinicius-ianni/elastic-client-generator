@@ -31,8 +31,8 @@ public class DateMath  implements XContentable<DateMath> {
     return DateMath.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateMath, Void> PARSER =
-    new ConstructingObjectParser<>(DateMath.class.getName(), false, args -> new DateMath());
+  public static final ObjectParser<DateMath, Void> PARSER =
+    new ObjectParser<>(DateMath.class.getName(), false, DateMath::new);
 
   static {
     

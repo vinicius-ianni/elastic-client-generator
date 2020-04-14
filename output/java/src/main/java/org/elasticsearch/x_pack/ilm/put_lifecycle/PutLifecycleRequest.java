@@ -39,8 +39,8 @@ public class PutLifecycleRequest  implements XContentable<PutLifecycleRequest> {
     return PutLifecycleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutLifecycleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutLifecycleRequest.class.getName(), false, args -> new PutLifecycleRequest());
+  public static final ObjectParser<PutLifecycleRequest, Void> PARSER =
+    new ObjectParser<>(PutLifecycleRequest.class.getName(), false, PutLifecycleRequest::new);
 
   static {
     PARSER.declareObject(PutLifecycleRequest::setPolicy, (p, t) -> Policy.PARSER.apply(p, t), POLICY);

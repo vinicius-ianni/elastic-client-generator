@@ -69,8 +69,8 @@ public class XPackUser  implements XContentable<XPackUser> {
     return XPackUser.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackUser, Void> PARSER =
-    new ConstructingObjectParser<>(XPackUser.class.getName(), false, args -> new XPackUser());
+  public static final ObjectParser<XPackUser, Void> PARSER =
+    new ObjectParser<>(XPackUser.class.getName(), false, XPackUser::new);
 
   static {
     PARSER.declareString(XPackUser::setEmail, EMAIL);

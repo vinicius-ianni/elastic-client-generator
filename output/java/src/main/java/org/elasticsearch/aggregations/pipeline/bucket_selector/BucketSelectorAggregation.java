@@ -39,8 +39,8 @@ public class BucketSelectorAggregation  implements XContentable<BucketSelectorAg
     return BucketSelectorAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BucketSelectorAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(BucketSelectorAggregation.class.getName(), false, args -> new BucketSelectorAggregation());
+  public static final ObjectParser<BucketSelectorAggregation, Void> PARSER =
+    new ObjectParser<>(BucketSelectorAggregation.class.getName(), false, BucketSelectorAggregation::new);
 
   static {
     PARSER.declareObject(BucketSelectorAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);

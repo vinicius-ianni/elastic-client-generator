@@ -39,11 +39,11 @@ public class WatchRecordStats  implements XContentable<WatchRecordStats> {
     return WatchRecordStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WatchRecordStats, Void> PARSER =
-    new ConstructingObjectParser<>(WatchRecordStats.class.getName(), false, args -> new WatchRecordStats());
+  public static final ObjectParser<WatchRecordStats, Void> PARSER =
+    new ObjectParser<>(WatchRecordStats.class.getName(), false, WatchRecordStats::new);
 
   static {
-    PARSER.declareObject(WatchRecordStats::setExecutionPhase, (p, t) -> ExecutionPhase.PARSER.apply(p), EXECUTION_PHASE);
+    PARSER.declareField(WatchRecordStats::setExecutionPhase, (p, t) -> ExecutionPhase.PARSER.apply(p), EXECUTION_PHASE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

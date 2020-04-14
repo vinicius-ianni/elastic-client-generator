@@ -54,8 +54,8 @@ public class Suggester  implements XContentable<Suggester> {
     return Suggester.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Suggester, Void> PARSER =
-    new ConstructingObjectParser<>(Suggester.class.getName(), false, args -> new Suggester());
+  public static final ObjectParser<Suggester, Void> PARSER =
+    new ObjectParser<>(Suggester.class.getName(), false, Suggester::new);
 
   static {
     PARSER.declareString(Suggester::setAnalyzer, ANALYZER);

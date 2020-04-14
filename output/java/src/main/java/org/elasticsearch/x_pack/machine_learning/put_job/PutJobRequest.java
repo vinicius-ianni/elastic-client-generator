@@ -95,8 +95,8 @@ public class PutJobRequest  implements XContentable<PutJobRequest> {
     return PutJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutJobRequest.class.getName(), false, args -> new PutJobRequest());
+  public static final ObjectParser<PutJobRequest, Void> PARSER =
+    new ObjectParser<>(PutJobRequest.class.getName(), false, PutJobRequest::new);
 
   static {
     PARSER.declareObject(PutJobRequest::setAnalysisConfig, (p, t) -> AnalysisConfig.PARSER.apply(p, t), ANALYSIS_CONFIG);

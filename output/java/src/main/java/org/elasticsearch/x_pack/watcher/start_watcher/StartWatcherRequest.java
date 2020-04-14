@@ -31,8 +31,8 @@ public class StartWatcherRequest  implements XContentable<StartWatcherRequest> {
     return StartWatcherRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StartWatcherRequest, Void> PARSER =
-    new ConstructingObjectParser<>(StartWatcherRequest.class.getName(), false, args -> new StartWatcherRequest());
+  public static final ObjectParser<StartWatcherRequest, Void> PARSER =
+    new ObjectParser<>(StartWatcherRequest.class.getName(), false, StartWatcherRequest::new);
 
   static {
     

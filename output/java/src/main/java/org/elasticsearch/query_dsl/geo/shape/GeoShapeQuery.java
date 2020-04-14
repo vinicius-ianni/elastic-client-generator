@@ -68,13 +68,13 @@ public class GeoShapeQuery  implements XContentable<GeoShapeQuery> {
     return GeoShapeQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoShapeQuery, Void> PARSER =
-    new ConstructingObjectParser<>(GeoShapeQuery.class.getName(), false, args -> new GeoShapeQuery());
+  public static final ObjectParser<GeoShapeQuery, Void> PARSER =
+    new ObjectParser<>(GeoShapeQuery.class.getName(), false, GeoShapeQuery::new);
 
   static {
     PARSER.declareBoolean(GeoShapeQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
     PARSER.declareObject(GeoShapeQuery::setIndexedShape, (p, t) -> FieldLookup.PARSER.apply(p, t), INDEXED_SHAPE);
-    PARSER.declareObject(GeoShapeQuery::setRelation, (p, t) -> GeoShapeRelation.PARSER.apply(p), RELATION);
+    PARSER.declareField(GeoShapeQuery::setRelation, (p, t) -> GeoShapeRelation.PARSER.apply(p), RELATION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(GeoShapeQuery::setShape, (p, t) -> GeoShape.PARSER.apply(p, t), SHAPE);
   }
 

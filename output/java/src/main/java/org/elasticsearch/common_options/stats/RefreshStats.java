@@ -64,8 +64,8 @@ public class RefreshStats  implements XContentable<RefreshStats> {
     return RefreshStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RefreshStats, Void> PARSER =
-    new ConstructingObjectParser<>(RefreshStats.class.getName(), false, args -> new RefreshStats());
+  public static final ObjectParser<RefreshStats, Void> PARSER =
+    new ObjectParser<>(RefreshStats.class.getName(), false, RefreshStats::new);
 
   static {
     PARSER.declareLong(RefreshStats::setTotal, TOTAL);

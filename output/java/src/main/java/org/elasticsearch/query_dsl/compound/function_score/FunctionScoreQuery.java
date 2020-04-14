@@ -84,16 +84,16 @@ public class FunctionScoreQuery  implements XContentable<FunctionScoreQuery> {
     return FunctionScoreQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FunctionScoreQuery, Void> PARSER =
-    new ConstructingObjectParser<>(FunctionScoreQuery.class.getName(), false, args -> new FunctionScoreQuery());
+  public static final ObjectParser<FunctionScoreQuery, Void> PARSER =
+    new ObjectParser<>(FunctionScoreQuery.class.getName(), false, FunctionScoreQuery::new);
 
   static {
-    PARSER.declareObject(FunctionScoreQuery::setBoostMode, (p, t) -> FunctionBoostMode.PARSER.apply(p), BOOST_MODE);
+    PARSER.declareField(FunctionScoreQuery::setBoostMode, (p, t) -> FunctionBoostMode.PARSER.apply(p), BOOST_MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObjectArray(FunctionScoreQuery::setFunctions, (p, t) -> ScoreFunction.PARSER.apply(p, t), FUNCTIONS);
     PARSER.declareDouble(FunctionScoreQuery::setMaxBoost, MAX_BOOST);
     PARSER.declareDouble(FunctionScoreQuery::setMinScore, MIN_SCORE);
     PARSER.declareObject(FunctionScoreQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
-    PARSER.declareObject(FunctionScoreQuery::setScoreMode, (p, t) -> FunctionScoreMode.PARSER.apply(p), SCORE_MODE);
+    PARSER.declareField(FunctionScoreQuery::setScoreMode, (p, t) -> FunctionScoreMode.PARSER.apply(p), SCORE_MODE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

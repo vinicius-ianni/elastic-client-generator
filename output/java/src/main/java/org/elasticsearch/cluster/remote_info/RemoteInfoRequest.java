@@ -31,8 +31,8 @@ public class RemoteInfoRequest  implements XContentable<RemoteInfoRequest> {
     return RemoteInfoRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RemoteInfoRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RemoteInfoRequest.class.getName(), false, args -> new RemoteInfoRequest());
+  public static final ObjectParser<RemoteInfoRequest, Void> PARSER =
+    new ObjectParser<>(RemoteInfoRequest.class.getName(), false, RemoteInfoRequest::new);
 
   static {
     

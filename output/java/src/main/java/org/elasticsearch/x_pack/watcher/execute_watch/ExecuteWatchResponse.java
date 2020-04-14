@@ -46,8 +46,8 @@ public class ExecuteWatchResponse  implements XContentable<ExecuteWatchResponse>
     return ExecuteWatchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecuteWatchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ExecuteWatchResponse.class.getName(), false, args -> new ExecuteWatchResponse());
+  public static final ObjectParser<ExecuteWatchResponse, Void> PARSER =
+    new ObjectParser<>(ExecuteWatchResponse.class.getName(), false, ExecuteWatchResponse::new);
 
   static {
     PARSER.declareString(ExecuteWatchResponse::setId, ID);

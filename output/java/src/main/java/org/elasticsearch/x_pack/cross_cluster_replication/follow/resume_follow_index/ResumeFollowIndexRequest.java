@@ -106,8 +106,8 @@ public class ResumeFollowIndexRequest  implements XContentable<ResumeFollowIndex
     return ResumeFollowIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ResumeFollowIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ResumeFollowIndexRequest.class.getName(), false, args -> new ResumeFollowIndexRequest());
+  public static final ObjectParser<ResumeFollowIndexRequest, Void> PARSER =
+    new ObjectParser<>(ResumeFollowIndexRequest.class.getName(), false, ResumeFollowIndexRequest::new);
 
   static {
     PARSER.declareLong(ResumeFollowIndexRequest::setMaxReadRequestOperationCount, MAX_READ_REQUEST_OPERATION_COUNT);

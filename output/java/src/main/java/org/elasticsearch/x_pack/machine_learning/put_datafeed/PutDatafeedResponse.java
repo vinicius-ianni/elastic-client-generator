@@ -126,8 +126,8 @@ public class PutDatafeedResponse  implements XContentable<PutDatafeedResponse> {
     return PutDatafeedResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutDatafeedResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutDatafeedResponse.class.getName(), false, args -> new PutDatafeedResponse());
+  public static final ObjectParser<PutDatafeedResponse, Void> PARSER =
+    new ObjectParser<>(PutDatafeedResponse.class.getName(), false, PutDatafeedResponse::new);
 
   static {
     PARSER.declareObject(PutDatafeedResponse::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);

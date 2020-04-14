@@ -31,8 +31,8 @@ public class TrimTokenFilter  implements XContentable<TrimTokenFilter> {
     return TrimTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TrimTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(TrimTokenFilter.class.getName(), false, args -> new TrimTokenFilter());
+  public static final ObjectParser<TrimTokenFilter, Void> PARSER =
+    new ObjectParser<>(TrimTokenFilter.class.getName(), false, TrimTokenFilter::new);
 
   static {
     

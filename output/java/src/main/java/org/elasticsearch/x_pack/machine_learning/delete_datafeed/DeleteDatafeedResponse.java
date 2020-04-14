@@ -31,8 +31,8 @@ public class DeleteDatafeedResponse  implements XContentable<DeleteDatafeedRespo
     return DeleteDatafeedResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteDatafeedResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteDatafeedResponse.class.getName(), false, args -> new DeleteDatafeedResponse());
+  public static final ObjectParser<DeleteDatafeedResponse, Void> PARSER =
+    new ObjectParser<>(DeleteDatafeedResponse.class.getName(), false, DeleteDatafeedResponse::new);
 
   static {
     

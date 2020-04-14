@@ -31,8 +31,8 @@ public class PutIndexTemplateResponse  implements XContentable<PutIndexTemplateR
     return PutIndexTemplateResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutIndexTemplateResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutIndexTemplateResponse.class.getName(), false, args -> new PutIndexTemplateResponse());
+  public static final ObjectParser<PutIndexTemplateResponse, Void> PARSER =
+    new ObjectParser<>(PutIndexTemplateResponse.class.getName(), false, PutIndexTemplateResponse::new);
 
   static {
     

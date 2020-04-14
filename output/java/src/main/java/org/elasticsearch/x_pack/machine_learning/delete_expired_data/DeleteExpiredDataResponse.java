@@ -36,8 +36,8 @@ public class DeleteExpiredDataResponse  implements XContentable<DeleteExpiredDat
     return DeleteExpiredDataResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteExpiredDataResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteExpiredDataResponse.class.getName(), false, args -> new DeleteExpiredDataResponse());
+  public static final ObjectParser<DeleteExpiredDataResponse, Void> PARSER =
+    new ObjectParser<>(DeleteExpiredDataResponse.class.getName(), false, DeleteExpiredDataResponse::new);
 
   static {
     PARSER.declareBoolean(DeleteExpiredDataResponse::setDeleted, DELETED);

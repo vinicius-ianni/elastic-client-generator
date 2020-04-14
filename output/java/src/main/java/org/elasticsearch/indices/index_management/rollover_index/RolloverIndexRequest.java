@@ -114,8 +114,8 @@ public class RolloverIndexRequest  implements XContentable<RolloverIndexRequest>
     return RolloverIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RolloverIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RolloverIndexRequest.class.getName(), false, args -> new RolloverIndexRequest());
+  public static final ObjectParser<RolloverIndexRequest, Void> PARSER =
+    new ObjectParser<>(RolloverIndexRequest.class.getName(), false, RolloverIndexRequest::new);
 
   static {
     PARSER.declareObject(RolloverIndexRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

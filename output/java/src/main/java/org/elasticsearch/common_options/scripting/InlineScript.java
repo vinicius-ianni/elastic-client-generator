@@ -36,8 +36,8 @@ public class InlineScript  implements XContentable<InlineScript> {
     return InlineScript.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InlineScript, Void> PARSER =
-    new ConstructingObjectParser<>(InlineScript.class.getName(), false, args -> new InlineScript());
+  public static final ObjectParser<InlineScript, Void> PARSER =
+    new ObjectParser<>(InlineScript.class.getName(), false, InlineScript::new);
 
   static {
     PARSER.declareString(InlineScript::setSource, SOURCE);

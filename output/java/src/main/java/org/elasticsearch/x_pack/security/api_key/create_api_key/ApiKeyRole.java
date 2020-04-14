@@ -47,8 +47,8 @@ public class ApiKeyRole  implements XContentable<ApiKeyRole> {
     return ApiKeyRole.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ApiKeyRole, Void> PARSER =
-    new ConstructingObjectParser<>(ApiKeyRole.class.getName(), false, args -> new ApiKeyRole());
+  public static final ObjectParser<ApiKeyRole, Void> PARSER =
+    new ObjectParser<>(ApiKeyRole.class.getName(), false, ApiKeyRole::new);
 
   static {
     PARSER.declareStringArray(ApiKeyRole::setCluster, CLUSTER);

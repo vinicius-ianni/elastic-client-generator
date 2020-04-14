@@ -61,8 +61,8 @@ public class IndexState  implements XContentable<IndexState> {
     return IndexState.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexState, Void> PARSER =
-    new ConstructingObjectParser<>(IndexState.class.getName(), false, args -> new IndexState());
+  public static final ObjectParser<IndexState, Void> PARSER =
+    new ObjectParser<>(IndexState.class.getName(), false, IndexState::new);
 
   static {
     PARSER.declareObject(IndexState::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

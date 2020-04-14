@@ -71,8 +71,8 @@ public class ClusterRerouteParameters  implements XContentable<ClusterReroutePar
     return ClusterRerouteParameters.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterRerouteParameters, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterRerouteParameters.class.getName(), false, args -> new ClusterRerouteParameters());
+  public static final ObjectParser<ClusterRerouteParameters, Void> PARSER =
+    new ObjectParser<>(ClusterRerouteParameters.class.getName(), false, ClusterRerouteParameters::new);
 
   static {
     PARSER.declareBoolean(ClusterRerouteParameters::setAllowPrimary, ALLOW_PRIMARY);

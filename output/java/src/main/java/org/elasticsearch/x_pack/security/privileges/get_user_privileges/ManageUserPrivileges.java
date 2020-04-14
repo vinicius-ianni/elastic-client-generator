@@ -38,8 +38,8 @@ public class ManageUserPrivileges  implements XContentable<ManageUserPrivileges>
     return ManageUserPrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ManageUserPrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(ManageUserPrivileges.class.getName(), false, args -> new ManageUserPrivileges());
+  public static final ObjectParser<ManageUserPrivileges, Void> PARSER =
+    new ObjectParser<>(ManageUserPrivileges.class.getName(), false, ManageUserPrivileges::new);
 
   static {
     PARSER.declareStringArray(ManageUserPrivileges::setApplications, APPLICATIONS);

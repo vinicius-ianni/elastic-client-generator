@@ -52,8 +52,8 @@ public class Calendar  implements XContentable<Calendar> {
     return Calendar.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Calendar, Void> PARSER =
-    new ConstructingObjectParser<>(Calendar.class.getName(), false, args -> new Calendar());
+  public static final ObjectParser<Calendar, Void> PARSER =
+    new ObjectParser<>(Calendar.class.getName(), false, Calendar::new);
 
   static {
     PARSER.declareString(Calendar::setCalendarId, CALENDAR_ID);

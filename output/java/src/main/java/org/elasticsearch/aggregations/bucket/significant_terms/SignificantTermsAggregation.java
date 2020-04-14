@@ -162,14 +162,14 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
     return SignificantTermsAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SignificantTermsAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(SignificantTermsAggregation.class.getName(), false, args -> new SignificantTermsAggregation());
+  public static final ObjectParser<SignificantTermsAggregation, Void> PARSER =
+    new ObjectParser<>(SignificantTermsAggregation.class.getName(), false, SignificantTermsAggregation::new);
 
   static {
     PARSER.declareObject(SignificantTermsAggregation::setBackgroundFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), BACKGROUND_FILTER);
     PARSER.declareObject(SignificantTermsAggregation::setChiSquare, (p, t) -> ChiSquareHeuristic.PARSER.apply(p, t), CHI_SQUARE);
     PARSER.declareObject(SignificantTermsAggregation::setExclude, (p, t) -> IncludeExclude.PARSER.apply(p, t), EXCLUDE);
-    PARSER.declareObject(SignificantTermsAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT);
+    PARSER.declareField(SignificantTermsAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(SignificantTermsAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareObject(SignificantTermsAggregation::setGnd, (p, t) -> GoogleNormalizedDistanceHeuristic.PARSER.apply(p, t), GND);
     PARSER.declareObject(SignificantTermsAggregation::setInclude, (p, t) -> IncludeExclude.PARSER.apply(p, t), INCLUDE);

@@ -48,8 +48,8 @@ public class MainError  implements XContentable<MainError> {
     return MainError.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MainError, Void> PARSER =
-    new ConstructingObjectParser<>(MainError.class.getName(), false, args -> new MainError());
+  public static final ObjectParser<MainError, Void> PARSER =
+    new ObjectParser<>(MainError.class.getName(), false, MainError::new);
 
   static {
     PARSER.declareObject(MainError::setHeaders, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), HEADERS);

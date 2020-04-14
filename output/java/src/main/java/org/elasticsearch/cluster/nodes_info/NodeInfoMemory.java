@@ -43,8 +43,8 @@ public class NodeInfoMemory  implements XContentable<NodeInfoMemory> {
     return NodeInfoMemory.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfoMemory, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfoMemory.class.getName(), false, args -> new NodeInfoMemory());
+  public static final ObjectParser<NodeInfoMemory, Void> PARSER =
+    new ObjectParser<>(NodeInfoMemory.class.getName(), false, NodeInfoMemory::new);
 
   static {
     PARSER.declareString(NodeInfoMemory::setTotal, TOTAL);

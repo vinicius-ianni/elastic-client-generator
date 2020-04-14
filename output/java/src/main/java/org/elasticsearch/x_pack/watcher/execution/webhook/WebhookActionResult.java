@@ -49,8 +49,8 @@ public class WebhookActionResult  implements XContentable<WebhookActionResult> {
     return WebhookActionResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WebhookActionResult, Void> PARSER =
-    new ConstructingObjectParser<>(WebhookActionResult.class.getName(), false, args -> new WebhookActionResult());
+  public static final ObjectParser<WebhookActionResult, Void> PARSER =
+    new ObjectParser<>(WebhookActionResult.class.getName(), false, WebhookActionResult::new);
 
   static {
     PARSER.declareObject(WebhookActionResult::setRequest, (p, t) -> HttpInputRequestResult.PARSER.apply(p, t), REQUEST);

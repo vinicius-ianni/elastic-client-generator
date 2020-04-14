@@ -43,8 +43,8 @@ public class ClusterOperatingSystemPrettyNane  implements XContentable<ClusterOp
     return ClusterOperatingSystemPrettyNane.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterOperatingSystemPrettyNane, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterOperatingSystemPrettyNane.class.getName(), false, args -> new ClusterOperatingSystemPrettyNane());
+  public static final ObjectParser<ClusterOperatingSystemPrettyNane, Void> PARSER =
+    new ObjectParser<>(ClusterOperatingSystemPrettyNane.class.getName(), false, ClusterOperatingSystemPrettyNane::new);
 
   static {
     PARSER.declareInt(ClusterOperatingSystemPrettyNane::setCount, COUNT);

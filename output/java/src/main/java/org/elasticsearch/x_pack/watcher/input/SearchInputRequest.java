@@ -82,14 +82,14 @@ public class SearchInputRequest  implements XContentable<SearchInputRequest> {
     return SearchInputRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchInputRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SearchInputRequest.class.getName(), false, args -> new SearchInputRequest());
+  public static final ObjectParser<SearchInputRequest, Void> PARSER =
+    new ObjectParser<>(SearchInputRequest.class.getName(), false, SearchInputRequest::new);
 
   static {
     PARSER.declareObject(SearchInputRequest::setBody, (p, t) -> SearchRequest.PARSER.apply(p, t), BODY);
     PARSER.declareObjectArray(SearchInputRequest::setIndices, (p, t) -> IndexName.createFrom(p), INDICES);
     PARSER.declareObject(SearchInputRequest::setIndicesOptions, (p, t) -> IndicesOptions.PARSER.apply(p, t), INDICES_OPTIONS);
-    PARSER.declareObject(SearchInputRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareField(SearchInputRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(SearchInputRequest::setTemplate, (p, t) -> SearchTemplateRequest.PARSER.apply(p, t), TEMPLATE);
   }
 

@@ -50,8 +50,8 @@ public class SegmentsResponse  implements XContentable<SegmentsResponse> {
     return SegmentsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SegmentsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(SegmentsResponse.class.getName(), false, args -> new SegmentsResponse());
+  public static final ObjectParser<SegmentsResponse, Void> PARSER =
+    new ObjectParser<>(SegmentsResponse.class.getName(), false, SegmentsResponse::new);
 
   static {
     PARSER.declareObject(SegmentsResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> IndexSegment.PARSER.apply(pp, null)), INDICES);

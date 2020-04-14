@@ -38,8 +38,8 @@ public class XPackInfoRequest  implements XContentable<XPackInfoRequest> {
     return XPackInfoRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackInfoRequest, Void> PARSER =
-    new ConstructingObjectParser<>(XPackInfoRequest.class.getName(), false, args -> new XPackInfoRequest());
+  public static final ObjectParser<XPackInfoRequest, Void> PARSER =
+    new ObjectParser<>(XPackInfoRequest.class.getName(), false, XPackInfoRequest::new);
 
   static {
     PARSER.declareStringArray(XPackInfoRequest::setCategories, CATEGORIES);

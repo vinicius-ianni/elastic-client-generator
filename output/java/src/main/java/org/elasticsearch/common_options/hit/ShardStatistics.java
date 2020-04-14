@@ -35,6 +35,12 @@ public class ShardStatistics  implements XContentable<ShardStatistics> {
   public ShardStatistics setSuccessful(Integer val) { this._successful = val; return this; }
 
 
+  static final ParseField SKIPPED = new ParseField("skipped");
+  private Integer _skipped;
+  public Integer getSkipped() { return this._skipped; }
+  public ShardStatistics setSkipped(Integer val) { this._skipped = val; return this; }
+
+
   static final ParseField TOTAL = new ParseField("total");
   private Integer _total;
   public Integer getTotal() { return this._total; }
@@ -50,6 +56,7 @@ public class ShardStatistics  implements XContentable<ShardStatistics> {
       builder.array(FAILURES.getPreferredName(), _failures);
     }
     builder.field(SUCCESSFUL.getPreferredName(), _successful);
+    builder.field(SKIPPED.getPreferredName(), _skipped);
     builder.field(TOTAL.getPreferredName(), _total);
     builder.endObject();
     return builder;
@@ -60,13 +67,14 @@ public class ShardStatistics  implements XContentable<ShardStatistics> {
     return ShardStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(ShardStatistics.class.getName(), false, args -> new ShardStatistics());
+  public static final ObjectParser<ShardStatistics, Void> PARSER =
+    new ObjectParser<>(ShardStatistics.class.getName(), false, ShardStatistics::new);
 
   static {
     PARSER.declareInt(ShardStatistics::setFailed, FAILED);
     PARSER.declareObjectArray(ShardStatistics::setFailures, (p, t) -> ShardFailure.PARSER.apply(p, t), FAILURES);
     PARSER.declareInt(ShardStatistics::setSuccessful, SUCCESSFUL);
+    PARSER.declareInt(ShardStatistics::setSkipped, SKIPPED);
     PARSER.declareInt(ShardStatistics::setTotal, TOTAL);
   }
 

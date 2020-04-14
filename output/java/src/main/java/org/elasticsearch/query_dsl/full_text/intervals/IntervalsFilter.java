@@ -120,8 +120,8 @@ public class IntervalsFilter  implements XContentable<IntervalsFilter> {
     return IntervalsFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsFilter, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsFilter.class.getName(), false, args -> new IntervalsFilter());
+  public static final ObjectParser<IntervalsFilter, Void> PARSER =
+    new ObjectParser<>(IntervalsFilter.class.getName(), false, IntervalsFilter::new);
 
   static {
     PARSER.declareObject(IntervalsFilter::setAfter, (p, t) -> IntervalsContainer.PARSER.apply(p, t), AFTER);

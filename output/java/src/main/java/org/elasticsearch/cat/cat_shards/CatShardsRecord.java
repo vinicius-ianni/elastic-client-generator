@@ -435,8 +435,8 @@ public class CatShardsRecord  implements XContentable<CatShardsRecord> {
     return CatShardsRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatShardsRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatShardsRecord.class.getName(), false, args -> new CatShardsRecord());
+  public static final ObjectParser<CatShardsRecord, Void> PARSER =
+    new ObjectParser<>(CatShardsRecord.class.getName(), false, CatShardsRecord::new);
 
   static {
     PARSER.declareString(CatShardsRecord::setCompletionSize, COMPLETION_SIZE);

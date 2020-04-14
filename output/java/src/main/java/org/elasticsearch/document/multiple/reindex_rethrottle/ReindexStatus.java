@@ -110,8 +110,8 @@ public class ReindexStatus  implements XContentable<ReindexStatus> {
     return ReindexStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexStatus, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexStatus.class.getName(), false, args -> new ReindexStatus());
+  public static final ObjectParser<ReindexStatus, Void> PARSER =
+    new ObjectParser<>(ReindexStatus.class.getName(), false, ReindexStatus::new);
 
   static {
     PARSER.declareLong(ReindexStatus::setBatches, BATCHES);

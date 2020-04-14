@@ -616,8 +616,8 @@ public class QueryContainer  implements XContentable<QueryContainer> {
     return QueryContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QueryContainer, Void> PARSER =
-    new ConstructingObjectParser<>(QueryContainer.class.getName(), false, args -> new QueryContainer());
+  public static final ObjectParser<QueryContainer, Void> PARSER =
+    new ObjectParser<>(QueryContainer.class.getName(), false, QueryContainer::new);
 
   static {
     PARSER.declareObject(QueryContainer::setBool, (p, t) -> BoolQuery.PARSER.apply(p, t), BOOL);

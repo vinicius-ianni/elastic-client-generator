@@ -206,17 +206,17 @@ public class HighlightField  implements XContentable<HighlightField> {
     return HighlightField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HighlightField, Void> PARSER =
-    new ConstructingObjectParser<>(HighlightField.class.getName(), false, args -> new HighlightField());
+  public static final ObjectParser<HighlightField, Void> PARSER =
+    new ObjectParser<>(HighlightField.class.getName(), false, HighlightField::new);
 
   static {
     PARSER.declareString(HighlightField::setBoundaryChars, BOUNDARY_CHARS);
     PARSER.declareInt(HighlightField::setBoundaryMaxScan, BOUNDARY_MAX_SCAN);
-    PARSER.declareObject(HighlightField::setBoundaryScanner, (p, t) -> BoundaryScanner.PARSER.apply(p), BOUNDARY_SCANNER);
+    PARSER.declareField(HighlightField::setBoundaryScanner, (p, t) -> BoundaryScanner.PARSER.apply(p), BOUNDARY_SCANNER, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(HighlightField::setBoundaryScannerLocale, BOUNDARY_SCANNER_LOCALE);
     PARSER.declareObject(HighlightField::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareBoolean(HighlightField::setForceSource, FORCE_SOURCE);
-    PARSER.declareObject(HighlightField::setFragmenter, (p, t) -> HighlighterFragmenter.PARSER.apply(p), FRAGMENTER);
+    PARSER.declareField(HighlightField::setFragmenter, (p, t) -> HighlighterFragmenter.PARSER.apply(p), FRAGMENTER, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(HighlightField::setFragmentOffset, FRAGMENT_OFFSET);
     PARSER.declareInt(HighlightField::setFragmentSize, FRAGMENT_SIZE);
     PARSER.declareObject(HighlightField::setHighlightQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), HIGHLIGHT_QUERY);
@@ -224,12 +224,12 @@ public class HighlightField  implements XContentable<HighlightField> {
     PARSER.declareInt(HighlightField::setMaxFragmentLength, MAX_FRAGMENT_LENGTH);
     PARSER.declareInt(HighlightField::setNoMatchSize, NO_MATCH_SIZE);
     PARSER.declareInt(HighlightField::setNumberOfFragments, NUMBER_OF_FRAGMENTS);
-    PARSER.declareObject(HighlightField::setOrder, (p, t) -> HighlighterOrder.PARSER.apply(p), ORDER);
+    PARSER.declareField(HighlightField::setOrder, (p, t) -> HighlighterOrder.PARSER.apply(p), ORDER, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(HighlightField::setPhraseLimit, PHRASE_LIMIT);
     PARSER.declareStringArray(HighlightField::setPostTags, POST_TAGS);
     PARSER.declareStringArray(HighlightField::setPreTags, PRE_TAGS);
     PARSER.declareBoolean(HighlightField::setRequireFieldMatch, REQUIRE_FIELD_MATCH);
-    PARSER.declareObject(HighlightField::setTagsSchema, (p, t) -> HighlighterTagsSchema.PARSER.apply(p), TAGS_SCHEMA);
+    PARSER.declareField(HighlightField::setTagsSchema, (p, t) -> HighlighterTagsSchema.PARSER.apply(p), TAGS_SCHEMA, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(HighlightField::setType, (p, t) ->  new Either<HighlighterType, String>() /* TODO UnionOf */, TYPE);
   }
 

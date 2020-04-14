@@ -31,8 +31,8 @@ public class CcrStatsRequest  implements XContentable<CcrStatsRequest> {
     return CcrStatsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CcrStatsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CcrStatsRequest.class.getName(), false, args -> new CcrStatsRequest());
+  public static final ObjectParser<CcrStatsRequest, Void> PARSER =
+    new ObjectParser<>(CcrStatsRequest.class.getName(), false, CcrStatsRequest::new);
 
   static {
     

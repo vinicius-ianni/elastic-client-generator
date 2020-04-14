@@ -57,8 +57,8 @@ public class GetApiKeyRequest  implements XContentable<GetApiKeyRequest> {
     return GetApiKeyRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetApiKeyRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetApiKeyRequest.class.getName(), false, args -> new GetApiKeyRequest());
+  public static final ObjectParser<GetApiKeyRequest, Void> PARSER =
+    new ObjectParser<>(GetApiKeyRequest.class.getName(), false, GetApiKeyRequest::new);
 
   static {
     PARSER.declareString(GetApiKeyRequest::setId, ID);

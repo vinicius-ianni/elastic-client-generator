@@ -99,8 +99,8 @@ public class GetStats  implements XContentable<GetStats> {
     return GetStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetStats, Void> PARSER =
-    new ConstructingObjectParser<>(GetStats.class.getName(), false, args -> new GetStats());
+  public static final ObjectParser<GetStats, Void> PARSER =
+    new ObjectParser<>(GetStats.class.getName(), false, GetStats::new);
 
   static {
     PARSER.declareLong(GetStats::setCurrent, CURRENT);

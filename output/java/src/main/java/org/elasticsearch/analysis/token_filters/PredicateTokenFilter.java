@@ -39,8 +39,8 @@ public class PredicateTokenFilter  implements XContentable<PredicateTokenFilter>
     return PredicateTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PredicateTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(PredicateTokenFilter.class.getName(), false, args -> new PredicateTokenFilter());
+  public static final ObjectParser<PredicateTokenFilter, Void> PARSER =
+    new ObjectParser<>(PredicateTokenFilter.class.getName(), false, PredicateTokenFilter::new);
 
   static {
     PARSER.declareObject(PredicateTokenFilter::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);

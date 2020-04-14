@@ -31,8 +31,8 @@ public class DeleteRepositoryResponse  implements XContentable<DeleteRepositoryR
     return DeleteRepositoryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteRepositoryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteRepositoryResponse.class.getName(), false, args -> new DeleteRepositoryResponse());
+  public static final ObjectParser<DeleteRepositoryResponse, Void> PARSER =
+    new ObjectParser<>(DeleteRepositoryResponse.class.getName(), false, DeleteRepositoryResponse::new);
 
   static {
     

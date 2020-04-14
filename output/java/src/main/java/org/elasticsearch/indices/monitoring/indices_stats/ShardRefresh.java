@@ -50,8 +50,8 @@ public class ShardRefresh  implements XContentable<ShardRefresh> {
     return ShardRefresh.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardRefresh, Void> PARSER =
-    new ConstructingObjectParser<>(ShardRefresh.class.getName(), false, args -> new ShardRefresh());
+  public static final ObjectParser<ShardRefresh, Void> PARSER =
+    new ObjectParser<>(ShardRefresh.class.getName(), false, ShardRefresh::new);
 
   static {
     PARSER.declareLong(ShardRefresh::setListeners, LISTENERS);

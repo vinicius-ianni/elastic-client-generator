@@ -50,8 +50,8 @@ public class ShardPath  implements XContentable<ShardPath> {
     return ShardPath.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardPath, Void> PARSER =
-    new ConstructingObjectParser<>(ShardPath.class.getName(), false, args -> new ShardPath());
+  public static final ObjectParser<ShardPath, Void> PARSER =
+    new ObjectParser<>(ShardPath.class.getName(), false, ShardPath::new);
 
   static {
     PARSER.declareString(ShardPath::setDataPath, DATA_PATH);

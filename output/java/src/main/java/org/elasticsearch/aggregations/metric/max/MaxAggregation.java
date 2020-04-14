@@ -31,8 +31,8 @@ public class MaxAggregation  implements XContentable<MaxAggregation> {
     return MaxAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MaxAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MaxAggregation.class.getName(), false, args -> new MaxAggregation());
+  public static final ObjectParser<MaxAggregation, Void> PARSER =
+    new ObjectParser<>(MaxAggregation.class.getName(), false, MaxAggregation::new);
 
   static {
     

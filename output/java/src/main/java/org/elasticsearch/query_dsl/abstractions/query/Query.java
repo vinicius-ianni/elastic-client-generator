@@ -71,8 +71,8 @@ public class Query  implements XContentable<Query> {
     return Query.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Query, Void> PARSER =
-    new ConstructingObjectParser<>(Query.class.getName(), false, args -> new Query());
+  public static final ObjectParser<Query, Void> PARSER =
+    new ObjectParser<>(Query.class.getName(), false, Query::new);
 
   static {
     PARSER.declareDouble(Query::setBoost, BOOST);

@@ -74,8 +74,8 @@ public class CompletionProperty  implements XContentable<CompletionProperty> {
     return CompletionProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompletionProperty, Void> PARSER =
-    new ConstructingObjectParser<>(CompletionProperty.class.getName(), false, args -> new CompletionProperty());
+  public static final ObjectParser<CompletionProperty, Void> PARSER =
+    new ObjectParser<>(CompletionProperty.class.getName(), false, CompletionProperty::new);
 
   static {
     PARSER.declareString(CompletionProperty::setAnalyzer, ANALYZER);

@@ -50,8 +50,8 @@ public class ShardStatsRecovery  implements XContentable<ShardStatsRecovery> {
     return ShardStatsRecovery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardStatsRecovery, Void> PARSER =
-    new ConstructingObjectParser<>(ShardStatsRecovery.class.getName(), false, args -> new ShardStatsRecovery());
+  public static final ObjectParser<ShardStatsRecovery, Void> PARSER =
+    new ObjectParser<>(ShardStatsRecovery.class.getName(), false, ShardStatsRecovery::new);
 
   static {
     PARSER.declareLong(ShardStatsRecovery::setCurrentAsSource, CURRENT_AS_SOURCE);

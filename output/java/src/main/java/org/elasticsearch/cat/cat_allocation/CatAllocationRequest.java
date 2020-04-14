@@ -96,11 +96,11 @@ public class CatAllocationRequest  implements XContentable<CatAllocationRequest>
     return CatAllocationRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatAllocationRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatAllocationRequest.class.getName(), false, args -> new CatAllocationRequest());
+  public static final ObjectParser<CatAllocationRequest, Void> PARSER =
+    new ObjectParser<>(CatAllocationRequest.class.getName(), false, CatAllocationRequest::new);
 
   static {
-    PARSER.declareObject(CatAllocationRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
+    PARSER.declareField(CatAllocationRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(CatAllocationRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatAllocationRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatAllocationRequest::setHelp, HELP);

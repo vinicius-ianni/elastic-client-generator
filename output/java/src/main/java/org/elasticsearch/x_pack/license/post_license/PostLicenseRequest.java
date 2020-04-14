@@ -46,8 +46,8 @@ public class PostLicenseRequest  implements XContentable<PostLicenseRequest> {
     return PostLicenseRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PostLicenseRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PostLicenseRequest.class.getName(), false, args -> new PostLicenseRequest());
+  public static final ObjectParser<PostLicenseRequest, Void> PARSER =
+    new ObjectParser<>(PostLicenseRequest.class.getName(), false, PostLicenseRequest::new);
 
   static {
     PARSER.declareBoolean(PostLicenseRequest::setAcknowledge, ACKNOWLEDGE);

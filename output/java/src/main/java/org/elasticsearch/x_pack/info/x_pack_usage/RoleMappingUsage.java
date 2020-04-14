@@ -43,8 +43,8 @@ public class RoleMappingUsage  implements XContentable<RoleMappingUsage> {
     return RoleMappingUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RoleMappingUsage, Void> PARSER =
-    new ConstructingObjectParser<>(RoleMappingUsage.class.getName(), false, args -> new RoleMappingUsage());
+  public static final ObjectParser<RoleMappingUsage, Void> PARSER =
+    new ObjectParser<>(RoleMappingUsage.class.getName(), false, RoleMappingUsage::new);
 
   static {
     PARSER.declareInt(RoleMappingUsage::setEnabled, ENABLED);

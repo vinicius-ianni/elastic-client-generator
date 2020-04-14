@@ -43,8 +43,8 @@ public class XPackUsage  implements XContentable<XPackUsage> {
     return XPackUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackUsage, Void> PARSER =
-    new ConstructingObjectParser<>(XPackUsage.class.getName(), false, args -> new XPackUsage());
+  public static final ObjectParser<XPackUsage, Void> PARSER =
+    new ObjectParser<>(XPackUsage.class.getName(), false, XPackUsage::new);
 
   static {
     PARSER.declareBoolean(XPackUsage::setAvailable, AVAILABLE);

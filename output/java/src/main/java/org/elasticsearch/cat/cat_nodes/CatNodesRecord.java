@@ -526,8 +526,8 @@ public class CatNodesRecord  implements XContentable<CatNodesRecord> {
     return CatNodesRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatNodesRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatNodesRecord.class.getName(), false, args -> new CatNodesRecord());
+  public static final ObjectParser<CatNodesRecord, Void> PARSER =
+    new ObjectParser<>(CatNodesRecord.class.getName(), false, CatNodesRecord::new);
 
   static {
     PARSER.declareString(CatNodesRecord::setBuild, BUILD);

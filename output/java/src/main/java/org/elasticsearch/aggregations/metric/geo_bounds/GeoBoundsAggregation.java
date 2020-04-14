@@ -36,8 +36,8 @@ public class GeoBoundsAggregation  implements XContentable<GeoBoundsAggregation>
     return GeoBoundsAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoBoundsAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(GeoBoundsAggregation.class.getName(), false, args -> new GeoBoundsAggregation());
+  public static final ObjectParser<GeoBoundsAggregation, Void> PARSER =
+    new ObjectParser<>(GeoBoundsAggregation.class.getName(), false, GeoBoundsAggregation::new);
 
   static {
     PARSER.declareBoolean(GeoBoundsAggregation::setWrapLongitude, WRAP_LONGITUDE);

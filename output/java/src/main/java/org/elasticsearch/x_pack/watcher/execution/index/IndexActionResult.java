@@ -46,8 +46,8 @@ public class IndexActionResult  implements XContentable<IndexActionResult> {
     return IndexActionResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexActionResult, Void> PARSER =
-    new ConstructingObjectParser<>(IndexActionResult.class.getName(), false, args -> new IndexActionResult());
+  public static final ObjectParser<IndexActionResult, Void> PARSER =
+    new ObjectParser<>(IndexActionResult.class.getName(), false, IndexActionResult::new);
 
   static {
     PARSER.declareString(IndexActionResult::setId, ID);

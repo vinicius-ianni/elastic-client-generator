@@ -31,8 +31,8 @@ public class CronExpression  implements XContentable<CronExpression> {
     return CronExpression.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CronExpression, Void> PARSER =
-    new ConstructingObjectParser<>(CronExpression.class.getName(), false, args -> new CronExpression());
+  public static final ObjectParser<CronExpression, Void> PARSER =
+    new ObjectParser<>(CronExpression.class.getName(), false, CronExpression::new);
 
   static {
     

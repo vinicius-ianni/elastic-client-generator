@@ -64,8 +64,8 @@ public class OperatingSystemMemoryInfo  implements XContentable<OperatingSystemM
     return OperatingSystemMemoryInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OperatingSystemMemoryInfo, Void> PARSER =
-    new ConstructingObjectParser<>(OperatingSystemMemoryInfo.class.getName(), false, args -> new OperatingSystemMemoryInfo());
+  public static final ObjectParser<OperatingSystemMemoryInfo, Void> PARSER =
+    new ObjectParser<>(OperatingSystemMemoryInfo.class.getName(), false, OperatingSystemMemoryInfo::new);
 
   static {
     PARSER.declareLong(OperatingSystemMemoryInfo::setFreeInBytes, FREE_IN_BYTES);

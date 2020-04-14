@@ -110,8 +110,8 @@ public class CatSnapshotsRecord  implements XContentable<CatSnapshotsRecord> {
     return CatSnapshotsRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatSnapshotsRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatSnapshotsRecord.class.getName(), false, args -> new CatSnapshotsRecord());
+  public static final ObjectParser<CatSnapshotsRecord, Void> PARSER =
+    new ObjectParser<>(CatSnapshotsRecord.class.getName(), false, CatSnapshotsRecord::new);
 
   static {
     PARSER.declareObject(CatSnapshotsRecord::setDuration, (p, t) -> Time.PARSER.apply(p, t), DURATION);

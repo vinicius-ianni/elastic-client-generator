@@ -47,12 +47,12 @@ public class Interval  implements XContentable<Interval> {
     return Interval.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Interval, Void> PARSER =
-    new ConstructingObjectParser<>(Interval.class.getName(), false, args -> new Interval());
+  public static final ObjectParser<Interval, Void> PARSER =
+    new ObjectParser<>(Interval.class.getName(), false, Interval::new);
 
   static {
     PARSER.declareLong(Interval::setFactor, FACTOR);
-    PARSER.declareObject(Interval::setUnit, (p, t) -> IntervalUnit.PARSER.apply(p), UNIT);
+    PARSER.declareField(Interval::setUnit, (p, t) -> IntervalUnit.PARSER.apply(p), UNIT, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

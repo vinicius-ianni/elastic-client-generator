@@ -47,8 +47,8 @@ public class SpanGapQuery  implements XContentable<SpanGapQuery> {
     return SpanGapQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanGapQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanGapQuery.class.getName(), false, args -> new SpanGapQuery());
+  public static final ObjectParser<SpanGapQuery, Void> PARSER =
+    new ObjectParser<>(SpanGapQuery.class.getName(), false, SpanGapQuery::new);
 
   static {
     PARSER.declareObject(SpanGapQuery::setField, (p, t) -> Field.createFrom(p), FIELD);

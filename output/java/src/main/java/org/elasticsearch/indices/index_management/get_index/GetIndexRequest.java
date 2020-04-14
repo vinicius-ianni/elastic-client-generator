@@ -92,12 +92,12 @@ public class GetIndexRequest  implements XContentable<GetIndexRequest> {
     return GetIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetIndexRequest.class.getName(), false, args -> new GetIndexRequest());
+  public static final ObjectParser<GetIndexRequest, Void> PARSER =
+    new ObjectParser<>(GetIndexRequest.class.getName(), false, GetIndexRequest::new);
 
   static {
     PARSER.declareBoolean(GetIndexRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(GetIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(GetIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(GetIndexRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(GetIndexRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(GetIndexRequest::setIncludeDefaults, INCLUDE_DEFAULTS);

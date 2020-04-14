@@ -74,12 +74,12 @@ public class Time  implements XContentable<Time> {
     return Time.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Time, Void> PARSER =
-    new ConstructingObjectParser<>(Time.class.getName(), false, args -> new Time());
+  public static final ObjectParser<Time, Void> PARSER =
+    new ObjectParser<>(Time.class.getName(), false, Time::new);
 
   static {
     PARSER.declareDouble(Time::setFactor, FACTOR);
-    PARSER.declareObject(Time::setInterval, (p, t) -> TimeUnit.PARSER.apply(p), INTERVAL);
+    PARSER.declareField(Time::setInterval, (p, t) -> TimeUnit.PARSER.apply(p), INTERVAL, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareDouble(Time::setMilliseconds, MILLISECONDS);
     PARSER.declareObject(Time::setMinusOne, (p, t) -> Time.PARSER.apply(p, t), MINUS_ONE);
     PARSER.declareObject(Time::setZero, (p, t) -> Time.PARSER.apply(p, t), ZERO);

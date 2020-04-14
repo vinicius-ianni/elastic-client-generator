@@ -43,8 +43,8 @@ public class CcrUsage  implements XContentable<CcrUsage> {
     return CcrUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CcrUsage, Void> PARSER =
-    new ConstructingObjectParser<>(CcrUsage.class.getName(), false, args -> new CcrUsage());
+  public static final ObjectParser<CcrUsage, Void> PARSER =
+    new ObjectParser<>(CcrUsage.class.getName(), false, CcrUsage::new);
 
   static {
     PARSER.declareInt(CcrUsage::setAutoFollowPatternsCount, AUTO_FOLLOW_PATTERNS_COUNT);

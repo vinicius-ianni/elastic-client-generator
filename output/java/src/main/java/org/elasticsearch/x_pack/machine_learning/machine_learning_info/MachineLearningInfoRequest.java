@@ -31,8 +31,8 @@ public class MachineLearningInfoRequest  implements XContentable<MachineLearning
     return MachineLearningInfoRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MachineLearningInfoRequest, Void> PARSER =
-    new ConstructingObjectParser<>(MachineLearningInfoRequest.class.getName(), false, args -> new MachineLearningInfoRequest());
+  public static final ObjectParser<MachineLearningInfoRequest, Void> PARSER =
+    new ObjectParser<>(MachineLearningInfoRequest.class.getName(), false, MachineLearningInfoRequest::new);
 
   static {
     

@@ -43,8 +43,8 @@ public class SqlColumn  implements XContentable<SqlColumn> {
     return SqlColumn.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SqlColumn, Void> PARSER =
-    new ConstructingObjectParser<>(SqlColumn.class.getName(), false, args -> new SqlColumn());
+  public static final ObjectParser<SqlColumn, Void> PARSER =
+    new ObjectParser<>(SqlColumn.class.getName(), false, SqlColumn::new);
 
   static {
     PARSER.declareString(SqlColumn::setName, NAME);

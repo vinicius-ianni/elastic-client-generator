@@ -60,12 +60,12 @@ public class DeprecationInfo  implements XContentable<DeprecationInfo> {
     return DeprecationInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeprecationInfo, Void> PARSER =
-    new ConstructingObjectParser<>(DeprecationInfo.class.getName(), false, args -> new DeprecationInfo());
+  public static final ObjectParser<DeprecationInfo, Void> PARSER =
+    new ObjectParser<>(DeprecationInfo.class.getName(), false, DeprecationInfo::new);
 
   static {
     PARSER.declareString(DeprecationInfo::setDetails, DETAILS);
-    PARSER.declareObject(DeprecationInfo::setLevel, (p, t) -> DeprecationWarningLevel.PARSER.apply(p), LEVEL);
+    PARSER.declareField(DeprecationInfo::setLevel, (p, t) -> DeprecationWarningLevel.PARSER.apply(p), LEVEL, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(DeprecationInfo::setMessage, MESSAGE);
     PARSER.declareString(DeprecationInfo::setUrl, URL);
   }

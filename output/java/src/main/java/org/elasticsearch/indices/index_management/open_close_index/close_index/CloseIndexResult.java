@@ -46,8 +46,8 @@ public class CloseIndexResult  implements XContentable<CloseIndexResult> {
     return CloseIndexResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CloseIndexResult, Void> PARSER =
-    new ConstructingObjectParser<>(CloseIndexResult.class.getName(), false, args -> new CloseIndexResult());
+  public static final ObjectParser<CloseIndexResult, Void> PARSER =
+    new ObjectParser<>(CloseIndexResult.class.getName(), false, CloseIndexResult::new);
 
   static {
     PARSER.declareBoolean(CloseIndexResult::setClosed, CLOSED);

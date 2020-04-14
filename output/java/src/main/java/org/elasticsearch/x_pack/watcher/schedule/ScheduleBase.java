@@ -31,8 +31,8 @@ public class ScheduleBase  implements XContentable<ScheduleBase> {
     return ScheduleBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScheduleBase, Void> PARSER =
-    new ConstructingObjectParser<>(ScheduleBase.class.getName(), false, args -> new ScheduleBase());
+  public static final ObjectParser<ScheduleBase, Void> PARSER =
+    new ObjectParser<>(ScheduleBase.class.getName(), false, ScheduleBase::new);
 
   static {
     

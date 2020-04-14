@@ -39,8 +39,8 @@ public class GlobalPrivileges  implements XContentable<GlobalPrivileges> {
     return GlobalPrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GlobalPrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(GlobalPrivileges.class.getName(), false, args -> new GlobalPrivileges());
+  public static final ObjectParser<GlobalPrivileges, Void> PARSER =
+    new ObjectParser<>(GlobalPrivileges.class.getName(), false, GlobalPrivileges::new);
 
   static {
     PARSER.declareObject(GlobalPrivileges::setApplication, (p, t) -> ApplicationGlobalUserPrivileges.PARSER.apply(p, t), APPLICATION);

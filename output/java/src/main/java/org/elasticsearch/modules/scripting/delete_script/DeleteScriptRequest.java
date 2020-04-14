@@ -49,8 +49,8 @@ public class DeleteScriptRequest  implements XContentable<DeleteScriptRequest> {
     return DeleteScriptRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteScriptRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteScriptRequest.class.getName(), false, args -> new DeleteScriptRequest());
+  public static final ObjectParser<DeleteScriptRequest, Void> PARSER =
+    new ObjectParser<>(DeleteScriptRequest.class.getName(), false, DeleteScriptRequest::new);
 
   static {
     PARSER.declareObject(DeleteScriptRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

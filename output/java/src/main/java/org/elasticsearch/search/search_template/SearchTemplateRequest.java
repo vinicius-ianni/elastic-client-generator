@@ -158,13 +158,13 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
     return SearchTemplateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchTemplateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SearchTemplateRequest.class.getName(), false, args -> new SearchTemplateRequest());
+  public static final ObjectParser<SearchTemplateRequest, Void> PARSER =
+    new ObjectParser<>(SearchTemplateRequest.class.getName(), false, SearchTemplateRequest::new);
 
   static {
     PARSER.declareBoolean(SearchTemplateRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(SearchTemplateRequest::setCcsMinimizeRoundtrips, CCS_MINIMIZE_ROUNDTRIPS);
-    PARSER.declareObject(SearchTemplateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(SearchTemplateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SearchTemplateRequest::setExplain, EXPLAIN);
     PARSER.declareBoolean(SearchTemplateRequest::setIgnoreThrottled, IGNORE_THROTTLED);
     PARSER.declareBoolean(SearchTemplateRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
@@ -172,7 +172,7 @@ public class SearchTemplateRequest  implements XContentable<SearchTemplateReques
     PARSER.declareBoolean(SearchTemplateRequest::setProfile, PROFILE);
     PARSER.declareObject(SearchTemplateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareObject(SearchTemplateRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
-    PARSER.declareObject(SearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareField(SearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SearchTemplateRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);
     PARSER.declareBoolean(SearchTemplateRequest::setTypedKeys, TYPED_KEYS);
     PARSER.declareString(SearchTemplateRequest::setId, ID);

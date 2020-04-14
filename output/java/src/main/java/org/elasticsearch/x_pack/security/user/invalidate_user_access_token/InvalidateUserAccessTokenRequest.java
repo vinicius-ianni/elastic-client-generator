@@ -31,8 +31,8 @@ public class InvalidateUserAccessTokenRequest  implements XContentable<Invalidat
     return InvalidateUserAccessTokenRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InvalidateUserAccessTokenRequest, Void> PARSER =
-    new ConstructingObjectParser<>(InvalidateUserAccessTokenRequest.class.getName(), false, args -> new InvalidateUserAccessTokenRequest());
+  public static final ObjectParser<InvalidateUserAccessTokenRequest, Void> PARSER =
+    new ObjectParser<>(InvalidateUserAccessTokenRequest.class.getName(), false, InvalidateUserAccessTokenRequest::new);
 
   static {
     

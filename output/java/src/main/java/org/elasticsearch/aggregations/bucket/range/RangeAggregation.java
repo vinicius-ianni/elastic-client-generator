@@ -60,8 +60,8 @@ public class RangeAggregation  implements XContentable<RangeAggregation> {
     return RangeAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RangeAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(RangeAggregation.class.getName(), false, args -> new RangeAggregation());
+  public static final ObjectParser<RangeAggregation, Void> PARSER =
+    new ObjectParser<>(RangeAggregation.class.getName(), false, RangeAggregation::new);
 
   static {
     PARSER.declareObject(RangeAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);

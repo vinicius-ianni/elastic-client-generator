@@ -43,8 +43,8 @@ public class ScriptStats  implements XContentable<ScriptStats> {
     return ScriptStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptStats, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptStats.class.getName(), false, args -> new ScriptStats());
+  public static final ObjectParser<ScriptStats, Void> PARSER =
+    new ObjectParser<>(ScriptStats.class.getName(), false, ScriptStats::new);
 
   static {
     PARSER.declareLong(ScriptStats::setCacheEvictions, CACHE_EVICTIONS);

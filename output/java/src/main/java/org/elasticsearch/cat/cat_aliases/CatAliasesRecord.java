@@ -64,8 +64,8 @@ public class CatAliasesRecord  implements XContentable<CatAliasesRecord> {
     return CatAliasesRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatAliasesRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatAliasesRecord.class.getName(), false, args -> new CatAliasesRecord());
+  public static final ObjectParser<CatAliasesRecord, Void> PARSER =
+    new ObjectParser<>(CatAliasesRecord.class.getName(), false, CatAliasesRecord::new);
 
   static {
     PARSER.declareString(CatAliasesRecord::setAlias, ALIAS);

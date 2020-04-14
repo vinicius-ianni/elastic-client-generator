@@ -67,8 +67,8 @@ public class OperatingSystemStats  implements XContentable<OperatingSystemStats>
     return OperatingSystemStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OperatingSystemStats, Void> PARSER =
-    new ConstructingObjectParser<>(OperatingSystemStats.class.getName(), false, args -> new OperatingSystemStats());
+  public static final ObjectParser<OperatingSystemStats, Void> PARSER =
+    new ObjectParser<>(OperatingSystemStats.class.getName(), false, OperatingSystemStats::new);
 
   static {
     PARSER.declareObject(OperatingSystemStats::setCpu, (p, t) -> CpuStats.PARSER.apply(p, t), CPU);

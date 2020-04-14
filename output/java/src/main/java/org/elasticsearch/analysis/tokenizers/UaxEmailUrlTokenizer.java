@@ -36,8 +36,8 @@ public class UaxEmailUrlTokenizer  implements XContentable<UaxEmailUrlTokenizer>
     return UaxEmailUrlTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UaxEmailUrlTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(UaxEmailUrlTokenizer.class.getName(), false, args -> new UaxEmailUrlTokenizer());
+  public static final ObjectParser<UaxEmailUrlTokenizer, Void> PARSER =
+    new ObjectParser<>(UaxEmailUrlTokenizer.class.getName(), false, UaxEmailUrlTokenizer::new);
 
   static {
     PARSER.declareInt(UaxEmailUrlTokenizer::setMaxTokenLength, MAX_TOKEN_LENGTH);

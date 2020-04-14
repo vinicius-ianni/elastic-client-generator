@@ -64,8 +64,8 @@ public class AnalyzeDetail  implements XContentable<AnalyzeDetail> {
     return AnalyzeDetail.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnalyzeDetail, Void> PARSER =
-    new ConstructingObjectParser<>(AnalyzeDetail.class.getName(), false, args -> new AnalyzeDetail());
+  public static final ObjectParser<AnalyzeDetail, Void> PARSER =
+    new ObjectParser<>(AnalyzeDetail.class.getName(), false, AnalyzeDetail::new);
 
   static {
     PARSER.declareObjectArray(AnalyzeDetail::setCharfilters, (p, t) -> CharFilterDetail.PARSER.apply(p, t), CHARFILTERS);

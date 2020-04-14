@@ -67,12 +67,12 @@ public class FlushRequest  implements XContentable<FlushRequest> {
     return FlushRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FlushRequest, Void> PARSER =
-    new ConstructingObjectParser<>(FlushRequest.class.getName(), false, args -> new FlushRequest());
+  public static final ObjectParser<FlushRequest, Void> PARSER =
+    new ObjectParser<>(FlushRequest.class.getName(), false, FlushRequest::new);
 
   static {
     PARSER.declareBoolean(FlushRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(FlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(FlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(FlushRequest::setForce, FORCE);
     PARSER.declareBoolean(FlushRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(FlushRequest::setWaitIfOngoing, WAIT_IF_ONGOING);

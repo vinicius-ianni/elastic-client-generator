@@ -73,8 +73,8 @@ public class ClusterStateResponse  implements XContentable<ClusterStateResponse>
     return ClusterStateResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterStateResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterStateResponse.class.getName(), false, args -> new ClusterStateResponse());
+  public static final ObjectParser<ClusterStateResponse, Void> PARSER =
+    new ObjectParser<>(ClusterStateResponse.class.getName(), false, ClusterStateResponse::new);
 
   static {
     PARSER.declareStringArray(ClusterStateResponse::setState, STATE);

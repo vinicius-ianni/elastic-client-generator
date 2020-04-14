@@ -39,8 +39,8 @@ public class HttpInputAuthentication  implements XContentable<HttpInputAuthentic
     return HttpInputAuthentication.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HttpInputAuthentication, Void> PARSER =
-    new ConstructingObjectParser<>(HttpInputAuthentication.class.getName(), false, args -> new HttpInputAuthentication());
+  public static final ObjectParser<HttpInputAuthentication, Void> PARSER =
+    new ObjectParser<>(HttpInputAuthentication.class.getName(), false, HttpInputAuthentication::new);
 
   static {
     PARSER.declareObject(HttpInputAuthentication::setBasic, (p, t) -> HttpInputBasicAuthentication.PARSER.apply(p, t), BASIC);

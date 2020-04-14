@@ -106,8 +106,8 @@ public class FollowConfig  implements XContentable<FollowConfig> {
     return FollowConfig.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FollowConfig, Void> PARSER =
-    new ConstructingObjectParser<>(FollowConfig.class.getName(), false, args -> new FollowConfig());
+  public static final ObjectParser<FollowConfig, Void> PARSER =
+    new ObjectParser<>(FollowConfig.class.getName(), false, FollowConfig::new);
 
   static {
     PARSER.declareInt(FollowConfig::setMaxReadRequestOperationCount, MAX_READ_REQUEST_OPERATION_COUNT);

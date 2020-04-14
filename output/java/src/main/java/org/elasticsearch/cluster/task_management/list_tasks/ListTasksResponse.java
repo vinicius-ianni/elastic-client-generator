@@ -56,8 +56,8 @@ public class ListTasksResponse  implements XContentable<ListTasksResponse> {
     return ListTasksResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ListTasksResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ListTasksResponse.class.getName(), false, args -> new ListTasksResponse());
+  public static final ObjectParser<ListTasksResponse, Void> PARSER =
+    new ObjectParser<>(ListTasksResponse.class.getName(), false, ListTasksResponse::new);
 
   static {
     PARSER.declareBoolean(ListTasksResponse::setIsValid, IS_VALID);

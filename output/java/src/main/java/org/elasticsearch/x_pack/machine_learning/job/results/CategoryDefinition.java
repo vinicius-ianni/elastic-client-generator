@@ -73,8 +73,8 @@ public class CategoryDefinition  implements XContentable<CategoryDefinition> {
     return CategoryDefinition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CategoryDefinition, Void> PARSER =
-    new ConstructingObjectParser<>(CategoryDefinition.class.getName(), false, args -> new CategoryDefinition());
+  public static final ObjectParser<CategoryDefinition, Void> PARSER =
+    new ObjectParser<>(CategoryDefinition.class.getName(), false, CategoryDefinition::new);
 
   static {
     PARSER.declareLong(CategoryDefinition::setCategoryId, CATEGORY_ID);

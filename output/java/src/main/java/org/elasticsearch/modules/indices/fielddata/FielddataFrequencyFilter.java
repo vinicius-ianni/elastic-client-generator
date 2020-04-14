@@ -50,8 +50,8 @@ public class FielddataFrequencyFilter  implements XContentable<FielddataFrequenc
     return FielddataFrequencyFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FielddataFrequencyFilter, Void> PARSER =
-    new ConstructingObjectParser<>(FielddataFrequencyFilter.class.getName(), false, args -> new FielddataFrequencyFilter());
+  public static final ObjectParser<FielddataFrequencyFilter, Void> PARSER =
+    new ObjectParser<>(FielddataFrequencyFilter.class.getName(), false, FielddataFrequencyFilter::new);
 
   static {
     PARSER.declareDouble(FielddataFrequencyFilter::setMax, MAX);

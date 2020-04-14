@@ -105,8 +105,8 @@ public class SourceExistsRequest  implements XContentable<SourceExistsRequest> {
     return SourceExistsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SourceExistsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SourceExistsRequest.class.getName(), false, args -> new SourceExistsRequest());
+  public static final ObjectParser<SourceExistsRequest, Void> PARSER =
+    new ObjectParser<>(SourceExistsRequest.class.getName(), false, SourceExistsRequest::new);
 
   static {
     PARSER.declareString(SourceExistsRequest::setPreference, PREFERENCE);
@@ -117,7 +117,7 @@ public class SourceExistsRequest  implements XContentable<SourceExistsRequest> {
     PARSER.declareObjectArray(SourceExistsRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
     PARSER.declareObjectArray(SourceExistsRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
     PARSER.declareLong(SourceExistsRequest::setVersion, VERSION);
-    PARSER.declareObject(SourceExistsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(SourceExistsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

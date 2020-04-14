@@ -81,12 +81,12 @@ public class OpenIndexRequest  implements XContentable<OpenIndexRequest> {
     return OpenIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OpenIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(OpenIndexRequest.class.getName(), false, args -> new OpenIndexRequest());
+  public static final ObjectParser<OpenIndexRequest, Void> PARSER =
+    new ObjectParser<>(OpenIndexRequest.class.getName(), false, OpenIndexRequest::new);
 
   static {
     PARSER.declareBoolean(OpenIndexRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(OpenIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(OpenIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(OpenIndexRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareObject(OpenIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareObject(OpenIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

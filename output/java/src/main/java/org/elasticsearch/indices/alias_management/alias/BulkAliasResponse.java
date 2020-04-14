@@ -31,8 +31,8 @@ public class BulkAliasResponse  implements XContentable<BulkAliasResponse> {
     return BulkAliasResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BulkAliasResponse, Void> PARSER =
-    new ConstructingObjectParser<>(BulkAliasResponse.class.getName(), false, args -> new BulkAliasResponse());
+  public static final ObjectParser<BulkAliasResponse, Void> PARSER =
+    new ObjectParser<>(BulkAliasResponse.class.getName(), false, BulkAliasResponse::new);
 
   static {
     

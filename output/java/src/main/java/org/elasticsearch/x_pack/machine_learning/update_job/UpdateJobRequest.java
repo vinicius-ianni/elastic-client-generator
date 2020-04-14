@@ -99,8 +99,8 @@ public class UpdateJobRequest  implements XContentable<UpdateJobRequest> {
     return UpdateJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateJobRequest.class.getName(), false, args -> new UpdateJobRequest());
+  public static final ObjectParser<UpdateJobRequest, Void> PARSER =
+    new ObjectParser<>(UpdateJobRequest.class.getName(), false, UpdateJobRequest::new);
 
   static {
     PARSER.declareObject(UpdateJobRequest::setAnalysisLimits, (p, t) -> AnalysisMemoryLimit.PARSER.apply(p, t), ANALYSIS_LIMITS);

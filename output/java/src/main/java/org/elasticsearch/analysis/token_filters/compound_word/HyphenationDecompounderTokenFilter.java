@@ -31,8 +31,8 @@ public class HyphenationDecompounderTokenFilter  implements XContentable<Hyphena
     return HyphenationDecompounderTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HyphenationDecompounderTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(HyphenationDecompounderTokenFilter.class.getName(), false, args -> new HyphenationDecompounderTokenFilter());
+  public static final ObjectParser<HyphenationDecompounderTokenFilter, Void> PARSER =
+    new ObjectParser<>(HyphenationDecompounderTokenFilter.class.getName(), false, HyphenationDecompounderTokenFilter::new);
 
   static {
     

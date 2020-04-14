@@ -39,11 +39,11 @@ public class SnowballTokenFilter  implements XContentable<SnowballTokenFilter> {
     return SnowballTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnowballTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(SnowballTokenFilter.class.getName(), false, args -> new SnowballTokenFilter());
+  public static final ObjectParser<SnowballTokenFilter, Void> PARSER =
+    new ObjectParser<>(SnowballTokenFilter.class.getName(), false, SnowballTokenFilter::new);
 
   static {
-    PARSER.declareObject(SnowballTokenFilter::setLanguage, (p, t) -> SnowballLanguage.PARSER.apply(p), LANGUAGE);
+    PARSER.declareField(SnowballTokenFilter::setLanguage, (p, t) -> SnowballLanguage.PARSER.apply(p), LANGUAGE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

@@ -57,8 +57,8 @@ public class BoostingQuery  implements XContentable<BoostingQuery> {
     return BoostingQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BoostingQuery, Void> PARSER =
-    new ConstructingObjectParser<>(BoostingQuery.class.getName(), false, args -> new BoostingQuery());
+  public static final ObjectParser<BoostingQuery, Void> PARSER =
+    new ObjectParser<>(BoostingQuery.class.getName(), false, BoostingQuery::new);
 
   static {
     PARSER.declareDouble(BoostingQuery::setNegativeBoost, NEGATIVE_BOOST);

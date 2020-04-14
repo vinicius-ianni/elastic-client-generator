@@ -43,8 +43,8 @@ public class ITokenizer  implements XContentable<ITokenizer> {
     return ITokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ITokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(ITokenizer.class.getName(), false, args -> new ITokenizer());
+  public static final ObjectParser<ITokenizer, Void> PARSER =
+    new ObjectParser<>(ITokenizer.class.getName(), false, ITokenizer::new);
 
   static {
     PARSER.declareString(ITokenizer::setType, TYPE);

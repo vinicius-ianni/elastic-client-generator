@@ -43,8 +43,8 @@ public class ClusterOperatingSystemName  implements XContentable<ClusterOperatin
     return ClusterOperatingSystemName.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterOperatingSystemName, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterOperatingSystemName.class.getName(), false, args -> new ClusterOperatingSystemName());
+  public static final ObjectParser<ClusterOperatingSystemName, Void> PARSER =
+    new ObjectParser<>(ClusterOperatingSystemName.class.getName(), false, ClusterOperatingSystemName::new);
 
   static {
     PARSER.declareInt(ClusterOperatingSystemName::setCount, COUNT);

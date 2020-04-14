@@ -36,8 +36,8 @@ public class GeoShape  implements XContentable<GeoShape> {
     return GeoShape.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoShape, Void> PARSER =
-    new ConstructingObjectParser<>(GeoShape.class.getName(), false, args -> new GeoShape());
+  public static final ObjectParser<GeoShape, Void> PARSER =
+    new ObjectParser<>(GeoShape.class.getName(), false, GeoShape::new);
 
   static {
     PARSER.declareString(GeoShape::setType, TYPE);

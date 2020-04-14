@@ -31,8 +31,8 @@ public class MatchNoneQuery  implements XContentable<MatchNoneQuery> {
     return MatchNoneQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MatchNoneQuery, Void> PARSER =
-    new ConstructingObjectParser<>(MatchNoneQuery.class.getName(), false, args -> new MatchNoneQuery());
+  public static final ObjectParser<MatchNoneQuery, Void> PARSER =
+    new ObjectParser<>(MatchNoneQuery.class.getName(), false, MatchNoneQuery::new);
 
   static {
     

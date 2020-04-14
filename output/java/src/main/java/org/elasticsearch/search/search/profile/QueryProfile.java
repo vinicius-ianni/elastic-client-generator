@@ -70,8 +70,8 @@ public class QueryProfile  implements XContentable<QueryProfile> {
     return QueryProfile.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QueryProfile, Void> PARSER =
-    new ConstructingObjectParser<>(QueryProfile.class.getName(), false, args -> new QueryProfile());
+  public static final ObjectParser<QueryProfile, Void> PARSER =
+    new ObjectParser<>(QueryProfile.class.getName(), false, QueryProfile::new);
 
   static {
     PARSER.declareObject(QueryProfile::setBreakdown, (p, t) -> QueryBreakdown.PARSER.apply(p, t), BREAKDOWN);

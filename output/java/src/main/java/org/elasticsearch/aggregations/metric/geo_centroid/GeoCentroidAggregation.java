@@ -31,8 +31,8 @@ public class GeoCentroidAggregation  implements XContentable<GeoCentroidAggregat
     return GeoCentroidAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoCentroidAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(GeoCentroidAggregation.class.getName(), false, args -> new GeoCentroidAggregation());
+  public static final ObjectParser<GeoCentroidAggregation, Void> PARSER =
+    new ObjectParser<>(GeoCentroidAggregation.class.getName(), false, GeoCentroidAggregation::new);
 
   static {
     

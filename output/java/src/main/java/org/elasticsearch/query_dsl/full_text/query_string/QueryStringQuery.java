@@ -233,8 +233,8 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
     return QueryStringQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QueryStringQuery, Void> PARSER =
-    new ConstructingObjectParser<>(QueryStringQuery.class.getName(), false, args -> new QueryStringQuery());
+  public static final ObjectParser<QueryStringQuery, Void> PARSER =
+    new ObjectParser<>(QueryStringQuery.class.getName(), false, QueryStringQuery::new);
 
   static {
     PARSER.declareBoolean(QueryStringQuery::setAllowLeadingWildcard, ALLOW_LEADING_WILDCARD);
@@ -242,7 +242,7 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
     PARSER.declareBoolean(QueryStringQuery::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareBoolean(QueryStringQuery::setAutoGenerateSynonymsPhraseQuery, AUTO_GENERATE_SYNONYMS_PHRASE_QUERY);
     PARSER.declareObject(QueryStringQuery::setDefaultField, (p, t) -> Field.createFrom(p), DEFAULT_FIELD);
-    PARSER.declareObject(QueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(QueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(QueryStringQuery::setEnablePositionIncrements, ENABLE_POSITION_INCREMENTS);
     PARSER.declareBoolean(QueryStringQuery::setEscape, ESCAPE);
     PARSER.declareObjectArray(QueryStringQuery::setFields, (p, t) -> Field.createFrom(p), FIELDS);
@@ -261,7 +261,7 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
     PARSER.declareObject(QueryStringQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), REWRITE);
     PARSER.declareDouble(QueryStringQuery::setTieBreaker, TIE_BREAKER);
     PARSER.declareString(QueryStringQuery::setTimeZone, TIME_ZONE);
-    PARSER.declareObject(QueryStringQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p), TYPE);
+    PARSER.declareField(QueryStringQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

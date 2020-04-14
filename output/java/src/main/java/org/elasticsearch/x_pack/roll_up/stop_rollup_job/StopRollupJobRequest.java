@@ -46,8 +46,8 @@ public class StopRollupJobRequest  implements XContentable<StopRollupJobRequest>
     return StopRollupJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StopRollupJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(StopRollupJobRequest.class.getName(), false, args -> new StopRollupJobRequest());
+  public static final ObjectParser<StopRollupJobRequest, Void> PARSER =
+    new ObjectParser<>(StopRollupJobRequest.class.getName(), false, StopRollupJobRequest::new);
 
   static {
     PARSER.declareObject(StopRollupJobRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

@@ -76,8 +76,8 @@ public class ClusterPutSettingsRequest  implements XContentable<ClusterPutSettin
     return ClusterPutSettingsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterPutSettingsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterPutSettingsRequest.class.getName(), false, args -> new ClusterPutSettingsRequest());
+  public static final ObjectParser<ClusterPutSettingsRequest, Void> PARSER =
+    new ObjectParser<>(ClusterPutSettingsRequest.class.getName(), false, ClusterPutSettingsRequest::new);
 
   static {
     PARSER.declareObject(ClusterPutSettingsRequest::setPersistent, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PERSISTENT);

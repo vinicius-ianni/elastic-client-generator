@@ -31,8 +31,8 @@ public class ResumeFollowIndexResponse  implements XContentable<ResumeFollowInde
     return ResumeFollowIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ResumeFollowIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ResumeFollowIndexResponse.class.getName(), false, args -> new ResumeFollowIndexResponse());
+  public static final ObjectParser<ResumeFollowIndexResponse, Void> PARSER =
+    new ObjectParser<>(ResumeFollowIndexResponse.class.getName(), false, ResumeFollowIndexResponse::new);
 
   static {
     

@@ -74,12 +74,12 @@ public class IndexExistsRequest  implements XContentable<IndexExistsRequest> {
     return IndexExistsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexExistsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(IndexExistsRequest.class.getName(), false, args -> new IndexExistsRequest());
+  public static final ObjectParser<IndexExistsRequest, Void> PARSER =
+    new ObjectParser<>(IndexExistsRequest.class.getName(), false, IndexExistsRequest::new);
 
   static {
     PARSER.declareBoolean(IndexExistsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(IndexExistsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(IndexExistsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(IndexExistsRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(IndexExistsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(IndexExistsRequest::setIncludeDefaults, INCLUDE_DEFAULTS);

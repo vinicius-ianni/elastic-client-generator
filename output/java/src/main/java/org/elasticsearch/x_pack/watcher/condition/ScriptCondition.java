@@ -46,8 +46,8 @@ public class ScriptCondition  implements XContentable<ScriptCondition> {
     return ScriptCondition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptCondition, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptCondition.class.getName(), false, args -> new ScriptCondition());
+  public static final ObjectParser<ScriptCondition, Void> PARSER =
+    new ObjectParser<>(ScriptCondition.class.getName(), false, ScriptCondition::new);
 
   static {
     PARSER.declareString(ScriptCondition::setLang, LANG);

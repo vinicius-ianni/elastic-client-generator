@@ -39,8 +39,8 @@ public class TriggerContainer  implements XContentable<TriggerContainer> {
     return TriggerContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TriggerContainer, Void> PARSER =
-    new ConstructingObjectParser<>(TriggerContainer.class.getName(), false, args -> new TriggerContainer());
+  public static final ObjectParser<TriggerContainer, Void> PARSER =
+    new ObjectParser<>(TriggerContainer.class.getName(), false, TriggerContainer::new);
 
   static {
     PARSER.declareObject(TriggerContainer::setSchedule, (p, t) -> ScheduleContainer.PARSER.apply(p, t), SCHEDULE);

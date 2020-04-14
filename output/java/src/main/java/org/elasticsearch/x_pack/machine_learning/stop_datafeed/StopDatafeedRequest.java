@@ -53,8 +53,8 @@ public class StopDatafeedRequest  implements XContentable<StopDatafeedRequest> {
     return StopDatafeedRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StopDatafeedRequest, Void> PARSER =
-    new ConstructingObjectParser<>(StopDatafeedRequest.class.getName(), false, args -> new StopDatafeedRequest());
+  public static final ObjectParser<StopDatafeedRequest, Void> PARSER =
+    new ObjectParser<>(StopDatafeedRequest.class.getName(), false, StopDatafeedRequest::new);
 
   static {
     PARSER.declareBoolean(StopDatafeedRequest::setAllowNoDatafeeds, ALLOW_NO_DATAFEEDS);

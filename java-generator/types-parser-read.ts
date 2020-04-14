@@ -6,6 +6,10 @@ import {specification} from "./specs";
 const valueTypes = ["String", "Float", "Double", "Integer", "Boolean", "Long"];
 const $declareType = (type: Domain.InstanceOf) => {
   if (type instanceof  Domain.ArrayOf) return $declareType(type.of);
+  if (type instanceof Domain.Type) {
+    const lookup = specification.typeLookup[type.name];
+    if (lookup instanceof Domain.Enum) return "Field";
+  }
   const t = $instanceOf(type);
   if (valueTypes.includes(t)) return t.replace("Integer", "Int");
   return "Object";
@@ -81,8 +85,15 @@ const $parseProperty = (prop: Domain.InterfaceProperty, parent: Domain.Interface
   let args = $valueParse(typeSymbol, prop.type, parent);
   if (args !== "") args += ", ";
 
-  const declareParser = `PARSER.declare${declareType}(${exp}, ${args}${$fieldRef(prop)});`;
   const closedOverType = recursiveArray(prop.type);
+  let trailingArgs = $fieldRef(prop);
+  const lookup = specification.typeLookup[closedOverType.name];
+  if (lookup instanceof Domain.Enum) {
+    if (prop.type instanceof Domain.ArrayOf) trailingArgs += ", ObjectParser.ValueType.STRING_ARRAY";
+    else trailingArgs += ", ObjectParser.ValueType.STRING_OR_NULL";
+  }
+
+  const declareParser = `PARSER.declare${declareType}(${exp}, ${args}${trailingArgs});`;
 
   if (closedOverType instanceof Domain.Type && closedOverType.closedGenerics.length > 0) {
     const closedOverSymbol = $instanceOf(closedOverType);

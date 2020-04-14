@@ -43,8 +43,8 @@ public class MutualInformationHeuristic  implements XContentable<MutualInformati
     return MutualInformationHeuristic.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MutualInformationHeuristic, Void> PARSER =
-    new ConstructingObjectParser<>(MutualInformationHeuristic.class.getName(), false, args -> new MutualInformationHeuristic());
+  public static final ObjectParser<MutualInformationHeuristic, Void> PARSER =
+    new ObjectParser<>(MutualInformationHeuristic.class.getName(), false, MutualInformationHeuristic::new);
 
   static {
     PARSER.declareBoolean(MutualInformationHeuristic::setBackgroundIsSuperset, BACKGROUND_IS_SUPERSET);

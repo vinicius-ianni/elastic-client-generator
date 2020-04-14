@@ -53,8 +53,8 @@ public class InlineGet<TDocument>  implements XContentable<InlineGet<TDocument>>
     return InlineGet.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InlineGet, Void> PARSER =
-    new ConstructingObjectParser<>(InlineGet.class.getName(), false, args -> new InlineGet());
+  public static final ObjectParser<InlineGet, Void> PARSER =
+    new ObjectParser<>(InlineGet.class.getName(), false, InlineGet::new);
 
   static {
     PARSER.declareObject(InlineGet::setFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);

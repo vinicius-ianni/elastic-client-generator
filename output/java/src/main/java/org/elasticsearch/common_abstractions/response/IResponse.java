@@ -39,8 +39,8 @@ public class IResponse  implements XContentable<IResponse> {
     return IResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IResponse, Void> PARSER =
-    new ConstructingObjectParser<>(IResponse.class.getName(), false, args -> new IResponse());
+  public static final ObjectParser<IResponse, Void> PARSER =
+    new ObjectParser<>(IResponse.class.getName(), false, IResponse::new);
 
   static {
     PARSER.declareObject(IResponse::setError, (p, t) -> ServerError.PARSER.apply(p, t), ERROR);

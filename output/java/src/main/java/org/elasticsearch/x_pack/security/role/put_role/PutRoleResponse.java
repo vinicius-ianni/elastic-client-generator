@@ -39,8 +39,8 @@ public class PutRoleResponse  implements XContentable<PutRoleResponse> {
     return PutRoleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutRoleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutRoleResponse.class.getName(), false, args -> new PutRoleResponse());
+  public static final ObjectParser<PutRoleResponse, Void> PARSER =
+    new ObjectParser<>(PutRoleResponse.class.getName(), false, PutRoleResponse::new);
 
   static {
     PARSER.declareObject(PutRoleResponse::setRole, (p, t) -> PutRoleStatus.PARSER.apply(p, t), ROLE);

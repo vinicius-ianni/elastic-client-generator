@@ -78,8 +78,8 @@ public class TimingStats  implements XContentable<TimingStats> {
     return TimingStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TimingStats, Void> PARSER =
-    new ConstructingObjectParser<>(TimingStats.class.getName(), false, args -> new TimingStats());
+  public static final ObjectParser<TimingStats, Void> PARSER =
+    new ObjectParser<>(TimingStats.class.getName(), false, TimingStats::new);
 
   static {
     PARSER.declareString(TimingStats::setJobId, JOB_ID);

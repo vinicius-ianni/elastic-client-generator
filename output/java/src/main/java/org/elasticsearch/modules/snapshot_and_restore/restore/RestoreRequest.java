@@ -119,8 +119,8 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
     return RestoreRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RestoreRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RestoreRequest.class.getName(), false, args -> new RestoreRequest());
+  public static final ObjectParser<RestoreRequest, Void> PARSER =
+    new ObjectParser<>(RestoreRequest.class.getName(), false, RestoreRequest::new);
 
   static {
     PARSER.declareStringArray(RestoreRequest::setIgnoreIndexSettings, IGNORE_INDEX_SETTINGS);

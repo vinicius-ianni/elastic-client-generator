@@ -131,8 +131,8 @@ public class CreateFollowIndexRequest  implements XContentable<CreateFollowIndex
     return CreateFollowIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateFollowIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CreateFollowIndexRequest.class.getName(), false, args -> new CreateFollowIndexRequest());
+  public static final ObjectParser<CreateFollowIndexRequest, Void> PARSER =
+    new ObjectParser<>(CreateFollowIndexRequest.class.getName(), false, CreateFollowIndexRequest::new);
 
   static {
     PARSER.declareString(CreateFollowIndexRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);

@@ -46,8 +46,8 @@ public class SnapshotStatusRequest  implements XContentable<SnapshotStatusReques
     return SnapshotStatusRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotStatusRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotStatusRequest.class.getName(), false, args -> new SnapshotStatusRequest());
+  public static final ObjectParser<SnapshotStatusRequest, Void> PARSER =
+    new ObjectParser<>(SnapshotStatusRequest.class.getName(), false, SnapshotStatusRequest::new);
 
   static {
     PARSER.declareBoolean(SnapshotStatusRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);

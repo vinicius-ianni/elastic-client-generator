@@ -39,11 +39,11 @@ public class DeletePrivilegesRequest  implements XContentable<DeletePrivilegesRe
     return DeletePrivilegesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeletePrivilegesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeletePrivilegesRequest.class.getName(), false, args -> new DeletePrivilegesRequest());
+  public static final ObjectParser<DeletePrivilegesRequest, Void> PARSER =
+    new ObjectParser<>(DeletePrivilegesRequest.class.getName(), false, DeletePrivilegesRequest::new);
 
   static {
-    PARSER.declareObject(DeletePrivilegesRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(DeletePrivilegesRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

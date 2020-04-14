@@ -36,8 +36,8 @@ public class ExtendedStatsAggregation  implements XContentable<ExtendedStatsAggr
     return ExtendedStatsAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExtendedStatsAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(ExtendedStatsAggregation.class.getName(), false, args -> new ExtendedStatsAggregation());
+  public static final ObjectParser<ExtendedStatsAggregation, Void> PARSER =
+    new ObjectParser<>(ExtendedStatsAggregation.class.getName(), false, ExtendedStatsAggregation::new);
 
   static {
     PARSER.declareDouble(ExtendedStatsAggregation::setSigma, SIGMA);

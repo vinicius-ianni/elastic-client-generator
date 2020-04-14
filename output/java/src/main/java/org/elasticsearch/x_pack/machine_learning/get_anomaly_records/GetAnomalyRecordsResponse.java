@@ -46,8 +46,8 @@ public class GetAnomalyRecordsResponse  implements XContentable<GetAnomalyRecord
     return GetAnomalyRecordsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetAnomalyRecordsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetAnomalyRecordsResponse.class.getName(), false, args -> new GetAnomalyRecordsResponse());
+  public static final ObjectParser<GetAnomalyRecordsResponse, Void> PARSER =
+    new ObjectParser<>(GetAnomalyRecordsResponse.class.getName(), false, GetAnomalyRecordsResponse::new);
 
   static {
     PARSER.declareLong(GetAnomalyRecordsResponse::setCount, COUNT);

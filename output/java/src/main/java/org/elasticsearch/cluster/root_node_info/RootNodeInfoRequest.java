@@ -31,8 +31,8 @@ public class RootNodeInfoRequest  implements XContentable<RootNodeInfoRequest> {
     return RootNodeInfoRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RootNodeInfoRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RootNodeInfoRequest.class.getName(), false, args -> new RootNodeInfoRequest());
+  public static final ObjectParser<RootNodeInfoRequest, Void> PARSER =
+    new ObjectParser<>(RootNodeInfoRequest.class.getName(), false, RootNodeInfoRequest::new);
 
   static {
     

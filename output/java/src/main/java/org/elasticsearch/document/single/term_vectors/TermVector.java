@@ -49,8 +49,8 @@ public class TermVector  implements XContentable<TermVector> {
     return TermVector.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermVector, Void> PARSER =
-    new ConstructingObjectParser<>(TermVector.class.getName(), false, args -> new TermVector());
+  public static final ObjectParser<TermVector, Void> PARSER =
+    new ObjectParser<>(TermVector.class.getName(), false, TermVector::new);
 
   static {
     PARSER.declareObject(TermVector::setFieldStatistics, (p, t) -> FieldStatistics.PARSER.apply(p, t), FIELD_STATISTICS);

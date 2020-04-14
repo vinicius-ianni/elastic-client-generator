@@ -71,8 +71,8 @@ public class ClusterNodeCount  implements XContentable<ClusterNodeCount> {
     return ClusterNodeCount.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterNodeCount, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterNodeCount.class.getName(), false, args -> new ClusterNodeCount());
+  public static final ObjectParser<ClusterNodeCount, Void> PARSER =
+    new ObjectParser<>(ClusterNodeCount.class.getName(), false, ClusterNodeCount::new);
 
   static {
     PARSER.declareInt(ClusterNodeCount::setCoordinatingOnly, COORDINATING_ONLY);

@@ -48,8 +48,8 @@ public class ConditionTokenFilter  implements XContentable<ConditionTokenFilter>
     return ConditionTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ConditionTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(ConditionTokenFilter.class.getName(), false, args -> new ConditionTokenFilter());
+  public static final ObjectParser<ConditionTokenFilter, Void> PARSER =
+    new ObjectParser<>(ConditionTokenFilter.class.getName(), false, ConditionTokenFilter::new);
 
   static {
     PARSER.declareObject(ConditionTokenFilter::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);

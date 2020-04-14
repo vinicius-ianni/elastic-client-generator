@@ -57,8 +57,8 @@ public class GraphVertex  implements XContentable<GraphVertex> {
     return GraphVertex.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GraphVertex, Void> PARSER =
-    new ConstructingObjectParser<>(GraphVertex.class.getName(), false, args -> new GraphVertex());
+  public static final ObjectParser<GraphVertex, Void> PARSER =
+    new ObjectParser<>(GraphVertex.class.getName(), false, GraphVertex::new);
 
   static {
     PARSER.declareLong(GraphVertex::setDepth, DEPTH);

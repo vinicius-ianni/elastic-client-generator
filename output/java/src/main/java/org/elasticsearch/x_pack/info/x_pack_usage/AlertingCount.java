@@ -43,8 +43,8 @@ public class AlertingCount  implements XContentable<AlertingCount> {
     return AlertingCount.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AlertingCount, Void> PARSER =
-    new ConstructingObjectParser<>(AlertingCount.class.getName(), false, args -> new AlertingCount());
+  public static final ObjectParser<AlertingCount, Void> PARSER =
+    new ObjectParser<>(AlertingCount.class.getName(), false, AlertingCount::new);
 
   static {
     PARSER.declareLong(AlertingCount::setActive, ACTIVE);

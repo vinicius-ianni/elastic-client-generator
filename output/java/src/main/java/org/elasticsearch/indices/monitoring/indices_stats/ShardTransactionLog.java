@@ -57,8 +57,8 @@ public class ShardTransactionLog  implements XContentable<ShardTransactionLog> {
     return ShardTransactionLog.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardTransactionLog, Void> PARSER =
-    new ConstructingObjectParser<>(ShardTransactionLog.class.getName(), false, args -> new ShardTransactionLog());
+  public static final ObjectParser<ShardTransactionLog, Void> PARSER =
+    new ObjectParser<>(ShardTransactionLog.class.getName(), false, ShardTransactionLog::new);
 
   static {
     PARSER.declareLong(ShardTransactionLog::setOperations, OPERATIONS);

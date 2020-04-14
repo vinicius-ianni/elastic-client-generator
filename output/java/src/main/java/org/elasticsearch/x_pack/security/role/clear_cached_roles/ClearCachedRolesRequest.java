@@ -31,8 +31,8 @@ public class ClearCachedRolesRequest  implements XContentable<ClearCachedRolesRe
     return ClearCachedRolesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearCachedRolesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClearCachedRolesRequest.class.getName(), false, args -> new ClearCachedRolesRequest());
+  public static final ObjectParser<ClearCachedRolesRequest, Void> PARSER =
+    new ObjectParser<>(ClearCachedRolesRequest.class.getName(), false, ClearCachedRolesRequest::new);
 
   static {
     

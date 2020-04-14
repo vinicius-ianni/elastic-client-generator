@@ -74,12 +74,12 @@ public class DeleteIndexRequest  implements XContentable<DeleteIndexRequest> {
     return DeleteIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteIndexRequest.class.getName(), false, args -> new DeleteIndexRequest());
+  public static final ObjectParser<DeleteIndexRequest, Void> PARSER =
+    new ObjectParser<>(DeleteIndexRequest.class.getName(), false, DeleteIndexRequest::new);
 
   static {
     PARSER.declareBoolean(DeleteIndexRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(DeleteIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(DeleteIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(DeleteIndexRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareObject(DeleteIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareObject(DeleteIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

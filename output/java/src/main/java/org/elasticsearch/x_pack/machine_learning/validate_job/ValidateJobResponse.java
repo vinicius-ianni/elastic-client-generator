@@ -31,8 +31,8 @@ public class ValidateJobResponse  implements XContentable<ValidateJobResponse> {
     return ValidateJobResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ValidateJobResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ValidateJobResponse.class.getName(), false, args -> new ValidateJobResponse());
+  public static final ObjectParser<ValidateJobResponse, Void> PARSER =
+    new ObjectParser<>(ValidateJobResponse.class.getName(), false, ValidateJobResponse::new);
 
   static {
     

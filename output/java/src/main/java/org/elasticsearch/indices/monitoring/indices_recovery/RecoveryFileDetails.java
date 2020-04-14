@@ -50,8 +50,8 @@ public class RecoveryFileDetails  implements XContentable<RecoveryFileDetails> {
     return RecoveryFileDetails.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryFileDetails, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryFileDetails.class.getName(), false, args -> new RecoveryFileDetails());
+  public static final ObjectParser<RecoveryFileDetails, Void> PARSER =
+    new ObjectParser<>(RecoveryFileDetails.class.getName(), false, RecoveryFileDetails::new);
 
   static {
     PARSER.declareLong(RecoveryFileDetails::setLength, LENGTH);

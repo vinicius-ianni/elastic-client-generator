@@ -78,12 +78,12 @@ public class SearchShardsRequest  implements XContentable<SearchShardsRequest> {
     return SearchShardsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchShardsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SearchShardsRequest.class.getName(), false, args -> new SearchShardsRequest());
+  public static final ObjectParser<SearchShardsRequest, Void> PARSER =
+    new ObjectParser<>(SearchShardsRequest.class.getName(), false, SearchShardsRequest::new);
 
   static {
     PARSER.declareBoolean(SearchShardsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(SearchShardsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(SearchShardsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SearchShardsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(SearchShardsRequest::setLocal, LOCAL);
     PARSER.declareString(SearchShardsRequest::setPreference, PREFERENCE);

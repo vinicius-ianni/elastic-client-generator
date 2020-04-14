@@ -31,8 +31,8 @@ public class CreateAutoFollowPatternResponse  implements XContentable<CreateAuto
     return CreateAutoFollowPatternResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateAutoFollowPatternResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CreateAutoFollowPatternResponse.class.getName(), false, args -> new CreateAutoFollowPatternResponse());
+  public static final ObjectParser<CreateAutoFollowPatternResponse, Void> PARSER =
+    new ObjectParser<>(CreateAutoFollowPatternResponse.class.getName(), false, CreateAutoFollowPatternResponse::new);
 
   static {
     

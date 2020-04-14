@@ -50,8 +50,8 @@ public class ClusterFileSystem  implements XContentable<ClusterFileSystem> {
     return ClusterFileSystem.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterFileSystem, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterFileSystem.class.getName(), false, args -> new ClusterFileSystem());
+  public static final ObjectParser<ClusterFileSystem, Void> PARSER =
+    new ObjectParser<>(ClusterFileSystem.class.getName(), false, ClusterFileSystem::new);
 
   static {
     PARSER.declareLong(ClusterFileSystem::setAvailableInBytes, AVAILABLE_IN_BYTES);

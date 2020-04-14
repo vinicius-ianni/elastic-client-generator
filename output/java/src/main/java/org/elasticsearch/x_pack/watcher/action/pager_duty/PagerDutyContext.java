@@ -53,13 +53,13 @@ public class PagerDutyContext  implements XContentable<PagerDutyContext> {
     return PagerDutyContext.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PagerDutyContext, Void> PARSER =
-    new ConstructingObjectParser<>(PagerDutyContext.class.getName(), false, args -> new PagerDutyContext());
+  public static final ObjectParser<PagerDutyContext, Void> PARSER =
+    new ObjectParser<>(PagerDutyContext.class.getName(), false, PagerDutyContext::new);
 
   static {
     PARSER.declareString(PagerDutyContext::setHref, HREF);
     PARSER.declareString(PagerDutyContext::setSrc, SRC);
-    PARSER.declareObject(PagerDutyContext::setType, (p, t) -> PagerDutyContextType.PARSER.apply(p), TYPE);
+    PARSER.declareField(PagerDutyContext::setType, (p, t) -> PagerDutyContextType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

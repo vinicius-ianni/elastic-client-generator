@@ -60,8 +60,8 @@ public class NodeStatistics  implements XContentable<NodeStatistics> {
     return NodeStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(NodeStatistics.class.getName(), false, args -> new NodeStatistics());
+  public static final ObjectParser<NodeStatistics, Void> PARSER =
+    new ObjectParser<>(NodeStatistics.class.getName(), false, NodeStatistics::new);
 
   static {
     PARSER.declareInt(NodeStatistics::setFailed, FAILED);

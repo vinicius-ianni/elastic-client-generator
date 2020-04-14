@@ -36,8 +36,8 @@ public class ShrinkIndexResponse  implements XContentable<ShrinkIndexResponse> {
     return ShrinkIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShrinkIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ShrinkIndexResponse.class.getName(), false, args -> new ShrinkIndexResponse());
+  public static final ObjectParser<ShrinkIndexResponse, Void> PARSER =
+    new ObjectParser<>(ShrinkIndexResponse.class.getName(), false, ShrinkIndexResponse::new);
 
   static {
     PARSER.declareBoolean(ShrinkIndexResponse::setShardsAcknowledged, SHARDS_ACKNOWLEDGED);

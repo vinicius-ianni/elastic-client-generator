@@ -87,8 +87,8 @@ public class TaskExecutingNode  implements XContentable<TaskExecutingNode> {
     return TaskExecutingNode.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TaskExecutingNode, Void> PARSER =
-    new ConstructingObjectParser<>(TaskExecutingNode.class.getName(), false, args -> new TaskExecutingNode());
+  public static final ObjectParser<TaskExecutingNode, Void> PARSER =
+    new ObjectParser<>(TaskExecutingNode.class.getName(), false, TaskExecutingNode::new);
 
   static {
     PARSER.declareObject(TaskExecutingNode::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), ATTRIBUTES);

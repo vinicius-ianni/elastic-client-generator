@@ -39,8 +39,8 @@ public class AcknowledgeWatchResponse  implements XContentable<AcknowledgeWatchR
     return AcknowledgeWatchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AcknowledgeWatchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(AcknowledgeWatchResponse.class.getName(), false, args -> new AcknowledgeWatchResponse());
+  public static final ObjectParser<AcknowledgeWatchResponse, Void> PARSER =
+    new ObjectParser<>(AcknowledgeWatchResponse.class.getName(), false, AcknowledgeWatchResponse::new);
 
   static {
     PARSER.declareObject(AcknowledgeWatchResponse::setStatus, (p, t) -> WatchStatus.PARSER.apply(p, t), STATUS);

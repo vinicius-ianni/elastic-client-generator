@@ -40,8 +40,8 @@ public class GetPrivilegesResponse extends DictionaryResponseBase<String, NamedC
     return GetPrivilegesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetPrivilegesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetPrivilegesResponse.class.getName(), false, args -> new GetPrivilegesResponse());
+  public static final ObjectParser<GetPrivilegesResponse, Void> PARSER =
+    new ObjectParser<>(GetPrivilegesResponse.class.getName(), false, GetPrivilegesResponse::new);
 
   static {
     PARSER.declareObject(GetPrivilegesResponse::setApplications, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO NamedContainer<String, PrivilegesActions> */), APPLICATIONS);

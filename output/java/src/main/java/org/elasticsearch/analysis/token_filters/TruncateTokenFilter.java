@@ -36,8 +36,8 @@ public class TruncateTokenFilter  implements XContentable<TruncateTokenFilter> {
     return TruncateTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TruncateTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(TruncateTokenFilter.class.getName(), false, args -> new TruncateTokenFilter());
+  public static final ObjectParser<TruncateTokenFilter, Void> PARSER =
+    new ObjectParser<>(TruncateTokenFilter.class.getName(), false, TruncateTokenFilter::new);
 
   static {
     PARSER.declareInt(TruncateTokenFilter::setLength, LENGTH);

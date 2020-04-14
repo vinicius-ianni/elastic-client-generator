@@ -125,8 +125,8 @@ public class GenericProperty  implements XContentable<GenericProperty> {
     return GenericProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GenericProperty, Void> PARSER =
-    new ConstructingObjectParser<>(GenericProperty.class.getName(), false, args -> new GenericProperty());
+  public static final ObjectParser<GenericProperty, Void> PARSER =
+    new ObjectParser<>(GenericProperty.class.getName(), false, GenericProperty::new);
 
   static {
     PARSER.declareString(GenericProperty::setAnalyzer, ANALYZER);
@@ -134,12 +134,12 @@ public class GenericProperty  implements XContentable<GenericProperty> {
     PARSER.declareObject(GenericProperty::setFielddata, (p, t) -> StringFielddata.PARSER.apply(p, t), FIELDDATA);
     PARSER.declareInt(GenericProperty::setIgnoreAbove, IGNORE_ABOVE);
     PARSER.declareBoolean(GenericProperty::setIndex, INDEX);
-    PARSER.declareObject(GenericProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
+    PARSER.declareField(GenericProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(GenericProperty::setNorms, NORMS);
     PARSER.declareString(GenericProperty::setNullValue, NULL_VALUE);
     PARSER.declareInt(GenericProperty::setPositionIncrementGap, POSITION_INCREMENT_GAP);
     PARSER.declareString(GenericProperty::setSearchAnalyzer, SEARCH_ANALYZER);
-    PARSER.declareObject(GenericProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR);
+    PARSER.declareField(GenericProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(GenericProperty::setType, TYPE);
   }
 

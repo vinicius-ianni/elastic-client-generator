@@ -31,8 +31,8 @@ public class CustomResponseBuilderBase  implements XContentable<CustomResponseBu
     return CustomResponseBuilderBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CustomResponseBuilderBase, Void> PARSER =
-    new ConstructingObjectParser<>(CustomResponseBuilderBase.class.getName(), false, args -> new CustomResponseBuilderBase());
+  public static final ObjectParser<CustomResponseBuilderBase, Void> PARSER =
+    new ObjectParser<>(CustomResponseBuilderBase.class.getName(), false, CustomResponseBuilderBase::new);
 
   static {
     

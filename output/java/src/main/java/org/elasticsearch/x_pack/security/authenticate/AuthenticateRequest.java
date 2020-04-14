@@ -31,8 +31,8 @@ public class AuthenticateRequest  implements XContentable<AuthenticateRequest> {
     return AuthenticateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AuthenticateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(AuthenticateRequest.class.getName(), false, args -> new AuthenticateRequest());
+  public static final ObjectParser<AuthenticateRequest, Void> PARSER =
+    new ObjectParser<>(AuthenticateRequest.class.getName(), false, AuthenticateRequest::new);
 
   static {
     

@@ -36,8 +36,8 @@ public class WatcherStatsRequest  implements XContentable<WatcherStatsRequest> {
     return WatcherStatsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WatcherStatsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(WatcherStatsRequest.class.getName(), false, args -> new WatcherStatsRequest());
+  public static final ObjectParser<WatcherStatsRequest, Void> PARSER =
+    new ObjectParser<>(WatcherStatsRequest.class.getName(), false, WatcherStatsRequest::new);
 
   static {
     PARSER.declareBoolean(WatcherStatsRequest::setEmitStacktraces, EMIT_STACKTRACES);

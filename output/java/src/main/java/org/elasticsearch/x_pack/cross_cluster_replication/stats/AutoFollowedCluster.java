@@ -51,8 +51,8 @@ public class AutoFollowedCluster  implements XContentable<AutoFollowedCluster> {
     return AutoFollowedCluster.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AutoFollowedCluster, Void> PARSER =
-    new ConstructingObjectParser<>(AutoFollowedCluster.class.getName(), false, args -> new AutoFollowedCluster());
+  public static final ObjectParser<AutoFollowedCluster, Void> PARSER =
+    new ObjectParser<>(AutoFollowedCluster.class.getName(), false, AutoFollowedCluster::new);
 
   static {
     PARSER.declareString(AutoFollowedCluster::setClusterName, CLUSTER_NAME);

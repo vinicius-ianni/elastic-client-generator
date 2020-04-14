@@ -36,8 +36,8 @@ public class RankFeatureProperty  implements XContentable<RankFeatureProperty> {
     return RankFeatureProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RankFeatureProperty, Void> PARSER =
-    new ConstructingObjectParser<>(RankFeatureProperty.class.getName(), false, args -> new RankFeatureProperty());
+  public static final ObjectParser<RankFeatureProperty, Void> PARSER =
+    new ObjectParser<>(RankFeatureProperty.class.getName(), false, RankFeatureProperty::new);
 
   static {
     PARSER.declareBoolean(RankFeatureProperty::setPositiveScoreImpact, POSITIVE_SCORE_IMPACT);

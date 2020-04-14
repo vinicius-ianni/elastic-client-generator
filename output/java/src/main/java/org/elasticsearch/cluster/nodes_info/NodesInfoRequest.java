@@ -46,8 +46,8 @@ public class NodesInfoRequest  implements XContentable<NodesInfoRequest> {
     return NodesInfoRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodesInfoRequest, Void> PARSER =
-    new ConstructingObjectParser<>(NodesInfoRequest.class.getName(), false, args -> new NodesInfoRequest());
+  public static final ObjectParser<NodesInfoRequest, Void> PARSER =
+    new ObjectParser<>(NodesInfoRequest.class.getName(), false, NodesInfoRequest::new);
 
   static {
     PARSER.declareBoolean(NodesInfoRequest::setFlatSettings, FLAT_SETTINGS);

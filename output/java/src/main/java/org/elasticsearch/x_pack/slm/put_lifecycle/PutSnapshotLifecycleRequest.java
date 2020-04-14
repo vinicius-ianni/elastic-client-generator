@@ -64,8 +64,8 @@ public class PutSnapshotLifecycleRequest  implements XContentable<PutSnapshotLif
     return PutSnapshotLifecycleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutSnapshotLifecycleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutSnapshotLifecycleRequest.class.getName(), false, args -> new PutSnapshotLifecycleRequest());
+  public static final ObjectParser<PutSnapshotLifecycleRequest, Void> PARSER =
+    new ObjectParser<>(PutSnapshotLifecycleRequest.class.getName(), false, PutSnapshotLifecycleRequest::new);
 
   static {
     PARSER.declareObject(PutSnapshotLifecycleRequest::setConfig, (p, t) -> SnapshotLifecycleConfig.PARSER.apply(p, t), CONFIG);

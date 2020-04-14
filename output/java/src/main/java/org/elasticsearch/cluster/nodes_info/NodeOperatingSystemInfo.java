@@ -102,8 +102,8 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
     return NodeOperatingSystemInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeOperatingSystemInfo, Void> PARSER =
-    new ConstructingObjectParser<>(NodeOperatingSystemInfo.class.getName(), false, args -> new NodeOperatingSystemInfo());
+  public static final ObjectParser<NodeOperatingSystemInfo, Void> PARSER =
+    new ObjectParser<>(NodeOperatingSystemInfo.class.getName(), false, NodeOperatingSystemInfo::new);
 
   static {
     PARSER.declareString(NodeOperatingSystemInfo::setArch, ARCH);

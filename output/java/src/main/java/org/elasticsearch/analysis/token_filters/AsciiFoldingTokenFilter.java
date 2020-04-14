@@ -36,8 +36,8 @@ public class AsciiFoldingTokenFilter  implements XContentable<AsciiFoldingTokenF
     return AsciiFoldingTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AsciiFoldingTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(AsciiFoldingTokenFilter.class.getName(), false, args -> new AsciiFoldingTokenFilter());
+  public static final ObjectParser<AsciiFoldingTokenFilter, Void> PARSER =
+    new ObjectParser<>(AsciiFoldingTokenFilter.class.getName(), false, AsciiFoldingTokenFilter::new);
 
   static {
     PARSER.declareBoolean(AsciiFoldingTokenFilter::setPreserveOriginal, PRESERVE_ORIGINAL);

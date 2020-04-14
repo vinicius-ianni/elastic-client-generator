@@ -60,12 +60,12 @@ public class TypeExistsRequest  implements XContentable<TypeExistsRequest> {
     return TypeExistsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TypeExistsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(TypeExistsRequest.class.getName(), false, args -> new TypeExistsRequest());
+  public static final ObjectParser<TypeExistsRequest, Void> PARSER =
+    new ObjectParser<>(TypeExistsRequest.class.getName(), false, TypeExistsRequest::new);
 
   static {
     PARSER.declareBoolean(TypeExistsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(TypeExistsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(TypeExistsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(TypeExistsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(TypeExistsRequest::setLocal, LOCAL);
   }

@@ -47,8 +47,8 @@ public class SpanFirstQuery  implements XContentable<SpanFirstQuery> {
     return SpanFirstQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanFirstQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanFirstQuery.class.getName(), false, args -> new SpanFirstQuery());
+  public static final ObjectParser<SpanFirstQuery, Void> PARSER =
+    new ObjectParser<>(SpanFirstQuery.class.getName(), false, SpanFirstQuery::new);
 
   static {
     PARSER.declareInt(SpanFirstQuery::setEnd, END);

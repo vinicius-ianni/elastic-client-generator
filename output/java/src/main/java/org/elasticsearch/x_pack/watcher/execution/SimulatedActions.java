@@ -55,8 +55,8 @@ public class SimulatedActions  implements XContentable<SimulatedActions> {
     return SimulatedActions.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SimulatedActions, Void> PARSER =
-    new ConstructingObjectParser<>(SimulatedActions.class.getName(), false, args -> new SimulatedActions());
+  public static final ObjectParser<SimulatedActions, Void> PARSER =
+    new ObjectParser<>(SimulatedActions.class.getName(), false, SimulatedActions::new);
 
   static {
     PARSER.declareStringArray(SimulatedActions::setActions, ACTIONS);

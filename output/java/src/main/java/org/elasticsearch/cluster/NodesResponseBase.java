@@ -39,8 +39,8 @@ public class NodesResponseBase  implements XContentable<NodesResponseBase> {
     return NodesResponseBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodesResponseBase, Void> PARSER =
-    new ConstructingObjectParser<>(NodesResponseBase.class.getName(), false, args -> new NodesResponseBase());
+  public static final ObjectParser<NodesResponseBase, Void> PARSER =
+    new ObjectParser<>(NodesResponseBase.class.getName(), false, NodesResponseBase::new);
 
   static {
     PARSER.declareObject(NodesResponseBase::setNodes, (p, t) -> NodeStatistics.PARSER.apply(p, t), NODES);

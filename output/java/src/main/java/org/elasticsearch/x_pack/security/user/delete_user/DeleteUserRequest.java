@@ -39,11 +39,11 @@ public class DeleteUserRequest  implements XContentable<DeleteUserRequest> {
     return DeleteUserRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteUserRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteUserRequest.class.getName(), false, args -> new DeleteUserRequest());
+  public static final ObjectParser<DeleteUserRequest, Void> PARSER =
+    new ObjectParser<>(DeleteUserRequest.class.getName(), false, DeleteUserRequest::new);
 
   static {
-    PARSER.declareObject(DeleteUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(DeleteUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

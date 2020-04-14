@@ -59,8 +59,8 @@ public class TermsSetQuery  implements XContentable<TermsSetQuery> {
     return TermsSetQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermsSetQuery, Void> PARSER =
-    new ConstructingObjectParser<>(TermsSetQuery.class.getName(), false, args -> new TermsSetQuery());
+  public static final ObjectParser<TermsSetQuery, Void> PARSER =
+    new ObjectParser<>(TermsSetQuery.class.getName(), false, TermsSetQuery::new);
 
   static {
     PARSER.declareObject(TermsSetQuery::setMinimumShouldMatchField, (p, t) -> Field.createFrom(p), MINIMUM_SHOULD_MATCH_FIELD);

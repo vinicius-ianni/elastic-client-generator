@@ -123,8 +123,8 @@ public class UpdateByQueryResponse  implements XContentable<UpdateByQueryRespons
     return UpdateByQueryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateByQueryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateByQueryResponse.class.getName(), false, args -> new UpdateByQueryResponse());
+  public static final ObjectParser<UpdateByQueryResponse, Void> PARSER =
+    new ObjectParser<>(UpdateByQueryResponse.class.getName(), false, UpdateByQueryResponse::new);
 
   static {
     PARSER.declareBoolean(UpdateByQueryResponse::setIsValid, IS_VALID);

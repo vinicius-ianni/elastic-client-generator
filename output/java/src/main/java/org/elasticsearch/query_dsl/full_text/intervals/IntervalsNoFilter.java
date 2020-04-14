@@ -31,8 +31,8 @@ public class IntervalsNoFilter  implements XContentable<IntervalsNoFilter> {
     return IntervalsNoFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsNoFilter, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsNoFilter.class.getName(), false, args -> new IntervalsNoFilter());
+  public static final ObjectParser<IntervalsNoFilter, Void> PARSER =
+    new ObjectParser<>(IntervalsNoFilter.class.getName(), false, IntervalsNoFilter::new);
 
   static {
     

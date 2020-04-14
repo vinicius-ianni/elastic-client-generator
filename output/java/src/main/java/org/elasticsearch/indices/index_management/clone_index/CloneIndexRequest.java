@@ -78,8 +78,8 @@ public class CloneIndexRequest  implements XContentable<CloneIndexRequest> {
     return CloneIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CloneIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CloneIndexRequest.class.getName(), false, args -> new CloneIndexRequest());
+  public static final ObjectParser<CloneIndexRequest, Void> PARSER =
+    new ObjectParser<>(CloneIndexRequest.class.getName(), false, CloneIndexRequest::new);
 
   static {
     PARSER.declareObject(CloneIndexRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

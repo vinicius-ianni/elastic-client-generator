@@ -31,8 +31,8 @@ public class UpdateIndexSettingsResponse  implements XContentable<UpdateIndexSet
     return UpdateIndexSettingsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateIndexSettingsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateIndexSettingsResponse.class.getName(), false, args -> new UpdateIndexSettingsResponse());
+  public static final ObjectParser<UpdateIndexSettingsResponse, Void> PARSER =
+    new ObjectParser<>(UpdateIndexSettingsResponse.class.getName(), false, UpdateIndexSettingsResponse::new);
 
   static {
     

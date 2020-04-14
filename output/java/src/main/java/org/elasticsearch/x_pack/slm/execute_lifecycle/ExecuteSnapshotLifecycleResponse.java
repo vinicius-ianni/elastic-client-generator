@@ -36,8 +36,8 @@ public class ExecuteSnapshotLifecycleResponse  implements XContentable<ExecuteSn
     return ExecuteSnapshotLifecycleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecuteSnapshotLifecycleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ExecuteSnapshotLifecycleResponse.class.getName(), false, args -> new ExecuteSnapshotLifecycleResponse());
+  public static final ObjectParser<ExecuteSnapshotLifecycleResponse, Void> PARSER =
+    new ObjectParser<>(ExecuteSnapshotLifecycleResponse.class.getName(), false, ExecuteSnapshotLifecycleResponse::new);
 
   static {
     PARSER.declareString(ExecuteSnapshotLifecycleResponse::setSnapshotName, SNAPSHOT_NAME);

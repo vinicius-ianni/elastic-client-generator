@@ -46,8 +46,8 @@ public class PhraseSuggestCollateQuery  implements XContentable<PhraseSuggestCol
     return PhraseSuggestCollateQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PhraseSuggestCollateQuery, Void> PARSER =
-    new ConstructingObjectParser<>(PhraseSuggestCollateQuery.class.getName(), false, args -> new PhraseSuggestCollateQuery());
+  public static final ObjectParser<PhraseSuggestCollateQuery, Void> PARSER =
+    new ObjectParser<>(PhraseSuggestCollateQuery.class.getName(), false, PhraseSuggestCollateQuery::new);
 
   static {
     PARSER.declareObject(PhraseSuggestCollateQuery::setId, (p, t) -> Id.createFrom(p), ID);

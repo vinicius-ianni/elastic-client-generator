@@ -31,8 +31,8 @@ public class Union<TFirst, TSecond>  implements XContentable<Union<TFirst, TSeco
     return Union.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Union, Void> PARSER =
-    new ConstructingObjectParser<>(Union.class.getName(), false, args -> new Union());
+  public static final ObjectParser<Union, Void> PARSER =
+    new ObjectParser<>(Union.class.getName(), false, Union::new);
 
   static {
     

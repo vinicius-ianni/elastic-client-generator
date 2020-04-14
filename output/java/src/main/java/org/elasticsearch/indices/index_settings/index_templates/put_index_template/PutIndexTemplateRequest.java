@@ -127,8 +127,8 @@ public class PutIndexTemplateRequest  implements XContentable<PutIndexTemplateRe
     return PutIndexTemplateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutIndexTemplateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutIndexTemplateRequest.class.getName(), false, args -> new PutIndexTemplateRequest());
+  public static final ObjectParser<PutIndexTemplateRequest, Void> PARSER =
+    new ObjectParser<>(PutIndexTemplateRequest.class.getName(), false, PutIndexTemplateRequest::new);
 
   static {
     PARSER.declareObject(PutIndexTemplateRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

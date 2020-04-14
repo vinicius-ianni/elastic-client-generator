@@ -71,8 +71,8 @@ public class ShingleTokenFilter  implements XContentable<ShingleTokenFilter> {
     return ShingleTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShingleTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(ShingleTokenFilter.class.getName(), false, args -> new ShingleTokenFilter());
+  public static final ObjectParser<ShingleTokenFilter, Void> PARSER =
+    new ObjectParser<>(ShingleTokenFilter.class.getName(), false, ShingleTokenFilter::new);
 
   static {
     PARSER.declareString(ShingleTokenFilter::setFillerToken, FILLER_TOKEN);

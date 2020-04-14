@@ -43,8 +43,8 @@ public class ShardDocs  implements XContentable<ShardDocs> {
     return ShardDocs.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardDocs, Void> PARSER =
-    new ConstructingObjectParser<>(ShardDocs.class.getName(), false, args -> new ShardDocs());
+  public static final ObjectParser<ShardDocs, Void> PARSER =
+    new ObjectParser<>(ShardDocs.class.getName(), false, ShardDocs::new);
 
   static {
     PARSER.declareLong(ShardDocs::setCount, COUNT);

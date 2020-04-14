@@ -31,8 +31,8 @@ public class PercolatorProperty  implements XContentable<PercolatorProperty> {
     return PercolatorProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PercolatorProperty, Void> PARSER =
-    new ConstructingObjectParser<>(PercolatorProperty.class.getName(), false, args -> new PercolatorProperty());
+  public static final ObjectParser<PercolatorProperty, Void> PARSER =
+    new ObjectParser<>(PercolatorProperty.class.getName(), false, PercolatorProperty::new);
 
   static {
     

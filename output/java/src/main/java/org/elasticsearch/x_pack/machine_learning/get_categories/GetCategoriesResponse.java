@@ -46,8 +46,8 @@ public class GetCategoriesResponse  implements XContentable<GetCategoriesRespons
     return GetCategoriesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetCategoriesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetCategoriesResponse.class.getName(), false, args -> new GetCategoriesResponse());
+  public static final ObjectParser<GetCategoriesResponse, Void> PARSER =
+    new ObjectParser<>(GetCategoriesResponse.class.getName(), false, GetCategoriesResponse::new);
 
   static {
     PARSER.declareObjectArray(GetCategoriesResponse::setCategories, (p, t) -> CategoryDefinition.PARSER.apply(p, t), CATEGORIES);

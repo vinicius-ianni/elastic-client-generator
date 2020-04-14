@@ -36,8 +36,8 @@ public class IndexResponse  implements XContentable<IndexResponse> {
     return IndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(IndexResponse.class.getName(), false, args -> new IndexResponse());
+  public static final ObjectParser<IndexResponse, Void> PARSER =
+    new ObjectParser<>(IndexResponse.class.getName(), false, IndexResponse::new);
 
   static {
     PARSER.declareBoolean(IndexResponse::setIsValid, IS_VALID);

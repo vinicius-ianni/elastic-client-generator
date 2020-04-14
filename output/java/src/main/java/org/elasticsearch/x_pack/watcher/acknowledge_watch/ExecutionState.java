@@ -44,8 +44,8 @@ public class ExecutionState  implements XContentable<ExecutionState> {
     return ExecutionState.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutionState, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutionState.class.getName(), false, args -> new ExecutionState());
+  public static final ObjectParser<ExecutionState, Void> PARSER =
+    new ObjectParser<>(ExecutionState.class.getName(), false, ExecutionState::new);
 
   static {
     PARSER.declareBoolean(ExecutionState::setSuccessful, SUCCESSFUL);

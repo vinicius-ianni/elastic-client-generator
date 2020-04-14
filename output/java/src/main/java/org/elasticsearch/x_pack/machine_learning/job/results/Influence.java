@@ -45,8 +45,8 @@ public class Influence  implements XContentable<Influence> {
     return Influence.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Influence, Void> PARSER =
-    new ConstructingObjectParser<>(Influence.class.getName(), false, args -> new Influence());
+  public static final ObjectParser<Influence, Void> PARSER =
+    new ObjectParser<>(Influence.class.getName(), false, Influence::new);
 
   static {
     PARSER.declareString(Influence::setInfluencerFieldName, INFLUENCER_FIELD_NAME);

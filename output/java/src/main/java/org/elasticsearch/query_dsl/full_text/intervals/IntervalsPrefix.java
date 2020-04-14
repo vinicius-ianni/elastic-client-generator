@@ -53,8 +53,8 @@ public class IntervalsPrefix  implements XContentable<IntervalsPrefix> {
     return IntervalsPrefix.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsPrefix, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsPrefix.class.getName(), false, args -> new IntervalsPrefix());
+  public static final ObjectParser<IntervalsPrefix, Void> PARSER =
+    new ObjectParser<>(IntervalsPrefix.class.getName(), false, IntervalsPrefix::new);
 
   static {
     PARSER.declareString(IntervalsPrefix::setAnalyzer, ANALYZER);

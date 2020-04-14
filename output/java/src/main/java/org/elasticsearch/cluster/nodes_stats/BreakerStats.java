@@ -71,8 +71,8 @@ public class BreakerStats  implements XContentable<BreakerStats> {
     return BreakerStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BreakerStats, Void> PARSER =
-    new ConstructingObjectParser<>(BreakerStats.class.getName(), false, args -> new BreakerStats());
+  public static final ObjectParser<BreakerStats, Void> PARSER =
+    new ObjectParser<>(BreakerStats.class.getName(), false, BreakerStats::new);
 
   static {
     PARSER.declareString(BreakerStats::setEstimatedSize, ESTIMATED_SIZE);

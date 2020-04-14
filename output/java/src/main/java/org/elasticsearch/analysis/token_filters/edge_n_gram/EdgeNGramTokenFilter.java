@@ -54,13 +54,13 @@ public class EdgeNGramTokenFilter  implements XContentable<EdgeNGramTokenFilter>
     return EdgeNGramTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<EdgeNGramTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(EdgeNGramTokenFilter.class.getName(), false, args -> new EdgeNGramTokenFilter());
+  public static final ObjectParser<EdgeNGramTokenFilter, Void> PARSER =
+    new ObjectParser<>(EdgeNGramTokenFilter.class.getName(), false, EdgeNGramTokenFilter::new);
 
   static {
     PARSER.declareInt(EdgeNGramTokenFilter::setMaxGram, MAX_GRAM);
     PARSER.declareInt(EdgeNGramTokenFilter::setMinGram, MIN_GRAM);
-    PARSER.declareObject(EdgeNGramTokenFilter::setSide, (p, t) -> EdgeNGramSide.PARSER.apply(p), SIDE);
+    PARSER.declareField(EdgeNGramTokenFilter::setSide, (p, t) -> EdgeNGramSide.PARSER.apply(p), SIDE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

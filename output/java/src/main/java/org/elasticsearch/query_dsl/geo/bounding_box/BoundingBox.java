@@ -56,8 +56,8 @@ public class BoundingBox  implements XContentable<BoundingBox> {
     return BoundingBox.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BoundingBox, Void> PARSER =
-    new ConstructingObjectParser<>(BoundingBox.class.getName(), false, args -> new BoundingBox());
+  public static final ObjectParser<BoundingBox, Void> PARSER =
+    new ObjectParser<>(BoundingBox.class.getName(), false, BoundingBox::new);
 
   static {
     PARSER.declareObject(BoundingBox::setBottomRight, (p, t) -> GeoLocation.PARSER.apply(p, t), BOTTOM_RIGHT);

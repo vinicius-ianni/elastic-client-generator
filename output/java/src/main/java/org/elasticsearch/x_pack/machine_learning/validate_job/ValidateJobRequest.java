@@ -95,8 +95,8 @@ public class ValidateJobRequest  implements XContentable<ValidateJobRequest> {
     return ValidateJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ValidateJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ValidateJobRequest.class.getName(), false, args -> new ValidateJobRequest());
+  public static final ObjectParser<ValidateJobRequest, Void> PARSER =
+    new ObjectParser<>(ValidateJobRequest.class.getName(), false, ValidateJobRequest::new);
 
   static {
     PARSER.declareObject(ValidateJobRequest::setAnalysisConfig, (p, t) -> AnalysisConfig.PARSER.apply(p, t), ANALYSIS_CONFIG);

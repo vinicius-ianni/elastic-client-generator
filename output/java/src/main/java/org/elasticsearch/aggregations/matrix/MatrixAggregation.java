@@ -49,8 +49,8 @@ public class MatrixAggregation  implements XContentable<MatrixAggregation> {
     return MatrixAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MatrixAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MatrixAggregation.class.getName(), false, args -> new MatrixAggregation());
+  public static final ObjectParser<MatrixAggregation, Void> PARSER =
+    new ObjectParser<>(MatrixAggregation.class.getName(), false, MatrixAggregation::new);
 
   static {
     PARSER.declareObjectArray(MatrixAggregation::setFields, (p, t) -> Field.createFrom(p), FIELDS);

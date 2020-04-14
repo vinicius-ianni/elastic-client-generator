@@ -40,8 +40,8 @@ public class GetLifecycleResponse extends DictionaryResponseBase<String, Lifecyc
     return GetLifecycleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetLifecycleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetLifecycleResponse.class.getName(), false, args -> new GetLifecycleResponse());
+  public static final ObjectParser<GetLifecycleResponse, Void> PARSER =
+    new ObjectParser<>(GetLifecycleResponse.class.getName(), false, GetLifecycleResponse::new);
 
   static {
     PARSER.declareObject(GetLifecycleResponse::setPolicies, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LifecyclePolicy.PARSER.apply(pp, null)), POLICIES);

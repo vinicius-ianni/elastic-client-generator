@@ -47,12 +47,12 @@ public class TimeOfWeek  implements XContentable<TimeOfWeek> {
     return TimeOfWeek.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TimeOfWeek, Void> PARSER =
-    new ConstructingObjectParser<>(TimeOfWeek.class.getName(), false, args -> new TimeOfWeek());
+  public static final ObjectParser<TimeOfWeek, Void> PARSER =
+    new ObjectParser<>(TimeOfWeek.class.getName(), false, TimeOfWeek::new);
 
   static {
     PARSER.declareStringArray(TimeOfWeek::setAt, AT);
-    PARSER.declareObjectArray(TimeOfWeek::setOn, (p, t) -> Day.PARSER.apply(p), ON);
+    PARSER.declareFieldArray(TimeOfWeek::setOn, (p, t) -> Day.PARSER.apply(p), ON, ObjectParser.ValueType.STRING_ARRAY);
   }
 
 }

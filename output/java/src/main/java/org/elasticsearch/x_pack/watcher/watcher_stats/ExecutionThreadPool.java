@@ -43,8 +43,8 @@ public class ExecutionThreadPool  implements XContentable<ExecutionThreadPool> {
     return ExecutionThreadPool.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutionThreadPool, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutionThreadPool.class.getName(), false, args -> new ExecutionThreadPool());
+  public static final ObjectParser<ExecutionThreadPool, Void> PARSER =
+    new ObjectParser<>(ExecutionThreadPool.class.getName(), false, ExecutionThreadPool::new);
 
   static {
     PARSER.declareLong(ExecutionThreadPool::setMaxSize, MAX_SIZE);

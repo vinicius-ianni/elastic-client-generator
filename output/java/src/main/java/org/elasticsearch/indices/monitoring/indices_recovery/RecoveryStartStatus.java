@@ -43,8 +43,8 @@ public class RecoveryStartStatus  implements XContentable<RecoveryStartStatus> {
     return RecoveryStartStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryStartStatus, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryStartStatus.class.getName(), false, args -> new RecoveryStartStatus());
+  public static final ObjectParser<RecoveryStartStatus, Void> PARSER =
+    new ObjectParser<>(RecoveryStartStatus.class.getName(), false, RecoveryStartStatus::new);
 
   static {
     PARSER.declareLong(RecoveryStartStatus::setCheckIndexTime, CHECK_INDEX_TIME);

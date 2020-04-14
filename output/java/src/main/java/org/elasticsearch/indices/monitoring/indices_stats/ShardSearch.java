@@ -120,8 +120,8 @@ public class ShardSearch  implements XContentable<ShardSearch> {
     return ShardSearch.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardSearch, Void> PARSER =
-    new ConstructingObjectParser<>(ShardSearch.class.getName(), false, args -> new ShardSearch());
+  public static final ObjectParser<ShardSearch, Void> PARSER =
+    new ObjectParser<>(ShardSearch.class.getName(), false, ShardSearch::new);
 
   static {
     PARSER.declareLong(ShardSearch::setFetchCurrent, FETCH_CURRENT);

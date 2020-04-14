@@ -53,8 +53,8 @@ public class CloseJobRequest  implements XContentable<CloseJobRequest> {
     return CloseJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CloseJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CloseJobRequest.class.getName(), false, args -> new CloseJobRequest());
+  public static final ObjectParser<CloseJobRequest, Void> PARSER =
+    new ObjectParser<>(CloseJobRequest.class.getName(), false, CloseJobRequest::new);
 
   static {
     PARSER.declareBoolean(CloseJobRequest::setAllowNoJobs, ALLOW_NO_JOBS);

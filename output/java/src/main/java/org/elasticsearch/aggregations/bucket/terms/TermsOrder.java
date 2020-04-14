@@ -87,8 +87,8 @@ public class TermsOrder  implements XContentable<TermsOrder> {
     return TermsOrder.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermsOrder, Void> PARSER =
-    new ConstructingObjectParser<>(TermsOrder.class.getName(), false, args -> new TermsOrder());
+  public static final ObjectParser<TermsOrder, Void> PARSER =
+    new ObjectParser<>(TermsOrder.class.getName(), false, TermsOrder::new);
 
   static {
     PARSER.declareObject(TermsOrder::setCountAscending, (p, t) -> TermsOrder.PARSER.apply(p, t), COUNT_ASCENDING);
@@ -96,7 +96,7 @@ public class TermsOrder  implements XContentable<TermsOrder> {
     PARSER.declareString(TermsOrder::setKey, KEY);
     PARSER.declareObject(TermsOrder::setKeyAscending, (p, t) -> TermsOrder.PARSER.apply(p, t), KEY_ASCENDING);
     PARSER.declareObject(TermsOrder::setKeyDescending, (p, t) -> TermsOrder.PARSER.apply(p, t), KEY_DESCENDING);
-    PARSER.declareObject(TermsOrder::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER);
+    PARSER.declareField(TermsOrder::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

@@ -66,13 +66,13 @@ public class WeightedAverageAggregation  implements XContentable<WeightedAverage
     return WeightedAverageAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WeightedAverageAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(WeightedAverageAggregation.class.getName(), false, args -> new WeightedAverageAggregation());
+  public static final ObjectParser<WeightedAverageAggregation, Void> PARSER =
+    new ObjectParser<>(WeightedAverageAggregation.class.getName(), false, WeightedAverageAggregation::new);
 
   static {
     PARSER.declareString(WeightedAverageAggregation::setFormat, FORMAT);
     PARSER.declareObject(WeightedAverageAggregation::setValue, (p, t) -> WeightedAverageValue.PARSER.apply(p, t), VALUE);
-    PARSER.declareObject(WeightedAverageAggregation::setValueType, (p, t) -> ValueType.PARSER.apply(p), VALUE_TYPE);
+    PARSER.declareField(WeightedAverageAggregation::setValueType, (p, t) -> ValueType.PARSER.apply(p), VALUE_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(WeightedAverageAggregation::setWeight, (p, t) -> WeightedAverageValue.PARSER.apply(p, t), WEIGHT);
   }
 

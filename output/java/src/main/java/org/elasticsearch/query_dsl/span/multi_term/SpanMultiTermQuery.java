@@ -39,8 +39,8 @@ public class SpanMultiTermQuery  implements XContentable<SpanMultiTermQuery> {
     return SpanMultiTermQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanMultiTermQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanMultiTermQuery.class.getName(), false, args -> new SpanMultiTermQuery());
+  public static final ObjectParser<SpanMultiTermQuery, Void> PARSER =
+    new ObjectParser<>(SpanMultiTermQuery.class.getName(), false, SpanMultiTermQuery::new);
 
   static {
     PARSER.declareObject(SpanMultiTermQuery::setMatch, (p, t) -> QueryContainer.PARSER.apply(p, t), MATCH);

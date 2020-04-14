@@ -41,8 +41,8 @@ public class GetIndexSettingsResponse extends DictionaryResponseBase<IndexName, 
     return GetIndexSettingsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetIndexSettingsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetIndexSettingsResponse.class.getName(), false, args -> new GetIndexSettingsResponse());
+  public static final ObjectParser<GetIndexSettingsResponse, Void> PARSER =
+    new ObjectParser<>(GetIndexSettingsResponse.class.getName(), false, GetIndexSettingsResponse::new);
 
   static {
     PARSER.declareObject(GetIndexSettingsResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> IndexState.PARSER.apply(pp, null)), INDICES);

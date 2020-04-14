@@ -87,15 +87,15 @@ public class Sort  implements XContentable<Sort> {
     return Sort.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Sort, Void> PARSER =
-    new ConstructingObjectParser<>(Sort.class.getName(), false, args -> new Sort());
+  public static final ObjectParser<Sort, Void> PARSER =
+    new ObjectParser<>(Sort.class.getName(), false, Sort::new);
 
   static {
     PARSER.declareObject(Sort::setMissing, (p, t) -> p.objectText(), MISSING);
-    PARSER.declareObject(Sort::setMode, (p, t) -> SortMode.PARSER.apply(p), MODE);
-    PARSER.declareObject(Sort::setNumericType, (p, t) -> NumericType.PARSER.apply(p), NUMERIC_TYPE);
+    PARSER.declareField(Sort::setMode, (p, t) -> SortMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(Sort::setNumericType, (p, t) -> NumericType.PARSER.apply(p), NUMERIC_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(Sort::setNested, (p, t) -> NestedSort.PARSER.apply(p, t), NESTED);
-    PARSER.declareObject(Sort::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER);
+    PARSER.declareField(Sort::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(Sort::setSortKey, (p, t) -> Field.createFrom(p), SORT_KEY);
   }
 

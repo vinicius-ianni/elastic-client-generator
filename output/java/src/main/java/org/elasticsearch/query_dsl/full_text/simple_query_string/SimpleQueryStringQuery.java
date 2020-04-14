@@ -135,16 +135,16 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
     return SimpleQueryStringQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SimpleQueryStringQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SimpleQueryStringQuery.class.getName(), false, args -> new SimpleQueryStringQuery());
+  public static final ObjectParser<SimpleQueryStringQuery, Void> PARSER =
+    new ObjectParser<>(SimpleQueryStringQuery.class.getName(), false, SimpleQueryStringQuery::new);
 
   static {
     PARSER.declareString(SimpleQueryStringQuery::setAnalyzer, ANALYZER);
     PARSER.declareBoolean(SimpleQueryStringQuery::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareBoolean(SimpleQueryStringQuery::setAutoGenerateSynonymsPhraseQuery, AUTO_GENERATE_SYNONYMS_PHRASE_QUERY);
-    PARSER.declareObject(SimpleQueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(SimpleQueryStringQuery::setDefaultOperator, (p, t) -> Operator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObjectArray(SimpleQueryStringQuery::setFields, (p, t) -> Field.createFrom(p), FIELDS);
-    PARSER.declareObject(SimpleQueryStringQuery::setFlags, (p, t) -> SimpleQueryStringFlags.PARSER.apply(p), FLAGS);
+    PARSER.declareField(SimpleQueryStringQuery::setFlags, (p, t) -> SimpleQueryStringFlags.PARSER.apply(p), FLAGS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(SimpleQueryStringQuery::setFuzzyMaxExpansions, FUZZY_MAX_EXPANSIONS);
     PARSER.declareInt(SimpleQueryStringQuery::setFuzzyPrefixLength, FUZZY_PREFIX_LENGTH);
     PARSER.declareBoolean(SimpleQueryStringQuery::setFuzzyTranspositions, FUZZY_TRANSPOSITIONS);

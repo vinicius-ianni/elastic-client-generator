@@ -36,8 +36,8 @@ public class SnapshotRepository  implements XContentable<SnapshotRepository> {
     return SnapshotRepository.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotRepository, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotRepository.class.getName(), false, args -> new SnapshotRepository());
+  public static final ObjectParser<SnapshotRepository, Void> PARSER =
+    new ObjectParser<>(SnapshotRepository.class.getName(), false, SnapshotRepository::new);
 
   static {
     PARSER.declareString(SnapshotRepository::setType, TYPE);

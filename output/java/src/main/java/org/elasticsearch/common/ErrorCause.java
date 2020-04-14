@@ -189,8 +189,8 @@ public class ErrorCause  implements XContentable<ErrorCause> {
     return ErrorCause.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ErrorCause, Void> PARSER =
-    new ConstructingObjectParser<>(ErrorCause.class.getName(), false, args -> new ErrorCause());
+  public static final ObjectParser<ErrorCause, Void> PARSER =
+    new ObjectParser<>(ErrorCause.class.getName(), false, ErrorCause::new);
 
   static {
     PARSER.declareObject(ErrorCause::setAdditionalProperties, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ADDITIONAL_PROPERTIES);

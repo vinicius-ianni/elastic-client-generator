@@ -36,8 +36,8 @@ public class CompletionStats  implements XContentable<CompletionStats> {
     return CompletionStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompletionStats, Void> PARSER =
-    new ConstructingObjectParser<>(CompletionStats.class.getName(), false, args -> new CompletionStats());
+  public static final ObjectParser<CompletionStats, Void> PARSER =
+    new ObjectParser<>(CompletionStats.class.getName(), false, CompletionStats::new);
 
   static {
     PARSER.declareLong(CompletionStats::setSizeInBytes, SIZE_IN_BYTES);

@@ -36,8 +36,8 @@ public class LowercaseTokenFilter  implements XContentable<LowercaseTokenFilter>
     return LowercaseTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LowercaseTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(LowercaseTokenFilter.class.getName(), false, args -> new LowercaseTokenFilter());
+  public static final ObjectParser<LowercaseTokenFilter, Void> PARSER =
+    new ObjectParser<>(LowercaseTokenFilter.class.getName(), false, LowercaseTokenFilter::new);
 
   static {
     PARSER.declareString(LowercaseTokenFilter::setLanguage, LANGUAGE);

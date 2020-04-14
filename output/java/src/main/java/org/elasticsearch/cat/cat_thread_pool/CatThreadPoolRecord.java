@@ -173,8 +173,8 @@ public class CatThreadPoolRecord  implements XContentable<CatThreadPoolRecord> {
     return CatThreadPoolRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatThreadPoolRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatThreadPoolRecord.class.getName(), false, args -> new CatThreadPoolRecord());
+  public static final ObjectParser<CatThreadPoolRecord, Void> PARSER =
+    new ObjectParser<>(CatThreadPoolRecord.class.getName(), false, CatThreadPoolRecord::new);
 
   static {
     PARSER.declareInt(CatThreadPoolRecord::setActive, ACTIVE);

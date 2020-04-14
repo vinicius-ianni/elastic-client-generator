@@ -83,8 +83,8 @@ public class DateProperty  implements XContentable<DateProperty> {
     return DateProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateProperty, Void> PARSER =
-    new ConstructingObjectParser<>(DateProperty.class.getName(), false, args -> new DateProperty());
+  public static final ObjectParser<DateProperty, Void> PARSER =
+    new ObjectParser<>(DateProperty.class.getName(), false, DateProperty::new);
 
   static {
     PARSER.declareDouble(DateProperty::setBoost, BOOST);

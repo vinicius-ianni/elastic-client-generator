@@ -142,11 +142,11 @@ public class ReindexOnServerRequest  implements XContentable<ReindexOnServerRequ
     return ReindexOnServerRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexOnServerRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexOnServerRequest.class.getName(), false, args -> new ReindexOnServerRequest());
+  public static final ObjectParser<ReindexOnServerRequest, Void> PARSER =
+    new ObjectParser<>(ReindexOnServerRequest.class.getName(), false, ReindexOnServerRequest::new);
 
   static {
-    PARSER.declareObject(ReindexOnServerRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS);
+    PARSER.declareField(ReindexOnServerRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(ReindexOnServerRequest::setDest, (p, t) -> ReindexDestination.PARSER.apply(p, t), DEST);
     PARSER.declareObject(ReindexOnServerRequest::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareLong(ReindexOnServerRequest::setSize, SIZE);

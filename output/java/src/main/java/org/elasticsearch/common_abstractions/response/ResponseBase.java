@@ -39,8 +39,8 @@ public class ResponseBase  implements XContentable<ResponseBase> {
     return ResponseBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ResponseBase, Void> PARSER =
-    new ConstructingObjectParser<>(ResponseBase.class.getName(), false, args -> new ResponseBase());
+  public static final ObjectParser<ResponseBase, Void> PARSER =
+    new ObjectParser<>(ResponseBase.class.getName(), false, ResponseBase::new);
 
   static {
     PARSER.declareObject(ResponseBase::setError, (p, t) -> ServerError.PARSER.apply(p, t), ERROR);

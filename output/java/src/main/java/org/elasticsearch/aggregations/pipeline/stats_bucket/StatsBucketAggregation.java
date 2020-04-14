@@ -31,8 +31,8 @@ public class StatsBucketAggregation  implements XContentable<StatsBucketAggregat
     return StatsBucketAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StatsBucketAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(StatsBucketAggregation.class.getName(), false, args -> new StatsBucketAggregation());
+  public static final ObjectParser<StatsBucketAggregation, Void> PARSER =
+    new ObjectParser<>(StatsBucketAggregation.class.getName(), false, StatsBucketAggregation::new);
 
   static {
     

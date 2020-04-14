@@ -111,8 +111,8 @@ public class Watch  implements XContentable<Watch> {
     return Watch.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Watch, Void> PARSER =
-    new ConstructingObjectParser<>(Watch.class.getName(), false, args -> new Watch());
+  public static final ObjectParser<Watch, Void> PARSER =
+    new ObjectParser<>(Watch.class.getName(), false, Watch::new);
 
   static {
     PARSER.declareObject(Watch::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> Action.PARSER.apply(pp, null)), ACTIONS);

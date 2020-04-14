@@ -56,8 +56,8 @@ public class HasPrivilegesRequest  implements XContentable<HasPrivilegesRequest>
     return HasPrivilegesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HasPrivilegesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(HasPrivilegesRequest.class.getName(), false, args -> new HasPrivilegesRequest());
+  public static final ObjectParser<HasPrivilegesRequest, Void> PARSER =
+    new ObjectParser<>(HasPrivilegesRequest.class.getName(), false, HasPrivilegesRequest::new);
 
   static {
     PARSER.declareObjectArray(HasPrivilegesRequest::setApplication, (p, t) -> ApplicationPrivilegesCheck.PARSER.apply(p, t), APPLICATION);

@@ -31,8 +31,8 @@ public class MaxBucketAggregation  implements XContentable<MaxBucketAggregation>
     return MaxBucketAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MaxBucketAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MaxBucketAggregation.class.getName(), false, args -> new MaxBucketAggregation());
+  public static final ObjectParser<MaxBucketAggregation, Void> PARSER =
+    new ObjectParser<>(MaxBucketAggregation.class.getName(), false, MaxBucketAggregation::new);
 
   static {
     

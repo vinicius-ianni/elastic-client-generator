@@ -31,8 +31,8 @@ public class DeleteSnapshotLifecycleRequest  implements XContentable<DeleteSnaps
     return DeleteSnapshotLifecycleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteSnapshotLifecycleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteSnapshotLifecycleRequest.class.getName(), false, args -> new DeleteSnapshotLifecycleRequest());
+  public static final ObjectParser<DeleteSnapshotLifecycleRequest, Void> PARSER =
+    new ObjectParser<>(DeleteSnapshotLifecycleRequest.class.getName(), false, DeleteSnapshotLifecycleRequest::new);
 
   static {
     

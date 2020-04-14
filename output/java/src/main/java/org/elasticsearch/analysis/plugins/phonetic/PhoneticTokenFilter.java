@@ -83,16 +83,16 @@ public class PhoneticTokenFilter  implements XContentable<PhoneticTokenFilter> {
     return PhoneticTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PhoneticTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(PhoneticTokenFilter.class.getName(), false, args -> new PhoneticTokenFilter());
+  public static final ObjectParser<PhoneticTokenFilter, Void> PARSER =
+    new ObjectParser<>(PhoneticTokenFilter.class.getName(), false, PhoneticTokenFilter::new);
 
   static {
-    PARSER.declareObject(PhoneticTokenFilter::setEncoder, (p, t) -> PhoneticEncoder.PARSER.apply(p), ENCODER);
-    PARSER.declareObjectArray(PhoneticTokenFilter::setLanguageset, (p, t) -> PhoneticLanguage.PARSER.apply(p), LANGUAGESET);
+    PARSER.declareField(PhoneticTokenFilter::setEncoder, (p, t) -> PhoneticEncoder.PARSER.apply(p), ENCODER, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareFieldArray(PhoneticTokenFilter::setLanguageset, (p, t) -> PhoneticLanguage.PARSER.apply(p), LANGUAGESET, ObjectParser.ValueType.STRING_ARRAY);
     PARSER.declareInt(PhoneticTokenFilter::setMaxCodeLen, MAX_CODE_LEN);
-    PARSER.declareObject(PhoneticTokenFilter::setNameType, (p, t) -> PhoneticNameType.PARSER.apply(p), NAME_TYPE);
+    PARSER.declareField(PhoneticTokenFilter::setNameType, (p, t) -> PhoneticNameType.PARSER.apply(p), NAME_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(PhoneticTokenFilter::setReplace, REPLACE);
-    PARSER.declareObject(PhoneticTokenFilter::setRuleType, (p, t) -> PhoneticRuleType.PARSER.apply(p), RULE_TYPE);
+    PARSER.declareField(PhoneticTokenFilter::setRuleType, (p, t) -> PhoneticRuleType.PARSER.apply(p), RULE_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

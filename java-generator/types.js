@@ -38,8 +38,8 @@ const $xCContentImplementation = (type) => {
     return ${naming_1.$typeName(type.name)}.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<${naming_1.$typeName(type.name)}, Void> PARSER =
-    new ConstructingObjectParser<>(${naming_1.$typeName(type.name)}.class.getName(), false, args -> new ${naming_1.$typeName(type.name)}());
+  public static final ObjectParser<${naming_1.$typeName(type.name)}, Void> PARSER =
+    new ObjectParser<>(${naming_1.$typeName(type.name)}.class.getName(), false, ${naming_1.$typeName(type.name)}::new);
 
   static {
     ${types_parser_read_1.$parseProperties(type)}

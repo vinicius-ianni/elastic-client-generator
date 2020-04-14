@@ -71,8 +71,8 @@ public class SearchShard  implements XContentable<SearchShard> {
     return SearchShard.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchShard, Void> PARSER =
-    new ConstructingObjectParser<>(SearchShard.class.getName(), false, args -> new SearchShard());
+  public static final ObjectParser<SearchShard, Void> PARSER =
+    new ObjectParser<>(SearchShard.class.getName(), false, SearchShard::new);
 
   static {
     PARSER.declareString(SearchShard::setIndex, INDEX);

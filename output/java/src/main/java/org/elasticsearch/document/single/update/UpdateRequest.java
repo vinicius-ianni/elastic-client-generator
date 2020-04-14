@@ -161,8 +161,8 @@ public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable
     return UpdateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateRequest.class.getName(), false, args -> new UpdateRequest());
+  public static final ObjectParser<UpdateRequest, Void> PARSER =
+    new ObjectParser<>(UpdateRequest.class.getName(), false, UpdateRequest::new);
 
   static {
     PARSER.declareBoolean(UpdateRequest::setDetectNoop, DETECT_NOOP);
@@ -175,7 +175,7 @@ public class UpdateRequest<TDocument, TPartialDocument>  implements XContentable
     PARSER.declareLong(UpdateRequest::setIfPrimaryTerm, IF_PRIMARY_TERM);
     PARSER.declareLong(UpdateRequest::setIfSequenceNumber, IF_SEQUENCE_NUMBER);
     PARSER.declareString(UpdateRequest::setLang, LANG);
-    PARSER.declareObject(UpdateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(UpdateRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(UpdateRequest::setRetryOnConflict, RETRY_ON_CONFLICT);
     PARSER.declareObject(UpdateRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(UpdateRequest::setSourceEnabled, SOURCE_ENABLED);

@@ -93,18 +93,18 @@ public class SearchAsYouTypeProperty  implements XContentable<SearchAsYouTypePro
     return SearchAsYouTypeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchAsYouTypeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(SearchAsYouTypeProperty.class.getName(), false, args -> new SearchAsYouTypeProperty());
+  public static final ObjectParser<SearchAsYouTypeProperty, Void> PARSER =
+    new ObjectParser<>(SearchAsYouTypeProperty.class.getName(), false, SearchAsYouTypeProperty::new);
 
   static {
     PARSER.declareString(SearchAsYouTypeProperty::setAnalyzer, ANALYZER);
     PARSER.declareBoolean(SearchAsYouTypeProperty::setIndex, INDEX);
-    PARSER.declareObject(SearchAsYouTypeProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
+    PARSER.declareField(SearchAsYouTypeProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(SearchAsYouTypeProperty::setMaxShingleSize, MAX_SHINGLE_SIZE);
     PARSER.declareBoolean(SearchAsYouTypeProperty::setNorms, NORMS);
     PARSER.declareString(SearchAsYouTypeProperty::setSearchAnalyzer, SEARCH_ANALYZER);
     PARSER.declareString(SearchAsYouTypeProperty::setSearchQuoteAnalyzer, SEARCH_QUOTE_ANALYZER);
-    PARSER.declareObject(SearchAsYouTypeProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR);
+    PARSER.declareField(SearchAsYouTypeProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

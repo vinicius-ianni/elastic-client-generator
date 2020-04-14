@@ -31,8 +31,8 @@ public class ChangePasswordResponse  implements XContentable<ChangePasswordRespo
     return ChangePasswordResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ChangePasswordResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ChangePasswordResponse.class.getName(), false, args -> new ChangePasswordResponse());
+  public static final ObjectParser<ChangePasswordResponse, Void> PARSER =
+    new ObjectParser<>(ChangePasswordResponse.class.getName(), false, ChangePasswordResponse::new);
 
   static {
     

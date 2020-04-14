@@ -49,8 +49,8 @@ public class DeleteRepositoryRequest  implements XContentable<DeleteRepositoryRe
     return DeleteRepositoryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteRepositoryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteRepositoryRequest.class.getName(), false, args -> new DeleteRepositoryRequest());
+  public static final ObjectParser<DeleteRepositoryRequest, Void> PARSER =
+    new ObjectParser<>(DeleteRepositoryRequest.class.getName(), false, DeleteRepositoryRequest::new);
 
   static {
     PARSER.declareObject(DeleteRepositoryRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

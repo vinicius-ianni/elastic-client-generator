@@ -59,8 +59,8 @@ public class Hop  implements XContentable<Hop> {
     return Hop.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Hop, Void> PARSER =
-    new ConstructingObjectParser<>(Hop.class.getName(), false, args -> new Hop());
+  public static final ObjectParser<Hop, Void> PARSER =
+    new ObjectParser<>(Hop.class.getName(), false, Hop::new);
 
   static {
     PARSER.declareObject(Hop::setConnections, (p, t) -> Hop.PARSER.apply(p, t), CONNECTIONS);

@@ -36,8 +36,8 @@ public class StartBasicLicenseRequest  implements XContentable<StartBasicLicense
     return StartBasicLicenseRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StartBasicLicenseRequest, Void> PARSER =
-    new ConstructingObjectParser<>(StartBasicLicenseRequest.class.getName(), false, args -> new StartBasicLicenseRequest());
+  public static final ObjectParser<StartBasicLicenseRequest, Void> PARSER =
+    new ObjectParser<>(StartBasicLicenseRequest.class.getName(), false, StartBasicLicenseRequest::new);
 
   static {
     PARSER.declareBoolean(StartBasicLicenseRequest::setAcknowledge, ACKNOWLEDGE);

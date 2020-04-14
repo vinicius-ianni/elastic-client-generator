@@ -102,8 +102,8 @@ public class Segment  implements XContentable<Segment> {
     return Segment.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Segment, Void> PARSER =
-    new ConstructingObjectParser<>(Segment.class.getName(), false, args -> new Segment());
+  public static final ObjectParser<Segment, Void> PARSER =
+    new ObjectParser<>(Segment.class.getName(), false, Segment::new);
 
   static {
     PARSER.declareObject(Segment::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), ATTRIBUTES);

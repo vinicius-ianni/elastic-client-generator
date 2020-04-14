@@ -136,13 +136,13 @@ public class TermsAggregation  implements XContentable<TermsAggregation> {
     return TermsAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermsAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(TermsAggregation.class.getName(), false, args -> new TermsAggregation());
+  public static final ObjectParser<TermsAggregation, Void> PARSER =
+    new ObjectParser<>(TermsAggregation.class.getName(), false, TermsAggregation::new);
 
   static {
-    PARSER.declareObject(TermsAggregation::setCollectMode, (p, t) -> TermsAggregationCollectMode.PARSER.apply(p), COLLECT_MODE);
+    PARSER.declareField(TermsAggregation::setCollectMode, (p, t) -> TermsAggregationCollectMode.PARSER.apply(p), COLLECT_MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(TermsAggregation::setExclude, (p, t) -> TermsExclude.PARSER.apply(p, t), EXCLUDE);
-    PARSER.declareObject(TermsAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT);
+    PARSER.declareField(TermsAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(TermsAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareObject(TermsAggregation::setInclude, (p, t) -> TermsInclude.PARSER.apply(p, t), INCLUDE);
     PARSER.declareInt(TermsAggregation::setMinDocCount, MIN_DOC_COUNT);

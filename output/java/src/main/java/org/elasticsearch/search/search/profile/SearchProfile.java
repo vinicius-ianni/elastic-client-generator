@@ -55,8 +55,8 @@ public class SearchProfile  implements XContentable<SearchProfile> {
     return SearchProfile.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchProfile, Void> PARSER =
-    new ConstructingObjectParser<>(SearchProfile.class.getName(), false, args -> new SearchProfile());
+  public static final ObjectParser<SearchProfile, Void> PARSER =
+    new ObjectParser<>(SearchProfile.class.getName(), false, SearchProfile::new);
 
   static {
     PARSER.declareObjectArray(SearchProfile::setCollector, (p, t) -> Collector.PARSER.apply(p, t), COLLECTOR);

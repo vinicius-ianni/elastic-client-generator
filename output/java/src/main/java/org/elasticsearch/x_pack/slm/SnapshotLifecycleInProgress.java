@@ -58,8 +58,8 @@ public class SnapshotLifecycleInProgress  implements XContentable<SnapshotLifecy
     return SnapshotLifecycleInProgress.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotLifecycleInProgress, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotLifecycleInProgress.class.getName(), false, args -> new SnapshotLifecycleInProgress());
+  public static final ObjectParser<SnapshotLifecycleInProgress, Void> PARSER =
+    new ObjectParser<>(SnapshotLifecycleInProgress.class.getName(), false, SnapshotLifecycleInProgress::new);
 
   static {
     PARSER.declareString(SnapshotLifecycleInProgress::setName, NAME);

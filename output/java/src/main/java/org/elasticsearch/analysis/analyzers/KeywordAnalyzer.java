@@ -31,8 +31,8 @@ public class KeywordAnalyzer  implements XContentable<KeywordAnalyzer> {
     return KeywordAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KeywordAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(KeywordAnalyzer.class.getName(), false, args -> new KeywordAnalyzer());
+  public static final ObjectParser<KeywordAnalyzer, Void> PARSER =
+    new ObjectParser<>(KeywordAnalyzer.class.getName(), false, KeywordAnalyzer::new);
 
   static {
     

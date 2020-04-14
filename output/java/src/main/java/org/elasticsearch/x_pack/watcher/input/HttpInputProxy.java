@@ -43,8 +43,8 @@ public class HttpInputProxy  implements XContentable<HttpInputProxy> {
     return HttpInputProxy.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HttpInputProxy, Void> PARSER =
-    new ConstructingObjectParser<>(HttpInputProxy.class.getName(), false, args -> new HttpInputProxy());
+  public static final ObjectParser<HttpInputProxy, Void> PARSER =
+    new ObjectParser<>(HttpInputProxy.class.getName(), false, HttpInputProxy::new);
 
   static {
     PARSER.declareString(HttpInputProxy::setHost, HOST);

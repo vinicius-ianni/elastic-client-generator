@@ -57,8 +57,8 @@ public class FlushStats  implements XContentable<FlushStats> {
     return FlushStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FlushStats, Void> PARSER =
-    new ConstructingObjectParser<>(FlushStats.class.getName(), false, args -> new FlushStats());
+  public static final ObjectParser<FlushStats, Void> PARSER =
+    new ObjectParser<>(FlushStats.class.getName(), false, FlushStats::new);
 
   static {
     PARSER.declareLong(FlushStats::setPeriodic, PERIODIC);

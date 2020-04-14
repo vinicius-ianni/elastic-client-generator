@@ -68,8 +68,8 @@ public class SourceField  implements XContentable<SourceField> {
     return SourceField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SourceField, Void> PARSER =
-    new ConstructingObjectParser<>(SourceField.class.getName(), false, args -> new SourceField());
+  public static final ObjectParser<SourceField, Void> PARSER =
+    new ObjectParser<>(SourceField.class.getName(), false, SourceField::new);
 
   static {
     PARSER.declareBoolean(SourceField::setCompress, COMPRESS);

@@ -71,8 +71,8 @@ public class CompletionSuggester  implements XContentable<CompletionSuggester> {
     return CompletionSuggester.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompletionSuggester, Void> PARSER =
-    new ConstructingObjectParser<>(CompletionSuggester.class.getName(), false, args -> new CompletionSuggester());
+  public static final ObjectParser<CompletionSuggester, Void> PARSER =
+    new ObjectParser<>(CompletionSuggester.class.getName(), false, CompletionSuggester::new);
 
   static {
     PARSER.declareObject(CompletionSuggester::setContexts, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<SuggestContextQuery> */), CONTEXTS);

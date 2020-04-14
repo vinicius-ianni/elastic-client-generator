@@ -39,8 +39,8 @@ public class ScriptField  implements XContentable<ScriptField> {
     return ScriptField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptField, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptField.class.getName(), false, args -> new ScriptField());
+  public static final ObjectParser<ScriptField, Void> PARSER =
+    new ObjectParser<>(ScriptField.class.getName(), false, ScriptField::new);
 
   static {
     PARSER.declareObject(ScriptField::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);

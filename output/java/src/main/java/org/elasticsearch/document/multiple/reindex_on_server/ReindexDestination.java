@@ -71,14 +71,14 @@ public class ReindexDestination  implements XContentable<ReindexDestination> {
     return ReindexDestination.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexDestination, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexDestination.class.getName(), false, args -> new ReindexDestination());
+  public static final ObjectParser<ReindexDestination, Void> PARSER =
+    new ObjectParser<>(ReindexDestination.class.getName(), false, ReindexDestination::new);
 
   static {
     PARSER.declareObject(ReindexDestination::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareObject(ReindexDestination::setOpType, (p, t) -> OpType.PARSER.apply(p), OP_TYPE);
+    PARSER.declareField(ReindexDestination::setOpType, (p, t) -> OpType.PARSER.apply(p), OP_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(ReindexDestination::setRouting, (p, t) -> ReindexRouting.PARSER.apply(p, t), ROUTING);
-    PARSER.declareObject(ReindexDestination::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(ReindexDestination::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

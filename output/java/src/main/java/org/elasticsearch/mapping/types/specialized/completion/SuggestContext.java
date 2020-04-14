@@ -53,8 +53,8 @@ public class SuggestContext  implements XContentable<SuggestContext> {
     return SuggestContext.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SuggestContext, Void> PARSER =
-    new ConstructingObjectParser<>(SuggestContext.class.getName(), false, args -> new SuggestContext());
+  public static final ObjectParser<SuggestContext, Void> PARSER =
+    new ObjectParser<>(SuggestContext.class.getName(), false, SuggestContext::new);
 
   static {
     PARSER.declareString(SuggestContext::setName, NAME);

@@ -82,14 +82,14 @@ public class CommonTermsQuery  implements XContentable<CommonTermsQuery> {
     return CommonTermsQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CommonTermsQuery, Void> PARSER =
-    new ConstructingObjectParser<>(CommonTermsQuery.class.getName(), false, args -> new CommonTermsQuery());
+  public static final ObjectParser<CommonTermsQuery, Void> PARSER =
+    new ObjectParser<>(CommonTermsQuery.class.getName(), false, CommonTermsQuery::new);
 
   static {
     PARSER.declareString(CommonTermsQuery::setAnalyzer, ANALYZER);
     PARSER.declareDouble(CommonTermsQuery::setCutoffFrequency, CUTOFF_FREQUENCY);
-    PARSER.declareObject(CommonTermsQuery::setHighFreqOperator, (p, t) -> Operator.PARSER.apply(p), HIGH_FREQ_OPERATOR);
-    PARSER.declareObject(CommonTermsQuery::setLowFreqOperator, (p, t) -> Operator.PARSER.apply(p), LOW_FREQ_OPERATOR);
+    PARSER.declareField(CommonTermsQuery::setHighFreqOperator, (p, t) -> Operator.PARSER.apply(p), HIGH_FREQ_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(CommonTermsQuery::setLowFreqOperator, (p, t) -> Operator.PARSER.apply(p), LOW_FREQ_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(CommonTermsQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
     PARSER.declareString(CommonTermsQuery::setQuery, QUERY);
   }

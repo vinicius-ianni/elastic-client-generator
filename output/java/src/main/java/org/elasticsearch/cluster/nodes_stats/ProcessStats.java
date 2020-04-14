@@ -64,8 +64,8 @@ public class ProcessStats  implements XContentable<ProcessStats> {
     return ProcessStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ProcessStats, Void> PARSER =
-    new ConstructingObjectParser<>(ProcessStats.class.getName(), false, args -> new ProcessStats());
+  public static final ObjectParser<ProcessStats, Void> PARSER =
+    new ObjectParser<>(ProcessStats.class.getName(), false, ProcessStats::new);
 
   static {
     PARSER.declareObject(ProcessStats::setCpu, (p, t) -> CpuStats.PARSER.apply(p, t), CPU);

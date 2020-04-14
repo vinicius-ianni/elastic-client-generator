@@ -93,8 +93,8 @@ public class ElasticsearchVersionInfo  implements XContentable<ElasticsearchVers
     return ElasticsearchVersionInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ElasticsearchVersionInfo, Void> PARSER =
-    new ConstructingObjectParser<>(ElasticsearchVersionInfo.class.getName(), false, args -> new ElasticsearchVersionInfo());
+  public static final ObjectParser<ElasticsearchVersionInfo, Void> PARSER =
+    new ObjectParser<>(ElasticsearchVersionInfo.class.getName(), false, ElasticsearchVersionInfo::new);
 
   static {
     PARSER.declareString(ElasticsearchVersionInfo::setLuceneVersion, LUCENE_VERSION);

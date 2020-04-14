@@ -46,8 +46,8 @@ public class ResourcePrivileges  implements XContentable<ResourcePrivileges> {
     return ResourcePrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ResourcePrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(ResourcePrivileges.class.getName(), false, args -> new ResourcePrivileges());
+  public static final ObjectParser<ResourcePrivileges, Void> PARSER =
+    new ObjectParser<>(ResourcePrivileges.class.getName(), false, ResourcePrivileges::new);
 
   static {
     PARSER.declareObject(ResourcePrivileges::setPrivileges, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.booleanValue()), PRIVILEGES);

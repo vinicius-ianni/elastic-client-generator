@@ -43,8 +43,8 @@ public class CleanupRepositoryResults  implements XContentable<CleanupRepository
     return CleanupRepositoryResults.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CleanupRepositoryResults, Void> PARSER =
-    new ConstructingObjectParser<>(CleanupRepositoryResults.class.getName(), false, args -> new CleanupRepositoryResults());
+  public static final ObjectParser<CleanupRepositoryResults, Void> PARSER =
+    new ObjectParser<>(CleanupRepositoryResults.class.getName(), false, CleanupRepositoryResults::new);
 
   static {
     PARSER.declareLong(CleanupRepositoryResults::setDeletedBytes, DELETED_BYTES);

@@ -50,8 +50,8 @@ public class LinearInterpolationSmoothingModel  implements XContentable<LinearIn
     return LinearInterpolationSmoothingModel.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LinearInterpolationSmoothingModel, Void> PARSER =
-    new ConstructingObjectParser<>(LinearInterpolationSmoothingModel.class.getName(), false, args -> new LinearInterpolationSmoothingModel());
+  public static final ObjectParser<LinearInterpolationSmoothingModel, Void> PARSER =
+    new ObjectParser<>(LinearInterpolationSmoothingModel.class.getName(), false, LinearInterpolationSmoothingModel::new);
 
   static {
     PARSER.declareDouble(LinearInterpolationSmoothingModel::setBigramLambda, BIGRAM_LAMBDA);

@@ -46,8 +46,8 @@ public class GetOverallBucketsResponse  implements XContentable<GetOverallBucket
     return GetOverallBucketsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetOverallBucketsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetOverallBucketsResponse.class.getName(), false, args -> new GetOverallBucketsResponse());
+  public static final ObjectParser<GetOverallBucketsResponse, Void> PARSER =
+    new ObjectParser<>(GetOverallBucketsResponse.class.getName(), false, GetOverallBucketsResponse::new);
 
   static {
     PARSER.declareLong(GetOverallBucketsResponse::setCount, COUNT);

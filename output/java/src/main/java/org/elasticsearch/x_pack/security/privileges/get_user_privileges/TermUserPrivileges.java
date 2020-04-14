@@ -36,8 +36,8 @@ public class TermUserPrivileges  implements XContentable<TermUserPrivileges> {
     return TermUserPrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermUserPrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(TermUserPrivileges.class.getName(), false, args -> new TermUserPrivileges());
+  public static final ObjectParser<TermUserPrivileges, Void> PARSER =
+    new ObjectParser<>(TermUserPrivileges.class.getName(), false, TermUserPrivileges::new);
 
   static {
     PARSER.declareBoolean(TermUserPrivileges::setApps, APPS);

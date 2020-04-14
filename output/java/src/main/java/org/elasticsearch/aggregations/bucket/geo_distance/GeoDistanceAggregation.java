@@ -81,15 +81,15 @@ public class GeoDistanceAggregation  implements XContentable<GeoDistanceAggregat
     return GeoDistanceAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoDistanceAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(GeoDistanceAggregation.class.getName(), false, args -> new GeoDistanceAggregation());
+  public static final ObjectParser<GeoDistanceAggregation, Void> PARSER =
+    new ObjectParser<>(GeoDistanceAggregation.class.getName(), false, GeoDistanceAggregation::new);
 
   static {
-    PARSER.declareObject(GeoDistanceAggregation::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p), DISTANCE_TYPE);
+    PARSER.declareField(GeoDistanceAggregation::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p), DISTANCE_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(GeoDistanceAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareObject(GeoDistanceAggregation::setOrigin, (p, t) -> GeoLocation.PARSER.apply(p, t), ORIGIN);
     PARSER.declareObjectArray(GeoDistanceAggregation::setRanges, (p, t) -> AggregationRange.PARSER.apply(p, t), RANGES);
-    PARSER.declareObject(GeoDistanceAggregation::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p), UNIT);
+    PARSER.declareField(GeoDistanceAggregation::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p), UNIT, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

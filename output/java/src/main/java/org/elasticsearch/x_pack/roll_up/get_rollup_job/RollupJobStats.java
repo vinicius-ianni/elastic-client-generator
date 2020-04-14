@@ -99,8 +99,8 @@ public class RollupJobStats  implements XContentable<RollupJobStats> {
     return RollupJobStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupJobStats, Void> PARSER =
-    new ConstructingObjectParser<>(RollupJobStats.class.getName(), false, args -> new RollupJobStats());
+  public static final ObjectParser<RollupJobStats, Void> PARSER =
+    new ObjectParser<>(RollupJobStats.class.getName(), false, RollupJobStats::new);
 
   static {
     PARSER.declareLong(RollupJobStats::setDocumentsProcessed, DOCUMENTS_PROCESSED);

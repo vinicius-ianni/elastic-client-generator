@@ -43,8 +43,8 @@ public class DocStats  implements XContentable<DocStats> {
     return DocStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DocStats, Void> PARSER =
-    new ConstructingObjectParser<>(DocStats.class.getName(), false, args -> new DocStats());
+  public static final ObjectParser<DocStats, Void> PARSER =
+    new ObjectParser<>(DocStats.class.getName(), false, DocStats::new);
 
   static {
     PARSER.declareLong(DocStats::setCount, COUNT);

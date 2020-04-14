@@ -100,8 +100,8 @@ public class HistogramAggregation  implements XContentable<HistogramAggregation>
     return HistogramAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HistogramAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(HistogramAggregation.class.getName(), false, args -> new HistogramAggregation());
+  public static final ObjectParser<HistogramAggregation, Void> PARSER =
+    new ObjectParser<>(HistogramAggregation.class.getName(), false, HistogramAggregation::new);
 
   static {
     ExtendedBounds<Double> _extendedBounds = new ExtendedBounds<Double>();

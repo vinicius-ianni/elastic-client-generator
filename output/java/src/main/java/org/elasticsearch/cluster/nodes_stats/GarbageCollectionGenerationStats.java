@@ -50,8 +50,8 @@ public class GarbageCollectionGenerationStats  implements XContentable<GarbageCo
     return GarbageCollectionGenerationStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GarbageCollectionGenerationStats, Void> PARSER =
-    new ConstructingObjectParser<>(GarbageCollectionGenerationStats.class.getName(), false, args -> new GarbageCollectionGenerationStats());
+  public static final ObjectParser<GarbageCollectionGenerationStats, Void> PARSER =
+    new ObjectParser<>(GarbageCollectionGenerationStats.class.getName(), false, GarbageCollectionGenerationStats::new);
 
   static {
     PARSER.declareLong(GarbageCollectionGenerationStats::setCollectionCount, COLLECTION_COUNT);

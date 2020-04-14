@@ -39,8 +39,8 @@ public class DailySchedule  implements XContentable<DailySchedule> {
     return DailySchedule.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DailySchedule, Void> PARSER =
-    new ConstructingObjectParser<>(DailySchedule.class.getName(), false, args -> new DailySchedule());
+  public static final ObjectParser<DailySchedule, Void> PARSER =
+    new ObjectParser<>(DailySchedule.class.getName(), false, DailySchedule::new);
 
   static {
     PARSER.declareObject(DailySchedule::setAt, (p, t) ->  new Either<List<String>, TimeOfDay>() /* TODO UnionOf */, AT);

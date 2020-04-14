@@ -61,8 +61,8 @@ public class AggregationProfile  implements XContentable<AggregationProfile> {
     return AggregationProfile.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AggregationProfile, Void> PARSER =
-    new ConstructingObjectParser<>(AggregationProfile.class.getName(), false, args -> new AggregationProfile());
+  public static final ObjectParser<AggregationProfile, Void> PARSER =
+    new ObjectParser<>(AggregationProfile.class.getName(), false, AggregationProfile::new);
 
   static {
     PARSER.declareObject(AggregationProfile::setBreakdown, (p, t) -> AggregationBreakdown.PARSER.apply(p, t), BREAKDOWN);

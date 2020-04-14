@@ -87,8 +87,8 @@ public class PluginStats  implements XContentable<PluginStats> {
     return PluginStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PluginStats, Void> PARSER =
-    new ConstructingObjectParser<>(PluginStats.class.getName(), false, args -> new PluginStats());
+  public static final ObjectParser<PluginStats, Void> PARSER =
+    new ObjectParser<>(PluginStats.class.getName(), false, PluginStats::new);
 
   static {
     PARSER.declareString(PluginStats::setClassname, CLASSNAME);

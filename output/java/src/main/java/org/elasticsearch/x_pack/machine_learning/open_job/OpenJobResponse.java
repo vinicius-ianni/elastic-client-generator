@@ -36,8 +36,8 @@ public class OpenJobResponse  implements XContentable<OpenJobResponse> {
     return OpenJobResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OpenJobResponse, Void> PARSER =
-    new ConstructingObjectParser<>(OpenJobResponse.class.getName(), false, args -> new OpenJobResponse());
+  public static final ObjectParser<OpenJobResponse, Void> PARSER =
+    new ObjectParser<>(OpenJobResponse.class.getName(), false, OpenJobResponse::new);
 
   static {
     PARSER.declareBoolean(OpenJobResponse::setOpened, OPENED);

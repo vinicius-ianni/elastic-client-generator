@@ -135,8 +135,8 @@ public class InnerHits  implements XContentable<InnerHits> {
     return InnerHits.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InnerHits, Void> PARSER =
-    new ConstructingObjectParser<>(InnerHits.class.getName(), false, args -> new InnerHits());
+  public static final ObjectParser<InnerHits, Void> PARSER =
+    new ObjectParser<>(InnerHits.class.getName(), false, InnerHits::new);
 
   static {
     PARSER.declareObject(InnerHits::setCollapse, (p, t) -> FieldCollapse.PARSER.apply(p, t), COLLAPSE);

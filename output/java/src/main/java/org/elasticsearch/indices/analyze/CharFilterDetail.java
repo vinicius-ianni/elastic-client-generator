@@ -45,8 +45,8 @@ public class CharFilterDetail  implements XContentable<CharFilterDetail> {
     return CharFilterDetail.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CharFilterDetail, Void> PARSER =
-    new ConstructingObjectParser<>(CharFilterDetail.class.getName(), false, args -> new CharFilterDetail());
+  public static final ObjectParser<CharFilterDetail, Void> PARSER =
+    new ObjectParser<>(CharFilterDetail.class.getName(), false, CharFilterDetail::new);
 
   static {
     PARSER.declareStringArray(CharFilterDetail::setFilteredText, FILTERED_TEXT);

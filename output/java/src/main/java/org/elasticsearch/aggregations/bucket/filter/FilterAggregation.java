@@ -39,8 +39,8 @@ public class FilterAggregation  implements XContentable<FilterAggregation> {
     return FilterAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FilterAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(FilterAggregation.class.getName(), false, args -> new FilterAggregation());
+  public static final ObjectParser<FilterAggregation, Void> PARSER =
+    new ObjectParser<>(FilterAggregation.class.getName(), false, FilterAggregation::new);
 
   static {
     PARSER.declareObject(FilterAggregation::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);

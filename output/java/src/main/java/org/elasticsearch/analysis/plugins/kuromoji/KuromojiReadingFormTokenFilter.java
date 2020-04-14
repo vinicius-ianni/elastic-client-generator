@@ -36,8 +36,8 @@ public class KuromojiReadingFormTokenFilter  implements XContentable<KuromojiRea
     return KuromojiReadingFormTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KuromojiReadingFormTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KuromojiReadingFormTokenFilter.class.getName(), false, args -> new KuromojiReadingFormTokenFilter());
+  public static final ObjectParser<KuromojiReadingFormTokenFilter, Void> PARSER =
+    new ObjectParser<>(KuromojiReadingFormTokenFilter.class.getName(), false, KuromojiReadingFormTokenFilter::new);
 
   static {
     PARSER.declareBoolean(KuromojiReadingFormTokenFilter::setUseRomaji, USE_ROMAJI);

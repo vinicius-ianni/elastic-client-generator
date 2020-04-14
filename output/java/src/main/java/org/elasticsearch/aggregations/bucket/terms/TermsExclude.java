@@ -45,8 +45,8 @@ public class TermsExclude  implements XContentable<TermsExclude> {
     return TermsExclude.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermsExclude, Void> PARSER =
-    new ConstructingObjectParser<>(TermsExclude.class.getName(), false, args -> new TermsExclude());
+  public static final ObjectParser<TermsExclude, Void> PARSER =
+    new ObjectParser<>(TermsExclude.class.getName(), false, TermsExclude::new);
 
   static {
     PARSER.declareString(TermsExclude::setPattern, PATTERN);

@@ -39,8 +39,8 @@ public class IndicesShardStoresResponse  implements XContentable<IndicesShardSto
     return IndicesShardStoresResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesShardStoresResponse, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesShardStoresResponse.class.getName(), false, args -> new IndicesShardStoresResponse());
+  public static final ObjectParser<IndicesShardStoresResponse, Void> PARSER =
+    new ObjectParser<>(IndicesShardStoresResponse.class.getName(), false, IndicesShardStoresResponse::new);
 
   static {
     PARSER.declareObject(IndicesShardStoresResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> IndicesShardStores.PARSER.apply(pp, null)), INDICES);

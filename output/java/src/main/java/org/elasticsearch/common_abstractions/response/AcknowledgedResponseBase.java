@@ -43,8 +43,8 @@ public class AcknowledgedResponseBase  implements XContentable<AcknowledgedRespo
     return AcknowledgedResponseBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AcknowledgedResponseBase, Void> PARSER =
-    new ConstructingObjectParser<>(AcknowledgedResponseBase.class.getName(), false, args -> new AcknowledgedResponseBase());
+  public static final ObjectParser<AcknowledgedResponseBase, Void> PARSER =
+    new ObjectParser<>(AcknowledgedResponseBase.class.getName(), false, AcknowledgedResponseBase::new);
 
   static {
     PARSER.declareBoolean(AcknowledgedResponseBase::setAcknowledged, ACKNOWLEDGED);

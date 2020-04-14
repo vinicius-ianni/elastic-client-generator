@@ -36,8 +36,8 @@ public class SecurityFeatureToggle  implements XContentable<SecurityFeatureToggl
     return SecurityFeatureToggle.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SecurityFeatureToggle, Void> PARSER =
-    new ConstructingObjectParser<>(SecurityFeatureToggle.class.getName(), false, args -> new SecurityFeatureToggle());
+  public static final ObjectParser<SecurityFeatureToggle, Void> PARSER =
+    new ObjectParser<>(SecurityFeatureToggle.class.getName(), false, SecurityFeatureToggle::new);
 
   static {
     PARSER.declareBoolean(SecurityFeatureToggle::setEnabled, ENABLED);

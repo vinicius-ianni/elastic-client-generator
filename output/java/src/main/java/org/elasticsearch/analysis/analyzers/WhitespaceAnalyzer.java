@@ -31,8 +31,8 @@ public class WhitespaceAnalyzer  implements XContentable<WhitespaceAnalyzer> {
     return WhitespaceAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WhitespaceAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(WhitespaceAnalyzer.class.getName(), false, args -> new WhitespaceAnalyzer());
+  public static final ObjectParser<WhitespaceAnalyzer, Void> PARSER =
+    new ObjectParser<>(WhitespaceAnalyzer.class.getName(), false, WhitespaceAnalyzer::new);
 
   static {
     

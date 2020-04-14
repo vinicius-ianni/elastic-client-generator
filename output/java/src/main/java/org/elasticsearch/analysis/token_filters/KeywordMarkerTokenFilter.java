@@ -59,8 +59,8 @@ public class KeywordMarkerTokenFilter  implements XContentable<KeywordMarkerToke
     return KeywordMarkerTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KeywordMarkerTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KeywordMarkerTokenFilter.class.getName(), false, args -> new KeywordMarkerTokenFilter());
+  public static final ObjectParser<KeywordMarkerTokenFilter, Void> PARSER =
+    new ObjectParser<>(KeywordMarkerTokenFilter.class.getName(), false, KeywordMarkerTokenFilter::new);
 
   static {
     PARSER.declareBoolean(KeywordMarkerTokenFilter::setIgnoreCase, IGNORE_CASE);

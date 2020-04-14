@@ -57,12 +57,12 @@ public class TimeOfYear  implements XContentable<TimeOfYear> {
     return TimeOfYear.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TimeOfYear, Void> PARSER =
-    new ConstructingObjectParser<>(TimeOfYear.class.getName(), false, args -> new TimeOfYear());
+  public static final ObjectParser<TimeOfYear, Void> PARSER =
+    new ObjectParser<>(TimeOfYear.class.getName(), false, TimeOfYear::new);
 
   static {
     PARSER.declareStringArray(TimeOfYear::setAt, AT);
-    PARSER.declareObjectArray(TimeOfYear::setInt, (p, t) -> Month.PARSER.apply(p), INT);
+    PARSER.declareFieldArray(TimeOfYear::setInt, (p, t) -> Month.PARSER.apply(p), INT, ObjectParser.ValueType.STRING_ARRAY);
     PARSER.declareIntArray(TimeOfYear::setOn, ON);
   }
 

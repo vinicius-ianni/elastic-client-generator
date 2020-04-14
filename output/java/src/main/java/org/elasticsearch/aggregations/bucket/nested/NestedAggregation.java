@@ -39,8 +39,8 @@ public class NestedAggregation  implements XContentable<NestedAggregation> {
     return NestedAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NestedAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(NestedAggregation.class.getName(), false, args -> new NestedAggregation());
+  public static final ObjectParser<NestedAggregation, Void> PARSER =
+    new ObjectParser<>(NestedAggregation.class.getName(), false, NestedAggregation::new);
 
   static {
     PARSER.declareObject(NestedAggregation::setPath, (p, t) -> Field.createFrom(p), PATH);

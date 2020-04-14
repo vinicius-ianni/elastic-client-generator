@@ -63,8 +63,8 @@ public class ClusterJvm  implements XContentable<ClusterJvm> {
     return ClusterJvm.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterJvm, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterJvm.class.getName(), false, args -> new ClusterJvm());
+  public static final ObjectParser<ClusterJvm, Void> PARSER =
+    new ObjectParser<>(ClusterJvm.class.getName(), false, ClusterJvm::new);
 
   static {
     PARSER.declareLong(ClusterJvm::setMaxUptimeInMillis, MAX_UPTIME_IN_MILLIS);

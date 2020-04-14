@@ -36,8 +36,8 @@ public class CatHelpRecord  implements XContentable<CatHelpRecord> {
     return CatHelpRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatHelpRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatHelpRecord.class.getName(), false, args -> new CatHelpRecord());
+  public static final ObjectParser<CatHelpRecord, Void> PARSER =
+    new ObjectParser<>(CatHelpRecord.class.getName(), false, CatHelpRecord::new);
 
   static {
     PARSER.declareString(CatHelpRecord::setEndpoint, ENDPOINT);

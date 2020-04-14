@@ -43,8 +43,8 @@ public class KuromojiIterationMarkCharFilter  implements XContentable<KuromojiIt
     return KuromojiIterationMarkCharFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KuromojiIterationMarkCharFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KuromojiIterationMarkCharFilter.class.getName(), false, args -> new KuromojiIterationMarkCharFilter());
+  public static final ObjectParser<KuromojiIterationMarkCharFilter, Void> PARSER =
+    new ObjectParser<>(KuromojiIterationMarkCharFilter.class.getName(), false, KuromojiIterationMarkCharFilter::new);
 
   static {
     PARSER.declareBoolean(KuromojiIterationMarkCharFilter::setNormalizeKana, NORMALIZE_KANA);

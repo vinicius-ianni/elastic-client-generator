@@ -94,11 +94,11 @@ public class Action  implements XContentable<Action> {
     return Action.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Action, Void> PARSER =
-    new ConstructingObjectParser<>(Action.class.getName(), false, args -> new Action());
+  public static final ObjectParser<Action, Void> PARSER =
+    new ObjectParser<>(Action.class.getName(), false, Action::new);
 
   static {
-    PARSER.declareObject(Action::setActionType, (p, t) -> ActionType.PARSER.apply(p), ACTION_TYPE);
+    PARSER.declareField(Action::setActionType, (p, t) -> ActionType.PARSER.apply(p), ACTION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(Action::setName, NAME);
     PARSER.declareObject(Action::setThrottlePeriod, (p, t) -> Time.PARSER.apply(p, t), THROTTLE_PERIOD);
     PARSER.declareString(Action::setForeach, FOREACH);

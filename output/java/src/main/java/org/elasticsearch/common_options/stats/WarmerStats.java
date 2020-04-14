@@ -57,8 +57,8 @@ public class WarmerStats  implements XContentable<WarmerStats> {
     return WarmerStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WarmerStats, Void> PARSER =
-    new ConstructingObjectParser<>(WarmerStats.class.getName(), false, args -> new WarmerStats());
+  public static final ObjectParser<WarmerStats, Void> PARSER =
+    new ObjectParser<>(WarmerStats.class.getName(), false, WarmerStats::new);
 
   static {
     PARSER.declareLong(WarmerStats::setCurrent, CURRENT);

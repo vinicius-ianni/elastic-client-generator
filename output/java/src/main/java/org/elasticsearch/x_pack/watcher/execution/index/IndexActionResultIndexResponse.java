@@ -72,14 +72,14 @@ public class IndexActionResultIndexResponse  implements XContentable<IndexAction
     return IndexActionResultIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexActionResultIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(IndexActionResultIndexResponse.class.getName(), false, args -> new IndexActionResultIndexResponse());
+  public static final ObjectParser<IndexActionResultIndexResponse, Void> PARSER =
+    new ObjectParser<>(IndexActionResultIndexResponse.class.getName(), false, IndexActionResultIndexResponse::new);
 
   static {
     PARSER.declareBoolean(IndexActionResultIndexResponse::setCreated, CREATED);
     PARSER.declareString(IndexActionResultIndexResponse::setId, ID);
     PARSER.declareObject(IndexActionResultIndexResponse::setIndex, (p, t) -> IndexName.createFrom(p), INDEX);
-    PARSER.declareObject(IndexActionResultIndexResponse::setResult, (p, t) -> Result.PARSER.apply(p), RESULT);
+    PARSER.declareField(IndexActionResultIndexResponse::setResult, (p, t) -> Result.PARSER.apply(p), RESULT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(IndexActionResultIndexResponse::setVersion, VERSION);
   }
 

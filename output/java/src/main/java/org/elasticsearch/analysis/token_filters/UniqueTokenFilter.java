@@ -36,8 +36,8 @@ public class UniqueTokenFilter  implements XContentable<UniqueTokenFilter> {
     return UniqueTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UniqueTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(UniqueTokenFilter.class.getName(), false, args -> new UniqueTokenFilter());
+  public static final ObjectParser<UniqueTokenFilter, Void> PARSER =
+    new ObjectParser<>(UniqueTokenFilter.class.getName(), false, UniqueTokenFilter::new);
 
   static {
     PARSER.declareBoolean(UniqueTokenFilter::setOnlyOnSamePosition, ONLY_ON_SAME_POSITION);

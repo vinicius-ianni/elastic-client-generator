@@ -67,8 +67,8 @@ public class PagerDutyActionEventResult  implements XContentable<PagerDutyAction
     return PagerDutyActionEventResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PagerDutyActionEventResult, Void> PARSER =
-    new ConstructingObjectParser<>(PagerDutyActionEventResult.class.getName(), false, args -> new PagerDutyActionEventResult());
+  public static final ObjectParser<PagerDutyActionEventResult, Void> PARSER =
+    new ObjectParser<>(PagerDutyActionEventResult.class.getName(), false, PagerDutyActionEventResult::new);
 
   static {
     PARSER.declareObject(PagerDutyActionEventResult::setEvent, (p, t) -> PagerDutyEvent.PARSER.apply(p, t), EVENT);

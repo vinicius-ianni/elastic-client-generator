@@ -57,8 +57,8 @@ public class Token  implements XContentable<Token> {
     return Token.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Token, Void> PARSER =
-    new ConstructingObjectParser<>(Token.class.getName(), false, args -> new Token());
+  public static final ObjectParser<Token, Void> PARSER =
+    new ObjectParser<>(Token.class.getName(), false, Token::new);
 
   static {
     PARSER.declareInt(Token::setEndOffset, END_OFFSET);

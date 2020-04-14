@@ -38,8 +38,8 @@ public class NodesHotThreadsResponse  implements XContentable<NodesHotThreadsRes
     return NodesHotThreadsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodesHotThreadsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(NodesHotThreadsResponse.class.getName(), false, args -> new NodesHotThreadsResponse());
+  public static final ObjectParser<NodesHotThreadsResponse, Void> PARSER =
+    new ObjectParser<>(NodesHotThreadsResponse.class.getName(), false, NodesHotThreadsResponse::new);
 
   static {
     PARSER.declareObjectArray(NodesHotThreadsResponse::setHotThreads, (p, t) -> HotThreadInformation.PARSER.apply(p, t), HOT_THREADS);

@@ -60,8 +60,8 @@ public class StopTokenFilter  implements XContentable<StopTokenFilter> {
     return StopTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StopTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(StopTokenFilter.class.getName(), false, args -> new StopTokenFilter());
+  public static final ObjectParser<StopTokenFilter, Void> PARSER =
+    new ObjectParser<>(StopTokenFilter.class.getName(), false, StopTokenFilter::new);
 
   static {
     PARSER.declareBoolean(StopTokenFilter::setIgnoreCase, IGNORE_CASE);

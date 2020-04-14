@@ -56,12 +56,12 @@ public class RollupJobStatus  implements XContentable<RollupJobStatus> {
     return RollupJobStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupJobStatus, Void> PARSER =
-    new ConstructingObjectParser<>(RollupJobStatus.class.getName(), false, args -> new RollupJobStatus());
+  public static final ObjectParser<RollupJobStatus, Void> PARSER =
+    new ObjectParser<>(RollupJobStatus.class.getName(), false, RollupJobStatus::new);
 
   static {
     PARSER.declareObject(RollupJobStatus::setCurrentPosition, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), CURRENT_POSITION);
-    PARSER.declareObject(RollupJobStatus::setJobState, (p, t) -> IndexingJobState.PARSER.apply(p), JOB_STATE);
+    PARSER.declareField(RollupJobStatus::setJobState, (p, t) -> IndexingJobState.PARSER.apply(p), JOB_STATE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(RollupJobStatus::setUpgradedDocId, UPGRADED_DOC_ID);
   }
 

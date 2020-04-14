@@ -137,8 +137,8 @@ public class MultiTermVectorsRequest  implements XContentable<MultiTermVectorsRe
     return MultiTermVectorsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiTermVectorsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(MultiTermVectorsRequest.class.getName(), false, args -> new MultiTermVectorsRequest());
+  public static final ObjectParser<MultiTermVectorsRequest, Void> PARSER =
+    new ObjectParser<>(MultiTermVectorsRequest.class.getName(), false, MultiTermVectorsRequest::new);
 
   static {
     PARSER.declareObjectArray(MultiTermVectorsRequest::setDocs, (p, t) -> MultiTermVectorOperation.PARSER.apply(p, t), DOCS);
@@ -153,7 +153,7 @@ public class MultiTermVectorsRequest  implements XContentable<MultiTermVectorsRe
     PARSER.declareObject(MultiTermVectorsRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(MultiTermVectorsRequest::setTermStatistics, TERM_STATISTICS);
     PARSER.declareLong(MultiTermVectorsRequest::setVersion, VERSION);
-    PARSER.declareObject(MultiTermVectorsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(MultiTermVectorsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

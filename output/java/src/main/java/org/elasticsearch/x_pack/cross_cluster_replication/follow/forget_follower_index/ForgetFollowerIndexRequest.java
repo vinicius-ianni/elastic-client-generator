@@ -60,8 +60,8 @@ public class ForgetFollowerIndexRequest  implements XContentable<ForgetFollowerI
     return ForgetFollowerIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ForgetFollowerIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ForgetFollowerIndexRequest.class.getName(), false, args -> new ForgetFollowerIndexRequest());
+  public static final ObjectParser<ForgetFollowerIndexRequest, Void> PARSER =
+    new ObjectParser<>(ForgetFollowerIndexRequest.class.getName(), false, ForgetFollowerIndexRequest::new);
 
   static {
     PARSER.declareString(ForgetFollowerIndexRequest::setFollowerCluster, FOLLOWER_CLUSTER);

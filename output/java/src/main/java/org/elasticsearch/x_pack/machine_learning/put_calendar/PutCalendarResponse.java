@@ -52,8 +52,8 @@ public class PutCalendarResponse  implements XContentable<PutCalendarResponse> {
     return PutCalendarResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutCalendarResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutCalendarResponse.class.getName(), false, args -> new PutCalendarResponse());
+  public static final ObjectParser<PutCalendarResponse, Void> PARSER =
+    new ObjectParser<>(PutCalendarResponse.class.getName(), false, PutCalendarResponse::new);
 
   static {
     PARSER.declareString(PutCalendarResponse::setCalendarId, CALENDAR_ID);

@@ -36,8 +36,8 @@ public class DeleteRoleMappingResponse  implements XContentable<DeleteRoleMappin
     return DeleteRoleMappingResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteRoleMappingResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteRoleMappingResponse.class.getName(), false, args -> new DeleteRoleMappingResponse());
+  public static final ObjectParser<DeleteRoleMappingResponse, Void> PARSER =
+    new ObjectParser<>(DeleteRoleMappingResponse.class.getName(), false, DeleteRoleMappingResponse::new);
 
   static {
     PARSER.declareBoolean(DeleteRoleMappingResponse::setFound, FOUND);

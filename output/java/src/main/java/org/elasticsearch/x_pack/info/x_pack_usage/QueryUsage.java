@@ -57,8 +57,8 @@ public class QueryUsage  implements XContentable<QueryUsage> {
     return QueryUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QueryUsage, Void> PARSER =
-    new ConstructingObjectParser<>(QueryUsage.class.getName(), false, args -> new QueryUsage());
+  public static final ObjectParser<QueryUsage, Void> PARSER =
+    new ObjectParser<>(QueryUsage.class.getName(), false, QueryUsage::new);
 
   static {
     PARSER.declareInt(QueryUsage::setTotal, TOTAL);

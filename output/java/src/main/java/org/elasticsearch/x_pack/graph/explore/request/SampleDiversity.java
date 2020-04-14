@@ -47,8 +47,8 @@ public class SampleDiversity  implements XContentable<SampleDiversity> {
     return SampleDiversity.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SampleDiversity, Void> PARSER =
-    new ConstructingObjectParser<>(SampleDiversity.class.getName(), false, args -> new SampleDiversity());
+  public static final ObjectParser<SampleDiversity, Void> PARSER =
+    new ObjectParser<>(SampleDiversity.class.getName(), false, SampleDiversity::new);
 
   static {
     PARSER.declareObject(SampleDiversity::setField, (p, t) -> Field.createFrom(p), FIELD);

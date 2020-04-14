@@ -57,8 +57,8 @@ public class CatPendingTasksRecord  implements XContentable<CatPendingTasksRecor
     return CatPendingTasksRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatPendingTasksRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatPendingTasksRecord.class.getName(), false, args -> new CatPendingTasksRecord());
+  public static final ObjectParser<CatPendingTasksRecord, Void> PARSER =
+    new ObjectParser<>(CatPendingTasksRecord.class.getName(), false, CatPendingTasksRecord::new);
 
   static {
     PARSER.declareInt(CatPendingTasksRecord::setInsertOrder, INSERT_ORDER);

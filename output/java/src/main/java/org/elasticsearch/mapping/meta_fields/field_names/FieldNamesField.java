@@ -36,8 +36,8 @@ public class FieldNamesField  implements XContentable<FieldNamesField> {
     return FieldNamesField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldNamesField, Void> PARSER =
-    new ConstructingObjectParser<>(FieldNamesField.class.getName(), false, args -> new FieldNamesField());
+  public static final ObjectParser<FieldNamesField, Void> PARSER =
+    new ObjectParser<>(FieldNamesField.class.getName(), false, FieldNamesField::new);
 
   static {
     PARSER.declareBoolean(FieldNamesField::setEnabled, ENABLED);

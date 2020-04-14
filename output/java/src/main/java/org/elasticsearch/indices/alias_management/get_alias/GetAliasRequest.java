@@ -60,12 +60,12 @@ public class GetAliasRequest  implements XContentable<GetAliasRequest> {
     return GetAliasRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetAliasRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetAliasRequest.class.getName(), false, args -> new GetAliasRequest());
+  public static final ObjectParser<GetAliasRequest, Void> PARSER =
+    new ObjectParser<>(GetAliasRequest.class.getName(), false, GetAliasRequest::new);
 
   static {
     PARSER.declareBoolean(GetAliasRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(GetAliasRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(GetAliasRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(GetAliasRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(GetAliasRequest::setLocal, LOCAL);
   }

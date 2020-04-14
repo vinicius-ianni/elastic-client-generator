@@ -31,8 +31,8 @@ public class DeleteAliasResponse  implements XContentable<DeleteAliasResponse> {
     return DeleteAliasResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteAliasResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteAliasResponse.class.getName(), false, args -> new DeleteAliasResponse());
+  public static final ObjectParser<DeleteAliasResponse, Void> PARSER =
+    new ObjectParser<>(DeleteAliasResponse.class.getName(), false, DeleteAliasResponse::new);
 
   static {
     

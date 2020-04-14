@@ -85,8 +85,8 @@ public class CatSnapshotsRequest  implements XContentable<CatSnapshotsRequest> {
     return CatSnapshotsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatSnapshotsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatSnapshotsRequest.class.getName(), false, args -> new CatSnapshotsRequest());
+  public static final ObjectParser<CatSnapshotsRequest, Void> PARSER =
+    new ObjectParser<>(CatSnapshotsRequest.class.getName(), false, CatSnapshotsRequest::new);
 
   static {
     PARSER.declareString(CatSnapshotsRequest::setFormat, FORMAT);

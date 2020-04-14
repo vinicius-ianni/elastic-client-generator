@@ -54,8 +54,8 @@ public class UpdateFilterRequest  implements XContentable<UpdateFilterRequest> {
     return UpdateFilterRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateFilterRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateFilterRequest.class.getName(), false, args -> new UpdateFilterRequest());
+  public static final ObjectParser<UpdateFilterRequest, Void> PARSER =
+    new ObjectParser<>(UpdateFilterRequest.class.getName(), false, UpdateFilterRequest::new);
 
   static {
     PARSER.declareStringArray(UpdateFilterRequest::setAddItems, ADD_ITEMS);

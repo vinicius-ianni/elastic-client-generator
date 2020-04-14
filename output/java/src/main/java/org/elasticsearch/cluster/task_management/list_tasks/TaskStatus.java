@@ -110,8 +110,8 @@ public class TaskStatus  implements XContentable<TaskStatus> {
     return TaskStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TaskStatus, Void> PARSER =
-    new ConstructingObjectParser<>(TaskStatus.class.getName(), false, args -> new TaskStatus());
+  public static final ObjectParser<TaskStatus, Void> PARSER =
+    new ObjectParser<>(TaskStatus.class.getName(), false, TaskStatus::new);
 
   static {
     PARSER.declareLong(TaskStatus::setBatches, BATCHES);

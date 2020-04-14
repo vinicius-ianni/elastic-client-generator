@@ -47,8 +47,8 @@ public class TimeOfMonth  implements XContentable<TimeOfMonth> {
     return TimeOfMonth.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TimeOfMonth, Void> PARSER =
-    new ConstructingObjectParser<>(TimeOfMonth.class.getName(), false, args -> new TimeOfMonth());
+  public static final ObjectParser<TimeOfMonth, Void> PARSER =
+    new ObjectParser<>(TimeOfMonth.class.getName(), false, TimeOfMonth::new);
 
   static {
     PARSER.declareStringArray(TimeOfMonth::setAt, AT);

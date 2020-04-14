@@ -56,8 +56,8 @@ public class CompositeAggregation  implements XContentable<CompositeAggregation>
     return CompositeAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompositeAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(CompositeAggregation.class.getName(), false, args -> new CompositeAggregation());
+  public static final ObjectParser<CompositeAggregation, Void> PARSER =
+    new ObjectParser<>(CompositeAggregation.class.getName(), false, CompositeAggregation::new);
 
   static {
     PARSER.declareObject(CompositeAggregation::setAfter, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), AFTER);

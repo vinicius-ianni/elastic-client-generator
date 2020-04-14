@@ -31,8 +31,8 @@ public class PropertyWithClrOrigin  implements XContentable<PropertyWithClrOrigi
     return PropertyWithClrOrigin.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PropertyWithClrOrigin, Void> PARSER =
-    new ConstructingObjectParser<>(PropertyWithClrOrigin.class.getName(), false, args -> new PropertyWithClrOrigin());
+  public static final ObjectParser<PropertyWithClrOrigin, Void> PARSER =
+    new ObjectParser<>(PropertyWithClrOrigin.class.getName(), false, PropertyWithClrOrigin::new);
 
   static {
     

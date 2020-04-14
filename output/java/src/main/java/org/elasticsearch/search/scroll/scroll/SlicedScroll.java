@@ -54,8 +54,8 @@ public class SlicedScroll  implements XContentable<SlicedScroll> {
     return SlicedScroll.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SlicedScroll, Void> PARSER =
-    new ConstructingObjectParser<>(SlicedScroll.class.getName(), false, args -> new SlicedScroll());
+  public static final ObjectParser<SlicedScroll, Void> PARSER =
+    new ObjectParser<>(SlicedScroll.class.getName(), false, SlicedScroll::new);
 
   static {
     PARSER.declareObject(SlicedScroll::setField, (p, t) -> Field.createFrom(p), FIELD);

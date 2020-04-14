@@ -40,8 +40,8 @@ public class GetSnapshotLifecycleResponse extends DictionaryResponseBase<String,
     return GetSnapshotLifecycleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetSnapshotLifecycleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetSnapshotLifecycleResponse.class.getName(), false, args -> new GetSnapshotLifecycleResponse());
+  public static final ObjectParser<GetSnapshotLifecycleResponse, Void> PARSER =
+    new ObjectParser<>(GetSnapshotLifecycleResponse.class.getName(), false, GetSnapshotLifecycleResponse::new);
 
   static {
     PARSER.declareObject(GetSnapshotLifecycleResponse::setPolicies, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SnapshotLifecyclePolicyMetadata.PARSER.apply(pp, null)), POLICIES);

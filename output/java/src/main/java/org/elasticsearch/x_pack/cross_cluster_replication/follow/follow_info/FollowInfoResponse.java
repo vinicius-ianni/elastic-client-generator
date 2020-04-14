@@ -38,8 +38,8 @@ public class FollowInfoResponse  implements XContentable<FollowInfoResponse> {
     return FollowInfoResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FollowInfoResponse, Void> PARSER =
-    new ConstructingObjectParser<>(FollowInfoResponse.class.getName(), false, args -> new FollowInfoResponse());
+  public static final ObjectParser<FollowInfoResponse, Void> PARSER =
+    new ObjectParser<>(FollowInfoResponse.class.getName(), false, FollowInfoResponse::new);
 
   static {
     PARSER.declareObjectArray(FollowInfoResponse::setFollowerIndices, (p, t) -> FollowerInfo.PARSER.apply(p, t), FOLLOWER_INDICES);

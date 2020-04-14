@@ -73,8 +73,8 @@ public class ClusterOperatingSystemStats  implements XContentable<ClusterOperati
     return ClusterOperatingSystemStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterOperatingSystemStats, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterOperatingSystemStats.class.getName(), false, args -> new ClusterOperatingSystemStats());
+  public static final ObjectParser<ClusterOperatingSystemStats, Void> PARSER =
+    new ObjectParser<>(ClusterOperatingSystemStats.class.getName(), false, ClusterOperatingSystemStats::new);
 
   static {
     PARSER.declareInt(ClusterOperatingSystemStats::setAllocatedProcessors, ALLOCATED_PROCESSORS);

@@ -39,11 +39,11 @@ public class DeleteRoleMappingRequest  implements XContentable<DeleteRoleMapping
     return DeleteRoleMappingRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteRoleMappingRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteRoleMappingRequest.class.getName(), false, args -> new DeleteRoleMappingRequest());
+  public static final ObjectParser<DeleteRoleMappingRequest, Void> PARSER =
+    new ObjectParser<>(DeleteRoleMappingRequest.class.getName(), false, DeleteRoleMappingRequest::new);
 
   static {
-    PARSER.declareObject(DeleteRoleMappingRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(DeleteRoleMappingRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

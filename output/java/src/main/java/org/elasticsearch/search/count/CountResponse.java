@@ -47,8 +47,8 @@ public class CountResponse  implements XContentable<CountResponse> {
     return CountResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CountResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CountResponse.class.getName(), false, args -> new CountResponse());
+  public static final ObjectParser<CountResponse, Void> PARSER =
+    new ObjectParser<>(CountResponse.class.getName(), false, CountResponse::new);
 
   static {
     PARSER.declareLong(CountResponse::setCount, COUNT);

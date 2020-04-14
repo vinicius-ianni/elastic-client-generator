@@ -57,8 +57,8 @@ public class ParentIdQuery  implements XContentable<ParentIdQuery> {
     return ParentIdQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ParentIdQuery, Void> PARSER =
-    new ConstructingObjectParser<>(ParentIdQuery.class.getName(), false, args -> new ParentIdQuery());
+  public static final ObjectParser<ParentIdQuery, Void> PARSER =
+    new ObjectParser<>(ParentIdQuery.class.getName(), false, ParentIdQuery::new);
 
   static {
     PARSER.declareObject(ParentIdQuery::setId, (p, t) -> Id.createFrom(p), ID);

@@ -31,8 +31,8 @@ public class ClearCacheResponse  implements XContentable<ClearCacheResponse> {
     return ClearCacheResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearCacheResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClearCacheResponse.class.getName(), false, args -> new ClearCacheResponse());
+  public static final ObjectParser<ClearCacheResponse, Void> PARSER =
+    new ObjectParser<>(ClearCacheResponse.class.getName(), false, ClearCacheResponse::new);
 
   static {
     

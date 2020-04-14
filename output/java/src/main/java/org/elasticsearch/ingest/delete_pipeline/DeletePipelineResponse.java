@@ -31,8 +31,8 @@ public class DeletePipelineResponse  implements XContentable<DeletePipelineRespo
     return DeletePipelineResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeletePipelineResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeletePipelineResponse.class.getName(), false, args -> new DeletePipelineResponse());
+  public static final ObjectParser<DeletePipelineResponse, Void> PARSER =
+    new ObjectParser<>(DeletePipelineResponse.class.getName(), false, DeletePipelineResponse::new);
 
   static {
     

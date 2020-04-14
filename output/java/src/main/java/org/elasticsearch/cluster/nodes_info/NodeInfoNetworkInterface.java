@@ -50,8 +50,8 @@ public class NodeInfoNetworkInterface  implements XContentable<NodeInfoNetworkIn
     return NodeInfoNetworkInterface.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfoNetworkInterface, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfoNetworkInterface.class.getName(), false, args -> new NodeInfoNetworkInterface());
+  public static final ObjectParser<NodeInfoNetworkInterface, Void> PARSER =
+    new ObjectParser<>(NodeInfoNetworkInterface.class.getName(), false, NodeInfoNetworkInterface::new);
 
   static {
     PARSER.declareString(NodeInfoNetworkInterface::setAddress, ADDRESS);

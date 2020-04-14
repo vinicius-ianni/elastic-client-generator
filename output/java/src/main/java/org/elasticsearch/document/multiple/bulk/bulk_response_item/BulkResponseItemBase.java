@@ -121,8 +121,8 @@ public class BulkResponseItemBase  implements XContentable<BulkResponseItemBase>
     return BulkResponseItemBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BulkResponseItemBase, Void> PARSER =
-    new ConstructingObjectParser<>(BulkResponseItemBase.class.getName(), false, args -> new BulkResponseItemBase());
+  public static final ObjectParser<BulkResponseItemBase, Void> PARSER =
+    new ObjectParser<>(BulkResponseItemBase.class.getName(), false, BulkResponseItemBase::new);
 
   static {
     PARSER.declareObject(BulkResponseItemBase::setError, (p, t) -> MainError.PARSER.apply(p, t), ERROR);

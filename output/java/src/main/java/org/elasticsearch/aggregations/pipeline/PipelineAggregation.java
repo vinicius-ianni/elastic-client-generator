@@ -56,13 +56,13 @@ public class PipelineAggregation  implements XContentable<PipelineAggregation> {
     return PipelineAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PipelineAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(PipelineAggregation.class.getName(), false, args -> new PipelineAggregation());
+  public static final ObjectParser<PipelineAggregation, Void> PARSER =
+    new ObjectParser<>(PipelineAggregation.class.getName(), false, PipelineAggregation::new);
 
   static {
     PARSER.declareObject(PipelineAggregation::setBucketsPath, (p, t) -> BucketsPath.PARSER.apply(p, t), BUCKETS_PATH);
     PARSER.declareString(PipelineAggregation::setFormat, FORMAT);
-    PARSER.declareObject(PipelineAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p), GAP_POLICY);
+    PARSER.declareField(PipelineAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p), GAP_POLICY, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

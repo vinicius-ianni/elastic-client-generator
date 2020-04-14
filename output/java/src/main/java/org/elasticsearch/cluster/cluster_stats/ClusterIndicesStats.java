@@ -108,8 +108,8 @@ public class ClusterIndicesStats  implements XContentable<ClusterIndicesStats> {
     return ClusterIndicesStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterIndicesStats, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterIndicesStats.class.getName(), false, args -> new ClusterIndicesStats());
+  public static final ObjectParser<ClusterIndicesStats, Void> PARSER =
+    new ObjectParser<>(ClusterIndicesStats.class.getName(), false, ClusterIndicesStats::new);
 
   static {
     PARSER.declareObject(ClusterIndicesStats::setCompletion, (p, t) -> CompletionStats.PARSER.apply(p, t), COMPLETION);

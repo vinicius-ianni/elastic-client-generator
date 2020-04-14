@@ -39,11 +39,11 @@ public class IcuNormalizationTokenFilter  implements XContentable<IcuNormalizati
     return IcuNormalizationTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IcuNormalizationTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(IcuNormalizationTokenFilter.class.getName(), false, args -> new IcuNormalizationTokenFilter());
+  public static final ObjectParser<IcuNormalizationTokenFilter, Void> PARSER =
+    new ObjectParser<>(IcuNormalizationTokenFilter.class.getName(), false, IcuNormalizationTokenFilter::new);
 
   static {
-    PARSER.declareObject(IcuNormalizationTokenFilter::setName, (p, t) -> IcuNormalizationType.PARSER.apply(p), NAME);
+    PARSER.declareField(IcuNormalizationTokenFilter::setName, (p, t) -> IcuNormalizationType.PARSER.apply(p), NAME, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

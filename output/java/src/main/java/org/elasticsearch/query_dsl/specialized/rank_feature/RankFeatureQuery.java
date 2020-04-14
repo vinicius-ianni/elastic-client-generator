@@ -39,8 +39,8 @@ public class RankFeatureQuery  implements XContentable<RankFeatureQuery> {
     return RankFeatureQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RankFeatureQuery, Void> PARSER =
-    new ConstructingObjectParser<>(RankFeatureQuery.class.getName(), false, args -> new RankFeatureQuery());
+  public static final ObjectParser<RankFeatureQuery, Void> PARSER =
+    new ObjectParser<>(RankFeatureQuery.class.getName(), false, RankFeatureQuery::new);
 
   static {
     PARSER.declareObject(RankFeatureQuery::setFunction, (p, t) -> RankFeatureFunction.PARSER.apply(p, t), FUNCTION);

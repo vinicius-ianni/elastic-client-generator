@@ -57,8 +57,8 @@ public class RecoveryStats  implements XContentable<RecoveryStats> {
     return RecoveryStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryStats, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryStats.class.getName(), false, args -> new RecoveryStats());
+  public static final ObjectParser<RecoveryStats, Void> PARSER =
+    new ObjectParser<>(RecoveryStats.class.getName(), false, RecoveryStats::new);
 
   static {
     PARSER.declareLong(RecoveryStats::setCurrentAsSource, CURRENT_AS_SOURCE);

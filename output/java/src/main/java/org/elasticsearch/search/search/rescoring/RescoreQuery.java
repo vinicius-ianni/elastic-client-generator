@@ -65,14 +65,14 @@ public class RescoreQuery  implements XContentable<RescoreQuery> {
     return RescoreQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RescoreQuery, Void> PARSER =
-    new ConstructingObjectParser<>(RescoreQuery.class.getName(), false, args -> new RescoreQuery());
+  public static final ObjectParser<RescoreQuery, Void> PARSER =
+    new ObjectParser<>(RescoreQuery.class.getName(), false, RescoreQuery::new);
 
   static {
     PARSER.declareObject(RescoreQuery::setRescoreQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), RESCORE_QUERY);
     PARSER.declareDouble(RescoreQuery::setQueryWeight, QUERY_WEIGHT);
     PARSER.declareDouble(RescoreQuery::setRescoreQueryWeight, RESCORE_QUERY_WEIGHT);
-    PARSER.declareObject(RescoreQuery::setScoreMode, (p, t) -> ScoreMode.PARSER.apply(p), SCORE_MODE);
+    PARSER.declareField(RescoreQuery::setScoreMode, (p, t) -> ScoreMode.PARSER.apply(p), SCORE_MODE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

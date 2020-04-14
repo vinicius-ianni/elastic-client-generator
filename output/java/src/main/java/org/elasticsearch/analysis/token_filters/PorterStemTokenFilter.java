@@ -31,8 +31,8 @@ public class PorterStemTokenFilter  implements XContentable<PorterStemTokenFilte
     return PorterStemTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PorterStemTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(PorterStemTokenFilter.class.getName(), false, args -> new PorterStemTokenFilter());
+  public static final ObjectParser<PorterStemTokenFilter, Void> PARSER =
+    new ObjectParser<>(PorterStemTokenFilter.class.getName(), false, PorterStemTokenFilter::new);
 
   static {
     

@@ -50,8 +50,8 @@ public class ClusterShardMetrics  implements XContentable<ClusterShardMetrics> {
     return ClusterShardMetrics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterShardMetrics, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterShardMetrics.class.getName(), false, args -> new ClusterShardMetrics());
+  public static final ObjectParser<ClusterShardMetrics, Void> PARSER =
+    new ObjectParser<>(ClusterShardMetrics.class.getName(), false, ClusterShardMetrics::new);
 
   static {
     PARSER.declareDouble(ClusterShardMetrics::setAvg, AVG);

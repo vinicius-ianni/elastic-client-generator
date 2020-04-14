@@ -61,8 +61,8 @@ public class SqlRequest  implements XContentable<SqlRequest> {
     return SqlRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SqlRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SqlRequest.class.getName(), false, args -> new SqlRequest());
+  public static final ObjectParser<SqlRequest, Void> PARSER =
+    new ObjectParser<>(SqlRequest.class.getName(), false, SqlRequest::new);
 
   static {
     PARSER.declareInt(SqlRequest::setFetchSize, FETCH_SIZE);

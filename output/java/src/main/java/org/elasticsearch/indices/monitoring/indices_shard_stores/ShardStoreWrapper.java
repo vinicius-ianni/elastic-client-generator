@@ -38,8 +38,8 @@ public class ShardStoreWrapper  implements XContentable<ShardStoreWrapper> {
     return ShardStoreWrapper.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardStoreWrapper, Void> PARSER =
-    new ConstructingObjectParser<>(ShardStoreWrapper.class.getName(), false, args -> new ShardStoreWrapper());
+  public static final ObjectParser<ShardStoreWrapper, Void> PARSER =
+    new ObjectParser<>(ShardStoreWrapper.class.getName(), false, ShardStoreWrapper::new);
 
   static {
     PARSER.declareObjectArray(ShardStoreWrapper::setStores, (p, t) -> ShardStore.PARSER.apply(p, t), STORES);

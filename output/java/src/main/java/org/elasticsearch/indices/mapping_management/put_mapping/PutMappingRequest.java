@@ -214,8 +214,8 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
     return PutMappingRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutMappingRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutMappingRequest.class.getName(), false, args -> new PutMappingRequest());
+  public static final ObjectParser<PutMappingRequest, Void> PARSER =
+    new ObjectParser<>(PutMappingRequest.class.getName(), false, PutMappingRequest::new);
 
   static {
     PARSER.declareObject(PutMappingRequest::setAllField, (p, t) -> AllField.PARSER.apply(p, t), ALL_FIELD);
@@ -232,7 +232,7 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
     PARSER.declareObject(PutMappingRequest::setSizeField, (p, t) -> SizeField.PARSER.apply(p, t), SIZE_FIELD);
     PARSER.declareObject(PutMappingRequest::setSourceField, (p, t) -> SourceField.PARSER.apply(p, t), SOURCE_FIELD);
     PARSER.declareBoolean(PutMappingRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(PutMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(PutMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(PutMappingRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(PutMappingRequest::setIncludeTypeName, INCLUDE_TYPE_NAME);
     PARSER.declareObject(PutMappingRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

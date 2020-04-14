@@ -64,8 +64,8 @@ public class CorePropertyBase  implements XContentable<CorePropertyBase> {
     return CorePropertyBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CorePropertyBase, Void> PARSER =
-    new ConstructingObjectParser<>(CorePropertyBase.class.getName(), false, args -> new CorePropertyBase());
+  public static final ObjectParser<CorePropertyBase, Void> PARSER =
+    new ObjectParser<>(CorePropertyBase.class.getName(), false, CorePropertyBase::new);
 
   static {
     PARSER.declareObjectArray(CorePropertyBase::setCopyTo, (p, t) -> Field.createFrom(p), COPY_TO);

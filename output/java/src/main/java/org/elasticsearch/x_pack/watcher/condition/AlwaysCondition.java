@@ -31,8 +31,8 @@ public class AlwaysCondition  implements XContentable<AlwaysCondition> {
     return AlwaysCondition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AlwaysCondition, Void> PARSER =
-    new ConstructingObjectParser<>(AlwaysCondition.class.getName(), false, args -> new AlwaysCondition());
+  public static final ObjectParser<AlwaysCondition, Void> PARSER =
+    new ObjectParser<>(AlwaysCondition.class.getName(), false, AlwaysCondition::new);
 
   static {
     

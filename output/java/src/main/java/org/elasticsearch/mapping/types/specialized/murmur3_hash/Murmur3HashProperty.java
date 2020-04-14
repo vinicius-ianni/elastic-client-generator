@@ -31,8 +31,8 @@ public class Murmur3HashProperty  implements XContentable<Murmur3HashProperty> {
     return Murmur3HashProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Murmur3HashProperty, Void> PARSER =
-    new ConstructingObjectParser<>(Murmur3HashProperty.class.getName(), false, args -> new Murmur3HashProperty());
+  public static final ObjectParser<Murmur3HashProperty, Void> PARSER =
+    new ObjectParser<>(Murmur3HashProperty.class.getName(), false, Murmur3HashProperty::new);
 
   static {
     

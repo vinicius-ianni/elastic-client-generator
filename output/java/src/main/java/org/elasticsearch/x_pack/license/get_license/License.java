@@ -89,8 +89,8 @@ public class License  implements XContentable<License> {
     return License.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<License, Void> PARSER =
-    new ConstructingObjectParser<>(License.class.getName(), false, args -> new License());
+  public static final ObjectParser<License, Void> PARSER =
+    new ObjectParser<>(License.class.getName(), false, License::new);
 
   static {
     PARSER.declareLong(License::setExpiryDateInMillis, EXPIRY_DATE_IN_MILLIS);
@@ -99,7 +99,7 @@ public class License  implements XContentable<License> {
     PARSER.declareString(License::setIssuer, ISSUER);
     PARSER.declareLong(License::setMaxNodes, MAX_NODES);
     PARSER.declareString(License::setSignature, SIGNATURE);
-    PARSER.declareObject(License::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE);
+    PARSER.declareField(License::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(License::setUid, UID);
   }
 

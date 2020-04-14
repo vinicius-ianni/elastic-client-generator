@@ -60,8 +60,8 @@ public class XPackFeature  implements XContentable<XPackFeature> {
     return XPackFeature.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackFeature, Void> PARSER =
-    new ConstructingObjectParser<>(XPackFeature.class.getName(), false, args -> new XPackFeature());
+  public static final ObjectParser<XPackFeature, Void> PARSER =
+    new ObjectParser<>(XPackFeature.class.getName(), false, XPackFeature::new);
 
   static {
     PARSER.declareBoolean(XPackFeature::setAvailable, AVAILABLE);

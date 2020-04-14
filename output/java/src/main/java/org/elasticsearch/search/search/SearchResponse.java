@@ -100,12 +100,6 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
   public SearchResponse<TDocument> setTook(Long val) { this._took = val; return this; }
 
 
-  static final ParseField TOTAL = new ParseField("total");
-  private Long _total;
-  public Long getTotal() { return this._total; }
-  public SearchResponse<TDocument> setTotal(Long val) { this._total = val; return this; }
-
-
   
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
@@ -144,7 +138,6 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
     builder.field(TERMINATED_EARLY.getPreferredName(), _terminatedEarly);
     builder.field(TIMED_OUT.getPreferredName(), _timedOut);
     builder.field(TOOK.getPreferredName(), _took);
-    builder.field(TOTAL.getPreferredName(), _total);
     builder.endObject();
     return builder;
   }
@@ -154,8 +147,8 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
     return SearchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(SearchResponse.class.getName(), false, args -> new SearchResponse());
+  public static final ObjectParser<SearchResponse, Void> PARSER =
+    new ObjectParser<>(SearchResponse.class.getName(), false, SearchResponse::new);
 
   static {
     PARSER.declareObject(SearchResponse::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> Aggregate.PARSER.apply(pp, null)), AGGREGATIONS);
@@ -173,7 +166,6 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
     PARSER.declareBoolean(SearchResponse::setTerminatedEarly, TERMINATED_EARLY);
     PARSER.declareBoolean(SearchResponse::setTimedOut, TIMED_OUT);
     PARSER.declareLong(SearchResponse::setTook, TOOK);
-    PARSER.declareLong(SearchResponse::setTotal, TOTAL);
   }
 
 }

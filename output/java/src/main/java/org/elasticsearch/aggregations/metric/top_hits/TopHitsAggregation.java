@@ -126,8 +126,8 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
     return TopHitsAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TopHitsAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(TopHitsAggregation.class.getName(), false, args -> new TopHitsAggregation());
+  public static final ObjectParser<TopHitsAggregation, Void> PARSER =
+    new ObjectParser<>(TopHitsAggregation.class.getName(), false, TopHitsAggregation::new);
 
   static {
     PARSER.declareObjectArray(TopHitsAggregation::setDocvalueFields, (p, t) -> Field.createFrom(p), DOCVALUE_FIELDS);

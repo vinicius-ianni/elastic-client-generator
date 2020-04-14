@@ -38,8 +38,8 @@ public class FollowIndexStatsResponse  implements XContentable<FollowIndexStatsR
     return FollowIndexStatsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FollowIndexStatsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(FollowIndexStatsResponse.class.getName(), false, args -> new FollowIndexStatsResponse());
+  public static final ObjectParser<FollowIndexStatsResponse, Void> PARSER =
+    new ObjectParser<>(FollowIndexStatsResponse.class.getName(), false, FollowIndexStatsResponse::new);
 
   static {
     PARSER.declareObjectArray(FollowIndexStatsResponse::setIndices, (p, t) -> FollowIndexStats.PARSER.apply(p, t), INDICES);

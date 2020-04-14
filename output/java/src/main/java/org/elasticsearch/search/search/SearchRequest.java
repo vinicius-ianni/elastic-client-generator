@@ -471,8 +471,8 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     return SearchRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SearchRequest.class.getName(), false, args -> new SearchRequest());
+  public static final ObjectParser<SearchRequest, Void> PARSER =
+    new ObjectParser<>(SearchRequest.class.getName(), false, SearchRequest::new);
 
   static {
     PARSER.declareBoolean(SearchRequest::setAllowNoIndices, ALLOW_NO_INDICES);
@@ -481,9 +481,9 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     PARSER.declareString(SearchRequest::setAnalyzer, ANALYZER);
     PARSER.declareLong(SearchRequest::setBatchedReduceSize, BATCHED_REDUCE_SIZE);
     PARSER.declareBoolean(SearchRequest::setCcsMinimizeRoundtrips, CCS_MINIMIZE_ROUNDTRIPS);
-    PARSER.declareObject(SearchRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(SearchRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(SearchRequest::setDf, DF);
-    PARSER.declareObject(SearchRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(SearchRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SearchRequest::setIgnoreThrottled, IGNORE_THROTTLED);
     PARSER.declareBoolean(SearchRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(SearchRequest::setLenient, LENIENT);
@@ -493,11 +493,11 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     PARSER.declareBoolean(SearchRequest::setRequestCache, REQUEST_CACHE);
     PARSER.declareObject(SearchRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareObject(SearchRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
-    PARSER.declareObject(SearchRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareField(SearchRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SearchRequest::setSequenceNumberPrimaryTerm, SEQUENCE_NUMBER_PRIMARY_TERM);
     PARSER.declareStringArray(SearchRequest::setStats, STATS);
     PARSER.declareObject(SearchRequest::setSuggestField, (p, t) -> Field.createFrom(p), SUGGEST_FIELD);
-    PARSER.declareObject(SearchRequest::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE);
+    PARSER.declareField(SearchRequest::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(SearchRequest::setSuggestSize, SUGGEST_SIZE);
     PARSER.declareString(SearchRequest::setSuggestText, SUGGEST_TEXT);
     PARSER.declareBoolean(SearchRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);

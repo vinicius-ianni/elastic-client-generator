@@ -64,8 +64,8 @@ public class GetWatchResponse  implements XContentable<GetWatchResponse> {
     return GetWatchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetWatchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetWatchResponse.class.getName(), false, args -> new GetWatchResponse());
+  public static final ObjectParser<GetWatchResponse, Void> PARSER =
+    new ObjectParser<>(GetWatchResponse.class.getName(), false, GetWatchResponse::new);
 
   static {
     PARSER.declareBoolean(GetWatchResponse::setFound, FOUND);

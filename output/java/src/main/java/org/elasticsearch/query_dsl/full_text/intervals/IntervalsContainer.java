@@ -79,8 +79,8 @@ public class IntervalsContainer  implements XContentable<IntervalsContainer> {
     return IntervalsContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsContainer, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsContainer.class.getName(), false, args -> new IntervalsContainer());
+  public static final ObjectParser<IntervalsContainer, Void> PARSER =
+    new ObjectParser<>(IntervalsContainer.class.getName(), false, IntervalsContainer::new);
 
   static {
     PARSER.declareObject(IntervalsContainer::setAllOf, (p, t) -> IntervalsAllOf.PARSER.apply(p, t), ALL_OF);

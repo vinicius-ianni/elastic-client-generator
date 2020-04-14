@@ -135,8 +135,8 @@ public class LifecycleExplain  implements XContentable<LifecycleExplain> {
     return LifecycleExplain.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LifecycleExplain, Void> PARSER =
-    new ConstructingObjectParser<>(LifecycleExplain.class.getName(), false, args -> new LifecycleExplain());
+  public static final ObjectParser<LifecycleExplain, Void> PARSER =
+    new ObjectParser<>(LifecycleExplain.class.getName(), false, LifecycleExplain::new);
 
   static {
     PARSER.declareString(LifecycleExplain::setAction, ACTION);

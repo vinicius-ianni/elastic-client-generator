@@ -70,8 +70,8 @@ public class IndicesPrivileges  implements XContentable<IndicesPrivileges> {
     return IndicesPrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesPrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesPrivileges.class.getName(), false, args -> new IndicesPrivileges());
+  public static final ObjectParser<IndicesPrivileges, Void> PARSER =
+    new ObjectParser<>(IndicesPrivileges.class.getName(), false, IndicesPrivileges::new);
 
   static {
     PARSER.declareObject(IndicesPrivileges::setFieldSecurity, (p, t) -> FieldSecurity.PARSER.apply(p, t), FIELD_SECURITY);

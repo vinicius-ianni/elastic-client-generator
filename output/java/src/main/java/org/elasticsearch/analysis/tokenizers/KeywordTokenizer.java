@@ -36,8 +36,8 @@ public class KeywordTokenizer  implements XContentable<KeywordTokenizer> {
     return KeywordTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KeywordTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(KeywordTokenizer.class.getName(), false, args -> new KeywordTokenizer());
+  public static final ObjectParser<KeywordTokenizer, Void> PARSER =
+    new ObjectParser<>(KeywordTokenizer.class.getName(), false, KeywordTokenizer::new);
 
   static {
     PARSER.declareInt(KeywordTokenizer::setBufferSize, BUFFER_SIZE);

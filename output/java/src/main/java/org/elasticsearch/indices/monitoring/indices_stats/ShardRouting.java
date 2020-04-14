@@ -60,14 +60,14 @@ public class ShardRouting  implements XContentable<ShardRouting> {
     return ShardRouting.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardRouting, Void> PARSER =
-    new ConstructingObjectParser<>(ShardRouting.class.getName(), false, args -> new ShardRouting());
+  public static final ObjectParser<ShardRouting, Void> PARSER =
+    new ObjectParser<>(ShardRouting.class.getName(), false, ShardRouting::new);
 
   static {
     PARSER.declareString(ShardRouting::setNode, NODE);
     PARSER.declareBoolean(ShardRouting::setPrimary, PRIMARY);
     PARSER.declareString(ShardRouting::setRelocatingNode, RELOCATING_NODE);
-    PARSER.declareObject(ShardRouting::setState, (p, t) -> ShardRoutingState.PARSER.apply(p), STATE);
+    PARSER.declareField(ShardRouting::setState, (p, t) -> ShardRoutingState.PARSER.apply(p), STATE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

@@ -39,8 +39,8 @@ public class AlertingExecution  implements XContentable<AlertingExecution> {
     return AlertingExecution.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AlertingExecution, Void> PARSER =
-    new ConstructingObjectParser<>(AlertingExecution.class.getName(), false, args -> new AlertingExecution());
+  public static final ObjectParser<AlertingExecution, Void> PARSER =
+    new ObjectParser<>(AlertingExecution.class.getName(), false, AlertingExecution::new);
 
   static {
     PARSER.declareObject(AlertingExecution::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ExecutionAction.PARSER.apply(pp, null)), ACTIONS);

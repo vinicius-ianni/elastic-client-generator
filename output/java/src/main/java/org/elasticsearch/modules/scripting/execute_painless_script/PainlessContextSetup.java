@@ -57,8 +57,8 @@ public class PainlessContextSetup  implements XContentable<PainlessContextSetup>
     return PainlessContextSetup.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PainlessContextSetup, Void> PARSER =
-    new ConstructingObjectParser<>(PainlessContextSetup.class.getName(), false, args -> new PainlessContextSetup());
+  public static final ObjectParser<PainlessContextSetup, Void> PARSER =
+    new ObjectParser<>(PainlessContextSetup.class.getName(), false, PainlessContextSetup::new);
 
   static {
     PARSER.declareObject(PainlessContextSetup::setDocument, (p, t) -> p.objectText(), DOCUMENT);

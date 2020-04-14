@@ -39,8 +39,8 @@ public class JoinProperty  implements XContentable<JoinProperty> {
     return JoinProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<JoinProperty, Void> PARSER =
-    new ConstructingObjectParser<>(JoinProperty.class.getName(), false, args -> new JoinProperty());
+  public static final ObjectParser<JoinProperty, Void> PARSER =
+    new ObjectParser<>(JoinProperty.class.getName(), false, JoinProperty::new);
 
   static {
     PARSER.declareObject(JoinProperty::setRelations, (p, t) -> new NamedContainer<>(n -> () -> new RelationName(n),null /* TODO List<RelationName> */), RELATIONS);

@@ -76,8 +76,8 @@ public class SuggestContextQuery  implements XContentable<SuggestContextQuery> {
     return SuggestContextQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SuggestContextQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SuggestContextQuery.class.getName(), false, args -> new SuggestContextQuery());
+  public static final ObjectParser<SuggestContextQuery, Void> PARSER =
+    new ObjectParser<>(SuggestContextQuery.class.getName(), false, SuggestContextQuery::new);
 
   static {
     PARSER.declareDouble(SuggestContextQuery::setBoost, BOOST);

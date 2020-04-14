@@ -105,8 +105,8 @@ public class MultiGetRequest  implements XContentable<MultiGetRequest> {
     return MultiGetRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiGetRequest, Void> PARSER =
-    new ConstructingObjectParser<>(MultiGetRequest.class.getName(), false, args -> new MultiGetRequest());
+  public static final ObjectParser<MultiGetRequest, Void> PARSER =
+    new ObjectParser<>(MultiGetRequest.class.getName(), false, MultiGetRequest::new);
 
   static {
     PARSER.declareObjectArray(MultiGetRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);

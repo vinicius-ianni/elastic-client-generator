@@ -31,8 +31,8 @@ public class IntervalsQuery  implements XContentable<IntervalsQuery> {
     return IntervalsQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsQuery, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsQuery.class.getName(), false, args -> new IntervalsQuery());
+  public static final ObjectParser<IntervalsQuery, Void> PARSER =
+    new ObjectParser<>(IntervalsQuery.class.getName(), false, IntervalsQuery::new);
 
   static {
     

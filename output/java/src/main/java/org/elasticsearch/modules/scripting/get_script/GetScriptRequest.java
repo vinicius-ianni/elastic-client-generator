@@ -39,8 +39,8 @@ public class GetScriptRequest  implements XContentable<GetScriptRequest> {
     return GetScriptRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetScriptRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetScriptRequest.class.getName(), false, args -> new GetScriptRequest());
+  public static final ObjectParser<GetScriptRequest, Void> PARSER =
+    new ObjectParser<>(GetScriptRequest.class.getName(), false, GetScriptRequest::new);
 
   static {
     PARSER.declareObject(GetScriptRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

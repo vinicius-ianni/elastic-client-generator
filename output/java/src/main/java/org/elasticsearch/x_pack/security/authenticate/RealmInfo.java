@@ -43,8 +43,8 @@ public class RealmInfo  implements XContentable<RealmInfo> {
     return RealmInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RealmInfo, Void> PARSER =
-    new ConstructingObjectParser<>(RealmInfo.class.getName(), false, args -> new RealmInfo());
+  public static final ObjectParser<RealmInfo, Void> PARSER =
+    new ObjectParser<>(RealmInfo.class.getName(), false, RealmInfo::new);
 
   static {
     PARSER.declareString(RealmInfo::setName, NAME);

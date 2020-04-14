@@ -116,8 +116,8 @@ public class TaskInfo  implements XContentable<TaskInfo> {
     return TaskInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TaskInfo, Void> PARSER =
-    new ConstructingObjectParser<>(TaskInfo.class.getName(), false, args -> new TaskInfo());
+  public static final ObjectParser<TaskInfo, Void> PARSER =
+    new ObjectParser<>(TaskInfo.class.getName(), false, TaskInfo::new);
 
   static {
     PARSER.declareString(TaskInfo::setAction, ACTION);

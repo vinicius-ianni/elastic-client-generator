@@ -31,8 +31,8 @@ public class RemovePolicyRequest  implements XContentable<RemovePolicyRequest> {
     return RemovePolicyRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RemovePolicyRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RemovePolicyRequest.class.getName(), false, args -> new RemovePolicyRequest());
+  public static final ObjectParser<RemovePolicyRequest, Void> PARSER =
+    new ObjectParser<>(RemovePolicyRequest.class.getName(), false, RemovePolicyRequest::new);
 
   static {
     

@@ -88,8 +88,8 @@ public class LikeDocument  implements XContentable<LikeDocument> {
     return LikeDocument.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LikeDocument, Void> PARSER =
-    new ConstructingObjectParser<>(LikeDocument.class.getName(), false, args -> new LikeDocument());
+  public static final ObjectParser<LikeDocument, Void> PARSER =
+    new ObjectParser<>(LikeDocument.class.getName(), false, LikeDocument::new);
 
   static {
     PARSER.declareObject(LikeDocument::setDoc, (p, t) -> p.objectText(), DOC);

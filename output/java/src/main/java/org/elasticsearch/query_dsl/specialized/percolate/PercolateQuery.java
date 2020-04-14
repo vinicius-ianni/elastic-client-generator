@@ -103,8 +103,8 @@ public class PercolateQuery  implements XContentable<PercolateQuery> {
     return PercolateQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PercolateQuery, Void> PARSER =
-    new ConstructingObjectParser<>(PercolateQuery.class.getName(), false, args -> new PercolateQuery());
+  public static final ObjectParser<PercolateQuery, Void> PARSER =
+    new ObjectParser<>(PercolateQuery.class.getName(), false, PercolateQuery::new);
 
   static {
     PARSER.declareObject(PercolateQuery::setDocument, (p, t) -> p.objectText(), DOCUMENT);

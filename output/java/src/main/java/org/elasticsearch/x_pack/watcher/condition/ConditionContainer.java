@@ -79,8 +79,8 @@ public class ConditionContainer  implements XContentable<ConditionContainer> {
     return ConditionContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ConditionContainer, Void> PARSER =
-    new ConstructingObjectParser<>(ConditionContainer.class.getName(), false, args -> new ConditionContainer());
+  public static final ObjectParser<ConditionContainer, Void> PARSER =
+    new ObjectParser<>(ConditionContainer.class.getName(), false, ConditionContainer::new);
 
   static {
     PARSER.declareObject(ConditionContainer::setAlways, (p, t) -> AlwaysCondition.PARSER.apply(p, t), ALWAYS);

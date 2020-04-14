@@ -69,8 +69,8 @@ public class InputContainer  implements XContentable<InputContainer> {
     return InputContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InputContainer, Void> PARSER =
-    new ConstructingObjectParser<>(InputContainer.class.getName(), false, args -> new InputContainer());
+  public static final ObjectParser<InputContainer, Void> PARSER =
+    new ObjectParser<>(InputContainer.class.getName(), false, InputContainer::new);
 
   static {
     PARSER.declareObject(InputContainer::setChain, (p, t) -> ChainInput.PARSER.apply(p, t), CHAIN);

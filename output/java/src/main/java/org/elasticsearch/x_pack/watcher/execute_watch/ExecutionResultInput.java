@@ -60,13 +60,13 @@ public class ExecutionResultInput  implements XContentable<ExecutionResultInput>
     return ExecutionResultInput.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutionResultInput, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutionResultInput.class.getName(), false, args -> new ExecutionResultInput());
+  public static final ObjectParser<ExecutionResultInput, Void> PARSER =
+    new ObjectParser<>(ExecutionResultInput.class.getName(), false, ExecutionResultInput::new);
 
   static {
     PARSER.declareObject(ExecutionResultInput::setPayload, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PAYLOAD);
-    PARSER.declareObject(ExecutionResultInput::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS);
-    PARSER.declareObject(ExecutionResultInput::setType, (p, t) -> InputType.PARSER.apply(p), TYPE);
+    PARSER.declareField(ExecutionResultInput::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(ExecutionResultInput::setType, (p, t) -> InputType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

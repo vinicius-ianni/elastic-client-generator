@@ -61,8 +61,8 @@ public class BooleanProperty  implements XContentable<BooleanProperty> {
     return BooleanProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BooleanProperty, Void> PARSER =
-    new ConstructingObjectParser<>(BooleanProperty.class.getName(), false, args -> new BooleanProperty());
+  public static final ObjectParser<BooleanProperty, Void> PARSER =
+    new ObjectParser<>(BooleanProperty.class.getName(), false, BooleanProperty::new);
 
   static {
     PARSER.declareDouble(BooleanProperty::setBoost, BOOST);

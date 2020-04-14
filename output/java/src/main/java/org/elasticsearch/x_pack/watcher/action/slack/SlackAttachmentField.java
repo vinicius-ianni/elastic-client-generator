@@ -50,8 +50,8 @@ public class SlackAttachmentField  implements XContentable<SlackAttachmentField>
     return SlackAttachmentField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SlackAttachmentField, Void> PARSER =
-    new ConstructingObjectParser<>(SlackAttachmentField.class.getName(), false, args -> new SlackAttachmentField());
+  public static final ObjectParser<SlackAttachmentField, Void> PARSER =
+    new ObjectParser<>(SlackAttachmentField.class.getName(), false, SlackAttachmentField::new);
 
   static {
     PARSER.declareBoolean(SlackAttachmentField::setShort, SHORT);

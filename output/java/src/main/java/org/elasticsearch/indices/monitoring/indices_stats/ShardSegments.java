@@ -124,8 +124,8 @@ public class ShardSegments  implements XContentable<ShardSegments> {
     return ShardSegments.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardSegments, Void> PARSER =
-    new ConstructingObjectParser<>(ShardSegments.class.getName(), false, args -> new ShardSegments());
+  public static final ObjectParser<ShardSegments, Void> PARSER =
+    new ObjectParser<>(ShardSegments.class.getName(), false, ShardSegments::new);
 
   static {
     PARSER.declareLong(ShardSegments::setCount, COUNT);

@@ -43,8 +43,8 @@ public class IAnalyzer  implements XContentable<IAnalyzer> {
     return IAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(IAnalyzer.class.getName(), false, args -> new IAnalyzer());
+  public static final ObjectParser<IAnalyzer, Void> PARSER =
+    new ObjectParser<>(IAnalyzer.class.getName(), false, IAnalyzer::new);
 
   static {
     PARSER.declareString(IAnalyzer::setType, TYPE);

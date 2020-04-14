@@ -60,12 +60,12 @@ public class SegmentsRequest  implements XContentable<SegmentsRequest> {
     return SegmentsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SegmentsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SegmentsRequest.class.getName(), false, args -> new SegmentsRequest());
+  public static final ObjectParser<SegmentsRequest, Void> PARSER =
+    new ObjectParser<>(SegmentsRequest.class.getName(), false, SegmentsRequest::new);
 
   static {
     PARSER.declareBoolean(SegmentsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(SegmentsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(SegmentsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SegmentsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(SegmentsRequest::setVerbose, VERBOSE);
   }

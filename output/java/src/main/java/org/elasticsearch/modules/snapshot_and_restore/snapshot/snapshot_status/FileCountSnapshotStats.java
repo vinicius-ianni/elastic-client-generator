@@ -43,8 +43,8 @@ public class FileCountSnapshotStats  implements XContentable<FileCountSnapshotSt
     return FileCountSnapshotStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FileCountSnapshotStats, Void> PARSER =
-    new ConstructingObjectParser<>(FileCountSnapshotStats.class.getName(), false, args -> new FileCountSnapshotStats());
+  public static final ObjectParser<FileCountSnapshotStats, Void> PARSER =
+    new ObjectParser<>(FileCountSnapshotStats.class.getName(), false, FileCountSnapshotStats::new);
 
   static {
     PARSER.declareInt(FileCountSnapshotStats::setFileCount, FILE_COUNT);

@@ -31,8 +31,8 @@ public class SmoothingModel  implements XContentable<SmoothingModel> {
     return SmoothingModel.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SmoothingModel, Void> PARSER =
-    new ConstructingObjectParser<>(SmoothingModel.class.getName(), false, args -> new SmoothingModel());
+  public static final ObjectParser<SmoothingModel, Void> PARSER =
+    new ObjectParser<>(SmoothingModel.class.getName(), false, SmoothingModel::new);
 
   static {
     

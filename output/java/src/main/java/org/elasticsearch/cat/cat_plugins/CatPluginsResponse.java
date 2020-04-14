@@ -38,8 +38,8 @@ public class CatPluginsResponse  implements XContentable<CatPluginsResponse> {
     return CatPluginsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatPluginsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CatPluginsResponse.class.getName(), false, args -> new CatPluginsResponse());
+  public static final ObjectParser<CatPluginsResponse, Void> PARSER =
+    new ObjectParser<>(CatPluginsResponse.class.getName(), false, CatPluginsResponse::new);
 
   static {
     PARSER.declareObjectArray(CatPluginsResponse::setRecords, (p, t) -> CatPluginsRecord.PARSER.apply(p, t), RECORDS);

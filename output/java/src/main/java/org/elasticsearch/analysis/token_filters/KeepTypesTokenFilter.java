@@ -48,11 +48,11 @@ public class KeepTypesTokenFilter  implements XContentable<KeepTypesTokenFilter>
     return KeepTypesTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KeepTypesTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KeepTypesTokenFilter.class.getName(), false, args -> new KeepTypesTokenFilter());
+  public static final ObjectParser<KeepTypesTokenFilter, Void> PARSER =
+    new ObjectParser<>(KeepTypesTokenFilter.class.getName(), false, KeepTypesTokenFilter::new);
 
   static {
-    PARSER.declareObject(KeepTypesTokenFilter::setMode, (p, t) -> KeepTypesMode.PARSER.apply(p), MODE);
+    PARSER.declareField(KeepTypesTokenFilter::setMode, (p, t) -> KeepTypesMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareStringArray(KeepTypesTokenFilter::setTypes, TYPES);
   }
 

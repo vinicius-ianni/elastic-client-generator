@@ -143,8 +143,8 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
     return MultiTermVectorOperation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiTermVectorOperation, Void> PARSER =
-    new ConstructingObjectParser<>(MultiTermVectorOperation.class.getName(), false, args -> new MultiTermVectorOperation());
+  public static final ObjectParser<MultiTermVectorOperation, Void> PARSER =
+    new ObjectParser<>(MultiTermVectorOperation.class.getName(), false, MultiTermVectorOperation::new);
 
   static {
     PARSER.declareObject(MultiTermVectorOperation::setDoc, (p, t) -> p.objectText(), DOC);
@@ -159,7 +159,7 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
     PARSER.declareObjectArray(MultiTermVectorOperation::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(MultiTermVectorOperation::setTermStatistics, TERM_STATISTICS);
     PARSER.declareLong(MultiTermVectorOperation::setVersion, VERSION);
-    PARSER.declareObject(MultiTermVectorOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(MultiTermVectorOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

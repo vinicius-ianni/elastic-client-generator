@@ -126,8 +126,8 @@ public class DatafeedConfig  implements XContentable<DatafeedConfig> {
     return DatafeedConfig.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DatafeedConfig, Void> PARSER =
-    new ConstructingObjectParser<>(DatafeedConfig.class.getName(), false, args -> new DatafeedConfig());
+  public static final ObjectParser<DatafeedConfig, Void> PARSER =
+    new ObjectParser<>(DatafeedConfig.class.getName(), false, DatafeedConfig::new);
 
   static {
     PARSER.declareObject(DatafeedConfig::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);

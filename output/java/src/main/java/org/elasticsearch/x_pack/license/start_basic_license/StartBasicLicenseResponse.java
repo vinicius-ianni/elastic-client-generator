@@ -53,8 +53,8 @@ public class StartBasicLicenseResponse  implements XContentable<StartBasicLicens
     return StartBasicLicenseResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StartBasicLicenseResponse, Void> PARSER =
-    new ConstructingObjectParser<>(StartBasicLicenseResponse.class.getName(), false, args -> new StartBasicLicenseResponse());
+  public static final ObjectParser<StartBasicLicenseResponse, Void> PARSER =
+    new ObjectParser<>(StartBasicLicenseResponse.class.getName(), false, StartBasicLicenseResponse::new);
 
   static {
     PARSER.declareObject(StartBasicLicenseResponse::setAcknowledge, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<String> */), ACKNOWLEDGE);

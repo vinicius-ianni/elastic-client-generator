@@ -59,8 +59,8 @@ public class BulkAliasRequest  implements XContentable<BulkAliasRequest> {
     return BulkAliasRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BulkAliasRequest, Void> PARSER =
-    new ConstructingObjectParser<>(BulkAliasRequest.class.getName(), false, args -> new BulkAliasRequest());
+  public static final ObjectParser<BulkAliasRequest, Void> PARSER =
+    new ObjectParser<>(BulkAliasRequest.class.getName(), false, BulkAliasRequest::new);
 
   static {
     PARSER.declareObjectArray(BulkAliasRequest::setActions, (p, t) -> AliasAction.PARSER.apply(p, t), ACTIONS);

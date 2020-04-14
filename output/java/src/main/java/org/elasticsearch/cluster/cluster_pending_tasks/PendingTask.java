@@ -64,8 +64,8 @@ public class PendingTask  implements XContentable<PendingTask> {
     return PendingTask.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PendingTask, Void> PARSER =
-    new ConstructingObjectParser<>(PendingTask.class.getName(), false, args -> new PendingTask());
+  public static final ObjectParser<PendingTask, Void> PARSER =
+    new ObjectParser<>(PendingTask.class.getName(), false, PendingTask::new);
 
   static {
     PARSER.declareInt(PendingTask::setInsertOrder, INSERT_ORDER);

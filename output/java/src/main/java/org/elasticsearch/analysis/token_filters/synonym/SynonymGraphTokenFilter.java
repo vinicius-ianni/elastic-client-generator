@@ -76,12 +76,12 @@ public class SynonymGraphTokenFilter  implements XContentable<SynonymGraphTokenF
     return SynonymGraphTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SynonymGraphTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(SynonymGraphTokenFilter.class.getName(), false, args -> new SynonymGraphTokenFilter());
+  public static final ObjectParser<SynonymGraphTokenFilter, Void> PARSER =
+    new ObjectParser<>(SynonymGraphTokenFilter.class.getName(), false, SynonymGraphTokenFilter::new);
 
   static {
     PARSER.declareBoolean(SynonymGraphTokenFilter::setExpand, EXPAND);
-    PARSER.declareObject(SynonymGraphTokenFilter::setFormat, (p, t) -> SynonymFormat.PARSER.apply(p), FORMAT);
+    PARSER.declareField(SynonymGraphTokenFilter::setFormat, (p, t) -> SynonymFormat.PARSER.apply(p), FORMAT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SynonymGraphTokenFilter::setLenient, LENIENT);
     PARSER.declareStringArray(SynonymGraphTokenFilter::setSynonyms, SYNONYMS);
     PARSER.declareString(SynonymGraphTokenFilter::setSynonymsPath, SYNONYMS_PATH);

@@ -50,8 +50,8 @@ public class CreateFollowIndexResponse  implements XContentable<CreateFollowInde
     return CreateFollowIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateFollowIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CreateFollowIndexResponse.class.getName(), false, args -> new CreateFollowIndexResponse());
+  public static final ObjectParser<CreateFollowIndexResponse, Void> PARSER =
+    new ObjectParser<>(CreateFollowIndexResponse.class.getName(), false, CreateFollowIndexResponse::new);
 
   static {
     PARSER.declareBoolean(CreateFollowIndexResponse::setFollowIndexCreated, FOLLOW_INDEX_CREATED);

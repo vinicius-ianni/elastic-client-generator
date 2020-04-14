@@ -31,8 +31,8 @@ public class OpenIndexResponse  implements XContentable<OpenIndexResponse> {
     return OpenIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OpenIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(OpenIndexResponse.class.getName(), false, args -> new OpenIndexResponse());
+  public static final ObjectParser<OpenIndexResponse, Void> PARSER =
+    new ObjectParser<>(OpenIndexResponse.class.getName(), false, OpenIndexResponse::new);
 
   static {
     

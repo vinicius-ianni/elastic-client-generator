@@ -36,8 +36,8 @@ public class FoundUserPrivilege  implements XContentable<FoundUserPrivilege> {
     return FoundUserPrivilege.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FoundUserPrivilege, Void> PARSER =
-    new ConstructingObjectParser<>(FoundUserPrivilege.class.getName(), false, args -> new FoundUserPrivilege());
+  public static final ObjectParser<FoundUserPrivilege, Void> PARSER =
+    new ObjectParser<>(FoundUserPrivilege.class.getName(), false, FoundUserPrivilege::new);
 
   static {
     PARSER.declareBoolean(FoundUserPrivilege::setFound, FOUND);

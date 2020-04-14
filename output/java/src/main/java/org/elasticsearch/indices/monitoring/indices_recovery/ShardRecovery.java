@@ -141,8 +141,8 @@ public class ShardRecovery  implements XContentable<ShardRecovery> {
     return ShardRecovery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardRecovery, Void> PARSER =
-    new ConstructingObjectParser<>(ShardRecovery.class.getName(), false, args -> new ShardRecovery());
+  public static final ObjectParser<ShardRecovery, Void> PARSER =
+    new ObjectParser<>(ShardRecovery.class.getName(), false, ShardRecovery::new);
 
   static {
     PARSER.declareLong(ShardRecovery::setId, ID);

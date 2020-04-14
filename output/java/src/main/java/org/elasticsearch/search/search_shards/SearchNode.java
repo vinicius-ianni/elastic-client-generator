@@ -43,8 +43,8 @@ public class SearchNode  implements XContentable<SearchNode> {
     return SearchNode.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchNode, Void> PARSER =
-    new ConstructingObjectParser<>(SearchNode.class.getName(), false, args -> new SearchNode());
+  public static final ObjectParser<SearchNode, Void> PARSER =
+    new ObjectParser<>(SearchNode.class.getName(), false, SearchNode::new);
 
   static {
     PARSER.declareString(SearchNode::setName, NAME);

@@ -123,8 +123,8 @@ public class UpdateDatafeedRequest  implements XContentable<UpdateDatafeedReques
     return UpdateDatafeedRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateDatafeedRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateDatafeedRequest.class.getName(), false, args -> new UpdateDatafeedRequest());
+  public static final ObjectParser<UpdateDatafeedRequest, Void> PARSER =
+    new ObjectParser<>(UpdateDatafeedRequest.class.getName(), false, UpdateDatafeedRequest::new);
 
   static {
     PARSER.declareObject(UpdateDatafeedRequest::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);

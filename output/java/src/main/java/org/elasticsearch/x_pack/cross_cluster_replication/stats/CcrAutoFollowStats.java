@@ -70,8 +70,8 @@ public class CcrAutoFollowStats  implements XContentable<CcrAutoFollowStats> {
     return CcrAutoFollowStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CcrAutoFollowStats, Void> PARSER =
-    new ConstructingObjectParser<>(CcrAutoFollowStats.class.getName(), false, args -> new CcrAutoFollowStats());
+  public static final ObjectParser<CcrAutoFollowStats, Void> PARSER =
+    new ObjectParser<>(CcrAutoFollowStats.class.getName(), false, CcrAutoFollowStats::new);
 
   static {
     PARSER.declareLong(CcrAutoFollowStats::setNumberOfFailedFollowIndices, NUMBER_OF_FAILED_FOLLOW_INDICES);

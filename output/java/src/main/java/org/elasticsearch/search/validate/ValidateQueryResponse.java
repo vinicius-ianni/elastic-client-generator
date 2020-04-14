@@ -56,8 +56,8 @@ public class ValidateQueryResponse  implements XContentable<ValidateQueryRespons
     return ValidateQueryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ValidateQueryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ValidateQueryResponse.class.getName(), false, args -> new ValidateQueryResponse());
+  public static final ObjectParser<ValidateQueryResponse, Void> PARSER =
+    new ObjectParser<>(ValidateQueryResponse.class.getName(), false, ValidateQueryResponse::new);
 
   static {
     PARSER.declareObjectArray(ValidateQueryResponse::setExplanations, (p, t) -> ValidationExplanation.PARSER.apply(p, t), EXPLANATIONS);

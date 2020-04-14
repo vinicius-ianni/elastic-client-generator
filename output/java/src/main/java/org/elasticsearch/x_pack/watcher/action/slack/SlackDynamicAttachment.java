@@ -46,8 +46,8 @@ public class SlackDynamicAttachment  implements XContentable<SlackDynamicAttachm
     return SlackDynamicAttachment.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SlackDynamicAttachment, Void> PARSER =
-    new ConstructingObjectParser<>(SlackDynamicAttachment.class.getName(), false, args -> new SlackDynamicAttachment());
+  public static final ObjectParser<SlackDynamicAttachment, Void> PARSER =
+    new ObjectParser<>(SlackDynamicAttachment.class.getName(), false, SlackDynamicAttachment::new);
 
   static {
     PARSER.declareObject(SlackDynamicAttachment::setAttachmentTemplate, (p, t) -> SlackAttachment.PARSER.apply(p, t), ATTACHMENT_TEMPLATE);

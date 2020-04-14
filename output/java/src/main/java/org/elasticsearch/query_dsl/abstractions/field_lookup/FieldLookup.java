@@ -72,8 +72,8 @@ public class FieldLookup  implements XContentable<FieldLookup> {
     return FieldLookup.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldLookup, Void> PARSER =
-    new ConstructingObjectParser<>(FieldLookup.class.getName(), false, args -> new FieldLookup());
+  public static final ObjectParser<FieldLookup, Void> PARSER =
+    new ObjectParser<>(FieldLookup.class.getName(), false, FieldLookup::new);
 
   static {
     PARSER.declareObject(FieldLookup::setId, (p, t) -> Id.createFrom(p), ID);

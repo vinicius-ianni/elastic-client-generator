@@ -36,8 +36,8 @@ public class DeleteByQueryRethrottleRequest  implements XContentable<DeleteByQue
     return DeleteByQueryRethrottleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteByQueryRethrottleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteByQueryRethrottleRequest.class.getName(), false, args -> new DeleteByQueryRethrottleRequest());
+  public static final ObjectParser<DeleteByQueryRethrottleRequest, Void> PARSER =
+    new ObjectParser<>(DeleteByQueryRethrottleRequest.class.getName(), false, DeleteByQueryRethrottleRequest::new);
 
   static {
     PARSER.declareLong(DeleteByQueryRethrottleRequest::setRequestsPerSecond, REQUESTS_PER_SECOND);

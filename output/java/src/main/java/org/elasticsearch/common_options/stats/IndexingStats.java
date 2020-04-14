@@ -124,8 +124,8 @@ public class IndexingStats  implements XContentable<IndexingStats> {
     return IndexingStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexingStats, Void> PARSER =
-    new ConstructingObjectParser<>(IndexingStats.class.getName(), false, args -> new IndexingStats());
+  public static final ObjectParser<IndexingStats, Void> PARSER =
+    new ObjectParser<>(IndexingStats.class.getName(), false, IndexingStats::new);
 
   static {
     PARSER.declareLong(IndexingStats::setIndexCurrent, INDEX_CURRENT);

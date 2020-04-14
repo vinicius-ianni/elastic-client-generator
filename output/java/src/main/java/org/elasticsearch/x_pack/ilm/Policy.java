@@ -39,8 +39,8 @@ public class Policy  implements XContentable<Policy> {
     return Policy.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Policy, Void> PARSER =
-    new ConstructingObjectParser<>(Policy.class.getName(), false, args -> new Policy());
+  public static final ObjectParser<Policy, Void> PARSER =
+    new ObjectParser<>(Policy.class.getName(), false, Policy::new);
 
   static {
     PARSER.declareObject(Policy::setPhases, (p, t) -> Phases.PARSER.apply(p, t), PHASES);

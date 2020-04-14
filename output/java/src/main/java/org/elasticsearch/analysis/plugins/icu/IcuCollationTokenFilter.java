@@ -118,19 +118,19 @@ public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenF
     return IcuCollationTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IcuCollationTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(IcuCollationTokenFilter.class.getName(), false, args -> new IcuCollationTokenFilter());
+  public static final ObjectParser<IcuCollationTokenFilter, Void> PARSER =
+    new ObjectParser<>(IcuCollationTokenFilter.class.getName(), false, IcuCollationTokenFilter::new);
 
   static {
-    PARSER.declareObject(IcuCollationTokenFilter::setAlternate, (p, t) -> IcuCollationAlternate.PARSER.apply(p), ALTERNATE);
-    PARSER.declareObject(IcuCollationTokenFilter::setCaseFirst, (p, t) -> IcuCollationCaseFirst.PARSER.apply(p), CASE_FIRST);
+    PARSER.declareField(IcuCollationTokenFilter::setAlternate, (p, t) -> IcuCollationAlternate.PARSER.apply(p), ALTERNATE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(IcuCollationTokenFilter::setCaseFirst, (p, t) -> IcuCollationCaseFirst.PARSER.apply(p), CASE_FIRST, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(IcuCollationTokenFilter::setCaseLevel, CASE_LEVEL);
     PARSER.declareString(IcuCollationTokenFilter::setCountry, COUNTRY);
-    PARSER.declareObject(IcuCollationTokenFilter::setDecomposition, (p, t) -> IcuCollationDecomposition.PARSER.apply(p), DECOMPOSITION);
+    PARSER.declareField(IcuCollationTokenFilter::setDecomposition, (p, t) -> IcuCollationDecomposition.PARSER.apply(p), DECOMPOSITION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(IcuCollationTokenFilter::setHiraganaQuaternaryMode, HIRAGANA_QUATERNARY_MODE);
     PARSER.declareString(IcuCollationTokenFilter::setLanguage, LANGUAGE);
     PARSER.declareBoolean(IcuCollationTokenFilter::setNumeric, NUMERIC);
-    PARSER.declareObject(IcuCollationTokenFilter::setStrength, (p, t) -> IcuCollationStrength.PARSER.apply(p), STRENGTH);
+    PARSER.declareField(IcuCollationTokenFilter::setStrength, (p, t) -> IcuCollationStrength.PARSER.apply(p), STRENGTH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(IcuCollationTokenFilter::setVariableTop, VARIABLE_TOP);
     PARSER.declareString(IcuCollationTokenFilter::setVariant, VARIANT);
   }

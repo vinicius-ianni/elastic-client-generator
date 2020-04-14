@@ -96,11 +96,11 @@ public class CatFielddataRequest  implements XContentable<CatFielddataRequest> {
     return CatFielddataRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatFielddataRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatFielddataRequest.class.getName(), false, args -> new CatFielddataRequest());
+  public static final ObjectParser<CatFielddataRequest, Void> PARSER =
+    new ObjectParser<>(CatFielddataRequest.class.getName(), false, CatFielddataRequest::new);
 
   static {
-    PARSER.declareObject(CatFielddataRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
+    PARSER.declareField(CatFielddataRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(CatFielddataRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatFielddataRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatFielddataRequest::setHelp, HELP);

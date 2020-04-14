@@ -107,8 +107,8 @@ public class Hit<TDocument>  implements XContentable<Hit<TDocument>> {
     return Hit.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Hit, Void> PARSER =
-    new ConstructingObjectParser<>(Hit.class.getName(), false, args -> new Hit());
+  public static final ObjectParser<Hit, Void> PARSER =
+    new ObjectParser<>(Hit.class.getName(), false, Hit::new);
 
   static {
     PARSER.declareObject(Hit::setExplanation, (p, t) -> Explanation.PARSER.apply(p, t), EXPLANATION);

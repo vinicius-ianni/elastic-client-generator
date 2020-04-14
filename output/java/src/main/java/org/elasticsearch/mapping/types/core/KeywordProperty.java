@@ -96,15 +96,15 @@ public class KeywordProperty  implements XContentable<KeywordProperty> {
     return KeywordProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KeywordProperty, Void> PARSER =
-    new ConstructingObjectParser<>(KeywordProperty.class.getName(), false, args -> new KeywordProperty());
+  public static final ObjectParser<KeywordProperty, Void> PARSER =
+    new ObjectParser<>(KeywordProperty.class.getName(), false, KeywordProperty::new);
 
   static {
     PARSER.declareDouble(KeywordProperty::setBoost, BOOST);
     PARSER.declareBoolean(KeywordProperty::setEagerGlobalOrdinals, EAGER_GLOBAL_ORDINALS);
     PARSER.declareInt(KeywordProperty::setIgnoreAbove, IGNORE_ABOVE);
     PARSER.declareBoolean(KeywordProperty::setIndex, INDEX);
-    PARSER.declareObject(KeywordProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
+    PARSER.declareField(KeywordProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(KeywordProperty::setNormalizer, NORMALIZER);
     PARSER.declareBoolean(KeywordProperty::setNorms, NORMS);
     PARSER.declareString(KeywordProperty::setNullValue, NULL_VALUE);

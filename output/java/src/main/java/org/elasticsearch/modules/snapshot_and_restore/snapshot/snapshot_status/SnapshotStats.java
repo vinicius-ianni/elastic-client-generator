@@ -64,8 +64,8 @@ public class SnapshotStats  implements XContentable<SnapshotStats> {
     return SnapshotStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotStats, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotStats.class.getName(), false, args -> new SnapshotStats());
+  public static final ObjectParser<SnapshotStats, Void> PARSER =
+    new ObjectParser<>(SnapshotStats.class.getName(), false, SnapshotStats::new);
 
   static {
     PARSER.declareObject(SnapshotStats::setIncremental, (p, t) -> FileCountSnapshotStats.PARSER.apply(p, t), INCREMENTAL);

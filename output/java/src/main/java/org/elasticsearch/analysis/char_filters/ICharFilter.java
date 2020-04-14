@@ -43,8 +43,8 @@ public class ICharFilter  implements XContentable<ICharFilter> {
     return ICharFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ICharFilter, Void> PARSER =
-    new ConstructingObjectParser<>(ICharFilter.class.getName(), false, args -> new ICharFilter());
+  public static final ObjectParser<ICharFilter, Void> PARSER =
+    new ObjectParser<>(ICharFilter.class.getName(), false, ICharFilter::new);
 
   static {
     PARSER.declareString(ICharFilter::setType, TYPE);

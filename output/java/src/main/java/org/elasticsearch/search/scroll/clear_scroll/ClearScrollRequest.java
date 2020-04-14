@@ -38,8 +38,8 @@ public class ClearScrollRequest  implements XContentable<ClearScrollRequest> {
     return ClearScrollRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearScrollRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClearScrollRequest.class.getName(), false, args -> new ClearScrollRequest());
+  public static final ObjectParser<ClearScrollRequest, Void> PARSER =
+    new ObjectParser<>(ClearScrollRequest.class.getName(), false, ClearScrollRequest::new);
 
   static {
     PARSER.declareStringArray(ClearScrollRequest::setScrollId, SCROLL_ID);

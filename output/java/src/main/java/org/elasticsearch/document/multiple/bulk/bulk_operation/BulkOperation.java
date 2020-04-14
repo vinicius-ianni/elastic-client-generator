@@ -94,8 +94,8 @@ public class BulkOperation  implements XContentable<BulkOperation> {
     return BulkOperation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BulkOperation, Void> PARSER =
-    new ConstructingObjectParser<>(BulkOperation.class.getName(), false, args -> new BulkOperation());
+  public static final ObjectParser<BulkOperation, Void> PARSER =
+    new ObjectParser<>(BulkOperation.class.getName(), false, BulkOperation::new);
 
   static {
     PARSER.declareObject(BulkOperation::setId, (p, t) -> Id.createFrom(p), ID);
@@ -104,7 +104,7 @@ public class BulkOperation  implements XContentable<BulkOperation> {
     PARSER.declareInt(BulkOperation::setRetryOnConflict, RETRY_ON_CONFLICT);
     PARSER.declareObject(BulkOperation::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareLong(BulkOperation::setVersion, VERSION);
-    PARSER.declareObject(BulkOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(BulkOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

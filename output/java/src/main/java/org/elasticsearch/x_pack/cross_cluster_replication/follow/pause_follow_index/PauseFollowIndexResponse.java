@@ -31,8 +31,8 @@ public class PauseFollowIndexResponse  implements XContentable<PauseFollowIndexR
     return PauseFollowIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PauseFollowIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PauseFollowIndexResponse.class.getName(), false, args -> new PauseFollowIndexResponse());
+  public static final ObjectParser<PauseFollowIndexResponse, Void> PARSER =
+    new ObjectParser<>(PauseFollowIndexResponse.class.getName(), false, PauseFollowIndexResponse::new);
 
   static {
     

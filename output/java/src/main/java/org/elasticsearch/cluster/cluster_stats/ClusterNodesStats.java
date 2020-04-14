@@ -128,8 +128,8 @@ public class ClusterNodesStats  implements XContentable<ClusterNodesStats> {
     return ClusterNodesStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterNodesStats, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterNodesStats.class.getName(), false, args -> new ClusterNodesStats());
+  public static final ObjectParser<ClusterNodesStats, Void> PARSER =
+    new ObjectParser<>(ClusterNodesStats.class.getName(), false, ClusterNodesStats::new);
 
   static {
     PARSER.declareObject(ClusterNodesStats::setCount, (p, t) -> ClusterNodeCount.PARSER.apply(p, t), COUNT);

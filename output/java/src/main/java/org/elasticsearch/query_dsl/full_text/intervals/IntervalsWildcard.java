@@ -53,8 +53,8 @@ public class IntervalsWildcard  implements XContentable<IntervalsWildcard> {
     return IntervalsWildcard.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsWildcard, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsWildcard.class.getName(), false, args -> new IntervalsWildcard());
+  public static final ObjectParser<IntervalsWildcard, Void> PARSER =
+    new ObjectParser<>(IntervalsWildcard.class.getName(), false, IntervalsWildcard::new);
 
   static {
     PARSER.declareString(IntervalsWildcard::setAnalyzer, ANALYZER);

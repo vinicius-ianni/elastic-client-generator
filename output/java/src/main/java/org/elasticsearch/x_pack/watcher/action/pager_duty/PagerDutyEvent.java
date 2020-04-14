@@ -90,8 +90,8 @@ public class PagerDutyEvent  implements XContentable<PagerDutyEvent> {
     return PagerDutyEvent.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PagerDutyEvent, Void> PARSER =
-    new ConstructingObjectParser<>(PagerDutyEvent.class.getName(), false, args -> new PagerDutyEvent());
+  public static final ObjectParser<PagerDutyEvent, Void> PARSER =
+    new ObjectParser<>(PagerDutyEvent.class.getName(), false, PagerDutyEvent::new);
 
   static {
     PARSER.declareString(PagerDutyEvent::setAccount, ACCOUNT);
@@ -100,7 +100,7 @@ public class PagerDutyEvent  implements XContentable<PagerDutyEvent> {
     PARSER.declareString(PagerDutyEvent::setClientUrl, CLIENT_URL);
     PARSER.declareObjectArray(PagerDutyEvent::setContext, (p, t) -> PagerDutyContext.PARSER.apply(p, t), CONTEXT);
     PARSER.declareString(PagerDutyEvent::setDescription, DESCRIPTION);
-    PARSER.declareObject(PagerDutyEvent::setEventType, (p, t) -> PagerDutyEventType.PARSER.apply(p), EVENT_TYPE);
+    PARSER.declareField(PagerDutyEvent::setEventType, (p, t) -> PagerDutyEventType.PARSER.apply(p), EVENT_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(PagerDutyEvent::setIncidentKey, INCIDENT_KEY);
   }
 

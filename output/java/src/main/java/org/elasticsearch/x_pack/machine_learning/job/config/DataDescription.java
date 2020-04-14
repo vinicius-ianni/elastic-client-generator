@@ -53,8 +53,8 @@ public class DataDescription  implements XContentable<DataDescription> {
     return DataDescription.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DataDescription, Void> PARSER =
-    new ConstructingObjectParser<>(DataDescription.class.getName(), false, args -> new DataDescription());
+  public static final ObjectParser<DataDescription, Void> PARSER =
+    new ObjectParser<>(DataDescription.class.getName(), false, DataDescription::new);
 
   static {
     PARSER.declareString(DataDescription::setFormat, FORMAT);

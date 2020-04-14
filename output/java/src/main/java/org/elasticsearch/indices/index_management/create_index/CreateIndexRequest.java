@@ -96,8 +96,8 @@ public class CreateIndexRequest  implements XContentable<CreateIndexRequest> {
     return CreateIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CreateIndexRequest.class.getName(), false, args -> new CreateIndexRequest());
+  public static final ObjectParser<CreateIndexRequest, Void> PARSER =
+    new ObjectParser<>(CreateIndexRequest.class.getName(), false, CreateIndexRequest::new);
 
   static {
     PARSER.declareObject(CreateIndexRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

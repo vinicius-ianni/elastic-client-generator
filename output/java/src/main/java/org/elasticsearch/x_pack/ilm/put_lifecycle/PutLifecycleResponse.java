@@ -31,8 +31,8 @@ public class PutLifecycleResponse  implements XContentable<PutLifecycleResponse>
     return PutLifecycleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutLifecycleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutLifecycleResponse.class.getName(), false, args -> new PutLifecycleResponse());
+  public static final ObjectParser<PutLifecycleResponse, Void> PARSER =
+    new ObjectParser<>(PutLifecycleResponse.class.getName(), false, PutLifecycleResponse::new);
 
   static {
     

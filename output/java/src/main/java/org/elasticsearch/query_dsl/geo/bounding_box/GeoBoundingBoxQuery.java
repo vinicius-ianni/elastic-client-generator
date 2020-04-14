@@ -60,13 +60,13 @@ public class GeoBoundingBoxQuery  implements XContentable<GeoBoundingBoxQuery> {
     return GeoBoundingBoxQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoBoundingBoxQuery, Void> PARSER =
-    new ConstructingObjectParser<>(GeoBoundingBoxQuery.class.getName(), false, args -> new GeoBoundingBoxQuery());
+  public static final ObjectParser<GeoBoundingBoxQuery, Void> PARSER =
+    new ObjectParser<>(GeoBoundingBoxQuery.class.getName(), false, GeoBoundingBoxQuery::new);
 
   static {
     PARSER.declareObject(GeoBoundingBoxQuery::setBoundingBox, (p, t) -> BoundingBox.PARSER.apply(p, t), BOUNDING_BOX);
-    PARSER.declareObject(GeoBoundingBoxQuery::setType, (p, t) -> GeoExecution.PARSER.apply(p), TYPE);
-    PARSER.declareObject(GeoBoundingBoxQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD);
+    PARSER.declareField(GeoBoundingBoxQuery::setType, (p, t) -> GeoExecution.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(GeoBoundingBoxQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

@@ -95,11 +95,11 @@ public class ShardStore  implements XContentable<ShardStore> {
     return ShardStore.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardStore, Void> PARSER =
-    new ConstructingObjectParser<>(ShardStore.class.getName(), false, args -> new ShardStore());
+  public static final ObjectParser<ShardStore, Void> PARSER =
+    new ObjectParser<>(ShardStore.class.getName(), false, ShardStore::new);
 
   static {
-    PARSER.declareObject(ShardStore::setAllocation, (p, t) -> ShardStoreAllocation.PARSER.apply(p), ALLOCATION);
+    PARSER.declareField(ShardStore::setAllocation, (p, t) -> ShardStoreAllocation.PARSER.apply(p), ALLOCATION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(ShardStore::setAllocationId, ALLOCATION_ID);
     PARSER.declareObject(ShardStore::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), ATTRIBUTES);
     PARSER.declareString(ShardStore::setId, ID);

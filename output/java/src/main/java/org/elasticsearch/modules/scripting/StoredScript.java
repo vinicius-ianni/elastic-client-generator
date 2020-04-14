@@ -43,8 +43,8 @@ public class StoredScript  implements XContentable<StoredScript> {
     return StoredScript.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StoredScript, Void> PARSER =
-    new ConstructingObjectParser<>(StoredScript.class.getName(), false, args -> new StoredScript());
+  public static final ObjectParser<StoredScript, Void> PARSER =
+    new ObjectParser<>(StoredScript.class.getName(), false, StoredScript::new);
 
   static {
     PARSER.declareString(StoredScript::setLang, LANG);

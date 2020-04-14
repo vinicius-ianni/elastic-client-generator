@@ -43,8 +43,8 @@ public class AnalysisLimits  implements XContentable<AnalysisLimits> {
     return AnalysisLimits.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnalysisLimits, Void> PARSER =
-    new ConstructingObjectParser<>(AnalysisLimits.class.getName(), false, args -> new AnalysisLimits());
+  public static final ObjectParser<AnalysisLimits, Void> PARSER =
+    new ObjectParser<>(AnalysisLimits.class.getName(), false, AnalysisLimits::new);
 
   static {
     PARSER.declareLong(AnalysisLimits::setCategorizationExamplesLimit, CATEGORIZATION_EXAMPLES_LIMIT);

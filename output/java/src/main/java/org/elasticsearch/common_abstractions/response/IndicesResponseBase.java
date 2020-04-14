@@ -39,8 +39,8 @@ public class IndicesResponseBase  implements XContentable<IndicesResponseBase> {
     return IndicesResponseBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesResponseBase, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesResponseBase.class.getName(), false, args -> new IndicesResponseBase());
+  public static final ObjectParser<IndicesResponseBase, Void> PARSER =
+    new ObjectParser<>(IndicesResponseBase.class.getName(), false, IndicesResponseBase::new);
 
   static {
     PARSER.declareObject(IndicesResponseBase::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);

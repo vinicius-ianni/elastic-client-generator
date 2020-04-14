@@ -31,8 +31,8 @@ public class LongRangeProperty  implements XContentable<LongRangeProperty> {
     return LongRangeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LongRangeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(LongRangeProperty.class.getName(), false, args -> new LongRangeProperty());
+  public static final ObjectParser<LongRangeProperty, Void> PARSER =
+    new ObjectParser<>(LongRangeProperty.class.getName(), false, LongRangeProperty::new);
 
   static {
     

@@ -75,15 +75,15 @@ public class ShardHealthStats  implements XContentable<ShardHealthStats> {
     return ShardHealthStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardHealthStats, Void> PARSER =
-    new ConstructingObjectParser<>(ShardHealthStats.class.getName(), false, args -> new ShardHealthStats());
+  public static final ObjectParser<ShardHealthStats, Void> PARSER =
+    new ObjectParser<>(ShardHealthStats.class.getName(), false, ShardHealthStats::new);
 
   static {
     PARSER.declareInt(ShardHealthStats::setActiveShards, ACTIVE_SHARDS);
     PARSER.declareInt(ShardHealthStats::setInitializingShards, INITIALIZING_SHARDS);
     PARSER.declareBoolean(ShardHealthStats::setPrimaryActive, PRIMARY_ACTIVE);
     PARSER.declareInt(ShardHealthStats::setRelocatingShards, RELOCATING_SHARDS);
-    PARSER.declareObject(ShardHealthStats::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS);
+    PARSER.declareField(ShardHealthStats::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(ShardHealthStats::setUnassignedShards, UNASSIGNED_SHARDS);
   }
 

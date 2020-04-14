@@ -48,8 +48,8 @@ public class AnalyzeResponse  implements XContentable<AnalyzeResponse> {
     return AnalyzeResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnalyzeResponse, Void> PARSER =
-    new ConstructingObjectParser<>(AnalyzeResponse.class.getName(), false, args -> new AnalyzeResponse());
+  public static final ObjectParser<AnalyzeResponse, Void> PARSER =
+    new ObjectParser<>(AnalyzeResponse.class.getName(), false, AnalyzeResponse::new);
 
   static {
     PARSER.declareObject(AnalyzeResponse::setDetail, (p, t) -> AnalyzeDetail.PARSER.apply(p, t), DETAIL);

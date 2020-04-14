@@ -46,8 +46,8 @@ public class ClearCachedRolesResponse  implements XContentable<ClearCachedRolesR
     return ClearCachedRolesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearCachedRolesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClearCachedRolesResponse.class.getName(), false, args -> new ClearCachedRolesResponse());
+  public static final ObjectParser<ClearCachedRolesResponse, Void> PARSER =
+    new ObjectParser<>(ClearCachedRolesResponse.class.getName(), false, ClearCachedRolesResponse::new);
 
   static {
     PARSER.declareString(ClearCachedRolesResponse::setClusterName, CLUSTER_NAME);

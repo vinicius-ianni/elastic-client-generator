@@ -40,8 +40,8 @@ public class FieldCapabilitiesResponse  implements XContentable<FieldCapabilitie
     return FieldCapabilitiesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldCapabilitiesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(FieldCapabilitiesResponse.class.getName(), false, args -> new FieldCapabilitiesResponse());
+  public static final ObjectParser<FieldCapabilitiesResponse, Void> PARSER =
+    new ObjectParser<>(FieldCapabilitiesResponse.class.getName(), false, FieldCapabilitiesResponse::new);
 
   static {
     PARSER.declareObject(FieldCapabilitiesResponse::setFields, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),null /* TODO NamedContainer<String, FieldCapabilities> */), FIELDS);

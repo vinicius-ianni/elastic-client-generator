@@ -31,8 +31,8 @@ public class PutAliasResponse  implements XContentable<PutAliasResponse> {
     return PutAliasResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutAliasResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutAliasResponse.class.getName(), false, args -> new PutAliasResponse());
+  public static final ObjectParser<PutAliasResponse, Void> PARSER =
+    new ObjectParser<>(PutAliasResponse.class.getName(), false, PutAliasResponse::new);
 
   static {
     

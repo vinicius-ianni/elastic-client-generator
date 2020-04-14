@@ -33,8 +33,8 @@ public class GetIndexResponse extends DictionaryResponseBase<IndexName, IndexSta
     return GetIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetIndexResponse.class.getName(), false, args -> new GetIndexResponse());
+  public static final ObjectParser<GetIndexResponse, Void> PARSER =
+    new ObjectParser<>(GetIndexResponse.class.getName(), false, GetIndexResponse::new);
 
   static {
     

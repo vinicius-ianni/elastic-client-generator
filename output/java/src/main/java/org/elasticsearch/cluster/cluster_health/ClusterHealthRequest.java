@@ -125,21 +125,21 @@ public class ClusterHealthRequest  implements XContentable<ClusterHealthRequest>
     return ClusterHealthRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterHealthRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterHealthRequest.class.getName(), false, args -> new ClusterHealthRequest());
+  public static final ObjectParser<ClusterHealthRequest, Void> PARSER =
+    new ObjectParser<>(ClusterHealthRequest.class.getName(), false, ClusterHealthRequest::new);
 
   static {
-    PARSER.declareObject(ClusterHealthRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
-    PARSER.declareObject(ClusterHealthRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL);
+    PARSER.declareField(ClusterHealthRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(ClusterHealthRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(ClusterHealthRequest::setLocal, LOCAL);
     PARSER.declareObject(ClusterHealthRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareObject(ClusterHealthRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareString(ClusterHealthRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
-    PARSER.declareObject(ClusterHealthRequest::setWaitForEvents, (p, t) -> WaitForEvents.PARSER.apply(p), WAIT_FOR_EVENTS);
+    PARSER.declareField(ClusterHealthRequest::setWaitForEvents, (p, t) -> WaitForEvents.PARSER.apply(p), WAIT_FOR_EVENTS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(ClusterHealthRequest::setWaitForNoInitializingShards, WAIT_FOR_NO_INITIALIZING_SHARDS);
     PARSER.declareBoolean(ClusterHealthRequest::setWaitForNoRelocatingShards, WAIT_FOR_NO_RELOCATING_SHARDS);
     PARSER.declareString(ClusterHealthRequest::setWaitForNodes, WAIT_FOR_NODES);
-    PARSER.declareObject(ClusterHealthRequest::setWaitForStatus, (p, t) -> WaitForStatus.PARSER.apply(p), WAIT_FOR_STATUS);
+    PARSER.declareField(ClusterHealthRequest::setWaitForStatus, (p, t) -> WaitForStatus.PARSER.apply(p), WAIT_FOR_STATUS, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

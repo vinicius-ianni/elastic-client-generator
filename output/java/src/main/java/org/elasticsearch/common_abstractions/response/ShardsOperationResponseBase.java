@@ -39,8 +39,8 @@ public class ShardsOperationResponseBase  implements XContentable<ShardsOperatio
     return ShardsOperationResponseBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardsOperationResponseBase, Void> PARSER =
-    new ConstructingObjectParser<>(ShardsOperationResponseBase.class.getName(), false, args -> new ShardsOperationResponseBase());
+  public static final ObjectParser<ShardsOperationResponseBase, Void> PARSER =
+    new ObjectParser<>(ShardsOperationResponseBase.class.getName(), false, ShardsOperationResponseBase::new);
 
   static {
     PARSER.declareObject(ShardsOperationResponseBase::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);

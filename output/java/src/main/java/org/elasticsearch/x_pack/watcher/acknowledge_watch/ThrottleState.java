@@ -44,8 +44,8 @@ public class ThrottleState  implements XContentable<ThrottleState> {
     return ThrottleState.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ThrottleState, Void> PARSER =
-    new ConstructingObjectParser<>(ThrottleState.class.getName(), false, args -> new ThrottleState());
+  public static final ObjectParser<ThrottleState, Void> PARSER =
+    new ObjectParser<>(ThrottleState.class.getName(), false, ThrottleState::new);
 
   static {
     PARSER.declareString(ThrottleState::setReason, REASON);

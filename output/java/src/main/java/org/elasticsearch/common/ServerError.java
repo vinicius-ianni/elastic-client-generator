@@ -47,8 +47,8 @@ public class ServerError  implements XContentable<ServerError> {
     return ServerError.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ServerError, Void> PARSER =
-    new ConstructingObjectParser<>(ServerError.class.getName(), false, args -> new ServerError());
+  public static final ObjectParser<ServerError, Void> PARSER =
+    new ObjectParser<>(ServerError.class.getName(), false, ServerError::new);
 
   static {
     PARSER.declareObject(ServerError::setError, (p, t) -> MainError.PARSER.apply(p, t), ERROR);

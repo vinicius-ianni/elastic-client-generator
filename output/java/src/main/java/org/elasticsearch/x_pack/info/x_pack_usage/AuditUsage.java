@@ -38,8 +38,8 @@ public class AuditUsage  implements XContentable<AuditUsage> {
     return AuditUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AuditUsage, Void> PARSER =
-    new ConstructingObjectParser<>(AuditUsage.class.getName(), false, args -> new AuditUsage());
+  public static final ObjectParser<AuditUsage, Void> PARSER =
+    new ObjectParser<>(AuditUsage.class.getName(), false, AuditUsage::new);
 
   static {
     PARSER.declareStringArray(AuditUsage::setOutputs, OUTPUTS);

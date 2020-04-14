@@ -36,8 +36,8 @@ public class StopRollupJobResponse  implements XContentable<StopRollupJobRespons
     return StopRollupJobResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StopRollupJobResponse, Void> PARSER =
-    new ConstructingObjectParser<>(StopRollupJobResponse.class.getName(), false, args -> new StopRollupJobResponse());
+  public static final ObjectParser<StopRollupJobResponse, Void> PARSER =
+    new ObjectParser<>(StopRollupJobResponse.class.getName(), false, StopRollupJobResponse::new);
 
   static {
     PARSER.declareBoolean(StopRollupJobResponse::setStopped, STOPPED);

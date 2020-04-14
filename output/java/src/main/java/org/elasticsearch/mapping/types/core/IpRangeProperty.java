@@ -31,8 +31,8 @@ public class IpRangeProperty  implements XContentable<IpRangeProperty> {
     return IpRangeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IpRangeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(IpRangeProperty.class.getName(), false, args -> new IpRangeProperty());
+  public static final ObjectParser<IpRangeProperty, Void> PARSER =
+    new ObjectParser<>(IpRangeProperty.class.getName(), false, IpRangeProperty::new);
 
   static {
     

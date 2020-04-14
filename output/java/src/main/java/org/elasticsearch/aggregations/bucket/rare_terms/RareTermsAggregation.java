@@ -82,8 +82,8 @@ public class RareTermsAggregation  implements XContentable<RareTermsAggregation>
     return RareTermsAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RareTermsAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(RareTermsAggregation.class.getName(), false, args -> new RareTermsAggregation());
+  public static final ObjectParser<RareTermsAggregation, Void> PARSER =
+    new ObjectParser<>(RareTermsAggregation.class.getName(), false, RareTermsAggregation::new);
 
   static {
     PARSER.declareObject(RareTermsAggregation::setExclude, (p, t) -> TermsExclude.PARSER.apply(p, t), EXCLUDE);

@@ -31,8 +31,8 @@ public class SqlValue  implements XContentable<SqlValue> {
     return SqlValue.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SqlValue, Void> PARSER =
-    new ConstructingObjectParser<>(SqlValue.class.getName(), false, args -> new SqlValue());
+  public static final ObjectParser<SqlValue, Void> PARSER =
+    new ObjectParser<>(SqlValue.class.getName(), false, SqlValue::new);
 
   static {
     

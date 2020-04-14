@@ -82,15 +82,15 @@ public class ClusterStatsResponse  implements XContentable<ClusterStatsResponse>
     return ClusterStatsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterStatsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterStatsResponse.class.getName(), false, args -> new ClusterStatsResponse());
+  public static final ObjectParser<ClusterStatsResponse, Void> PARSER =
+    new ObjectParser<>(ClusterStatsResponse.class.getName(), false, ClusterStatsResponse::new);
 
   static {
     PARSER.declareString(ClusterStatsResponse::setClusterName, CLUSTER_NAME);
     PARSER.declareString(ClusterStatsResponse::setClusterUuid, CLUSTER_UUID);
     PARSER.declareObject(ClusterStatsResponse::setIndices, (p, t) -> ClusterIndicesStats.PARSER.apply(p, t), INDICES);
     PARSER.declareObject(ClusterStatsResponse::setNodes, (p, t) -> ClusterNodesStats.PARSER.apply(p, t), NODES);
-    PARSER.declareObject(ClusterStatsResponse::setStatus, (p, t) -> ClusterStatus.PARSER.apply(p), STATUS);
+    PARSER.declareField(ClusterStatsResponse::setStatus, (p, t) -> ClusterStatus.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(ClusterStatsResponse::setTimestamp, TIMESTAMP);
   }
 

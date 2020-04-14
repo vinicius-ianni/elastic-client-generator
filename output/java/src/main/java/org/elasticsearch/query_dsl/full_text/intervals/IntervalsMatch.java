@@ -68,8 +68,8 @@ public class IntervalsMatch  implements XContentable<IntervalsMatch> {
     return IntervalsMatch.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsMatch, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsMatch.class.getName(), false, args -> new IntervalsMatch());
+  public static final ObjectParser<IntervalsMatch, Void> PARSER =
+    new ObjectParser<>(IntervalsMatch.class.getName(), false, IntervalsMatch::new);
 
   static {
     PARSER.declareString(IntervalsMatch::setAnalyzer, ANALYZER);

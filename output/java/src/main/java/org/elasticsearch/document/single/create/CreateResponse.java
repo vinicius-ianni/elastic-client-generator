@@ -36,8 +36,8 @@ public class CreateResponse  implements XContentable<CreateResponse> {
     return CreateResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CreateResponse.class.getName(), false, args -> new CreateResponse());
+  public static final ObjectParser<CreateResponse, Void> PARSER =
+    new ObjectParser<>(CreateResponse.class.getName(), false, CreateResponse::new);
 
   static {
     PARSER.declareBoolean(CreateResponse::setIsValid, IS_VALID);

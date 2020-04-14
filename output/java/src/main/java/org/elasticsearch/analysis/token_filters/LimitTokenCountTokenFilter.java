@@ -43,8 +43,8 @@ public class LimitTokenCountTokenFilter  implements XContentable<LimitTokenCount
     return LimitTokenCountTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LimitTokenCountTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(LimitTokenCountTokenFilter.class.getName(), false, args -> new LimitTokenCountTokenFilter());
+  public static final ObjectParser<LimitTokenCountTokenFilter, Void> PARSER =
+    new ObjectParser<>(LimitTokenCountTokenFilter.class.getName(), false, LimitTokenCountTokenFilter::new);
 
   static {
     PARSER.declareBoolean(LimitTokenCountTokenFilter::setConsumeAllTokens, CONSUME_ALL_TOKENS);

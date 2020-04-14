@@ -47,8 +47,8 @@ public class ApiKeyPrivileges  implements XContentable<ApiKeyPrivileges> {
     return ApiKeyPrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ApiKeyPrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(ApiKeyPrivileges.class.getName(), false, args -> new ApiKeyPrivileges());
+  public static final ObjectParser<ApiKeyPrivileges, Void> PARSER =
+    new ObjectParser<>(ApiKeyPrivileges.class.getName(), false, ApiKeyPrivileges::new);
 
   static {
     PARSER.declareStringArray(ApiKeyPrivileges::setNames, NAMES);

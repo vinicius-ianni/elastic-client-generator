@@ -43,8 +43,8 @@ public class OverallBucketJobInfo  implements XContentable<OverallBucketJobInfo>
     return OverallBucketJobInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OverallBucketJobInfo, Void> PARSER =
-    new ConstructingObjectParser<>(OverallBucketJobInfo.class.getName(), false, args -> new OverallBucketJobInfo());
+  public static final ObjectParser<OverallBucketJobInfo, Void> PARSER =
+    new ObjectParser<>(OverallBucketJobInfo.class.getName(), false, OverallBucketJobInfo::new);
 
   static {
     PARSER.declareString(OverallBucketJobInfo::setJobId, JOB_ID);

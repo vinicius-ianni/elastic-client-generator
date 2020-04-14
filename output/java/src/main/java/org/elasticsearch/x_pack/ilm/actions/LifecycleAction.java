@@ -31,8 +31,8 @@ public class LifecycleAction  implements XContentable<LifecycleAction> {
     return LifecycleAction.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LifecycleAction, Void> PARSER =
-    new ConstructingObjectParser<>(LifecycleAction.class.getName(), false, args -> new LifecycleAction());
+  public static final ObjectParser<LifecycleAction, Void> PARSER =
+    new ObjectParser<>(LifecycleAction.class.getName(), false, LifecycleAction::new);
 
   static {
     

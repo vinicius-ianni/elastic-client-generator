@@ -69,8 +69,8 @@ public class Phases  implements XContentable<Phases> {
     return Phases.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Phases, Void> PARSER =
-    new ConstructingObjectParser<>(Phases.class.getName(), false, args -> new Phases());
+  public static final ObjectParser<Phases, Void> PARSER =
+    new ObjectParser<>(Phases.class.getName(), false, Phases::new);
 
   static {
     PARSER.declareObject(Phases::setCold, (p, t) -> Phase.PARSER.apply(p, t), COLD);

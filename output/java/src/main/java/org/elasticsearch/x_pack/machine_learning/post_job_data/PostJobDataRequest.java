@@ -54,8 +54,8 @@ public class PostJobDataRequest  implements XContentable<PostJobDataRequest> {
     return PostJobDataRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PostJobDataRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PostJobDataRequest.class.getName(), false, args -> new PostJobDataRequest());
+  public static final ObjectParser<PostJobDataRequest, Void> PARSER =
+    new ObjectParser<>(PostJobDataRequest.class.getName(), false, PostJobDataRequest::new);
 
   static {
     PARSER.declareObject(PostJobDataRequest::setResetEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), RESET_END);

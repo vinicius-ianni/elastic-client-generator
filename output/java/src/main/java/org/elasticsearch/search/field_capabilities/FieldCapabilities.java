@@ -73,8 +73,8 @@ public class FieldCapabilities  implements XContentable<FieldCapabilities> {
     return FieldCapabilities.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldCapabilities, Void> PARSER =
-    new ConstructingObjectParser<>(FieldCapabilities.class.getName(), false, args -> new FieldCapabilities());
+  public static final ObjectParser<FieldCapabilities, Void> PARSER =
+    new ObjectParser<>(FieldCapabilities.class.getName(), false, FieldCapabilities::new);
 
   static {
     PARSER.declareBoolean(FieldCapabilities::setAggregatable, AGGREGATABLE);

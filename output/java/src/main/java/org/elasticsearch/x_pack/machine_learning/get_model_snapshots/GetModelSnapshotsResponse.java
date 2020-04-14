@@ -46,8 +46,8 @@ public class GetModelSnapshotsResponse  implements XContentable<GetModelSnapshot
     return GetModelSnapshotsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetModelSnapshotsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetModelSnapshotsResponse.class.getName(), false, args -> new GetModelSnapshotsResponse());
+  public static final ObjectParser<GetModelSnapshotsResponse, Void> PARSER =
+    new ObjectParser<>(GetModelSnapshotsResponse.class.getName(), false, GetModelSnapshotsResponse::new);
 
   static {
     PARSER.declareLong(GetModelSnapshotsResponse::setCount, COUNT);

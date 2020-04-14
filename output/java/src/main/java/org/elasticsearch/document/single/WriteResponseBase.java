@@ -93,14 +93,14 @@ public class WriteResponseBase  implements XContentable<WriteResponseBase> {
     return WriteResponseBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WriteResponseBase, Void> PARSER =
-    new ConstructingObjectParser<>(WriteResponseBase.class.getName(), false, args -> new WriteResponseBase());
+  public static final ObjectParser<WriteResponseBase, Void> PARSER =
+    new ObjectParser<>(WriteResponseBase.class.getName(), false, WriteResponseBase::new);
 
   static {
     PARSER.declareString(WriteResponseBase::setId, ID);
     PARSER.declareString(WriteResponseBase::setIndex, INDEX);
     PARSER.declareLong(WriteResponseBase::setPrimaryTerm, PRIMARY_TERM);
-    PARSER.declareObject(WriteResponseBase::setResult, (p, t) -> Result.PARSER.apply(p), RESULT);
+    PARSER.declareField(WriteResponseBase::setResult, (p, t) -> Result.PARSER.apply(p), RESULT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(WriteResponseBase::setSeqNo, SEQ_NO);
     PARSER.declareObject(WriteResponseBase::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);
     PARSER.declareString(WriteResponseBase::setType, TYPE);

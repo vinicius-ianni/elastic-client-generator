@@ -46,8 +46,8 @@ public class GetTaskRequest  implements XContentable<GetTaskRequest> {
     return GetTaskRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetTaskRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetTaskRequest.class.getName(), false, args -> new GetTaskRequest());
+  public static final ObjectParser<GetTaskRequest, Void> PARSER =
+    new ObjectParser<>(GetTaskRequest.class.getName(), false, GetTaskRequest::new);
 
   static {
     PARSER.declareObject(GetTaskRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

@@ -85,8 +85,8 @@ public class TemplateMapping  implements XContentable<TemplateMapping> {
     return TemplateMapping.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TemplateMapping, Void> PARSER =
-    new ConstructingObjectParser<>(TemplateMapping.class.getName(), false, args -> new TemplateMapping());
+  public static final ObjectParser<TemplateMapping, Void> PARSER =
+    new ObjectParser<>(TemplateMapping.class.getName(), false, TemplateMapping::new);
 
   static {
     PARSER.declareObject(TemplateMapping::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

@@ -52,8 +52,8 @@ public class UpdateFilterResponse  implements XContentable<UpdateFilterResponse>
     return UpdateFilterResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateFilterResponse, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateFilterResponse.class.getName(), false, args -> new UpdateFilterResponse());
+  public static final ObjectParser<UpdateFilterResponse, Void> PARSER =
+    new ObjectParser<>(UpdateFilterResponse.class.getName(), false, UpdateFilterResponse::new);
 
   static {
     PARSER.declareString(UpdateFilterResponse::setDescription, DESCRIPTION);

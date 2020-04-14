@@ -36,8 +36,8 @@ public class ShardCompletion  implements XContentable<ShardCompletion> {
     return ShardCompletion.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardCompletion, Void> PARSER =
-    new ConstructingObjectParser<>(ShardCompletion.class.getName(), false, args -> new ShardCompletion());
+  public static final ObjectParser<ShardCompletion, Void> PARSER =
+    new ObjectParser<>(ShardCompletion.class.getName(), false, ShardCompletion::new);
 
   static {
     PARSER.declareLong(ShardCompletion::setSizeInBytes, SIZE_IN_BYTES);

@@ -92,8 +92,8 @@ public class CatTasksRecord  implements XContentable<CatTasksRecord> {
     return CatTasksRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatTasksRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatTasksRecord.class.getName(), false, args -> new CatTasksRecord());
+  public static final ObjectParser<CatTasksRecord, Void> PARSER =
+    new ObjectParser<>(CatTasksRecord.class.getName(), false, CatTasksRecord::new);
 
   static {
     PARSER.declareString(CatTasksRecord::setAction, ACTION);

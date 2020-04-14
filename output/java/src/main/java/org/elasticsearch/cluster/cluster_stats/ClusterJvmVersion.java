@@ -78,8 +78,8 @@ public class ClusterJvmVersion  implements XContentable<ClusterJvmVersion> {
     return ClusterJvmVersion.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterJvmVersion, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterJvmVersion.class.getName(), false, args -> new ClusterJvmVersion());
+  public static final ObjectParser<ClusterJvmVersion, Void> PARSER =
+    new ObjectParser<>(ClusterJvmVersion.class.getName(), false, ClusterJvmVersion::new);
 
   static {
     PARSER.declareBoolean(ClusterJvmVersion::setBundledJdk, BUNDLED_JDK);

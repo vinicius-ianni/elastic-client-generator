@@ -39,8 +39,8 @@ public class GetRepositoryResponse  implements XContentable<GetRepositoryRespons
     return GetRepositoryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRepositoryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetRepositoryResponse.class.getName(), false, args -> new GetRepositoryResponse());
+  public static final ObjectParser<GetRepositoryResponse, Void> PARSER =
+    new ObjectParser<>(GetRepositoryResponse.class.getName(), false, GetRepositoryResponse::new);
 
   static {
     PARSER.declareObject(GetRepositoryResponse::setRepositories, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SnapshotRepository.PARSER.apply(pp, null)), REPOSITORIES);

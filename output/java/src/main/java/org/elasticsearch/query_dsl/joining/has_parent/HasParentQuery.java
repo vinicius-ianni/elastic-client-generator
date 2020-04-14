@@ -75,8 +75,8 @@ public class HasParentQuery  implements XContentable<HasParentQuery> {
     return HasParentQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HasParentQuery, Void> PARSER =
-    new ConstructingObjectParser<>(HasParentQuery.class.getName(), false, args -> new HasParentQuery());
+  public static final ObjectParser<HasParentQuery, Void> PARSER =
+    new ObjectParser<>(HasParentQuery.class.getName(), false, HasParentQuery::new);
 
   static {
     PARSER.declareBoolean(HasParentQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);

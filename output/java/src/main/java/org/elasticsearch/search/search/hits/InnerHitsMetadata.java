@@ -57,8 +57,8 @@ public class InnerHitsMetadata  implements XContentable<InnerHitsMetadata> {
     return InnerHitsMetadata.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InnerHitsMetadata, Void> PARSER =
-    new ConstructingObjectParser<>(InnerHitsMetadata.class.getName(), false, args -> new InnerHitsMetadata());
+  public static final ObjectParser<InnerHitsMetadata, Void> PARSER =
+    new ObjectParser<>(InnerHitsMetadata.class.getName(), false, InnerHitsMetadata::new);
 
   static {
     Hit<LazyDocument> _hits = new Hit<LazyDocument>();

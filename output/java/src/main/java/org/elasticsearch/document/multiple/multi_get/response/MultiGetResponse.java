@@ -45,8 +45,8 @@ public class MultiGetResponse  implements XContentable<MultiGetResponse> {
     return MultiGetResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiGetResponse, Void> PARSER =
-    new ConstructingObjectParser<>(MultiGetResponse.class.getName(), false, args -> new MultiGetResponse());
+  public static final ObjectParser<MultiGetResponse, Void> PARSER =
+    new ObjectParser<>(MultiGetResponse.class.getName(), false, MultiGetResponse::new);
 
   static {
     MultiGetHit<Object> _hits = new MultiGetHit<Object>();

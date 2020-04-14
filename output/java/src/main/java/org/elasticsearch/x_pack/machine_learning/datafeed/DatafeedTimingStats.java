@@ -64,8 +64,8 @@ public class DatafeedTimingStats  implements XContentable<DatafeedTimingStats> {
     return DatafeedTimingStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DatafeedTimingStats, Void> PARSER =
-    new ConstructingObjectParser<>(DatafeedTimingStats.class.getName(), false, args -> new DatafeedTimingStats());
+  public static final ObjectParser<DatafeedTimingStats, Void> PARSER =
+    new ObjectParser<>(DatafeedTimingStats.class.getName(), false, DatafeedTimingStats::new);
 
   static {
     PARSER.declareLong(DatafeedTimingStats::setBucketCount, BUCKET_COUNT);

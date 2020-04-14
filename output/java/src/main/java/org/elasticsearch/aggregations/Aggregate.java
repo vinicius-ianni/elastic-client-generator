@@ -39,8 +39,8 @@ public class Aggregate  implements XContentable<Aggregate> {
     return Aggregate.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Aggregate, Void> PARSER =
-    new ConstructingObjectParser<>(Aggregate.class.getName(), false, args -> new Aggregate());
+  public static final ObjectParser<Aggregate, Void> PARSER =
+    new ObjectParser<>(Aggregate.class.getName(), false, Aggregate::new);
 
   static {
     PARSER.declareObject(Aggregate::setMeta, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), META);

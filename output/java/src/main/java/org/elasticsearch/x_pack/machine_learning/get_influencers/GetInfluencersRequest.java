@@ -88,8 +88,8 @@ public class GetInfluencersRequest  implements XContentable<GetInfluencersReques
     return GetInfluencersRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetInfluencersRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetInfluencersRequest.class.getName(), false, args -> new GetInfluencersRequest());
+  public static final ObjectParser<GetInfluencersRequest, Void> PARSER =
+    new ObjectParser<>(GetInfluencersRequest.class.getName(), false, GetInfluencersRequest::new);
 
   static {
     PARSER.declareBoolean(GetInfluencersRequest::setDescending, DESCENDING);

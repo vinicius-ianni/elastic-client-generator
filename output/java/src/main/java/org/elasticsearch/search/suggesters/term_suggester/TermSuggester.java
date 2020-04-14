@@ -124,8 +124,8 @@ public class TermSuggester  implements XContentable<TermSuggester> {
     return TermSuggester.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermSuggester, Void> PARSER =
-    new ConstructingObjectParser<>(TermSuggester.class.getName(), false, args -> new TermSuggester());
+  public static final ObjectParser<TermSuggester, Void> PARSER =
+    new ObjectParser<>(TermSuggester.class.getName(), false, TermSuggester::new);
 
   static {
     PARSER.declareBoolean(TermSuggester::setLowercaseTerms, LOWERCASE_TERMS);
@@ -136,9 +136,9 @@ public class TermSuggester  implements XContentable<TermSuggester> {
     PARSER.declareInt(TermSuggester::setMinWordLength, MIN_WORD_LENGTH);
     PARSER.declareInt(TermSuggester::setPrefixLength, PREFIX_LENGTH);
     PARSER.declareInt(TermSuggester::setShardSize, SHARD_SIZE);
-    PARSER.declareObject(TermSuggester::setSort, (p, t) -> SuggestSort.PARSER.apply(p), SORT);
-    PARSER.declareObject(TermSuggester::setStringDistance, (p, t) -> StringDistance.PARSER.apply(p), STRING_DISTANCE);
-    PARSER.declareObject(TermSuggester::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE);
+    PARSER.declareField(TermSuggester::setSort, (p, t) -> SuggestSort.PARSER.apply(p), SORT, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(TermSuggester::setStringDistance, (p, t) -> StringDistance.PARSER.apply(p), STRING_DISTANCE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(TermSuggester::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(TermSuggester::setText, TEXT);
   }
 

@@ -107,19 +107,19 @@ public class IndicesStatsRequest  implements XContentable<IndicesStatsRequest> {
     return IndicesStatsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesStatsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesStatsRequest.class.getName(), false, args -> new IndicesStatsRequest());
+  public static final ObjectParser<IndicesStatsRequest, Void> PARSER =
+    new ObjectParser<>(IndicesStatsRequest.class.getName(), false, IndicesStatsRequest::new);
 
   static {
     PARSER.declareObjectArray(IndicesStatsRequest::setCompletionFields, (p, t) -> Field.createFrom(p), COMPLETION_FIELDS);
-    PARSER.declareObject(IndicesStatsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(IndicesStatsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObjectArray(IndicesStatsRequest::setFielddataFields, (p, t) -> Field.createFrom(p), FIELDDATA_FIELDS);
     PARSER.declareObjectArray(IndicesStatsRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(IndicesStatsRequest::setForbidClosedIndices, FORBID_CLOSED_INDICES);
     PARSER.declareStringArray(IndicesStatsRequest::setGroups, GROUPS);
     PARSER.declareBoolean(IndicesStatsRequest::setIncludeSegmentFileSizes, INCLUDE_SEGMENT_FILE_SIZES);
     PARSER.declareBoolean(IndicesStatsRequest::setIncludeUnloadedSegments, INCLUDE_UNLOADED_SEGMENTS);
-    PARSER.declareObject(IndicesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL);
+    PARSER.declareField(IndicesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

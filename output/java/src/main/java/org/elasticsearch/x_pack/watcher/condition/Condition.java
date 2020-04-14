@@ -31,8 +31,8 @@ public class Condition  implements XContentable<Condition> {
     return Condition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Condition, Void> PARSER =
-    new ConstructingObjectParser<>(Condition.class.getName(), false, args -> new Condition());
+  public static final ObjectParser<Condition, Void> PARSER =
+    new ObjectParser<>(Condition.class.getName(), false, Condition::new);
 
   static {
     

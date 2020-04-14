@@ -46,8 +46,8 @@ public class DeleteForecastRequest  implements XContentable<DeleteForecastReques
     return DeleteForecastRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteForecastRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteForecastRequest.class.getName(), false, args -> new DeleteForecastRequest());
+  public static final ObjectParser<DeleteForecastRequest, Void> PARSER =
+    new ObjectParser<>(DeleteForecastRequest.class.getName(), false, DeleteForecastRequest::new);
 
   static {
     PARSER.declareBoolean(DeleteForecastRequest::setAllowNoForecasts, ALLOW_NO_FORECASTS);

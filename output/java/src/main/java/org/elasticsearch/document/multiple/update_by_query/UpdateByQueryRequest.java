@@ -343,8 +343,8 @@ public class UpdateByQueryRequest  implements XContentable<UpdateByQueryRequest>
     return UpdateByQueryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateByQueryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateByQueryRequest.class.getName(), false, args -> new UpdateByQueryRequest());
+  public static final ObjectParser<UpdateByQueryRequest, Void> PARSER =
+    new ObjectParser<>(UpdateByQueryRequest.class.getName(), false, UpdateByQueryRequest::new);
 
   static {
     PARSER.declareObject(UpdateByQueryRequest::setSlice, (p, t) -> SlicedScroll.PARSER.apply(p, t), SLICE);
@@ -354,10 +354,10 @@ public class UpdateByQueryRequest  implements XContentable<UpdateByQueryRequest>
     PARSER.declareBoolean(UpdateByQueryRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(UpdateByQueryRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(UpdateByQueryRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(UpdateByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS);
-    PARSER.declareObject(UpdateByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(UpdateByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(UpdateByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(UpdateByQueryRequest::setDf, DF);
-    PARSER.declareObject(UpdateByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(UpdateByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(UpdateByQueryRequest::setFrom, FROM);
     PARSER.declareBoolean(UpdateByQueryRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(UpdateByQueryRequest::setLenient, LENIENT);
@@ -371,7 +371,7 @@ public class UpdateByQueryRequest  implements XContentable<UpdateByQueryRequest>
     PARSER.declareObject(UpdateByQueryRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
     PARSER.declareLong(UpdateByQueryRequest::setScrollSize, SCROLL_SIZE);
     PARSER.declareObject(UpdateByQueryRequest::setSearchTimeout, (p, t) -> Time.PARSER.apply(p, t), SEARCH_TIMEOUT);
-    PARSER.declareObject(UpdateByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareField(UpdateByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(UpdateByQueryRequest::setSize, SIZE);
     PARSER.declareLong(UpdateByQueryRequest::setSlices, SLICES);
     PARSER.declareStringArray(UpdateByQueryRequest::setSort, SORT);

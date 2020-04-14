@@ -676,8 +676,8 @@ public class AggregationContainer  implements XContentable<AggregationContainer>
     return AggregationContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AggregationContainer, Void> PARSER =
-    new ConstructingObjectParser<>(AggregationContainer.class.getName(), false, args -> new AggregationContainer());
+  public static final ObjectParser<AggregationContainer, Void> PARSER =
+    new ObjectParser<>(AggregationContainer.class.getName(), false, AggregationContainer::new);
 
   static {
     PARSER.declareObject(AggregationContainer::setAdjacencyMatrix, (p, t) -> AdjacencyMatrixAggregation.PARSER.apply(p, t), ADJACENCY_MATRIX);

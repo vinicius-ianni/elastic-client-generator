@@ -57,8 +57,8 @@ public class RecoveryBytes  implements XContentable<RecoveryBytes> {
     return RecoveryBytes.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryBytes, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryBytes.class.getName(), false, args -> new RecoveryBytes());
+  public static final ObjectParser<RecoveryBytes, Void> PARSER =
+    new ObjectParser<>(RecoveryBytes.class.getName(), false, RecoveryBytes::new);
 
   static {
     PARSER.declareString(RecoveryBytes::setPercent, PERCENT);

@@ -65,8 +65,8 @@ public class XPackRoleMapping  implements XContentable<XPackRoleMapping> {
     return XPackRoleMapping.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackRoleMapping, Void> PARSER =
-    new ConstructingObjectParser<>(XPackRoleMapping.class.getName(), false, args -> new XPackRoleMapping());
+  public static final ObjectParser<XPackRoleMapping, Void> PARSER =
+    new ObjectParser<>(XPackRoleMapping.class.getName(), false, XPackRoleMapping::new);
 
   static {
     PARSER.declareBoolean(XPackRoleMapping::setEnabled, ENABLED);

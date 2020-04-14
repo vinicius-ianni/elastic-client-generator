@@ -36,8 +36,8 @@ public class ReindexRethrottleRequest  implements XContentable<ReindexRethrottle
     return ReindexRethrottleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexRethrottleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexRethrottleRequest.class.getName(), false, args -> new ReindexRethrottleRequest());
+  public static final ObjectParser<ReindexRethrottleRequest, Void> PARSER =
+    new ObjectParser<>(ReindexRethrottleRequest.class.getName(), false, ReindexRethrottleRequest::new);
 
   static {
     PARSER.declareLong(ReindexRethrottleRequest::setRequestsPerSecond, REQUESTS_PER_SECOND);

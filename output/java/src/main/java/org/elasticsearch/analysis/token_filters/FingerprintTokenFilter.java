@@ -43,8 +43,8 @@ public class FingerprintTokenFilter  implements XContentable<FingerprintTokenFil
     return FingerprintTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FingerprintTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(FingerprintTokenFilter.class.getName(), false, args -> new FingerprintTokenFilter());
+  public static final ObjectParser<FingerprintTokenFilter, Void> PARSER =
+    new ObjectParser<>(FingerprintTokenFilter.class.getName(), false, FingerprintTokenFilter::new);
 
   static {
     PARSER.declareInt(FingerprintTokenFilter::setMaxOutputSize, MAX_OUTPUT_SIZE);

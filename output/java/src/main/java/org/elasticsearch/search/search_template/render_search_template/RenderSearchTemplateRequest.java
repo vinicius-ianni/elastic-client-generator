@@ -53,8 +53,8 @@ public class RenderSearchTemplateRequest  implements XContentable<RenderSearchTe
     return RenderSearchTemplateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RenderSearchTemplateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RenderSearchTemplateRequest.class.getName(), false, args -> new RenderSearchTemplateRequest());
+  public static final ObjectParser<RenderSearchTemplateRequest, Void> PARSER =
+    new ObjectParser<>(RenderSearchTemplateRequest.class.getName(), false, RenderSearchTemplateRequest::new);
 
   static {
     PARSER.declareString(RenderSearchTemplateRequest::setFile, FILE);

@@ -43,8 +43,8 @@ public class IpFilterUsage  implements XContentable<IpFilterUsage> {
     return IpFilterUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IpFilterUsage, Void> PARSER =
-    new ConstructingObjectParser<>(IpFilterUsage.class.getName(), false, args -> new IpFilterUsage());
+  public static final ObjectParser<IpFilterUsage, Void> PARSER =
+    new ObjectParser<>(IpFilterUsage.class.getName(), false, IpFilterUsage::new);
 
   static {
     PARSER.declareBoolean(IpFilterUsage::setHttp, HTTP);

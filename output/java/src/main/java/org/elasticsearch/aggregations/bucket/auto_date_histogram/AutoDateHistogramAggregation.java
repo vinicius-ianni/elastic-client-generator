@@ -108,8 +108,8 @@ public class AutoDateHistogramAggregation  implements XContentable<AutoDateHisto
     return AutoDateHistogramAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AutoDateHistogramAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(AutoDateHistogramAggregation.class.getName(), false, args -> new AutoDateHistogramAggregation());
+  public static final ObjectParser<AutoDateHistogramAggregation, Void> PARSER =
+    new ObjectParser<>(AutoDateHistogramAggregation.class.getName(), false, AutoDateHistogramAggregation::new);
 
   static {
     PARSER.declareObject(AutoDateHistogramAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
@@ -120,7 +120,7 @@ public class AutoDateHistogramAggregation  implements XContentable<AutoDateHisto
     PARSER.declareObject(AutoDateHistogramAggregation::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);
     PARSER.declareObject(AutoDateHistogramAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareString(AutoDateHistogramAggregation::setTimeZone, TIME_ZONE);
-    PARSER.declareObject(AutoDateHistogramAggregation::setMinimumInterval, (p, t) -> MinimumInterval.PARSER.apply(p), MINIMUM_INTERVAL);
+    PARSER.declareField(AutoDateHistogramAggregation::setMinimumInterval, (p, t) -> MinimumInterval.PARSER.apply(p), MINIMUM_INTERVAL, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

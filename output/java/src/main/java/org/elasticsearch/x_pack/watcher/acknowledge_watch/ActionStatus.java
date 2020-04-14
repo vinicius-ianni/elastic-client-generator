@@ -69,8 +69,8 @@ public class ActionStatus  implements XContentable<ActionStatus> {
     return ActionStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ActionStatus, Void> PARSER =
-    new ConstructingObjectParser<>(ActionStatus.class.getName(), false, args -> new ActionStatus());
+  public static final ObjectParser<ActionStatus, Void> PARSER =
+    new ObjectParser<>(ActionStatus.class.getName(), false, ActionStatus::new);
 
   static {
     PARSER.declareObject(ActionStatus::setAck, (p, t) -> AcknowledgeState.PARSER.apply(p, t), ACK);

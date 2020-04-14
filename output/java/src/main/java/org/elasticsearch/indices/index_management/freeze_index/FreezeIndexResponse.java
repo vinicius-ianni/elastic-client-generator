@@ -36,8 +36,8 @@ public class FreezeIndexResponse  implements XContentable<FreezeIndexResponse> {
     return FreezeIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FreezeIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(FreezeIndexResponse.class.getName(), false, args -> new FreezeIndexResponse());
+  public static final ObjectParser<FreezeIndexResponse, Void> PARSER =
+    new ObjectParser<>(FreezeIndexResponse.class.getName(), false, FreezeIndexResponse::new);
 
   static {
     PARSER.declareBoolean(FreezeIndexResponse::setShardsAcknowledged, SHARDS_ACKNOWLEDGED);

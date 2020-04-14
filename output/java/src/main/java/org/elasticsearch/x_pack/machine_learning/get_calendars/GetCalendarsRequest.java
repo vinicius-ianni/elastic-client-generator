@@ -39,8 +39,8 @@ public class GetCalendarsRequest  implements XContentable<GetCalendarsRequest> {
     return GetCalendarsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetCalendarsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetCalendarsRequest.class.getName(), false, args -> new GetCalendarsRequest());
+  public static final ObjectParser<GetCalendarsRequest, Void> PARSER =
+    new ObjectParser<>(GetCalendarsRequest.class.getName(), false, GetCalendarsRequest::new);
 
   static {
     PARSER.declareObject(GetCalendarsRequest::setPage, (p, t) -> Page.PARSER.apply(p, t), PAGE);

@@ -60,8 +60,8 @@ public class Suggest<T>  implements XContentable<Suggest<T>> {
     return Suggest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Suggest, Void> PARSER =
-    new ConstructingObjectParser<>(Suggest.class.getName(), false, args -> new Suggest());
+  public static final ObjectParser<Suggest, Void> PARSER =
+    new ObjectParser<>(Suggest.class.getName(), false, Suggest::new);
 
   static {
     PARSER.declareInt(Suggest::setLength, LENGTH);

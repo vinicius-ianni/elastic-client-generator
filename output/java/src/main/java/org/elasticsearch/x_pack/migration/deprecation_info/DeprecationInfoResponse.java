@@ -57,8 +57,8 @@ public class DeprecationInfoResponse  implements XContentable<DeprecationInfoRes
     return DeprecationInfoResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeprecationInfoResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeprecationInfoResponse.class.getName(), false, args -> new DeprecationInfoResponse());
+  public static final ObjectParser<DeprecationInfoResponse, Void> PARSER =
+    new ObjectParser<>(DeprecationInfoResponse.class.getName(), false, DeprecationInfoResponse::new);
 
   static {
     PARSER.declareObjectArray(DeprecationInfoResponse::setClusterSettings, (p, t) -> DeprecationInfo.PARSER.apply(p, t), CLUSTER_SETTINGS);

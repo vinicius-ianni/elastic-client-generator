@@ -39,8 +39,8 @@ public class FieldNameQuery  implements XContentable<FieldNameQuery> {
     return FieldNameQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldNameQuery, Void> PARSER =
-    new ConstructingObjectParser<>(FieldNameQuery.class.getName(), false, args -> new FieldNameQuery());
+  public static final ObjectParser<FieldNameQuery, Void> PARSER =
+    new ObjectParser<>(FieldNameQuery.class.getName(), false, FieldNameQuery::new);
 
   static {
     PARSER.declareObject(FieldNameQuery::setField, (p, t) -> Field.createFrom(p), FIELD);

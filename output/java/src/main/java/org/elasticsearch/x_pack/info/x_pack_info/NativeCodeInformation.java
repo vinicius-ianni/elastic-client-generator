@@ -43,8 +43,8 @@ public class NativeCodeInformation  implements XContentable<NativeCodeInformatio
     return NativeCodeInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NativeCodeInformation, Void> PARSER =
-    new ConstructingObjectParser<>(NativeCodeInformation.class.getName(), false, args -> new NativeCodeInformation());
+  public static final ObjectParser<NativeCodeInformation, Void> PARSER =
+    new ObjectParser<>(NativeCodeInformation.class.getName(), false, NativeCodeInformation::new);
 
   static {
     PARSER.declareString(NativeCodeInformation::setBuildHash, BUILD_HASH);

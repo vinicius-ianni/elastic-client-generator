@@ -38,8 +38,8 @@ public class PercentilesBucketAggregation  implements XContentable<PercentilesBu
     return PercentilesBucketAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PercentilesBucketAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(PercentilesBucketAggregation.class.getName(), false, args -> new PercentilesBucketAggregation());
+  public static final ObjectParser<PercentilesBucketAggregation, Void> PARSER =
+    new ObjectParser<>(PercentilesBucketAggregation.class.getName(), false, PercentilesBucketAggregation::new);
 
   static {
     PARSER.declareDoubleArray(PercentilesBucketAggregation::setPercents, PERCENTS);

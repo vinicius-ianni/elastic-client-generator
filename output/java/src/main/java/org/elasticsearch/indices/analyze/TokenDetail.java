@@ -45,8 +45,8 @@ public class TokenDetail  implements XContentable<TokenDetail> {
     return TokenDetail.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TokenDetail, Void> PARSER =
-    new ConstructingObjectParser<>(TokenDetail.class.getName(), false, args -> new TokenDetail());
+  public static final ObjectParser<TokenDetail, Void> PARSER =
+    new ObjectParser<>(TokenDetail.class.getName(), false, TokenDetail::new);
 
   static {
     PARSER.declareString(TokenDetail::setName, NAME);

@@ -49,8 +49,8 @@ public class ClusterNetworkTypes  implements XContentable<ClusterNetworkTypes> {
     return ClusterNetworkTypes.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterNetworkTypes, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterNetworkTypes.class.getName(), false, args -> new ClusterNetworkTypes());
+  public static final ObjectParser<ClusterNetworkTypes, Void> PARSER =
+    new ObjectParser<>(ClusterNetworkTypes.class.getName(), false, ClusterNetworkTypes::new);
 
   static {
     PARSER.declareObject(ClusterNetworkTypes::setHttpTypes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.intValue()), HTTP_TYPES);

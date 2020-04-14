@@ -73,11 +73,11 @@ public class LanguageAnalyzer  implements XContentable<LanguageAnalyzer> {
     return LanguageAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LanguageAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(LanguageAnalyzer.class.getName(), false, args -> new LanguageAnalyzer());
+  public static final ObjectParser<LanguageAnalyzer, Void> PARSER =
+    new ObjectParser<>(LanguageAnalyzer.class.getName(), false, LanguageAnalyzer::new);
 
   static {
-    PARSER.declareObject(LanguageAnalyzer::setLanguage, (p, t) -> Language.PARSER.apply(p), LANGUAGE);
+    PARSER.declareField(LanguageAnalyzer::setLanguage, (p, t) -> Language.PARSER.apply(p), LANGUAGE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareStringArray(LanguageAnalyzer::setStemExclusion, STEM_EXCLUSION);
     PARSER.declareObject(LanguageAnalyzer::setStopwords, (p, t) -> new StopWords().fromXContent(p), STOPWORDS);
     PARSER.declareString(LanguageAnalyzer::setStopwordsPath, STOPWORDS_PATH);

@@ -46,8 +46,8 @@ public class GetBucketsResponse  implements XContentable<GetBucketsResponse> {
     return GetBucketsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetBucketsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetBucketsResponse.class.getName(), false, args -> new GetBucketsResponse());
+  public static final ObjectParser<GetBucketsResponse, Void> PARSER =
+    new ObjectParser<>(GetBucketsResponse.class.getName(), false, GetBucketsResponse::new);
 
   static {
     PARSER.declareObjectArray(GetBucketsResponse::setBuckets, (p, t) -> Bucket.PARSER.apply(p, t), BUCKETS);

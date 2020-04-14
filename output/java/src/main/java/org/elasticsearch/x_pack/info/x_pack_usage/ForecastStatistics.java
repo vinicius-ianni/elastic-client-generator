@@ -84,8 +84,8 @@ public class ForecastStatistics  implements XContentable<ForecastStatistics> {
     return ForecastStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ForecastStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(ForecastStatistics.class.getName(), false, args -> new ForecastStatistics());
+  public static final ObjectParser<ForecastStatistics, Void> PARSER =
+    new ObjectParser<>(ForecastStatistics.class.getName(), false, ForecastStatistics::new);
 
   static {
     PARSER.declareLong(ForecastStatistics::setForecastedJobs, FORECASTED_JOBS);

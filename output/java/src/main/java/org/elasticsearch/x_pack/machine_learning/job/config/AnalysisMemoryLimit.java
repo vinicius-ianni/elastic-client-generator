@@ -36,8 +36,8 @@ public class AnalysisMemoryLimit  implements XContentable<AnalysisMemoryLimit> {
     return AnalysisMemoryLimit.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnalysisMemoryLimit, Void> PARSER =
-    new ConstructingObjectParser<>(AnalysisMemoryLimit.class.getName(), false, args -> new AnalysisMemoryLimit());
+  public static final ObjectParser<AnalysisMemoryLimit, Void> PARSER =
+    new ObjectParser<>(AnalysisMemoryLimit.class.getName(), false, AnalysisMemoryLimit::new);
 
   static {
     PARSER.declareString(AnalysisMemoryLimit::setModelMemoryLimit, MODEL_MEMORY_LIMIT);

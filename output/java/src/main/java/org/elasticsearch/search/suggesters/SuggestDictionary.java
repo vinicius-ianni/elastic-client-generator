@@ -56,8 +56,8 @@ public class SuggestDictionary<T>  implements XContentable<SuggestDictionary<T>>
     return SuggestDictionary.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SuggestDictionary, Void> PARSER =
-    new ConstructingObjectParser<>(SuggestDictionary.class.getName(), false, args -> new SuggestDictionary());
+  public static final ObjectParser<SuggestDictionary, Void> PARSER =
+    new ObjectParser<>(SuggestDictionary.class.getName(), false, SuggestDictionary::new);
 
   static {
     Suggest _item = new Suggest<>();

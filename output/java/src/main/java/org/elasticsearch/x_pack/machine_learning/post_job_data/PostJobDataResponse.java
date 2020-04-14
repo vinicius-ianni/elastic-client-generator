@@ -137,8 +137,8 @@ public class PostJobDataResponse  implements XContentable<PostJobDataResponse> {
     return PostJobDataResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PostJobDataResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PostJobDataResponse.class.getName(), false, args -> new PostJobDataResponse());
+  public static final ObjectParser<PostJobDataResponse, Void> PARSER =
+    new ObjectParser<>(PostJobDataResponse.class.getName(), false, PostJobDataResponse::new);
 
   static {
     PARSER.declareLong(PostJobDataResponse::setBucketCount, BUCKET_COUNT);

@@ -53,13 +53,13 @@ public class NGramTokenizer  implements XContentable<NGramTokenizer> {
     return NGramTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NGramTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(NGramTokenizer.class.getName(), false, args -> new NGramTokenizer());
+  public static final ObjectParser<NGramTokenizer, Void> PARSER =
+    new ObjectParser<>(NGramTokenizer.class.getName(), false, NGramTokenizer::new);
 
   static {
     PARSER.declareInt(NGramTokenizer::setMaxGram, MAX_GRAM);
     PARSER.declareInt(NGramTokenizer::setMinGram, MIN_GRAM);
-    PARSER.declareObjectArray(NGramTokenizer::setTokenChars, (p, t) -> TokenChar.PARSER.apply(p), TOKEN_CHARS);
+    PARSER.declareFieldArray(NGramTokenizer::setTokenChars, (p, t) -> TokenChar.PARSER.apply(p), TOKEN_CHARS, ObjectParser.ValueType.STRING_ARRAY);
   }
 
 }

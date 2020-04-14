@@ -116,8 +116,8 @@ public class JobStats  implements XContentable<JobStats> {
     return JobStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<JobStats, Void> PARSER =
-    new ConstructingObjectParser<>(JobStats.class.getName(), false, args -> new JobStats());
+  public static final ObjectParser<JobStats, Void> PARSER =
+    new ObjectParser<>(JobStats.class.getName(), false, JobStats::new);
 
   static {
     PARSER.declareString(JobStats::setAssignmentExplanation, ASSIGNMENT_EXPLANATION);
@@ -127,7 +127,7 @@ public class JobStats  implements XContentable<JobStats> {
     PARSER.declareObject(JobStats::setModelSizeStats, (p, t) -> ModelSizeStats.PARSER.apply(p, t), MODEL_SIZE_STATS);
     PARSER.declareObject(JobStats::setNode, (p, t) -> DiscoveryNode.PARSER.apply(p, t), NODE);
     PARSER.declareObject(JobStats::setOpenTime, (p, t) -> Time.PARSER.apply(p, t), OPEN_TIME);
-    PARSER.declareObject(JobStats::setState, (p, t) -> JobState.PARSER.apply(p), STATE);
+    PARSER.declareField(JobStats::setState, (p, t) -> JobState.PARSER.apply(p), STATE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(JobStats::setTimingStats, (p, t) -> TimingStats.PARSER.apply(p, t), TIMING_STATS);
   }
 

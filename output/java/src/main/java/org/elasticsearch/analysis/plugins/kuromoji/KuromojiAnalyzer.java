@@ -46,11 +46,11 @@ public class KuromojiAnalyzer  implements XContentable<KuromojiAnalyzer> {
     return KuromojiAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KuromojiAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(KuromojiAnalyzer.class.getName(), false, args -> new KuromojiAnalyzer());
+  public static final ObjectParser<KuromojiAnalyzer, Void> PARSER =
+    new ObjectParser<>(KuromojiAnalyzer.class.getName(), false, KuromojiAnalyzer::new);
 
   static {
-    PARSER.declareObject(KuromojiAnalyzer::setMode, (p, t) -> KuromojiTokenizationMode.PARSER.apply(p), MODE);
+    PARSER.declareField(KuromojiAnalyzer::setMode, (p, t) -> KuromojiTokenizationMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(KuromojiAnalyzer::setUserDictionary, USER_DICTIONARY);
   }
 

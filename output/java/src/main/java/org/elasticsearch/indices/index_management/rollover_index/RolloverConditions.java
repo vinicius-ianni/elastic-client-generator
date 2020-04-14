@@ -54,8 +54,8 @@ public class RolloverConditions  implements XContentable<RolloverConditions> {
     return RolloverConditions.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RolloverConditions, Void> PARSER =
-    new ConstructingObjectParser<>(RolloverConditions.class.getName(), false, args -> new RolloverConditions());
+  public static final ObjectParser<RolloverConditions, Void> PARSER =
+    new ObjectParser<>(RolloverConditions.class.getName(), false, RolloverConditions::new);
 
   static {
     PARSER.declareObject(RolloverConditions::setMaxAge, (p, t) -> Time.PARSER.apply(p, t), MAX_AGE);

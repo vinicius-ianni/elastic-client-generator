@@ -31,8 +31,8 @@ public class SpanSubQuery  implements XContentable<SpanSubQuery> {
     return SpanSubQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanSubQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanSubQuery.class.getName(), false, args -> new SpanSubQuery());
+  public static final ObjectParser<SpanSubQuery, Void> PARSER =
+    new ObjectParser<>(SpanSubQuery.class.getName(), false, SpanSubQuery::new);
 
   static {
     

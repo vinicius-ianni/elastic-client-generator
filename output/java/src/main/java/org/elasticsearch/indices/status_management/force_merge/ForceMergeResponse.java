@@ -31,8 +31,8 @@ public class ForceMergeResponse  implements XContentable<ForceMergeResponse> {
     return ForceMergeResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ForceMergeResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ForceMergeResponse.class.getName(), false, args -> new ForceMergeResponse());
+  public static final ObjectParser<ForceMergeResponse, Void> PARSER =
+    new ObjectParser<>(ForceMergeResponse.class.getName(), false, ForceMergeResponse::new);
 
   static {
     

@@ -56,8 +56,8 @@ public class HitsMetadata<T>  implements XContentable<HitsMetadata<T>> {
     return HitsMetadata.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HitsMetadata, Void> PARSER =
-    new ConstructingObjectParser<>(HitsMetadata.class.getName(), false, args -> new HitsMetadata());
+  public static final ObjectParser<HitsMetadata, Void> PARSER =
+    new ObjectParser<>(HitsMetadata.class.getName(), false, HitsMetadata::new);
 
   static {
     Hit _hits = new Hit<>();

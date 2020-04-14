@@ -87,8 +87,8 @@ public class ReindexNode  implements XContentable<ReindexNode> {
     return ReindexNode.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexNode, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexNode.class.getName(), false, args -> new ReindexNode());
+  public static final ObjectParser<ReindexNode, Void> PARSER =
+    new ObjectParser<>(ReindexNode.class.getName(), false, ReindexNode::new);
 
   static {
     PARSER.declareObject(ReindexNode::setAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), ATTRIBUTES);

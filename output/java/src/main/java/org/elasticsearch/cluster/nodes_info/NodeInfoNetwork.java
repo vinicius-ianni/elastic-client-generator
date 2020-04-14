@@ -47,8 +47,8 @@ public class NodeInfoNetwork  implements XContentable<NodeInfoNetwork> {
     return NodeInfoNetwork.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfoNetwork, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfoNetwork.class.getName(), false, args -> new NodeInfoNetwork());
+  public static final ObjectParser<NodeInfoNetwork, Void> PARSER =
+    new ObjectParser<>(NodeInfoNetwork.class.getName(), false, NodeInfoNetwork::new);
 
   static {
     PARSER.declareObject(NodeInfoNetwork::setPrimaryInterface, (p, t) -> NodeInfoNetworkInterface.PARSER.apply(p, t), PRIMARY_INTERFACE);

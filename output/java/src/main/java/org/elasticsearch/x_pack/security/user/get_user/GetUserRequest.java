@@ -31,8 +31,8 @@ public class GetUserRequest  implements XContentable<GetUserRequest> {
     return GetUserRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetUserRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetUserRequest.class.getName(), false, args -> new GetUserRequest());
+  public static final ObjectParser<GetUserRequest, Void> PARSER =
+    new ObjectParser<>(GetUserRequest.class.getName(), false, GetUserRequest::new);
 
   static {
     

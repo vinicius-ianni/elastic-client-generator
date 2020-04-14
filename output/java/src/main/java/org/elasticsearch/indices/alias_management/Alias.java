@@ -77,8 +77,8 @@ public class Alias  implements XContentable<Alias> {
     return Alias.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Alias, Void> PARSER =
-    new ConstructingObjectParser<>(Alias.class.getName(), false, args -> new Alias());
+  public static final ObjectParser<Alias, Void> PARSER =
+    new ObjectParser<>(Alias.class.getName(), false, Alias::new);
 
   static {
     PARSER.declareObject(Alias::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);

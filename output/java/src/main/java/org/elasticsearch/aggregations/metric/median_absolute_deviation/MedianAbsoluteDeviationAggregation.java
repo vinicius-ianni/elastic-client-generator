@@ -36,8 +36,8 @@ public class MedianAbsoluteDeviationAggregation  implements XContentable<MedianA
     return MedianAbsoluteDeviationAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MedianAbsoluteDeviationAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MedianAbsoluteDeviationAggregation.class.getName(), false, args -> new MedianAbsoluteDeviationAggregation());
+  public static final ObjectParser<MedianAbsoluteDeviationAggregation, Void> PARSER =
+    new ObjectParser<>(MedianAbsoluteDeviationAggregation.class.getName(), false, MedianAbsoluteDeviationAggregation::new);
 
   static {
     PARSER.declareDouble(MedianAbsoluteDeviationAggregation::setCompression, COMPRESSION);

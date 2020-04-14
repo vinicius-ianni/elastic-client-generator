@@ -81,12 +81,12 @@ public class CloseIndexRequest  implements XContentable<CloseIndexRequest> {
     return CloseIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CloseIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CloseIndexRequest.class.getName(), false, args -> new CloseIndexRequest());
+  public static final ObjectParser<CloseIndexRequest, Void> PARSER =
+    new ObjectParser<>(CloseIndexRequest.class.getName(), false, CloseIndexRequest::new);
 
   static {
     PARSER.declareBoolean(CloseIndexRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(CloseIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(CloseIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(CloseIndexRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareObject(CloseIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareObject(CloseIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

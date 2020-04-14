@@ -85,8 +85,8 @@ public class AggregationBreakdown  implements XContentable<AggregationBreakdown>
     return AggregationBreakdown.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AggregationBreakdown, Void> PARSER =
-    new ConstructingObjectParser<>(AggregationBreakdown.class.getName(), false, args -> new AggregationBreakdown());
+  public static final ObjectParser<AggregationBreakdown, Void> PARSER =
+    new ObjectParser<>(AggregationBreakdown.class.getName(), false, AggregationBreakdown::new);
 
   static {
     PARSER.declareLong(AggregationBreakdown::setBuildAggregation, BUILD_AGGREGATION);

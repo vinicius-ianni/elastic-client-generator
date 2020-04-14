@@ -50,8 +50,8 @@ public class MovingFunctionAggregation  implements XContentable<MovingFunctionAg
     return MovingFunctionAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MovingFunctionAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MovingFunctionAggregation.class.getName(), false, args -> new MovingFunctionAggregation());
+  public static final ObjectParser<MovingFunctionAggregation, Void> PARSER =
+    new ObjectParser<>(MovingFunctionAggregation.class.getName(), false, MovingFunctionAggregation::new);
 
   static {
     PARSER.declareString(MovingFunctionAggregation::setScript, SCRIPT);

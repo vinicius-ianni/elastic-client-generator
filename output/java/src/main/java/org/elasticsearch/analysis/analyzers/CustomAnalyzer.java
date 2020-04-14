@@ -61,8 +61,8 @@ public class CustomAnalyzer  implements XContentable<CustomAnalyzer> {
     return CustomAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CustomAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(CustomAnalyzer.class.getName(), false, args -> new CustomAnalyzer());
+  public static final ObjectParser<CustomAnalyzer, Void> PARSER =
+    new ObjectParser<>(CustomAnalyzer.class.getName(), false, CustomAnalyzer::new);
 
   static {
     PARSER.declareStringArray(CustomAnalyzer::setCharFilter, CHAR_FILTER);

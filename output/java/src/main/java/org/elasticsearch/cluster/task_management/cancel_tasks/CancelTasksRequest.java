@@ -54,8 +54,8 @@ public class CancelTasksRequest  implements XContentable<CancelTasksRequest> {
     return CancelTasksRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CancelTasksRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CancelTasksRequest.class.getName(), false, args -> new CancelTasksRequest());
+  public static final ObjectParser<CancelTasksRequest, Void> PARSER =
+    new ObjectParser<>(CancelTasksRequest.class.getName(), false, CancelTasksRequest::new);
 
   static {
     PARSER.declareStringArray(CancelTasksRequest::setActions, ACTIONS);

@@ -55,11 +55,11 @@ public class NoriAnalyzer  implements XContentable<NoriAnalyzer> {
     return NoriAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NoriAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(NoriAnalyzer.class.getName(), false, args -> new NoriAnalyzer());
+  public static final ObjectParser<NoriAnalyzer, Void> PARSER =
+    new ObjectParser<>(NoriAnalyzer.class.getName(), false, NoriAnalyzer::new);
 
   static {
-    PARSER.declareObject(NoriAnalyzer::setDecompoundMode, (p, t) -> NoriDecompoundMode.PARSER.apply(p), DECOMPOUND_MODE);
+    PARSER.declareField(NoriAnalyzer::setDecompoundMode, (p, t) -> NoriDecompoundMode.PARSER.apply(p), DECOMPOUND_MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareStringArray(NoriAnalyzer::setStoptags, STOPTAGS);
     PARSER.declareString(NoriAnalyzer::setUserDictionary, USER_DICTIONARY);
   }

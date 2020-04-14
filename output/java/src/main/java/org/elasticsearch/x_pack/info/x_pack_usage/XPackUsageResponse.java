@@ -179,8 +179,8 @@ public class XPackUsageResponse  implements XContentable<XPackUsageResponse> {
     return XPackUsageResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackUsageResponse, Void> PARSER =
-    new ConstructingObjectParser<>(XPackUsageResponse.class.getName(), false, args -> new XPackUsageResponse());
+  public static final ObjectParser<XPackUsageResponse, Void> PARSER =
+    new ObjectParser<>(XPackUsageResponse.class.getName(), false, XPackUsageResponse::new);
 
   static {
     PARSER.declareObject(XPackUsageResponse::setSql, (p, t) -> SqlUsage.PARSER.apply(p, t), SQL);

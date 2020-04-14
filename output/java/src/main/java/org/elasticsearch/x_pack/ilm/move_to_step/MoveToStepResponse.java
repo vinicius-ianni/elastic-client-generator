@@ -31,8 +31,8 @@ public class MoveToStepResponse  implements XContentable<MoveToStepResponse> {
     return MoveToStepResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MoveToStepResponse, Void> PARSER =
-    new ConstructingObjectParser<>(MoveToStepResponse.class.getName(), false, args -> new MoveToStepResponse());
+  public static final ObjectParser<MoveToStepResponse, Void> PARSER =
+    new ObjectParser<>(MoveToStepResponse.class.getName(), false, MoveToStepResponse::new);
 
   static {
     

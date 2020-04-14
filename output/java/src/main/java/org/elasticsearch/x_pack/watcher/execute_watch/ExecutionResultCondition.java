@@ -57,13 +57,13 @@ public class ExecutionResultCondition  implements XContentable<ExecutionResultCo
     return ExecutionResultCondition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutionResultCondition, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutionResultCondition.class.getName(), false, args -> new ExecutionResultCondition());
+  public static final ObjectParser<ExecutionResultCondition, Void> PARSER =
+    new ObjectParser<>(ExecutionResultCondition.class.getName(), false, ExecutionResultCondition::new);
 
   static {
     PARSER.declareBoolean(ExecutionResultCondition::setMet, MET);
-    PARSER.declareObject(ExecutionResultCondition::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS);
-    PARSER.declareObject(ExecutionResultCondition::setType, (p, t) -> ConditionType.PARSER.apply(p), TYPE);
+    PARSER.declareField(ExecutionResultCondition::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(ExecutionResultCondition::setType, (p, t) -> ConditionType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

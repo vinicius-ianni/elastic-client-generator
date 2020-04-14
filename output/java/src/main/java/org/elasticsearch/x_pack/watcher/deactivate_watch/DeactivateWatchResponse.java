@@ -39,8 +39,8 @@ public class DeactivateWatchResponse  implements XContentable<DeactivateWatchRes
     return DeactivateWatchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeactivateWatchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeactivateWatchResponse.class.getName(), false, args -> new DeactivateWatchResponse());
+  public static final ObjectParser<DeactivateWatchResponse, Void> PARSER =
+    new ObjectParser<>(DeactivateWatchResponse.class.getName(), false, DeactivateWatchResponse::new);
 
   static {
     PARSER.declareObject(DeactivateWatchResponse::setStatus, (p, t) -> ActivationStatus.PARSER.apply(p, t), STATUS);

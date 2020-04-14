@@ -45,8 +45,8 @@ public class PutFilterRequest  implements XContentable<PutFilterRequest> {
     return PutFilterRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutFilterRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutFilterRequest.class.getName(), false, args -> new PutFilterRequest());
+  public static final ObjectParser<PutFilterRequest, Void> PARSER =
+    new ObjectParser<>(PutFilterRequest.class.getName(), false, PutFilterRequest::new);
 
   static {
     PARSER.declareString(PutFilterRequest::setDescription, DESCRIPTION);

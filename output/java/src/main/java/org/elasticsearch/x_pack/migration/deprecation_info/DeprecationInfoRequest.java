@@ -31,8 +31,8 @@ public class DeprecationInfoRequest  implements XContentable<DeprecationInfoRequ
     return DeprecationInfoRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeprecationInfoRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeprecationInfoRequest.class.getName(), false, args -> new DeprecationInfoRequest());
+  public static final ObjectParser<DeprecationInfoRequest, Void> PARSER =
+    new ObjectParser<>(DeprecationInfoRequest.class.getName(), false, DeprecationInfoRequest::new);
 
   static {
     

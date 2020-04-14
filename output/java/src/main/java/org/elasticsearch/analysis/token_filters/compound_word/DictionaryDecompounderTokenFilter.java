@@ -31,8 +31,8 @@ public class DictionaryDecompounderTokenFilter  implements XContentable<Dictiona
     return DictionaryDecompounderTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DictionaryDecompounderTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(DictionaryDecompounderTokenFilter.class.getName(), false, args -> new DictionaryDecompounderTokenFilter());
+  public static final ObjectParser<DictionaryDecompounderTokenFilter, Void> PARSER =
+    new ObjectParser<>(DictionaryDecompounderTokenFilter.class.getName(), false, DictionaryDecompounderTokenFilter::new);
 
   static {
     

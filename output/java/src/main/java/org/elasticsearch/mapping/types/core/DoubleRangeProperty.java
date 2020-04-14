@@ -31,8 +31,8 @@ public class DoubleRangeProperty  implements XContentable<DoubleRangeProperty> {
     return DoubleRangeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DoubleRangeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(DoubleRangeProperty.class.getName(), false, args -> new DoubleRangeProperty());
+  public static final ObjectParser<DoubleRangeProperty, Void> PARSER =
+    new ObjectParser<>(DoubleRangeProperty.class.getName(), false, DoubleRangeProperty::new);
 
   static {
     

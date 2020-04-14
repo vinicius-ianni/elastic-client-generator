@@ -39,8 +39,8 @@ public class BucketScriptAggregation  implements XContentable<BucketScriptAggreg
     return BucketScriptAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BucketScriptAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(BucketScriptAggregation.class.getName(), false, args -> new BucketScriptAggregation());
+  public static final ObjectParser<BucketScriptAggregation, Void> PARSER =
+    new ObjectParser<>(BucketScriptAggregation.class.getName(), false, BucketScriptAggregation::new);
 
   static {
     PARSER.declareObject(BucketScriptAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);

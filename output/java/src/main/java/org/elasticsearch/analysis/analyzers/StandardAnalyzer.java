@@ -47,8 +47,8 @@ public class StandardAnalyzer  implements XContentable<StandardAnalyzer> {
     return StandardAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StandardAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(StandardAnalyzer.class.getName(), false, args -> new StandardAnalyzer());
+  public static final ObjectParser<StandardAnalyzer, Void> PARSER =
+    new ObjectParser<>(StandardAnalyzer.class.getName(), false, StandardAnalyzer::new);
 
   static {
     PARSER.declareInt(StandardAnalyzer::setMaxTokenLength, MAX_TOKEN_LENGTH);

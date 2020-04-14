@@ -31,8 +31,8 @@ public class ReindexRouting  implements XContentable<ReindexRouting> {
     return ReindexRouting.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexRouting, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexRouting.class.getName(), false, args -> new ReindexRouting());
+  public static final ObjectParser<ReindexRouting, Void> PARSER =
+    new ObjectParser<>(ReindexRouting.class.getName(), false, ReindexRouting::new);
 
   static {
     

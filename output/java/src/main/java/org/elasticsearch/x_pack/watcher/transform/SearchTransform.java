@@ -50,8 +50,8 @@ public class SearchTransform  implements XContentable<SearchTransform> {
     return SearchTransform.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchTransform, Void> PARSER =
-    new ConstructingObjectParser<>(SearchTransform.class.getName(), false, args -> new SearchTransform());
+  public static final ObjectParser<SearchTransform, Void> PARSER =
+    new ObjectParser<>(SearchTransform.class.getName(), false, SearchTransform::new);
 
   static {
     PARSER.declareObject(SearchTransform::setRequest, (p, t) -> SearchInputRequest.PARSER.apply(p, t), REQUEST);

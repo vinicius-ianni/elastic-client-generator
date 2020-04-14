@@ -46,8 +46,8 @@ public class ClearCachedRealmsResponse  implements XContentable<ClearCachedRealm
     return ClearCachedRealmsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearCachedRealmsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClearCachedRealmsResponse.class.getName(), false, args -> new ClearCachedRealmsResponse());
+  public static final ObjectParser<ClearCachedRealmsResponse, Void> PARSER =
+    new ObjectParser<>(ClearCachedRealmsResponse.class.getName(), false, ClearCachedRealmsResponse::new);
 
   static {
     PARSER.declareString(ClearCachedRealmsResponse::setClusterName, CLUSTER_NAME);

@@ -50,11 +50,11 @@ public class ChunkingConfig  implements XContentable<ChunkingConfig> {
     return ChunkingConfig.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ChunkingConfig, Void> PARSER =
-    new ConstructingObjectParser<>(ChunkingConfig.class.getName(), false, args -> new ChunkingConfig());
+  public static final ObjectParser<ChunkingConfig, Void> PARSER =
+    new ObjectParser<>(ChunkingConfig.class.getName(), false, ChunkingConfig::new);
 
   static {
-    PARSER.declareObject(ChunkingConfig::setMode, (p, t) -> ChunkingMode.PARSER.apply(p), MODE);
+    PARSER.declareField(ChunkingConfig::setMode, (p, t) -> ChunkingMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(ChunkingConfig::setTimeSpan, (p, t) -> Time.PARSER.apply(p, t), TIME_SPAN);
   }
 

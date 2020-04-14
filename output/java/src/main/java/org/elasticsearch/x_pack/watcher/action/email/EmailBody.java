@@ -43,8 +43,8 @@ public class EmailBody  implements XContentable<EmailBody> {
     return EmailBody.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<EmailBody, Void> PARSER =
-    new ConstructingObjectParser<>(EmailBody.class.getName(), false, args -> new EmailBody());
+  public static final ObjectParser<EmailBody, Void> PARSER =
+    new ObjectParser<>(EmailBody.class.getName(), false, EmailBody::new);
 
   static {
     PARSER.declareString(EmailBody::setHtml, HTML);

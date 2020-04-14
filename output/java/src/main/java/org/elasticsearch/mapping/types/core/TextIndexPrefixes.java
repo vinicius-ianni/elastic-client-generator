@@ -43,8 +43,8 @@ public class TextIndexPrefixes  implements XContentable<TextIndexPrefixes> {
     return TextIndexPrefixes.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TextIndexPrefixes, Void> PARSER =
-    new ConstructingObjectParser<>(TextIndexPrefixes.class.getName(), false, args -> new TextIndexPrefixes());
+  public static final ObjectParser<TextIndexPrefixes, Void> PARSER =
+    new ObjectParser<>(TextIndexPrefixes.class.getName(), false, TextIndexPrefixes::new);
 
   static {
     PARSER.declareInt(TextIndexPrefixes::setMaxChars, MAX_CHARS);

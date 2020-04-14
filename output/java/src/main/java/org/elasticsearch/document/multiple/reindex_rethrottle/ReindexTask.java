@@ -96,8 +96,8 @@ public class ReindexTask  implements XContentable<ReindexTask> {
     return ReindexTask.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexTask, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexTask.class.getName(), false, args -> new ReindexTask());
+  public static final ObjectParser<ReindexTask, Void> PARSER =
+    new ObjectParser<>(ReindexTask.class.getName(), false, ReindexTask::new);
 
   static {
     PARSER.declareString(ReindexTask::setAction, ACTION);

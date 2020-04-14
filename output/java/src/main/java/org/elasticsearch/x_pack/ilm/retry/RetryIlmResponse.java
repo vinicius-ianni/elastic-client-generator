@@ -31,8 +31,8 @@ public class RetryIlmResponse  implements XContentable<RetryIlmResponse> {
     return RetryIlmResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RetryIlmResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RetryIlmResponse.class.getName(), false, args -> new RetryIlmResponse());
+  public static final ObjectParser<RetryIlmResponse, Void> PARSER =
+    new ObjectParser<>(RetryIlmResponse.class.getName(), false, RetryIlmResponse::new);
 
   static {
     

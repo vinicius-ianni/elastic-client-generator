@@ -61,8 +61,8 @@ public class TranslateSqlRequest  implements XContentable<TranslateSqlRequest> {
     return TranslateSqlRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TranslateSqlRequest, Void> PARSER =
-    new ConstructingObjectParser<>(TranslateSqlRequest.class.getName(), false, args -> new TranslateSqlRequest());
+  public static final ObjectParser<TranslateSqlRequest, Void> PARSER =
+    new ObjectParser<>(TranslateSqlRequest.class.getName(), false, TranslateSqlRequest::new);
 
   static {
     PARSER.declareInt(TranslateSqlRequest::setFetchSize, FETCH_SIZE);

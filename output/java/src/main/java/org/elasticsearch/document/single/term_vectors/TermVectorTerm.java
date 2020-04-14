@@ -67,8 +67,8 @@ public class TermVectorTerm  implements XContentable<TermVectorTerm> {
     return TermVectorTerm.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermVectorTerm, Void> PARSER =
-    new ConstructingObjectParser<>(TermVectorTerm.class.getName(), false, args -> new TermVectorTerm());
+  public static final ObjectParser<TermVectorTerm, Void> PARSER =
+    new ObjectParser<>(TermVectorTerm.class.getName(), false, TermVectorTerm::new);
 
   static {
     PARSER.declareInt(TermVectorTerm::setDocFreq, DOC_FREQ);

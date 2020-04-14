@@ -36,8 +36,8 @@ public class TermQuery  implements XContentable<TermQuery> {
     return TermQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermQuery, Void> PARSER =
-    new ConstructingObjectParser<>(TermQuery.class.getName(), false, args -> new TermQuery());
+  public static final ObjectParser<TermQuery, Void> PARSER =
+    new ObjectParser<>(TermQuery.class.getName(), false, TermQuery::new);
 
   static {
     PARSER.declareObject(TermQuery::setValue, (p, t) -> p.objectText(), VALUE);

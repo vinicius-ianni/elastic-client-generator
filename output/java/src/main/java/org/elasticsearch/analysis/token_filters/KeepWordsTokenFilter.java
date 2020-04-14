@@ -52,8 +52,8 @@ public class KeepWordsTokenFilter  implements XContentable<KeepWordsTokenFilter>
     return KeepWordsTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KeepWordsTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KeepWordsTokenFilter.class.getName(), false, args -> new KeepWordsTokenFilter());
+  public static final ObjectParser<KeepWordsTokenFilter, Void> PARSER =
+    new ObjectParser<>(KeepWordsTokenFilter.class.getName(), false, KeepWordsTokenFilter::new);
 
   static {
     PARSER.declareStringArray(KeepWordsTokenFilter::setKeepWords, KEEP_WORDS);

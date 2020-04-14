@@ -36,8 +36,8 @@ public class MatchAllQuery  implements XContentable<MatchAllQuery> {
     return MatchAllQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MatchAllQuery, Void> PARSER =
-    new ConstructingObjectParser<>(MatchAllQuery.class.getName(), false, args -> new MatchAllQuery());
+  public static final ObjectParser<MatchAllQuery, Void> PARSER =
+    new ObjectParser<>(MatchAllQuery.class.getName(), false, MatchAllQuery::new);
 
   static {
     PARSER.declareString(MatchAllQuery::setNormField, NORM_FIELD);

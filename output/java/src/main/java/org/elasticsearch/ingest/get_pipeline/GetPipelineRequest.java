@@ -39,8 +39,8 @@ public class GetPipelineRequest  implements XContentable<GetPipelineRequest> {
     return GetPipelineRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetPipelineRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetPipelineRequest.class.getName(), false, args -> new GetPipelineRequest());
+  public static final ObjectParser<GetPipelineRequest, Void> PARSER =
+    new ObjectParser<>(GetPipelineRequest.class.getName(), false, GetPipelineRequest::new);
 
   static {
     PARSER.declareObject(GetPipelineRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

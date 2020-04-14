@@ -54,8 +54,8 @@ public class ApplicationPrivilegesCheck  implements XContentable<ApplicationPriv
     return ApplicationPrivilegesCheck.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ApplicationPrivilegesCheck, Void> PARSER =
-    new ConstructingObjectParser<>(ApplicationPrivilegesCheck.class.getName(), false, args -> new ApplicationPrivilegesCheck());
+  public static final ObjectParser<ApplicationPrivilegesCheck, Void> PARSER =
+    new ObjectParser<>(ApplicationPrivilegesCheck.class.getName(), false, ApplicationPrivilegesCheck::new);
 
   static {
     PARSER.declareString(ApplicationPrivilegesCheck::setApplication, APPLICATION);

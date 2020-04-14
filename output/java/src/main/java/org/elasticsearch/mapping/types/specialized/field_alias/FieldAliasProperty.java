@@ -39,8 +39,8 @@ public class FieldAliasProperty  implements XContentable<FieldAliasProperty> {
     return FieldAliasProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldAliasProperty, Void> PARSER =
-    new ConstructingObjectParser<>(FieldAliasProperty.class.getName(), false, args -> new FieldAliasProperty());
+  public static final ObjectParser<FieldAliasProperty, Void> PARSER =
+    new ObjectParser<>(FieldAliasProperty.class.getName(), false, FieldAliasProperty::new);
 
   static {
     PARSER.declareObject(FieldAliasProperty::setPath, (p, t) -> Field.createFrom(p), PATH);

@@ -93,15 +93,15 @@ public class MultiSearchRequest  implements XContentable<MultiSearchRequest> {
     return MultiSearchRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiSearchRequest, Void> PARSER =
-    new ConstructingObjectParser<>(MultiSearchRequest.class.getName(), false, args -> new MultiSearchRequest());
+  public static final ObjectParser<MultiSearchRequest, Void> PARSER =
+    new ObjectParser<>(MultiSearchRequest.class.getName(), false, MultiSearchRequest::new);
 
   static {
     PARSER.declareBoolean(MultiSearchRequest::setCcsMinimizeRoundtrips, CCS_MINIMIZE_ROUNDTRIPS);
     PARSER.declareLong(MultiSearchRequest::setMaxConcurrentSearches, MAX_CONCURRENT_SEARCHES);
     PARSER.declareLong(MultiSearchRequest::setMaxConcurrentShardRequests, MAX_CONCURRENT_SHARD_REQUESTS);
     PARSER.declareLong(MultiSearchRequest::setPreFilterShardSize, PRE_FILTER_SHARD_SIZE);
-    PARSER.declareObject(MultiSearchRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareField(MultiSearchRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(MultiSearchRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);
     PARSER.declareBoolean(MultiSearchRequest::setTypedKeys, TYPED_KEYS);
     PARSER.declareObject(MultiSearchRequest::setOperations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SearchRequest.PARSER.apply(pp, null)), OPERATIONS);

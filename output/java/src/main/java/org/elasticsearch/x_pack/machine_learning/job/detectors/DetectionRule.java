@@ -58,11 +58,11 @@ public class DetectionRule  implements XContentable<DetectionRule> {
     return DetectionRule.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DetectionRule, Void> PARSER =
-    new ConstructingObjectParser<>(DetectionRule.class.getName(), false, args -> new DetectionRule());
+  public static final ObjectParser<DetectionRule, Void> PARSER =
+    new ObjectParser<>(DetectionRule.class.getName(), false, DetectionRule::new);
 
   static {
-    PARSER.declareObjectArray(DetectionRule::setActions, (p, t) -> RuleAction.PARSER.apply(p), ACTIONS);
+    PARSER.declareFieldArray(DetectionRule::setActions, (p, t) -> RuleAction.PARSER.apply(p), ACTIONS, ObjectParser.ValueType.STRING_ARRAY);
     PARSER.declareObjectArray(DetectionRule::setConditions, (p, t) -> RuleCondition.PARSER.apply(p, t), CONDITIONS);
     PARSER.declareObject(DetectionRule::setScope, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),pp -> FilterRef.PARSER.apply(pp, null)), SCOPE);
   }

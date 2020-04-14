@@ -36,8 +36,8 @@ public class SecurityNode  implements XContentable<SecurityNode> {
     return SecurityNode.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SecurityNode, Void> PARSER =
-    new ConstructingObjectParser<>(SecurityNode.class.getName(), false, args -> new SecurityNode());
+  public static final ObjectParser<SecurityNode, Void> PARSER =
+    new ObjectParser<>(SecurityNode.class.getName(), false, SecurityNode::new);
 
   static {
     PARSER.declareString(SecurityNode::setName, NAME);

@@ -54,8 +54,8 @@ public class FollowIndexReadException  implements XContentable<FollowIndexReadEx
     return FollowIndexReadException.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FollowIndexReadException, Void> PARSER =
-    new ConstructingObjectParser<>(FollowIndexReadException.class.getName(), false, args -> new FollowIndexReadException());
+  public static final ObjectParser<FollowIndexReadException, Void> PARSER =
+    new ObjectParser<>(FollowIndexReadException.class.getName(), false, FollowIndexReadException::new);
 
   static {
     PARSER.declareLong(FollowIndexReadException::setFromSeqNo, FROM_SEQ_NO);

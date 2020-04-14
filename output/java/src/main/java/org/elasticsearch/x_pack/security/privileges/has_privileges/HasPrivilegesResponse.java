@@ -72,8 +72,8 @@ public class HasPrivilegesResponse  implements XContentable<HasPrivilegesRespons
     return HasPrivilegesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HasPrivilegesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(HasPrivilegesResponse.class.getName(), false, args -> new HasPrivilegesResponse());
+  public static final ObjectParser<HasPrivilegesResponse, Void> PARSER =
+    new ObjectParser<>(HasPrivilegesResponse.class.getName(), false, HasPrivilegesResponse::new);
 
   static {
     PARSER.declareObject(HasPrivilegesResponse::setApplication, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO List<ResourcePrivileges> */), APPLICATION);

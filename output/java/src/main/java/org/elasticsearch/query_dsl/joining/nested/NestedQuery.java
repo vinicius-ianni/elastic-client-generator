@@ -79,15 +79,15 @@ public class NestedQuery  implements XContentable<NestedQuery> {
     return NestedQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NestedQuery, Void> PARSER =
-    new ConstructingObjectParser<>(NestedQuery.class.getName(), false, args -> new NestedQuery());
+  public static final ObjectParser<NestedQuery, Void> PARSER =
+    new ObjectParser<>(NestedQuery.class.getName(), false, NestedQuery::new);
 
   static {
     PARSER.declareBoolean(NestedQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
     PARSER.declareObject(NestedQuery::setInnerHits, (p, t) -> InnerHits.PARSER.apply(p, t), INNER_HITS);
     PARSER.declareObject(NestedQuery::setPath, (p, t) -> Field.createFrom(p), PATH);
     PARSER.declareObject(NestedQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
-    PARSER.declareObject(NestedQuery::setScoreMode, (p, t) -> NestedScoreMode.PARSER.apply(p), SCORE_MODE);
+    PARSER.declareField(NestedQuery::setScoreMode, (p, t) -> NestedScoreMode.PARSER.apply(p), SCORE_MODE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

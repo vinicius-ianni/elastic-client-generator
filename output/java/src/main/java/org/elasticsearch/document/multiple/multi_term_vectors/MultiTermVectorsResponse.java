@@ -38,8 +38,8 @@ public class MultiTermVectorsResponse  implements XContentable<MultiTermVectorsR
     return MultiTermVectorsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiTermVectorsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(MultiTermVectorsResponse.class.getName(), false, args -> new MultiTermVectorsResponse());
+  public static final ObjectParser<MultiTermVectorsResponse, Void> PARSER =
+    new ObjectParser<>(MultiTermVectorsResponse.class.getName(), false, MultiTermVectorsResponse::new);
 
   static {
     PARSER.declareObjectArray(MultiTermVectorsResponse::setDocs, (p, t) -> TermVectors.PARSER.apply(p, t), DOCS);

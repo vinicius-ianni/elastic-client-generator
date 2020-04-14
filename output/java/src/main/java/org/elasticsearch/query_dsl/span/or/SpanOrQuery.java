@@ -38,8 +38,8 @@ public class SpanOrQuery  implements XContentable<SpanOrQuery> {
     return SpanOrQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanOrQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanOrQuery.class.getName(), false, args -> new SpanOrQuery());
+  public static final ObjectParser<SpanOrQuery, Void> PARSER =
+    new ObjectParser<>(SpanOrQuery.class.getName(), false, SpanOrQuery::new);
 
   static {
     PARSER.declareObjectArray(SpanOrQuery::setClauses, (p, t) -> SpanQuery.PARSER.apply(p, t), CLAUSES);

@@ -47,8 +47,8 @@ public class TimeOfDay  implements XContentable<TimeOfDay> {
     return TimeOfDay.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TimeOfDay, Void> PARSER =
-    new ConstructingObjectParser<>(TimeOfDay.class.getName(), false, args -> new TimeOfDay());
+  public static final ObjectParser<TimeOfDay, Void> PARSER =
+    new ObjectParser<>(TimeOfDay.class.getName(), false, TimeOfDay::new);
 
   static {
     PARSER.declareIntArray(TimeOfDay::setHour, HOUR);

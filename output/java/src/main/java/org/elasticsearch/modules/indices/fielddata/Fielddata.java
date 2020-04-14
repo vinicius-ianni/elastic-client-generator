@@ -49,12 +49,12 @@ public class Fielddata  implements XContentable<Fielddata> {
     return Fielddata.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Fielddata, Void> PARSER =
-    new ConstructingObjectParser<>(Fielddata.class.getName(), false, args -> new Fielddata());
+  public static final ObjectParser<Fielddata, Void> PARSER =
+    new ObjectParser<>(Fielddata.class.getName(), false, Fielddata::new);
 
   static {
     PARSER.declareObject(Fielddata::setFilter, (p, t) -> FielddataFilter.PARSER.apply(p, t), FILTER);
-    PARSER.declareObject(Fielddata::setLoading, (p, t) -> FielddataLoading.PARSER.apply(p), LOADING);
+    PARSER.declareField(Fielddata::setLoading, (p, t) -> FielddataLoading.PARSER.apply(p), LOADING, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

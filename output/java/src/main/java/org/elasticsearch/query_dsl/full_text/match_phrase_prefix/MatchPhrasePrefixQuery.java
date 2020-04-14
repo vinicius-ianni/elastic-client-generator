@@ -68,15 +68,15 @@ public class MatchPhrasePrefixQuery  implements XContentable<MatchPhrasePrefixQu
     return MatchPhrasePrefixQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MatchPhrasePrefixQuery, Void> PARSER =
-    new ConstructingObjectParser<>(MatchPhrasePrefixQuery.class.getName(), false, args -> new MatchPhrasePrefixQuery());
+  public static final ObjectParser<MatchPhrasePrefixQuery, Void> PARSER =
+    new ObjectParser<>(MatchPhrasePrefixQuery.class.getName(), false, MatchPhrasePrefixQuery::new);
 
   static {
     PARSER.declareString(MatchPhrasePrefixQuery::setAnalyzer, ANALYZER);
     PARSER.declareInt(MatchPhrasePrefixQuery::setMaxExpansions, MAX_EXPANSIONS);
     PARSER.declareString(MatchPhrasePrefixQuery::setQuery, QUERY);
     PARSER.declareInt(MatchPhrasePrefixQuery::setSlop, SLOP);
-    PARSER.declareObject(MatchPhrasePrefixQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY);
+    PARSER.declareField(MatchPhrasePrefixQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

@@ -46,8 +46,8 @@ public class GetCalendarEventsResponse  implements XContentable<GetCalendarEvent
     return GetCalendarEventsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetCalendarEventsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetCalendarEventsResponse.class.getName(), false, args -> new GetCalendarEventsResponse());
+  public static final ObjectParser<GetCalendarEventsResponse, Void> PARSER =
+    new ObjectParser<>(GetCalendarEventsResponse.class.getName(), false, GetCalendarEventsResponse::new);
 
   static {
     PARSER.declareInt(GetCalendarEventsResponse::setCount, COUNT);

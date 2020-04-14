@@ -31,8 +31,8 @@ public class LetterTokenizer  implements XContentable<LetterTokenizer> {
     return LetterTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LetterTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(LetterTokenizer.class.getName(), false, args -> new LetterTokenizer());
+  public static final ObjectParser<LetterTokenizer, Void> PARSER =
+    new ObjectParser<>(LetterTokenizer.class.getName(), false, LetterTokenizer::new);
 
   static {
     

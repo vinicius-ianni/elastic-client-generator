@@ -161,8 +161,8 @@ public class TypeMapping  implements XContentable<TypeMapping> {
     return TypeMapping.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TypeMapping, Void> PARSER =
-    new ConstructingObjectParser<>(TypeMapping.class.getName(), false, args -> new TypeMapping());
+  public static final ObjectParser<TypeMapping, Void> PARSER =
+    new ObjectParser<>(TypeMapping.class.getName(), false, TypeMapping::new);
 
   static {
     PARSER.declareObject(TypeMapping::setAllField, (p, t) -> AllField.PARSER.apply(p, t), ALL_FIELD);

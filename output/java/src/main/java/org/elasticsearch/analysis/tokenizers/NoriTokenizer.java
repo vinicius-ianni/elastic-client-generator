@@ -55,11 +55,11 @@ public class NoriTokenizer  implements XContentable<NoriTokenizer> {
     return NoriTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NoriTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(NoriTokenizer.class.getName(), false, args -> new NoriTokenizer());
+  public static final ObjectParser<NoriTokenizer, Void> PARSER =
+    new ObjectParser<>(NoriTokenizer.class.getName(), false, NoriTokenizer::new);
 
   static {
-    PARSER.declareObject(NoriTokenizer::setDecompoundMode, (p, t) -> NoriDecompoundMode.PARSER.apply(p), DECOMPOUND_MODE);
+    PARSER.declareField(NoriTokenizer::setDecompoundMode, (p, t) -> NoriDecompoundMode.PARSER.apply(p), DECOMPOUND_MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(NoriTokenizer::setUserDictionary, USER_DICTIONARY);
     PARSER.declareStringArray(NoriTokenizer::setUserDictionaryRules, USER_DICTIONARY_RULES);
   }

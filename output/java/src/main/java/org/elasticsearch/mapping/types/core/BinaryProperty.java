@@ -31,8 +31,8 @@ public class BinaryProperty  implements XContentable<BinaryProperty> {
     return BinaryProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BinaryProperty, Void> PARSER =
-    new ConstructingObjectParser<>(BinaryProperty.class.getName(), false, args -> new BinaryProperty());
+  public static final ObjectParser<BinaryProperty, Void> PARSER =
+    new ObjectParser<>(BinaryProperty.class.getName(), false, BinaryProperty::new);
 
   static {
     

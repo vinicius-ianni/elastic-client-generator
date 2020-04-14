@@ -56,8 +56,8 @@ public class DateRangeExpression  implements XContentable<DateRangeExpression> {
     return DateRangeExpression.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateRangeExpression, Void> PARSER =
-    new ConstructingObjectParser<>(DateRangeExpression.class.getName(), false, args -> new DateRangeExpression());
+  public static final ObjectParser<DateRangeExpression, Void> PARSER =
+    new ObjectParser<>(DateRangeExpression.class.getName(), false, DateRangeExpression::new);
 
   static {
     PARSER.declareObject(DateRangeExpression::setFrom, (p, t) -> DateMath.PARSER.apply(p, t), FROM);

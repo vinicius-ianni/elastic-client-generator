@@ -43,8 +43,8 @@ public class ExtendedMemoryStats  implements XContentable<ExtendedMemoryStats> {
     return ExtendedMemoryStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExtendedMemoryStats, Void> PARSER =
-    new ConstructingObjectParser<>(ExtendedMemoryStats.class.getName(), false, args -> new ExtendedMemoryStats());
+  public static final ObjectParser<ExtendedMemoryStats, Void> PARSER =
+    new ObjectParser<>(ExtendedMemoryStats.class.getName(), false, ExtendedMemoryStats::new);
 
   static {
     PARSER.declareInt(ExtendedMemoryStats::setFreePercent, FREE_PERCENT);

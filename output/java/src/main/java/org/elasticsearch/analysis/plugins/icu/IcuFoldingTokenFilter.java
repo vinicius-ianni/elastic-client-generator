@@ -36,8 +36,8 @@ public class IcuFoldingTokenFilter  implements XContentable<IcuFoldingTokenFilte
     return IcuFoldingTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IcuFoldingTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(IcuFoldingTokenFilter.class.getName(), false, args -> new IcuFoldingTokenFilter());
+  public static final ObjectParser<IcuFoldingTokenFilter, Void> PARSER =
+    new ObjectParser<>(IcuFoldingTokenFilter.class.getName(), false, IcuFoldingTokenFilter::new);
 
   static {
     PARSER.declareString(IcuFoldingTokenFilter::setUnicodeSetFilter, UNICODE_SET_FILTER);

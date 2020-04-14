@@ -59,8 +59,8 @@ public class TransformContainer  implements XContentable<TransformContainer> {
     return TransformContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TransformContainer, Void> PARSER =
-    new ConstructingObjectParser<>(TransformContainer.class.getName(), false, args -> new TransformContainer());
+  public static final ObjectParser<TransformContainer, Void> PARSER =
+    new ObjectParser<>(TransformContainer.class.getName(), false, TransformContainer::new);
 
   static {
     PARSER.declareObject(TransformContainer::setChain, (p, t) -> ChainTransform.PARSER.apply(p, t), CHAIN);

@@ -47,8 +47,8 @@ public class IndexPrivilegesCheck  implements XContentable<IndexPrivilegesCheck>
     return IndexPrivilegesCheck.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexPrivilegesCheck, Void> PARSER =
-    new ConstructingObjectParser<>(IndexPrivilegesCheck.class.getName(), false, args -> new IndexPrivilegesCheck());
+  public static final ObjectParser<IndexPrivilegesCheck, Void> PARSER =
+    new ObjectParser<>(IndexPrivilegesCheck.class.getName(), false, IndexPrivilegesCheck::new);
 
   static {
     PARSER.declareStringArray(IndexPrivilegesCheck::setNames, NAMES);

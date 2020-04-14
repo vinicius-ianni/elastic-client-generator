@@ -66,8 +66,8 @@ public class XPackInfoResponse  implements XContentable<XPackInfoResponse> {
     return XPackInfoResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackInfoResponse, Void> PARSER =
-    new ConstructingObjectParser<>(XPackInfoResponse.class.getName(), false, args -> new XPackInfoResponse());
+  public static final ObjectParser<XPackInfoResponse, Void> PARSER =
+    new ObjectParser<>(XPackInfoResponse.class.getName(), false, XPackInfoResponse::new);
 
   static {
     PARSER.declareObject(XPackInfoResponse::setBuild, (p, t) -> XPackBuildInformation.PARSER.apply(p, t), BUILD);

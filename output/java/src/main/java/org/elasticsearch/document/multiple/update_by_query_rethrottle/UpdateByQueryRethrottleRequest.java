@@ -36,8 +36,8 @@ public class UpdateByQueryRethrottleRequest  implements XContentable<UpdateByQue
     return UpdateByQueryRethrottleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateByQueryRethrottleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateByQueryRethrottleRequest.class.getName(), false, args -> new UpdateByQueryRethrottleRequest());
+  public static final ObjectParser<UpdateByQueryRethrottleRequest, Void> PARSER =
+    new ObjectParser<>(UpdateByQueryRethrottleRequest.class.getName(), false, UpdateByQueryRethrottleRequest::new);
 
   static {
     PARSER.declareLong(UpdateByQueryRethrottleRequest::setRequestsPerSecond, REQUESTS_PER_SECOND);

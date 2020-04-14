@@ -39,11 +39,11 @@ public class DisableUserRequest  implements XContentable<DisableUserRequest> {
     return DisableUserRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DisableUserRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DisableUserRequest.class.getName(), false, args -> new DisableUserRequest());
+  public static final ObjectParser<DisableUserRequest, Void> PARSER =
+    new ObjectParser<>(DisableUserRequest.class.getName(), false, DisableUserRequest::new);
 
   static {
-    PARSER.declareObject(DisableUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(DisableUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

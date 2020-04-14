@@ -96,11 +96,11 @@ public class PutRoleRequest  implements XContentable<PutRoleRequest> {
     return PutRoleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutRoleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutRoleRequest.class.getName(), false, args -> new PutRoleRequest());
+  public static final ObjectParser<PutRoleRequest, Void> PARSER =
+    new ObjectParser<>(PutRoleRequest.class.getName(), false, PutRoleRequest::new);
 
   static {
-    PARSER.declareObject(PutRoleRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(PutRoleRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObjectArray(PutRoleRequest::setApplications, (p, t) -> ApplicationPrivileges.PARSER.apply(p, t), APPLICATIONS);
     PARSER.declareStringArray(PutRoleRequest::setCluster, CLUSTER);
     PARSER.declareObject(PutRoleRequest::setGlobal, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), GLOBAL);

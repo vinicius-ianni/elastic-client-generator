@@ -67,8 +67,8 @@ public class IngestStats  implements XContentable<IngestStats> {
     return IngestStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IngestStats, Void> PARSER =
-    new ConstructingObjectParser<>(IngestStats.class.getName(), false, args -> new IngestStats());
+  public static final ObjectParser<IngestStats, Void> PARSER =
+    new ObjectParser<>(IngestStats.class.getName(), false, IngestStats::new);
 
   static {
     PARSER.declareLong(IngestStats::setCount, COUNT);

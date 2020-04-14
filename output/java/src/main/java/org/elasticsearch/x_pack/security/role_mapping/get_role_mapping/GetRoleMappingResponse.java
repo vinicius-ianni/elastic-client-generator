@@ -40,8 +40,8 @@ public class GetRoleMappingResponse extends DictionaryResponseBase<String, XPack
     return GetRoleMappingResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRoleMappingResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetRoleMappingResponse.class.getName(), false, args -> new GetRoleMappingResponse());
+  public static final ObjectParser<GetRoleMappingResponse, Void> PARSER =
+    new ObjectParser<>(GetRoleMappingResponse.class.getName(), false, GetRoleMappingResponse::new);
 
   static {
     PARSER.declareObject(GetRoleMappingResponse::setRoleMappings, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> XPackRoleMapping.PARSER.apply(pp, null)), ROLE_MAPPINGS);

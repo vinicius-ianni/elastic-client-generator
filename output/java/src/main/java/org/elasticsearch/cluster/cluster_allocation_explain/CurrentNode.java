@@ -67,8 +67,8 @@ public class CurrentNode  implements XContentable<CurrentNode> {
     return CurrentNode.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CurrentNode, Void> PARSER =
-    new ConstructingObjectParser<>(CurrentNode.class.getName(), false, args -> new CurrentNode());
+  public static final ObjectParser<CurrentNode, Void> PARSER =
+    new ObjectParser<>(CurrentNode.class.getName(), false, CurrentNode::new);
 
   static {
     PARSER.declareString(CurrentNode::setId, ID);

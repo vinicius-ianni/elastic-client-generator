@@ -43,8 +43,8 @@ public class NestedProperty  implements XContentable<NestedProperty> {
     return NestedProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NestedProperty, Void> PARSER =
-    new ConstructingObjectParser<>(NestedProperty.class.getName(), false, args -> new NestedProperty());
+  public static final ObjectParser<NestedProperty, Void> PARSER =
+    new ObjectParser<>(NestedProperty.class.getName(), false, NestedProperty::new);
 
   static {
     PARSER.declareBoolean(NestedProperty::setIncludeInParent, INCLUDE_IN_PARENT);

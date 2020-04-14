@@ -49,8 +49,8 @@ public class PinnedQuery  implements XContentable<PinnedQuery> {
     return PinnedQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PinnedQuery, Void> PARSER =
-    new ConstructingObjectParser<>(PinnedQuery.class.getName(), false, args -> new PinnedQuery());
+  public static final ObjectParser<PinnedQuery, Void> PARSER =
+    new ObjectParser<>(PinnedQuery.class.getName(), false, PinnedQuery::new);
 
   static {
     PARSER.declareObjectArray(PinnedQuery::setIds, (p, t) -> Id.createFrom(p), IDS);

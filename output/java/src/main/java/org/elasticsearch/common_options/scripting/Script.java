@@ -46,8 +46,8 @@ public class Script  implements XContentable<Script> {
     return Script.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Script, Void> PARSER =
-    new ConstructingObjectParser<>(Script.class.getName(), false, args -> new Script());
+  public static final ObjectParser<Script, Void> PARSER =
+    new ObjectParser<>(Script.class.getName(), false, Script::new);
 
   static {
     PARSER.declareString(Script::setLang, LANG);

@@ -142,8 +142,8 @@ public class TextProperty  implements XContentable<TextProperty> {
     return TextProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TextProperty, Void> PARSER =
-    new ConstructingObjectParser<>(TextProperty.class.getName(), false, args -> new TextProperty());
+  public static final ObjectParser<TextProperty, Void> PARSER =
+    new ObjectParser<>(TextProperty.class.getName(), false, TextProperty::new);
 
   static {
     PARSER.declareString(TextProperty::setAnalyzer, ANALYZER);
@@ -152,14 +152,14 @@ public class TextProperty  implements XContentable<TextProperty> {
     PARSER.declareBoolean(TextProperty::setFielddata, FIELDDATA);
     PARSER.declareObject(TextProperty::setFielddataFrequencyFilter, (p, t) -> FielddataFrequencyFilter.PARSER.apply(p, t), FIELDDATA_FREQUENCY_FILTER);
     PARSER.declareBoolean(TextProperty::setIndex, INDEX);
-    PARSER.declareObject(TextProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
+    PARSER.declareField(TextProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(TextProperty::setIndexPhrases, INDEX_PHRASES);
     PARSER.declareObject(TextProperty::setIndexPrefixes, (p, t) -> TextIndexPrefixes.PARSER.apply(p, t), INDEX_PREFIXES);
     PARSER.declareBoolean(TextProperty::setNorms, NORMS);
     PARSER.declareInt(TextProperty::setPositionIncrementGap, POSITION_INCREMENT_GAP);
     PARSER.declareString(TextProperty::setSearchAnalyzer, SEARCH_ANALYZER);
     PARSER.declareString(TextProperty::setSearchQuoteAnalyzer, SEARCH_QUOTE_ANALYZER);
-    PARSER.declareObject(TextProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR);
+    PARSER.declareField(TextProperty::setTermVector, (p, t) -> TermVectorOption.PARSER.apply(p), TERM_VECTOR, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

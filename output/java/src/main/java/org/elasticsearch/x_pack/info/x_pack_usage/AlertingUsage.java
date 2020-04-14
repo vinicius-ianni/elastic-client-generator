@@ -59,8 +59,8 @@ public class AlertingUsage  implements XContentable<AlertingUsage> {
     return AlertingUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AlertingUsage, Void> PARSER =
-    new ConstructingObjectParser<>(AlertingUsage.class.getName(), false, args -> new AlertingUsage());
+  public static final ObjectParser<AlertingUsage, Void> PARSER =
+    new ObjectParser<>(AlertingUsage.class.getName(), false, AlertingUsage::new);
 
   static {
     PARSER.declareObject(AlertingUsage::setCount, (p, t) -> AlertingCount.PARSER.apply(p, t), COUNT);

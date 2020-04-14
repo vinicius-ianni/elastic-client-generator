@@ -36,8 +36,8 @@ public class SplitIndexResponse  implements XContentable<SplitIndexResponse> {
     return SplitIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SplitIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(SplitIndexResponse.class.getName(), false, args -> new SplitIndexResponse());
+  public static final ObjectParser<SplitIndexResponse, Void> PARSER =
+    new ObjectParser<>(SplitIndexResponse.class.getName(), false, SplitIndexResponse::new);
 
   static {
     PARSER.declareBoolean(SplitIndexResponse::setShardsAcknowledged, SHARDS_ACKNOWLEDGED);

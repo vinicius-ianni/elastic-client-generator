@@ -50,8 +50,8 @@ public class RangePropertyBase  implements XContentable<RangePropertyBase> {
     return RangePropertyBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RangePropertyBase, Void> PARSER =
-    new ConstructingObjectParser<>(RangePropertyBase.class.getName(), false, args -> new RangePropertyBase());
+  public static final ObjectParser<RangePropertyBase, Void> PARSER =
+    new ObjectParser<>(RangePropertyBase.class.getName(), false, RangePropertyBase::new);
 
   static {
     PARSER.declareDouble(RangePropertyBase::setBoost, BOOST);

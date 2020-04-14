@@ -67,8 +67,8 @@ public class CreateRepositoryRequest  implements XContentable<CreateRepositoryRe
     return CreateRepositoryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateRepositoryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CreateRepositoryRequest.class.getName(), false, args -> new CreateRepositoryRequest());
+  public static final ObjectParser<CreateRepositoryRequest, Void> PARSER =
+    new ObjectParser<>(CreateRepositoryRequest.class.getName(), false, CreateRepositoryRequest::new);
 
   static {
     PARSER.declareObject(CreateRepositoryRequest::setRepository, (p, t) -> SnapshotRepository.PARSER.apply(p, t), REPOSITORY);

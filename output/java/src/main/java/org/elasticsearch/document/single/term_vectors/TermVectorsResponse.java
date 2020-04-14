@@ -90,8 +90,8 @@ public class TermVectorsResponse  implements XContentable<TermVectorsResponse> {
     return TermVectorsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermVectorsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(TermVectorsResponse.class.getName(), false, args -> new TermVectorsResponse());
+  public static final ObjectParser<TermVectorsResponse, Void> PARSER =
+    new ObjectParser<>(TermVectorsResponse.class.getName(), false, TermVectorsResponse::new);
 
   static {
     PARSER.declareBoolean(TermVectorsResponse::setIsValid, IS_VALID);

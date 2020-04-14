@@ -56,8 +56,8 @@ public class CancelTasksResponse  implements XContentable<CancelTasksResponse> {
     return CancelTasksResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CancelTasksResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CancelTasksResponse.class.getName(), false, args -> new CancelTasksResponse());
+  public static final ObjectParser<CancelTasksResponse, Void> PARSER =
+    new ObjectParser<>(CancelTasksResponse.class.getName(), false, CancelTasksResponse::new);
 
   static {
     PARSER.declareBoolean(CancelTasksResponse::setIsValid, IS_VALID);

@@ -64,8 +64,8 @@ public class CircuitBreakerSettings  implements XContentable<CircuitBreakerSetti
     return CircuitBreakerSettings.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CircuitBreakerSettings, Void> PARSER =
-    new ConstructingObjectParser<>(CircuitBreakerSettings.class.getName(), false, args -> new CircuitBreakerSettings());
+  public static final ObjectParser<CircuitBreakerSettings, Void> PARSER =
+    new ObjectParser<>(CircuitBreakerSettings.class.getName(), false, CircuitBreakerSettings::new);
 
   static {
     PARSER.declareString(CircuitBreakerSettings::setFielddataLimit, FIELDDATA_LIMIT);

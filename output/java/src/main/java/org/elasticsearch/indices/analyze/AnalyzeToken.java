@@ -71,8 +71,8 @@ public class AnalyzeToken  implements XContentable<AnalyzeToken> {
     return AnalyzeToken.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnalyzeToken, Void> PARSER =
-    new ConstructingObjectParser<>(AnalyzeToken.class.getName(), false, args -> new AnalyzeToken());
+  public static final ObjectParser<AnalyzeToken, Void> PARSER =
+    new ObjectParser<>(AnalyzeToken.class.getName(), false, AnalyzeToken::new);
 
   static {
     PARSER.declareLong(AnalyzeToken::setEndOffset, END_OFFSET);

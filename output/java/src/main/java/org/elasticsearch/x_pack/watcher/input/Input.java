@@ -31,8 +31,8 @@ public class Input  implements XContentable<Input> {
     return Input.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Input, Void> PARSER =
-    new ConstructingObjectParser<>(Input.class.getName(), false, args -> new Input());
+  public static final ObjectParser<Input, Void> PARSER =
+    new ObjectParser<>(Input.class.getName(), false, Input::new);
 
   static {
     

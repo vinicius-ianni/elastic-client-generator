@@ -129,8 +129,8 @@ public class AutoFollowPattern  implements XContentable<AutoFollowPattern> {
     return AutoFollowPattern.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AutoFollowPattern, Void> PARSER =
-    new ConstructingObjectParser<>(AutoFollowPattern.class.getName(), false, args -> new AutoFollowPattern());
+  public static final ObjectParser<AutoFollowPattern, Void> PARSER =
+    new ObjectParser<>(AutoFollowPattern.class.getName(), false, AutoFollowPattern::new);
 
   static {
     PARSER.declareString(AutoFollowPattern::setFollowIndexPattern, FOLLOW_INDEX_PATTERN);

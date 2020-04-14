@@ -67,14 +67,14 @@ public class ArrayCompareCondition  implements XContentable<ArrayCompareConditio
     return ArrayCompareCondition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ArrayCompareCondition, Void> PARSER =
-    new ConstructingObjectParser<>(ArrayCompareCondition.class.getName(), false, args -> new ArrayCompareCondition());
+  public static final ObjectParser<ArrayCompareCondition, Void> PARSER =
+    new ObjectParser<>(ArrayCompareCondition.class.getName(), false, ArrayCompareCondition::new);
 
   static {
     PARSER.declareString(ArrayCompareCondition::setArrayPath, ARRAY_PATH);
     PARSER.declareString(ArrayCompareCondition::setComparison, COMPARISON);
     PARSER.declareString(ArrayCompareCondition::setPath, PATH);
-    PARSER.declareObject(ArrayCompareCondition::setQuantifier, (p, t) -> Quantifier.PARSER.apply(p), QUANTIFIER);
+    PARSER.declareField(ArrayCompareCondition::setQuantifier, (p, t) -> Quantifier.PARSER.apply(p), QUANTIFIER, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(ArrayCompareCondition::setValue, (p, t) -> p.objectText(), VALUE);
   }
 

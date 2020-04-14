@@ -40,8 +40,8 @@ public class GetPipelineResponse extends DictionaryResponseBase<String, Pipeline
     return GetPipelineResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetPipelineResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetPipelineResponse.class.getName(), false, args -> new GetPipelineResponse());
+  public static final ObjectParser<GetPipelineResponse, Void> PARSER =
+    new ObjectParser<>(GetPipelineResponse.class.getName(), false, GetPipelineResponse::new);
 
   static {
     PARSER.declareObject(GetPipelineResponse::setPipelines, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> Pipeline.PARSER.apply(pp, null)), PIPELINES);

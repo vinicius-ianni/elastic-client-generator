@@ -98,13 +98,13 @@ public class UpdateIndexSettingsRequest  implements XContentable<UpdateIndexSett
     return UpdateIndexSettingsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateIndexSettingsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateIndexSettingsRequest.class.getName(), false, args -> new UpdateIndexSettingsRequest());
+  public static final ObjectParser<UpdateIndexSettingsRequest, Void> PARSER =
+    new ObjectParser<>(UpdateIndexSettingsRequest.class.getName(), false, UpdateIndexSettingsRequest::new);
 
   static {
     PARSER.declareObject(UpdateIndexSettingsRequest::setIndexSettings, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), INDEX_SETTINGS);
     PARSER.declareBoolean(UpdateIndexSettingsRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(UpdateIndexSettingsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(UpdateIndexSettingsRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(UpdateIndexSettingsRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(UpdateIndexSettingsRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareObject(UpdateIndexSettingsRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

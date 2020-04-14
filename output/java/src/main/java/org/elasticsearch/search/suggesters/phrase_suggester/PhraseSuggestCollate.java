@@ -56,8 +56,8 @@ public class PhraseSuggestCollate  implements XContentable<PhraseSuggestCollate>
     return PhraseSuggestCollate.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PhraseSuggestCollate, Void> PARSER =
-    new ConstructingObjectParser<>(PhraseSuggestCollate.class.getName(), false, args -> new PhraseSuggestCollate());
+  public static final ObjectParser<PhraseSuggestCollate, Void> PARSER =
+    new ObjectParser<>(PhraseSuggestCollate.class.getName(), false, PhraseSuggestCollate::new);
 
   static {
     PARSER.declareObject(PhraseSuggestCollate::setParams, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PARAMS);

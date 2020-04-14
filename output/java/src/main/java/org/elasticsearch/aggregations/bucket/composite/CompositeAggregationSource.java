@@ -71,14 +71,14 @@ public class CompositeAggregationSource  implements XContentable<CompositeAggreg
     return CompositeAggregationSource.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompositeAggregationSource, Void> PARSER =
-    new ConstructingObjectParser<>(CompositeAggregationSource.class.getName(), false, args -> new CompositeAggregationSource());
+  public static final ObjectParser<CompositeAggregationSource, Void> PARSER =
+    new ObjectParser<>(CompositeAggregationSource.class.getName(), false, CompositeAggregationSource::new);
 
   static {
     PARSER.declareObject(CompositeAggregationSource::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareBoolean(CompositeAggregationSource::setMissingBucket, MISSING_BUCKET);
     PARSER.declareString(CompositeAggregationSource::setName, NAME);
-    PARSER.declareObject(CompositeAggregationSource::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER);
+    PARSER.declareField(CompositeAggregationSource::setOrder, (p, t) -> SortOrder.PARSER.apply(p), ORDER, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(CompositeAggregationSource::setSourceType, SOURCE_TYPE);
   }
 

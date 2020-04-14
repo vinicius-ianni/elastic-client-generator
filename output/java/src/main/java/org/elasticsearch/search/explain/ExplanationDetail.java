@@ -53,8 +53,8 @@ public class ExplanationDetail  implements XContentable<ExplanationDetail> {
     return ExplanationDetail.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExplanationDetail, Void> PARSER =
-    new ConstructingObjectParser<>(ExplanationDetail.class.getName(), false, args -> new ExplanationDetail());
+  public static final ObjectParser<ExplanationDetail, Void> PARSER =
+    new ObjectParser<>(ExplanationDetail.class.getName(), false, ExplanationDetail::new);
 
   static {
     PARSER.declareString(ExplanationDetail::setDescription, DESCRIPTION);

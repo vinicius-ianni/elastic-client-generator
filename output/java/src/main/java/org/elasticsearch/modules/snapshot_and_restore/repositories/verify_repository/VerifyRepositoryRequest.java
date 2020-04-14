@@ -49,8 +49,8 @@ public class VerifyRepositoryRequest  implements XContentable<VerifyRepositoryRe
     return VerifyRepositoryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<VerifyRepositoryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(VerifyRepositoryRequest.class.getName(), false, args -> new VerifyRepositoryRequest());
+  public static final ObjectParser<VerifyRepositoryRequest, Void> PARSER =
+    new ObjectParser<>(VerifyRepositoryRequest.class.getName(), false, VerifyRepositoryRequest::new);
 
   static {
     PARSER.declareObject(VerifyRepositoryRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

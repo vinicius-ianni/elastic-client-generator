@@ -36,8 +36,8 @@ public class GetLicenseRequest  implements XContentable<GetLicenseRequest> {
     return GetLicenseRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetLicenseRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetLicenseRequest.class.getName(), false, args -> new GetLicenseRequest());
+  public static final ObjectParser<GetLicenseRequest, Void> PARSER =
+    new ObjectParser<>(GetLicenseRequest.class.getName(), false, GetLicenseRequest::new);
 
   static {
     PARSER.declareBoolean(GetLicenseRequest::setLocal, LOCAL);

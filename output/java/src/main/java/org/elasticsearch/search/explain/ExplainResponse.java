@@ -56,8 +56,8 @@ public class ExplainResponse<TDocument>  implements XContentable<ExplainResponse
     return ExplainResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExplainResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ExplainResponse.class.getName(), false, args -> new ExplainResponse());
+  public static final ObjectParser<ExplainResponse, Void> PARSER =
+    new ObjectParser<>(ExplainResponse.class.getName(), false, ExplainResponse::new);
 
   static {
     PARSER.declareObject(ExplainResponse::setExplanation, (p, t) -> ExplanationDetail.PARSER.apply(p, t), EXPLANATION);

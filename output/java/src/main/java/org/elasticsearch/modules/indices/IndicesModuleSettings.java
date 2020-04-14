@@ -68,8 +68,8 @@ public class IndicesModuleSettings  implements XContentable<IndicesModuleSetting
     return IndicesModuleSettings.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesModuleSettings, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesModuleSettings.class.getName(), false, args -> new IndicesModuleSettings());
+  public static final ObjectParser<IndicesModuleSettings, Void> PARSER =
+    new ObjectParser<>(IndicesModuleSettings.class.getName(), false, IndicesModuleSettings::new);
 
   static {
     PARSER.declareObject(IndicesModuleSettings::setCircuitBreakerSettings, (p, t) -> CircuitBreakerSettings.PARSER.apply(p, t), CIRCUIT_BREAKER_SETTINGS);

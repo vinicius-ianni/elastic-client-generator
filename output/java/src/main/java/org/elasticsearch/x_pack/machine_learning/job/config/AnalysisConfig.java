@@ -105,8 +105,8 @@ public class AnalysisConfig  implements XContentable<AnalysisConfig> {
     return AnalysisConfig.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnalysisConfig, Void> PARSER =
-    new ConstructingObjectParser<>(AnalysisConfig.class.getName(), false, args -> new AnalysisConfig());
+  public static final ObjectParser<AnalysisConfig, Void> PARSER =
+    new ObjectParser<>(AnalysisConfig.class.getName(), false, AnalysisConfig::new);
 
   static {
     PARSER.declareObject(AnalysisConfig::setBucketSpan, (p, t) -> Time.PARSER.apply(p, t), BUCKET_SPAN);

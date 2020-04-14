@@ -50,8 +50,8 @@ public class RoleUsage  implements XContentable<RoleUsage> {
     return RoleUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RoleUsage, Void> PARSER =
-    new ConstructingObjectParser<>(RoleUsage.class.getName(), false, args -> new RoleUsage());
+  public static final ObjectParser<RoleUsage, Void> PARSER =
+    new ObjectParser<>(RoleUsage.class.getName(), false, RoleUsage::new);
 
   static {
     PARSER.declareBoolean(RoleUsage::setDls, DLS);

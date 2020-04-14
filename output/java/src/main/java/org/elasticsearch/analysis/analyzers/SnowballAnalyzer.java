@@ -50,11 +50,11 @@ public class SnowballAnalyzer  implements XContentable<SnowballAnalyzer> {
     return SnowballAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnowballAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(SnowballAnalyzer.class.getName(), false, args -> new SnowballAnalyzer());
+  public static final ObjectParser<SnowballAnalyzer, Void> PARSER =
+    new ObjectParser<>(SnowballAnalyzer.class.getName(), false, SnowballAnalyzer::new);
 
   static {
-    PARSER.declareObject(SnowballAnalyzer::setLanguage, (p, t) -> SnowballLanguage.PARSER.apply(p), LANGUAGE);
+    PARSER.declareField(SnowballAnalyzer::setLanguage, (p, t) -> SnowballLanguage.PARSER.apply(p), LANGUAGE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(SnowballAnalyzer::setStopwords, (p, t) -> new StopWords().fromXContent(p), STOPWORDS);
   }
 

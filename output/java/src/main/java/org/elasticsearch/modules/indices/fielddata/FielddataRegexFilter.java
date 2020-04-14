@@ -36,8 +36,8 @@ public class FielddataRegexFilter  implements XContentable<FielddataRegexFilter>
     return FielddataRegexFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FielddataRegexFilter, Void> PARSER =
-    new ConstructingObjectParser<>(FielddataRegexFilter.class.getName(), false, args -> new FielddataRegexFilter());
+  public static final ObjectParser<FielddataRegexFilter, Void> PARSER =
+    new ObjectParser<>(FielddataRegexFilter.class.getName(), false, FielddataRegexFilter::new);
 
   static {
     PARSER.declareString(FielddataRegexFilter::setPattern, PATTERN);

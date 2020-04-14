@@ -38,8 +38,8 @@ public class ModelPlotConfig  implements XContentable<ModelPlotConfig> {
     return ModelPlotConfig.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ModelPlotConfig, Void> PARSER =
-    new ConstructingObjectParser<>(ModelPlotConfig.class.getName(), false, args -> new ModelPlotConfig());
+  public static final ObjectParser<ModelPlotConfig, Void> PARSER =
+    new ObjectParser<>(ModelPlotConfig.class.getName(), false, ModelPlotConfig::new);
 
   static {
     PARSER.declareObjectArray(ModelPlotConfig::setTerms, (p, t) -> Field.createFrom(p), TERMS);

@@ -39,8 +39,8 @@ public class ScriptQuery  implements XContentable<ScriptQuery> {
     return ScriptQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptQuery, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptQuery.class.getName(), false, args -> new ScriptQuery());
+  public static final ObjectParser<ScriptQuery, Void> PARSER =
+    new ObjectParser<>(ScriptQuery.class.getName(), false, ScriptQuery::new);
 
   static {
     PARSER.declareObject(ScriptQuery::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);

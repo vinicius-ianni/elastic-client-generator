@@ -40,8 +40,8 @@ public class GetRoleResponse extends DictionaryResponseBase<String, XPackRole> i
     return GetRoleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRoleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetRoleResponse.class.getName(), false, args -> new GetRoleResponse());
+  public static final ObjectParser<GetRoleResponse, Void> PARSER =
+    new ObjectParser<>(GetRoleResponse.class.getName(), false, GetRoleResponse::new);
 
   static {
     PARSER.declareObject(GetRoleResponse::setRoles, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> XPackRole.PARSER.apply(pp, null)), ROLES);

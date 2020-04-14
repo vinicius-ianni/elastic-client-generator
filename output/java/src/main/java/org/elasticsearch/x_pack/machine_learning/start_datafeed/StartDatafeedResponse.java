@@ -36,8 +36,8 @@ public class StartDatafeedResponse  implements XContentable<StartDatafeedRespons
     return StartDatafeedResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StartDatafeedResponse, Void> PARSER =
-    new ConstructingObjectParser<>(StartDatafeedResponse.class.getName(), false, args -> new StartDatafeedResponse());
+  public static final ObjectParser<StartDatafeedResponse, Void> PARSER =
+    new ObjectParser<>(StartDatafeedResponse.class.getName(), false, StartDatafeedResponse::new);
 
   static {
     PARSER.declareBoolean(StartDatafeedResponse::setStarted, STARTED);

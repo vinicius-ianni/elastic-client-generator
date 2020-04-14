@@ -31,8 +31,8 @@ public class GlobalAggregation  implements XContentable<GlobalAggregation> {
     return GlobalAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GlobalAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(GlobalAggregation.class.getName(), false, args -> new GlobalAggregation());
+  public static final ObjectParser<GlobalAggregation, Void> PARSER =
+    new ObjectParser<>(GlobalAggregation.class.getName(), false, GlobalAggregation::new);
 
   static {
     

@@ -57,8 +57,8 @@ public class ShardRequestCache  implements XContentable<ShardRequestCache> {
     return ShardRequestCache.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardRequestCache, Void> PARSER =
-    new ConstructingObjectParser<>(ShardRequestCache.class.getName(), false, args -> new ShardRequestCache());
+  public static final ObjectParser<ShardRequestCache, Void> PARSER =
+    new ObjectParser<>(ShardRequestCache.class.getName(), false, ShardRequestCache::new);
 
   static {
     PARSER.declareLong(ShardRequestCache::setEvictions, EVICTIONS);

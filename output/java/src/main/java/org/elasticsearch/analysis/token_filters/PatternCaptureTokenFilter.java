@@ -45,8 +45,8 @@ public class PatternCaptureTokenFilter  implements XContentable<PatternCaptureTo
     return PatternCaptureTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PatternCaptureTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(PatternCaptureTokenFilter.class.getName(), false, args -> new PatternCaptureTokenFilter());
+  public static final ObjectParser<PatternCaptureTokenFilter, Void> PARSER =
+    new ObjectParser<>(PatternCaptureTokenFilter.class.getName(), false, PatternCaptureTokenFilter::new);
 
   static {
     PARSER.declareStringArray(PatternCaptureTokenFilter::setPatterns, PATTERNS);

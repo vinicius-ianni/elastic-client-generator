@@ -46,8 +46,8 @@ public class DisMaxQuery  implements XContentable<DisMaxQuery> {
     return DisMaxQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DisMaxQuery, Void> PARSER =
-    new ConstructingObjectParser<>(DisMaxQuery.class.getName(), false, args -> new DisMaxQuery());
+  public static final ObjectParser<DisMaxQuery, Void> PARSER =
+    new ObjectParser<>(DisMaxQuery.class.getName(), false, DisMaxQuery::new);
 
   static {
     PARSER.declareObjectArray(DisMaxQuery::setQueries, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERIES);

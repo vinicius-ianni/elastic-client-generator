@@ -31,8 +31,8 @@ public class GetRoleRequest  implements XContentable<GetRoleRequest> {
     return GetRoleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRoleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetRoleRequest.class.getName(), false, args -> new GetRoleRequest());
+  public static final ObjectParser<GetRoleRequest, Void> PARSER =
+    new ObjectParser<>(GetRoleRequest.class.getName(), false, GetRoleRequest::new);
 
   static {
     

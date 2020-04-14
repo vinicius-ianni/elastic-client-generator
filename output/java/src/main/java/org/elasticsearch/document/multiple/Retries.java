@@ -43,8 +43,8 @@ public class Retries  implements XContentable<Retries> {
     return Retries.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Retries, Void> PARSER =
-    new ConstructingObjectParser<>(Retries.class.getName(), false, args -> new Retries());
+  public static final ObjectParser<Retries, Void> PARSER =
+    new ObjectParser<>(Retries.class.getName(), false, Retries::new);
 
   static {
     PARSER.declareLong(Retries::setBulk, BULK);

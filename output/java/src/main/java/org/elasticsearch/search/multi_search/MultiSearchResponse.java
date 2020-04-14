@@ -60,8 +60,8 @@ public class MultiSearchResponse  implements XContentable<MultiSearchResponse> {
     return MultiSearchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiSearchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(MultiSearchResponse.class.getName(), false, args -> new MultiSearchResponse());
+  public static final ObjectParser<MultiSearchResponse, Void> PARSER =
+    new ObjectParser<>(MultiSearchResponse.class.getName(), false, MultiSearchResponse::new);
 
   static {
     PARSER.declareLong(MultiSearchResponse::setTook, TOOK);

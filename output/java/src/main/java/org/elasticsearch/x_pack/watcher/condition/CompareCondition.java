@@ -50,8 +50,8 @@ public class CompareCondition  implements XContentable<CompareCondition> {
     return CompareCondition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompareCondition, Void> PARSER =
-    new ConstructingObjectParser<>(CompareCondition.class.getName(), false, args -> new CompareCondition());
+  public static final ObjectParser<CompareCondition, Void> PARSER =
+    new ObjectParser<>(CompareCondition.class.getName(), false, CompareCondition::new);
 
   static {
     PARSER.declareString(CompareCondition::setComparison, COMPARISON);

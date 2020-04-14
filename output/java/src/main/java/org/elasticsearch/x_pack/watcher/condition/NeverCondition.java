@@ -31,8 +31,8 @@ public class NeverCondition  implements XContentable<NeverCondition> {
     return NeverCondition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NeverCondition, Void> PARSER =
-    new ConstructingObjectParser<>(NeverCondition.class.getName(), false, args -> new NeverCondition());
+  public static final ObjectParser<NeverCondition, Void> PARSER =
+    new ObjectParser<>(NeverCondition.class.getName(), false, NeverCondition::new);
 
   static {
     

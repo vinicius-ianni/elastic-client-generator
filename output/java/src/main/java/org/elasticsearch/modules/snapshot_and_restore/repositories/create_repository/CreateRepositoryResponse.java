@@ -31,8 +31,8 @@ public class CreateRepositoryResponse  implements XContentable<CreateRepositoryR
     return CreateRepositoryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateRepositoryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CreateRepositoryResponse.class.getName(), false, args -> new CreateRepositoryResponse());
+  public static final ObjectParser<CreateRepositoryResponse, Void> PARSER =
+    new ObjectParser<>(CreateRepositoryResponse.class.getName(), false, CreateRepositoryResponse::new);
 
   static {
     

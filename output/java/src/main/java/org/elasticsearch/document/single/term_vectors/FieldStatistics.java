@@ -50,8 +50,8 @@ public class FieldStatistics  implements XContentable<FieldStatistics> {
     return FieldStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(FieldStatistics.class.getName(), false, args -> new FieldStatistics());
+  public static final ObjectParser<FieldStatistics, Void> PARSER =
+    new ObjectParser<>(FieldStatistics.class.getName(), false, FieldStatistics::new);
 
   static {
     PARSER.declareInt(FieldStatistics::setDocCount, DOC_COUNT);

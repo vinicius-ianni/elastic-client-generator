@@ -109,8 +109,8 @@ public class SecurityUsage  implements XContentable<SecurityUsage> {
     return SecurityUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SecurityUsage, Void> PARSER =
-    new ConstructingObjectParser<>(SecurityUsage.class.getName(), false, args -> new SecurityUsage());
+  public static final ObjectParser<SecurityUsage, Void> PARSER =
+    new ObjectParser<>(SecurityUsage.class.getName(), false, SecurityUsage::new);
 
   static {
     PARSER.declareObject(SecurityUsage::setAnonymous, (p, t) -> SecurityFeatureToggle.PARSER.apply(p, t), ANONYMOUS);

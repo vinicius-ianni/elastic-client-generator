@@ -81,12 +81,12 @@ public class FreezeIndexRequest  implements XContentable<FreezeIndexRequest> {
     return FreezeIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FreezeIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(FreezeIndexRequest.class.getName(), false, args -> new FreezeIndexRequest());
+  public static final ObjectParser<FreezeIndexRequest, Void> PARSER =
+    new ObjectParser<>(FreezeIndexRequest.class.getName(), false, FreezeIndexRequest::new);
 
   static {
     PARSER.declareBoolean(FreezeIndexRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(FreezeIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(FreezeIndexRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(FreezeIndexRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareObject(FreezeIndexRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
     PARSER.declareObject(FreezeIndexRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

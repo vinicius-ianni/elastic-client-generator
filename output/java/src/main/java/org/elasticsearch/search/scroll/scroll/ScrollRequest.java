@@ -53,8 +53,8 @@ public class ScrollRequest  implements XContentable<ScrollRequest> {
     return ScrollRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScrollRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ScrollRequest.class.getName(), false, args -> new ScrollRequest());
+  public static final ObjectParser<ScrollRequest, Void> PARSER =
+    new ObjectParser<>(ScrollRequest.class.getName(), false, ScrollRequest::new);
 
   static {
     PARSER.declareBoolean(ScrollRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);

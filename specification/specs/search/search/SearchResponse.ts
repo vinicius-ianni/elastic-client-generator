@@ -12,5 +12,4 @@ class SearchResponse<TDocument> extends ResponseBase {
 	terminated_early: boolean;
 	timed_out: boolean;
 	took: long;
-	total: long;
 }

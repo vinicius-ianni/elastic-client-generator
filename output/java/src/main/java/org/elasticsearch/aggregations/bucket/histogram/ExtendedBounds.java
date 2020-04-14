@@ -43,8 +43,8 @@ public class ExtendedBounds<T>  implements XContentable<ExtendedBounds<T>> {
     return ExtendedBounds.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExtendedBounds, Void> PARSER =
-    new ConstructingObjectParser<>(ExtendedBounds.class.getName(), false, args -> new ExtendedBounds());
+  public static final ObjectParser<ExtendedBounds, Void> PARSER =
+    new ObjectParser<>(ExtendedBounds.class.getName(), false, ExtendedBounds::new);
 
   static {
     PARSER.declareObject(ExtendedBounds::setMax, (p, t) -> null /* TODO T */, MAX);

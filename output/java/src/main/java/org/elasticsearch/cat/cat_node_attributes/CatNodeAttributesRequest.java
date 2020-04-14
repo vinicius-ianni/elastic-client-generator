@@ -85,8 +85,8 @@ public class CatNodeAttributesRequest  implements XContentable<CatNodeAttributes
     return CatNodeAttributesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatNodeAttributesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatNodeAttributesRequest.class.getName(), false, args -> new CatNodeAttributesRequest());
+  public static final ObjectParser<CatNodeAttributesRequest, Void> PARSER =
+    new ObjectParser<>(CatNodeAttributesRequest.class.getName(), false, CatNodeAttributesRequest::new);
 
   static {
     PARSER.declareString(CatNodeAttributesRequest::setFormat, FORMAT);

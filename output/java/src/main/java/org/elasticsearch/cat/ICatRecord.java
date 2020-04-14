@@ -31,8 +31,8 @@ public class ICatRecord  implements XContentable<ICatRecord> {
     return ICatRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ICatRecord, Void> PARSER =
-    new ConstructingObjectParser<>(ICatRecord.class.getName(), false, args -> new ICatRecord());
+  public static final ObjectParser<ICatRecord, Void> PARSER =
+    new ObjectParser<>(ICatRecord.class.getName(), false, ICatRecord::new);
 
   static {
     

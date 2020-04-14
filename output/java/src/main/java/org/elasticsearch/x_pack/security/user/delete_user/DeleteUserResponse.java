@@ -36,8 +36,8 @@ public class DeleteUserResponse  implements XContentable<DeleteUserResponse> {
     return DeleteUserResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteUserResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteUserResponse.class.getName(), false, args -> new DeleteUserResponse());
+  public static final ObjectParser<DeleteUserResponse, Void> PARSER =
+    new ObjectParser<>(DeleteUserResponse.class.getName(), false, DeleteUserResponse::new);
 
   static {
     PARSER.declareBoolean(DeleteUserResponse::setFound, FOUND);

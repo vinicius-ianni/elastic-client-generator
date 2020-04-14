@@ -70,12 +70,12 @@ public class FieldCapabilitiesRequest  implements XContentable<FieldCapabilities
     return FieldCapabilitiesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldCapabilitiesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(FieldCapabilitiesRequest.class.getName(), false, args -> new FieldCapabilitiesRequest());
+  public static final ObjectParser<FieldCapabilitiesRequest, Void> PARSER =
+    new ObjectParser<>(FieldCapabilitiesRequest.class.getName(), false, FieldCapabilitiesRequest::new);
 
   static {
     PARSER.declareBoolean(FieldCapabilitiesRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(FieldCapabilitiesRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(FieldCapabilitiesRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObjectArray(FieldCapabilitiesRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(FieldCapabilitiesRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(FieldCapabilitiesRequest::setIncludeUnmapped, INCLUDE_UNMAPPED);

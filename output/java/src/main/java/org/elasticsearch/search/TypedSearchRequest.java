@@ -31,8 +31,8 @@ public class TypedSearchRequest  implements XContentable<TypedSearchRequest> {
     return TypedSearchRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TypedSearchRequest, Void> PARSER =
-    new ConstructingObjectParser<>(TypedSearchRequest.class.getName(), false, args -> new TypedSearchRequest());
+  public static final ObjectParser<TypedSearchRequest, Void> PARSER =
+    new ObjectParser<>(TypedSearchRequest.class.getName(), false, TypedSearchRequest::new);
 
   static {
     

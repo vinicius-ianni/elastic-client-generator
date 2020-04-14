@@ -39,8 +39,8 @@ public class InnerHitsResult  implements XContentable<InnerHitsResult> {
     return InnerHitsResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<InnerHitsResult, Void> PARSER =
-    new ConstructingObjectParser<>(InnerHitsResult.class.getName(), false, args -> new InnerHitsResult());
+  public static final ObjectParser<InnerHitsResult, Void> PARSER =
+    new ObjectParser<>(InnerHitsResult.class.getName(), false, InnerHitsResult::new);
 
   static {
     PARSER.declareObject(InnerHitsResult::setHits, (p, t) -> InnerHitsMetadata.PARSER.apply(p, t), HITS);

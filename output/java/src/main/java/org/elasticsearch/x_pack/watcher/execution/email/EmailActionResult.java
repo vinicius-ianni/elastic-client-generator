@@ -53,8 +53,8 @@ public class EmailActionResult  implements XContentable<EmailActionResult> {
     return EmailActionResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<EmailActionResult, Void> PARSER =
-    new ConstructingObjectParser<>(EmailActionResult.class.getName(), false, args -> new EmailActionResult());
+  public static final ObjectParser<EmailActionResult, Void> PARSER =
+    new ObjectParser<>(EmailActionResult.class.getName(), false, EmailActionResult::new);
 
   static {
     PARSER.declareString(EmailActionResult::setAccount, ACCOUNT);

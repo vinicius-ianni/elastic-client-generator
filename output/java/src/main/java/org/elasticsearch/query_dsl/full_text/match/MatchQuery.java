@@ -140,8 +140,8 @@ public class MatchQuery  implements XContentable<MatchQuery> {
     return MatchQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MatchQuery, Void> PARSER =
-    new ConstructingObjectParser<>(MatchQuery.class.getName(), false, args -> new MatchQuery());
+  public static final ObjectParser<MatchQuery, Void> PARSER =
+    new ObjectParser<>(MatchQuery.class.getName(), false, MatchQuery::new);
 
   static {
     PARSER.declareString(MatchQuery::setAnalyzer, ANALYZER);
@@ -153,10 +153,10 @@ public class MatchQuery  implements XContentable<MatchQuery> {
     PARSER.declareBoolean(MatchQuery::setLenient, LENIENT);
     PARSER.declareInt(MatchQuery::setMaxExpansions, MAX_EXPANSIONS);
     PARSER.declareObject(MatchQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
-    PARSER.declareObject(MatchQuery::setOperator, (p, t) -> Operator.PARSER.apply(p), OPERATOR);
+    PARSER.declareField(MatchQuery::setOperator, (p, t) -> Operator.PARSER.apply(p), OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(MatchQuery::setPrefixLength, PREFIX_LENGTH);
     PARSER.declareString(MatchQuery::setQuery, QUERY);
-    PARSER.declareObject(MatchQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY);
+    PARSER.declareField(MatchQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

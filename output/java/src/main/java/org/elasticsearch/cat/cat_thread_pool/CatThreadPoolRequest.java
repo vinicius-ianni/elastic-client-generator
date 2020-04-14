@@ -96,8 +96,8 @@ public class CatThreadPoolRequest  implements XContentable<CatThreadPoolRequest>
     return CatThreadPoolRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatThreadPoolRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatThreadPoolRequest.class.getName(), false, args -> new CatThreadPoolRequest());
+  public static final ObjectParser<CatThreadPoolRequest, Void> PARSER =
+    new ObjectParser<>(CatThreadPoolRequest.class.getName(), false, CatThreadPoolRequest::new);
 
   static {
     PARSER.declareString(CatThreadPoolRequest::setFormat, FORMAT);
@@ -105,7 +105,7 @@ public class CatThreadPoolRequest  implements XContentable<CatThreadPoolRequest>
     PARSER.declareBoolean(CatThreadPoolRequest::setHelp, HELP);
     PARSER.declareBoolean(CatThreadPoolRequest::setLocal, LOCAL);
     PARSER.declareObject(CatThreadPoolRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);
-    PARSER.declareObject(CatThreadPoolRequest::setSize, (p, t) -> Size.PARSER.apply(p), SIZE);
+    PARSER.declareField(CatThreadPoolRequest::setSize, (p, t) -> Size.PARSER.apply(p), SIZE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareStringArray(CatThreadPoolRequest::setSortByColumns, SORT_BY_COLUMNS);
     PARSER.declareBoolean(CatThreadPoolRequest::setVerbose, VERBOSE);
   }

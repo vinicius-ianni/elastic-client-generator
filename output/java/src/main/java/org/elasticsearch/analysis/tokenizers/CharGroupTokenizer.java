@@ -38,8 +38,8 @@ public class CharGroupTokenizer  implements XContentable<CharGroupTokenizer> {
     return CharGroupTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CharGroupTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(CharGroupTokenizer.class.getName(), false, args -> new CharGroupTokenizer());
+  public static final ObjectParser<CharGroupTokenizer, Void> PARSER =
+    new ObjectParser<>(CharGroupTokenizer.class.getName(), false, CharGroupTokenizer::new);
 
   static {
     PARSER.declareStringArray(CharGroupTokenizer::setTokenizeOnChars, TOKENIZE_ON_CHARS);

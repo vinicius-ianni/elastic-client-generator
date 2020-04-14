@@ -31,8 +31,8 @@ public class PreviewDatafeedRequest  implements XContentable<PreviewDatafeedRequ
     return PreviewDatafeedRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PreviewDatafeedRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PreviewDatafeedRequest.class.getName(), false, args -> new PreviewDatafeedRequest());
+  public static final ObjectParser<PreviewDatafeedRequest, Void> PARSER =
+    new ObjectParser<>(PreviewDatafeedRequest.class.getName(), false, PreviewDatafeedRequest::new);
 
   static {
     

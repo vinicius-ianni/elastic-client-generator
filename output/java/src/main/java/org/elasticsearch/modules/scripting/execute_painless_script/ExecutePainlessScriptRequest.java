@@ -57,8 +57,8 @@ public class ExecutePainlessScriptRequest  implements XContentable<ExecutePainle
     return ExecutePainlessScriptRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutePainlessScriptRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutePainlessScriptRequest.class.getName(), false, args -> new ExecutePainlessScriptRequest());
+  public static final ObjectParser<ExecutePainlessScriptRequest, Void> PARSER =
+    new ObjectParser<>(ExecutePainlessScriptRequest.class.getName(), false, ExecutePainlessScriptRequest::new);
 
   static {
     PARSER.declareString(ExecutePainlessScriptRequest::setContext, CONTEXT);

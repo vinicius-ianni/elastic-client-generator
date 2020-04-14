@@ -53,8 +53,8 @@ public class HttpInputResponseResult  implements XContentable<HttpInputResponseR
     return HttpInputResponseResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HttpInputResponseResult, Void> PARSER =
-    new ConstructingObjectParser<>(HttpInputResponseResult.class.getName(), false, args -> new HttpInputResponseResult());
+  public static final ObjectParser<HttpInputResponseResult, Void> PARSER =
+    new ObjectParser<>(HttpInputResponseResult.class.getName(), false, HttpInputResponseResult::new);
 
   static {
     PARSER.declareString(HttpInputResponseResult::setBody, BODY);

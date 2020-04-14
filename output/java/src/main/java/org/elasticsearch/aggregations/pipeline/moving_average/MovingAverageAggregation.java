@@ -61,8 +61,8 @@ public class MovingAverageAggregation  implements XContentable<MovingAverageAggr
     return MovingAverageAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MovingAverageAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MovingAverageAggregation.class.getName(), false, args -> new MovingAverageAggregation());
+  public static final ObjectParser<MovingAverageAggregation, Void> PARSER =
+    new ObjectParser<>(MovingAverageAggregation.class.getName(), false, MovingAverageAggregation::new);
 
   static {
     PARSER.declareBoolean(MovingAverageAggregation::setMinimize, MINIMIZE);

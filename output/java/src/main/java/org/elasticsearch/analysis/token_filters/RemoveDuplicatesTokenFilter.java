@@ -31,8 +31,8 @@ public class RemoveDuplicatesTokenFilter  implements XContentable<RemoveDuplicat
     return RemoveDuplicatesTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RemoveDuplicatesTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(RemoveDuplicatesTokenFilter.class.getName(), false, args -> new RemoveDuplicatesTokenFilter());
+  public static final ObjectParser<RemoveDuplicatesTokenFilter, Void> PARSER =
+    new ObjectParser<>(RemoveDuplicatesTokenFilter.class.getName(), false, RemoveDuplicatesTokenFilter::new);
 
   static {
     

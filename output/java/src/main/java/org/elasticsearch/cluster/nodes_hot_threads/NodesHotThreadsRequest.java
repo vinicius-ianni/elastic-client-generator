@@ -82,14 +82,14 @@ public class NodesHotThreadsRequest  implements XContentable<NodesHotThreadsRequ
     return NodesHotThreadsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodesHotThreadsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(NodesHotThreadsRequest.class.getName(), false, args -> new NodesHotThreadsRequest());
+  public static final ObjectParser<NodesHotThreadsRequest, Void> PARSER =
+    new ObjectParser<>(NodesHotThreadsRequest.class.getName(), false, NodesHotThreadsRequest::new);
 
   static {
     PARSER.declareBoolean(NodesHotThreadsRequest::setIgnoreIdleThreads, IGNORE_IDLE_THREADS);
     PARSER.declareObject(NodesHotThreadsRequest::setInterval, (p, t) -> Time.PARSER.apply(p, t), INTERVAL);
     PARSER.declareLong(NodesHotThreadsRequest::setSnapshots, SNAPSHOTS);
-    PARSER.declareObject(NodesHotThreadsRequest::setThreadType, (p, t) -> ThreadType.PARSER.apply(p), THREAD_TYPE);
+    PARSER.declareField(NodesHotThreadsRequest::setThreadType, (p, t) -> ThreadType.PARSER.apply(p), THREAD_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(NodesHotThreadsRequest::setThreads, THREADS);
     PARSER.declareObject(NodesHotThreadsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
   }

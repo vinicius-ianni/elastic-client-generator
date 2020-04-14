@@ -149,16 +149,16 @@ public class CountRequest  implements XContentable<CountRequest> {
     return CountRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CountRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CountRequest.class.getName(), false, args -> new CountRequest());
+  public static final ObjectParser<CountRequest, Void> PARSER =
+    new ObjectParser<>(CountRequest.class.getName(), false, CountRequest::new);
 
   static {
     PARSER.declareBoolean(CountRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(CountRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(CountRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(CountRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(CountRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(CountRequest::setDf, DF);
-    PARSER.declareObject(CountRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(CountRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(CountRequest::setIgnoreThrottled, IGNORE_THROTTLED);
     PARSER.declareBoolean(CountRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(CountRequest::setLenient, LENIENT);

@@ -39,8 +39,8 @@ public class ReverseNestedAggregation  implements XContentable<ReverseNestedAggr
     return ReverseNestedAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReverseNestedAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(ReverseNestedAggregation.class.getName(), false, args -> new ReverseNestedAggregation());
+  public static final ObjectParser<ReverseNestedAggregation, Void> PARSER =
+    new ObjectParser<>(ReverseNestedAggregation.class.getName(), false, ReverseNestedAggregation::new);
 
   static {
     PARSER.declareObject(ReverseNestedAggregation::setPath, (p, t) -> Field.createFrom(p), PATH);

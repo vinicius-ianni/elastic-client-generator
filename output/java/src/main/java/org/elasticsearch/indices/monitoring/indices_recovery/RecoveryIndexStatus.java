@@ -81,8 +81,8 @@ public class RecoveryIndexStatus  implements XContentable<RecoveryIndexStatus> {
     return RecoveryIndexStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryIndexStatus, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryIndexStatus.class.getName(), false, args -> new RecoveryIndexStatus());
+  public static final ObjectParser<RecoveryIndexStatus, Void> PARSER =
+    new ObjectParser<>(RecoveryIndexStatus.class.getName(), false, RecoveryIndexStatus::new);
 
   static {
     PARSER.declareObject(RecoveryIndexStatus::setBytes, (p, t) -> RecoveryBytes.PARSER.apply(p, t), BYTES);

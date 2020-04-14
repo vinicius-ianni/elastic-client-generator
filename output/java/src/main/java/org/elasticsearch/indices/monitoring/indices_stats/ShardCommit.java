@@ -60,8 +60,8 @@ public class ShardCommit  implements XContentable<ShardCommit> {
     return ShardCommit.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardCommit, Void> PARSER =
-    new ConstructingObjectParser<>(ShardCommit.class.getName(), false, args -> new ShardCommit());
+  public static final ObjectParser<ShardCommit, Void> PARSER =
+    new ObjectParser<>(ShardCommit.class.getName(), false, ShardCommit::new);
 
   static {
     PARSER.declareInt(ShardCommit::setGeneration, GENERATION);

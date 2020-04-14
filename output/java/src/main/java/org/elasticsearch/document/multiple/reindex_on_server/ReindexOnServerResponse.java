@@ -134,8 +134,8 @@ public class ReindexOnServerResponse  implements XContentable<ReindexOnServerRes
     return ReindexOnServerResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexOnServerResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexOnServerResponse.class.getName(), false, args -> new ReindexOnServerResponse());
+  public static final ObjectParser<ReindexOnServerResponse, Void> PARSER =
+    new ObjectParser<>(ReindexOnServerResponse.class.getName(), false, ReindexOnServerResponse::new);
 
   static {
     PARSER.declareBoolean(ReindexOnServerResponse::setIsValid, IS_VALID);

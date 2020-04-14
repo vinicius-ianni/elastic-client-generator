@@ -75,12 +75,12 @@ public class ForceMergeRequest  implements XContentable<ForceMergeRequest> {
     return ForceMergeRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ForceMergeRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ForceMergeRequest.class.getName(), false, args -> new ForceMergeRequest());
+  public static final ObjectParser<ForceMergeRequest, Void> PARSER =
+    new ObjectParser<>(ForceMergeRequest.class.getName(), false, ForceMergeRequest::new);
 
   static {
     PARSER.declareBoolean(ForceMergeRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(ForceMergeRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(ForceMergeRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(ForceMergeRequest::setFlush, FLUSH);
     PARSER.declareBoolean(ForceMergeRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareLong(ForceMergeRequest::setMaxNumSegments, MAX_NUM_SEGMENTS);

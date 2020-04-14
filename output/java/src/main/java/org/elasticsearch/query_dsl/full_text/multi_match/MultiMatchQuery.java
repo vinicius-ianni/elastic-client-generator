@@ -181,8 +181,8 @@ public class MultiMatchQuery  implements XContentable<MultiMatchQuery> {
     return MultiMatchQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiMatchQuery, Void> PARSER =
-    new ConstructingObjectParser<>(MultiMatchQuery.class.getName(), false, args -> new MultiMatchQuery());
+  public static final ObjectParser<MultiMatchQuery, Void> PARSER =
+    new ObjectParser<>(MultiMatchQuery.class.getName(), false, MultiMatchQuery::new);
 
   static {
     PARSER.declareString(MultiMatchQuery::setAnalyzer, ANALYZER);
@@ -195,14 +195,14 @@ public class MultiMatchQuery  implements XContentable<MultiMatchQuery> {
     PARSER.declareBoolean(MultiMatchQuery::setLenient, LENIENT);
     PARSER.declareInt(MultiMatchQuery::setMaxExpansions, MAX_EXPANSIONS);
     PARSER.declareObject(MultiMatchQuery::setMinimumShouldMatch, (p, t) -> new MinimumShouldMatch().fromXContent(p), MINIMUM_SHOULD_MATCH);
-    PARSER.declareObject(MultiMatchQuery::setOperator, (p, t) -> Operator.PARSER.apply(p), OPERATOR);
+    PARSER.declareField(MultiMatchQuery::setOperator, (p, t) -> Operator.PARSER.apply(p), OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(MultiMatchQuery::setPrefixLength, PREFIX_LENGTH);
     PARSER.declareString(MultiMatchQuery::setQuery, QUERY);
     PARSER.declareInt(MultiMatchQuery::setSlop, SLOP);
     PARSER.declareDouble(MultiMatchQuery::setTieBreaker, TIE_BREAKER);
-    PARSER.declareObject(MultiMatchQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p), TYPE);
+    PARSER.declareField(MultiMatchQuery::setType, (p, t) -> TextQueryType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(MultiMatchQuery::setUseDisMax, USE_DIS_MAX);
-    PARSER.declareObject(MultiMatchQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY);
+    PARSER.declareField(MultiMatchQuery::setZeroTermsQuery, (p, t) -> ZeroTermsQuery.PARSER.apply(p), ZERO_TERMS_QUERY, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

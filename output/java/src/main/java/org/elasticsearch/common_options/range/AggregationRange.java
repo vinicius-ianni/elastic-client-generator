@@ -50,8 +50,8 @@ public class AggregationRange  implements XContentable<AggregationRange> {
     return AggregationRange.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AggregationRange, Void> PARSER =
-    new ConstructingObjectParser<>(AggregationRange.class.getName(), false, args -> new AggregationRange());
+  public static final ObjectParser<AggregationRange, Void> PARSER =
+    new ObjectParser<>(AggregationRange.class.getName(), false, AggregationRange::new);
 
   static {
     PARSER.declareDouble(AggregationRange::setFrom, FROM);

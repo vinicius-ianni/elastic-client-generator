@@ -46,8 +46,8 @@ public class NodesStatsResponse  implements XContentable<NodesStatsResponse> {
     return NodesStatsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodesStatsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(NodesStatsResponse.class.getName(), false, args -> new NodesStatsResponse());
+  public static final ObjectParser<NodesStatsResponse, Void> PARSER =
+    new ObjectParser<>(NodesStatsResponse.class.getName(), false, NodesStatsResponse::new);
 
   static {
     PARSER.declareString(NodesStatsResponse::setClusterName, CLUSTER_NAME);

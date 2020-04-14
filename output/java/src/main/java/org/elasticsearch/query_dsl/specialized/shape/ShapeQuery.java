@@ -68,13 +68,13 @@ public class ShapeQuery  implements XContentable<ShapeQuery> {
     return ShapeQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShapeQuery, Void> PARSER =
-    new ConstructingObjectParser<>(ShapeQuery.class.getName(), false, args -> new ShapeQuery());
+  public static final ObjectParser<ShapeQuery, Void> PARSER =
+    new ObjectParser<>(ShapeQuery.class.getName(), false, ShapeQuery::new);
 
   static {
     PARSER.declareBoolean(ShapeQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
     PARSER.declareObject(ShapeQuery::setIndexedShape, (p, t) -> FieldLookup.PARSER.apply(p, t), INDEXED_SHAPE);
-    PARSER.declareObject(ShapeQuery::setRelation, (p, t) -> ShapeRelation.PARSER.apply(p), RELATION);
+    PARSER.declareField(ShapeQuery::setRelation, (p, t) -> ShapeRelation.PARSER.apply(p), RELATION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(ShapeQuery::setShape, (p, t) -> GeoShape.PARSER.apply(p, t), SHAPE);
   }
 

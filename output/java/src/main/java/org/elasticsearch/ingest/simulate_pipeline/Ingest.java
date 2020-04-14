@@ -37,8 +37,8 @@ public class Ingest  implements XContentable<Ingest> {
     return Ingest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Ingest, Void> PARSER =
-    new ConstructingObjectParser<>(Ingest.class.getName(), false, args -> new Ingest());
+  public static final ObjectParser<Ingest, Void> PARSER =
+    new ObjectParser<>(Ingest.class.getName(), false, Ingest::new);
 
   static {
     PARSER.declareObject(Ingest::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);

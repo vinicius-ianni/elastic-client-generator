@@ -39,8 +39,8 @@ public class ParentAggregation  implements XContentable<ParentAggregation> {
     return ParentAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ParentAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(ParentAggregation.class.getName(), false, args -> new ParentAggregation());
+  public static final ObjectParser<ParentAggregation, Void> PARSER =
+    new ObjectParser<>(ParentAggregation.class.getName(), false, ParentAggregation::new);
 
   static {
     PARSER.declareObject(ParentAggregation::setType, (p, t) -> RelationName.createFrom(p), TYPE);

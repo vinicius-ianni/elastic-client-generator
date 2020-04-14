@@ -64,8 +64,8 @@ public class PathHierarchyTokenizer  implements XContentable<PathHierarchyTokeni
     return PathHierarchyTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PathHierarchyTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(PathHierarchyTokenizer.class.getName(), false, args -> new PathHierarchyTokenizer());
+  public static final ObjectParser<PathHierarchyTokenizer, Void> PARSER =
+    new ObjectParser<>(PathHierarchyTokenizer.class.getName(), false, PathHierarchyTokenizer::new);
 
   static {
     PARSER.declareInt(PathHierarchyTokenizer::setBufferSize, BUFFER_SIZE);

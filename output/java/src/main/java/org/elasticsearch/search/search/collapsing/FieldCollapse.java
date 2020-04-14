@@ -58,8 +58,8 @@ public class FieldCollapse  implements XContentable<FieldCollapse> {
     return FieldCollapse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldCollapse, Void> PARSER =
-    new ConstructingObjectParser<>(FieldCollapse.class.getName(), false, args -> new FieldCollapse());
+  public static final ObjectParser<FieldCollapse, Void> PARSER =
+    new ObjectParser<>(FieldCollapse.class.getName(), false, FieldCollapse::new);
 
   static {
     PARSER.declareObject(FieldCollapse::setField, (p, t) -> Field.createFrom(p), FIELD);

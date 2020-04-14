@@ -43,8 +43,8 @@ public class FielddataStats  implements XContentable<FielddataStats> {
     return FielddataStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FielddataStats, Void> PARSER =
-    new ConstructingObjectParser<>(FielddataStats.class.getName(), false, args -> new FielddataStats());
+  public static final ObjectParser<FielddataStats, Void> PARSER =
+    new ObjectParser<>(FielddataStats.class.getName(), false, FielddataStats::new);
 
   static {
     PARSER.declareLong(FielddataStats::setEvictions, EVICTIONS);

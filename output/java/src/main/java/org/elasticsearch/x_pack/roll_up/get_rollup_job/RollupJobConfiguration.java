@@ -99,8 +99,8 @@ public class RollupJobConfiguration  implements XContentable<RollupJobConfigurat
     return RollupJobConfiguration.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupJobConfiguration, Void> PARSER =
-    new ConstructingObjectParser<>(RollupJobConfiguration.class.getName(), false, args -> new RollupJobConfiguration());
+  public static final ObjectParser<RollupJobConfiguration, Void> PARSER =
+    new ObjectParser<>(RollupJobConfiguration.class.getName(), false, RollupJobConfiguration::new);
 
   static {
     PARSER.declareString(RollupJobConfiguration::setCron, CRON);

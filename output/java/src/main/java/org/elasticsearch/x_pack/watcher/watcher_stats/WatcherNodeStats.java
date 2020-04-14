@@ -75,15 +75,15 @@ public class WatcherNodeStats  implements XContentable<WatcherNodeStats> {
     return WatcherNodeStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WatcherNodeStats, Void> PARSER =
-    new ConstructingObjectParser<>(WatcherNodeStats.class.getName(), false, args -> new WatcherNodeStats());
+  public static final ObjectParser<WatcherNodeStats, Void> PARSER =
+    new ObjectParser<>(WatcherNodeStats.class.getName(), false, WatcherNodeStats::new);
 
   static {
     PARSER.declareObjectArray(WatcherNodeStats::setCurrentWatches, (p, t) -> WatchRecordStats.PARSER.apply(p, t), CURRENT_WATCHES);
     PARSER.declareObject(WatcherNodeStats::setExecutionThreadPool, (p, t) -> ExecutionThreadPool.PARSER.apply(p, t), EXECUTION_THREAD_POOL);
     PARSER.declareObjectArray(WatcherNodeStats::setQueuedWatches, (p, t) -> WatchRecordQueuedStats.PARSER.apply(p, t), QUEUED_WATCHES);
     PARSER.declareLong(WatcherNodeStats::setWatchCount, WATCH_COUNT);
-    PARSER.declareObject(WatcherNodeStats::setWatcherState, (p, t) -> WatcherState.PARSER.apply(p), WATCHER_STATE);
+    PARSER.declareField(WatcherNodeStats::setWatcherState, (p, t) -> WatcherState.PARSER.apply(p), WATCHER_STATE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

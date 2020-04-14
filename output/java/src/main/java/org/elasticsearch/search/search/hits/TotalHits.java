@@ -47,11 +47,11 @@ public class TotalHits  implements XContentable<TotalHits> {
     return TotalHits.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TotalHits, Void> PARSER =
-    new ConstructingObjectParser<>(TotalHits.class.getName(), false, args -> new TotalHits());
+  public static final ObjectParser<TotalHits, Void> PARSER =
+    new ObjectParser<>(TotalHits.class.getName(), false, TotalHits::new);
 
   static {
-    PARSER.declareObject(TotalHits::setRelation, (p, t) -> TotalHitsRelation.PARSER.apply(p), RELATION);
+    PARSER.declareField(TotalHits::setRelation, (p, t) -> TotalHitsRelation.PARSER.apply(p), RELATION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(TotalHits::setValue, VALUE);
   }
 

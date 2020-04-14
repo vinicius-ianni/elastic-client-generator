@@ -43,8 +43,8 @@ public class CloneIndexResponse  implements XContentable<CloneIndexResponse> {
     return CloneIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CloneIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CloneIndexResponse.class.getName(), false, args -> new CloneIndexResponse());
+  public static final ObjectParser<CloneIndexResponse, Void> PARSER =
+    new ObjectParser<>(CloneIndexResponse.class.getName(), false, CloneIndexResponse::new);
 
   static {
     PARSER.declareBoolean(CloneIndexResponse::setShardsAcknowledged, SHARDS_ACKNOWLEDGED);

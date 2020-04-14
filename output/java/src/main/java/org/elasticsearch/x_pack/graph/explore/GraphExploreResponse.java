@@ -72,8 +72,8 @@ public class GraphExploreResponse  implements XContentable<GraphExploreResponse>
     return GraphExploreResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GraphExploreResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GraphExploreResponse.class.getName(), false, args -> new GraphExploreResponse());
+  public static final ObjectParser<GraphExploreResponse, Void> PARSER =
+    new ObjectParser<>(GraphExploreResponse.class.getName(), false, GraphExploreResponse::new);
 
   static {
     PARSER.declareObjectArray(GraphExploreResponse::setConnections, (p, t) -> GraphConnection.PARSER.apply(p, t), CONNECTIONS);

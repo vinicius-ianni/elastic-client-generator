@@ -39,8 +39,8 @@ public class VerifyRepositoryResponse  implements XContentable<VerifyRepositoryR
     return VerifyRepositoryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<VerifyRepositoryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(VerifyRepositoryResponse.class.getName(), false, args -> new VerifyRepositoryResponse());
+  public static final ObjectParser<VerifyRepositoryResponse, Void> PARSER =
+    new ObjectParser<>(VerifyRepositoryResponse.class.getName(), false, VerifyRepositoryResponse::new);
 
   static {
     PARSER.declareObject(VerifyRepositoryResponse::setNodes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> CompactNodeInfo.PARSER.apply(pp, null)), NODES);

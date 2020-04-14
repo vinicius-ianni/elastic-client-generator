@@ -50,8 +50,8 @@ public class PatternTokenizer  implements XContentable<PatternTokenizer> {
     return PatternTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PatternTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(PatternTokenizer.class.getName(), false, args -> new PatternTokenizer());
+  public static final ObjectParser<PatternTokenizer, Void> PARSER =
+    new ObjectParser<>(PatternTokenizer.class.getName(), false, PatternTokenizer::new);
 
   static {
     PARSER.declareString(PatternTokenizer::setFlags, FLAGS);

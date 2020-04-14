@@ -47,8 +47,8 @@ public class FieldSecuritySettings  implements XContentable<FieldSecuritySetting
     return FieldSecuritySettings.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldSecuritySettings, Void> PARSER =
-    new ConstructingObjectParser<>(FieldSecuritySettings.class.getName(), false, args -> new FieldSecuritySettings());
+  public static final ObjectParser<FieldSecuritySettings, Void> PARSER =
+    new ObjectParser<>(FieldSecuritySettings.class.getName(), false, FieldSecuritySettings::new);
 
   static {
     PARSER.declareStringArray(FieldSecuritySettings::setExcept, EXCEPT);

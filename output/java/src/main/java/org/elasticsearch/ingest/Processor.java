@@ -66,8 +66,8 @@ public class Processor  implements XContentable<Processor> {
     return Processor.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Processor, Void> PARSER =
-    new ConstructingObjectParser<>(Processor.class.getName(), false, args -> new Processor());
+  public static final ObjectParser<Processor, Void> PARSER =
+    new ObjectParser<>(Processor.class.getName(), false, Processor::new);
 
   static {
     PARSER.declareString(Processor::setName, NAME);

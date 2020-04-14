@@ -39,8 +39,8 @@ public class RenderSearchTemplateResponse  implements XContentable<RenderSearchT
     return RenderSearchTemplateResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RenderSearchTemplateResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RenderSearchTemplateResponse.class.getName(), false, args -> new RenderSearchTemplateResponse());
+  public static final ObjectParser<RenderSearchTemplateResponse, Void> PARSER =
+    new ObjectParser<>(RenderSearchTemplateResponse.class.getName(), false, RenderSearchTemplateResponse::new);
 
   static {
     PARSER.declareObject(RenderSearchTemplateResponse::setTemplateOutput, (p, t) -> LazyDocument.PARSER.apply(p, t), TEMPLATE_OUTPUT);

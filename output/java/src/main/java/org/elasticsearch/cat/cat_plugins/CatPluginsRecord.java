@@ -85,8 +85,8 @@ public class CatPluginsRecord  implements XContentable<CatPluginsRecord> {
     return CatPluginsRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatPluginsRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatPluginsRecord.class.getName(), false, args -> new CatPluginsRecord());
+  public static final ObjectParser<CatPluginsRecord, Void> PARSER =
+    new ObjectParser<>(CatPluginsRecord.class.getName(), false, CatPluginsRecord::new);
 
   static {
     PARSER.declareString(CatPluginsRecord::setComponent, COMPONENT);

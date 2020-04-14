@@ -31,8 +31,8 @@ public class LowercaseTokenizer  implements XContentable<LowercaseTokenizer> {
     return LowercaseTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LowercaseTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(LowercaseTokenizer.class.getName(), false, args -> new LowercaseTokenizer());
+  public static final ObjectParser<LowercaseTokenizer, Void> PARSER =
+    new ObjectParser<>(LowercaseTokenizer.class.getName(), false, LowercaseTokenizer::new);
 
   static {
     

@@ -79,8 +79,8 @@ public class ScriptedMetricAggregation  implements XContentable<ScriptedMetricAg
     return ScriptedMetricAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptedMetricAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptedMetricAggregation.class.getName(), false, args -> new ScriptedMetricAggregation());
+  public static final ObjectParser<ScriptedMetricAggregation, Void> PARSER =
+    new ObjectParser<>(ScriptedMetricAggregation.class.getName(), false, ScriptedMetricAggregation::new);
 
   static {
     PARSER.declareObject(ScriptedMetricAggregation::setCombineScript, (p, t) -> Script.PARSER.apply(p, t), COMBINE_SCRIPT);

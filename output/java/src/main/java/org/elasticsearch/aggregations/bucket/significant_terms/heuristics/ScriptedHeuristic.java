@@ -39,8 +39,8 @@ public class ScriptedHeuristic  implements XContentable<ScriptedHeuristic> {
     return ScriptedHeuristic.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptedHeuristic, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptedHeuristic.class.getName(), false, args -> new ScriptedHeuristic());
+  public static final ObjectParser<ScriptedHeuristic, Void> PARSER =
+    new ObjectParser<>(ScriptedHeuristic.class.getName(), false, ScriptedHeuristic::new);
 
   static {
     PARSER.declareObject(ScriptedHeuristic::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);

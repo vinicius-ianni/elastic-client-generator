@@ -36,8 +36,8 @@ public class StopDatafeedResponse  implements XContentable<StopDatafeedResponse>
     return StopDatafeedResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StopDatafeedResponse, Void> PARSER =
-    new ConstructingObjectParser<>(StopDatafeedResponse.class.getName(), false, args -> new StopDatafeedResponse());
+  public static final ObjectParser<StopDatafeedResponse, Void> PARSER =
+    new ObjectParser<>(StopDatafeedResponse.class.getName(), false, StopDatafeedResponse::new);
 
   static {
     PARSER.declareBoolean(StopDatafeedResponse::setStopped, STOPPED);

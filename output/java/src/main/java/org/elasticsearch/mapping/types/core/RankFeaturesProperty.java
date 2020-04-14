@@ -31,8 +31,8 @@ public class RankFeaturesProperty  implements XContentable<RankFeaturesProperty>
     return RankFeaturesProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RankFeaturesProperty, Void> PARSER =
-    new ConstructingObjectParser<>(RankFeaturesProperty.class.getName(), false, args -> new RankFeaturesProperty());
+  public static final ObjectParser<RankFeaturesProperty, Void> PARSER =
+    new ObjectParser<>(RankFeaturesProperty.class.getName(), false, RankFeaturesProperty::new);
 
   static {
     

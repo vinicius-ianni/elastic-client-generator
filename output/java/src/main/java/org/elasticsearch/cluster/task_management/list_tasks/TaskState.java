@@ -117,8 +117,8 @@ public class TaskState  implements XContentable<TaskState> {
     return TaskState.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TaskState, Void> PARSER =
-    new ConstructingObjectParser<>(TaskState.class.getName(), false, args -> new TaskState());
+  public static final ObjectParser<TaskState, Void> PARSER =
+    new ObjectParser<>(TaskState.class.getName(), false, TaskState::new);
 
   static {
     PARSER.declareString(TaskState::setAction, ACTION);

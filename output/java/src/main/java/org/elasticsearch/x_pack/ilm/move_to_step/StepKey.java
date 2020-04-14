@@ -50,8 +50,8 @@ public class StepKey  implements XContentable<StepKey> {
     return StepKey.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StepKey, Void> PARSER =
-    new ConstructingObjectParser<>(StepKey.class.getName(), false, args -> new StepKey());
+  public static final ObjectParser<StepKey, Void> PARSER =
+    new ObjectParser<>(StepKey.class.getName(), false, StepKey::new);
 
   static {
     PARSER.declareString(StepKey::setAction, ACTION);

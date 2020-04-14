@@ -39,8 +39,8 @@ public class PrefixQuery  implements XContentable<PrefixQuery> {
     return PrefixQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PrefixQuery, Void> PARSER =
-    new ConstructingObjectParser<>(PrefixQuery.class.getName(), false, args -> new PrefixQuery());
+  public static final ObjectParser<PrefixQuery, Void> PARSER =
+    new ObjectParser<>(PrefixQuery.class.getName(), false, PrefixQuery::new);
 
   static {
     PARSER.declareObject(PrefixQuery::setRewrite, (p, t) -> MultiTermQueryRewrite.PARSER.apply(p, t), REWRITE);

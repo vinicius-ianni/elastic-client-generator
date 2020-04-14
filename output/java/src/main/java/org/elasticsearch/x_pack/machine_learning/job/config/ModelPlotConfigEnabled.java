@@ -36,8 +36,8 @@ public class ModelPlotConfigEnabled  implements XContentable<ModelPlotConfigEnab
     return ModelPlotConfigEnabled.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ModelPlotConfigEnabled, Void> PARSER =
-    new ConstructingObjectParser<>(ModelPlotConfigEnabled.class.getName(), false, args -> new ModelPlotConfigEnabled());
+  public static final ObjectParser<ModelPlotConfigEnabled, Void> PARSER =
+    new ObjectParser<>(ModelPlotConfigEnabled.class.getName(), false, ModelPlotConfigEnabled::new);
 
   static {
     PARSER.declareBoolean(ModelPlotConfigEnabled::setEnabled, ENABLED);

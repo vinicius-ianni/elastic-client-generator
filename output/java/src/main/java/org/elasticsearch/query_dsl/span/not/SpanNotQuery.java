@@ -71,8 +71,8 @@ public class SpanNotQuery  implements XContentable<SpanNotQuery> {
     return SpanNotQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanNotQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanNotQuery.class.getName(), false, args -> new SpanNotQuery());
+  public static final ObjectParser<SpanNotQuery, Void> PARSER =
+    new ObjectParser<>(SpanNotQuery.class.getName(), false, SpanNotQuery::new);
 
   static {
     PARSER.declareInt(SpanNotQuery::setDist, DIST);

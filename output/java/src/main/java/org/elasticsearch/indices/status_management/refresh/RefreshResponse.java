@@ -31,8 +31,8 @@ public class RefreshResponse  implements XContentable<RefreshResponse> {
     return RefreshResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RefreshResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RefreshResponse.class.getName(), false, args -> new RefreshResponse());
+  public static final ObjectParser<RefreshResponse, Void> PARSER =
+    new ObjectParser<>(RefreshResponse.class.getName(), false, RefreshResponse::new);
 
   static {
     

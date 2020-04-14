@@ -43,8 +43,8 @@ public class Page  implements XContentable<Page> {
     return Page.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Page, Void> PARSER =
-    new ConstructingObjectParser<>(Page.class.getName(), false, args -> new Page());
+  public static final ObjectParser<Page, Void> PARSER =
+    new ObjectParser<>(Page.class.getName(), false, Page::new);
 
   static {
     PARSER.declareInt(Page::setFrom, FROM);

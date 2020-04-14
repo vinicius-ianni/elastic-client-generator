@@ -50,8 +50,8 @@ public class ClusterStatistics  implements XContentable<ClusterStatistics> {
     return ClusterStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterStatistics.class.getName(), false, args -> new ClusterStatistics());
+  public static final ObjectParser<ClusterStatistics, Void> PARSER =
+    new ObjectParser<>(ClusterStatistics.class.getName(), false, ClusterStatistics::new);
 
   static {
     PARSER.declareInt(ClusterStatistics::setSkipped, SKIPPED);

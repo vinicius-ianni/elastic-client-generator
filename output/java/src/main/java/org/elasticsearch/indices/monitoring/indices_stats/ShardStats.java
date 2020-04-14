@@ -229,8 +229,8 @@ public class ShardStats  implements XContentable<ShardStats> {
     return ShardStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardStats, Void> PARSER =
-    new ConstructingObjectParser<>(ShardStats.class.getName(), false, args -> new ShardStats());
+  public static final ObjectParser<ShardStats, Void> PARSER =
+    new ObjectParser<>(ShardStats.class.getName(), false, ShardStats::new);
 
   static {
     PARSER.declareObject(ShardStats::setCommit, (p, t) -> ShardCommit.PARSER.apply(p, t), COMMIT);

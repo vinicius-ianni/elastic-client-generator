@@ -124,8 +124,8 @@ public class WordDelimiterTokenFilter  implements XContentable<WordDelimiterToke
     return WordDelimiterTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WordDelimiterTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(WordDelimiterTokenFilter.class.getName(), false, args -> new WordDelimiterTokenFilter());
+  public static final ObjectParser<WordDelimiterTokenFilter, Void> PARSER =
+    new ObjectParser<>(WordDelimiterTokenFilter.class.getName(), false, WordDelimiterTokenFilter::new);
 
   static {
     PARSER.declareBoolean(WordDelimiterTokenFilter::setCatenateAll, CATENATE_ALL);

@@ -40,8 +40,8 @@ public class TypeFieldMappings  implements XContentable<TypeFieldMappings> {
     return TypeFieldMappings.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TypeFieldMappings, Void> PARSER =
-    new ConstructingObjectParser<>(TypeFieldMappings.class.getName(), false, args -> new TypeFieldMappings());
+  public static final ObjectParser<TypeFieldMappings, Void> PARSER =
+    new ObjectParser<>(TypeFieldMappings.class.getName(), false, TypeFieldMappings::new);
 
   static {
     PARSER.declareObject(TypeFieldMappings::setMappings, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),pp -> FieldMapping.PARSER.apply(pp, null)), MAPPINGS);

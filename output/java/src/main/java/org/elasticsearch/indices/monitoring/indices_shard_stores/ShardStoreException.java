@@ -43,8 +43,8 @@ public class ShardStoreException  implements XContentable<ShardStoreException> {
     return ShardStoreException.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardStoreException, Void> PARSER =
-    new ConstructingObjectParser<>(ShardStoreException.class.getName(), false, args -> new ShardStoreException());
+  public static final ObjectParser<ShardStoreException, Void> PARSER =
+    new ObjectParser<>(ShardStoreException.class.getName(), false, ShardStoreException::new);
 
   static {
     PARSER.declareString(ShardStoreException::setReason, REASON);

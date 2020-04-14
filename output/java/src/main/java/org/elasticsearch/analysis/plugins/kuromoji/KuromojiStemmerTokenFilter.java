@@ -36,8 +36,8 @@ public class KuromojiStemmerTokenFilter  implements XContentable<KuromojiStemmer
     return KuromojiStemmerTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KuromojiStemmerTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(KuromojiStemmerTokenFilter.class.getName(), false, args -> new KuromojiStemmerTokenFilter());
+  public static final ObjectParser<KuromojiStemmerTokenFilter, Void> PARSER =
+    new ObjectParser<>(KuromojiStemmerTokenFilter.class.getName(), false, KuromojiStemmerTokenFilter::new);
 
   static {
     PARSER.declareInt(KuromojiStemmerTokenFilter::setMinimumLength, MINIMUM_LENGTH);

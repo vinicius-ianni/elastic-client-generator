@@ -85,8 +85,8 @@ public class CatCountRequest  implements XContentable<CatCountRequest> {
     return CatCountRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatCountRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatCountRequest.class.getName(), false, args -> new CatCountRequest());
+  public static final ObjectParser<CatCountRequest, Void> PARSER =
+    new ObjectParser<>(CatCountRequest.class.getName(), false, CatCountRequest::new);
 
   static {
     PARSER.declareString(CatCountRequest::setFormat, FORMAT);

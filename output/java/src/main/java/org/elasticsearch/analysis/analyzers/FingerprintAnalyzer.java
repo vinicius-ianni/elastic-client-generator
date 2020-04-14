@@ -68,8 +68,8 @@ public class FingerprintAnalyzer  implements XContentable<FingerprintAnalyzer> {
     return FingerprintAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FingerprintAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(FingerprintAnalyzer.class.getName(), false, args -> new FingerprintAnalyzer());
+  public static final ObjectParser<FingerprintAnalyzer, Void> PARSER =
+    new ObjectParser<>(FingerprintAnalyzer.class.getName(), false, FingerprintAnalyzer::new);
 
   static {
     PARSER.declareInt(FingerprintAnalyzer::setMaxOutputSize, MAX_OUTPUT_SIZE);

@@ -121,8 +121,8 @@ public class WatchRecord  implements XContentable<WatchRecord> {
     return WatchRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WatchRecord, Void> PARSER =
-    new ConstructingObjectParser<>(WatchRecord.class.getName(), false, args -> new WatchRecord());
+  public static final ObjectParser<WatchRecord, Void> PARSER =
+    new ObjectParser<>(WatchRecord.class.getName(), false, WatchRecord::new);
 
   static {
     PARSER.declareObject(WatchRecord::setCondition, (p, t) -> ConditionContainer.PARSER.apply(p, t), CONDITION);
@@ -130,7 +130,7 @@ public class WatchRecord  implements XContentable<WatchRecord> {
     PARSER.declareStringArray(WatchRecord::setMessages, MESSAGES);
     PARSER.declareObject(WatchRecord::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareObject(WatchRecord::setResult, (p, t) -> ExecutionResult.PARSER.apply(p, t), RESULT);
-    PARSER.declareObject(WatchRecord::setState, (p, t) -> ActionExecutionState.PARSER.apply(p), STATE);
+    PARSER.declareField(WatchRecord::setState, (p, t) -> ActionExecutionState.PARSER.apply(p), STATE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(WatchRecord::setTriggerEvent, (p, t) -> TriggerEventResult.PARSER.apply(p, t), TRIGGER_EVENT);
     PARSER.declareString(WatchRecord::setUser, USER);
     PARSER.declareString(WatchRecord::setNode, NODE);

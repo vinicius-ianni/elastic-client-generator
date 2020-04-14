@@ -89,11 +89,11 @@ public class CatRecoveryRequest  implements XContentable<CatRecoveryRequest> {
     return CatRecoveryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatRecoveryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatRecoveryRequest.class.getName(), false, args -> new CatRecoveryRequest());
+  public static final ObjectParser<CatRecoveryRequest, Void> PARSER =
+    new ObjectParser<>(CatRecoveryRequest.class.getName(), false, CatRecoveryRequest::new);
 
   static {
-    PARSER.declareObject(CatRecoveryRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
+    PARSER.declareField(CatRecoveryRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(CatRecoveryRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatRecoveryRequest::setHeaders, HEADERS);
     PARSER.declareBoolean(CatRecoveryRequest::setHelp, HELP);

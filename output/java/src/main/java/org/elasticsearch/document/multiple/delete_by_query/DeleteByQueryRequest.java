@@ -318,8 +318,8 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
     return DeleteByQueryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteByQueryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteByQueryRequest.class.getName(), false, args -> new DeleteByQueryRequest());
+  public static final ObjectParser<DeleteByQueryRequest, Void> PARSER =
+    new ObjectParser<>(DeleteByQueryRequest.class.getName(), false, DeleteByQueryRequest::new);
 
   static {
     PARSER.declareObject(DeleteByQueryRequest::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
@@ -328,10 +328,10 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
     PARSER.declareBoolean(DeleteByQueryRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(DeleteByQueryRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(DeleteByQueryRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(DeleteByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS);
-    PARSER.declareObject(DeleteByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(DeleteByQueryRequest::setConflicts, (p, t) -> Conflicts.PARSER.apply(p), CONFLICTS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(DeleteByQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(DeleteByQueryRequest::setDf, DF);
-    PARSER.declareObject(DeleteByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(DeleteByQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(DeleteByQueryRequest::setFrom, FROM);
     PARSER.declareBoolean(DeleteByQueryRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(DeleteByQueryRequest::setLenient, LENIENT);
@@ -344,7 +344,7 @@ public class DeleteByQueryRequest  implements XContentable<DeleteByQueryRequest>
     PARSER.declareObject(DeleteByQueryRequest::setScroll, (p, t) -> Time.PARSER.apply(p, t), SCROLL);
     PARSER.declareLong(DeleteByQueryRequest::setScrollSize, SCROLL_SIZE);
     PARSER.declareObject(DeleteByQueryRequest::setSearchTimeout, (p, t) -> Time.PARSER.apply(p, t), SEARCH_TIMEOUT);
-    PARSER.declareObject(DeleteByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareField(DeleteByQueryRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(DeleteByQueryRequest::setSize, SIZE);
     PARSER.declareLong(DeleteByQueryRequest::setSlices, SLICES);
     PARSER.declareStringArray(DeleteByQueryRequest::setSort, SORT);

@@ -63,8 +63,8 @@ public class ClusterGetSettingsRequest  implements XContentable<ClusterGetSettin
     return ClusterGetSettingsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterGetSettingsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterGetSettingsRequest.class.getName(), false, args -> new ClusterGetSettingsRequest());
+  public static final ObjectParser<ClusterGetSettingsRequest, Void> PARSER =
+    new ObjectParser<>(ClusterGetSettingsRequest.class.getName(), false, ClusterGetSettingsRequest::new);
 
   static {
     PARSER.declareBoolean(ClusterGetSettingsRequest::setFlatSettings, FLAT_SETTINGS);

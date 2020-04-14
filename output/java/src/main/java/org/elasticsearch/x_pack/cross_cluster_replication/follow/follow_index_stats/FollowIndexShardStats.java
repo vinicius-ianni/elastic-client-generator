@@ -239,8 +239,8 @@ public class FollowIndexShardStats  implements XContentable<FollowIndexShardStat
     return FollowIndexShardStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FollowIndexShardStats, Void> PARSER =
-    new ConstructingObjectParser<>(FollowIndexShardStats.class.getName(), false, args -> new FollowIndexShardStats());
+  public static final ObjectParser<FollowIndexShardStats, Void> PARSER =
+    new ObjectParser<>(FollowIndexShardStats.class.getName(), false, FollowIndexShardStats::new);
 
   static {
     PARSER.declareLong(FollowIndexShardStats::setBytesRead, BYTES_READ);

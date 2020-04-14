@@ -36,8 +36,8 @@ public class StupidBackoffSmoothingModel  implements XContentable<StupidBackoffS
     return StupidBackoffSmoothingModel.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StupidBackoffSmoothingModel, Void> PARSER =
-    new ConstructingObjectParser<>(StupidBackoffSmoothingModel.class.getName(), false, args -> new StupidBackoffSmoothingModel());
+  public static final ObjectParser<StupidBackoffSmoothingModel, Void> PARSER =
+    new ObjectParser<>(StupidBackoffSmoothingModel.class.getName(), false, StupidBackoffSmoothingModel::new);
 
   static {
     PARSER.declareDouble(StupidBackoffSmoothingModel::setDiscount, DISCOUNT);

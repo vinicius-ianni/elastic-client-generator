@@ -50,8 +50,8 @@ public class ClusterProcessOpenFileDescriptors  implements XContentable<ClusterP
     return ClusterProcessOpenFileDescriptors.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterProcessOpenFileDescriptors, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterProcessOpenFileDescriptors.class.getName(), false, args -> new ClusterProcessOpenFileDescriptors());
+  public static final ObjectParser<ClusterProcessOpenFileDescriptors, Void> PARSER =
+    new ObjectParser<>(ClusterProcessOpenFileDescriptors.class.getName(), false, ClusterProcessOpenFileDescriptors::new);
 
   static {
     PARSER.declareLong(ClusterProcessOpenFileDescriptors::setAvg, AVG);

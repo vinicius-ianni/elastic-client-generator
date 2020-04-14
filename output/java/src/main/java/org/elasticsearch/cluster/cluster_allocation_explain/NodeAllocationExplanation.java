@@ -97,13 +97,13 @@ public class NodeAllocationExplanation  implements XContentable<NodeAllocationEx
     return NodeAllocationExplanation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeAllocationExplanation, Void> PARSER =
-    new ConstructingObjectParser<>(NodeAllocationExplanation.class.getName(), false, args -> new NodeAllocationExplanation());
+  public static final ObjectParser<NodeAllocationExplanation, Void> PARSER =
+    new ObjectParser<>(NodeAllocationExplanation.class.getName(), false, NodeAllocationExplanation::new);
 
   static {
     PARSER.declareObjectArray(NodeAllocationExplanation::setDeciders, (p, t) -> AllocationDecision.PARSER.apply(p, t), DECIDERS);
     PARSER.declareObject(NodeAllocationExplanation::setNodeAttributes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), NODE_ATTRIBUTES);
-    PARSER.declareObject(NodeAllocationExplanation::setNodeDecision, (p, t) -> Decision.PARSER.apply(p), NODE_DECISION);
+    PARSER.declareField(NodeAllocationExplanation::setNodeDecision, (p, t) -> Decision.PARSER.apply(p), NODE_DECISION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(NodeAllocationExplanation::setNodeId, NODE_ID);
     PARSER.declareString(NodeAllocationExplanation::setNodeName, NODE_NAME);
     PARSER.declareObject(NodeAllocationExplanation::setStore, (p, t) -> AllocationStore.PARSER.apply(p, t), STORE);

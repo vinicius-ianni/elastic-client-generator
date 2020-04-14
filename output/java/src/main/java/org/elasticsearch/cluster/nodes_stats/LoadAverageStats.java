@@ -50,8 +50,8 @@ public class LoadAverageStats  implements XContentable<LoadAverageStats> {
     return LoadAverageStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LoadAverageStats, Void> PARSER =
-    new ConstructingObjectParser<>(LoadAverageStats.class.getName(), false, args -> new LoadAverageStats());
+  public static final ObjectParser<LoadAverageStats, Void> PARSER =
+    new ObjectParser<>(LoadAverageStats.class.getName(), false, LoadAverageStats::new);
 
   static {
     PARSER.declareFloat(LoadAverageStats::setAverage15m, AVERAGE15M);

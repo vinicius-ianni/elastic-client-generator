@@ -48,11 +48,11 @@ public class AcknowledgeState  implements XContentable<AcknowledgeState> {
     return AcknowledgeState.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AcknowledgeState, Void> PARSER =
-    new ConstructingObjectParser<>(AcknowledgeState.class.getName(), false, args -> new AcknowledgeState());
+  public static final ObjectParser<AcknowledgeState, Void> PARSER =
+    new ObjectParser<>(AcknowledgeState.class.getName(), false, AcknowledgeState::new);
 
   static {
-    PARSER.declareObject(AcknowledgeState::setState, (p, t) -> AcknowledgementState.PARSER.apply(p), STATE);
+    PARSER.declareField(AcknowledgeState::setState, (p, t) -> AcknowledgementState.PARSER.apply(p), STATE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(AcknowledgeState::setTimestamp, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), TIMESTAMP);
   }
 

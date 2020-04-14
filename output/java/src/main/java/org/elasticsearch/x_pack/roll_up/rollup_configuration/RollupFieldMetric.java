@@ -49,12 +49,12 @@ public class RollupFieldMetric  implements XContentable<RollupFieldMetric> {
     return RollupFieldMetric.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupFieldMetric, Void> PARSER =
-    new ConstructingObjectParser<>(RollupFieldMetric.class.getName(), false, args -> new RollupFieldMetric());
+  public static final ObjectParser<RollupFieldMetric, Void> PARSER =
+    new ObjectParser<>(RollupFieldMetric.class.getName(), false, RollupFieldMetric::new);
 
   static {
     PARSER.declareObject(RollupFieldMetric::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObjectArray(RollupFieldMetric::setMetrics, (p, t) -> RollupMetric.PARSER.apply(p), METRICS);
+    PARSER.declareFieldArray(RollupFieldMetric::setMetrics, (p, t) -> RollupMetric.PARSER.apply(p), METRICS, ObjectParser.ValueType.STRING_ARRAY);
   }
 
 }

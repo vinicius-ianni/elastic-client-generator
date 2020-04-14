@@ -50,8 +50,8 @@ public class CatCountRecord  implements XContentable<CatCountRecord> {
     return CatCountRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatCountRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatCountRecord.class.getName(), false, args -> new CatCountRecord());
+  public static final ObjectParser<CatCountRecord, Void> PARSER =
+    new ObjectParser<>(CatCountRecord.class.getName(), false, CatCountRecord::new);
 
   static {
     PARSER.declareString(CatCountRecord::setCount, COUNT);

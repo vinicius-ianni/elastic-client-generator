@@ -36,8 +36,8 @@ public class GetJobStatsRequest  implements XContentable<GetJobStatsRequest> {
     return GetJobStatsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetJobStatsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetJobStatsRequest.class.getName(), false, args -> new GetJobStatsRequest());
+  public static final ObjectParser<GetJobStatsRequest, Void> PARSER =
+    new ObjectParser<>(GetJobStatsRequest.class.getName(), false, GetJobStatsRequest::new);
 
   static {
     PARSER.declareBoolean(GetJobStatsRequest::setAllowNoJobs, ALLOW_NO_JOBS);

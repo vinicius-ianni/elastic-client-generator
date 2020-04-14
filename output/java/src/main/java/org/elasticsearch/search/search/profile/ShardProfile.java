@@ -54,8 +54,8 @@ public class ShardProfile  implements XContentable<ShardProfile> {
     return ShardProfile.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardProfile, Void> PARSER =
-    new ConstructingObjectParser<>(ShardProfile.class.getName(), false, args -> new ShardProfile());
+  public static final ObjectParser<ShardProfile, Void> PARSER =
+    new ObjectParser<>(ShardProfile.class.getName(), false, ShardProfile::new);
 
   static {
     PARSER.declareObjectArray(ShardProfile::setAggregations, (p, t) -> AggregationProfile.PARSER.apply(p, t), AGGREGATIONS);

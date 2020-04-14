@@ -40,8 +40,8 @@ public class PutPrivilegesResponse extends DictionaryResponseBase<String, NamedC
     return PutPrivilegesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutPrivilegesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutPrivilegesResponse.class.getName(), false, args -> new PutPrivilegesResponse());
+  public static final ObjectParser<PutPrivilegesResponse, Void> PARSER =
+    new ObjectParser<>(PutPrivilegesResponse.class.getName(), false, PutPrivilegesResponse::new);
 
   static {
     PARSER.declareObject(PutPrivilegesResponse::setApplications, (p, t) -> new NamedContainer<>(n -> () -> n,null /* TODO NamedContainer<String, PutPrivilegesStatus> */), APPLICATIONS);

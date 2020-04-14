@@ -47,12 +47,12 @@ public class Distance  implements XContentable<Distance> {
     return Distance.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Distance, Void> PARSER =
-    new ConstructingObjectParser<>(Distance.class.getName(), false, args -> new Distance());
+  public static final ObjectParser<Distance, Void> PARSER =
+    new ObjectParser<>(Distance.class.getName(), false, Distance::new);
 
   static {
     PARSER.declareDouble(Distance::setPrecision, PRECISION);
-    PARSER.declareObject(Distance::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p), UNIT);
+    PARSER.declareField(Distance::setUnit, (p, t) -> DistanceUnit.PARSER.apply(p), UNIT, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

@@ -39,8 +39,8 @@ public class ForgetFollowerIndexResponse  implements XContentable<ForgetFollower
     return ForgetFollowerIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ForgetFollowerIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ForgetFollowerIndexResponse.class.getName(), false, args -> new ForgetFollowerIndexResponse());
+  public static final ObjectParser<ForgetFollowerIndexResponse, Void> PARSER =
+    new ObjectParser<>(ForgetFollowerIndexResponse.class.getName(), false, ForgetFollowerIndexResponse::new);
 
   static {
     PARSER.declareObject(ForgetFollowerIndexResponse::setShards, (p, t) -> ShardStatistics.PARSER.apply(p, t), SHARDS);

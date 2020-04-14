@@ -72,8 +72,8 @@ public class DateNanosProperty  implements XContentable<DateNanosProperty> {
     return DateNanosProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateNanosProperty, Void> PARSER =
-    new ConstructingObjectParser<>(DateNanosProperty.class.getName(), false, args -> new DateNanosProperty());
+  public static final ObjectParser<DateNanosProperty, Void> PARSER =
+    new ObjectParser<>(DateNanosProperty.class.getName(), false, DateNanosProperty::new);
 
   static {
     PARSER.declareDouble(DateNanosProperty::setBoost, BOOST);

@@ -43,8 +43,8 @@ public class PhraseSuggestHighlight  implements XContentable<PhraseSuggestHighli
     return PhraseSuggestHighlight.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PhraseSuggestHighlight, Void> PARSER =
-    new ConstructingObjectParser<>(PhraseSuggestHighlight.class.getName(), false, args -> new PhraseSuggestHighlight());
+  public static final ObjectParser<PhraseSuggestHighlight, Void> PARSER =
+    new ObjectParser<>(PhraseSuggestHighlight.class.getName(), false, PhraseSuggestHighlight::new);
 
   static {
     PARSER.declareString(PhraseSuggestHighlight::setPostTag, POST_TAG);

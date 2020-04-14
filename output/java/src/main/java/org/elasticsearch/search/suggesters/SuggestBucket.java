@@ -82,8 +82,8 @@ public class SuggestBucket  implements XContentable<SuggestBucket> {
     return SuggestBucket.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SuggestBucket, Void> PARSER =
-    new ConstructingObjectParser<>(SuggestBucket.class.getName(), false, args -> new SuggestBucket());
+  public static final ObjectParser<SuggestBucket, Void> PARSER =
+    new ObjectParser<>(SuggestBucket.class.getName(), false, SuggestBucket::new);
 
   static {
     PARSER.declareObject(SuggestBucket::setCompletion, (p, t) -> CompletionSuggester.PARSER.apply(p, t), COMPLETION);

@@ -31,8 +31,8 @@ public class DeleteAutoFollowPatternRequest  implements XContentable<DeleteAutoF
     return DeleteAutoFollowPatternRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteAutoFollowPatternRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteAutoFollowPatternRequest.class.getName(), false, args -> new DeleteAutoFollowPatternRequest());
+  public static final ObjectParser<DeleteAutoFollowPatternRequest, Void> PARSER =
+    new ObjectParser<>(DeleteAutoFollowPatternRequest.class.getName(), false, DeleteAutoFollowPatternRequest::new);
 
   static {
     

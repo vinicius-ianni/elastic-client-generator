@@ -31,8 +31,8 @@ public class GetLifecycleRequest  implements XContentable<GetLifecycleRequest> {
     return GetLifecycleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetLifecycleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetLifecycleRequest.class.getName(), false, args -> new GetLifecycleRequest());
+  public static final ObjectParser<GetLifecycleRequest, Void> PARSER =
+    new ObjectParser<>(GetLifecycleRequest.class.getName(), false, GetLifecycleRequest::new);
 
   static {
     

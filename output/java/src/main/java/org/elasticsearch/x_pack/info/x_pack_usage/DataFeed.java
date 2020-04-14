@@ -36,8 +36,8 @@ public class DataFeed  implements XContentable<DataFeed> {
     return DataFeed.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DataFeed, Void> PARSER =
-    new ConstructingObjectParser<>(DataFeed.class.getName(), false, args -> new DataFeed());
+  public static final ObjectParser<DataFeed, Void> PARSER =
+    new ObjectParser<>(DataFeed.class.getName(), false, DataFeed::new);
 
   static {
     PARSER.declareLong(DataFeed::setCount, COUNT);

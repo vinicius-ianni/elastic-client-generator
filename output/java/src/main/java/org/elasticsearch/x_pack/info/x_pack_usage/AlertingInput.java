@@ -49,8 +49,8 @@ public class AlertingInput  implements XContentable<AlertingInput> {
     return AlertingInput.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AlertingInput, Void> PARSER =
-    new ConstructingObjectParser<>(AlertingInput.class.getName(), false, args -> new AlertingInput());
+  public static final ObjectParser<AlertingInput, Void> PARSER =
+    new ObjectParser<>(AlertingInput.class.getName(), false, AlertingInput::new);
 
   static {
     PARSER.declareObject(AlertingInput::setInput, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AlertingCount.PARSER.apply(pp, null)), INPUT);

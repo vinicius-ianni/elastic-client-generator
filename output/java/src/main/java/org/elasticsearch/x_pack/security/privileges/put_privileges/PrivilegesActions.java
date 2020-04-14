@@ -48,8 +48,8 @@ public class PrivilegesActions  implements XContentable<PrivilegesActions> {
     return PrivilegesActions.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PrivilegesActions, Void> PARSER =
-    new ConstructingObjectParser<>(PrivilegesActions.class.getName(), false, args -> new PrivilegesActions());
+  public static final ObjectParser<PrivilegesActions, Void> PARSER =
+    new ObjectParser<>(PrivilegesActions.class.getName(), false, PrivilegesActions::new);
 
   static {
     PARSER.declareStringArray(PrivilegesActions::setActions, ACTIONS);

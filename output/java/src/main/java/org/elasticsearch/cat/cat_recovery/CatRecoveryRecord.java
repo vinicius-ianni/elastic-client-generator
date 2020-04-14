@@ -183,8 +183,8 @@ public class CatRecoveryRecord  implements XContentable<CatRecoveryRecord> {
     return CatRecoveryRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatRecoveryRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatRecoveryRecord.class.getName(), false, args -> new CatRecoveryRecord());
+  public static final ObjectParser<CatRecoveryRecord, Void> PARSER =
+    new ObjectParser<>(CatRecoveryRecord.class.getName(), false, CatRecoveryRecord::new);
 
   static {
     PARSER.declareString(CatRecoveryRecord::setBytes, BYTES);

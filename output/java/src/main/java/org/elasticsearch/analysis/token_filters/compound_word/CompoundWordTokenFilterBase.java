@@ -80,8 +80,8 @@ public class CompoundWordTokenFilterBase  implements XContentable<CompoundWordTo
     return CompoundWordTokenFilterBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompoundWordTokenFilterBase, Void> PARSER =
-    new ConstructingObjectParser<>(CompoundWordTokenFilterBase.class.getName(), false, args -> new CompoundWordTokenFilterBase());
+  public static final ObjectParser<CompoundWordTokenFilterBase, Void> PARSER =
+    new ObjectParser<>(CompoundWordTokenFilterBase.class.getName(), false, CompoundWordTokenFilterBase::new);
 
   static {
     PARSER.declareString(CompoundWordTokenFilterBase::setHyphenationPatternsPath, HYPHENATION_PATTERNS_PATH);

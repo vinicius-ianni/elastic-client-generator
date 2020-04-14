@@ -41,8 +41,8 @@ public class GetRollupIndexCapabilitiesResponse extends DictionaryResponseBase<I
     return GetRollupIndexCapabilitiesResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRollupIndexCapabilitiesResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetRollupIndexCapabilitiesResponse.class.getName(), false, args -> new GetRollupIndexCapabilitiesResponse());
+  public static final ObjectParser<GetRollupIndexCapabilitiesResponse, Void> PARSER =
+    new ObjectParser<>(GetRollupIndexCapabilitiesResponse.class.getName(), false, GetRollupIndexCapabilitiesResponse::new);
 
   static {
     PARSER.declareObject(GetRollupIndexCapabilitiesResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> RollupIndexCapabilities.PARSER.apply(pp, null)), INDICES);

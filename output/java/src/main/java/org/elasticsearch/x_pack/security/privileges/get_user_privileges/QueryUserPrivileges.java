@@ -39,8 +39,8 @@ public class QueryUserPrivileges  implements XContentable<QueryUserPrivileges> {
     return QueryUserPrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QueryUserPrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(QueryUserPrivileges.class.getName(), false, args -> new QueryUserPrivileges());
+  public static final ObjectParser<QueryUserPrivileges, Void> PARSER =
+    new ObjectParser<>(QueryUserPrivileges.class.getName(), false, QueryUserPrivileges::new);
 
   static {
     PARSER.declareObject(QueryUserPrivileges::setTerm, (p, t) -> TermUserPrivileges.PARSER.apply(p, t), TERM);

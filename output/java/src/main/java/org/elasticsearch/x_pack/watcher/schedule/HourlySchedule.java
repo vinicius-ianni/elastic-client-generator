@@ -38,8 +38,8 @@ public class HourlySchedule  implements XContentable<HourlySchedule> {
     return HourlySchedule.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HourlySchedule, Void> PARSER =
-    new ConstructingObjectParser<>(HourlySchedule.class.getName(), false, args -> new HourlySchedule());
+  public static final ObjectParser<HourlySchedule, Void> PARSER =
+    new ObjectParser<>(HourlySchedule.class.getName(), false, HourlySchedule::new);
 
   static {
     PARSER.declareIntArray(HourlySchedule::setMinute, MINUTE);

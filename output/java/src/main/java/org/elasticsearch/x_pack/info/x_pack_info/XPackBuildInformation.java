@@ -44,8 +44,8 @@ public class XPackBuildInformation  implements XContentable<XPackBuildInformatio
     return XPackBuildInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackBuildInformation, Void> PARSER =
-    new ConstructingObjectParser<>(XPackBuildInformation.class.getName(), false, args -> new XPackBuildInformation());
+  public static final ObjectParser<XPackBuildInformation, Void> PARSER =
+    new ObjectParser<>(XPackBuildInformation.class.getName(), false, XPackBuildInformation::new);
 
   static {
     PARSER.declareObject(XPackBuildInformation::setDate, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), DATE);

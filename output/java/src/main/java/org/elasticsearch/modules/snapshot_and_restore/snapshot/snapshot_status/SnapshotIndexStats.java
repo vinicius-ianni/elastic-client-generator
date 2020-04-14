@@ -59,8 +59,8 @@ public class SnapshotIndexStats  implements XContentable<SnapshotIndexStats> {
     return SnapshotIndexStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotIndexStats, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotIndexStats.class.getName(), false, args -> new SnapshotIndexStats());
+  public static final ObjectParser<SnapshotIndexStats, Void> PARSER =
+    new ObjectParser<>(SnapshotIndexStats.class.getName(), false, SnapshotIndexStats::new);
 
   static {
     PARSER.declareObject(SnapshotIndexStats::setShards, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SnapshotShardsStats.PARSER.apply(pp, null)), SHARDS);

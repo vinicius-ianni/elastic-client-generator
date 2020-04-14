@@ -56,8 +56,8 @@ public class StartDatafeedRequest  implements XContentable<StartDatafeedRequest>
     return StartDatafeedRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StartDatafeedRequest, Void> PARSER =
-    new ConstructingObjectParser<>(StartDatafeedRequest.class.getName(), false, args -> new StartDatafeedRequest());
+  public static final ObjectParser<StartDatafeedRequest, Void> PARSER =
+    new ObjectParser<>(StartDatafeedRequest.class.getName(), false, StartDatafeedRequest::new);
 
   static {
     PARSER.declareObject(StartDatafeedRequest::setEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END);

@@ -45,8 +45,8 @@ public class NodeInfoTransport  implements XContentable<NodeInfoTransport> {
     return NodeInfoTransport.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfoTransport, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfoTransport.class.getName(), false, args -> new NodeInfoTransport());
+  public static final ObjectParser<NodeInfoTransport, Void> PARSER =
+    new ObjectParser<>(NodeInfoTransport.class.getName(), false, NodeInfoTransport::new);
 
   static {
     PARSER.declareStringArray(NodeInfoTransport::setBoundAddress, BOUND_ADDRESS);

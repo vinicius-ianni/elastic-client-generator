@@ -53,8 +53,8 @@ public class GetSnapshotRequest  implements XContentable<GetSnapshotRequest> {
     return GetSnapshotRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetSnapshotRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetSnapshotRequest.class.getName(), false, args -> new GetSnapshotRequest());
+  public static final ObjectParser<GetSnapshotRequest, Void> PARSER =
+    new ObjectParser<>(GetSnapshotRequest.class.getName(), false, GetSnapshotRequest::new);
 
   static {
     PARSER.declareBoolean(GetSnapshotRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);

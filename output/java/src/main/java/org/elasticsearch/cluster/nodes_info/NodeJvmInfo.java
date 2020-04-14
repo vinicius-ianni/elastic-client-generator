@@ -100,8 +100,8 @@ public class NodeJvmInfo  implements XContentable<NodeJvmInfo> {
     return NodeJvmInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeJvmInfo, Void> PARSER =
-    new ConstructingObjectParser<>(NodeJvmInfo.class.getName(), false, args -> new NodeJvmInfo());
+  public static final ObjectParser<NodeJvmInfo, Void> PARSER =
+    new ObjectParser<>(NodeJvmInfo.class.getName(), false, NodeJvmInfo::new);
 
   static {
     PARSER.declareStringArray(NodeJvmInfo::setGcCollectors, GC_COLLECTORS);

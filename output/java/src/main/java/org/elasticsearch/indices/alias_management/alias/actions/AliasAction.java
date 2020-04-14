@@ -31,8 +31,8 @@ public class AliasAction  implements XContentable<AliasAction> {
     return AliasAction.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AliasAction, Void> PARSER =
-    new ConstructingObjectParser<>(AliasAction.class.getName(), false, args -> new AliasAction());
+  public static final ObjectParser<AliasAction, Void> PARSER =
+    new ObjectParser<>(AliasAction.class.getName(), false, AliasAction::new);
 
   static {
     

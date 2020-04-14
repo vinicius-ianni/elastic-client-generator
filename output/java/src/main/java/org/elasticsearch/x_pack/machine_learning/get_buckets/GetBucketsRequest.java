@@ -95,8 +95,8 @@ public class GetBucketsRequest  implements XContentable<GetBucketsRequest> {
     return GetBucketsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetBucketsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetBucketsRequest.class.getName(), false, args -> new GetBucketsRequest());
+  public static final ObjectParser<GetBucketsRequest, Void> PARSER =
+    new ObjectParser<>(GetBucketsRequest.class.getName(), false, GetBucketsRequest::new);
 
   static {
     PARSER.declareDouble(GetBucketsRequest::setAnomalyScore, ANOMALY_SCORE);

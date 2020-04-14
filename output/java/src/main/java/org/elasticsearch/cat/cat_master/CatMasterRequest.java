@@ -85,8 +85,8 @@ public class CatMasterRequest  implements XContentable<CatMasterRequest> {
     return CatMasterRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatMasterRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatMasterRequest.class.getName(), false, args -> new CatMasterRequest());
+  public static final ObjectParser<CatMasterRequest, Void> PARSER =
+    new ObjectParser<>(CatMasterRequest.class.getName(), false, CatMasterRequest::new);
 
   static {
     PARSER.declareString(CatMasterRequest::setFormat, FORMAT);

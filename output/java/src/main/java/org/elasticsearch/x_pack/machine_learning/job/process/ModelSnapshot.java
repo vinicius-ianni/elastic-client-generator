@@ -99,8 +99,8 @@ public class ModelSnapshot  implements XContentable<ModelSnapshot> {
     return ModelSnapshot.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ModelSnapshot, Void> PARSER =
-    new ConstructingObjectParser<>(ModelSnapshot.class.getName(), false, args -> new ModelSnapshot());
+  public static final ObjectParser<ModelSnapshot, Void> PARSER =
+    new ObjectParser<>(ModelSnapshot.class.getName(), false, ModelSnapshot::new);
 
   static {
     PARSER.declareString(ModelSnapshot::setDescription, DESCRIPTION);

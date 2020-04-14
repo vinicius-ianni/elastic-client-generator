@@ -94,8 +94,8 @@ public class SnapshotStatus  implements XContentable<SnapshotStatus> {
     return SnapshotStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotStatus, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotStatus.class.getName(), false, args -> new SnapshotStatus());
+  public static final ObjectParser<SnapshotStatus, Void> PARSER =
+    new ObjectParser<>(SnapshotStatus.class.getName(), false, SnapshotStatus::new);
 
   static {
     PARSER.declareBoolean(SnapshotStatus::setIncludeGlobalState, INCLUDE_GLOBAL_STATE);

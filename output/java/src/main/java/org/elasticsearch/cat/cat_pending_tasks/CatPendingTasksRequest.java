@@ -85,8 +85,8 @@ public class CatPendingTasksRequest  implements XContentable<CatPendingTasksRequ
     return CatPendingTasksRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatPendingTasksRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatPendingTasksRequest.class.getName(), false, args -> new CatPendingTasksRequest());
+  public static final ObjectParser<CatPendingTasksRequest, Void> PARSER =
+    new ObjectParser<>(CatPendingTasksRequest.class.getName(), false, CatPendingTasksRequest::new);
 
   static {
     PARSER.declareString(CatPendingTasksRequest::setFormat, FORMAT);

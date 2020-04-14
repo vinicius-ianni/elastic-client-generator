@@ -31,8 +31,8 @@ public class Transform  implements XContentable<Transform> {
     return Transform.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Transform, Void> PARSER =
-    new ConstructingObjectParser<>(Transform.class.getName(), false, args -> new Transform());
+  public static final ObjectParser<Transform, Void> PARSER =
+    new ObjectParser<>(Transform.class.getName(), false, Transform::new);
 
   static {
     

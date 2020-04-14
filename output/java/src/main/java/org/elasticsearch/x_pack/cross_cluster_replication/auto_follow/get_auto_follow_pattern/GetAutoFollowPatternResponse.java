@@ -39,8 +39,8 @@ public class GetAutoFollowPatternResponse  implements XContentable<GetAutoFollow
     return GetAutoFollowPatternResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetAutoFollowPatternResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetAutoFollowPatternResponse.class.getName(), false, args -> new GetAutoFollowPatternResponse());
+  public static final ObjectParser<GetAutoFollowPatternResponse, Void> PARSER =
+    new ObjectParser<>(GetAutoFollowPatternResponse.class.getName(), false, GetAutoFollowPatternResponse::new);
 
   static {
     PARSER.declareObject(GetAutoFollowPatternResponse::setPatterns, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AutoFollowPattern.PARSER.apply(pp, null)), PATTERNS);

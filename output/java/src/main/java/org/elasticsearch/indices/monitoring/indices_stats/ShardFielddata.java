@@ -43,8 +43,8 @@ public class ShardFielddata  implements XContentable<ShardFielddata> {
     return ShardFielddata.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardFielddata, Void> PARSER =
-    new ConstructingObjectParser<>(ShardFielddata.class.getName(), false, args -> new ShardFielddata());
+  public static final ObjectParser<ShardFielddata, Void> PARSER =
+    new ObjectParser<>(ShardFielddata.class.getName(), false, ShardFielddata::new);
 
   static {
     PARSER.declareLong(ShardFielddata::setEvictions, EVICTIONS);

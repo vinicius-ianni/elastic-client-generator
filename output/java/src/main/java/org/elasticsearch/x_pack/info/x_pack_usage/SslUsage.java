@@ -49,8 +49,8 @@ public class SslUsage  implements XContentable<SslUsage> {
     return SslUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SslUsage, Void> PARSER =
-    new ConstructingObjectParser<>(SslUsage.class.getName(), false, args -> new SslUsage());
+  public static final ObjectParser<SslUsage, Void> PARSER =
+    new ObjectParser<>(SslUsage.class.getName(), false, SslUsage::new);
 
   static {
     PARSER.declareObject(SslUsage::setHttp, (p, t) -> SecurityFeatureToggle.PARSER.apply(p, t), HTTP);

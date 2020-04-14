@@ -63,8 +63,8 @@ public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
     return QuerySqlResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QuerySqlResponse, Void> PARSER =
-    new ConstructingObjectParser<>(QuerySqlResponse.class.getName(), false, args -> new QuerySqlResponse());
+  public static final ObjectParser<QuerySqlResponse, Void> PARSER =
+    new ObjectParser<>(QuerySqlResponse.class.getName(), false, QuerySqlResponse::new);
 
   static {
     PARSER.declareObjectArray(QuerySqlResponse::setColumns, (p, t) -> SqlColumn.PARSER.apply(p, t), COLUMNS);

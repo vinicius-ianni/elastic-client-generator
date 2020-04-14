@@ -78,8 +78,8 @@ public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySet
     return IndicesRecoverySettings.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesRecoverySettings, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesRecoverySettings.class.getName(), false, args -> new IndicesRecoverySettings());
+  public static final ObjectParser<IndicesRecoverySettings, Void> PARSER =
+    new ObjectParser<>(IndicesRecoverySettings.class.getName(), false, IndicesRecoverySettings::new);
 
   static {
     PARSER.declareBoolean(IndicesRecoverySettings::setCompress, COMPRESS);

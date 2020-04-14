@@ -39,8 +39,8 @@ public class SimpleInput  implements XContentable<SimpleInput> {
     return SimpleInput.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SimpleInput, Void> PARSER =
-    new ConstructingObjectParser<>(SimpleInput.class.getName(), false, args -> new SimpleInput());
+  public static final ObjectParser<SimpleInput, Void> PARSER =
+    new ObjectParser<>(SimpleInput.class.getName(), false, SimpleInput::new);
 
   static {
     PARSER.declareObject(SimpleInput::setPayload, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PAYLOAD);

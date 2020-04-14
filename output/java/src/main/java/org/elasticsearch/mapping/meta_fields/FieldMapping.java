@@ -31,8 +31,8 @@ public class FieldMapping  implements XContentable<FieldMapping> {
     return FieldMapping.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldMapping, Void> PARSER =
-    new ConstructingObjectParser<>(FieldMapping.class.getName(), false, args -> new FieldMapping());
+  public static final ObjectParser<FieldMapping, Void> PARSER =
+    new ObjectParser<>(FieldMapping.class.getName(), false, FieldMapping::new);
 
   static {
     

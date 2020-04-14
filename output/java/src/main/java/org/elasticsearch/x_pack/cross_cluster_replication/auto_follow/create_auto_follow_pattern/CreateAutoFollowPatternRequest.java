@@ -129,8 +129,8 @@ public class CreateAutoFollowPatternRequest  implements XContentable<CreateAutoF
     return CreateAutoFollowPatternRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateAutoFollowPatternRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CreateAutoFollowPatternRequest.class.getName(), false, args -> new CreateAutoFollowPatternRequest());
+  public static final ObjectParser<CreateAutoFollowPatternRequest, Void> PARSER =
+    new ObjectParser<>(CreateAutoFollowPatternRequest.class.getName(), false, CreateAutoFollowPatternRequest::new);
 
   static {
     PARSER.declareString(CreateAutoFollowPatternRequest::setRemoteCluster, REMOTE_CLUSTER);

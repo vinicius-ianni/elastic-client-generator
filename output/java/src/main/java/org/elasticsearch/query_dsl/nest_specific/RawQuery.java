@@ -36,8 +36,8 @@ public class RawQuery  implements XContentable<RawQuery> {
     return RawQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RawQuery, Void> PARSER =
-    new ConstructingObjectParser<>(RawQuery.class.getName(), false, args -> new RawQuery());
+  public static final ObjectParser<RawQuery, Void> PARSER =
+    new ObjectParser<>(RawQuery.class.getName(), false, RawQuery::new);
 
   static {
     PARSER.declareString(RawQuery::setRaw, RAW);

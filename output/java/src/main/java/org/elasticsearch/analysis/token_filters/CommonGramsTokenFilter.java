@@ -59,8 +59,8 @@ public class CommonGramsTokenFilter  implements XContentable<CommonGramsTokenFil
     return CommonGramsTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CommonGramsTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(CommonGramsTokenFilter.class.getName(), false, args -> new CommonGramsTokenFilter());
+  public static final ObjectParser<CommonGramsTokenFilter, Void> PARSER =
+    new ObjectParser<>(CommonGramsTokenFilter.class.getName(), false, CommonGramsTokenFilter::new);
 
   static {
     PARSER.declareStringArray(CommonGramsTokenFilter::setCommonWords, COMMON_WORDS);

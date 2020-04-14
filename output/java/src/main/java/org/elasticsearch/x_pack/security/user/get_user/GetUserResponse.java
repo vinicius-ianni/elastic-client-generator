@@ -40,8 +40,8 @@ public class GetUserResponse extends DictionaryResponseBase<String, XPackUser> i
     return GetUserResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetUserResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetUserResponse.class.getName(), false, args -> new GetUserResponse());
+  public static final ObjectParser<GetUserResponse, Void> PARSER =
+    new ObjectParser<>(GetUserResponse.class.getName(), false, GetUserResponse::new);
 
   static {
     PARSER.declareObject(GetUserResponse::setUsers, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> XPackUser.PARSER.apply(pp, null)), USERS);

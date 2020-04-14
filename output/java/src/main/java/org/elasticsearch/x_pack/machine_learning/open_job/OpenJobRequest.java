@@ -39,8 +39,8 @@ public class OpenJobRequest  implements XContentable<OpenJobRequest> {
     return OpenJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OpenJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(OpenJobRequest.class.getName(), false, args -> new OpenJobRequest());
+  public static final ObjectParser<OpenJobRequest, Void> PARSER =
+    new ObjectParser<>(OpenJobRequest.class.getName(), false, OpenJobRequest::new);
 
   static {
     PARSER.declareObject(OpenJobRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

@@ -36,8 +36,8 @@ public class GoogleNormalizedDistanceHeuristic  implements XContentable<GoogleNo
     return GoogleNormalizedDistanceHeuristic.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GoogleNormalizedDistanceHeuristic, Void> PARSER =
-    new ConstructingObjectParser<>(GoogleNormalizedDistanceHeuristic.class.getName(), false, args -> new GoogleNormalizedDistanceHeuristic());
+  public static final ObjectParser<GoogleNormalizedDistanceHeuristic, Void> PARSER =
+    new ObjectParser<>(GoogleNormalizedDistanceHeuristic.class.getName(), false, GoogleNormalizedDistanceHeuristic::new);
 
   static {
     PARSER.declareBoolean(GoogleNormalizedDistanceHeuristic::setBackgroundIsSuperset, BACKGROUND_IS_SUPERSET);

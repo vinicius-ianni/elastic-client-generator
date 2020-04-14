@@ -57,8 +57,8 @@ public class JobStatistics  implements XContentable<JobStatistics> {
     return JobStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<JobStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(JobStatistics.class.getName(), false, args -> new JobStatistics());
+  public static final ObjectParser<JobStatistics, Void> PARSER =
+    new ObjectParser<>(JobStatistics.class.getName(), false, JobStatistics::new);
 
   static {
     PARSER.declareDouble(JobStatistics::setAvg, AVG);

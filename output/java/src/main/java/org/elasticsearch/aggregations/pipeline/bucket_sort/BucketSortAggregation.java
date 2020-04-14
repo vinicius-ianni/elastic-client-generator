@@ -64,12 +64,12 @@ public class BucketSortAggregation  implements XContentable<BucketSortAggregatio
     return BucketSortAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BucketSortAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(BucketSortAggregation.class.getName(), false, args -> new BucketSortAggregation());
+  public static final ObjectParser<BucketSortAggregation, Void> PARSER =
+    new ObjectParser<>(BucketSortAggregation.class.getName(), false, BucketSortAggregation::new);
 
   static {
     PARSER.declareInt(BucketSortAggregation::setFrom, FROM);
-    PARSER.declareObject(BucketSortAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p), GAP_POLICY);
+    PARSER.declareField(BucketSortAggregation::setGapPolicy, (p, t) -> GapPolicy.PARSER.apply(p), GAP_POLICY, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(BucketSortAggregation::setSize, SIZE);
     PARSER.declareObjectArray(BucketSortAggregation::setSort, (p, t) -> Sort.PARSER.apply(p, t), SORT);
   }

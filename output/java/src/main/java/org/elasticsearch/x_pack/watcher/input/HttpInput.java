@@ -58,13 +58,13 @@ public class HttpInput  implements XContentable<HttpInput> {
     return HttpInput.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HttpInput, Void> PARSER =
-    new ConstructingObjectParser<>(HttpInput.class.getName(), false, args -> new HttpInput());
+  public static final ObjectParser<HttpInput, Void> PARSER =
+    new ObjectParser<>(HttpInput.class.getName(), false, HttpInput::new);
 
   static {
     PARSER.declareStringArray(HttpInput::setExtract, EXTRACT);
     PARSER.declareObject(HttpInput::setRequest, (p, t) -> HttpInputRequest.PARSER.apply(p, t), REQUEST);
-    PARSER.declareObject(HttpInput::setResponseContentType, (p, t) -> ResponseContentType.PARSER.apply(p), RESPONSE_CONTENT_TYPE);
+    PARSER.declareField(HttpInput::setResponseContentType, (p, t) -> ResponseContentType.PARSER.apply(p), RESPONSE_CONTENT_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

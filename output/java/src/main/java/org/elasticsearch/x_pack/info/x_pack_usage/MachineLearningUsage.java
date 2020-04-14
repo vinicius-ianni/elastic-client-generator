@@ -57,8 +57,8 @@ public class MachineLearningUsage  implements XContentable<MachineLearningUsage>
     return MachineLearningUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MachineLearningUsage, Void> PARSER =
-    new ConstructingObjectParser<>(MachineLearningUsage.class.getName(), false, args -> new MachineLearningUsage());
+  public static final ObjectParser<MachineLearningUsage, Void> PARSER =
+    new ObjectParser<>(MachineLearningUsage.class.getName(), false, MachineLearningUsage::new);
 
   static {
     PARSER.declareInt(MachineLearningUsage::setNodeCount, NODE_COUNT);

@@ -65,8 +65,8 @@ public class GetCalendarEventsRequest  implements XContentable<GetCalendarEvents
     return GetCalendarEventsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetCalendarEventsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetCalendarEventsRequest.class.getName(), false, args -> new GetCalendarEventsRequest());
+  public static final ObjectParser<GetCalendarEventsRequest, Void> PARSER =
+    new ObjectParser<>(GetCalendarEventsRequest.class.getName(), false, GetCalendarEventsRequest::new);
 
   static {
     PARSER.declareObject(GetCalendarEventsRequest::setEnd, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), END);

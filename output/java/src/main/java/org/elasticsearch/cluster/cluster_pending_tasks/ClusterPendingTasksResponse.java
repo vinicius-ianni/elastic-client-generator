@@ -38,8 +38,8 @@ public class ClusterPendingTasksResponse  implements XContentable<ClusterPending
     return ClusterPendingTasksResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterPendingTasksResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterPendingTasksResponse.class.getName(), false, args -> new ClusterPendingTasksResponse());
+  public static final ObjectParser<ClusterPendingTasksResponse, Void> PARSER =
+    new ObjectParser<>(ClusterPendingTasksResponse.class.getName(), false, ClusterPendingTasksResponse::new);
 
   static {
     PARSER.declareObjectArray(ClusterPendingTasksResponse::setTasks, (p, t) -> PendingTask.PARSER.apply(p, t), TASKS);

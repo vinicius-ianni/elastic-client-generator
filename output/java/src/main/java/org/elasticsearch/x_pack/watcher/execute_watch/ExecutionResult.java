@@ -74,8 +74,8 @@ public class ExecutionResult  implements XContentable<ExecutionResult> {
     return ExecutionResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutionResult, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutionResult.class.getName(), false, args -> new ExecutionResult());
+  public static final ObjectParser<ExecutionResult, Void> PARSER =
+    new ObjectParser<>(ExecutionResult.class.getName(), false, ExecutionResult::new);
 
   static {
     PARSER.declareObjectArray(ExecutionResult::setActions, (p, t) -> ExecutionResultAction.PARSER.apply(p, t), ACTIONS);

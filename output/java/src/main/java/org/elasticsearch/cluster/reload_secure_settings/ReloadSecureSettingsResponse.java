@@ -46,8 +46,8 @@ public class ReloadSecureSettingsResponse  implements XContentable<ReloadSecureS
     return ReloadSecureSettingsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReloadSecureSettingsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ReloadSecureSettingsResponse.class.getName(), false, args -> new ReloadSecureSettingsResponse());
+  public static final ObjectParser<ReloadSecureSettingsResponse, Void> PARSER =
+    new ObjectParser<>(ReloadSecureSettingsResponse.class.getName(), false, ReloadSecureSettingsResponse::new);
 
   static {
     PARSER.declareString(ReloadSecureSettingsResponse::setClusterName, CLUSTER_NAME);

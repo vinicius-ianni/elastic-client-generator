@@ -31,8 +31,8 @@ public class PutSnapshotLifecycleResponse  implements XContentable<PutSnapshotLi
     return PutSnapshotLifecycleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutSnapshotLifecycleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutSnapshotLifecycleResponse.class.getName(), false, args -> new PutSnapshotLifecycleResponse());
+  public static final ObjectParser<PutSnapshotLifecycleResponse, Void> PARSER =
+    new ObjectParser<>(PutSnapshotLifecycleResponse.class.getName(), false, PutSnapshotLifecycleResponse::new);
 
   static {
     

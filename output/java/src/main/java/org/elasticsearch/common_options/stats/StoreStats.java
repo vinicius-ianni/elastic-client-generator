@@ -43,8 +43,8 @@ public class StoreStats  implements XContentable<StoreStats> {
     return StoreStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StoreStats, Void> PARSER =
-    new ConstructingObjectParser<>(StoreStats.class.getName(), false, args -> new StoreStats());
+  public static final ObjectParser<StoreStats, Void> PARSER =
+    new ObjectParser<>(StoreStats.class.getName(), false, StoreStats::new);
 
   static {
     PARSER.declareString(StoreStats::setSize, SIZE);

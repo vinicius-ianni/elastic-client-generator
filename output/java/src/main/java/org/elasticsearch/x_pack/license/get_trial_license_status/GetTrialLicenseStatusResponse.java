@@ -36,8 +36,8 @@ public class GetTrialLicenseStatusResponse  implements XContentable<GetTrialLice
     return GetTrialLicenseStatusResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetTrialLicenseStatusResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetTrialLicenseStatusResponse.class.getName(), false, args -> new GetTrialLicenseStatusResponse());
+  public static final ObjectParser<GetTrialLicenseStatusResponse, Void> PARSER =
+    new ObjectParser<>(GetTrialLicenseStatusResponse.class.getName(), false, GetTrialLicenseStatusResponse::new);
 
   static {
     PARSER.declareBoolean(GetTrialLicenseStatusResponse::setEligibleToStartTrial, ELIGIBLE_TO_START_TRIAL);

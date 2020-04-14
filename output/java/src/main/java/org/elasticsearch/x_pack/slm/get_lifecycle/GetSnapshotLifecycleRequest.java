@@ -31,8 +31,8 @@ public class GetSnapshotLifecycleRequest  implements XContentable<GetSnapshotLif
     return GetSnapshotLifecycleRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetSnapshotLifecycleRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetSnapshotLifecycleRequest.class.getName(), false, args -> new GetSnapshotLifecycleRequest());
+  public static final ObjectParser<GetSnapshotLifecycleRequest, Void> PARSER =
+    new ObjectParser<>(GetSnapshotLifecycleRequest.class.getName(), false, GetSnapshotLifecycleRequest::new);
 
   static {
     

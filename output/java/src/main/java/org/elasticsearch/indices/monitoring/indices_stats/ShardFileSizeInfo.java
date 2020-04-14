@@ -43,8 +43,8 @@ public class ShardFileSizeInfo  implements XContentable<ShardFileSizeInfo> {
     return ShardFileSizeInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardFileSizeInfo, Void> PARSER =
-    new ConstructingObjectParser<>(ShardFileSizeInfo.class.getName(), false, args -> new ShardFileSizeInfo());
+  public static final ObjectParser<ShardFileSizeInfo, Void> PARSER =
+    new ObjectParser<>(ShardFileSizeInfo.class.getName(), false, ShardFileSizeInfo::new);
 
   static {
     PARSER.declareString(ShardFileSizeInfo::setDescription, DESCRIPTION);

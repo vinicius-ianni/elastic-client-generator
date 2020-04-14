@@ -31,8 +31,8 @@ public class GetTrialLicenseStatusRequest  implements XContentable<GetTrialLicen
     return GetTrialLicenseStatusRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetTrialLicenseStatusRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetTrialLicenseStatusRequest.class.getName(), false, args -> new GetTrialLicenseStatusRequest());
+  public static final ObjectParser<GetTrialLicenseStatusRequest, Void> PARSER =
+    new ObjectParser<>(GetTrialLicenseStatusRequest.class.getName(), false, GetTrialLicenseStatusRequest::new);
 
   static {
     

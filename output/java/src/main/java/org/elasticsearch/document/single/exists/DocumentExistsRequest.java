@@ -114,8 +114,8 @@ public class DocumentExistsRequest  implements XContentable<DocumentExistsReques
     return DocumentExistsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DocumentExistsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DocumentExistsRequest.class.getName(), false, args -> new DocumentExistsRequest());
+  public static final ObjectParser<DocumentExistsRequest, Void> PARSER =
+    new ObjectParser<>(DocumentExistsRequest.class.getName(), false, DocumentExistsRequest::new);
 
   static {
     PARSER.declareString(DocumentExistsRequest::setPreference, PREFERENCE);
@@ -127,7 +127,7 @@ public class DocumentExistsRequest  implements XContentable<DocumentExistsReques
     PARSER.declareObjectArray(DocumentExistsRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
     PARSER.declareObjectArray(DocumentExistsRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
     PARSER.declareLong(DocumentExistsRequest::setVersion, VERSION);
-    PARSER.declareObject(DocumentExistsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(DocumentExistsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

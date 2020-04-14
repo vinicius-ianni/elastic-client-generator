@@ -47,8 +47,8 @@ public class FieldSecurity  implements XContentable<FieldSecurity> {
     return FieldSecurity.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FieldSecurity, Void> PARSER =
-    new ConstructingObjectParser<>(FieldSecurity.class.getName(), false, args -> new FieldSecurity());
+  public static final ObjectParser<FieldSecurity, Void> PARSER =
+    new ObjectParser<>(FieldSecurity.class.getName(), false, FieldSecurity::new);
 
   static {
     PARSER.declareObjectArray(FieldSecurity::setExcept, (p, t) -> Field.createFrom(p), EXCEPT);

@@ -49,12 +49,12 @@ public class IcuAnalyzer  implements XContentable<IcuAnalyzer> {
     return IcuAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IcuAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(IcuAnalyzer.class.getName(), false, args -> new IcuAnalyzer());
+  public static final ObjectParser<IcuAnalyzer, Void> PARSER =
+    new ObjectParser<>(IcuAnalyzer.class.getName(), false, IcuAnalyzer::new);
 
   static {
-    PARSER.declareObject(IcuAnalyzer::setMethod, (p, t) -> IcuNormalizationType.PARSER.apply(p), METHOD);
-    PARSER.declareObject(IcuAnalyzer::setMode, (p, t) -> IcuNormalizationMode.PARSER.apply(p), MODE);
+    PARSER.declareField(IcuAnalyzer::setMethod, (p, t) -> IcuNormalizationType.PARSER.apply(p), METHOD, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(IcuAnalyzer::setMode, (p, t) -> IcuNormalizationMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

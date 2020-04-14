@@ -31,8 +31,8 @@ public class UppercaseTokenFilter  implements XContentable<UppercaseTokenFilter>
     return UppercaseTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UppercaseTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(UppercaseTokenFilter.class.getName(), false, args -> new UppercaseTokenFilter());
+  public static final ObjectParser<UppercaseTokenFilter, Void> PARSER =
+    new ObjectParser<>(UppercaseTokenFilter.class.getName(), false, UppercaseTokenFilter::new);
 
   static {
     

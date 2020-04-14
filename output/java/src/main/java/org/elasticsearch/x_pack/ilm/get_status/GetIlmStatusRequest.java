@@ -31,8 +31,8 @@ public class GetIlmStatusRequest  implements XContentable<GetIlmStatusRequest> {
     return GetIlmStatusRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetIlmStatusRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetIlmStatusRequest.class.getName(), false, args -> new GetIlmStatusRequest());
+  public static final ObjectParser<GetIlmStatusRequest, Void> PARSER =
+    new ObjectParser<>(GetIlmStatusRequest.class.getName(), false, GetIlmStatusRequest::new);
 
   static {
     

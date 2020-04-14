@@ -64,8 +64,8 @@ public class SnapshotShardFailure  implements XContentable<SnapshotShardFailure>
     return SnapshotShardFailure.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotShardFailure, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotShardFailure.class.getName(), false, args -> new SnapshotShardFailure());
+  public static final ObjectParser<SnapshotShardFailure, Void> PARSER =
+    new ObjectParser<>(SnapshotShardFailure.class.getName(), false, SnapshotShardFailure::new);
 
   static {
     PARSER.declareString(SnapshotShardFailure::setIndex, INDEX);

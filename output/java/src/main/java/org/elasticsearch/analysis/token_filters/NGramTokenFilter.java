@@ -43,8 +43,8 @@ public class NGramTokenFilter  implements XContentable<NGramTokenFilter> {
     return NGramTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NGramTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(NGramTokenFilter.class.getName(), false, args -> new NGramTokenFilter());
+  public static final ObjectParser<NGramTokenFilter, Void> PARSER =
+    new ObjectParser<>(NGramTokenFilter.class.getName(), false, NGramTokenFilter::new);
 
   static {
     PARSER.declareInt(NGramTokenFilter::setMaxGram, MAX_GRAM);

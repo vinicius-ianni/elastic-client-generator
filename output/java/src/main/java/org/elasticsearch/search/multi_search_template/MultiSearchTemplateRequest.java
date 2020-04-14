@@ -79,13 +79,13 @@ public class MultiSearchTemplateRequest  implements XContentable<MultiSearchTemp
     return MultiSearchTemplateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiSearchTemplateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(MultiSearchTemplateRequest.class.getName(), false, args -> new MultiSearchTemplateRequest());
+  public static final ObjectParser<MultiSearchTemplateRequest, Void> PARSER =
+    new ObjectParser<>(MultiSearchTemplateRequest.class.getName(), false, MultiSearchTemplateRequest::new);
 
   static {
     PARSER.declareBoolean(MultiSearchTemplateRequest::setCcsMinimizeRoundtrips, CCS_MINIMIZE_ROUNDTRIPS);
     PARSER.declareLong(MultiSearchTemplateRequest::setMaxConcurrentSearches, MAX_CONCURRENT_SEARCHES);
-    PARSER.declareObject(MultiSearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE);
+    PARSER.declareField(MultiSearchTemplateRequest::setSearchType, (p, t) -> SearchType.PARSER.apply(p), SEARCH_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(MultiSearchTemplateRequest::setTotalHitsAsInteger, TOTAL_HITS_AS_INTEGER);
     PARSER.declareBoolean(MultiSearchTemplateRequest::setTypedKeys, TYPED_KEYS);
     PARSER.declareObject(MultiSearchTemplateRequest::setOperations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SearchTemplateRequest.PARSER.apply(pp, null)), OPERATIONS);

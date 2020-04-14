@@ -43,8 +43,8 @@ public class RecoveryVerifyIndex  implements XContentable<RecoveryVerifyIndex> {
     return RecoveryVerifyIndex.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryVerifyIndex, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryVerifyIndex.class.getName(), false, args -> new RecoveryVerifyIndex());
+  public static final ObjectParser<RecoveryVerifyIndex, Void> PARSER =
+    new ObjectParser<>(RecoveryVerifyIndex.class.getName(), false, RecoveryVerifyIndex::new);
 
   static {
     PARSER.declareLong(RecoveryVerifyIndex::setCheckIndexTimeInMillis, CHECK_INDEX_TIME_IN_MILLIS);

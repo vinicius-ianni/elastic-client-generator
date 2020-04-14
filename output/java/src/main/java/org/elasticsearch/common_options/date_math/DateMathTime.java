@@ -47,12 +47,12 @@ public class DateMathTime  implements XContentable<DateMathTime> {
     return DateMathTime.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateMathTime, Void> PARSER =
-    new ConstructingObjectParser<>(DateMathTime.class.getName(), false, args -> new DateMathTime());
+  public static final ObjectParser<DateMathTime, Void> PARSER =
+    new ObjectParser<>(DateMathTime.class.getName(), false, DateMathTime::new);
 
   static {
     PARSER.declareInt(DateMathTime::setFactor, FACTOR);
-    PARSER.declareObject(DateMathTime::setInterval, (p, t) -> DateMathTimeUnit.PARSER.apply(p), INTERVAL);
+    PARSER.declareField(DateMathTime::setInterval, (p, t) -> DateMathTimeUnit.PARSER.apply(p), INTERVAL, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

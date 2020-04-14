@@ -46,11 +46,11 @@ public class IcuTransformTokenFilter  implements XContentable<IcuTransformTokenF
     return IcuTransformTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IcuTransformTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(IcuTransformTokenFilter.class.getName(), false, args -> new IcuTransformTokenFilter());
+  public static final ObjectParser<IcuTransformTokenFilter, Void> PARSER =
+    new ObjectParser<>(IcuTransformTokenFilter.class.getName(), false, IcuTransformTokenFilter::new);
 
   static {
-    PARSER.declareObject(IcuTransformTokenFilter::setDir, (p, t) -> IcuTransformDirection.PARSER.apply(p), DIR);
+    PARSER.declareField(IcuTransformTokenFilter::setDir, (p, t) -> IcuTransformDirection.PARSER.apply(p), DIR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(IcuTransformTokenFilter::setId, ID);
   }
 

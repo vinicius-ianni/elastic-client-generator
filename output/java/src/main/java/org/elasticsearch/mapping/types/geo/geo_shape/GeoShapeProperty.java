@@ -70,14 +70,14 @@ public class GeoShapeProperty  implements XContentable<GeoShapeProperty> {
     return GeoShapeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoShapeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(GeoShapeProperty.class.getName(), false, args -> new GeoShapeProperty());
+  public static final ObjectParser<GeoShapeProperty, Void> PARSER =
+    new ObjectParser<>(GeoShapeProperty.class.getName(), false, GeoShapeProperty::new);
 
   static {
     PARSER.declareBoolean(GeoShapeProperty::setIgnoreMalformed, IGNORE_MALFORMED);
     PARSER.declareBoolean(GeoShapeProperty::setIgnoreZValue, IGNORE_Z_VALUE);
-    PARSER.declareObject(GeoShapeProperty::setOrientation, (p, t) -> GeoOrientation.PARSER.apply(p), ORIENTATION);
-    PARSER.declareObject(GeoShapeProperty::setStrategy, (p, t) -> GeoStrategy.PARSER.apply(p), STRATEGY);
+    PARSER.declareField(GeoShapeProperty::setOrientation, (p, t) -> GeoOrientation.PARSER.apply(p), ORIENTATION, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(GeoShapeProperty::setStrategy, (p, t) -> GeoStrategy.PARSER.apply(p), STRATEGY, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(GeoShapeProperty::setCoerce, COERCE);
   }
 

@@ -43,8 +43,8 @@ public class TokenFilterBase  implements XContentable<TokenFilterBase> {
     return TokenFilterBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TokenFilterBase, Void> PARSER =
-    new ConstructingObjectParser<>(TokenFilterBase.class.getName(), false, args -> new TokenFilterBase());
+  public static final ObjectParser<TokenFilterBase, Void> PARSER =
+    new ObjectParser<>(TokenFilterBase.class.getName(), false, TokenFilterBase::new);
 
   static {
     PARSER.declareString(TokenFilterBase::setType, TYPE);

@@ -114,8 +114,8 @@ public class DirectGenerator  implements XContentable<DirectGenerator> {
     return DirectGenerator.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DirectGenerator, Void> PARSER =
-    new ConstructingObjectParser<>(DirectGenerator.class.getName(), false, args -> new DirectGenerator());
+  public static final ObjectParser<DirectGenerator, Void> PARSER =
+    new ObjectParser<>(DirectGenerator.class.getName(), false, DirectGenerator::new);
 
   static {
     PARSER.declareObject(DirectGenerator::setField, (p, t) -> Field.createFrom(p), FIELD);
@@ -128,7 +128,7 @@ public class DirectGenerator  implements XContentable<DirectGenerator> {
     PARSER.declareString(DirectGenerator::setPreFilter, PRE_FILTER);
     PARSER.declareInt(DirectGenerator::setPrefixLength, PREFIX_LENGTH);
     PARSER.declareInt(DirectGenerator::setSize, SIZE);
-    PARSER.declareObject(DirectGenerator::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE);
+    PARSER.declareField(DirectGenerator::setSuggestMode, (p, t) -> SuggestMode.PARSER.apply(p), SUGGEST_MODE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

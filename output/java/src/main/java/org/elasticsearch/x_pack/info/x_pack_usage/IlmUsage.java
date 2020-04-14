@@ -46,8 +46,8 @@ public class IlmUsage  implements XContentable<IlmUsage> {
     return IlmUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IlmUsage, Void> PARSER =
-    new ConstructingObjectParser<>(IlmUsage.class.getName(), false, args -> new IlmUsage());
+  public static final ObjectParser<IlmUsage, Void> PARSER =
+    new ObjectParser<>(IlmUsage.class.getName(), false, IlmUsage::new);
 
   static {
     PARSER.declareInt(IlmUsage::setPolicyCount, POLICY_COUNT);

@@ -39,8 +39,8 @@ public class XPackUsageRequest  implements XContentable<XPackUsageRequest> {
     return XPackUsageRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackUsageRequest, Void> PARSER =
-    new ConstructingObjectParser<>(XPackUsageRequest.class.getName(), false, args -> new XPackUsageRequest());
+  public static final ObjectParser<XPackUsageRequest, Void> PARSER =
+    new ObjectParser<>(XPackUsageRequest.class.getName(), false, XPackUsageRequest::new);
 
   static {
     PARSER.declareObject(XPackUsageRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

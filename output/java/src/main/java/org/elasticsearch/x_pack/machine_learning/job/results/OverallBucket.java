@@ -75,8 +75,8 @@ public class OverallBucket  implements XContentable<OverallBucket> {
     return OverallBucket.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<OverallBucket, Void> PARSER =
-    new ConstructingObjectParser<>(OverallBucket.class.getName(), false, args -> new OverallBucket());
+  public static final ObjectParser<OverallBucket, Void> PARSER =
+    new ObjectParser<>(OverallBucket.class.getName(), false, OverallBucket::new);
 
   static {
     PARSER.declareLong(OverallBucket::setBucketSpan, BUCKET_SPAN);

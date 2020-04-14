@@ -76,8 +76,8 @@ public class TermVectors  implements XContentable<TermVectors> {
     return TermVectors.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermVectors, Void> PARSER =
-    new ConstructingObjectParser<>(TermVectors.class.getName(), false, args -> new TermVectors());
+  public static final ObjectParser<TermVectors, Void> PARSER =
+    new ObjectParser<>(TermVectors.class.getName(), false, TermVectors::new);
 
   static {
     PARSER.declareBoolean(TermVectors::setFound, FOUND);

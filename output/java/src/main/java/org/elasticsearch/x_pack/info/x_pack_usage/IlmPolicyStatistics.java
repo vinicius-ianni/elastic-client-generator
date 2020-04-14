@@ -47,8 +47,8 @@ public class IlmPolicyStatistics  implements XContentable<IlmPolicyStatistics> {
     return IlmPolicyStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IlmPolicyStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(IlmPolicyStatistics.class.getName(), false, args -> new IlmPolicyStatistics());
+  public static final ObjectParser<IlmPolicyStatistics, Void> PARSER =
+    new ObjectParser<>(IlmPolicyStatistics.class.getName(), false, IlmPolicyStatistics::new);
 
   static {
     PARSER.declareObject(IlmPolicyStatistics::setPhases, (p, t) -> Phases.PARSER.apply(p, t), PHASES);

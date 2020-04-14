@@ -31,8 +31,8 @@ public class CumulativeCardinalityAggregation  implements XContentable<Cumulativ
     return CumulativeCardinalityAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CumulativeCardinalityAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(CumulativeCardinalityAggregation.class.getName(), false, args -> new CumulativeCardinalityAggregation());
+  public static final ObjectParser<CumulativeCardinalityAggregation, Void> PARSER =
+    new ObjectParser<>(CumulativeCardinalityAggregation.class.getName(), false, CumulativeCardinalityAggregation::new);
 
   static {
     

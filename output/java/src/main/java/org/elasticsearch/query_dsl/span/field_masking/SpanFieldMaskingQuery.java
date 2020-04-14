@@ -50,8 +50,8 @@ public class SpanFieldMaskingQuery  implements XContentable<SpanFieldMaskingQuer
     return SpanFieldMaskingQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanFieldMaskingQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanFieldMaskingQuery.class.getName(), false, args -> new SpanFieldMaskingQuery());
+  public static final ObjectParser<SpanFieldMaskingQuery, Void> PARSER =
+    new ObjectParser<>(SpanFieldMaskingQuery.class.getName(), false, SpanFieldMaskingQuery::new);
 
   static {
     PARSER.declareObject(SpanFieldMaskingQuery::setField, (p, t) -> Field.createFrom(p), FIELD);

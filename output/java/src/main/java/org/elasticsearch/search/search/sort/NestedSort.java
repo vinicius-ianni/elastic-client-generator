@@ -61,8 +61,8 @@ public class NestedSort  implements XContentable<NestedSort> {
     return NestedSort.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NestedSort, Void> PARSER =
-    new ConstructingObjectParser<>(NestedSort.class.getName(), false, args -> new NestedSort());
+  public static final ObjectParser<NestedSort, Void> PARSER =
+    new ObjectParser<>(NestedSort.class.getName(), false, NestedSort::new);
 
   static {
     PARSER.declareObject(NestedSort::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);

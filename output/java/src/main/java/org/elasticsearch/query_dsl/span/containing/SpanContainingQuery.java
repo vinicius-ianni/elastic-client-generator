@@ -49,8 +49,8 @@ public class SpanContainingQuery  implements XContentable<SpanContainingQuery> {
     return SpanContainingQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanContainingQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanContainingQuery.class.getName(), false, args -> new SpanContainingQuery());
+  public static final ObjectParser<SpanContainingQuery, Void> PARSER =
+    new ObjectParser<>(SpanContainingQuery.class.getName(), false, SpanContainingQuery::new);
 
   static {
     PARSER.declareObject(SpanContainingQuery::setBig, (p, t) -> SpanQuery.PARSER.apply(p, t), BIG);

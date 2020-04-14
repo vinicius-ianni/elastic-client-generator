@@ -100,8 +100,8 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
     return IndexHealthStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexHealthStats, Void> PARSER =
-    new ConstructingObjectParser<>(IndexHealthStats.class.getName(), false, args -> new IndexHealthStats());
+  public static final ObjectParser<IndexHealthStats, Void> PARSER =
+    new ObjectParser<>(IndexHealthStats.class.getName(), false, IndexHealthStats::new);
 
   static {
     PARSER.declareInt(IndexHealthStats::setActivePrimaryShards, ACTIVE_PRIMARY_SHARDS);
@@ -111,7 +111,7 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
     PARSER.declareInt(IndexHealthStats::setNumberOfShards, NUMBER_OF_SHARDS);
     PARSER.declareInt(IndexHealthStats::setRelocatingShards, RELOCATING_SHARDS);
     PARSER.declareObject(IndexHealthStats::setShards, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ShardHealthStats.PARSER.apply(pp, null)), SHARDS);
-    PARSER.declareObject(IndexHealthStats::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS);
+    PARSER.declareField(IndexHealthStats::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(IndexHealthStats::setUnassignedShards, UNASSIGNED_SHARDS);
   }
 

@@ -31,8 +31,8 @@ public class StopIlmResponse  implements XContentable<StopIlmResponse> {
     return StopIlmResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StopIlmResponse, Void> PARSER =
-    new ConstructingObjectParser<>(StopIlmResponse.class.getName(), false, args -> new StopIlmResponse());
+  public static final ObjectParser<StopIlmResponse, Void> PARSER =
+    new ObjectParser<>(StopIlmResponse.class.getName(), false, StopIlmResponse::new);
 
   static {
     

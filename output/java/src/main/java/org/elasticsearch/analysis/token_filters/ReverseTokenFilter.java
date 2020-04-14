@@ -31,8 +31,8 @@ public class ReverseTokenFilter  implements XContentable<ReverseTokenFilter> {
     return ReverseTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReverseTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(ReverseTokenFilter.class.getName(), false, args -> new ReverseTokenFilter());
+  public static final ObjectParser<ReverseTokenFilter, Void> PARSER =
+    new ObjectParser<>(ReverseTokenFilter.class.getName(), false, ReverseTokenFilter::new);
 
   static {
     

@@ -58,8 +58,8 @@ public class ObjectProperty  implements XContentable<ObjectProperty> {
     return ObjectProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ObjectProperty, Void> PARSER =
-    new ConstructingObjectParser<>(ObjectProperty.class.getName(), false, args -> new ObjectProperty());
+  public static final ObjectParser<ObjectProperty, Void> PARSER =
+    new ObjectParser<>(ObjectProperty.class.getName(), false, ObjectProperty::new);
 
   static {
     PARSER.declareObject(ObjectProperty::setDynamic, (p, t) ->  new Either<Boolean, DynamicMapping>() /* TODO UnionOf */, DYNAMIC);

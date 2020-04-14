@@ -38,8 +38,8 @@ public class PostCalendarEventsRequest  implements XContentable<PostCalendarEven
     return PostCalendarEventsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PostCalendarEventsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PostCalendarEventsRequest.class.getName(), false, args -> new PostCalendarEventsRequest());
+  public static final ObjectParser<PostCalendarEventsRequest, Void> PARSER =
+    new ObjectParser<>(PostCalendarEventsRequest.class.getName(), false, PostCalendarEventsRequest::new);
 
   static {
     PARSER.declareObjectArray(PostCalendarEventsRequest::setEvents, (p, t) -> ScheduledEvent.PARSER.apply(p, t), EVENTS);

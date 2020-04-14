@@ -78,8 +78,8 @@ public class QueryCacheStats  implements XContentable<QueryCacheStats> {
     return QueryCacheStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QueryCacheStats, Void> PARSER =
-    new ConstructingObjectParser<>(QueryCacheStats.class.getName(), false, args -> new QueryCacheStats());
+  public static final ObjectParser<QueryCacheStats, Void> PARSER =
+    new ObjectParser<>(QueryCacheStats.class.getName(), false, QueryCacheStats::new);
 
   static {
     PARSER.declareLong(QueryCacheStats::setCacheCount, CACHE_COUNT);

@@ -101,8 +101,8 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
     return NodesStatsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodesStatsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(NodesStatsRequest.class.getName(), false, args -> new NodesStatsRequest());
+  public static final ObjectParser<NodesStatsRequest, Void> PARSER =
+    new ObjectParser<>(NodesStatsRequest.class.getName(), false, NodesStatsRequest::new);
 
   static {
     PARSER.declareObjectArray(NodesStatsRequest::setCompletionFields, (p, t) -> Field.createFrom(p), COMPLETION_FIELDS);
@@ -110,7 +110,7 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
     PARSER.declareObjectArray(NodesStatsRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(NodesStatsRequest::setGroups, GROUPS);
     PARSER.declareBoolean(NodesStatsRequest::setIncludeSegmentFileSizes, INCLUDE_SEGMENT_FILE_SIZES);
-    PARSER.declareObject(NodesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL);
+    PARSER.declareField(NodesStatsRequest::setLevel, (p, t) -> Level.PARSER.apply(p), LEVEL, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(NodesStatsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareStringArray(NodesStatsRequest::setTypes, TYPES);
   }

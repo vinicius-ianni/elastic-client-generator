@@ -57,8 +57,8 @@ public class RecoveryOrigin  implements XContentable<RecoveryOrigin> {
     return RecoveryOrigin.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryOrigin, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryOrigin.class.getName(), false, args -> new RecoveryOrigin());
+  public static final ObjectParser<RecoveryOrigin, Void> PARSER =
+    new ObjectParser<>(RecoveryOrigin.class.getName(), false, RecoveryOrigin::new);
 
   static {
     PARSER.declareString(RecoveryOrigin::setHostname, HOSTNAME);

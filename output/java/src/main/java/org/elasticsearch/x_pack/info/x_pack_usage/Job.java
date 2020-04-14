@@ -153,8 +153,8 @@ public class Job  implements XContentable<Job> {
     return Job.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Job, Void> PARSER =
-    new ConstructingObjectParser<>(Job.class.getName(), false, args -> new Job());
+  public static final ObjectParser<Job, Void> PARSER =
+    new ObjectParser<>(Job.class.getName(), false, Job::new);
 
   static {
     PARSER.declareObject(Job::setAnalysisConfig, (p, t) -> AnalysisConfig.PARSER.apply(p, t), ANALYSIS_CONFIG);

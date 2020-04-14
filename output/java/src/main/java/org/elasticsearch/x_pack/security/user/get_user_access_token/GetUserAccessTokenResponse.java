@@ -57,8 +57,8 @@ public class GetUserAccessTokenResponse  implements XContentable<GetUserAccessTo
     return GetUserAccessTokenResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetUserAccessTokenResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetUserAccessTokenResponse.class.getName(), false, args -> new GetUserAccessTokenResponse());
+  public static final ObjectParser<GetUserAccessTokenResponse, Void> PARSER =
+    new ObjectParser<>(GetUserAccessTokenResponse.class.getName(), false, GetUserAccessTokenResponse::new);
 
   static {
     PARSER.declareString(GetUserAccessTokenResponse::setAccessToken, ACCESS_TOKEN);

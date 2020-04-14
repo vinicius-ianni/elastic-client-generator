@@ -73,14 +73,14 @@ public class DatafeedStats  implements XContentable<DatafeedStats> {
     return DatafeedStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DatafeedStats, Void> PARSER =
-    new ConstructingObjectParser<>(DatafeedStats.class.getName(), false, args -> new DatafeedStats());
+  public static final ObjectParser<DatafeedStats, Void> PARSER =
+    new ObjectParser<>(DatafeedStats.class.getName(), false, DatafeedStats::new);
 
   static {
     PARSER.declareString(DatafeedStats::setAssignmentExplanation, ASSIGNMENT_EXPLANATION);
     PARSER.declareString(DatafeedStats::setDatafeedId, DATAFEED_ID);
     PARSER.declareObject(DatafeedStats::setNode, (p, t) -> DiscoveryNode.PARSER.apply(p, t), NODE);
-    PARSER.declareObject(DatafeedStats::setState, (p, t) -> DatafeedState.PARSER.apply(p), STATE);
+    PARSER.declareField(DatafeedStats::setState, (p, t) -> DatafeedState.PARSER.apply(p), STATE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(DatafeedStats::setTimingStats, (p, t) -> DatafeedTimingStats.PARSER.apply(p, t), TIMING_STATS);
   }
 

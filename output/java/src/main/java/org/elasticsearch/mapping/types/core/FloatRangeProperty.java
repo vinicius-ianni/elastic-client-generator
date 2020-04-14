@@ -31,8 +31,8 @@ public class FloatRangeProperty  implements XContentable<FloatRangeProperty> {
     return FloatRangeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FloatRangeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(FloatRangeProperty.class.getName(), false, args -> new FloatRangeProperty());
+  public static final ObjectParser<FloatRangeProperty, Void> PARSER =
+    new ObjectParser<>(FloatRangeProperty.class.getName(), false, FloatRangeProperty::new);
 
   static {
     

@@ -68,11 +68,11 @@ public class CreateApiKeyRequest  implements XContentable<CreateApiKeyRequest> {
     return CreateApiKeyRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateApiKeyRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CreateApiKeyRequest.class.getName(), false, args -> new CreateApiKeyRequest());
+  public static final ObjectParser<CreateApiKeyRequest, Void> PARSER =
+    new ObjectParser<>(CreateApiKeyRequest.class.getName(), false, CreateApiKeyRequest::new);
 
   static {
-    PARSER.declareObject(CreateApiKeyRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(CreateApiKeyRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(CreateApiKeyRequest::setExpiration, (p, t) -> Time.PARSER.apply(p, t), EXPIRATION);
     PARSER.declareString(CreateApiKeyRequest::setName, NAME);
     PARSER.declareObject(CreateApiKeyRequest::setRoleDescriptors, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ApiKeyRole.PARSER.apply(pp, null)), ROLE_DESCRIPTORS);

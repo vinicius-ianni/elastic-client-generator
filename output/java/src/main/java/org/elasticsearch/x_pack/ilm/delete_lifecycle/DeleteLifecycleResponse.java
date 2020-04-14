@@ -31,8 +31,8 @@ public class DeleteLifecycleResponse  implements XContentable<DeleteLifecycleRes
     return DeleteLifecycleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteLifecycleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteLifecycleResponse.class.getName(), false, args -> new DeleteLifecycleResponse());
+  public static final ObjectParser<DeleteLifecycleResponse, Void> PARSER =
+    new ObjectParser<>(DeleteLifecycleResponse.class.getName(), false, DeleteLifecycleResponse::new);
 
   static {
     

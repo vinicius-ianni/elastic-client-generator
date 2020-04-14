@@ -86,11 +86,11 @@ public class PutUserRequest  implements XContentable<PutUserRequest> {
     return PutUserRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutUserRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutUserRequest.class.getName(), false, args -> new PutUserRequest());
+  public static final ObjectParser<PutUserRequest, Void> PARSER =
+    new ObjectParser<>(PutUserRequest.class.getName(), false, PutUserRequest::new);
 
   static {
-    PARSER.declareObject(PutUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(PutUserRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(PutUserRequest::setEmail, EMAIL);
     PARSER.declareString(PutUserRequest::setFullName, FULL_NAME);
     PARSER.declareObject(PutUserRequest::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);

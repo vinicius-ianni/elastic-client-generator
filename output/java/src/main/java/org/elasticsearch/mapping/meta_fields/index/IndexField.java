@@ -36,8 +36,8 @@ public class IndexField  implements XContentable<IndexField> {
     return IndexField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexField, Void> PARSER =
-    new ConstructingObjectParser<>(IndexField.class.getName(), false, args -> new IndexField());
+  public static final ObjectParser<IndexField, Void> PARSER =
+    new ObjectParser<>(IndexField.class.getName(), false, IndexField::new);
 
   static {
     PARSER.declareBoolean(IndexField::setEnabled, ENABLED);

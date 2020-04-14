@@ -39,8 +39,8 @@ public class ReloadSecureSettingsRequest  implements XContentable<ReloadSecureSe
     return ReloadSecureSettingsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReloadSecureSettingsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ReloadSecureSettingsRequest.class.getName(), false, args -> new ReloadSecureSettingsRequest());
+  public static final ObjectParser<ReloadSecureSettingsRequest, Void> PARSER =
+    new ObjectParser<>(ReloadSecureSettingsRequest.class.getName(), false, ReloadSecureSettingsRequest::new);
 
   static {
     PARSER.declareObject(ReloadSecureSettingsRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

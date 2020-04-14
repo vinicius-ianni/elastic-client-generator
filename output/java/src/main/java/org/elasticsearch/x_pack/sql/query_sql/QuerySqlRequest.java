@@ -82,8 +82,8 @@ public class QuerySqlRequest  implements XContentable<QuerySqlRequest> {
     return QuerySqlRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QuerySqlRequest, Void> PARSER =
-    new ConstructingObjectParser<>(QuerySqlRequest.class.getName(), false, args -> new QuerySqlRequest());
+  public static final ObjectParser<QuerySqlRequest, Void> PARSER =
+    new ObjectParser<>(QuerySqlRequest.class.getName(), false, QuerySqlRequest::new);
 
   static {
     PARSER.declareString(QuerySqlRequest::setFormat, FORMAT);

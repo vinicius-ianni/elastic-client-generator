@@ -45,8 +45,8 @@ public class StemmerOverrideTokenFilter  implements XContentable<StemmerOverride
     return StemmerOverrideTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StemmerOverrideTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(StemmerOverrideTokenFilter.class.getName(), false, args -> new StemmerOverrideTokenFilter());
+  public static final ObjectParser<StemmerOverrideTokenFilter, Void> PARSER =
+    new ObjectParser<>(StemmerOverrideTokenFilter.class.getName(), false, StemmerOverrideTokenFilter::new);
 
   static {
     PARSER.declareStringArray(StemmerOverrideTokenFilter::setRules, RULES);

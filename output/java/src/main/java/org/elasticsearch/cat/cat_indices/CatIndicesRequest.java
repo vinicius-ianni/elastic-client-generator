@@ -120,14 +120,14 @@ public class CatIndicesRequest  implements XContentable<CatIndicesRequest> {
     return CatIndicesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatIndicesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatIndicesRequest.class.getName(), false, args -> new CatIndicesRequest());
+  public static final ObjectParser<CatIndicesRequest, Void> PARSER =
+    new ObjectParser<>(CatIndicesRequest.class.getName(), false, CatIndicesRequest::new);
 
   static {
-    PARSER.declareObject(CatIndicesRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES);
+    PARSER.declareField(CatIndicesRequest::setBytes, (p, t) -> Bytes.PARSER.apply(p), BYTES, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(CatIndicesRequest::setFormat, FORMAT);
     PARSER.declareStringArray(CatIndicesRequest::setHeaders, HEADERS);
-    PARSER.declareObject(CatIndicesRequest::setHealth, (p, t) -> Health.PARSER.apply(p), HEALTH);
+    PARSER.declareField(CatIndicesRequest::setHealth, (p, t) -> Health.PARSER.apply(p), HEALTH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(CatIndicesRequest::setHelp, HELP);
     PARSER.declareBoolean(CatIndicesRequest::setIncludeUnloadedSegments, INCLUDE_UNLOADED_SEGMENTS);
     PARSER.declareBoolean(CatIndicesRequest::setLocal, LOCAL);

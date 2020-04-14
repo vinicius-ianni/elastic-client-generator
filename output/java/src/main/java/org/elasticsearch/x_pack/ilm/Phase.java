@@ -50,8 +50,8 @@ public class Phase  implements XContentable<Phase> {
     return Phase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Phase, Void> PARSER =
-    new ConstructingObjectParser<>(Phase.class.getName(), false, args -> new Phase());
+  public static final ObjectParser<Phase, Void> PARSER =
+    new ObjectParser<>(Phase.class.getName(), false, Phase::new);
 
   static {
     PARSER.declareObject(Phase::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LifecycleAction.PARSER.apply(pp, null)), ACTIONS);

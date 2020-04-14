@@ -58,8 +58,8 @@ public class MetricAggregation  implements XContentable<MetricAggregation> {
     return MetricAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MetricAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MetricAggregation.class.getName(), false, args -> new MetricAggregation());
+  public static final ObjectParser<MetricAggregation, Void> PARSER =
+    new ObjectParser<>(MetricAggregation.class.getName(), false, MetricAggregation::new);
 
   static {
     PARSER.declareObject(MetricAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);

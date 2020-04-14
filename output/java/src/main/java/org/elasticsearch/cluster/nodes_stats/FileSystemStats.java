@@ -56,8 +56,8 @@ public class FileSystemStats  implements XContentable<FileSystemStats> {
     return FileSystemStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FileSystemStats, Void> PARSER =
-    new ConstructingObjectParser<>(FileSystemStats.class.getName(), false, args -> new FileSystemStats());
+  public static final ObjectParser<FileSystemStats, Void> PARSER =
+    new ObjectParser<>(FileSystemStats.class.getName(), false, FileSystemStats::new);
 
   static {
     PARSER.declareObjectArray(FileSystemStats::setData, (p, t) -> DataPathStats.PARSER.apply(p, t), DATA);

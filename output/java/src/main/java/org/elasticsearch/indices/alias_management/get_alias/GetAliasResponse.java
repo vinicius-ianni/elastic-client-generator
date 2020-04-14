@@ -48,8 +48,8 @@ public class GetAliasResponse extends DictionaryResponseBase<IndexName, IndexAli
     return GetAliasResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetAliasResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetAliasResponse.class.getName(), false, args -> new GetAliasResponse());
+  public static final ObjectParser<GetAliasResponse, Void> PARSER =
+    new ObjectParser<>(GetAliasResponse.class.getName(), false, GetAliasResponse::new);
 
   static {
     PARSER.declareObject(GetAliasResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> IndexAliases.PARSER.apply(pp, null)), INDICES);

@@ -50,8 +50,8 @@ public class CatMasterRecord  implements XContentable<CatMasterRecord> {
     return CatMasterRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatMasterRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatMasterRecord.class.getName(), false, args -> new CatMasterRecord());
+  public static final ObjectParser<CatMasterRecord, Void> PARSER =
+    new ObjectParser<>(CatMasterRecord.class.getName(), false, CatMasterRecord::new);
 
   static {
     PARSER.declareString(CatMasterRecord::setId, ID);

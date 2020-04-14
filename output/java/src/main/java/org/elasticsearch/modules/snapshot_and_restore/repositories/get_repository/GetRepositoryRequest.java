@@ -46,8 +46,8 @@ public class GetRepositoryRequest  implements XContentable<GetRepositoryRequest>
     return GetRepositoryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRepositoryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetRepositoryRequest.class.getName(), false, args -> new GetRepositoryRequest());
+  public static final ObjectParser<GetRepositoryRequest, Void> PARSER =
+    new ObjectParser<>(GetRepositoryRequest.class.getName(), false, GetRepositoryRequest::new);
 
   static {
     PARSER.declareBoolean(GetRepositoryRequest::setLocal, LOCAL);

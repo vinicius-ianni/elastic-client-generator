@@ -85,8 +85,8 @@ public class DocumentSimulation  implements XContentable<DocumentSimulation> {
     return DocumentSimulation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DocumentSimulation, Void> PARSER =
-    new ConstructingObjectParser<>(DocumentSimulation.class.getName(), false, args -> new DocumentSimulation());
+  public static final ObjectParser<DocumentSimulation, Void> PARSER =
+    new ObjectParser<>(DocumentSimulation.class.getName(), false, DocumentSimulation::new);
 
   static {
     PARSER.declareString(DocumentSimulation::setId, ID);

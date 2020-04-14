@@ -105,8 +105,8 @@ public class SourceRequest  implements XContentable<SourceRequest> {
     return SourceRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SourceRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SourceRequest.class.getName(), false, args -> new SourceRequest());
+  public static final ObjectParser<SourceRequest, Void> PARSER =
+    new ObjectParser<>(SourceRequest.class.getName(), false, SourceRequest::new);
 
   static {
     PARSER.declareString(SourceRequest::setPreference, PREFERENCE);
@@ -117,7 +117,7 @@ public class SourceRequest  implements XContentable<SourceRequest> {
     PARSER.declareObjectArray(SourceRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);
     PARSER.declareObjectArray(SourceRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
     PARSER.declareLong(SourceRequest::setVersion, VERSION);
-    PARSER.declareObject(SourceRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(SourceRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

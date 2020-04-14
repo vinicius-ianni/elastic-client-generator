@@ -85,11 +85,11 @@ public class PutRoleMappingRequest  implements XContentable<PutRoleMappingReques
     return PutRoleMappingRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutRoleMappingRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutRoleMappingRequest.class.getName(), false, args -> new PutRoleMappingRequest());
+  public static final ObjectParser<PutRoleMappingRequest, Void> PARSER =
+    new ObjectParser<>(PutRoleMappingRequest.class.getName(), false, PutRoleMappingRequest::new);
 
   static {
-    PARSER.declareObject(PutRoleMappingRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(PutRoleMappingRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(PutRoleMappingRequest::setEnabled, ENABLED);
     PARSER.declareObject(PutRoleMappingRequest::setMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), METADATA);
     PARSER.declareStringArray(PutRoleMappingRequest::setRoles, ROLES);

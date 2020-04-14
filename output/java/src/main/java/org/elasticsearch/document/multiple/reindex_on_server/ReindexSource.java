@@ -100,8 +100,8 @@ public class ReindexSource  implements XContentable<ReindexSource> {
     return ReindexSource.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ReindexSource, Void> PARSER =
-    new ConstructingObjectParser<>(ReindexSource.class.getName(), false, args -> new ReindexSource());
+  public static final ObjectParser<ReindexSource, Void> PARSER =
+    new ObjectParser<>(ReindexSource.class.getName(), false, ReindexSource::new);
 
   static {
     PARSER.declareObject(ReindexSource::setIndex, (p, t) -> Indices.createFrom(p), INDEX);

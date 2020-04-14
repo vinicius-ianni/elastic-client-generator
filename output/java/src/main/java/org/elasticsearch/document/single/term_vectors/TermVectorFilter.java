@@ -78,8 +78,8 @@ public class TermVectorFilter  implements XContentable<TermVectorFilter> {
     return TermVectorFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermVectorFilter, Void> PARSER =
-    new ConstructingObjectParser<>(TermVectorFilter.class.getName(), false, args -> new TermVectorFilter());
+  public static final ObjectParser<TermVectorFilter, Void> PARSER =
+    new ObjectParser<>(TermVectorFilter.class.getName(), false, TermVectorFilter::new);
 
   static {
     PARSER.declareInt(TermVectorFilter::setMaxDocFreq, MAX_DOC_FREQ);

@@ -116,8 +116,8 @@ public class Bucket  implements XContentable<Bucket> {
     return Bucket.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Bucket, Void> PARSER =
-    new ConstructingObjectParser<>(Bucket.class.getName(), false, args -> new Bucket());
+  public static final ObjectParser<Bucket, Void> PARSER =
+    new ObjectParser<>(Bucket.class.getName(), false, Bucket::new);
 
   static {
     PARSER.declareDouble(Bucket::setAnomalyScore, ANOMALY_SCORE);

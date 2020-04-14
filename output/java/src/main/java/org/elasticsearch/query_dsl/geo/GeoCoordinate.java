@@ -36,8 +36,8 @@ public class GeoCoordinate  implements XContentable<GeoCoordinate> {
     return GeoCoordinate.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoCoordinate, Void> PARSER =
-    new ConstructingObjectParser<>(GeoCoordinate.class.getName(), false, args -> new GeoCoordinate());
+  public static final ObjectParser<GeoCoordinate, Void> PARSER =
+    new ObjectParser<>(GeoCoordinate.class.getName(), false, GeoCoordinate::new);
 
   static {
     PARSER.declareDouble(GeoCoordinate::setZ, Z);

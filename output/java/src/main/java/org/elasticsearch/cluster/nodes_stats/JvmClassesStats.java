@@ -50,8 +50,8 @@ public class JvmClassesStats  implements XContentable<JvmClassesStats> {
     return JvmClassesStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<JvmClassesStats, Void> PARSER =
-    new ConstructingObjectParser<>(JvmClassesStats.class.getName(), false, args -> new JvmClassesStats());
+  public static final ObjectParser<JvmClassesStats, Void> PARSER =
+    new ObjectParser<>(JvmClassesStats.class.getName(), false, JvmClassesStats::new);
 
   static {
     PARSER.declareLong(JvmClassesStats::setCurrentLoadedCount, CURRENT_LOADED_COUNT);

@@ -84,8 +84,8 @@ public class BoolQuery  implements XContentable<BoolQuery> {
     return BoolQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BoolQuery, Void> PARSER =
-    new ConstructingObjectParser<>(BoolQuery.class.getName(), false, args -> new BoolQuery());
+  public static final ObjectParser<BoolQuery, Void> PARSER =
+    new ObjectParser<>(BoolQuery.class.getName(), false, BoolQuery::new);
 
   static {
     PARSER.declareObjectArray(BoolQuery::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);

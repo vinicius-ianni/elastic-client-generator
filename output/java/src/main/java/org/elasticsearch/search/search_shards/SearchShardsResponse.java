@@ -48,8 +48,8 @@ public class SearchShardsResponse  implements XContentable<SearchShardsResponse>
     return SearchShardsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SearchShardsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(SearchShardsResponse.class.getName(), false, args -> new SearchShardsResponse());
+  public static final ObjectParser<SearchShardsResponse, Void> PARSER =
+    new ObjectParser<>(SearchShardsResponse.class.getName(), false, SearchShardsResponse::new);
 
   static {
     PARSER.declareObject(SearchShardsResponse::setNodes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> SearchNode.PARSER.apply(pp, null)), NODES);

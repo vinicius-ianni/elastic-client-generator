@@ -31,8 +31,8 @@ public class ValidateDetectorResponse  implements XContentable<ValidateDetectorR
     return ValidateDetectorResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ValidateDetectorResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ValidateDetectorResponse.class.getName(), false, args -> new ValidateDetectorResponse());
+  public static final ObjectParser<ValidateDetectorResponse, Void> PARSER =
+    new ObjectParser<>(ValidateDetectorResponse.class.getName(), false, ValidateDetectorResponse::new);
 
   static {
     

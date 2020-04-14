@@ -77,8 +77,8 @@ public class RemoteInfo  implements XContentable<RemoteInfo> {
     return RemoteInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RemoteInfo, Void> PARSER =
-    new ConstructingObjectParser<>(RemoteInfo.class.getName(), false, args -> new RemoteInfo());
+  public static final ObjectParser<RemoteInfo, Void> PARSER =
+    new ObjectParser<>(RemoteInfo.class.getName(), false, RemoteInfo::new);
 
   static {
     PARSER.declareBoolean(RemoteInfo::setConnected, CONNECTED);

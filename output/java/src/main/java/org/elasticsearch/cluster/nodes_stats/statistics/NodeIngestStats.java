@@ -49,8 +49,8 @@ public class NodeIngestStats  implements XContentable<NodeIngestStats> {
     return NodeIngestStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeIngestStats, Void> PARSER =
-    new ConstructingObjectParser<>(NodeIngestStats.class.getName(), false, args -> new NodeIngestStats());
+  public static final ObjectParser<NodeIngestStats, Void> PARSER =
+    new ObjectParser<>(NodeIngestStats.class.getName(), false, NodeIngestStats::new);
 
   static {
     PARSER.declareObject(NodeIngestStats::setPipelines, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> IngestStats.PARSER.apply(pp, null)), PIPELINES);

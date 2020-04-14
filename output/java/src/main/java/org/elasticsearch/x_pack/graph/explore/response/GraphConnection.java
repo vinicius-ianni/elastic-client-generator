@@ -57,8 +57,8 @@ public class GraphConnection  implements XContentable<GraphConnection> {
     return GraphConnection.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GraphConnection, Void> PARSER =
-    new ConstructingObjectParser<>(GraphConnection.class.getName(), false, args -> new GraphConnection());
+  public static final ObjectParser<GraphConnection, Void> PARSER =
+    new ObjectParser<>(GraphConnection.class.getName(), false, GraphConnection::new);
 
   static {
     PARSER.declareLong(GraphConnection::setDocCount, DOC_COUNT);

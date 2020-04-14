@@ -91,8 +91,8 @@ public class GraphExploreRequest  implements XContentable<GraphExploreRequest> {
     return GraphExploreRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GraphExploreRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GraphExploreRequest.class.getName(), false, args -> new GraphExploreRequest());
+  public static final ObjectParser<GraphExploreRequest, Void> PARSER =
+    new ObjectParser<>(GraphExploreRequest.class.getName(), false, GraphExploreRequest::new);
 
   static {
     PARSER.declareObject(GraphExploreRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);

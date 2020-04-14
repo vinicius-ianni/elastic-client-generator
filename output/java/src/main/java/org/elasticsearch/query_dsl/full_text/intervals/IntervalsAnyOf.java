@@ -38,8 +38,8 @@ public class IntervalsAnyOf  implements XContentable<IntervalsAnyOf> {
     return IntervalsAnyOf.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IntervalsAnyOf, Void> PARSER =
-    new ConstructingObjectParser<>(IntervalsAnyOf.class.getName(), false, args -> new IntervalsAnyOf());
+  public static final ObjectParser<IntervalsAnyOf, Void> PARSER =
+    new ObjectParser<>(IntervalsAnyOf.class.getName(), false, IntervalsAnyOf::new);
 
   static {
     PARSER.declareObjectArray(IntervalsAnyOf::setIntervals, (p, t) -> IntervalsContainer.PARSER.apply(p, t), INTERVALS);

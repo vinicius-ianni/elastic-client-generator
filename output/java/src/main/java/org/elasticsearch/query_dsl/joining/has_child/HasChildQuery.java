@@ -94,8 +94,8 @@ public class HasChildQuery  implements XContentable<HasChildQuery> {
     return HasChildQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HasChildQuery, Void> PARSER =
-    new ConstructingObjectParser<>(HasChildQuery.class.getName(), false, args -> new HasChildQuery());
+  public static final ObjectParser<HasChildQuery, Void> PARSER =
+    new ObjectParser<>(HasChildQuery.class.getName(), false, HasChildQuery::new);
 
   static {
     PARSER.declareBoolean(HasChildQuery::setIgnoreUnmapped, IGNORE_UNMAPPED);
@@ -103,7 +103,7 @@ public class HasChildQuery  implements XContentable<HasChildQuery> {
     PARSER.declareInt(HasChildQuery::setMaxChildren, MAX_CHILDREN);
     PARSER.declareInt(HasChildQuery::setMinChildren, MIN_CHILDREN);
     PARSER.declareObject(HasChildQuery::setQuery, (p, t) -> QueryContainer.PARSER.apply(p, t), QUERY);
-    PARSER.declareObject(HasChildQuery::setScoreMode, (p, t) -> ChildScoreMode.PARSER.apply(p), SCORE_MODE);
+    PARSER.declareField(HasChildQuery::setScoreMode, (p, t) -> ChildScoreMode.PARSER.apply(p), SCORE_MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(HasChildQuery::setType, (p, t) -> RelationName.createFrom(p), TYPE);
   }
 

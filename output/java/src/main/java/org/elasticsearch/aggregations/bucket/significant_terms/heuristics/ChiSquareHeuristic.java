@@ -43,8 +43,8 @@ public class ChiSquareHeuristic  implements XContentable<ChiSquareHeuristic> {
     return ChiSquareHeuristic.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ChiSquareHeuristic, Void> PARSER =
-    new ConstructingObjectParser<>(ChiSquareHeuristic.class.getName(), false, args -> new ChiSquareHeuristic());
+  public static final ObjectParser<ChiSquareHeuristic, Void> PARSER =
+    new ObjectParser<>(ChiSquareHeuristic.class.getName(), false, ChiSquareHeuristic::new);
 
   static {
     PARSER.declareBoolean(ChiSquareHeuristic::setBackgroundIsSuperset, BACKGROUND_IS_SUPERSET);

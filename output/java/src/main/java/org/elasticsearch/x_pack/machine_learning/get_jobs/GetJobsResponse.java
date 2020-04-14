@@ -46,8 +46,8 @@ public class GetJobsResponse  implements XContentable<GetJobsResponse> {
     return GetJobsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetJobsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetJobsResponse.class.getName(), false, args -> new GetJobsResponse());
+  public static final ObjectParser<GetJobsResponse, Void> PARSER =
+    new ObjectParser<>(GetJobsResponse.class.getName(), false, GetJobsResponse::new);
 
   static {
     PARSER.declareLong(GetJobsResponse::setCount, COUNT);

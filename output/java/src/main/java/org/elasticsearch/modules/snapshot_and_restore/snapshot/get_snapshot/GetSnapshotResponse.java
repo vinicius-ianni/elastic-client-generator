@@ -38,8 +38,8 @@ public class GetSnapshotResponse  implements XContentable<GetSnapshotResponse> {
     return GetSnapshotResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetSnapshotResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetSnapshotResponse.class.getName(), false, args -> new GetSnapshotResponse());
+  public static final ObjectParser<GetSnapshotResponse, Void> PARSER =
+    new ObjectParser<>(GetSnapshotResponse.class.getName(), false, GetSnapshotResponse::new);
 
   static {
     PARSER.declareObjectArray(GetSnapshotResponse::setSnapshots, (p, t) -> Snapshot.PARSER.apply(p, t), SNAPSHOTS);

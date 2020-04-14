@@ -50,12 +50,12 @@ public class FilterRef  implements XContentable<FilterRef> {
     return FilterRef.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FilterRef, Void> PARSER =
-    new ConstructingObjectParser<>(FilterRef.class.getName(), false, args -> new FilterRef());
+  public static final ObjectParser<FilterRef, Void> PARSER =
+    new ObjectParser<>(FilterRef.class.getName(), false, FilterRef::new);
 
   static {
     PARSER.declareObject(FilterRef::setFilterId, (p, t) -> Id.createFrom(p), FILTER_ID);
-    PARSER.declareObject(FilterRef::setFilterType, (p, t) -> RuleFilterType.PARSER.apply(p), FILTER_TYPE);
+    PARSER.declareField(FilterRef::setFilterType, (p, t) -> RuleFilterType.PARSER.apply(p), FILTER_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

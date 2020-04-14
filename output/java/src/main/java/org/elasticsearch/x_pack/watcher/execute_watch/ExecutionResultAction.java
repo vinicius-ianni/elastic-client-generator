@@ -130,8 +130,8 @@ public class ExecutionResultAction  implements XContentable<ExecutionResultActio
     return ExecutionResultAction.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecutionResultAction, Void> PARSER =
-    new ConstructingObjectParser<>(ExecutionResultAction.class.getName(), false, args -> new ExecutionResultAction());
+  public static final ObjectParser<ExecutionResultAction, Void> PARSER =
+    new ObjectParser<>(ExecutionResultAction.class.getName(), false, ExecutionResultAction::new);
 
   static {
     PARSER.declareObject(ExecutionResultAction::setEmail, (p, t) -> EmailActionResult.PARSER.apply(p, t), EMAIL);
@@ -141,8 +141,8 @@ public class ExecutionResultAction  implements XContentable<ExecutionResultActio
     PARSER.declareObject(ExecutionResultAction::setPagerduty, (p, t) -> PagerDutyActionResult.PARSER.apply(p, t), PAGERDUTY);
     PARSER.declareString(ExecutionResultAction::setReason, REASON);
     PARSER.declareObject(ExecutionResultAction::setSlack, (p, t) -> SlackActionResult.PARSER.apply(p, t), SLACK);
-    PARSER.declareObject(ExecutionResultAction::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS);
-    PARSER.declareObject(ExecutionResultAction::setType, (p, t) -> ActionType.PARSER.apply(p), TYPE);
+    PARSER.declareField(ExecutionResultAction::setStatus, (p, t) -> Status.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(ExecutionResultAction::setType, (p, t) -> ActionType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(ExecutionResultAction::setWebhook, (p, t) -> WebhookActionResult.PARSER.apply(p, t), WEBHOOK);
   }
 

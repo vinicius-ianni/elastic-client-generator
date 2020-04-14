@@ -53,12 +53,12 @@ public class IndicesOptions  implements XContentable<IndicesOptions> {
     return IndicesOptions.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesOptions, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesOptions.class.getName(), false, args -> new IndicesOptions());
+  public static final ObjectParser<IndicesOptions, Void> PARSER =
+    new ObjectParser<>(IndicesOptions.class.getName(), false, IndicesOptions::new);
 
   static {
     PARSER.declareBoolean(IndicesOptions::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(IndicesOptions::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(IndicesOptions::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(IndicesOptions::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
   }
 

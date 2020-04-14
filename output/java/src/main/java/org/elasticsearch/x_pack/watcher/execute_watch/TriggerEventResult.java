@@ -55,8 +55,8 @@ public class TriggerEventResult  implements XContentable<TriggerEventResult> {
     return TriggerEventResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TriggerEventResult, Void> PARSER =
-    new ConstructingObjectParser<>(TriggerEventResult.class.getName(), false, args -> new TriggerEventResult());
+  public static final ObjectParser<TriggerEventResult, Void> PARSER =
+    new ObjectParser<>(TriggerEventResult.class.getName(), false, TriggerEventResult::new);
 
   static {
     PARSER.declareObject(TriggerEventResult::setManual, (p, t) -> TriggerEventContainer.PARSER.apply(p, t), MANUAL);

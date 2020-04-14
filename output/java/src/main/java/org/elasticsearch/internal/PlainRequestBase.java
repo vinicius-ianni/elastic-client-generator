@@ -66,8 +66,8 @@ public class PlainRequestBase<TParameters>  implements XContentable<PlainRequest
     return PlainRequestBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PlainRequestBase, Void> PARSER =
-    new ConstructingObjectParser<>(PlainRequestBase.class.getName(), false, args -> new PlainRequestBase());
+  public static final ObjectParser<PlainRequestBase, Void> PARSER =
+    new ObjectParser<>(PlainRequestBase.class.getName(), false, PlainRequestBase::new);
 
   static {
     PARSER.declareBoolean(PlainRequestBase::setErrorTrace, ERROR_TRACE);

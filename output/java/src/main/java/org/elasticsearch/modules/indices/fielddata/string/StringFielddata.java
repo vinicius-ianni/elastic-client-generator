@@ -39,11 +39,11 @@ public class StringFielddata  implements XContentable<StringFielddata> {
     return StringFielddata.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StringFielddata, Void> PARSER =
-    new ConstructingObjectParser<>(StringFielddata.class.getName(), false, args -> new StringFielddata());
+  public static final ObjectParser<StringFielddata, Void> PARSER =
+    new ObjectParser<>(StringFielddata.class.getName(), false, StringFielddata::new);
 
   static {
-    PARSER.declareObject(StringFielddata::setFormat, (p, t) -> StringFielddataFormat.PARSER.apply(p), FORMAT);
+    PARSER.declareField(StringFielddata::setFormat, (p, t) -> StringFielddataFormat.PARSER.apply(p), FORMAT, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

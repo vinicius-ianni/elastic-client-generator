@@ -64,8 +64,8 @@ public class SnapshotLifecyclePolicy  implements XContentable<SnapshotLifecycleP
     return SnapshotLifecyclePolicy.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotLifecyclePolicy, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotLifecyclePolicy.class.getName(), false, args -> new SnapshotLifecyclePolicy());
+  public static final ObjectParser<SnapshotLifecyclePolicy, Void> PARSER =
+    new ObjectParser<>(SnapshotLifecyclePolicy.class.getName(), false, SnapshotLifecyclePolicy::new);
 
   static {
     PARSER.declareObject(SnapshotLifecyclePolicy::setConfig, (p, t) -> SnapshotLifecycleConfig.PARSER.apply(p, t), CONFIG);

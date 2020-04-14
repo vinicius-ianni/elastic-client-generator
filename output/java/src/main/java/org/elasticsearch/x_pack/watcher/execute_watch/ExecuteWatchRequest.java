@@ -102,8 +102,8 @@ public class ExecuteWatchRequest  implements XContentable<ExecuteWatchRequest> {
     return ExecuteWatchRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExecuteWatchRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ExecuteWatchRequest.class.getName(), false, args -> new ExecuteWatchRequest());
+  public static final ObjectParser<ExecuteWatchRequest, Void> PARSER =
+    new ObjectParser<>(ExecuteWatchRequest.class.getName(), false, ExecuteWatchRequest::new);
 
   static {
     PARSER.declareBoolean(ExecuteWatchRequest::setDebug, DEBUG);

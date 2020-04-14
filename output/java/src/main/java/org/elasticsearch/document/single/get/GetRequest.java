@@ -114,8 +114,8 @@ public class GetRequest  implements XContentable<GetRequest> {
     return GetRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetRequest.class.getName(), false, args -> new GetRequest());
+  public static final ObjectParser<GetRequest, Void> PARSER =
+    new ObjectParser<>(GetRequest.class.getName(), false, GetRequest::new);
 
   static {
     PARSER.declareString(GetRequest::setPreference, PREFERENCE);
@@ -127,7 +127,7 @@ public class GetRequest  implements XContentable<GetRequest> {
     PARSER.declareObjectArray(GetRequest::setSourceIncludes, (p, t) -> Field.createFrom(p), SOURCE_INCLUDES);
     PARSER.declareObjectArray(GetRequest::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
     PARSER.declareLong(GetRequest::setVersion, VERSION);
-    PARSER.declareObject(GetRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(GetRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

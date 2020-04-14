@@ -99,8 +99,8 @@ public class ShardMerges  implements XContentable<ShardMerges> {
     return ShardMerges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardMerges, Void> PARSER =
-    new ConstructingObjectParser<>(ShardMerges.class.getName(), false, args -> new ShardMerges());
+  public static final ObjectParser<ShardMerges, Void> PARSER =
+    new ObjectParser<>(ShardMerges.class.getName(), false, ShardMerges::new);
 
   static {
     PARSER.declareLong(ShardMerges::setCurrent, CURRENT);

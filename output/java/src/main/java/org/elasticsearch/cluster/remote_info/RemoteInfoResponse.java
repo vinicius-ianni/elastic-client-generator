@@ -40,8 +40,8 @@ public class RemoteInfoResponse extends DictionaryResponseBase<String, RemoteInf
     return RemoteInfoResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RemoteInfoResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RemoteInfoResponse.class.getName(), false, args -> new RemoteInfoResponse());
+  public static final ObjectParser<RemoteInfoResponse, Void> PARSER =
+    new ObjectParser<>(RemoteInfoResponse.class.getName(), false, RemoteInfoResponse::new);
 
   static {
     PARSER.declareObject(RemoteInfoResponse::setRemotes, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> RemoteInfo.PARSER.apply(pp, null)), REMOTES);

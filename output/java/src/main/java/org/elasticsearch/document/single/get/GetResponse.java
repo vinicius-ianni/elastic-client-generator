@@ -103,8 +103,8 @@ public class GetResponse<TDocument>  implements XContentable<GetResponse<TDocume
     return GetResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetResponse.class.getName(), false, args -> new GetResponse());
+  public static final ObjectParser<GetResponse, Void> PARSER =
+    new ObjectParser<>(GetResponse.class.getName(), false, GetResponse::new);
 
   static {
     PARSER.declareObject(GetResponse::setFields, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LazyDocument.PARSER.apply(pp, null)), FIELDS);

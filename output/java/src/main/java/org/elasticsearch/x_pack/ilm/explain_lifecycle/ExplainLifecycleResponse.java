@@ -39,8 +39,8 @@ public class ExplainLifecycleResponse  implements XContentable<ExplainLifecycleR
     return ExplainLifecycleResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExplainLifecycleResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ExplainLifecycleResponse.class.getName(), false, args -> new ExplainLifecycleResponse());
+  public static final ObjectParser<ExplainLifecycleResponse, Void> PARSER =
+    new ObjectParser<>(ExplainLifecycleResponse.class.getName(), false, ExplainLifecycleResponse::new);
 
   static {
     PARSER.declareObject(ExplainLifecycleResponse::setIndices, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> LifecycleExplain.PARSER.apply(pp, null)), INDICES);

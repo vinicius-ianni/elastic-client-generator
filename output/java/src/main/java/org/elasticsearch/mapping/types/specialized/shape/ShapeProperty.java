@@ -60,13 +60,13 @@ public class ShapeProperty  implements XContentable<ShapeProperty> {
     return ShapeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShapeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(ShapeProperty.class.getName(), false, args -> new ShapeProperty());
+  public static final ObjectParser<ShapeProperty, Void> PARSER =
+    new ObjectParser<>(ShapeProperty.class.getName(), false, ShapeProperty::new);
 
   static {
     PARSER.declareBoolean(ShapeProperty::setIgnoreMalformed, IGNORE_MALFORMED);
     PARSER.declareBoolean(ShapeProperty::setIgnoreZValue, IGNORE_Z_VALUE);
-    PARSER.declareObject(ShapeProperty::setOrientation, (p, t) -> ShapeOrientation.PARSER.apply(p), ORIENTATION);
+    PARSER.declareField(ShapeProperty::setOrientation, (p, t) -> ShapeOrientation.PARSER.apply(p), ORIENTATION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(ShapeProperty::setCoerce, COERCE);
   }
 

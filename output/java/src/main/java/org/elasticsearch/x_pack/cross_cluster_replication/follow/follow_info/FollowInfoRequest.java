@@ -31,8 +31,8 @@ public class FollowInfoRequest  implements XContentable<FollowInfoRequest> {
     return FollowInfoRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FollowInfoRequest, Void> PARSER =
-    new ConstructingObjectParser<>(FollowInfoRequest.class.getName(), false, args -> new FollowInfoRequest());
+  public static final ObjectParser<FollowInfoRequest, Void> PARSER =
+    new ObjectParser<>(FollowInfoRequest.class.getName(), false, FollowInfoRequest::new);
 
   static {
     

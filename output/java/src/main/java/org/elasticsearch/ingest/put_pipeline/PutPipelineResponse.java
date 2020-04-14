@@ -31,8 +31,8 @@ public class PutPipelineResponse  implements XContentable<PutPipelineResponse> {
     return PutPipelineResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutPipelineResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PutPipelineResponse.class.getName(), false, args -> new PutPipelineResponse());
+  public static final ObjectParser<PutPipelineResponse, Void> PARSER =
+    new ObjectParser<>(PutPipelineResponse.class.getName(), false, PutPipelineResponse::new);
 
   static {
     

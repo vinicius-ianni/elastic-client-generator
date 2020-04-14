@@ -36,8 +36,8 @@ public class LoggingActionResult  implements XContentable<LoggingActionResult> {
     return LoggingActionResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LoggingActionResult, Void> PARSER =
-    new ConstructingObjectParser<>(LoggingActionResult.class.getName(), false, args -> new LoggingActionResult());
+  public static final ObjectParser<LoggingActionResult, Void> PARSER =
+    new ObjectParser<>(LoggingActionResult.class.getName(), false, LoggingActionResult::new);
 
   static {
     PARSER.declareString(LoggingActionResult::setLoggedText, LOGGED_TEXT);

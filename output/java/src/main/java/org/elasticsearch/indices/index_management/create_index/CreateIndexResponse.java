@@ -43,8 +43,8 @@ public class CreateIndexResponse  implements XContentable<CreateIndexResponse> {
     return CreateIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CreateIndexResponse.class.getName(), false, args -> new CreateIndexResponse());
+  public static final ObjectParser<CreateIndexResponse, Void> PARSER =
+    new ObjectParser<>(CreateIndexResponse.class.getName(), false, CreateIndexResponse::new);
 
   static {
     PARSER.declareBoolean(CreateIndexResponse::setShardsAcknowledged, SHARDS_ACKNOWLEDGED);

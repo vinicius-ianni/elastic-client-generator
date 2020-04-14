@@ -68,8 +68,8 @@ public class BulkIndexByScrollFailure  implements XContentable<BulkIndexByScroll
     return BulkIndexByScrollFailure.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BulkIndexByScrollFailure, Void> PARSER =
-    new ConstructingObjectParser<>(BulkIndexByScrollFailure.class.getName(), false, args -> new BulkIndexByScrollFailure());
+  public static final ObjectParser<BulkIndexByScrollFailure, Void> PARSER =
+    new ObjectParser<>(BulkIndexByScrollFailure.class.getName(), false, BulkIndexByScrollFailure::new);
 
   static {
     PARSER.declareObject(BulkIndexByScrollFailure::setCause, (p, t) -> MainError.PARSER.apply(p, t), CAUSE);

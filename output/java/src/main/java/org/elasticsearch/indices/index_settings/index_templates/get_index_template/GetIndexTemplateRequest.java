@@ -60,8 +60,8 @@ public class GetIndexTemplateRequest  implements XContentable<GetIndexTemplateRe
     return GetIndexTemplateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetIndexTemplateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetIndexTemplateRequest.class.getName(), false, args -> new GetIndexTemplateRequest());
+  public static final ObjectParser<GetIndexTemplateRequest, Void> PARSER =
+    new ObjectParser<>(GetIndexTemplateRequest.class.getName(), false, GetIndexTemplateRequest::new);
 
   static {
     PARSER.declareBoolean(GetIndexTemplateRequest::setFlatSettings, FLAT_SETTINGS);

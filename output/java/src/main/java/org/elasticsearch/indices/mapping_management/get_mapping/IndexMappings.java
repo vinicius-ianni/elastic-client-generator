@@ -49,8 +49,8 @@ public class IndexMappings  implements XContentable<IndexMappings> {
     return IndexMappings.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexMappings, Void> PARSER =
-    new ConstructingObjectParser<>(IndexMappings.class.getName(), false, args -> new IndexMappings());
+  public static final ObjectParser<IndexMappings, Void> PARSER =
+    new ObjectParser<>(IndexMappings.class.getName(), false, IndexMappings::new);
 
   static {
     PARSER.declareObject(IndexMappings::setItem, (p, t) -> TypeMapping.PARSER.apply(p, t), ITEM);

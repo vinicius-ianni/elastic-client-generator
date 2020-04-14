@@ -85,8 +85,8 @@ public class CatNodeAttributesRecord  implements XContentable<CatNodeAttributesR
     return CatNodeAttributesRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatNodeAttributesRecord, Void> PARSER =
-    new ConstructingObjectParser<>(CatNodeAttributesRecord.class.getName(), false, args -> new CatNodeAttributesRecord());
+  public static final ObjectParser<CatNodeAttributesRecord, Void> PARSER =
+    new ObjectParser<>(CatNodeAttributesRecord.class.getName(), false, CatNodeAttributesRecord::new);
 
   static {
     PARSER.declareString(CatNodeAttributesRecord::setAttr, ATTR);

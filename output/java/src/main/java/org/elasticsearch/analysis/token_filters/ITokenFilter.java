@@ -43,8 +43,8 @@ public class ITokenFilter  implements XContentable<ITokenFilter> {
     return ITokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ITokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(ITokenFilter.class.getName(), false, args -> new ITokenFilter());
+  public static final ObjectParser<ITokenFilter, Void> PARSER =
+    new ObjectParser<>(ITokenFilter.class.getName(), false, ITokenFilter::new);
 
   static {
     PARSER.declareString(ITokenFilter::setType, TYPE);

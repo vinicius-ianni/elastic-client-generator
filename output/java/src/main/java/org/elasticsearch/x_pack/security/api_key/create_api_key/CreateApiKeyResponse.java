@@ -58,8 +58,8 @@ public class CreateApiKeyResponse  implements XContentable<CreateApiKeyResponse>
     return CreateApiKeyResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CreateApiKeyResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CreateApiKeyResponse.class.getName(), false, args -> new CreateApiKeyResponse());
+  public static final ObjectParser<CreateApiKeyResponse, Void> PARSER =
+    new ObjectParser<>(CreateApiKeyResponse.class.getName(), false, CreateApiKeyResponse::new);
 
   static {
     PARSER.declareString(CreateApiKeyResponse::setId, ID);

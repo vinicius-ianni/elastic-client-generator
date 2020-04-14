@@ -45,8 +45,8 @@ public class IncludeExclude  implements XContentable<IncludeExclude> {
     return IncludeExclude.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IncludeExclude, Void> PARSER =
-    new ConstructingObjectParser<>(IncludeExclude.class.getName(), false, args -> new IncludeExclude());
+  public static final ObjectParser<IncludeExclude, Void> PARSER =
+    new ObjectParser<>(IncludeExclude.class.getName(), false, IncludeExclude::new);
 
   static {
     PARSER.declareString(IncludeExclude::setPattern, PATTERN);

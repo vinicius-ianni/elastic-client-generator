@@ -59,8 +59,8 @@ public class SmoothingModelContainer  implements XContentable<SmoothingModelCont
     return SmoothingModelContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SmoothingModelContainer, Void> PARSER =
-    new ConstructingObjectParser<>(SmoothingModelContainer.class.getName(), false, args -> new SmoothingModelContainer());
+  public static final ObjectParser<SmoothingModelContainer, Void> PARSER =
+    new ObjectParser<>(SmoothingModelContainer.class.getName(), false, SmoothingModelContainer::new);
 
   static {
     PARSER.declareObject(SmoothingModelContainer::setLaplace, (p, t) -> LaplaceSmoothingModel.PARSER.apply(p, t), LAPLACE);

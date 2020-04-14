@@ -39,8 +39,8 @@ public class RestoreResponse  implements XContentable<RestoreResponse> {
     return RestoreResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RestoreResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RestoreResponse.class.getName(), false, args -> new RestoreResponse());
+  public static final ObjectParser<RestoreResponse, Void> PARSER =
+    new ObjectParser<>(RestoreResponse.class.getName(), false, RestoreResponse::new);
 
   static {
     PARSER.declareObject(RestoreResponse::setSnapshot, (p, t) -> SnapshotRestore.PARSER.apply(p, t), SNAPSHOT);

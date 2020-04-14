@@ -138,8 +138,8 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
     return SlackAttachment.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SlackAttachment, Void> PARSER =
-    new ConstructingObjectParser<>(SlackAttachment.class.getName(), false, args -> new SlackAttachment());
+  public static final ObjectParser<SlackAttachment, Void> PARSER =
+    new ObjectParser<>(SlackAttachment.class.getName(), false, SlackAttachment::new);
 
   static {
     PARSER.declareString(SlackAttachment::setAuthorIcon, AUTHOR_ICON);

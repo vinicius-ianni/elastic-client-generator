@@ -31,8 +31,8 @@ public class ClearScrollResponse  implements XContentable<ClearScrollResponse> {
     return ClearScrollResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearScrollResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClearScrollResponse.class.getName(), false, args -> new ClearScrollResponse());
+  public static final ObjectParser<ClearScrollResponse, Void> PARSER =
+    new ObjectParser<>(ClearScrollResponse.class.getName(), false, ClearScrollResponse::new);
 
   static {
     

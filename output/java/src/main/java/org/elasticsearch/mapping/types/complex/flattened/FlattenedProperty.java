@@ -103,8 +103,8 @@ public class FlattenedProperty  implements XContentable<FlattenedProperty> {
     return FlattenedProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FlattenedProperty, Void> PARSER =
-    new ConstructingObjectParser<>(FlattenedProperty.class.getName(), false, args -> new FlattenedProperty());
+  public static final ObjectParser<FlattenedProperty, Void> PARSER =
+    new ObjectParser<>(FlattenedProperty.class.getName(), false, FlattenedProperty::new);
 
   static {
     PARSER.declareDouble(FlattenedProperty::setBoost, BOOST);
@@ -113,7 +113,7 @@ public class FlattenedProperty  implements XContentable<FlattenedProperty> {
     PARSER.declareBoolean(FlattenedProperty::setEagerGlobalOrdinals, EAGER_GLOBAL_ORDINALS);
     PARSER.declareInt(FlattenedProperty::setIgnoreAbove, IGNORE_ABOVE);
     PARSER.declareBoolean(FlattenedProperty::setIndex, INDEX);
-    PARSER.declareObject(FlattenedProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS);
+    PARSER.declareField(FlattenedProperty::setIndexOptions, (p, t) -> IndexOptions.PARSER.apply(p), INDEX_OPTIONS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(FlattenedProperty::setNullValue, NULL_VALUE);
     PARSER.declareString(FlattenedProperty::setSimilarity, SIMILARITY);
     PARSER.declareBoolean(FlattenedProperty::setSplitQueriesOnWhitespace, SPLIT_QUERIES_ON_WHITESPACE);

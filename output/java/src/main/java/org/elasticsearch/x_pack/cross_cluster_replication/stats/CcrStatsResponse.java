@@ -49,8 +49,8 @@ public class CcrStatsResponse  implements XContentable<CcrStatsResponse> {
     return CcrStatsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CcrStatsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CcrStatsResponse.class.getName(), false, args -> new CcrStatsResponse());
+  public static final ObjectParser<CcrStatsResponse, Void> PARSER =
+    new ObjectParser<>(CcrStatsResponse.class.getName(), false, CcrStatsResponse::new);
 
   static {
     PARSER.declareObject(CcrStatsResponse::setAutoFollowStats, (p, t) -> CcrAutoFollowStats.PARSER.apply(p, t), AUTO_FOLLOW_STATS);

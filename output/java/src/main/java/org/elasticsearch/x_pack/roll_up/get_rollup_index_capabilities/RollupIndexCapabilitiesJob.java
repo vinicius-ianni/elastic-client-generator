@@ -60,8 +60,8 @@ public class RollupIndexCapabilitiesJob  implements XContentable<RollupIndexCapa
     return RollupIndexCapabilitiesJob.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupIndexCapabilitiesJob, Void> PARSER =
-    new ConstructingObjectParser<>(RollupIndexCapabilitiesJob.class.getName(), false, args -> new RollupIndexCapabilitiesJob());
+  public static final ObjectParser<RollupIndexCapabilitiesJob, Void> PARSER =
+    new ObjectParser<>(RollupIndexCapabilitiesJob.class.getName(), false, RollupIndexCapabilitiesJob::new);
 
   static {
     PARSER.declareObject(RollupIndexCapabilitiesJob::setFields, (p, t) -> new NamedContainer<>(n -> () -> new Field(n),null /* TODO NamedContainer<String, String> */), FIELDS);

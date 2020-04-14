@@ -36,8 +36,8 @@ public class RevertModelSnapshotRequest  implements XContentable<RevertModelSnap
     return RevertModelSnapshotRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RevertModelSnapshotRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RevertModelSnapshotRequest.class.getName(), false, args -> new RevertModelSnapshotRequest());
+  public static final ObjectParser<RevertModelSnapshotRequest, Void> PARSER =
+    new ObjectParser<>(RevertModelSnapshotRequest.class.getName(), false, RevertModelSnapshotRequest::new);
 
   static {
     PARSER.declareBoolean(RevertModelSnapshotRequest::setDeleteInterveningResults, DELETE_INTERVENING_RESULTS);

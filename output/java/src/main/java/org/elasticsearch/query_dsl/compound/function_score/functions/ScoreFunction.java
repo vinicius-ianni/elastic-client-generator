@@ -47,8 +47,8 @@ public class ScoreFunction  implements XContentable<ScoreFunction> {
     return ScoreFunction.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScoreFunction, Void> PARSER =
-    new ConstructingObjectParser<>(ScoreFunction.class.getName(), false, args -> new ScoreFunction());
+  public static final ObjectParser<ScoreFunction, Void> PARSER =
+    new ObjectParser<>(ScoreFunction.class.getName(), false, ScoreFunction::new);
 
   static {
     PARSER.declareObject(ScoreFunction::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);

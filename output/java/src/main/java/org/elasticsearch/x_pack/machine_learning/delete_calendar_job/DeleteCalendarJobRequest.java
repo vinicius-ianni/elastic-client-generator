@@ -31,8 +31,8 @@ public class DeleteCalendarJobRequest  implements XContentable<DeleteCalendarJob
     return DeleteCalendarJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteCalendarJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteCalendarJobRequest.class.getName(), false, args -> new DeleteCalendarJobRequest());
+  public static final ObjectParser<DeleteCalendarJobRequest, Void> PARSER =
+    new ObjectParser<>(DeleteCalendarJobRequest.class.getName(), false, DeleteCalendarJobRequest::new);
 
   static {
     

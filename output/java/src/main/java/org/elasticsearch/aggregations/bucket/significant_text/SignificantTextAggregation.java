@@ -178,14 +178,14 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
     return SignificantTextAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SignificantTextAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(SignificantTextAggregation.class.getName(), false, args -> new SignificantTextAggregation());
+  public static final ObjectParser<SignificantTextAggregation, Void> PARSER =
+    new ObjectParser<>(SignificantTextAggregation.class.getName(), false, SignificantTextAggregation::new);
 
   static {
     PARSER.declareObject(SignificantTextAggregation::setBackgroundFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), BACKGROUND_FILTER);
     PARSER.declareObject(SignificantTextAggregation::setChiSquare, (p, t) -> ChiSquareHeuristic.PARSER.apply(p, t), CHI_SQUARE);
     PARSER.declareObject(SignificantTextAggregation::setExclude, (p, t) -> IncludeExclude.PARSER.apply(p, t), EXCLUDE);
-    PARSER.declareObject(SignificantTextAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT);
+    PARSER.declareField(SignificantTextAggregation::setExecutionHint, (p, t) -> TermsAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(SignificantTextAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
     PARSER.declareBoolean(SignificantTextAggregation::setFilterDuplicateText, FILTER_DUPLICATE_TEXT);
     PARSER.declareObject(SignificantTextAggregation::setGnd, (p, t) -> GoogleNormalizedDistanceHeuristic.PARSER.apply(p, t), GND);

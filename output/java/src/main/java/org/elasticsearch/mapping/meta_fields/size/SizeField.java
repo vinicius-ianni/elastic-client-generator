@@ -36,8 +36,8 @@ public class SizeField  implements XContentable<SizeField> {
     return SizeField.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SizeField, Void> PARSER =
-    new ConstructingObjectParser<>(SizeField.class.getName(), false, args -> new SizeField());
+  public static final ObjectParser<SizeField, Void> PARSER =
+    new ObjectParser<>(SizeField.class.getName(), false, SizeField::new);
 
   static {
     PARSER.declareBoolean(SizeField::setEnabled, ENABLED);

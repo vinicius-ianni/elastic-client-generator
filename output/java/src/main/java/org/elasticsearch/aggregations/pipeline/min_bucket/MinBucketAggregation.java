@@ -31,8 +31,8 @@ public class MinBucketAggregation  implements XContentable<MinBucketAggregation>
     return MinBucketAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MinBucketAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MinBucketAggregation.class.getName(), false, args -> new MinBucketAggregation());
+  public static final ObjectParser<MinBucketAggregation, Void> PARSER =
+    new ObjectParser<>(MinBucketAggregation.class.getName(), false, MinBucketAggregation::new);
 
   static {
     

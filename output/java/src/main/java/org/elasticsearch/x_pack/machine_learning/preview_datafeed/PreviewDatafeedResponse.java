@@ -38,8 +38,8 @@ public class PreviewDatafeedResponse<TDocument>  implements XContentable<Preview
     return PreviewDatafeedResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PreviewDatafeedResponse, Void> PARSER =
-    new ConstructingObjectParser<>(PreviewDatafeedResponse.class.getName(), false, args -> new PreviewDatafeedResponse());
+  public static final ObjectParser<PreviewDatafeedResponse, Void> PARSER =
+    new ObjectParser<>(PreviewDatafeedResponse.class.getName(), false, PreviewDatafeedResponse::new);
 
   static {
     PARSER.declareObjectArray(PreviewDatafeedResponse::setData, (p, t) -> null /* TODO TDocument */, DATA);

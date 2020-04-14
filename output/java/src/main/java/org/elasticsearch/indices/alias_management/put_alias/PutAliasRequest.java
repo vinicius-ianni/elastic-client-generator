@@ -98,8 +98,8 @@ public class PutAliasRequest  implements XContentable<PutAliasRequest> {
     return PutAliasRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutAliasRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutAliasRequest.class.getName(), false, args -> new PutAliasRequest());
+  public static final ObjectParser<PutAliasRequest, Void> PARSER =
+    new ObjectParser<>(PutAliasRequest.class.getName(), false, PutAliasRequest::new);
 
   static {
     PARSER.declareObject(PutAliasRequest::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);

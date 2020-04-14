@@ -39,8 +39,8 @@ public class ConstantScoreQuery  implements XContentable<ConstantScoreQuery> {
     return ConstantScoreQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ConstantScoreQuery, Void> PARSER =
-    new ConstructingObjectParser<>(ConstantScoreQuery.class.getName(), false, args -> new ConstantScoreQuery());
+  public static final ObjectParser<ConstantScoreQuery, Void> PARSER =
+    new ObjectParser<>(ConstantScoreQuery.class.getName(), false, ConstantScoreQuery::new);
 
   static {
     PARSER.declareObject(ConstantScoreQuery::setFilter, (p, t) -> QueryContainer.PARSER.apply(p, t), FILTER);

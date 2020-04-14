@@ -54,8 +54,8 @@ public class ApplicationResourcePrivileges  implements XContentable<ApplicationR
     return ApplicationResourcePrivileges.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ApplicationResourcePrivileges, Void> PARSER =
-    new ConstructingObjectParser<>(ApplicationResourcePrivileges.class.getName(), false, args -> new ApplicationResourcePrivileges());
+  public static final ObjectParser<ApplicationResourcePrivileges, Void> PARSER =
+    new ObjectParser<>(ApplicationResourcePrivileges.class.getName(), false, ApplicationResourcePrivileges::new);
 
   static {
     PARSER.declareString(ApplicationResourcePrivileges::setApplication, APPLICATION);

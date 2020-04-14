@@ -53,12 +53,12 @@ public class RefreshRequest  implements XContentable<RefreshRequest> {
     return RefreshRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RefreshRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RefreshRequest.class.getName(), false, args -> new RefreshRequest());
+  public static final ObjectParser<RefreshRequest, Void> PARSER =
+    new ObjectParser<>(RefreshRequest.class.getName(), false, RefreshRequest::new);
 
   static {
     PARSER.declareBoolean(RefreshRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(RefreshRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(RefreshRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(RefreshRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
   }
 

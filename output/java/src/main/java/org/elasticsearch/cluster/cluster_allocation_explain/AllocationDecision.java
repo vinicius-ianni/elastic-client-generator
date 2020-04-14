@@ -53,12 +53,12 @@ public class AllocationDecision  implements XContentable<AllocationDecision> {
     return AllocationDecision.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AllocationDecision, Void> PARSER =
-    new ConstructingObjectParser<>(AllocationDecision.class.getName(), false, args -> new AllocationDecision());
+  public static final ObjectParser<AllocationDecision, Void> PARSER =
+    new ObjectParser<>(AllocationDecision.class.getName(), false, AllocationDecision::new);
 
   static {
     PARSER.declareString(AllocationDecision::setDecider, DECIDER);
-    PARSER.declareObject(AllocationDecision::setDecision, (p, t) -> AllocationExplainDecision.PARSER.apply(p), DECISION);
+    PARSER.declareField(AllocationDecision::setDecision, (p, t) -> AllocationExplainDecision.PARSER.apply(p), DECISION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(AllocationDecision::setExplanation, EXPLANATION);
   }
 

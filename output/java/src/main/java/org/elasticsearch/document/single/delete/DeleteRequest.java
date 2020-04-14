@@ -100,17 +100,17 @@ public class DeleteRequest  implements XContentable<DeleteRequest> {
     return DeleteRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteRequest.class.getName(), false, args -> new DeleteRequest());
+  public static final ObjectParser<DeleteRequest, Void> PARSER =
+    new ObjectParser<>(DeleteRequest.class.getName(), false, DeleteRequest::new);
 
   static {
     PARSER.declareLong(DeleteRequest::setIfPrimaryTerm, IF_PRIMARY_TERM);
     PARSER.declareLong(DeleteRequest::setIfSequenceNumber, IF_SEQUENCE_NUMBER);
-    PARSER.declareObject(DeleteRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(DeleteRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(DeleteRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareObject(DeleteRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);
     PARSER.declareLong(DeleteRequest::setVersion, VERSION);
-    PARSER.declareObject(DeleteRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(DeleteRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(DeleteRequest::setWaitForActiveShards, WAIT_FOR_ACTIVE_SHARDS);
   }
 

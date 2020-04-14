@@ -78,8 +78,8 @@ public class ShrinkIndexRequest  implements XContentable<ShrinkIndexRequest> {
     return ShrinkIndexRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShrinkIndexRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ShrinkIndexRequest.class.getName(), false, args -> new ShrinkIndexRequest());
+  public static final ObjectParser<ShrinkIndexRequest, Void> PARSER =
+    new ObjectParser<>(ShrinkIndexRequest.class.getName(), false, ShrinkIndexRequest::new);
 
   static {
     PARSER.declareObject(ShrinkIndexRequest::setAliases, (p, t) -> new NamedContainer<>(n -> () -> new IndexName(n),pp -> Alias.PARSER.apply(pp, null)), ALIASES);

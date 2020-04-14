@@ -79,8 +79,8 @@ public class ClusterCertificateInformation  implements XContentable<ClusterCerti
     return ClusterCertificateInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterCertificateInformation, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterCertificateInformation.class.getName(), false, args -> new ClusterCertificateInformation());
+  public static final ObjectParser<ClusterCertificateInformation, Void> PARSER =
+    new ObjectParser<>(ClusterCertificateInformation.class.getName(), false, ClusterCertificateInformation::new);
 
   static {
     PARSER.declareString(ClusterCertificateInformation::setPath, PATH);

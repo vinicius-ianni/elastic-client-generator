@@ -31,8 +31,8 @@ public class DeleteScriptResponse  implements XContentable<DeleteScriptResponse>
     return DeleteScriptResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteScriptResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteScriptResponse.class.getName(), false, args -> new DeleteScriptResponse());
+  public static final ObjectParser<DeleteScriptResponse, Void> PARSER =
+    new ObjectParser<>(DeleteScriptResponse.class.getName(), false, DeleteScriptResponse::new);
 
   static {
     

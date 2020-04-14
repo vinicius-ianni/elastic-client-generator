@@ -59,8 +59,8 @@ public class RollupJobInformation  implements XContentable<RollupJobInformation>
     return RollupJobInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RollupJobInformation, Void> PARSER =
-    new ConstructingObjectParser<>(RollupJobInformation.class.getName(), false, args -> new RollupJobInformation());
+  public static final ObjectParser<RollupJobInformation, Void> PARSER =
+    new ObjectParser<>(RollupJobInformation.class.getName(), false, RollupJobInformation::new);
 
   static {
     PARSER.declareObject(RollupJobInformation::setConfig, (p, t) -> RollupJobConfiguration.PARSER.apply(p, t), CONFIG);

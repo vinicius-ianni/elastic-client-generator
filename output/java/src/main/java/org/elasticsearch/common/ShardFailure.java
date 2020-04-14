@@ -68,8 +68,8 @@ public class ShardFailure  implements XContentable<ShardFailure> {
     return ShardFailure.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardFailure, Void> PARSER =
-    new ConstructingObjectParser<>(ShardFailure.class.getName(), false, args -> new ShardFailure());
+  public static final ObjectParser<ShardFailure, Void> PARSER =
+    new ObjectParser<>(ShardFailure.class.getName(), false, ShardFailure::new);
 
   static {
     PARSER.declareString(ShardFailure::setIndex, INDEX);

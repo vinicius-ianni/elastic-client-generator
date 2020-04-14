@@ -41,8 +41,8 @@ const $xCContentImplementation = (type: Domain.Interface) => {
     return ${$typeName(type.name)}.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<${$typeName(type.name)}, Void> PARSER =
-    new ConstructingObjectParser<>(${$typeName(type.name)}.class.getName(), false, args -> new ${$typeName(type.name)}());
+  public static final ObjectParser<${$typeName(type.name)}, Void> PARSER =
+    new ObjectParser<>(${$typeName(type.name)}.class.getName(), false, ${$typeName(type.name)}::new);
 
   static {
     ${$parseProperties(type)}

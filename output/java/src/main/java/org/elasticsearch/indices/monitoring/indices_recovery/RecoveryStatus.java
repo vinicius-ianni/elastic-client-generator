@@ -38,8 +38,8 @@ public class RecoveryStatus  implements XContentable<RecoveryStatus> {
     return RecoveryStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryStatus, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryStatus.class.getName(), false, args -> new RecoveryStatus());
+  public static final ObjectParser<RecoveryStatus, Void> PARSER =
+    new ObjectParser<>(RecoveryStatus.class.getName(), false, RecoveryStatus::new);
 
   static {
     PARSER.declareObjectArray(RecoveryStatus::setShards, (p, t) -> ShardRecovery.PARSER.apply(p, t), SHARDS);

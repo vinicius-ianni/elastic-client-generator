@@ -118,13 +118,13 @@ public class BulkRequest  implements XContentable<BulkRequest> {
     return BulkRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BulkRequest, Void> PARSER =
-    new ConstructingObjectParser<>(BulkRequest.class.getName(), false, args -> new BulkRequest());
+  public static final ObjectParser<BulkRequest, Void> PARSER =
+    new ObjectParser<>(BulkRequest.class.getName(), false, BulkRequest::new);
 
   static {
     PARSER.declareObjectArray(BulkRequest::setOperations, (p, t) -> BulkOperation.PARSER.apply(p, t), OPERATIONS);
     PARSER.declareString(BulkRequest::setPipeline, PIPELINE);
-    PARSER.declareObject(BulkRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(BulkRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(BulkRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(BulkRequest::setSourceEnabled, SOURCE_ENABLED);
     PARSER.declareObjectArray(BulkRequest::setSourceExcludes, (p, t) -> Field.createFrom(p), SOURCE_EXCLUDES);

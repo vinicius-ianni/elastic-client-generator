@@ -57,8 +57,8 @@ public class HunspellTokenFilter  implements XContentable<HunspellTokenFilter> {
     return HunspellTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HunspellTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(HunspellTokenFilter.class.getName(), false, args -> new HunspellTokenFilter());
+  public static final ObjectParser<HunspellTokenFilter, Void> PARSER =
+    new ObjectParser<>(HunspellTokenFilter.class.getName(), false, HunspellTokenFilter::new);
 
   static {
     PARSER.declareBoolean(HunspellTokenFilter::setDedup, DEDUP);

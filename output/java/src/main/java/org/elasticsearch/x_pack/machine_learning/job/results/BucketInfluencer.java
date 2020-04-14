@@ -100,8 +100,8 @@ public class BucketInfluencer  implements XContentable<BucketInfluencer> {
     return BucketInfluencer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BucketInfluencer, Void> PARSER =
-    new ConstructingObjectParser<>(BucketInfluencer.class.getName(), false, args -> new BucketInfluencer());
+  public static final ObjectParser<BucketInfluencer, Void> PARSER =
+    new ObjectParser<>(BucketInfluencer.class.getName(), false, BucketInfluencer::new);
 
   static {
     PARSER.declareLong(BucketInfluencer::setBucketSpan, BUCKET_SPAN);

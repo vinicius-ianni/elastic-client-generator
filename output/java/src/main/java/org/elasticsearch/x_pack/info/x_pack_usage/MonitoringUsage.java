@@ -46,8 +46,8 @@ public class MonitoringUsage  implements XContentable<MonitoringUsage> {
     return MonitoringUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MonitoringUsage, Void> PARSER =
-    new ConstructingObjectParser<>(MonitoringUsage.class.getName(), false, args -> new MonitoringUsage());
+  public static final ObjectParser<MonitoringUsage, Void> PARSER =
+    new ObjectParser<>(MonitoringUsage.class.getName(), false, MonitoringUsage::new);
 
   static {
     PARSER.declareBoolean(MonitoringUsage::setCollectionEnabled, COLLECTION_ENABLED);

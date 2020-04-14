@@ -31,8 +31,8 @@ public class DeleteWatchRequest  implements XContentable<DeleteWatchRequest> {
     return DeleteWatchRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteWatchRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteWatchRequest.class.getName(), false, args -> new DeleteWatchRequest());
+  public static final ObjectParser<DeleteWatchRequest, Void> PARSER =
+    new ObjectParser<>(DeleteWatchRequest.class.getName(), false, DeleteWatchRequest::new);
 
   static {
     

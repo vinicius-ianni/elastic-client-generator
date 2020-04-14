@@ -38,8 +38,8 @@ public class Profile  implements XContentable<Profile> {
     return Profile.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Profile, Void> PARSER =
-    new ConstructingObjectParser<>(Profile.class.getName(), false, args -> new Profile());
+  public static final ObjectParser<Profile, Void> PARSER =
+    new ObjectParser<>(Profile.class.getName(), false, Profile::new);
 
   static {
     PARSER.declareObjectArray(Profile::setShards, (p, t) -> ShardProfile.PARSER.apply(p, t), SHARDS);

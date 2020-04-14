@@ -59,8 +59,8 @@ public class NodeInfoHttp  implements XContentable<NodeInfoHttp> {
     return NodeInfoHttp.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfoHttp, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfoHttp.class.getName(), false, args -> new NodeInfoHttp());
+  public static final ObjectParser<NodeInfoHttp, Void> PARSER =
+    new ObjectParser<>(NodeInfoHttp.class.getName(), false, NodeInfoHttp::new);
 
   static {
     PARSER.declareStringArray(NodeInfoHttp::setBoundAddress, BOUND_ADDRESS);

@@ -50,8 +50,8 @@ public class VectorUsage  implements XContentable<VectorUsage> {
     return VectorUsage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<VectorUsage, Void> PARSER =
-    new ConstructingObjectParser<>(VectorUsage.class.getName(), false, args -> new VectorUsage());
+  public static final ObjectParser<VectorUsage, Void> PARSER =
+    new ObjectParser<>(VectorUsage.class.getName(), false, VectorUsage::new);
 
   static {
     PARSER.declareInt(VectorUsage::setDenseVectorFieldsCount, DENSE_VECTOR_FIELDS_COUNT);

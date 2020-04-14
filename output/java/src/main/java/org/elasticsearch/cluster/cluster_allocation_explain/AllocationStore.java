@@ -71,8 +71,8 @@ public class AllocationStore  implements XContentable<AllocationStore> {
     return AllocationStore.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AllocationStore, Void> PARSER =
-    new ConstructingObjectParser<>(AllocationStore.class.getName(), false, args -> new AllocationStore());
+  public static final ObjectParser<AllocationStore, Void> PARSER =
+    new ObjectParser<>(AllocationStore.class.getName(), false, AllocationStore::new);
 
   static {
     PARSER.declareString(AllocationStore::setAllocationId, ALLOCATION_ID);

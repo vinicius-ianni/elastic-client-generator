@@ -60,8 +60,8 @@ public class PatternAnalyzer  implements XContentable<PatternAnalyzer> {
     return PatternAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PatternAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(PatternAnalyzer.class.getName(), false, args -> new PatternAnalyzer());
+  public static final ObjectParser<PatternAnalyzer, Void> PARSER =
+    new ObjectParser<>(PatternAnalyzer.class.getName(), false, PatternAnalyzer::new);
 
   static {
     PARSER.declareString(PatternAnalyzer::setFlags, FLAGS);

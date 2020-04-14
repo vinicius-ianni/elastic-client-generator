@@ -44,8 +44,8 @@ public class SnapshotLifecycleInvocationRecord  implements XContentable<Snapshot
     return SnapshotLifecycleInvocationRecord.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotLifecycleInvocationRecord, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotLifecycleInvocationRecord.class.getName(), false, args -> new SnapshotLifecycleInvocationRecord());
+  public static final ObjectParser<SnapshotLifecycleInvocationRecord, Void> PARSER =
+    new ObjectParser<>(SnapshotLifecycleInvocationRecord.class.getName(), false, SnapshotLifecycleInvocationRecord::new);
 
   static {
     PARSER.declareString(SnapshotLifecycleInvocationRecord::setSnapshotName, SNAPSHOT_NAME);

@@ -31,8 +31,8 @@ public class PercentilesMethod  implements XContentable<PercentilesMethod> {
     return PercentilesMethod.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PercentilesMethod, Void> PARSER =
-    new ConstructingObjectParser<>(PercentilesMethod.class.getName(), false, args -> new PercentilesMethod());
+  public static final ObjectParser<PercentilesMethod, Void> PARSER =
+    new ObjectParser<>(PercentilesMethod.class.getName(), false, PercentilesMethod::new);
 
   static {
     

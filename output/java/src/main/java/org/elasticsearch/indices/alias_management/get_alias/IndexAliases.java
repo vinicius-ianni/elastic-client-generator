@@ -39,8 +39,8 @@ public class IndexAliases  implements XContentable<IndexAliases> {
     return IndexAliases.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndexAliases, Void> PARSER =
-    new ConstructingObjectParser<>(IndexAliases.class.getName(), false, args -> new IndexAliases());
+  public static final ObjectParser<IndexAliases, Void> PARSER =
+    new ObjectParser<>(IndexAliases.class.getName(), false, IndexAliases::new);
 
   static {
     PARSER.declareObject(IndexAliases::setAliases, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AliasDefinition.PARSER.apply(pp, null)), ALIASES);

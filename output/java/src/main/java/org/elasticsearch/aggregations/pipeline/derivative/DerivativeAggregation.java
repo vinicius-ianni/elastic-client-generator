@@ -31,8 +31,8 @@ public class DerivativeAggregation  implements XContentable<DerivativeAggregatio
     return DerivativeAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DerivativeAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(DerivativeAggregation.class.getName(), false, args -> new DerivativeAggregation());
+  public static final ObjectParser<DerivativeAggregation, Void> PARSER =
+    new ObjectParser<>(DerivativeAggregation.class.getName(), false, DerivativeAggregation::new);
 
   static {
     

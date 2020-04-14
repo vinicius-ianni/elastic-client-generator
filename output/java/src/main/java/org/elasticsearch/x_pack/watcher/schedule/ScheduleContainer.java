@@ -96,8 +96,8 @@ public class ScheduleContainer  implements XContentable<ScheduleContainer> {
     return ScheduleContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScheduleContainer, Void> PARSER =
-    new ConstructingObjectParser<>(ScheduleContainer.class.getName(), false, args -> new ScheduleContainer());
+  public static final ObjectParser<ScheduleContainer, Void> PARSER =
+    new ObjectParser<>(ScheduleContainer.class.getName(), false, ScheduleContainer::new);
 
   static {
     PARSER.declareObject(ScheduleContainer::setCron, (p, t) -> CronExpression.PARSER.apply(p, t), CRON);

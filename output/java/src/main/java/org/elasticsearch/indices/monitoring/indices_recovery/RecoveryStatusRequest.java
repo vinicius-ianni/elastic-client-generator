@@ -43,8 +43,8 @@ public class RecoveryStatusRequest  implements XContentable<RecoveryStatusReques
     return RecoveryStatusRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryStatusRequest, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryStatusRequest.class.getName(), false, args -> new RecoveryStatusRequest());
+  public static final ObjectParser<RecoveryStatusRequest, Void> PARSER =
+    new ObjectParser<>(RecoveryStatusRequest.class.getName(), false, RecoveryStatusRequest::new);
 
   static {
     PARSER.declareBoolean(RecoveryStatusRequest::setActiveOnly, ACTIVE_ONLY);

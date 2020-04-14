@@ -101,8 +101,8 @@ public class NodeJvmStats  implements XContentable<NodeJvmStats> {
     return NodeJvmStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeJvmStats, Void> PARSER =
-    new ConstructingObjectParser<>(NodeJvmStats.class.getName(), false, args -> new NodeJvmStats());
+  public static final ObjectParser<NodeJvmStats, Void> PARSER =
+    new ObjectParser<>(NodeJvmStats.class.getName(), false, NodeJvmStats::new);
 
   static {
     PARSER.declareObject(NodeJvmStats::setBufferPools, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> NodeBufferPool.PARSER.apply(pp, null)), BUFFER_POOLS);

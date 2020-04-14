@@ -48,12 +48,12 @@ public class GeoPolygonQuery  implements XContentable<GeoPolygonQuery> {
     return GeoPolygonQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoPolygonQuery, Void> PARSER =
-    new ConstructingObjectParser<>(GeoPolygonQuery.class.getName(), false, args -> new GeoPolygonQuery());
+  public static final ObjectParser<GeoPolygonQuery, Void> PARSER =
+    new ObjectParser<>(GeoPolygonQuery.class.getName(), false, GeoPolygonQuery::new);
 
   static {
     PARSER.declareObjectArray(GeoPolygonQuery::setPoints, (p, t) -> GeoLocation.PARSER.apply(p, t), POINTS);
-    PARSER.declareObject(GeoPolygonQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD);
+    PARSER.declareField(GeoPolygonQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

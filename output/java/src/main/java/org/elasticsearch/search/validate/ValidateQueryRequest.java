@@ -130,17 +130,17 @@ public class ValidateQueryRequest  implements XContentable<ValidateQueryRequest>
     return ValidateQueryRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ValidateQueryRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ValidateQueryRequest.class.getName(), false, args -> new ValidateQueryRequest());
+  public static final ObjectParser<ValidateQueryRequest, Void> PARSER =
+    new ObjectParser<>(ValidateQueryRequest.class.getName(), false, ValidateQueryRequest::new);
 
   static {
     PARSER.declareBoolean(ValidateQueryRequest::setAllShards, ALL_SHARDS);
     PARSER.declareBoolean(ValidateQueryRequest::setAllowNoIndices, ALLOW_NO_INDICES);
     PARSER.declareBoolean(ValidateQueryRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(ValidateQueryRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(ValidateQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(ValidateQueryRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(ValidateQueryRequest::setDf, DF);
-    PARSER.declareObject(ValidateQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(ValidateQueryRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(ValidateQueryRequest::setExplain, EXPLAIN);
     PARSER.declareBoolean(ValidateQueryRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(ValidateQueryRequest::setLenient, LENIENT);

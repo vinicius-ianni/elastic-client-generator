@@ -43,8 +43,8 @@ public class HttpStats  implements XContentable<HttpStats> {
     return HttpStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HttpStats, Void> PARSER =
-    new ConstructingObjectParser<>(HttpStats.class.getName(), false, args -> new HttpStats());
+  public static final ObjectParser<HttpStats, Void> PARSER =
+    new ObjectParser<>(HttpStats.class.getName(), false, HttpStats::new);
 
   static {
     PARSER.declareInt(HttpStats::setCurrentOpen, CURRENT_OPEN);

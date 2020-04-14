@@ -39,8 +39,8 @@ public class GrokProcessorPatternsResponse  implements XContentable<GrokProcesso
     return GrokProcessorPatternsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GrokProcessorPatternsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GrokProcessorPatternsResponse.class.getName(), false, args -> new GrokProcessorPatternsResponse());
+  public static final ObjectParser<GrokProcessorPatternsResponse, Void> PARSER =
+    new ObjectParser<>(GrokProcessorPatternsResponse.class.getName(), false, GrokProcessorPatternsResponse::new);
 
   static {
     PARSER.declareObject(GrokProcessorPatternsResponse::setPatterns, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.text()), PATTERNS);

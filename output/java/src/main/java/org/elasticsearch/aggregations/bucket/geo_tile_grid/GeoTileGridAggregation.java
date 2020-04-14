@@ -65,12 +65,12 @@ public class GeoTileGridAggregation  implements XContentable<GeoTileGridAggregat
     return GeoTileGridAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoTileGridAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(GeoTileGridAggregation.class.getName(), false, args -> new GeoTileGridAggregation());
+  public static final ObjectParser<GeoTileGridAggregation, Void> PARSER =
+    new ObjectParser<>(GeoTileGridAggregation.class.getName(), false, GeoTileGridAggregation::new);
 
   static {
     PARSER.declareObject(GeoTileGridAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);
-    PARSER.declareObject(GeoTileGridAggregation::setPrecision, (p, t) -> GeoTilePrecision.PARSER.apply(p), PRECISION);
+    PARSER.declareField(GeoTileGridAggregation::setPrecision, (p, t) -> GeoTilePrecision.PARSER.apply(p), PRECISION, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(GeoTileGridAggregation::setShardSize, SHARD_SIZE);
     PARSER.declareInt(GeoTileGridAggregation::setSize, SIZE);
   }

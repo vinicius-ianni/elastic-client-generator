@@ -39,8 +39,8 @@ public class GarbageCollectionStats  implements XContentable<GarbageCollectionSt
     return GarbageCollectionStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GarbageCollectionStats, Void> PARSER =
-    new ConstructingObjectParser<>(GarbageCollectionStats.class.getName(), false, args -> new GarbageCollectionStats());
+  public static final ObjectParser<GarbageCollectionStats, Void> PARSER =
+    new ObjectParser<>(GarbageCollectionStats.class.getName(), false, GarbageCollectionStats::new);
 
   static {
     PARSER.declareObject(GarbageCollectionStats::setCollectors, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> GarbageCollectionGenerationStats.PARSER.apply(pp, null)), COLLECTORS);

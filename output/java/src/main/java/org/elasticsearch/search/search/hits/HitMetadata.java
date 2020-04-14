@@ -85,8 +85,8 @@ public class HitMetadata<TDocument>  implements XContentable<HitMetadata<TDocume
     return HitMetadata.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HitMetadata, Void> PARSER =
-    new ConstructingObjectParser<>(HitMetadata.class.getName(), false, args -> new HitMetadata());
+  public static final ObjectParser<HitMetadata, Void> PARSER =
+    new ObjectParser<>(HitMetadata.class.getName(), false, HitMetadata::new);
 
   static {
     PARSER.declareString(HitMetadata::setId, ID);

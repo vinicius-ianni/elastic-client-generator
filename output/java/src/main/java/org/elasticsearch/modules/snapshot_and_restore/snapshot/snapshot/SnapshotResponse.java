@@ -46,8 +46,8 @@ public class SnapshotResponse  implements XContentable<SnapshotResponse> {
     return SnapshotResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotResponse, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotResponse.class.getName(), false, args -> new SnapshotResponse());
+  public static final ObjectParser<SnapshotResponse, Void> PARSER =
+    new ObjectParser<>(SnapshotResponse.class.getName(), false, SnapshotResponse::new);
 
   static {
     PARSER.declareBoolean(SnapshotResponse::setAccepted, ACCEPTED);

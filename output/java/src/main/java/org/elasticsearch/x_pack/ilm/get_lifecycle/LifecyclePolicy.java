@@ -55,8 +55,8 @@ public class LifecyclePolicy  implements XContentable<LifecyclePolicy> {
     return LifecyclePolicy.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LifecyclePolicy, Void> PARSER =
-    new ConstructingObjectParser<>(LifecyclePolicy.class.getName(), false, args -> new LifecyclePolicy());
+  public static final ObjectParser<LifecyclePolicy, Void> PARSER =
+    new ObjectParser<>(LifecyclePolicy.class.getName(), false, LifecyclePolicy::new);
 
   static {
     PARSER.declareObject(LifecyclePolicy::setModifiedDate, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), MODIFIED_DATE);

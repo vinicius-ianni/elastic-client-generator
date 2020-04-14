@@ -115,8 +115,8 @@ public class EmailResult  implements XContentable<EmailResult> {
     return EmailResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<EmailResult, Void> PARSER =
-    new ConstructingObjectParser<>(EmailResult.class.getName(), false, args -> new EmailResult());
+  public static final ObjectParser<EmailResult, Void> PARSER =
+    new ObjectParser<>(EmailResult.class.getName(), false, EmailResult::new);
 
   static {
     PARSER.declareStringArray(EmailResult::setBcc, BCC);
@@ -124,7 +124,7 @@ public class EmailResult  implements XContentable<EmailResult> {
     PARSER.declareStringArray(EmailResult::setCc, CC);
     PARSER.declareString(EmailResult::setFrom, FROM);
     PARSER.declareString(EmailResult::setId, ID);
-    PARSER.declareObject(EmailResult::setPriority, (p, t) -> EmailPriority.PARSER.apply(p), PRIORITY);
+    PARSER.declareField(EmailResult::setPriority, (p, t) -> EmailPriority.PARSER.apply(p), PRIORITY, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareStringArray(EmailResult::setReplyTo, REPLY_TO);
     PARSER.declareObject(EmailResult::setSentDate, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), SENT_DATE);
     PARSER.declareString(EmailResult::setSubject, SUBJECT);

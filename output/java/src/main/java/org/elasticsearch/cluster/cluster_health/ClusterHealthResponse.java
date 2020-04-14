@@ -150,8 +150,8 @@ public class ClusterHealthResponse  implements XContentable<ClusterHealthRespons
     return ClusterHealthResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterHealthResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterHealthResponse.class.getName(), false, args -> new ClusterHealthResponse());
+  public static final ObjectParser<ClusterHealthResponse, Void> PARSER =
+    new ObjectParser<>(ClusterHealthResponse.class.getName(), false, ClusterHealthResponse::new);
 
   static {
     PARSER.declareInt(ClusterHealthResponse::setActivePrimaryShards, ACTIVE_PRIMARY_SHARDS);
@@ -166,7 +166,7 @@ public class ClusterHealthResponse  implements XContentable<ClusterHealthRespons
     PARSER.declareInt(ClusterHealthResponse::setNumberOfNodes, NUMBER_OF_NODES);
     PARSER.declareInt(ClusterHealthResponse::setNumberOfPendingTasks, NUMBER_OF_PENDING_TASKS);
     PARSER.declareInt(ClusterHealthResponse::setRelocatingShards, RELOCATING_SHARDS);
-    PARSER.declareObject(ClusterHealthResponse::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS);
+    PARSER.declareField(ClusterHealthResponse::setStatus, (p, t) -> Health.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareLong(ClusterHealthResponse::setTaskMaxWaitingInQueueMillis, TASK_MAX_WAITING_IN_QUEUE_MILLIS);
     PARSER.declareBoolean(ClusterHealthResponse::setTimedOut, TIMED_OUT);
     PARSER.declareInt(ClusterHealthResponse::setUnassignedShards, UNASSIGNED_SHARDS);

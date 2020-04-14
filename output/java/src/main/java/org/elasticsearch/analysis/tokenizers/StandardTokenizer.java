@@ -36,8 +36,8 @@ public class StandardTokenizer  implements XContentable<StandardTokenizer> {
     return StandardTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StandardTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(StandardTokenizer.class.getName(), false, args -> new StandardTokenizer());
+  public static final ObjectParser<StandardTokenizer, Void> PARSER =
+    new ObjectParser<>(StandardTokenizer.class.getName(), false, StandardTokenizer::new);
 
   static {
     PARSER.declareInt(StandardTokenizer::setMaxTokenLength, MAX_TOKEN_LENGTH);

@@ -99,8 +99,8 @@ public class ShardIndexing  implements XContentable<ShardIndexing> {
     return ShardIndexing.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardIndexing, Void> PARSER =
-    new ConstructingObjectParser<>(ShardIndexing.class.getName(), false, args -> new ShardIndexing());
+  public static final ObjectParser<ShardIndexing, Void> PARSER =
+    new ObjectParser<>(ShardIndexing.class.getName(), false, ShardIndexing::new);
 
   static {
     PARSER.declareLong(ShardIndexing::setDeleteCurrent, DELETE_CURRENT);

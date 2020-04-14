@@ -50,8 +50,8 @@ public class NodePackagingType  implements XContentable<NodePackagingType> {
     return NodePackagingType.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodePackagingType, Void> PARSER =
-    new ConstructingObjectParser<>(NodePackagingType.class.getName(), false, args -> new NodePackagingType());
+  public static final ObjectParser<NodePackagingType, Void> PARSER =
+    new ObjectParser<>(NodePackagingType.class.getName(), false, NodePackagingType::new);
 
   static {
     PARSER.declareInt(NodePackagingType::setCount, COUNT);

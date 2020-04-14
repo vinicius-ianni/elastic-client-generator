@@ -46,8 +46,8 @@ public class GetDatafeedsResponse  implements XContentable<GetDatafeedsResponse>
     return GetDatafeedsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetDatafeedsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetDatafeedsResponse.class.getName(), false, args -> new GetDatafeedsResponse());
+  public static final ObjectParser<GetDatafeedsResponse, Void> PARSER =
+    new ObjectParser<>(GetDatafeedsResponse.class.getName(), false, GetDatafeedsResponse::new);
 
   static {
     PARSER.declareLong(GetDatafeedsResponse::setCount, COUNT);

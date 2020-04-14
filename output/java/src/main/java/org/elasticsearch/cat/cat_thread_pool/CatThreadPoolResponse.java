@@ -38,8 +38,8 @@ public class CatThreadPoolResponse  implements XContentable<CatThreadPoolRespons
     return CatThreadPoolResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatThreadPoolResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CatThreadPoolResponse.class.getName(), false, args -> new CatThreadPoolResponse());
+  public static final ObjectParser<CatThreadPoolResponse, Void> PARSER =
+    new ObjectParser<>(CatThreadPoolResponse.class.getName(), false, CatThreadPoolResponse::new);
 
   static {
     PARSER.declareObjectArray(CatThreadPoolResponse::setRecords, (p, t) -> CatThreadPoolRecord.PARSER.apply(p, t), RECORDS);

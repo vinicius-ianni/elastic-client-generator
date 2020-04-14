@@ -71,8 +71,8 @@ public class MemoryStats  implements XContentable<MemoryStats> {
     return MemoryStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MemoryStats, Void> PARSER =
-    new ConstructingObjectParser<>(MemoryStats.class.getName(), false, args -> new MemoryStats());
+  public static final ObjectParser<MemoryStats, Void> PARSER =
+    new ObjectParser<>(MemoryStats.class.getName(), false, MemoryStats::new);
 
   static {
     PARSER.declareString(MemoryStats::setResident, RESIDENT);

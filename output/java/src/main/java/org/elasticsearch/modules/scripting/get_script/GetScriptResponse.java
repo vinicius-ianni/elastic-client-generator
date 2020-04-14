@@ -39,8 +39,8 @@ public class GetScriptResponse  implements XContentable<GetScriptResponse> {
     return GetScriptResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetScriptResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetScriptResponse.class.getName(), false, args -> new GetScriptResponse());
+  public static final ObjectParser<GetScriptResponse, Void> PARSER =
+    new ObjectParser<>(GetScriptResponse.class.getName(), false, GetScriptResponse::new);
 
   static {
     PARSER.declareObject(GetScriptResponse::setScript, (p, t) -> StoredScript.PARSER.apply(p, t), SCRIPT);

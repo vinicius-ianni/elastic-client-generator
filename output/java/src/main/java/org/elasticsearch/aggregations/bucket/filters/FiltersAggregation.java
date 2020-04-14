@@ -53,8 +53,8 @@ public class FiltersAggregation  implements XContentable<FiltersAggregation> {
     return FiltersAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FiltersAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(FiltersAggregation.class.getName(), false, args -> new FiltersAggregation());
+  public static final ObjectParser<FiltersAggregation, Void> PARSER =
+    new ObjectParser<>(FiltersAggregation.class.getName(), false, FiltersAggregation::new);
 
   static {
     PARSER.declareObject(FiltersAggregation::setFilters, (p, t) ->  new Either<NamedContainer<String, QueryContainer>, List<QueryContainer>>() /* TODO UnionOf */, FILTERS);

@@ -85,8 +85,8 @@ public class NodeInfoOscpu  implements XContentable<NodeInfoOscpu> {
     return NodeInfoOscpu.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeInfoOscpu, Void> PARSER =
-    new ConstructingObjectParser<>(NodeInfoOscpu.class.getName(), false, args -> new NodeInfoOscpu());
+  public static final ObjectParser<NodeInfoOscpu, Void> PARSER =
+    new ObjectParser<>(NodeInfoOscpu.class.getName(), false, NodeInfoOscpu::new);
 
   static {
     PARSER.declareString(NodeInfoOscpu::setCacheSize, CACHE_SIZE);

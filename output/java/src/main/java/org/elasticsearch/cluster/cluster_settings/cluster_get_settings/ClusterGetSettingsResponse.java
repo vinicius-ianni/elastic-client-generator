@@ -49,8 +49,8 @@ public class ClusterGetSettingsResponse  implements XContentable<ClusterGetSetti
     return ClusterGetSettingsResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterGetSettingsResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterGetSettingsResponse.class.getName(), false, args -> new ClusterGetSettingsResponse());
+  public static final ObjectParser<ClusterGetSettingsResponse, Void> PARSER =
+    new ObjectParser<>(ClusterGetSettingsResponse.class.getName(), false, ClusterGetSettingsResponse::new);
 
   static {
     PARSER.declareObject(ClusterGetSettingsResponse::setPersistent, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), PERSISTENT);

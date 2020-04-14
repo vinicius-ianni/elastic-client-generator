@@ -77,8 +77,8 @@ public class JobForecastStatistics  implements XContentable<JobForecastStatistic
     return JobForecastStatistics.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<JobForecastStatistics, Void> PARSER =
-    new ConstructingObjectParser<>(JobForecastStatistics.class.getName(), false, args -> new JobForecastStatistics());
+  public static final ObjectParser<JobForecastStatistics, Void> PARSER =
+    new ObjectParser<>(JobForecastStatistics.class.getName(), false, JobForecastStatistics::new);
 
   static {
     PARSER.declareObject(JobForecastStatistics::setMemoryBytes, (p, t) -> JobStatistics.PARSER.apply(p, t), MEMORY_BYTES);

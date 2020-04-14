@@ -61,8 +61,8 @@ public class HotThreadInformation  implements XContentable<HotThreadInformation>
     return HotThreadInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HotThreadInformation, Void> PARSER =
-    new ConstructingObjectParser<>(HotThreadInformation.class.getName(), false, args -> new HotThreadInformation());
+  public static final ObjectParser<HotThreadInformation, Void> PARSER =
+    new ObjectParser<>(HotThreadInformation.class.getName(), false, HotThreadInformation::new);
 
   static {
     PARSER.declareStringArray(HotThreadInformation::setHosts, HOSTS);

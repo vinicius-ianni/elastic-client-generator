@@ -31,8 +31,8 @@ public class EnableUserResponse  implements XContentable<EnableUserResponse> {
     return EnableUserResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<EnableUserResponse, Void> PARSER =
-    new ConstructingObjectParser<>(EnableUserResponse.class.getName(), false, args -> new EnableUserResponse());
+  public static final ObjectParser<EnableUserResponse, Void> PARSER =
+    new ObjectParser<>(EnableUserResponse.class.getName(), false, EnableUserResponse::new);
 
   static {
     

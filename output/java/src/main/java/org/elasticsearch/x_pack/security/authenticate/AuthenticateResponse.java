@@ -89,8 +89,8 @@ public class AuthenticateResponse  implements XContentable<AuthenticateResponse>
     return AuthenticateResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AuthenticateResponse, Void> PARSER =
-    new ConstructingObjectParser<>(AuthenticateResponse.class.getName(), false, args -> new AuthenticateResponse());
+  public static final ObjectParser<AuthenticateResponse, Void> PARSER =
+    new ObjectParser<>(AuthenticateResponse.class.getName(), false, AuthenticateResponse::new);
 
   static {
     PARSER.declareString(AuthenticateResponse::setEmail, EMAIL);

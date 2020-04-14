@@ -58,8 +58,8 @@ public class WeightedAverageValue  implements XContentable<WeightedAverageValue>
     return WeightedAverageValue.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<WeightedAverageValue, Void> PARSER =
-    new ConstructingObjectParser<>(WeightedAverageValue.class.getName(), false, args -> new WeightedAverageValue());
+  public static final ObjectParser<WeightedAverageValue, Void> PARSER =
+    new ObjectParser<>(WeightedAverageValue.class.getName(), false, WeightedAverageValue::new);
 
   static {
     PARSER.declareObject(WeightedAverageValue::setField, (p, t) -> Field.createFrom(p), FIELD);

@@ -57,8 +57,8 @@ public class ValidationExplanation  implements XContentable<ValidationExplanatio
     return ValidationExplanation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ValidationExplanation, Void> PARSER =
-    new ConstructingObjectParser<>(ValidationExplanation.class.getName(), false, args -> new ValidationExplanation());
+  public static final ObjectParser<ValidationExplanation, Void> PARSER =
+    new ObjectParser<>(ValidationExplanation.class.getName(), false, ValidationExplanation::new);
 
   static {
     PARSER.declareString(ValidationExplanation::setError, ERROR);

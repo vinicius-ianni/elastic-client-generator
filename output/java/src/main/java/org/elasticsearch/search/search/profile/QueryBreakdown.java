@@ -71,8 +71,8 @@ public class QueryBreakdown  implements XContentable<QueryBreakdown> {
     return QueryBreakdown.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<QueryBreakdown, Void> PARSER =
-    new ConstructingObjectParser<>(QueryBreakdown.class.getName(), false, args -> new QueryBreakdown());
+  public static final ObjectParser<QueryBreakdown, Void> PARSER =
+    new ObjectParser<>(QueryBreakdown.class.getName(), false, QueryBreakdown::new);
 
   static {
     PARSER.declareLong(QueryBreakdown::setAdvance, ADVANCE);

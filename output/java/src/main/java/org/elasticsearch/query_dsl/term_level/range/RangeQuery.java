@@ -31,8 +31,8 @@ public class RangeQuery  implements XContentable<RangeQuery> {
     return RangeQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RangeQuery, Void> PARSER =
-    new ConstructingObjectParser<>(RangeQuery.class.getName(), false, args -> new RangeQuery());
+  public static final ObjectParser<RangeQuery, Void> PARSER =
+    new ObjectParser<>(RangeQuery.class.getName(), false, RangeQuery::new);
 
   static {
     

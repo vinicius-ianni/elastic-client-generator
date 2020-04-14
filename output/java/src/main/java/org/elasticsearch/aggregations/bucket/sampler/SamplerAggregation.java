@@ -65,11 +65,11 @@ public class SamplerAggregation  implements XContentable<SamplerAggregation> {
     return SamplerAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SamplerAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(SamplerAggregation.class.getName(), false, args -> new SamplerAggregation());
+  public static final ObjectParser<SamplerAggregation, Void> PARSER =
+    new ObjectParser<>(SamplerAggregation.class.getName(), false, SamplerAggregation::new);
 
   static {
-    PARSER.declareObject(SamplerAggregation::setExecutionHint, (p, t) -> SamplerAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT);
+    PARSER.declareField(SamplerAggregation::setExecutionHint, (p, t) -> SamplerAggregationExecutionHint.PARSER.apply(p), EXECUTION_HINT, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(SamplerAggregation::setMaxDocsPerValue, MAX_DOCS_PER_VALUE);
     PARSER.declareObject(SamplerAggregation::setScript, (p, t) -> Script.PARSER.apply(p, t), SCRIPT);
     PARSER.declareInt(SamplerAggregation::setShardSize, SHARD_SIZE);

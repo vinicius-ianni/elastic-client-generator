@@ -50,8 +50,8 @@ public class ShardSegmentRouting  implements XContentable<ShardSegmentRouting> {
     return ShardSegmentRouting.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardSegmentRouting, Void> PARSER =
-    new ConstructingObjectParser<>(ShardSegmentRouting.class.getName(), false, args -> new ShardSegmentRouting());
+  public static final ObjectParser<ShardSegmentRouting, Void> PARSER =
+    new ObjectParser<>(ShardSegmentRouting.class.getName(), false, ShardSegmentRouting::new);
 
   static {
     PARSER.declareString(ShardSegmentRouting::setNode, NODE);

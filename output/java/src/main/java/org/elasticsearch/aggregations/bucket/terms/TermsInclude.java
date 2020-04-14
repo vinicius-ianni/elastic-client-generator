@@ -59,8 +59,8 @@ public class TermsInclude  implements XContentable<TermsInclude> {
     return TermsInclude.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermsInclude, Void> PARSER =
-    new ConstructingObjectParser<>(TermsInclude.class.getName(), false, args -> new TermsInclude());
+  public static final ObjectParser<TermsInclude, Void> PARSER =
+    new ObjectParser<>(TermsInclude.class.getName(), false, TermsInclude::new);
 
   static {
     PARSER.declareLong(TermsInclude::setNumPartitions, NUM_PARTITIONS);

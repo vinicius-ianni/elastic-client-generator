@@ -109,8 +109,8 @@ public class AnalyzeRequest  implements XContentable<AnalyzeRequest> {
     return AnalyzeRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<AnalyzeRequest, Void> PARSER =
-    new ConstructingObjectParser<>(AnalyzeRequest.class.getName(), false, args -> new AnalyzeRequest());
+  public static final ObjectParser<AnalyzeRequest, Void> PARSER =
+    new ObjectParser<>(AnalyzeRequest.class.getName(), false, AnalyzeRequest::new);
 
   static {
     PARSER.declareString(AnalyzeRequest::setAnalyzer, ANALYZER);

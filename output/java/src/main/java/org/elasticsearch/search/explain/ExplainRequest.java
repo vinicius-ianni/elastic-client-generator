@@ -138,13 +138,13 @@ public class ExplainRequest  implements XContentable<ExplainRequest> {
     return ExplainRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ExplainRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ExplainRequest.class.getName(), false, args -> new ExplainRequest());
+  public static final ObjectParser<ExplainRequest, Void> PARSER =
+    new ObjectParser<>(ExplainRequest.class.getName(), false, ExplainRequest::new);
 
   static {
     PARSER.declareBoolean(ExplainRequest::setAnalyzeWildcard, ANALYZE_WILDCARD);
     PARSER.declareString(ExplainRequest::setAnalyzer, ANALYZER);
-    PARSER.declareObject(ExplainRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR);
+    PARSER.declareField(ExplainRequest::setDefaultOperator, (p, t) -> DefaultOperator.PARSER.apply(p), DEFAULT_OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(ExplainRequest::setDf, DF);
     PARSER.declareBoolean(ExplainRequest::setLenient, LENIENT);
     PARSER.declareString(ExplainRequest::setPreference, PREFERENCE);

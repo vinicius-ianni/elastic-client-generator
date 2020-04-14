@@ -45,8 +45,8 @@ public class LicenseAcknowledgement  implements XContentable<LicenseAcknowledgem
     return LicenseAcknowledgement.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LicenseAcknowledgement, Void> PARSER =
-    new ConstructingObjectParser<>(LicenseAcknowledgement.class.getName(), false, args -> new LicenseAcknowledgement());
+  public static final ObjectParser<LicenseAcknowledgement, Void> PARSER =
+    new ObjectParser<>(LicenseAcknowledgement.class.getName(), false, LicenseAcknowledgement::new);
 
   static {
     PARSER.declareStringArray(LicenseAcknowledgement::setLicense, LICENSE);

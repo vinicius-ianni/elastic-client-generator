@@ -89,13 +89,13 @@ public class ListTasksRequest  implements XContentable<ListTasksRequest> {
     return ListTasksRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ListTasksRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ListTasksRequest.class.getName(), false, args -> new ListTasksRequest());
+  public static final ObjectParser<ListTasksRequest, Void> PARSER =
+    new ObjectParser<>(ListTasksRequest.class.getName(), false, ListTasksRequest::new);
 
   static {
     PARSER.declareStringArray(ListTasksRequest::setActions, ACTIONS);
     PARSER.declareBoolean(ListTasksRequest::setDetailed, DETAILED);
-    PARSER.declareObject(ListTasksRequest::setGroupBy, (p, t) -> GroupBy.PARSER.apply(p), GROUP_BY);
+    PARSER.declareField(ListTasksRequest::setGroupBy, (p, t) -> GroupBy.PARSER.apply(p), GROUP_BY, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareStringArray(ListTasksRequest::setNodes, NODES);
     PARSER.declareString(ListTasksRequest::setParentTaskId, PARENT_TASK_ID);
     PARSER.declareObject(ListTasksRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

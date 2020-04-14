@@ -104,8 +104,8 @@ public class MultiGetOperation  implements XContentable<MultiGetOperation> {
     return MultiGetOperation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MultiGetOperation, Void> PARSER =
-    new ConstructingObjectParser<>(MultiGetOperation.class.getName(), false, args -> new MultiGetOperation());
+  public static final ObjectParser<MultiGetOperation, Void> PARSER =
+    new ObjectParser<>(MultiGetOperation.class.getName(), false, MultiGetOperation::new);
 
   static {
     PARSER.declareBoolean(MultiGetOperation::setCanBeFlattened, CAN_BE_FLATTENED);
@@ -115,7 +115,7 @@ public class MultiGetOperation  implements XContentable<MultiGetOperation> {
     PARSER.declareObject(MultiGetOperation::setSource, (p, t) ->  new Either<Boolean, SourceFilter>() /* TODO UnionOf */, SOURCE);
     PARSER.declareObjectArray(MultiGetOperation::setStoredFields, (p, t) -> Field.createFrom(p), STORED_FIELDS);
     PARSER.declareLong(MultiGetOperation::setVersion, VERSION);
-    PARSER.declareObject(MultiGetOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(MultiGetOperation::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

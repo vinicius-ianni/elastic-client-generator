@@ -39,8 +39,8 @@ public class TriggerEventContainer  implements XContentable<TriggerEventContaine
     return TriggerEventContainer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TriggerEventContainer, Void> PARSER =
-    new ConstructingObjectParser<>(TriggerEventContainer.class.getName(), false, args -> new TriggerEventContainer());
+  public static final ObjectParser<TriggerEventContainer, Void> PARSER =
+    new ObjectParser<>(TriggerEventContainer.class.getName(), false, TriggerEventContainer::new);
 
   static {
     PARSER.declareObject(TriggerEventContainer::setSchedule, (p, t) -> ScheduleTriggerEvent.PARSER.apply(p, t), SCHEDULE);

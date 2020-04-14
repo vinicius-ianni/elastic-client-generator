@@ -43,8 +43,8 @@ public class TokenizerBase  implements XContentable<TokenizerBase> {
     return TokenizerBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TokenizerBase, Void> PARSER =
-    new ConstructingObjectParser<>(TokenizerBase.class.getName(), false, args -> new TokenizerBase());
+  public static final ObjectParser<TokenizerBase, Void> PARSER =
+    new ObjectParser<>(TokenizerBase.class.getName(), false, TokenizerBase::new);
 
   static {
     PARSER.declareString(TokenizerBase::setType, TYPE);

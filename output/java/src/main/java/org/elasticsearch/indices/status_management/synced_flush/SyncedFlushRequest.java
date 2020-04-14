@@ -53,12 +53,12 @@ public class SyncedFlushRequest  implements XContentable<SyncedFlushRequest> {
     return SyncedFlushRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SyncedFlushRequest, Void> PARSER =
-    new ConstructingObjectParser<>(SyncedFlushRequest.class.getName(), false, args -> new SyncedFlushRequest());
+  public static final ObjectParser<SyncedFlushRequest, Void> PARSER =
+    new ObjectParser<>(SyncedFlushRequest.class.getName(), false, SyncedFlushRequest::new);
 
   static {
     PARSER.declareBoolean(SyncedFlushRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(SyncedFlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(SyncedFlushRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(SyncedFlushRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
   }
 

@@ -53,8 +53,8 @@ public class SpanNearQuery  implements XContentable<SpanNearQuery> {
     return SpanNearQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SpanNearQuery, Void> PARSER =
-    new ConstructingObjectParser<>(SpanNearQuery.class.getName(), false, args -> new SpanNearQuery());
+  public static final ObjectParser<SpanNearQuery, Void> PARSER =
+    new ObjectParser<>(SpanNearQuery.class.getName(), false, SpanNearQuery::new);
 
   static {
     PARSER.declareObjectArray(SpanNearQuery::setClauses, (p, t) -> SpanQuery.PARSER.apply(p, t), CLAUSES);

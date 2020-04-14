@@ -43,8 +43,8 @@ public class CardinalityAggregation  implements XContentable<CardinalityAggregat
     return CardinalityAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CardinalityAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(CardinalityAggregation.class.getName(), false, args -> new CardinalityAggregation());
+  public static final ObjectParser<CardinalityAggregation, Void> PARSER =
+    new ObjectParser<>(CardinalityAggregation.class.getName(), false, CardinalityAggregation::new);
 
   static {
     PARSER.declareInt(CardinalityAggregation::setPrecisionThreshold, PRECISION_THRESHOLD);

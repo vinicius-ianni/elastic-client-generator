@@ -36,8 +36,8 @@ public class CompactNodeInfo  implements XContentable<CompactNodeInfo> {
     return CompactNodeInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CompactNodeInfo, Void> PARSER =
-    new ConstructingObjectParser<>(CompactNodeInfo.class.getName(), false, args -> new CompactNodeInfo());
+  public static final ObjectParser<CompactNodeInfo, Void> PARSER =
+    new ObjectParser<>(CompactNodeInfo.class.getName(), false, CompactNodeInfo::new);
 
   static {
     PARSER.declareString(CompactNodeInfo::setName, NAME);

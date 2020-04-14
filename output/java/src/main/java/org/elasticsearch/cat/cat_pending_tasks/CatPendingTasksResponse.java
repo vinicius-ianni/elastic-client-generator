@@ -38,8 +38,8 @@ public class CatPendingTasksResponse  implements XContentable<CatPendingTasksRes
     return CatPendingTasksResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatPendingTasksResponse, Void> PARSER =
-    new ConstructingObjectParser<>(CatPendingTasksResponse.class.getName(), false, args -> new CatPendingTasksResponse());
+  public static final ObjectParser<CatPendingTasksResponse, Void> PARSER =
+    new ObjectParser<>(CatPendingTasksResponse.class.getName(), false, CatPendingTasksResponse::new);
 
   static {
     PARSER.declareObjectArray(CatPendingTasksResponse::setRecords, (p, t) -> CatPendingTasksRecord.PARSER.apply(p, t), RECORDS);

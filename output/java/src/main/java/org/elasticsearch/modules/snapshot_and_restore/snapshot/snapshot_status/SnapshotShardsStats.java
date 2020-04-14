@@ -71,8 +71,8 @@ public class SnapshotShardsStats  implements XContentable<SnapshotShardsStats> {
     return SnapshotShardsStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotShardsStats, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotShardsStats.class.getName(), false, args -> new SnapshotShardsStats());
+  public static final ObjectParser<SnapshotShardsStats, Void> PARSER =
+    new ObjectParser<>(SnapshotShardsStats.class.getName(), false, SnapshotShardsStats::new);
 
   static {
     PARSER.declareLong(SnapshotShardsStats::setDone, DONE);

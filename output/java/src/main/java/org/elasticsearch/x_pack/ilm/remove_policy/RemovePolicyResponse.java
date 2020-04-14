@@ -45,8 +45,8 @@ public class RemovePolicyResponse  implements XContentable<RemovePolicyResponse>
     return RemovePolicyResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RemovePolicyResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RemovePolicyResponse.class.getName(), false, args -> new RemovePolicyResponse());
+  public static final ObjectParser<RemovePolicyResponse, Void> PARSER =
+    new ObjectParser<>(RemovePolicyResponse.class.getName(), false, RemovePolicyResponse::new);
 
   static {
     PARSER.declareStringArray(RemovePolicyResponse::setFailedIndexes, FAILED_INDEXES);

@@ -50,8 +50,8 @@ public class DeleteWatchResponse  implements XContentable<DeleteWatchResponse> {
     return DeleteWatchResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteWatchResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteWatchResponse.class.getName(), false, args -> new DeleteWatchResponse());
+  public static final ObjectParser<DeleteWatchResponse, Void> PARSER =
+    new ObjectParser<>(DeleteWatchResponse.class.getName(), false, DeleteWatchResponse::new);
 
   static {
     PARSER.declareBoolean(DeleteWatchResponse::setFound, FOUND);

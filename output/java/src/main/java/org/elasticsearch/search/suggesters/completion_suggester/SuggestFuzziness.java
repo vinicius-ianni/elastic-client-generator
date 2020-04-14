@@ -68,8 +68,8 @@ public class SuggestFuzziness  implements XContentable<SuggestFuzziness> {
     return SuggestFuzziness.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SuggestFuzziness, Void> PARSER =
-    new ConstructingObjectParser<>(SuggestFuzziness.class.getName(), false, args -> new SuggestFuzziness());
+  public static final ObjectParser<SuggestFuzziness, Void> PARSER =
+    new ObjectParser<>(SuggestFuzziness.class.getName(), false, SuggestFuzziness::new);
 
   static {
     PARSER.declareObject(SuggestFuzziness::setFuzziness, (p, t) -> Fuzziness.PARSER.apply(p, t), FUZZINESS);

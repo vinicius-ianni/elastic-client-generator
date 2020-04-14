@@ -71,8 +71,8 @@ public class RecoveryTranslogStatus  implements XContentable<RecoveryTranslogSta
     return RecoveryTranslogStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryTranslogStatus, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryTranslogStatus.class.getName(), false, args -> new RecoveryTranslogStatus());
+  public static final ObjectParser<RecoveryTranslogStatus, Void> PARSER =
+    new ObjectParser<>(RecoveryTranslogStatus.class.getName(), false, RecoveryTranslogStatus::new);
 
   static {
     PARSER.declareString(RecoveryTranslogStatus::setPercent, PERCENT);

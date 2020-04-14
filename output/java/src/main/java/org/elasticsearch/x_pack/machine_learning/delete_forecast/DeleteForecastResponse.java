@@ -31,8 +31,8 @@ public class DeleteForecastResponse  implements XContentable<DeleteForecastRespo
     return DeleteForecastResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteForecastResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteForecastResponse.class.getName(), false, args -> new DeleteForecastResponse());
+  public static final ObjectParser<DeleteForecastResponse, Void> PARSER =
+    new ObjectParser<>(DeleteForecastResponse.class.getName(), false, DeleteForecastResponse::new);
 
   static {
     

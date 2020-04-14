@@ -61,8 +61,8 @@ public class ClusterIndicesShardsStats  implements XContentable<ClusterIndicesSh
     return ClusterIndicesShardsStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterIndicesShardsStats, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterIndicesShardsStats.class.getName(), false, args -> new ClusterIndicesShardsStats());
+  public static final ObjectParser<ClusterIndicesShardsStats, Void> PARSER =
+    new ObjectParser<>(ClusterIndicesShardsStats.class.getName(), false, ClusterIndicesShardsStats::new);
 
   static {
     PARSER.declareObject(ClusterIndicesShardsStats::setIndex, (p, t) -> ClusterIndicesShardsIndexStats.PARSER.apply(p, t), INDEX);

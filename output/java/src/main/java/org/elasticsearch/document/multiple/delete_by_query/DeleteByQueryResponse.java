@@ -144,8 +144,8 @@ public class DeleteByQueryResponse  implements XContentable<DeleteByQueryRespons
     return DeleteByQueryResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteByQueryResponse, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteByQueryResponse.class.getName(), false, args -> new DeleteByQueryResponse());
+  public static final ObjectParser<DeleteByQueryResponse, Void> PARSER =
+    new ObjectParser<>(DeleteByQueryResponse.class.getName(), false, DeleteByQueryResponse::new);
 
   static {
     PARSER.declareBoolean(DeleteByQueryResponse::setIsValid, IS_VALID);

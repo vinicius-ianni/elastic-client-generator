@@ -47,8 +47,8 @@ public class Rescore  implements XContentable<Rescore> {
     return Rescore.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Rescore, Void> PARSER =
-    new ConstructingObjectParser<>(Rescore.class.getName(), false, args -> new Rescore());
+  public static final ObjectParser<Rescore, Void> PARSER =
+    new ObjectParser<>(Rescore.class.getName(), false, Rescore::new);
 
   static {
     PARSER.declareObject(Rescore::setQuery, (p, t) -> RescoreQuery.PARSER.apply(p, t), QUERY);

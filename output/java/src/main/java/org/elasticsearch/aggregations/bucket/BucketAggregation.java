@@ -39,8 +39,8 @@ public class BucketAggregation  implements XContentable<BucketAggregation> {
     return BucketAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<BucketAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(BucketAggregation.class.getName(), false, args -> new BucketAggregation());
+  public static final ObjectParser<BucketAggregation, Void> PARSER =
+    new ObjectParser<>(BucketAggregation.class.getName(), false, BucketAggregation::new);
 
   static {
     PARSER.declareObject(BucketAggregation::setAggregations, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> AggregationContainer.PARSER.apply(pp, null)), AGGREGATIONS);

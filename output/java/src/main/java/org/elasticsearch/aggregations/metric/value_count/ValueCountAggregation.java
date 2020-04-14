@@ -31,8 +31,8 @@ public class ValueCountAggregation  implements XContentable<ValueCountAggregatio
     return ValueCountAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ValueCountAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(ValueCountAggregation.class.getName(), false, args -> new ValueCountAggregation());
+  public static final ObjectParser<ValueCountAggregation, Void> PARSER =
+    new ObjectParser<>(ValueCountAggregation.class.getName(), false, ValueCountAggregation::new);
 
   static {
     

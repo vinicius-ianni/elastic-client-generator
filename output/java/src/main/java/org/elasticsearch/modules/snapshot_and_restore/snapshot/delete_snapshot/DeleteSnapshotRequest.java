@@ -39,8 +39,8 @@ public class DeleteSnapshotRequest  implements XContentable<DeleteSnapshotReques
     return DeleteSnapshotRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeleteSnapshotRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeleteSnapshotRequest.class.getName(), false, args -> new DeleteSnapshotRequest());
+  public static final ObjectParser<DeleteSnapshotRequest, Void> PARSER =
+    new ObjectParser<>(DeleteSnapshotRequest.class.getName(), false, DeleteSnapshotRequest::new);
 
   static {
     PARSER.declareObject(DeleteSnapshotRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

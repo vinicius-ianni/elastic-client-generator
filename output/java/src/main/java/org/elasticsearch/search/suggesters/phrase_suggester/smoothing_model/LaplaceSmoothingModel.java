@@ -36,8 +36,8 @@ public class LaplaceSmoothingModel  implements XContentable<LaplaceSmoothingMode
     return LaplaceSmoothingModel.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LaplaceSmoothingModel, Void> PARSER =
-    new ConstructingObjectParser<>(LaplaceSmoothingModel.class.getName(), false, args -> new LaplaceSmoothingModel());
+  public static final ObjectParser<LaplaceSmoothingModel, Void> PARSER =
+    new ObjectParser<>(LaplaceSmoothingModel.class.getName(), false, LaplaceSmoothingModel::new);
 
   static {
     PARSER.declareDouble(LaplaceSmoothingModel::setAlpha, ALPHA);

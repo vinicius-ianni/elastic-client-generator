@@ -31,8 +31,8 @@ public class GetRollupIndexCapabilitiesRequest  implements XContentable<GetRollu
     return GetRollupIndexCapabilitiesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetRollupIndexCapabilitiesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetRollupIndexCapabilitiesRequest.class.getName(), false, args -> new GetRollupIndexCapabilitiesRequest());
+  public static final ObjectParser<GetRollupIndexCapabilitiesRequest, Void> PARSER =
+    new ObjectParser<>(GetRollupIndexCapabilitiesRequest.class.getName(), false, GetRollupIndexCapabilitiesRequest::new);
 
   static {
     

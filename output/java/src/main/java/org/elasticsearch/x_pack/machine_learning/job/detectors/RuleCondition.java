@@ -57,12 +57,12 @@ public class RuleCondition  implements XContentable<RuleCondition> {
     return RuleCondition.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RuleCondition, Void> PARSER =
-    new ConstructingObjectParser<>(RuleCondition.class.getName(), false, args -> new RuleCondition());
+  public static final ObjectParser<RuleCondition, Void> PARSER =
+    new ObjectParser<>(RuleCondition.class.getName(), false, RuleCondition::new);
 
   static {
-    PARSER.declareObject(RuleCondition::setAppliesTo, (p, t) -> AppliesTo.PARSER.apply(p), APPLIES_TO);
-    PARSER.declareObject(RuleCondition::setOperator, (p, t) -> ConditionOperator.PARSER.apply(p), OPERATOR);
+    PARSER.declareField(RuleCondition::setAppliesTo, (p, t) -> AppliesTo.PARSER.apply(p), APPLIES_TO, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(RuleCondition::setOperator, (p, t) -> ConditionOperator.PARSER.apply(p), OPERATOR, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareDouble(RuleCondition::setValue, VALUE);
   }
 

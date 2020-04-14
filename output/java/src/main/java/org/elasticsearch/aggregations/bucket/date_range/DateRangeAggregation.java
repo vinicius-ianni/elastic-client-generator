@@ -70,8 +70,8 @@ public class DateRangeAggregation  implements XContentable<DateRangeAggregation>
     return DateRangeAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateRangeAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(DateRangeAggregation.class.getName(), false, args -> new DateRangeAggregation());
+  public static final ObjectParser<DateRangeAggregation, Void> PARSER =
+    new ObjectParser<>(DateRangeAggregation.class.getName(), false, DateRangeAggregation::new);
 
   static {
     PARSER.declareObject(DateRangeAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);

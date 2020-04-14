@@ -36,8 +36,8 @@ public class DocValuesPropertyBase  implements XContentable<DocValuesPropertyBas
     return DocValuesPropertyBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DocValuesPropertyBase, Void> PARSER =
-    new ConstructingObjectParser<>(DocValuesPropertyBase.class.getName(), false, args -> new DocValuesPropertyBase());
+  public static final ObjectParser<DocValuesPropertyBase, Void> PARSER =
+    new ObjectParser<>(DocValuesPropertyBase.class.getName(), false, DocValuesPropertyBase::new);
 
   static {
     PARSER.declareBoolean(DocValuesPropertyBase::setDocValues, DOC_VALUES);

@@ -84,12 +84,12 @@ public class ClearCacheRequest  implements XContentable<ClearCacheRequest> {
     return ClearCacheRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearCacheRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClearCacheRequest.class.getName(), false, args -> new ClearCacheRequest());
+  public static final ObjectParser<ClearCacheRequest, Void> PARSER =
+    new ObjectParser<>(ClearCacheRequest.class.getName(), false, ClearCacheRequest::new);
 
   static {
     PARSER.declareBoolean(ClearCacheRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(ClearCacheRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(ClearCacheRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(ClearCacheRequest::setFielddata, FIELDDATA);
     PARSER.declareObjectArray(ClearCacheRequest::setFields, (p, t) -> Field.createFrom(p), FIELDS);
     PARSER.declareBoolean(ClearCacheRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);

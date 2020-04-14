@@ -31,8 +31,8 @@ public class GetUserPrivilegesRequest  implements XContentable<GetUserPrivileges
     return GetUserPrivilegesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetUserPrivilegesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetUserPrivilegesRequest.class.getName(), false, args -> new GetUserPrivilegesRequest());
+  public static final ObjectParser<GetUserPrivilegesRequest, Void> PARSER =
+    new ObjectParser<>(GetUserPrivilegesRequest.class.getName(), false, GetUserPrivilegesRequest::new);
 
   static {
     

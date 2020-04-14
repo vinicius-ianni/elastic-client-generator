@@ -49,12 +49,12 @@ public class IcuNormalizationCharFilter  implements XContentable<IcuNormalizatio
     return IcuNormalizationCharFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IcuNormalizationCharFilter, Void> PARSER =
-    new ConstructingObjectParser<>(IcuNormalizationCharFilter.class.getName(), false, args -> new IcuNormalizationCharFilter());
+  public static final ObjectParser<IcuNormalizationCharFilter, Void> PARSER =
+    new ObjectParser<>(IcuNormalizationCharFilter.class.getName(), false, IcuNormalizationCharFilter::new);
 
   static {
-    PARSER.declareObject(IcuNormalizationCharFilter::setMode, (p, t) -> IcuNormalizationMode.PARSER.apply(p), MODE);
-    PARSER.declareObject(IcuNormalizationCharFilter::setName, (p, t) -> IcuNormalizationType.PARSER.apply(p), NAME);
+    PARSER.declareField(IcuNormalizationCharFilter::setMode, (p, t) -> IcuNormalizationMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(IcuNormalizationCharFilter::setName, (p, t) -> IcuNormalizationType.PARSER.apply(p), NAME, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

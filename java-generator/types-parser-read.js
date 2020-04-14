@@ -10,6 +10,11 @@ const valueTypes = ["String", "Float", "Double", "Integer", "Boolean", "Long"];
 const $declareType = (type) => {
     if (type instanceof domain_1.default.ArrayOf)
         return $declareType(type.of);
+    if (type instanceof domain_1.default.Type) {
+        const lookup = specs_1.specification.typeLookup[type.name];
+        if (lookup instanceof domain_1.default.Enum)
+            return "Field";
+    }
     const t = naming_1.$instanceOf(type);
     if (valueTypes.includes(t))
         return t.replace("Integer", "Int");
@@ -89,8 +94,16 @@ const $parseProperty = (prop, parent) => {
     let args = $valueParse(typeSymbol, prop.type, parent);
     if (args !== "")
         args += ", ";
-    const declareParser = `PARSER.declare${declareType}(${exp}, ${args}${$fieldRef(prop)});`;
     const closedOverType = recursiveArray(prop.type);
+    let trailingArgs = $fieldRef(prop);
+    const lookup = specs_1.specification.typeLookup[closedOverType.name];
+    if (lookup instanceof domain_1.default.Enum) {
+        if (prop.type instanceof domain_1.default.ArrayOf)
+            trailingArgs += ", ObjectParser.ValueType.STRING_ARRAY";
+        else
+            trailingArgs += ", ObjectParser.ValueType.STRING_OR_NULL";
+    }
+    const declareParser = `PARSER.declare${declareType}(${exp}, ${args}${trailingArgs});`;
     if (closedOverType instanceof domain_1.default.Type && closedOverType.closedGenerics.length > 0) {
         const closedOverSymbol = naming_1.$instanceOf(closedOverType);
         const field = naming_1.$fieldName(prop.name);

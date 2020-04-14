@@ -39,8 +39,8 @@ public class MissingAggregation  implements XContentable<MissingAggregation> {
     return MissingAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MissingAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(MissingAggregation.class.getName(), false, args -> new MissingAggregation());
+  public static final ObjectParser<MissingAggregation, Void> PARSER =
+    new ObjectParser<>(MissingAggregation.class.getName(), false, MissingAggregation::new);
 
   static {
     PARSER.declareObject(MissingAggregation::setField, (p, t) -> Field.createFrom(p), FIELD);

@@ -108,8 +108,8 @@ public class LicenseInformation  implements XContentable<LicenseInformation> {
     return LicenseInformation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LicenseInformation, Void> PARSER =
-    new ConstructingObjectParser<>(LicenseInformation.class.getName(), false, args -> new LicenseInformation());
+  public static final ObjectParser<LicenseInformation, Void> PARSER =
+    new ObjectParser<>(LicenseInformation.class.getName(), false, LicenseInformation::new);
 
   static {
     PARSER.declareObject(LicenseInformation::setExpiryDate, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), EXPIRY_DATE);
@@ -119,8 +119,8 @@ public class LicenseInformation  implements XContentable<LicenseInformation> {
     PARSER.declareString(LicenseInformation::setIssuedTo, ISSUED_TO);
     PARSER.declareString(LicenseInformation::setIssuer, ISSUER);
     PARSER.declareLong(LicenseInformation::setMaxNodes, MAX_NODES);
-    PARSER.declareObject(LicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p), STATUS);
-    PARSER.declareObject(LicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE);
+    PARSER.declareField(LicenseInformation::setStatus, (p, t) -> LicenseStatus.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(LicenseInformation::setType, (p, t) -> LicenseType.PARSER.apply(p), TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(LicenseInformation::setUid, UID);
   }
 

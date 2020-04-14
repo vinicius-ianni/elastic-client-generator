@@ -46,8 +46,8 @@ public class HistogramRollupGrouping  implements XContentable<HistogramRollupGro
     return HistogramRollupGrouping.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<HistogramRollupGrouping, Void> PARSER =
-    new ConstructingObjectParser<>(HistogramRollupGrouping.class.getName(), false, args -> new HistogramRollupGrouping());
+  public static final ObjectParser<HistogramRollupGrouping, Void> PARSER =
+    new ObjectParser<>(HistogramRollupGrouping.class.getName(), false, HistogramRollupGrouping::new);
 
   static {
     PARSER.declareObjectArray(HistogramRollupGrouping::setFields, (p, t) -> Field.createFrom(p), FIELDS);

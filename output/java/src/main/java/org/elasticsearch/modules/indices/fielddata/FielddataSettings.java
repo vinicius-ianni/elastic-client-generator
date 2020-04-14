@@ -46,8 +46,8 @@ public class FielddataSettings  implements XContentable<FielddataSettings> {
     return FielddataSettings.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FielddataSettings, Void> PARSER =
-    new ConstructingObjectParser<>(FielddataSettings.class.getName(), false, args -> new FielddataSettings());
+  public static final ObjectParser<FielddataSettings, Void> PARSER =
+    new ObjectParser<>(FielddataSettings.class.getName(), false, FielddataSettings::new);
 
   static {
     PARSER.declareObject(FielddataSettings::setCacheExpire, (p, t) -> Time.PARSER.apply(p, t), CACHE_EXPIRE);

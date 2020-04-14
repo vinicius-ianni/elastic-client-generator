@@ -60,8 +60,8 @@ public class PutScriptRequest  implements XContentable<PutScriptRequest> {
     return PutScriptRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PutScriptRequest, Void> PARSER =
-    new ConstructingObjectParser<>(PutScriptRequest.class.getName(), false, args -> new PutScriptRequest());
+  public static final ObjectParser<PutScriptRequest, Void> PARSER =
+    new ObjectParser<>(PutScriptRequest.class.getName(), false, PutScriptRequest::new);
 
   static {
     PARSER.declareObject(PutScriptRequest::setScript, (p, t) -> StoredScript.PARSER.apply(p, t), SCRIPT);

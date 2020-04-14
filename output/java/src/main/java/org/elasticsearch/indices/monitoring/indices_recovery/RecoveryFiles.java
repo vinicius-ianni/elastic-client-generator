@@ -67,8 +67,8 @@ public class RecoveryFiles  implements XContentable<RecoveryFiles> {
     return RecoveryFiles.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RecoveryFiles, Void> PARSER =
-    new ConstructingObjectParser<>(RecoveryFiles.class.getName(), false, args -> new RecoveryFiles());
+  public static final ObjectParser<RecoveryFiles, Void> PARSER =
+    new ObjectParser<>(RecoveryFiles.class.getName(), false, RecoveryFiles::new);
 
   static {
     PARSER.declareObjectArray(RecoveryFiles::setDetails, (p, t) -> RecoveryFileDetails.PARSER.apply(p, t), DETAILS);

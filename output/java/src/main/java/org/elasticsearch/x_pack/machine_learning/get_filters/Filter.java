@@ -52,8 +52,8 @@ public class Filter  implements XContentable<Filter> {
     return Filter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Filter, Void> PARSER =
-    new ConstructingObjectParser<>(Filter.class.getName(), false, args -> new Filter());
+  public static final ObjectParser<Filter, Void> PARSER =
+    new ObjectParser<>(Filter.class.getName(), false, Filter::new);
 
   static {
     PARSER.declareString(Filter::setDescription, DESCRIPTION);

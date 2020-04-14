@@ -64,8 +64,8 @@ public class NodeBufferPool  implements XContentable<NodeBufferPool> {
     return NodeBufferPool.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodeBufferPool, Void> PARSER =
-    new ConstructingObjectParser<>(NodeBufferPool.class.getName(), false, args -> new NodeBufferPool());
+  public static final ObjectParser<NodeBufferPool, Void> PARSER =
+    new ObjectParser<>(NodeBufferPool.class.getName(), false, NodeBufferPool::new);
 
   static {
     PARSER.declareLong(NodeBufferPool::setCount, COUNT);

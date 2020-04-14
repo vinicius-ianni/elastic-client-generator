@@ -38,8 +38,8 @@ public class CloseShardResult  implements XContentable<CloseShardResult> {
     return CloseShardResult.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CloseShardResult, Void> PARSER =
-    new ConstructingObjectParser<>(CloseShardResult.class.getName(), false, args -> new CloseShardResult());
+  public static final ObjectParser<CloseShardResult, Void> PARSER =
+    new ObjectParser<>(CloseShardResult.class.getName(), false, CloseShardResult::new);
 
   static {
     PARSER.declareObjectArray(CloseShardResult::setFailures, (p, t) -> ShardFailure.PARSER.apply(p, t), FAILURES);

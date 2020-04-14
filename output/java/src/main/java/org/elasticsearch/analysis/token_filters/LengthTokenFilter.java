@@ -43,8 +43,8 @@ public class LengthTokenFilter  implements XContentable<LengthTokenFilter> {
     return LengthTokenFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LengthTokenFilter, Void> PARSER =
-    new ConstructingObjectParser<>(LengthTokenFilter.class.getName(), false, args -> new LengthTokenFilter());
+  public static final ObjectParser<LengthTokenFilter, Void> PARSER =
+    new ObjectParser<>(LengthTokenFilter.class.getName(), false, LengthTokenFilter::new);
 
   static {
     PARSER.declareInt(LengthTokenFilter::setMax, MAX);

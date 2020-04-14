@@ -49,8 +49,8 @@ public class FielddataFilter  implements XContentable<FielddataFilter> {
     return FielddataFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FielddataFilter, Void> PARSER =
-    new ConstructingObjectParser<>(FielddataFilter.class.getName(), false, args -> new FielddataFilter());
+  public static final ObjectParser<FielddataFilter, Void> PARSER =
+    new ObjectParser<>(FielddataFilter.class.getName(), false, FielddataFilter::new);
 
   static {
     PARSER.declareObject(FielddataFilter::setFrequency, (p, t) -> FielddataFrequencyFilter.PARSER.apply(p, t), FREQUENCY);

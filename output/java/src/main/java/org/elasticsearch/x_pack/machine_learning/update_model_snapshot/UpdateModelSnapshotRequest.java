@@ -43,8 +43,8 @@ public class UpdateModelSnapshotRequest  implements XContentable<UpdateModelSnap
     return UpdateModelSnapshotRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateModelSnapshotRequest, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateModelSnapshotRequest.class.getName(), false, args -> new UpdateModelSnapshotRequest());
+  public static final ObjectParser<UpdateModelSnapshotRequest, Void> PARSER =
+    new ObjectParser<>(UpdateModelSnapshotRequest.class.getName(), false, UpdateModelSnapshotRequest::new);
 
   static {
     PARSER.declareString(UpdateModelSnapshotRequest::setDescription, DESCRIPTION);

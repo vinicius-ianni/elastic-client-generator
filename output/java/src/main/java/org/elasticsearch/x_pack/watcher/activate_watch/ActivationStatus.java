@@ -49,8 +49,8 @@ public class ActivationStatus  implements XContentable<ActivationStatus> {
     return ActivationStatus.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ActivationStatus, Void> PARSER =
-    new ConstructingObjectParser<>(ActivationStatus.class.getName(), false, args -> new ActivationStatus());
+  public static final ObjectParser<ActivationStatus, Void> PARSER =
+    new ObjectParser<>(ActivationStatus.class.getName(), false, ActivationStatus::new);
 
   static {
     PARSER.declareObject(ActivationStatus::setActions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> ActionStatus.PARSER.apply(pp, null)), ACTIONS);

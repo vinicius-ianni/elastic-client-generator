@@ -38,8 +38,8 @@ public class TermsRollupGrouping  implements XContentable<TermsRollupGrouping> {
     return TermsRollupGrouping.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermsRollupGrouping, Void> PARSER =
-    new ConstructingObjectParser<>(TermsRollupGrouping.class.getName(), false, args -> new TermsRollupGrouping());
+  public static final ObjectParser<TermsRollupGrouping, Void> PARSER =
+    new ObjectParser<>(TermsRollupGrouping.class.getName(), false, TermsRollupGrouping::new);
 
   static {
     PARSER.declareObjectArray(TermsRollupGrouping::setFields, (p, t) -> Field.createFrom(p), FIELDS);

@@ -96,12 +96,12 @@ public class ClusterStateRequest  implements XContentable<ClusterStateRequest> {
     return ClusterStateRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterStateRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterStateRequest.class.getName(), false, args -> new ClusterStateRequest());
+  public static final ObjectParser<ClusterStateRequest, Void> PARSER =
+    new ObjectParser<>(ClusterStateRequest.class.getName(), false, ClusterStateRequest::new);
 
   static {
     PARSER.declareBoolean(ClusterStateRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(ClusterStateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(ClusterStateRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(ClusterStateRequest::setFlatSettings, FLAT_SETTINGS);
     PARSER.declareBoolean(ClusterStateRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(ClusterStateRequest::setLocal, LOCAL);

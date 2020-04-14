@@ -78,8 +78,8 @@ public class SlackMessage  implements XContentable<SlackMessage> {
     return SlackMessage.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SlackMessage, Void> PARSER =
-    new ConstructingObjectParser<>(SlackMessage.class.getName(), false, args -> new SlackMessage());
+  public static final ObjectParser<SlackMessage, Void> PARSER =
+    new ObjectParser<>(SlackMessage.class.getName(), false, SlackMessage::new);
 
   static {
     PARSER.declareObjectArray(SlackMessage::setAttachments, (p, t) -> SlackAttachment.PARSER.apply(p, t), ATTACHMENTS);

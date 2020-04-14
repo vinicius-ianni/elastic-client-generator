@@ -70,14 +70,14 @@ public class FollowerInfo  implements XContentable<FollowerInfo> {
     return FollowerInfo.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<FollowerInfo, Void> PARSER =
-    new ConstructingObjectParser<>(FollowerInfo.class.getName(), false, args -> new FollowerInfo());
+  public static final ObjectParser<FollowerInfo, Void> PARSER =
+    new ObjectParser<>(FollowerInfo.class.getName(), false, FollowerInfo::new);
 
   static {
     PARSER.declareString(FollowerInfo::setFollowerIndex, FOLLOWER_INDEX);
     PARSER.declareString(FollowerInfo::setRemoteCluster, REMOTE_CLUSTER);
     PARSER.declareString(FollowerInfo::setLeaderIndex, LEADER_INDEX);
-    PARSER.declareObject(FollowerInfo::setStatus, (p, t) -> FollowerIndexStatus.PARSER.apply(p), STATUS);
+    PARSER.declareField(FollowerInfo::setStatus, (p, t) -> FollowerIndexStatus.PARSER.apply(p), STATUS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(FollowerInfo::setParameters, (p, t) -> FollowConfig.PARSER.apply(p, t), PARAMETERS);
   }
 

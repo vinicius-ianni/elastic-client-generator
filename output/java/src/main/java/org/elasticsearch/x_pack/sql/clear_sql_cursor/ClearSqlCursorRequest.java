@@ -36,8 +36,8 @@ public class ClearSqlCursorRequest  implements XContentable<ClearSqlCursorReques
     return ClearSqlCursorRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClearSqlCursorRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ClearSqlCursorRequest.class.getName(), false, args -> new ClearSqlCursorRequest());
+  public static final ObjectParser<ClearSqlCursorRequest, Void> PARSER =
+    new ObjectParser<>(ClearSqlCursorRequest.class.getName(), false, ClearSqlCursorRequest::new);
 
   static {
     PARSER.declareString(ClearSqlCursorRequest::setCursor, CURSOR);

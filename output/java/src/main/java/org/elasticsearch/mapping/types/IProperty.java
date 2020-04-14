@@ -56,8 +56,8 @@ public class IProperty  implements XContentable<IProperty> {
     return IProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IProperty, Void> PARSER =
-    new ConstructingObjectParser<>(IProperty.class.getName(), false, args -> new IProperty());
+  public static final ObjectParser<IProperty, Void> PARSER =
+    new ObjectParser<>(IProperty.class.getName(), false, IProperty::new);
 
   static {
     PARSER.declareObject(IProperty::setLocalMetadata, (p, t) -> new NamedContainer<>(n -> () -> n,XContentParser::binaryValue), LOCAL_METADATA);

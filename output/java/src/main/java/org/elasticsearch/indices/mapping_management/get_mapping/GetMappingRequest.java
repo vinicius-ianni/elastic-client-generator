@@ -78,12 +78,12 @@ public class GetMappingRequest  implements XContentable<GetMappingRequest> {
     return GetMappingRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetMappingRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetMappingRequest.class.getName(), false, args -> new GetMappingRequest());
+  public static final ObjectParser<GetMappingRequest, Void> PARSER =
+    new ObjectParser<>(GetMappingRequest.class.getName(), false, GetMappingRequest::new);
 
   static {
     PARSER.declareBoolean(GetMappingRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(GetMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(GetMappingRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(GetMappingRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareBoolean(GetMappingRequest::setIncludeTypeName, INCLUDE_TYPE_NAME);
     PARSER.declareBoolean(GetMappingRequest::setLocal, LOCAL);

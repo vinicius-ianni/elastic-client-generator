@@ -31,8 +31,8 @@ public class SumAggregation  implements XContentable<SumAggregation> {
     return SumAggregation.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SumAggregation, Void> PARSER =
-    new ConstructingObjectParser<>(SumAggregation.class.getName(), false, args -> new SumAggregation());
+  public static final ObjectParser<SumAggregation, Void> PARSER =
+    new ObjectParser<>(SumAggregation.class.getName(), false, SumAggregation::new);
 
   static {
     

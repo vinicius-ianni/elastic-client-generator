@@ -31,8 +31,8 @@ public class RoleMappingRuleBase  implements XContentable<RoleMappingRuleBase> {
     return RoleMappingRuleBase.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RoleMappingRuleBase, Void> PARSER =
-    new ConstructingObjectParser<>(RoleMappingRuleBase.class.getName(), false, args -> new RoleMappingRuleBase());
+  public static final ObjectParser<RoleMappingRuleBase, Void> PARSER =
+    new ObjectParser<>(RoleMappingRuleBase.class.getName(), false, RoleMappingRuleBase::new);
 
   static {
     

@@ -56,8 +56,8 @@ public class SnapshotRestore  implements XContentable<SnapshotRestore> {
     return SnapshotRestore.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<SnapshotRestore, Void> PARSER =
-    new ConstructingObjectParser<>(SnapshotRestore.class.getName(), false, args -> new SnapshotRestore());
+  public static final ObjectParser<SnapshotRestore, Void> PARSER =
+    new ObjectParser<>(SnapshotRestore.class.getName(), false, SnapshotRestore::new);
 
   static {
     PARSER.declareObjectArray(SnapshotRestore::setIndices, (p, t) -> IndexName.createFrom(p), INDICES);

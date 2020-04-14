@@ -50,8 +50,8 @@ public class ClusterRerouteDecision  implements XContentable<ClusterRerouteDecis
     return ClusterRerouteDecision.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterRerouteDecision, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterRerouteDecision.class.getName(), false, args -> new ClusterRerouteDecision());
+  public static final ObjectParser<ClusterRerouteDecision, Void> PARSER =
+    new ObjectParser<>(ClusterRerouteDecision.class.getName(), false, ClusterRerouteDecision::new);
 
   static {
     PARSER.declareString(ClusterRerouteDecision::setDecider, DECIDER);

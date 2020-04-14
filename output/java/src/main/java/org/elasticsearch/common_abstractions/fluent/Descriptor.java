@@ -31,8 +31,8 @@ public class Descriptor  implements XContentable<Descriptor> {
     return Descriptor.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Descriptor, Void> PARSER =
-    new ConstructingObjectParser<>(Descriptor.class.getName(), false, args -> new Descriptor());
+  public static final ObjectParser<Descriptor, Void> PARSER =
+    new ObjectParser<>(Descriptor.class.getName(), false, Descriptor::new);
 
   static {
     

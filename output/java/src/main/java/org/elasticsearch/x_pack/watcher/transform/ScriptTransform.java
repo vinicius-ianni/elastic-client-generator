@@ -46,8 +46,8 @@ public class ScriptTransform  implements XContentable<ScriptTransform> {
     return ScriptTransform.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ScriptTransform, Void> PARSER =
-    new ConstructingObjectParser<>(ScriptTransform.class.getName(), false, args -> new ScriptTransform());
+  public static final ObjectParser<ScriptTransform, Void> PARSER =
+    new ObjectParser<>(ScriptTransform.class.getName(), false, ScriptTransform::new);
 
   static {
     PARSER.declareString(ScriptTransform::setLang, LANG);

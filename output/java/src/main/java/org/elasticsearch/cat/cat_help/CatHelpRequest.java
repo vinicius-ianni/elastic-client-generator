@@ -45,8 +45,8 @@ public class CatHelpRequest  implements XContentable<CatHelpRequest> {
     return CatHelpRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<CatHelpRequest, Void> PARSER =
-    new ConstructingObjectParser<>(CatHelpRequest.class.getName(), false, args -> new CatHelpRequest());
+  public static final ObjectParser<CatHelpRequest, Void> PARSER =
+    new ObjectParser<>(CatHelpRequest.class.getName(), false, CatHelpRequest::new);
 
   static {
     PARSER.declareBoolean(CatHelpRequest::setHelp, HELP);

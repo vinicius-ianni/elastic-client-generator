@@ -46,11 +46,11 @@ public class GetUserAccessTokenRequest  implements XContentable<GetUserAccessTok
     return GetUserAccessTokenRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetUserAccessTokenRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetUserAccessTokenRequest.class.getName(), false, args -> new GetUserAccessTokenRequest());
+  public static final ObjectParser<GetUserAccessTokenRequest, Void> PARSER =
+    new ObjectParser<>(GetUserAccessTokenRequest.class.getName(), false, GetUserAccessTokenRequest::new);
 
   static {
-    PARSER.declareObject(GetUserAccessTokenRequest::setGrantType, (p, t) -> AccessTokenGrantType.PARSER.apply(p), GRANT_TYPE);
+    PARSER.declareField(GetUserAccessTokenRequest::setGrantType, (p, t) -> AccessTokenGrantType.PARSER.apply(p), GRANT_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(GetUserAccessTokenRequest::setScope, SCOPE);
   }
 

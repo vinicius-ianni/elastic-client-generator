@@ -31,8 +31,8 @@ public class LazyDocument  implements XContentable<LazyDocument> {
     return LazyDocument.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<LazyDocument, Void> PARSER =
-    new ConstructingObjectParser<>(LazyDocument.class.getName(), false, args -> new LazyDocument());
+  public static final ObjectParser<LazyDocument, Void> PARSER =
+    new ObjectParser<>(LazyDocument.class.getName(), false, LazyDocument::new);
 
   static {
     

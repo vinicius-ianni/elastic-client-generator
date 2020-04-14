@@ -77,12 +77,12 @@ public class KuromojiTokenizer  implements XContentable<KuromojiTokenizer> {
     return KuromojiTokenizer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<KuromojiTokenizer, Void> PARSER =
-    new ConstructingObjectParser<>(KuromojiTokenizer.class.getName(), false, args -> new KuromojiTokenizer());
+  public static final ObjectParser<KuromojiTokenizer, Void> PARSER =
+    new ObjectParser<>(KuromojiTokenizer.class.getName(), false, KuromojiTokenizer::new);
 
   static {
     PARSER.declareBoolean(KuromojiTokenizer::setDiscardPunctuation, DISCARD_PUNCTUATION);
-    PARSER.declareObject(KuromojiTokenizer::setMode, (p, t) -> KuromojiTokenizationMode.PARSER.apply(p), MODE);
+    PARSER.declareField(KuromojiTokenizer::setMode, (p, t) -> KuromojiTokenizationMode.PARSER.apply(p), MODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareInt(KuromojiTokenizer::setNbestCost, NBEST_COST);
     PARSER.declareString(KuromojiTokenizer::setNbestExamples, NBEST_EXAMPLES);
     PARSER.declareString(KuromojiTokenizer::setUserDictionary, USER_DICTIONARY);

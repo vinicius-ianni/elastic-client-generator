@@ -36,8 +36,8 @@ public class DateRangeProperty  implements XContentable<DateRangeProperty> {
     return DateRangeProperty.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DateRangeProperty, Void> PARSER =
-    new ConstructingObjectParser<>(DateRangeProperty.class.getName(), false, args -> new DateRangeProperty());
+  public static final ObjectParser<DateRangeProperty, Void> PARSER =
+    new ObjectParser<>(DateRangeProperty.class.getName(), false, DateRangeProperty::new);
 
   static {
     PARSER.declareString(DateRangeProperty::setFormat, FORMAT);

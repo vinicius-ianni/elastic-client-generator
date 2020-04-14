@@ -43,8 +43,8 @@ public class ShardFlush  implements XContentable<ShardFlush> {
     return ShardFlush.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardFlush, Void> PARSER =
-    new ConstructingObjectParser<>(ShardFlush.class.getName(), false, args -> new ShardFlush());
+  public static final ObjectParser<ShardFlush, Void> PARSER =
+    new ObjectParser<>(ShardFlush.class.getName(), false, ShardFlush::new);
 
   static {
     PARSER.declareLong(ShardFlush::setTotal, TOTAL);

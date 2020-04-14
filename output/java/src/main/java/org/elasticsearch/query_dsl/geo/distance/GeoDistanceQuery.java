@@ -70,14 +70,14 @@ public class GeoDistanceQuery  implements XContentable<GeoDistanceQuery> {
     return GeoDistanceQuery.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GeoDistanceQuery, Void> PARSER =
-    new ConstructingObjectParser<>(GeoDistanceQuery.class.getName(), false, args -> new GeoDistanceQuery());
+  public static final ObjectParser<GeoDistanceQuery, Void> PARSER =
+    new ObjectParser<>(GeoDistanceQuery.class.getName(), false, GeoDistanceQuery::new);
 
   static {
     PARSER.declareObject(GeoDistanceQuery::setDistance, (p, t) -> Distance.PARSER.apply(p, t), DISTANCE);
-    PARSER.declareObject(GeoDistanceQuery::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p), DISTANCE_TYPE);
+    PARSER.declareField(GeoDistanceQuery::setDistanceType, (p, t) -> GeoDistanceType.PARSER.apply(p), DISTANCE_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObject(GeoDistanceQuery::setLocation, (p, t) -> GeoLocation.PARSER.apply(p, t), LOCATION);
-    PARSER.declareObject(GeoDistanceQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD);
+    PARSER.declareField(GeoDistanceQuery::setValidationMethod, (p, t) -> GeoValidationMethod.PARSER.apply(p), VALIDATION_METHOD, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

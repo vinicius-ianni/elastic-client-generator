@@ -36,8 +36,8 @@ public class GetDatafeedsRequest  implements XContentable<GetDatafeedsRequest> {
     return GetDatafeedsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetDatafeedsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetDatafeedsRequest.class.getName(), false, args -> new GetDatafeedsRequest());
+  public static final ObjectParser<GetDatafeedsRequest, Void> PARSER =
+    new ObjectParser<>(GetDatafeedsRequest.class.getName(), false, GetDatafeedsRequest::new);
 
   static {
     PARSER.declareBoolean(GetDatafeedsRequest::setAllowNoDatafeeds, ALLOW_NO_DATAFEEDS);

@@ -50,8 +50,8 @@ public class PatternReplaceCharFilter  implements XContentable<PatternReplaceCha
     return PatternReplaceCharFilter.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<PatternReplaceCharFilter, Void> PARSER =
-    new ConstructingObjectParser<>(PatternReplaceCharFilter.class.getName(), false, args -> new PatternReplaceCharFilter());
+  public static final ObjectParser<PatternReplaceCharFilter, Void> PARSER =
+    new ObjectParser<>(PatternReplaceCharFilter.class.getName(), false, PatternReplaceCharFilter::new);
 
   static {
     PARSER.declareString(PatternReplaceCharFilter::setFlags, FLAGS);

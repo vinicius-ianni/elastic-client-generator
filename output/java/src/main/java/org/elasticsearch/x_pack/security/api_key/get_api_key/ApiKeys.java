@@ -80,8 +80,8 @@ public class ApiKeys  implements XContentable<ApiKeys> {
     return ApiKeys.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ApiKeys, Void> PARSER =
-    new ConstructingObjectParser<>(ApiKeys.class.getName(), false, args -> new ApiKeys());
+  public static final ObjectParser<ApiKeys, Void> PARSER =
+    new ObjectParser<>(ApiKeys.class.getName(), false, ApiKeys::new);
 
   static {
     PARSER.declareObject(ApiKeys::setCreation, (p, t) -> Date.from(Instant.from(DateTimeFormatter.ISO_DATE.parse(p.text()))), CREATION);

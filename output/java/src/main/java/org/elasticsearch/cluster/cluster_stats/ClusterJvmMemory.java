@@ -43,8 +43,8 @@ public class ClusterJvmMemory  implements XContentable<ClusterJvmMemory> {
     return ClusterJvmMemory.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterJvmMemory, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterJvmMemory.class.getName(), false, args -> new ClusterJvmMemory());
+  public static final ObjectParser<ClusterJvmMemory, Void> PARSER =
+    new ObjectParser<>(ClusterJvmMemory.class.getName(), false, ClusterJvmMemory::new);
 
   static {
     PARSER.declareLong(ClusterJvmMemory::setHeapMaxInBytes, HEAP_MAX_IN_BYTES);

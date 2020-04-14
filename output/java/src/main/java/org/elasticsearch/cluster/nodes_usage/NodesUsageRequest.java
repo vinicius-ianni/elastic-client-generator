@@ -39,8 +39,8 @@ public class NodesUsageRequest  implements XContentable<NodesUsageRequest> {
     return NodesUsageRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<NodesUsageRequest, Void> PARSER =
-    new ConstructingObjectParser<>(NodesUsageRequest.class.getName(), false, args -> new NodesUsageRequest());
+  public static final ObjectParser<NodesUsageRequest, Void> PARSER =
+    new ObjectParser<>(NodesUsageRequest.class.getName(), false, NodesUsageRequest::new);
 
   static {
     PARSER.declareObject(NodesUsageRequest::setTimeout, (p, t) -> Time.PARSER.apply(p, t), TIMEOUT);

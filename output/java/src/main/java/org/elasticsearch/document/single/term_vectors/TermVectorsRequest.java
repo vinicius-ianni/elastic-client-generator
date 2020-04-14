@@ -145,8 +145,8 @@ public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsR
     return TermVectorsRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TermVectorsRequest, Void> PARSER =
-    new ConstructingObjectParser<>(TermVectorsRequest.class.getName(), false, args -> new TermVectorsRequest());
+  public static final ObjectParser<TermVectorsRequest, Void> PARSER =
+    new ObjectParser<>(TermVectorsRequest.class.getName(), false, TermVectorsRequest::new);
 
   static {
     PARSER.declareObject(TermVectorsRequest::setDoc, (p, t) -> null /* TODO TDocument */, DOC);
@@ -162,7 +162,7 @@ public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsR
     PARSER.declareObject(TermVectorsRequest::setRouting, (p, t) -> Routing.createFrom(p), ROUTING);
     PARSER.declareBoolean(TermVectorsRequest::setTermStatistics, TERM_STATISTICS);
     PARSER.declareLong(TermVectorsRequest::setVersion, VERSION);
-    PARSER.declareObject(TermVectorsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE);
+    PARSER.declareField(TermVectorsRequest::setVersionType, (p, t) -> VersionType.PARSER.apply(p), VERSION_TYPE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

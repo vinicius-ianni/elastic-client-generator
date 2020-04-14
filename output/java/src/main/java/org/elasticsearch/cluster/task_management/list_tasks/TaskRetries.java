@@ -43,8 +43,8 @@ public class TaskRetries  implements XContentable<TaskRetries> {
     return TaskRetries.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<TaskRetries, Void> PARSER =
-    new ConstructingObjectParser<>(TaskRetries.class.getName(), false, args -> new TaskRetries());
+  public static final ObjectParser<TaskRetries, Void> PARSER =
+    new ObjectParser<>(TaskRetries.class.getName(), false, TaskRetries::new);
 
   static {
     PARSER.declareInt(TaskRetries::setBulk, BULK);

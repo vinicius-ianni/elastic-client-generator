@@ -49,8 +49,8 @@ public class DeletePipelineRequest  implements XContentable<DeletePipelineReques
     return DeletePipelineRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<DeletePipelineRequest, Void> PARSER =
-    new ConstructingObjectParser<>(DeletePipelineRequest.class.getName(), false, args -> new DeletePipelineRequest());
+  public static final ObjectParser<DeletePipelineRequest, Void> PARSER =
+    new ObjectParser<>(DeletePipelineRequest.class.getName(), false, DeletePipelineRequest::new);
 
   static {
     PARSER.declareObject(DeletePipelineRequest::setMasterTimeout, (p, t) -> Time.PARSER.apply(p, t), MASTER_TIMEOUT);

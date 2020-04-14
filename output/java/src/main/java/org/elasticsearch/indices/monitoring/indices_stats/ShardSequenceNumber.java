@@ -50,8 +50,8 @@ public class ShardSequenceNumber  implements XContentable<ShardSequenceNumber> {
     return ShardSequenceNumber.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardSequenceNumber, Void> PARSER =
-    new ConstructingObjectParser<>(ShardSequenceNumber.class.getName(), false, args -> new ShardSequenceNumber());
+  public static final ObjectParser<ShardSequenceNumber, Void> PARSER =
+    new ObjectParser<>(ShardSequenceNumber.class.getName(), false, ShardSequenceNumber::new);
 
   static {
     PARSER.declareLong(ShardSequenceNumber::setGlobalCheckpoint, GLOBAL_CHECKPOINT);

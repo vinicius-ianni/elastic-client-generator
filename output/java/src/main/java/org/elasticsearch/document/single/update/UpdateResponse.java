@@ -46,8 +46,8 @@ public class UpdateResponse<TDocument>  implements XContentable<UpdateResponse<T
     return UpdateResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<UpdateResponse, Void> PARSER =
-    new ConstructingObjectParser<>(UpdateResponse.class.getName(), false, args -> new UpdateResponse());
+  public static final ObjectParser<UpdateResponse, Void> PARSER =
+    new ObjectParser<>(UpdateResponse.class.getName(), false, UpdateResponse::new);
 
   static {
     PARSER.declareBoolean(UpdateResponse::setIsValid, IS_VALID);

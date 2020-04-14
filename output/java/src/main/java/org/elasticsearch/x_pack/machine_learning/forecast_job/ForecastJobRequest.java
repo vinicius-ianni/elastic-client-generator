@@ -49,8 +49,8 @@ public class ForecastJobRequest  implements XContentable<ForecastJobRequest> {
     return ForecastJobRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ForecastJobRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ForecastJobRequest.class.getName(), false, args -> new ForecastJobRequest());
+  public static final ObjectParser<ForecastJobRequest, Void> PARSER =
+    new ObjectParser<>(ForecastJobRequest.class.getName(), false, ForecastJobRequest::new);
 
   static {
     PARSER.declareObject(ForecastJobRequest::setDuration, (p, t) -> Time.PARSER.apply(p, t), DURATION);

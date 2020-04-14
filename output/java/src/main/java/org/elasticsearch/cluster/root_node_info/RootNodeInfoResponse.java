@@ -67,8 +67,8 @@ public class RootNodeInfoResponse  implements XContentable<RootNodeInfoResponse>
     return RootNodeInfoResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RootNodeInfoResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RootNodeInfoResponse.class.getName(), false, args -> new RootNodeInfoResponse());
+  public static final ObjectParser<RootNodeInfoResponse, Void> PARSER =
+    new ObjectParser<>(RootNodeInfoResponse.class.getName(), false, RootNodeInfoResponse::new);
 
   static {
     PARSER.declareString(RootNodeInfoResponse::setName, NAME);

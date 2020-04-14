@@ -66,8 +66,8 @@ public class XPackRole  implements XContentable<XPackRole> {
     return XPackRole.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<XPackRole, Void> PARSER =
-    new ConstructingObjectParser<>(XPackRole.class.getName(), false, args -> new XPackRole());
+  public static final ObjectParser<XPackRole, Void> PARSER =
+    new ObjectParser<>(XPackRole.class.getName(), false, XPackRole::new);
 
   static {
     PARSER.declareStringArray(XPackRole::setCluster, CLUSTER);

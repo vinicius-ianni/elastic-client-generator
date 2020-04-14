@@ -62,12 +62,12 @@ public class IndicesShardStoresRequest  implements XContentable<IndicesShardStor
     return IndicesShardStoresRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<IndicesShardStoresRequest, Void> PARSER =
-    new ConstructingObjectParser<>(IndicesShardStoresRequest.class.getName(), false, args -> new IndicesShardStoresRequest());
+  public static final ObjectParser<IndicesShardStoresRequest, Void> PARSER =
+    new ObjectParser<>(IndicesShardStoresRequest.class.getName(), false, IndicesShardStoresRequest::new);
 
   static {
     PARSER.declareBoolean(IndicesShardStoresRequest::setAllowNoIndices, ALLOW_NO_INDICES);
-    PARSER.declareObject(IndicesShardStoresRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS);
+    PARSER.declareField(IndicesShardStoresRequest::setExpandWildcards, (p, t) -> ExpandWildcards.PARSER.apply(p), EXPAND_WILDCARDS, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareBoolean(IndicesShardStoresRequest::setIgnoreUnavailable, IGNORE_UNAVAILABLE);
     PARSER.declareStringArray(IndicesShardStoresRequest::setStatus, STATUS);
   }

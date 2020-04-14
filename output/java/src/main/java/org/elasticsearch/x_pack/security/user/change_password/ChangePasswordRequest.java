@@ -46,11 +46,11 @@ public class ChangePasswordRequest  implements XContentable<ChangePasswordReques
     return ChangePasswordRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ChangePasswordRequest, Void> PARSER =
-    new ConstructingObjectParser<>(ChangePasswordRequest.class.getName(), false, args -> new ChangePasswordRequest());
+  public static final ObjectParser<ChangePasswordRequest, Void> PARSER =
+    new ObjectParser<>(ChangePasswordRequest.class.getName(), false, ChangePasswordRequest::new);
 
   static {
-    PARSER.declareObject(ChangePasswordRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH);
+    PARSER.declareField(ChangePasswordRequest::setRefresh, (p, t) -> Refresh.PARSER.apply(p), REFRESH, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(ChangePasswordRequest::setPassword, PASSWORD);
   }
 

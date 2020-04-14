@@ -78,8 +78,8 @@ public class ShardGet  implements XContentable<ShardGet> {
     return ShardGet.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ShardGet, Void> PARSER =
-    new ConstructingObjectParser<>(ShardGet.class.getName(), false, args -> new ShardGet());
+  public static final ObjectParser<ShardGet, Void> PARSER =
+    new ObjectParser<>(ShardGet.class.getName(), false, ShardGet::new);
 
   static {
     PARSER.declareLong(ShardGet::setCurrent, CURRENT);

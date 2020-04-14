@@ -46,8 +46,8 @@ public class StopAnalyzer  implements XContentable<StopAnalyzer> {
     return StopAnalyzer.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<StopAnalyzer, Void> PARSER =
-    new ConstructingObjectParser<>(StopAnalyzer.class.getName(), false, args -> new StopAnalyzer());
+  public static final ObjectParser<StopAnalyzer, Void> PARSER =
+    new ObjectParser<>(StopAnalyzer.class.getName(), false, StopAnalyzer::new);
 
   static {
     PARSER.declareObject(StopAnalyzer::setStopwords, (p, t) -> new StopWords().fromXContent(p), STOPWORDS);

@@ -49,8 +49,8 @@ public class Defaults  implements XContentable<Defaults> {
     return Defaults.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Defaults, Void> PARSER =
-    new ConstructingObjectParser<>(Defaults.class.getName(), false, args -> new Defaults());
+  public static final ObjectParser<Defaults, Void> PARSER =
+    new ObjectParser<>(Defaults.class.getName(), false, Defaults::new);
 
   static {
     PARSER.declareObject(Defaults::setAnomalyDetectors, (p, t) -> AnomalyDetectors.PARSER.apply(p, t), ANOMALY_DETECTORS);

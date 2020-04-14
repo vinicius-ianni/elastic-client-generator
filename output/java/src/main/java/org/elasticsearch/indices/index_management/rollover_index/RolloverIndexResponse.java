@@ -74,8 +74,8 @@ public class RolloverIndexResponse  implements XContentable<RolloverIndexRespons
     return RolloverIndexResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RolloverIndexResponse, Void> PARSER =
-    new ConstructingObjectParser<>(RolloverIndexResponse.class.getName(), false, args -> new RolloverIndexResponse());
+  public static final ObjectParser<RolloverIndexResponse, Void> PARSER =
+    new ObjectParser<>(RolloverIndexResponse.class.getName(), false, RolloverIndexResponse::new);
 
   static {
     PARSER.declareObject(RolloverIndexResponse::setConditions, (p, t) -> new NamedContainer<>(n -> () -> n,pp -> pp.booleanValue()), CONDITIONS);

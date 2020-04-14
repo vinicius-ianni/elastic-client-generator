@@ -64,8 +64,8 @@ public class RequestCacheStats  implements XContentable<RequestCacheStats> {
     return RequestCacheStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<RequestCacheStats, Void> PARSER =
-    new ConstructingObjectParser<>(RequestCacheStats.class.getName(), false, args -> new RequestCacheStats());
+  public static final ObjectParser<RequestCacheStats, Void> PARSER =
+    new ObjectParser<>(RequestCacheStats.class.getName(), false, RequestCacheStats::new);
 
   static {
     PARSER.declareLong(RequestCacheStats::setEvictions, EVICTIONS);

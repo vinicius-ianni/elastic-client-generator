@@ -218,20 +218,20 @@ public class ClusterAllocationExplainResponse  implements XContentable<ClusterAl
     return ClusterAllocationExplainResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<ClusterAllocationExplainResponse, Void> PARSER =
-    new ConstructingObjectParser<>(ClusterAllocationExplainResponse.class.getName(), false, args -> new ClusterAllocationExplainResponse());
+  public static final ObjectParser<ClusterAllocationExplainResponse, Void> PARSER =
+    new ObjectParser<>(ClusterAllocationExplainResponse.class.getName(), false, ClusterAllocationExplainResponse::new);
 
   static {
     PARSER.declareString(ClusterAllocationExplainResponse::setAllocateExplanation, ALLOCATE_EXPLANATION);
     PARSER.declareString(ClusterAllocationExplainResponse::setAllocationDelay, ALLOCATION_DELAY);
     PARSER.declareLong(ClusterAllocationExplainResponse::setAllocationDelayInMillis, ALLOCATION_DELAY_IN_MILLIS);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanAllocate, (p, t) -> Decision.PARSER.apply(p), CAN_ALLOCATE);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanMoveToOtherNode, (p, t) -> Decision.PARSER.apply(p), CAN_MOVE_TO_OTHER_NODE);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRebalanceCluster, (p, t) -> Decision.PARSER.apply(p), CAN_REBALANCE_CLUSTER);
+    PARSER.declareField(ClusterAllocationExplainResponse::setCanAllocate, (p, t) -> Decision.PARSER.apply(p), CAN_ALLOCATE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(ClusterAllocationExplainResponse::setCanMoveToOtherNode, (p, t) -> Decision.PARSER.apply(p), CAN_MOVE_TO_OTHER_NODE, ObjectParser.ValueType.STRING_OR_NULL);
+    PARSER.declareField(ClusterAllocationExplainResponse::setCanRebalanceCluster, (p, t) -> Decision.PARSER.apply(p), CAN_REBALANCE_CLUSTER, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObjectArray(ClusterAllocationExplainResponse::setCanRebalanceClusterDecisions, (p, t) -> AllocationDecision.PARSER.apply(p, t), CAN_REBALANCE_CLUSTER_DECISIONS);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRebalanceToOtherNode, (p, t) -> Decision.PARSER.apply(p), CAN_REBALANCE_TO_OTHER_NODE);
+    PARSER.declareField(ClusterAllocationExplainResponse::setCanRebalanceToOtherNode, (p, t) -> Decision.PARSER.apply(p), CAN_REBALANCE_TO_OTHER_NODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareObjectArray(ClusterAllocationExplainResponse::setCanRemainDecisions, (p, t) -> AllocationDecision.PARSER.apply(p, t), CAN_REMAIN_DECISIONS);
-    PARSER.declareObject(ClusterAllocationExplainResponse::setCanRemainOnCurrentNode, (p, t) -> Decision.PARSER.apply(p), CAN_REMAIN_ON_CURRENT_NODE);
+    PARSER.declareField(ClusterAllocationExplainResponse::setCanRemainOnCurrentNode, (p, t) -> Decision.PARSER.apply(p), CAN_REMAIN_ON_CURRENT_NODE, ObjectParser.ValueType.STRING_OR_NULL);
     PARSER.declareString(ClusterAllocationExplainResponse::setConfiguredDelay, CONFIGURED_DELAY);
     PARSER.declareLong(ClusterAllocationExplainResponse::setConfiguredDelayInMills, CONFIGURED_DELAY_IN_MILLS);
     PARSER.declareObject(ClusterAllocationExplainResponse::setCurrentNode, (p, t) -> CurrentNode.PARSER.apply(p, t), CURRENT_NODE);

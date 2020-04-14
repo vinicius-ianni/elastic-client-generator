@@ -39,8 +39,8 @@ public class GetCategoriesRequest  implements XContentable<GetCategoriesRequest>
     return GetCategoriesRequest.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetCategoriesRequest, Void> PARSER =
-    new ConstructingObjectParser<>(GetCategoriesRequest.class.getName(), false, args -> new GetCategoriesRequest());
+  public static final ObjectParser<GetCategoriesRequest, Void> PARSER =
+    new ObjectParser<>(GetCategoriesRequest.class.getName(), false, GetCategoriesRequest::new);
 
   static {
     PARSER.declareObject(GetCategoriesRequest::setPage, (p, t) -> Page.PARSER.apply(p, t), PAGE);

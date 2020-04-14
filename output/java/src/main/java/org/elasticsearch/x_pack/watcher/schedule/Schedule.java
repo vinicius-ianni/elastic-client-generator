@@ -31,8 +31,8 @@ public class Schedule  implements XContentable<Schedule> {
     return Schedule.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<Schedule, Void> PARSER =
-    new ConstructingObjectParser<>(Schedule.class.getName(), false, args -> new Schedule());
+  public static final ObjectParser<Schedule, Void> PARSER =
+    new ObjectParser<>(Schedule.class.getName(), false, Schedule::new);
 
   static {
     

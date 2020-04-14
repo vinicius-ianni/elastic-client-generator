@@ -39,11 +39,11 @@ public class GetIlmStatusResponse  implements XContentable<GetIlmStatusResponse>
     return GetIlmStatusResponse.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<GetIlmStatusResponse, Void> PARSER =
-    new ConstructingObjectParser<>(GetIlmStatusResponse.class.getName(), false, args -> new GetIlmStatusResponse());
+  public static final ObjectParser<GetIlmStatusResponse, Void> PARSER =
+    new ObjectParser<>(GetIlmStatusResponse.class.getName(), false, GetIlmStatusResponse::new);
 
   static {
-    PARSER.declareObject(GetIlmStatusResponse::setOperationMode, (p, t) -> LifecycleOperationMode.PARSER.apply(p), OPERATION_MODE);
+    PARSER.declareField(GetIlmStatusResponse::setOperationMode, (p, t) -> LifecycleOperationMode.PARSER.apply(p), OPERATION_MODE, ObjectParser.ValueType.STRING_OR_NULL);
   }
 
 }

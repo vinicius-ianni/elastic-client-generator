@@ -141,8 +141,8 @@ public class MergesStats  implements XContentable<MergesStats> {
     return MergesStats.PARSER.apply(parser, null);
   }
 
-  public static final ConstructingObjectParser<MergesStats, Void> PARSER =
-    new ConstructingObjectParser<>(MergesStats.class.getName(), false, args -> new MergesStats());
+  public static final ObjectParser<MergesStats, Void> PARSER =
+    new ObjectParser<>(MergesStats.class.getName(), false, MergesStats::new);
 
   static {
     PARSER.declareLong(MergesStats::setCurrent, CURRENT);
