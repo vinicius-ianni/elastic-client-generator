@@ -44,10 +44,18 @@ public class WarmerStats  implements XContentable<WarmerStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CURRENT.getPreferredName(), _current);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_TIME.getPreferredName(), _totalTime);
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_current != null) {
+      builder.field(CURRENT.getPreferredName(), _current);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalTime != null) {
+      builder.field(TOTAL_TIME.getPreferredName(), _totalTime);
+    }
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

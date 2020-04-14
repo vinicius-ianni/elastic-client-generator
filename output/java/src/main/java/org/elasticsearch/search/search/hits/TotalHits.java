@@ -37,7 +37,9 @@ public class TotalHits  implements XContentable<TotalHits> {
       builder.field(RELATION.getPreferredName());
       _relation.toXContent(builder, params);
     }
-    builder.field(VALUE.getPreferredName(), _value);
+    if (_value != null) {
+      builder.field(VALUE.getPreferredName(), _value);
+    }
     builder.endObject();
     return builder;
   }

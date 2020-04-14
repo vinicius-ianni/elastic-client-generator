@@ -84,15 +84,33 @@ public class Segment  implements XContentable<Segment> {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
     }
-    builder.field(COMMITTED.getPreferredName(), _committed);
-    builder.field(COMPOUND.getPreferredName(), _compound);
-    builder.field(DELETED_DOCS.getPreferredName(), _deletedDocs);
-    builder.field(GENERATION.getPreferredName(), _generation);
-    builder.field(MEMORY_IN_BYTES.getPreferredName(), _memoryInBytes);
-    builder.field(SEARCH.getPreferredName(), _search);
-    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
-    builder.field(NUM_DOCS.getPreferredName(), _numDocs);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_committed != null) {
+      builder.field(COMMITTED.getPreferredName(), _committed);
+    }
+    if (_compound != null) {
+      builder.field(COMPOUND.getPreferredName(), _compound);
+    }
+    if (_deletedDocs != null) {
+      builder.field(DELETED_DOCS.getPreferredName(), _deletedDocs);
+    }
+    if (_generation != null) {
+      builder.field(GENERATION.getPreferredName(), _generation);
+    }
+    if (_memoryInBytes != null) {
+      builder.field(MEMORY_IN_BYTES.getPreferredName(), _memoryInBytes);
+    }
+    if (_search != null) {
+      builder.field(SEARCH.getPreferredName(), _search);
+    }
+    if (_sizeInBytes != null) {
+      builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    }
+    if (_numDocs != null) {
+      builder.field(NUM_DOCS.getPreferredName(), _numDocs);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

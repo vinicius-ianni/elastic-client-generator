@@ -36,7 +36,9 @@ public class HistogramRollupGrouping  implements XContentable<HistogramRollupGro
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
-    builder.field(INTERVAL.getPreferredName(), _interval);
+    if (_interval != null) {
+      builder.field(INTERVAL.getPreferredName(), _interval);
+    }
     builder.endObject();
     return builder;
   }

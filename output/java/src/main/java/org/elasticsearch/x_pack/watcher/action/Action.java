@@ -70,13 +70,19 @@ public class Action  implements XContentable<Action> {
       builder.field(ACTION_TYPE.getPreferredName());
       _actionType.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName(), _name);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_throttlePeriod != null) {
       builder.field(THROTTLE_PERIOD.getPreferredName());
       _throttlePeriod.toXContent(builder, params);
     }
-    builder.field(FOREACH.getPreferredName(), _foreach);
-    builder.field(MAX_ITERATIONS.getPreferredName(), _maxIterations);
+    if (_foreach != null) {
+      builder.field(FOREACH.getPreferredName(), _foreach);
+    }
+    if (_maxIterations != null) {
+      builder.field(MAX_ITERATIONS.getPreferredName(), _maxIterations);
+    }
     if (_transform != null) {
       builder.field(TRANSFORM.getPreferredName());
       _transform.toXContent(builder, params);

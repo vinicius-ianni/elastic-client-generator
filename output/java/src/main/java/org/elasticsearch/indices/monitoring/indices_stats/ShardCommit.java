@@ -44,9 +44,15 @@ public class ShardCommit  implements XContentable<ShardCommit> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(GENERATION.getPreferredName(), _generation);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(NUM_DOCS.getPreferredName(), _numDocs);
+    if (_generation != null) {
+      builder.field(GENERATION.getPreferredName(), _generation);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_numDocs != null) {
+      builder.field(NUM_DOCS.getPreferredName(), _numDocs);
+    }
     if (_userData != null) {
       builder.field(USER_DATA.getPreferredName());
       _userData.toXContent(builder, params);

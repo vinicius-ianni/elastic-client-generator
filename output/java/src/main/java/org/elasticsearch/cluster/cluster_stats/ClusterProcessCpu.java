@@ -26,7 +26,9 @@ public class ClusterProcessCpu  implements XContentable<ClusterProcessCpu> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(PERCENT.getPreferredName(), _percent);
+    if (_percent != null) {
+      builder.field(PERCENT.getPreferredName(), _percent);
+    }
     builder.endObject();
     return builder;
   }

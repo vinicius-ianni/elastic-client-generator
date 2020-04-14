@@ -45,12 +45,18 @@ public class MultiSearchResponse  implements XContentable<MultiSearchResponse> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(TOOK.getPreferredName(), _took);
+    if (_took != null) {
+      builder.field(TOOK.getPreferredName(), _took);
+    }
     if (_allResponses != null) {
       builder.array(ALL_RESPONSES.getPreferredName(), _allResponses);
     }
-    builder.field(IS_VALID.getPreferredName(), _isValid);
-    builder.field(TOTAL_RESPONSES.getPreferredName(), _totalResponses);
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
+    if (_totalResponses != null) {
+      builder.field(TOTAL_RESPONSES.getPreferredName(), _totalResponses);
+    }
     builder.endObject();
     return builder;
   }

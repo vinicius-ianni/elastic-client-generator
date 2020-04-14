@@ -57,7 +57,9 @@ public class OperatingSystemStats  implements XContentable<OperatingSystemStats>
       builder.field(SWAP.getPreferredName());
       _swap.toXContent(builder, params);
     }
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
     builder.endObject();
     return builder;
   }

@@ -32,8 +32,12 @@ public class Retries  implements XContentable<Retries> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BULK.getPreferredName(), _bulk);
-    builder.field(SEARCH.getPreferredName(), _search);
+    if (_bulk != null) {
+      builder.field(BULK.getPreferredName(), _bulk);
+    }
+    if (_search != null) {
+      builder.field(SEARCH.getPreferredName(), _search);
+    }
     builder.endObject();
     return builder;
   }

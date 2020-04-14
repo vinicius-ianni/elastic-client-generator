@@ -58,17 +58,23 @@ public class NodesHotThreadsRequest  implements XContentable<NodesHotThreadsRequ
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IGNORE_IDLE_THREADS.getPreferredName(), _ignoreIdleThreads);
+    if (_ignoreIdleThreads != null) {
+      builder.field(IGNORE_IDLE_THREADS.getPreferredName(), _ignoreIdleThreads);
+    }
     if (_interval != null) {
       builder.field(INTERVAL.getPreferredName());
       _interval.toXContent(builder, params);
     }
-    builder.field(SNAPSHOTS.getPreferredName(), _snapshots);
+    if (_snapshots != null) {
+      builder.field(SNAPSHOTS.getPreferredName(), _snapshots);
+    }
     if (_threadType != null) {
       builder.field(THREAD_TYPE.getPreferredName());
       _threadType.toXContent(builder, params);
     }
-    builder.field(THREADS.getPreferredName(), _threads);
+    if (_threads != null) {
+      builder.field(THREADS.getPreferredName(), _threads);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);

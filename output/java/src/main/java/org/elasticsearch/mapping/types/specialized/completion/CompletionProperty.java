@@ -57,14 +57,24 @@ public class CompletionProperty  implements XContentable<CompletionProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
     if (_contexts != null) {
       builder.array(CONTEXTS.getPreferredName(), _contexts);
     }
-    builder.field(MAX_INPUT_LENGTH.getPreferredName(), _maxInputLength);
-    builder.field(PRESERVE_POSITION_INCREMENTS.getPreferredName(), _preservePositionIncrements);
-    builder.field(PRESERVE_SEPARATORS.getPreferredName(), _preserveSeparators);
-    builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    if (_maxInputLength != null) {
+      builder.field(MAX_INPUT_LENGTH.getPreferredName(), _maxInputLength);
+    }
+    if (_preservePositionIncrements != null) {
+      builder.field(PRESERVE_POSITION_INCREMENTS.getPreferredName(), _preservePositionIncrements);
+    }
+    if (_preserveSeparators != null) {
+      builder.field(PRESERVE_SEPARATORS.getPreferredName(), _preserveSeparators);
+    }
+    if (_searchAnalyzer != null) {
+      builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    }
     builder.endObject();
     return builder;
   }

@@ -79,10 +79,18 @@ public class HistogramAggregation  implements XContentable<HistogramAggregation>
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(INTERVAL.getPreferredName(), _interval);
-    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
-    builder.field(MISSING.getPreferredName(), _missing);
-    builder.field(OFFSET.getPreferredName(), _offset);
+    if (_interval != null) {
+      builder.field(INTERVAL.getPreferredName(), _interval);
+    }
+    if (_minDocCount != null) {
+      builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    }
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName(), _missing);
+    }
+    if (_offset != null) {
+      builder.field(OFFSET.getPreferredName(), _offset);
+    }
     if (_order != null) {
       builder.field(ORDER.getPreferredName());
       _order.toXContent(builder, params);

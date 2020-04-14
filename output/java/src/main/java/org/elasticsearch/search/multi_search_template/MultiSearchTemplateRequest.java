@@ -58,14 +58,22 @@ public class MultiSearchTemplateRequest  implements XContentable<MultiSearchTemp
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
-    builder.field(MAX_CONCURRENT_SEARCHES.getPreferredName(), _maxConcurrentSearches);
+    if (_ccsMinimizeRoundtrips != null) {
+      builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
+    }
+    if (_maxConcurrentSearches != null) {
+      builder.field(MAX_CONCURRENT_SEARCHES.getPreferredName(), _maxConcurrentSearches);
+    }
     if (_searchType != null) {
       builder.field(SEARCH_TYPE.getPreferredName());
       _searchType.toXContent(builder, params);
     }
-    builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
-    builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    if (_totalHitsAsInteger != null) {
+      builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
+    }
+    if (_typedKeys != null) {
+      builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    }
     if (_operations != null) {
       builder.field(OPERATIONS.getPreferredName());
       _operations.toXContent(builder, params);

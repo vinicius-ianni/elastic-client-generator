@@ -61,7 +61,9 @@ public class PutRoleMappingRequest  implements XContentable<PutRoleMappingReques
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
     }
-    builder.field(ENABLED.getPreferredName(), _enabled);
+    if (_enabled != null) {
+      builder.field(ENABLED.getPreferredName(), _enabled);
+    }
     if (_metadata != null) {
       builder.field(METADATA.getPreferredName());
       _metadata.toXContent(builder, params);

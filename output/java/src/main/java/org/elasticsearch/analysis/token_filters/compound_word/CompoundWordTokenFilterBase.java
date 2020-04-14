@@ -62,15 +62,27 @@ public class CompoundWordTokenFilterBase  implements XContentable<CompoundWordTo
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(HYPHENATION_PATTERNS_PATH.getPreferredName(), _hyphenationPatternsPath);
-    builder.field(MAX_SUBWORD_SIZE.getPreferredName(), _maxSubwordSize);
-    builder.field(MIN_SUBWORD_SIZE.getPreferredName(), _minSubwordSize);
-    builder.field(MIN_WORD_SIZE.getPreferredName(), _minWordSize);
-    builder.field(ONLY_LONGEST_MATCH.getPreferredName(), _onlyLongestMatch);
+    if (_hyphenationPatternsPath != null) {
+      builder.field(HYPHENATION_PATTERNS_PATH.getPreferredName(), _hyphenationPatternsPath);
+    }
+    if (_maxSubwordSize != null) {
+      builder.field(MAX_SUBWORD_SIZE.getPreferredName(), _maxSubwordSize);
+    }
+    if (_minSubwordSize != null) {
+      builder.field(MIN_SUBWORD_SIZE.getPreferredName(), _minSubwordSize);
+    }
+    if (_minWordSize != null) {
+      builder.field(MIN_WORD_SIZE.getPreferredName(), _minWordSize);
+    }
+    if (_onlyLongestMatch != null) {
+      builder.field(ONLY_LONGEST_MATCH.getPreferredName(), _onlyLongestMatch);
+    }
     if (_wordList != null) {
       builder.array(WORD_LIST.getPreferredName(), _wordList);
     }
-    builder.field(WORD_LIST_PATH.getPreferredName(), _wordListPath);
+    if (_wordListPath != null) {
+      builder.field(WORD_LIST_PATH.getPreferredName(), _wordListPath);
+    }
     builder.endObject();
     return builder;
   }

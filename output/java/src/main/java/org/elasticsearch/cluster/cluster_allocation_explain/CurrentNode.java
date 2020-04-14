@@ -50,14 +50,22 @@ public class CurrentNode  implements XContentable<CurrentNode> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(NAME.getPreferredName(), _name);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_attributes != null) {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
     }
-    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
-    builder.field(WEIGHT_RANKING.getPreferredName(), _weightRanking);
+    if (_transportAddress != null) {
+      builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    }
+    if (_weightRanking != null) {
+      builder.field(WEIGHT_RANKING.getPreferredName(), _weightRanking);
+    }
     builder.endObject();
     return builder;
   }

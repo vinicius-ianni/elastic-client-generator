@@ -47,8 +47,12 @@ public class HotThreadInformation  implements XContentable<HotThreadInformation>
     if (_hosts != null) {
       builder.array(HOSTS.getPreferredName(), _hosts);
     }
-    builder.field(NODE_ID.getPreferredName(), _nodeId);
-    builder.field(NODE_NAME.getPreferredName(), _nodeName);
+    if (_nodeId != null) {
+      builder.field(NODE_ID.getPreferredName(), _nodeId);
+    }
+    if (_nodeName != null) {
+      builder.field(NODE_NAME.getPreferredName(), _nodeName);
+    }
     if (_threads != null) {
       builder.array(THREADS.getPreferredName(), _threads);
     }

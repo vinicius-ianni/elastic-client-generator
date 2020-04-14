@@ -48,7 +48,9 @@ public class NestedIdentity  implements XContentable<NestedIdentity> {
       builder.field(NESTED.getPreferredName());
       _nested.toXContent(builder, params);
     }
-    builder.field(OFFSET.getPreferredName(), _offset);
+    if (_offset != null) {
+      builder.field(OFFSET.getPreferredName(), _offset);
+    }
     builder.endObject();
     return builder;
   }

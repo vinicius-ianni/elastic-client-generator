@@ -26,7 +26,9 @@ public class FielddataRegexFilter  implements XContentable<FielddataRegexFilter>
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(PATTERN.getPreferredName(), _pattern);
+    if (_pattern != null) {
+      builder.field(PATTERN.getPreferredName(), _pattern);
+    }
     builder.endObject();
     return builder;
   }

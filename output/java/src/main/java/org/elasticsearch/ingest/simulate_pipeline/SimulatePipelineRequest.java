@@ -46,7 +46,9 @@ public class SimulatePipelineRequest  implements XContentable<SimulatePipelineRe
       builder.field(PIPELINE.getPreferredName());
       _pipeline.toXContent(builder, params);
     }
-    builder.field(VERBOSE.getPreferredName(), _verbose);
+    if (_verbose != null) {
+      builder.field(VERBOSE.getPreferredName(), _verbose);
+    }
     builder.endObject();
     return builder;
   }

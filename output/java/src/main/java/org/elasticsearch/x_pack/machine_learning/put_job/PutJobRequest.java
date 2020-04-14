@@ -76,12 +76,16 @@ public class PutJobRequest  implements XContentable<PutJobRequest> {
       builder.field(DATA_DESCRIPTION.getPreferredName());
       _dataDescription.toXContent(builder, params);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     if (_modelPlot != null) {
       builder.field(MODEL_PLOT.getPreferredName());
       _modelPlot.toXContent(builder, params);
     }
-    builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
+    if (_modelSnapshotRetentionDays != null) {
+      builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
+    }
     if (_resultsIndexName != null) {
       builder.field(RESULTS_INDEX_NAME.getPreferredName());
       _resultsIndexName.toXContent(builder, params);

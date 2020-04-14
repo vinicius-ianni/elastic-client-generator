@@ -44,9 +44,15 @@ public class ShardRouting  implements XContentable<ShardRouting> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(NODE.getPreferredName(), _node);
-    builder.field(PRIMARY.getPreferredName(), _primary);
-    builder.field(RELOCATING_NODE.getPreferredName(), _relocatingNode);
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
+    if (_primary != null) {
+      builder.field(PRIMARY.getPreferredName(), _primary);
+    }
+    if (_relocatingNode != null) {
+      builder.field(RELOCATING_NODE.getPreferredName(), _relocatingNode);
+    }
     if (_state != null) {
       builder.field(STATE.getPreferredName());
       _state.toXContent(builder, params);

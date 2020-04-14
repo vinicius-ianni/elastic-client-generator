@@ -71,8 +71,12 @@ public class DeleteRequest  implements XContentable<DeleteRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
-    builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    if (_ifPrimaryTerm != null) {
+      builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
+    }
+    if (_ifSequenceNumber != null) {
+      builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    }
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
@@ -85,12 +89,16 @@ public class DeleteRequest  implements XContentable<DeleteRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    if (_waitForActiveShards != null) {
+      builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    }
     builder.endObject();
     return builder;
   }

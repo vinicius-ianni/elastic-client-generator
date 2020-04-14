@@ -48,7 +48,9 @@ public class FieldCollapse  implements XContentable<FieldCollapse> {
       builder.field(INNER_HITS.getPreferredName());
       _innerHits.toXContent(builder, params);
     }
-    builder.field(MAX_CONCURRENT_GROUP_SEARCHES.getPreferredName(), _maxConcurrentGroupSearches);
+    if (_maxConcurrentGroupSearches != null) {
+      builder.field(MAX_CONCURRENT_GROUP_SEARCHES.getPreferredName(), _maxConcurrentGroupSearches);
+    }
     builder.endObject();
     return builder;
   }

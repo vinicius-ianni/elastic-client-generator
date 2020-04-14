@@ -44,8 +44,12 @@ public class ClusterGetSettingsRequest  implements XContentable<ClusterGetSettin
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
-    builder.field(INCLUDE_DEFAULTS.getPreferredName(), _includeDefaults);
+    if (_flatSettings != null) {
+      builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    }
+    if (_includeDefaults != null) {
+      builder.field(INCLUDE_DEFAULTS.getPreferredName(), _includeDefaults);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);

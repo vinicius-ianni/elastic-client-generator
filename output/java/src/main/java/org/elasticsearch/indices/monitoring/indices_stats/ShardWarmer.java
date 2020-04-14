@@ -38,9 +38,15 @@ public class ShardWarmer  implements XContentable<ShardWarmer> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CURRENT.getPreferredName(), _current);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_current != null) {
+      builder.field(CURRENT.getPreferredName(), _current);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

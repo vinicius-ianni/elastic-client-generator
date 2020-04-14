@@ -50,8 +50,12 @@ public class GeoShapeProperty  implements XContentable<GeoShapeProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
-    builder.field(IGNORE_Z_VALUE.getPreferredName(), _ignoreZValue);
+    if (_ignoreMalformed != null) {
+      builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
+    }
+    if (_ignoreZValue != null) {
+      builder.field(IGNORE_Z_VALUE.getPreferredName(), _ignoreZValue);
+    }
     if (_orientation != null) {
       builder.field(ORIENTATION.getPreferredName());
       _orientation.toXContent(builder, params);
@@ -60,7 +64,9 @@ public class GeoShapeProperty  implements XContentable<GeoShapeProperty> {
       builder.field(STRATEGY.getPreferredName());
       _strategy.toXContent(builder, params);
     }
-    builder.field(COERCE.getPreferredName(), _coerce);
+    if (_coerce != null) {
+      builder.field(COERCE.getPreferredName(), _coerce);
+    }
     builder.endObject();
     return builder;
   }

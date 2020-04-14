@@ -73,19 +73,29 @@ public class ShardStore  implements XContentable<ShardStore> {
       builder.field(ALLOCATION.getPreferredName());
       _allocation.toXContent(builder, params);
     }
-    builder.field(ALLOCATION_ID.getPreferredName(), _allocationId);
+    if (_allocationId != null) {
+      builder.field(ALLOCATION_ID.getPreferredName(), _allocationId);
+    }
     if (_attributes != null) {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(LEGACY_VERSION.getPreferredName(), _legacyVersion);
-    builder.field(NAME.getPreferredName(), _name);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_legacyVersion != null) {
+      builder.field(LEGACY_VERSION.getPreferredName(), _legacyVersion);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_storeException != null) {
       builder.field(STORE_EXCEPTION.getPreferredName());
       _storeException.toXContent(builder, params);
     }
-    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    if (_transportAddress != null) {
+      builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    }
     builder.endObject();
     return builder;
   }

@@ -32,8 +32,12 @@ public class ShardFielddata  implements XContentable<ShardFielddata> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(EVICTIONS.getPreferredName(), _evictions);
-    builder.field(MEMORY_SIZE_IN_BYTES.getPreferredName(), _memorySizeInBytes);
+    if (_evictions != null) {
+      builder.field(EVICTIONS.getPreferredName(), _evictions);
+    }
+    if (_memorySizeInBytes != null) {
+      builder.field(MEMORY_SIZE_IN_BYTES.getPreferredName(), _memorySizeInBytes);
+    }
     builder.endObject();
     return builder;
   }

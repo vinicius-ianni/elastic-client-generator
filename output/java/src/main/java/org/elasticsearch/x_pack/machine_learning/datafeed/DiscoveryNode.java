@@ -54,10 +54,18 @@ public class DiscoveryNode  implements XContentable<DiscoveryNode> {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
     }
-    builder.field(EPHEMERAL_ID.getPreferredName(), _ephemeralId);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    if (_ephemeralId != null) {
+      builder.field(EPHEMERAL_ID.getPreferredName(), _ephemeralId);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_transportAddress != null) {
+      builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    }
     builder.endObject();
     return builder;
   }

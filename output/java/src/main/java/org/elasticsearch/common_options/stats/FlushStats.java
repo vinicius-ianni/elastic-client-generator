@@ -44,10 +44,18 @@ public class FlushStats  implements XContentable<FlushStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(PERIODIC.getPreferredName(), _periodic);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_TIME.getPreferredName(), _totalTime);
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_periodic != null) {
+      builder.field(PERIODIC.getPreferredName(), _periodic);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalTime != null) {
+      builder.field(TOTAL_TIME.getPreferredName(), _totalTime);
+    }
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

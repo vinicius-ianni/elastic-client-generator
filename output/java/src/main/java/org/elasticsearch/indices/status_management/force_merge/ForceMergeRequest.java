@@ -57,15 +57,25 @@ public class ForceMergeRequest  implements XContentable<ForceMergeRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    if (_allowNoIndices != null) {
+      builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    }
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
     }
-    builder.field(FLUSH.getPreferredName(), _flush);
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(MAX_NUM_SEGMENTS.getPreferredName(), _maxNumSegments);
-    builder.field(ONLY_EXPUNGE_DELETES.getPreferredName(), _onlyExpungeDeletes);
+    if (_flush != null) {
+      builder.field(FLUSH.getPreferredName(), _flush);
+    }
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_maxNumSegments != null) {
+      builder.field(MAX_NUM_SEGMENTS.getPreferredName(), _maxNumSegments);
+    }
+    if (_onlyExpungeDeletes != null) {
+      builder.field(ONLY_EXPUNGE_DELETES.getPreferredName(), _onlyExpungeDeletes);
+    }
     builder.endObject();
     return builder;
   }

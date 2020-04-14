@@ -42,8 +42,12 @@ public class SpanNearQuery  implements XContentable<SpanNearQuery> {
     if (_clauses != null) {
       builder.array(CLAUSES.getPreferredName(), _clauses);
     }
-    builder.field(IN_ORDER.getPreferredName(), _inOrder);
-    builder.field(SLOP.getPreferredName(), _slop);
+    if (_inOrder != null) {
+      builder.field(IN_ORDER.getPreferredName(), _inOrder);
+    }
+    if (_slop != null) {
+      builder.field(SLOP.getPreferredName(), _slop);
+    }
     builder.endObject();
     return builder;
   }

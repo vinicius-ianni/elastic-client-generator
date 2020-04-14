@@ -79,8 +79,12 @@ public class NodesStatsRequest  implements XContentable<NodesStatsRequest> {
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
-    builder.field(GROUPS.getPreferredName(), _groups);
-    builder.field(INCLUDE_SEGMENT_FILE_SIZES.getPreferredName(), _includeSegmentFileSizes);
+    if (_groups != null) {
+      builder.field(GROUPS.getPreferredName(), _groups);
+    }
+    if (_includeSegmentFileSizes != null) {
+      builder.field(INCLUDE_SEGMENT_FILE_SIZES.getPreferredName(), _includeSegmentFileSizes);
+    }
     if (_level != null) {
       builder.field(LEVEL.getPreferredName());
       _level.toXContent(builder, params);

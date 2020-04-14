@@ -54,7 +54,9 @@ public class CreateApiKeyRequest  implements XContentable<CreateApiKeyRequest> {
       builder.field(EXPIRATION.getPreferredName());
       _expiration.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName(), _name);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_roleDescriptors != null) {
       builder.field(ROLE_DESCRIPTORS.getPreferredName());
       _roleDescriptors.toXContent(builder, params);

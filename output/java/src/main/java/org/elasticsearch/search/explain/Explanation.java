@@ -39,11 +39,15 @@ public class Explanation  implements XContentable<Explanation> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     if (_details != null) {
       builder.array(DETAILS.getPreferredName(), _details);
     }
-    builder.field(VALUE.getPreferredName(), _value);
+    if (_value != null) {
+      builder.field(VALUE.getPreferredName(), _value);
+    }
     builder.endObject();
     return builder;
   }

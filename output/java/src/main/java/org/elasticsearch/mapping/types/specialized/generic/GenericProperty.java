@@ -95,27 +95,45 @@ public class GenericProperty  implements XContentable<GenericProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(BOOST.getPreferredName(), _boost);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_boost != null) {
+      builder.field(BOOST.getPreferredName(), _boost);
+    }
     if (_fielddata != null) {
       builder.field(FIELDDATA.getPreferredName());
       _fielddata.toXContent(builder, params);
     }
-    builder.field(IGNORE_ABOVE.getPreferredName(), _ignoreAbove);
-    builder.field(INDEX.getPreferredName(), _index);
+    if (_ignoreAbove != null) {
+      builder.field(IGNORE_ABOVE.getPreferredName(), _ignoreAbove);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
     if (_indexOptions != null) {
       builder.field(INDEX_OPTIONS.getPreferredName());
       _indexOptions.toXContent(builder, params);
     }
-    builder.field(NORMS.getPreferredName(), _norms);
-    builder.field(NULL_VALUE.getPreferredName(), _nullValue);
-    builder.field(POSITION_INCREMENT_GAP.getPreferredName(), _positionIncrementGap);
-    builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    if (_norms != null) {
+      builder.field(NORMS.getPreferredName(), _norms);
+    }
+    if (_nullValue != null) {
+      builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    }
+    if (_positionIncrementGap != null) {
+      builder.field(POSITION_INCREMENT_GAP.getPreferredName(), _positionIncrementGap);
+    }
+    if (_searchAnalyzer != null) {
+      builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    }
     if (_termVector != null) {
       builder.field(TERM_VECTOR.getPreferredName());
       _termVector.toXContent(builder, params);
     }
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

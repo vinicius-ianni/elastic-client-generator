@@ -56,12 +56,24 @@ public class ThreadCountStats  implements XContentable<ThreadCountStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTIVE.getPreferredName(), _active);
-    builder.field(COMPLETED.getPreferredName(), _completed);
-    builder.field(LARGEST.getPreferredName(), _largest);
-    builder.field(QUEUE.getPreferredName(), _queue);
-    builder.field(REJECTED.getPreferredName(), _rejected);
-    builder.field(THREADS.getPreferredName(), _threads);
+    if (_active != null) {
+      builder.field(ACTIVE.getPreferredName(), _active);
+    }
+    if (_completed != null) {
+      builder.field(COMPLETED.getPreferredName(), _completed);
+    }
+    if (_largest != null) {
+      builder.field(LARGEST.getPreferredName(), _largest);
+    }
+    if (_queue != null) {
+      builder.field(QUEUE.getPreferredName(), _queue);
+    }
+    if (_rejected != null) {
+      builder.field(REJECTED.getPreferredName(), _rejected);
+    }
+    if (_threads != null) {
+      builder.field(THREADS.getPreferredName(), _threads);
+    }
     builder.endObject();
     return builder;
   }

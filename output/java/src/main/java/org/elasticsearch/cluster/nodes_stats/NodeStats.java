@@ -144,7 +144,9 @@ public class NodeStats  implements XContentable<NodeStats> {
       builder.field(FS.getPreferredName());
       _fs.toXContent(builder, params);
     }
-    builder.field(HOST.getPreferredName(), _host);
+    if (_host != null) {
+      builder.field(HOST.getPreferredName(), _host);
+    }
     if (_http != null) {
       builder.field(HTTP.getPreferredName());
       _http.toXContent(builder, params);
@@ -164,7 +166,9 @@ public class NodeStats  implements XContentable<NodeStats> {
       builder.field(JVM.getPreferredName());
       _jvm.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName(), _name);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_os != null) {
       builder.field(OS.getPreferredName());
       _os.toXContent(builder, params);
@@ -184,12 +188,16 @@ public class NodeStats  implements XContentable<NodeStats> {
       builder.field(THREAD_POOL.getPreferredName());
       _threadPool.toXContent(builder, params);
     }
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
     if (_transport != null) {
       builder.field(TRANSPORT.getPreferredName());
       _transport.toXContent(builder, params);
     }
-    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    if (_transportAddress != null) {
+      builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    }
     builder.endObject();
     return builder;
   }

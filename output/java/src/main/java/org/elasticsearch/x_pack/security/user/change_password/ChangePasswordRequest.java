@@ -36,7 +36,9 @@ public class ChangePasswordRequest  implements XContentable<ChangePasswordReques
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
     }
-    builder.field(PASSWORD.getPreferredName(), _password);
+    if (_password != null) {
+      builder.field(PASSWORD.getPreferredName(), _password);
+    }
     builder.endObject();
     return builder;
   }

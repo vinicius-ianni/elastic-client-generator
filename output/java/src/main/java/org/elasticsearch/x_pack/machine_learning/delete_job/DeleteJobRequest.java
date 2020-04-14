@@ -32,8 +32,12 @@ public class DeleteJobRequest  implements XContentable<DeleteJobRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORCE.getPreferredName(), _force);
-    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    if (_force != null) {
+      builder.field(FORCE.getPreferredName(), _force);
+    }
+    if (_waitForCompletion != null) {
+      builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    }
     builder.endObject();
     return builder;
   }

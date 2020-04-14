@@ -93,7 +93,9 @@ public class Watch  implements XContentable<Watch> {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(THROTTLE_PERIOD.getPreferredName(), _throttlePeriod);
+    if (_throttlePeriod != null) {
+      builder.field(THROTTLE_PERIOD.getPreferredName(), _throttlePeriod);
+    }
     if (_transform != null) {
       builder.field(TRANSFORM.getPreferredName());
       _transform.toXContent(builder, params);

@@ -26,7 +26,9 @@ public class WatcherStatsRequest  implements XContentable<WatcherStatsRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(EMIT_STACKTRACES.getPreferredName(), _emitStacktraces);
+    if (_emitStacktraces != null) {
+      builder.field(EMIT_STACKTRACES.getPreferredName(), _emitStacktraces);
+    }
     builder.endObject();
     return builder;
   }

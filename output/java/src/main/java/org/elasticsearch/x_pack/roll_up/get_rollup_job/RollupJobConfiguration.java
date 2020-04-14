@@ -71,17 +71,25 @@ public class RollupJobConfiguration  implements XContentable<RollupJobConfigurat
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CRON.getPreferredName(), _cron);
+    if (_cron != null) {
+      builder.field(CRON.getPreferredName(), _cron);
+    }
     if (_groups != null) {
       builder.field(GROUPS.getPreferredName());
       _groups.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX_PATTERN.getPreferredName(), _indexPattern);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_indexPattern != null) {
+      builder.field(INDEX_PATTERN.getPreferredName(), _indexPattern);
+    }
     if (_metrics != null) {
       builder.array(METRICS.getPreferredName(), _metrics);
     }
-    builder.field(PAGE_SIZE.getPreferredName(), _pageSize);
+    if (_pageSize != null) {
+      builder.field(PAGE_SIZE.getPreferredName(), _pageSize);
+    }
     if (_rollupIndex != null) {
       builder.field(ROLLUP_INDEX.getPreferredName());
       _rollupIndex.toXContent(builder, params);

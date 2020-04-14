@@ -26,7 +26,9 @@ public class CompactNodeInfo  implements XContentable<CompactNodeInfo> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(NAME.getPreferredName(), _name);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     builder.endObject();
     return builder;
   }

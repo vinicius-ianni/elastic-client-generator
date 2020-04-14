@@ -50,11 +50,21 @@ public class CatAliasesRecord  implements XContentable<CatAliasesRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALIAS.getPreferredName(), _alias);
-    builder.field(FILTER.getPreferredName(), _filter);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(INDEX_ROUTING.getPreferredName(), _indexRouting);
-    builder.field(SEARCH_ROUTING.getPreferredName(), _searchRouting);
+    if (_alias != null) {
+      builder.field(ALIAS.getPreferredName(), _alias);
+    }
+    if (_filter != null) {
+      builder.field(FILTER.getPreferredName(), _filter);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_indexRouting != null) {
+      builder.field(INDEX_ROUTING.getPreferredName(), _indexRouting);
+    }
+    if (_searchRouting != null) {
+      builder.field(SEARCH_ROUTING.getPreferredName(), _searchRouting);
+    }
     builder.endObject();
     return builder;
   }

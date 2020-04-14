@@ -55,15 +55,21 @@ public class WatchStatus  implements XContentable<WatchStatus> {
       builder.field(ACTIONS.getPreferredName());
       _actions.toXContent(builder, params);
     }
-    builder.field(LAST_CHECKED.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_lastChecked.toInstant()));
-    builder.field(LAST_MET_CONDITION.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_lastMetCondition.toInstant()));
+    if (_lastChecked != null) {
+      builder.field(LAST_CHECKED.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_lastChecked.toInstant()));
+    }
+    if (_lastMetCondition != null) {
+      builder.field(LAST_MET_CONDITION.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_lastMetCondition.toInstant()));
+    }
     if (_state != null) {
       builder.field(STATE.getPreferredName());
       _state.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

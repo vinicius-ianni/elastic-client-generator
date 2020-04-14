@@ -91,7 +91,9 @@ public class AnalysisConfig  implements XContentable<AnalysisConfig> {
       builder.field(LATENCY.getPreferredName());
       _latency.toXContent(builder, params);
     }
-    builder.field(MULTIVARIATE_BY_FIELDS.getPreferredName(), _multivariateByFields);
+    if (_multivariateByFields != null) {
+      builder.field(MULTIVARIATE_BY_FIELDS.getPreferredName(), _multivariateByFields);
+    }
     if (_summaryCountFieldName != null) {
       builder.field(SUMMARY_COUNT_FIELD_NAME.getPreferredName());
       _summaryCountFieldName.toXContent(builder, params);

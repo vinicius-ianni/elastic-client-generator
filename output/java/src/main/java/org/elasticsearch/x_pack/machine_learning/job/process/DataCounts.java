@@ -122,28 +122,62 @@ public class DataCounts  implements XContentable<DataCounts> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BUCKET_COUNT.getPreferredName(), _bucketCount);
-    builder.field(EARLIEST_RECORD_TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_earliestRecordTimestamp.toInstant()));
-    builder.field(EMPTY_BUCKET_COUNT.getPreferredName(), _emptyBucketCount);
-    builder.field(INPUT_BYTES.getPreferredName(), _inputBytes);
-    builder.field(INPUT_FIELD_COUNT.getPreferredName(), _inputFieldCount);
-    builder.field(INPUT_RECORD_COUNT.getPreferredName(), _inputRecordCount);
-    builder.field(INVALID_DATE_COUNT.getPreferredName(), _invalidDateCount);
-    builder.field(JOB_ID.getPreferredName(), _jobId);
-    builder.field(LAST_DATA_TIME.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_lastDataTime.toInstant()));
-    builder.field(LATEST_EMPTY_BUCKET_TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_latestEmptyBucketTimestamp.toInstant()));
-    builder.field(LATEST_RECORD_TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_latestRecordTimestamp.toInstant()));
-    builder.field(LATEST_SPARSE_BUCKET_TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_latestSparseBucketTimestamp.toInstant()));
-    builder.field(MISSING_FIELD_COUNT.getPreferredName(), _missingFieldCount);
-    builder.field(OUT_OF_ORDER_TIMESTAMP_COUNT.getPreferredName(), _outOfOrderTimestampCount);
-    builder.field(PROCESSED_FIELD_COUNT.getPreferredName(), _processedFieldCount);
-    builder.field(PROCESSED_RECORD_COUNT.getPreferredName(), _processedRecordCount);
-    builder.field(SPARSE_BUCKET_COUNT.getPreferredName(), _sparseBucketCount);
+    if (_bucketCount != null) {
+      builder.field(BUCKET_COUNT.getPreferredName(), _bucketCount);
+    }
+    if (_earliestRecordTimestamp != null) {
+      builder.field(EARLIEST_RECORD_TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_earliestRecordTimestamp.toInstant()));
+    }
+    if (_emptyBucketCount != null) {
+      builder.field(EMPTY_BUCKET_COUNT.getPreferredName(), _emptyBucketCount);
+    }
+    if (_inputBytes != null) {
+      builder.field(INPUT_BYTES.getPreferredName(), _inputBytes);
+    }
+    if (_inputFieldCount != null) {
+      builder.field(INPUT_FIELD_COUNT.getPreferredName(), _inputFieldCount);
+    }
+    if (_inputRecordCount != null) {
+      builder.field(INPUT_RECORD_COUNT.getPreferredName(), _inputRecordCount);
+    }
+    if (_invalidDateCount != null) {
+      builder.field(INVALID_DATE_COUNT.getPreferredName(), _invalidDateCount);
+    }
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
+    if (_lastDataTime != null) {
+      builder.field(LAST_DATA_TIME.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_lastDataTime.toInstant()));
+    }
+    if (_latestEmptyBucketTimestamp != null) {
+      builder.field(LATEST_EMPTY_BUCKET_TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_latestEmptyBucketTimestamp.toInstant()));
+    }
+    if (_latestRecordTimestamp != null) {
+      builder.field(LATEST_RECORD_TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_latestRecordTimestamp.toInstant()));
+    }
+    if (_latestSparseBucketTimestamp != null) {
+      builder.field(LATEST_SPARSE_BUCKET_TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_latestSparseBucketTimestamp.toInstant()));
+    }
+    if (_missingFieldCount != null) {
+      builder.field(MISSING_FIELD_COUNT.getPreferredName(), _missingFieldCount);
+    }
+    if (_outOfOrderTimestampCount != null) {
+      builder.field(OUT_OF_ORDER_TIMESTAMP_COUNT.getPreferredName(), _outOfOrderTimestampCount);
+    }
+    if (_processedFieldCount != null) {
+      builder.field(PROCESSED_FIELD_COUNT.getPreferredName(), _processedFieldCount);
+    }
+    if (_processedRecordCount != null) {
+      builder.field(PROCESSED_RECORD_COUNT.getPreferredName(), _processedRecordCount);
+    }
+    if (_sparseBucketCount != null) {
+      builder.field(SPARSE_BUCKET_COUNT.getPreferredName(), _sparseBucketCount);
+    }
     builder.endObject();
     return builder;
   }

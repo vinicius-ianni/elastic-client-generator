@@ -159,9 +159,15 @@ public class ClusterAllocationExplainResponse  implements XContentable<ClusterAl
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOCATE_EXPLANATION.getPreferredName(), _allocateExplanation);
-    builder.field(ALLOCATION_DELAY.getPreferredName(), _allocationDelay);
-    builder.field(ALLOCATION_DELAY_IN_MILLIS.getPreferredName(), _allocationDelayInMillis);
+    if (_allocateExplanation != null) {
+      builder.field(ALLOCATE_EXPLANATION.getPreferredName(), _allocateExplanation);
+    }
+    if (_allocationDelay != null) {
+      builder.field(ALLOCATION_DELAY.getPreferredName(), _allocationDelay);
+    }
+    if (_allocationDelayInMillis != null) {
+      builder.field(ALLOCATION_DELAY_IN_MILLIS.getPreferredName(), _allocationDelayInMillis);
+    }
     if (_canAllocate != null) {
       builder.field(CAN_ALLOCATE.getPreferredName());
       _canAllocate.toXContent(builder, params);
@@ -188,23 +194,43 @@ public class ClusterAllocationExplainResponse  implements XContentable<ClusterAl
       builder.field(CAN_REMAIN_ON_CURRENT_NODE.getPreferredName());
       _canRemainOnCurrentNode.toXContent(builder, params);
     }
-    builder.field(CONFIGURED_DELAY.getPreferredName(), _configuredDelay);
-    builder.field(CONFIGURED_DELAY_IN_MILLS.getPreferredName(), _configuredDelayInMills);
+    if (_configuredDelay != null) {
+      builder.field(CONFIGURED_DELAY.getPreferredName(), _configuredDelay);
+    }
+    if (_configuredDelayInMills != null) {
+      builder.field(CONFIGURED_DELAY_IN_MILLS.getPreferredName(), _configuredDelayInMills);
+    }
     if (_currentNode != null) {
       builder.field(CURRENT_NODE.getPreferredName());
       _currentNode.toXContent(builder, params);
     }
-    builder.field(CURRENT_STATE.getPreferredName(), _currentState);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(MOVE_EXPLANATION.getPreferredName(), _moveExplanation);
+    if (_currentState != null) {
+      builder.field(CURRENT_STATE.getPreferredName(), _currentState);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_moveExplanation != null) {
+      builder.field(MOVE_EXPLANATION.getPreferredName(), _moveExplanation);
+    }
     if (_nodeAllocationDecisions != null) {
       builder.array(NODE_ALLOCATION_DECISIONS.getPreferredName(), _nodeAllocationDecisions);
     }
-    builder.field(PRIMARY.getPreferredName(), _primary);
-    builder.field(REBALANCE_EXPLANATION.getPreferredName(), _rebalanceExplanation);
-    builder.field(REMAINING_DELAY.getPreferredName(), _remainingDelay);
-    builder.field(REMAINING_DELAY_IN_MILLIS.getPreferredName(), _remainingDelayInMillis);
-    builder.field(SHARD.getPreferredName(), _shard);
+    if (_primary != null) {
+      builder.field(PRIMARY.getPreferredName(), _primary);
+    }
+    if (_rebalanceExplanation != null) {
+      builder.field(REBALANCE_EXPLANATION.getPreferredName(), _rebalanceExplanation);
+    }
+    if (_remainingDelay != null) {
+      builder.field(REMAINING_DELAY.getPreferredName(), _remainingDelay);
+    }
+    if (_remainingDelayInMillis != null) {
+      builder.field(REMAINING_DELAY_IN_MILLIS.getPreferredName(), _remainingDelayInMillis);
+    }
+    if (_shard != null) {
+      builder.field(SHARD.getPreferredName(), _shard);
+    }
     if (_unassignedInfo != null) {
       builder.field(UNASSIGNED_INFO.getPreferredName());
       _unassignedInfo.toXContent(builder, params);

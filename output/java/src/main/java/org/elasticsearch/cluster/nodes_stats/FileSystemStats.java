@@ -42,7 +42,9 @@ public class FileSystemStats  implements XContentable<FileSystemStats> {
     if (_data != null) {
       builder.array(DATA.getPreferredName(), _data);
     }
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
     if (_total != null) {
       builder.field(TOTAL.getPreferredName());
       _total.toXContent(builder, params);

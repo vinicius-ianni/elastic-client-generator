@@ -42,8 +42,12 @@ public class InlineGet<TDocument>  implements XContentable<InlineGet<TDocument>>
       builder.field(FIELDS.getPreferredName());
       _fields.toXContent(builder, params);
     }
-    builder.field(FOUND.getPreferredName(), _found);
-    builder.field(SOURCE.getPreferredName(), _source);
+    if (_found != null) {
+      builder.field(FOUND.getPreferredName(), _found);
+    }
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName(), _source);
+    }
     builder.endObject();
     return builder;
   }

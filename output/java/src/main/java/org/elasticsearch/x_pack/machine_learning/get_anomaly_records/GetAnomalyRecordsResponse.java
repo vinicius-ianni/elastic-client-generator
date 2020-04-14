@@ -33,7 +33,9 @@ public class GetAnomalyRecordsResponse  implements XContentable<GetAnomalyRecord
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COUNT.getPreferredName(), _count);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
     if (_records != null) {
       builder.array(RECORDS.getPreferredName(), _records);
     }

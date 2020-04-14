@@ -74,16 +74,34 @@ public class ElasticsearchVersionInfo  implements XContentable<ElasticsearchVers
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(LUCENE_VERSION.getPreferredName(), _luceneVersion);
-    builder.field(NUMBER.getPreferredName(), _number);
-    builder.field(BUILD_FLAVOR.getPreferredName(), _buildFlavor);
-    builder.field(BUILD_TYPE.getPreferredName(), _buildType);
-    builder.field(BUILD_HASH.getPreferredName(), _buildHash);
-    builder.field(BUILD_DATE.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_buildDate.toInstant()));
-    builder.field(BUILD_SNAPSHOT.getPreferredName(), _buildSnapshot);
-    builder.field(MINIMUM_WIRE_COMPATIBILITY_VERSION.getPreferredName(), _minimumWireCompatibilityVersion);
-    builder.field(MINIMUM_INDEX_COMPATIBILITY_VERSION.getPreferredName(), _minimumIndexCompatibilityVersion);
+    if (_luceneVersion != null) {
+      builder.field(LUCENE_VERSION.getPreferredName(), _luceneVersion);
+    }
+    if (_number != null) {
+      builder.field(NUMBER.getPreferredName(), _number);
+    }
+    if (_buildFlavor != null) {
+      builder.field(BUILD_FLAVOR.getPreferredName(), _buildFlavor);
+    }
+    if (_buildType != null) {
+      builder.field(BUILD_TYPE.getPreferredName(), _buildType);
+    }
+    if (_buildHash != null) {
+      builder.field(BUILD_HASH.getPreferredName(), _buildHash);
+    }
+    if (_buildDate != null) {
+      builder.field(BUILD_DATE.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_buildDate.toInstant()));
+    }
+    if (_buildSnapshot != null) {
+      builder.field(BUILD_SNAPSHOT.getPreferredName(), _buildSnapshot);
+    }
+    if (_minimumWireCompatibilityVersion != null) {
+      builder.field(MINIMUM_WIRE_COMPATIBILITY_VERSION.getPreferredName(), _minimumWireCompatibilityVersion);
+    }
+    if (_minimumIndexCompatibilityVersion != null) {
+      builder.field(MINIMUM_INDEX_COMPATIBILITY_VERSION.getPreferredName(), _minimumIndexCompatibilityVersion);
+    }
     builder.endObject();
     return builder;
   }

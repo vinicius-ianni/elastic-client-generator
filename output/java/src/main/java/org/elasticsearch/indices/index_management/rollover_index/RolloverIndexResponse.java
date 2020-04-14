@@ -60,11 +60,21 @@ public class RolloverIndexResponse  implements XContentable<RolloverIndexRespons
       builder.field(CONDITIONS.getPreferredName());
       _conditions.toXContent(builder, params);
     }
-    builder.field(DRY_RUN.getPreferredName(), _dryRun);
-    builder.field(NEW_INDEX.getPreferredName(), _newIndex);
-    builder.field(OLD_INDEX.getPreferredName(), _oldIndex);
-    builder.field(ROLLED_OVER.getPreferredName(), _rolledOver);
-    builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    if (_dryRun != null) {
+      builder.field(DRY_RUN.getPreferredName(), _dryRun);
+    }
+    if (_newIndex != null) {
+      builder.field(NEW_INDEX.getPreferredName(), _newIndex);
+    }
+    if (_oldIndex != null) {
+      builder.field(OLD_INDEX.getPreferredName(), _oldIndex);
+    }
+    if (_rolledOver != null) {
+      builder.field(ROLLED_OVER.getPreferredName(), _rolledOver);
+    }
+    if (_shardsAcknowledged != null) {
+      builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    }
     builder.endObject();
     return builder;
   }

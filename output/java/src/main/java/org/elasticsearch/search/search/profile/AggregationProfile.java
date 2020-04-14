@@ -49,9 +49,15 @@ public class AggregationProfile  implements XContentable<AggregationProfile> {
       builder.field(BREAKDOWN.getPreferredName());
       _breakdown.toXContent(builder, params);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_timeInNanos != null) {
+      builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

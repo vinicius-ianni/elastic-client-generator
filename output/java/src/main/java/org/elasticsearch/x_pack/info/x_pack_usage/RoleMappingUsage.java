@@ -32,8 +32,12 @@ public class RoleMappingUsage  implements XContentable<RoleMappingUsage> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ENABLED.getPreferredName(), _enabled);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_enabled != null) {
+      builder.field(ENABLED.getPreferredName(), _enabled);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

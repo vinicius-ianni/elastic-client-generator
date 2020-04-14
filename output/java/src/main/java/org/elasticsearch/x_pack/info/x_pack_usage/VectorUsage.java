@@ -38,9 +38,15 @@ public class VectorUsage  implements XContentable<VectorUsage> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DENSE_VECTOR_FIELDS_COUNT.getPreferredName(), _denseVectorFieldsCount);
-    builder.field(SPARSE_VECTOR_FIELDS_COUNT.getPreferredName(), _sparseVectorFieldsCount);
-    builder.field(DENSE_VECTOR_DIMS_AVG_COUNT.getPreferredName(), _denseVectorDimsAvgCount);
+    if (_denseVectorFieldsCount != null) {
+      builder.field(DENSE_VECTOR_FIELDS_COUNT.getPreferredName(), _denseVectorFieldsCount);
+    }
+    if (_sparseVectorFieldsCount != null) {
+      builder.field(SPARSE_VECTOR_FIELDS_COUNT.getPreferredName(), _sparseVectorFieldsCount);
+    }
+    if (_denseVectorDimsAvgCount != null) {
+      builder.field(DENSE_VECTOR_DIMS_AVG_COUNT.getPreferredName(), _denseVectorDimsAvgCount);
+    }
     builder.endObject();
     return builder;
   }

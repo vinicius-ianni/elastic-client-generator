@@ -62,8 +62,12 @@ public class LanguageAnalyzer  implements XContentable<LanguageAnalyzer> {
       builder.field(STOPWORDS.getPreferredName());
       _stopwords.toXContent(builder, params);
     }
-    builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_stopwordsPath != null) {
+      builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

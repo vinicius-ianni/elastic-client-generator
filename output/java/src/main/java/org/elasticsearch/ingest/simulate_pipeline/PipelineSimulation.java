@@ -45,7 +45,9 @@ public class PipelineSimulation  implements XContentable<PipelineSimulation> {
     if (_processorResults != null) {
       builder.array(PROCESSOR_RESULTS.getPreferredName(), _processorResults);
     }
-    builder.field(TAG.getPreferredName(), _tag);
+    if (_tag != null) {
+      builder.field(TAG.getPreferredName(), _tag);
+    }
     builder.endObject();
     return builder;
   }

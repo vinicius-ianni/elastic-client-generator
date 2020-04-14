@@ -32,8 +32,12 @@ public class ClusterJvmMemory  implements XContentable<ClusterJvmMemory> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(HEAP_MAX_IN_BYTES.getPreferredName(), _heapMaxInBytes);
-    builder.field(HEAP_USED_IN_BYTES.getPreferredName(), _heapUsedInBytes);
+    if (_heapMaxInBytes != null) {
+      builder.field(HEAP_MAX_IN_BYTES.getPreferredName(), _heapMaxInBytes);
+    }
+    if (_heapUsedInBytes != null) {
+      builder.field(HEAP_USED_IN_BYTES.getPreferredName(), _heapUsedInBytes);
+    }
     builder.endObject();
     return builder;
   }

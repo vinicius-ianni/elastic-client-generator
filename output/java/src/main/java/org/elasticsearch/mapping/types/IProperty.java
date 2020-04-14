@@ -46,7 +46,9 @@ public class IProperty  implements XContentable<IProperty> {
       builder.field(NAME.getPreferredName());
       _name.toXContent(builder, params);
     }
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

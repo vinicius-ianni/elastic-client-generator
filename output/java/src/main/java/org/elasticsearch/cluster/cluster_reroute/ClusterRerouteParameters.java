@@ -56,12 +56,24 @@ public class ClusterRerouteParameters  implements XContentable<ClusterReroutePar
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_PRIMARY.getPreferredName(), _allowPrimary);
-    builder.field(FROM_NODE.getPreferredName(), _fromNode);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(NODE.getPreferredName(), _node);
-    builder.field(SHARD.getPreferredName(), _shard);
-    builder.field(TO_NODE.getPreferredName(), _toNode);
+    if (_allowPrimary != null) {
+      builder.field(ALLOW_PRIMARY.getPreferredName(), _allowPrimary);
+    }
+    if (_fromNode != null) {
+      builder.field(FROM_NODE.getPreferredName(), _fromNode);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
+    if (_shard != null) {
+      builder.field(SHARD.getPreferredName(), _shard);
+    }
+    if (_toNode != null) {
+      builder.field(TO_NODE.getPreferredName(), _toNode);
+    }
     builder.endObject();
     return builder;
   }

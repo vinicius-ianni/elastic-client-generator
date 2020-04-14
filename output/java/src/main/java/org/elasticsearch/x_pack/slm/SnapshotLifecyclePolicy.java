@@ -49,8 +49,12 @@ public class SnapshotLifecyclePolicy  implements XContentable<SnapshotLifecycleP
       builder.field(CONFIG.getPreferredName());
       _config.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(REPOSITORY.getPreferredName(), _repository);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_repository != null) {
+      builder.field(REPOSITORY.getPreferredName(), _repository);
+    }
     if (_schedule != null) {
       builder.field(SCHEDULE.getPreferredName());
       _schedule.toXContent(builder, params);

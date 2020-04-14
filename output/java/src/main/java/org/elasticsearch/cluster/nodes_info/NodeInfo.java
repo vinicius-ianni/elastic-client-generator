@@ -117,18 +117,26 @@ public class NodeInfo  implements XContentable<NodeInfo> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BUILD_HASH.getPreferredName(), _buildHash);
-    builder.field(HOST.getPreferredName(), _host);
+    if (_buildHash != null) {
+      builder.field(BUILD_HASH.getPreferredName(), _buildHash);
+    }
+    if (_host != null) {
+      builder.field(HOST.getPreferredName(), _host);
+    }
     if (_http != null) {
       builder.field(HTTP.getPreferredName());
       _http.toXContent(builder, params);
     }
-    builder.field(IP.getPreferredName(), _ip);
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
     if (_jvm != null) {
       builder.field(JVM.getPreferredName());
       _jvm.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName(), _name);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_network != null) {
       builder.field(NETWORK.getPreferredName());
       _network.toXContent(builder, params);
@@ -158,8 +166,12 @@ public class NodeInfo  implements XContentable<NodeInfo> {
       builder.field(TRANSPORT.getPreferredName());
       _transport.toXContent(builder, params);
     }
-    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_transportAddress != null) {
+      builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

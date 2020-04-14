@@ -42,8 +42,12 @@ public class RemoteSource  implements XContentable<RemoteSource> {
       builder.field(HOST.getPreferredName());
       _host.toXContent(builder, params);
     }
-    builder.field(PASSWORD.getPreferredName(), _password);
-    builder.field(USERNAME.getPreferredName(), _username);
+    if (_password != null) {
+      builder.field(PASSWORD.getPreferredName(), _password);
+    }
+    if (_username != null) {
+      builder.field(USERNAME.getPreferredName(), _username);
+    }
     builder.endObject();
     return builder;
   }

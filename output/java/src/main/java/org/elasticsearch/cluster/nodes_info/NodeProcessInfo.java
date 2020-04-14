@@ -38,9 +38,15 @@ public class NodeProcessInfo  implements XContentable<NodeProcessInfo> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(MLOCKALL.getPreferredName(), _mlockall);
-    builder.field(REFRESH_INTERVAL_IN_MILLIS.getPreferredName(), _refreshIntervalInMillis);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_mlockall != null) {
+      builder.field(MLOCKALL.getPreferredName(), _mlockall);
+    }
+    if (_refreshIntervalInMillis != null) {
+      builder.field(REFRESH_INTERVAL_IN_MILLIS.getPreferredName(), _refreshIntervalInMillis);
+    }
     builder.endObject();
     return builder;
   }

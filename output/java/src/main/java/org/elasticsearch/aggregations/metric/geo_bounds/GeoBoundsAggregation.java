@@ -26,7 +26,9 @@ public class GeoBoundsAggregation  implements XContentable<GeoBoundsAggregation>
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(WRAP_LONGITUDE.getPreferredName(), _wrapLongitude);
+    if (_wrapLongitude != null) {
+      builder.field(WRAP_LONGITUDE.getPreferredName(), _wrapLongitude);
+    }
     builder.endObject();
     return builder;
   }

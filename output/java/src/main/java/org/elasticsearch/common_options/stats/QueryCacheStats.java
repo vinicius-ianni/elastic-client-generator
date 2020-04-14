@@ -62,13 +62,27 @@ public class QueryCacheStats  implements XContentable<QueryCacheStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CACHE_COUNT.getPreferredName(), _cacheCount);
-    builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
-    builder.field(EVICTIONS.getPreferredName(), _evictions);
-    builder.field(HIT_COUNT.getPreferredName(), _hitCount);
-    builder.field(MEMORY_SIZE_IN_BYTES.getPreferredName(), _memorySizeInBytes);
-    builder.field(MISS_COUNT.getPreferredName(), _missCount);
-    builder.field(TOTAL_COUNT.getPreferredName(), _totalCount);
+    if (_cacheCount != null) {
+      builder.field(CACHE_COUNT.getPreferredName(), _cacheCount);
+    }
+    if (_cacheSize != null) {
+      builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
+    }
+    if (_evictions != null) {
+      builder.field(EVICTIONS.getPreferredName(), _evictions);
+    }
+    if (_hitCount != null) {
+      builder.field(HIT_COUNT.getPreferredName(), _hitCount);
+    }
+    if (_memorySizeInBytes != null) {
+      builder.field(MEMORY_SIZE_IN_BYTES.getPreferredName(), _memorySizeInBytes);
+    }
+    if (_missCount != null) {
+      builder.field(MISS_COUNT.getPreferredName(), _missCount);
+    }
+    if (_totalCount != null) {
+      builder.field(TOTAL_COUNT.getPreferredName(), _totalCount);
+    }
     builder.endObject();
     return builder;
   }

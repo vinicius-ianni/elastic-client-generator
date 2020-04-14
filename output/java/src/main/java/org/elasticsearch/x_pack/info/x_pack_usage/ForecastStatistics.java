@@ -57,7 +57,9 @@ public class ForecastStatistics  implements XContentable<ForecastStatistics> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORECASTED_JOBS.getPreferredName(), _forecastedJobs);
+    if (_forecastedJobs != null) {
+      builder.field(FORECASTED_JOBS.getPreferredName(), _forecastedJobs);
+    }
     if (_memoryBytes != null) {
       builder.field(MEMORY_BYTES.getPreferredName());
       _memoryBytes.toXContent(builder, params);
@@ -74,7 +76,9 @@ public class ForecastStatistics  implements XContentable<ForecastStatistics> {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(TOTAL.getPreferredName(), _total);
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
     builder.endObject();
     return builder;
   }

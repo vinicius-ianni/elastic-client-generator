@@ -36,7 +36,9 @@ public class SlackDynamicAttachment  implements XContentable<SlackDynamicAttachm
       builder.field(ATTACHMENT_TEMPLATE.getPreferredName());
       _attachmentTemplate.toXContent(builder, params);
     }
-    builder.field(LIST_PATH.getPreferredName(), _listPath);
+    if (_listPath != null) {
+      builder.field(LIST_PATH.getPreferredName(), _listPath);
+    }
     builder.endObject();
     return builder;
   }

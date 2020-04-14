@@ -26,7 +26,9 @@ public class GeoCoordinate  implements XContentable<GeoCoordinate> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(Z.getPreferredName(), _z);
+    if (_z != null) {
+      builder.field(Z.getPreferredName(), _z);
+    }
     builder.endObject();
     return builder;
   }

@@ -88,12 +88,18 @@ public class IndicesStatsRequest  implements XContentable<IndicesStatsRequest> {
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
-    builder.field(FORBID_CLOSED_INDICES.getPreferredName(), _forbidClosedIndices);
+    if (_forbidClosedIndices != null) {
+      builder.field(FORBID_CLOSED_INDICES.getPreferredName(), _forbidClosedIndices);
+    }
     if (_groups != null) {
       builder.array(GROUPS.getPreferredName(), _groups);
     }
-    builder.field(INCLUDE_SEGMENT_FILE_SIZES.getPreferredName(), _includeSegmentFileSizes);
-    builder.field(INCLUDE_UNLOADED_SEGMENTS.getPreferredName(), _includeUnloadedSegments);
+    if (_includeSegmentFileSizes != null) {
+      builder.field(INCLUDE_SEGMENT_FILE_SIZES.getPreferredName(), _includeSegmentFileSizes);
+    }
+    if (_includeUnloadedSegments != null) {
+      builder.field(INCLUDE_UNLOADED_SEGMENTS.getPreferredName(), _includeUnloadedSegments);
+    }
     if (_level != null) {
       builder.field(LEVEL.getPreferredName());
       _level.toXContent(builder, params);

@@ -35,7 +35,9 @@ public class StemmerOverrideTokenFilter  implements XContentable<StemmerOverride
     if (_rules != null) {
       builder.array(RULES.getPreferredName(), _rules);
     }
-    builder.field(RULES_PATH.getPreferredName(), _rulesPath);
+    if (_rulesPath != null) {
+      builder.field(RULES_PATH.getPreferredName(), _rulesPath);
+    }
     builder.endObject();
     return builder;
   }

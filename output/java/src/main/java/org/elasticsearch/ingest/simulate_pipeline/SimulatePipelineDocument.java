@@ -47,7 +47,9 @@ public class SimulatePipelineDocument  implements XContentable<SimulatePipelineD
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(SOURCE.getPreferredName(), _source);
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName(), _source);
+    }
     builder.endObject();
     return builder;
   }

@@ -26,7 +26,9 @@ public class ExistsResponse  implements XContentable<ExistsResponse> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(EXISTS.getPreferredName(), _exists);
+    if (_exists != null) {
+      builder.field(EXISTS.getPreferredName(), _exists);
+    }
     builder.endObject();
     return builder;
   }

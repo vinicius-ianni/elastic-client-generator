@@ -82,14 +82,22 @@ public class MultiGetRequest  implements XContentable<MultiGetRequest> {
     if (_docs != null) {
       builder.array(DOCS.getPreferredName(), _docs);
     }
-    builder.field(PREFERENCE.getPreferredName(), _preference);
-    builder.field(REALTIME.getPreferredName(), _realtime);
-    builder.field(REFRESH.getPreferredName(), _refresh);
+    if (_preference != null) {
+      builder.field(PREFERENCE.getPreferredName(), _preference);
+    }
+    if (_realtime != null) {
+      builder.field(REALTIME.getPreferredName(), _realtime);
+    }
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName(), _refresh);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
     }
-    builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    if (_sourceEnabled != null) {
+      builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    }
     if (_sourceExcludes != null) {
       builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
     }

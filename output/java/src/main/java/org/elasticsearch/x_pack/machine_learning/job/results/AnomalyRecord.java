@@ -161,30 +161,64 @@ public class AnomalyRecord  implements XContentable<AnomalyRecord> {
       builder.field(BUCKET_SPAN.getPreferredName());
       _bucketSpan.toXContent(builder, params);
     }
-    builder.field(BY_FIELD_NAME.getPreferredName(), _byFieldName);
-    builder.field(BY_FIELD_VALUE.getPreferredName(), _byFieldValue);
+    if (_byFieldName != null) {
+      builder.field(BY_FIELD_NAME.getPreferredName(), _byFieldName);
+    }
+    if (_byFieldValue != null) {
+      builder.field(BY_FIELD_VALUE.getPreferredName(), _byFieldValue);
+    }
     if (_causes != null) {
       builder.array(CAUSES.getPreferredName(), _causes);
     }
-    builder.field(DETECTOR_INDEX.getPreferredName(), _detectorIndex);
-    builder.field(FIELD_NAME.getPreferredName(), _fieldName);
-    builder.field(FUNCTION.getPreferredName(), _function);
-    builder.field(FUNCTION_DESCRIPTION.getPreferredName(), _functionDescription);
+    if (_detectorIndex != null) {
+      builder.field(DETECTOR_INDEX.getPreferredName(), _detectorIndex);
+    }
+    if (_fieldName != null) {
+      builder.field(FIELD_NAME.getPreferredName(), _fieldName);
+    }
+    if (_function != null) {
+      builder.field(FUNCTION.getPreferredName(), _function);
+    }
+    if (_functionDescription != null) {
+      builder.field(FUNCTION_DESCRIPTION.getPreferredName(), _functionDescription);
+    }
     if (_influencers != null) {
       builder.array(INFLUENCERS.getPreferredName(), _influencers);
     }
-    builder.field(INITIAL_RECORD_SCORE.getPreferredName(), _initialRecordScore);
-    builder.field(IS_INTERIM.getPreferredName(), _isInterim);
-    builder.field(JOB_ID.getPreferredName(), _jobId);
-    builder.field(OVER_FIELD_NAME.getPreferredName(), _overFieldName);
-    builder.field(OVER_FIELD_VALUE.getPreferredName(), _overFieldValue);
-    builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
-    builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
-    builder.field(PROBABILITY.getPreferredName(), _probability);
-    builder.field(RECORD_SCORE.getPreferredName(), _recordScore);
-    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
-    builder.field(TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_initialRecordScore != null) {
+      builder.field(INITIAL_RECORD_SCORE.getPreferredName(), _initialRecordScore);
+    }
+    if (_isInterim != null) {
+      builder.field(IS_INTERIM.getPreferredName(), _isInterim);
+    }
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
+    if (_overFieldName != null) {
+      builder.field(OVER_FIELD_NAME.getPreferredName(), _overFieldName);
+    }
+    if (_overFieldValue != null) {
+      builder.field(OVER_FIELD_VALUE.getPreferredName(), _overFieldValue);
+    }
+    if (_partitionFieldName != null) {
+      builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
+    }
+    if (_partitionFieldValue != null) {
+      builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
+    }
+    if (_probability != null) {
+      builder.field(PROBABILITY.getPreferredName(), _probability);
+    }
+    if (_recordScore != null) {
+      builder.field(RECORD_SCORE.getPreferredName(), _recordScore);
+    }
+    if (_resultType != null) {
+      builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    }
     if (_typical != null) {
       builder.array(TYPICAL.getPreferredName(), _typical);
     }

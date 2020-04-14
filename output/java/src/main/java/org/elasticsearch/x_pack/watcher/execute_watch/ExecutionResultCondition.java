@@ -39,7 +39,9 @@ public class ExecutionResultCondition  implements XContentable<ExecutionResultCo
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MET.getPreferredName(), _met);
+    if (_met != null) {
+      builder.field(MET.getPreferredName(), _met);
+    }
     if (_status != null) {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);

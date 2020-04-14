@@ -37,7 +37,9 @@ public class IlmPolicyStatistics  implements XContentable<IlmPolicyStatistics> {
       builder.field(PHASES.getPreferredName());
       _phases.toXContent(builder, params);
     }
-    builder.field(INDICES_MANAGED.getPreferredName(), _indicesManaged);
+    if (_indicesManaged != null) {
+      builder.field(INDICES_MANAGED.getPreferredName(), _indicesManaged);
+    }
     builder.endObject();
     return builder;
   }

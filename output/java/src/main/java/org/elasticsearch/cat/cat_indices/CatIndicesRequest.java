@@ -91,7 +91,9 @@ public class CatIndicesRequest  implements XContentable<CatIndicesRequest> {
       builder.field(BYTES.getPreferredName());
       _bytes.toXContent(builder, params);
     }
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_headers != null) {
       builder.array(HEADERS.getPreferredName(), _headers);
     }
@@ -99,18 +101,28 @@ public class CatIndicesRequest  implements XContentable<CatIndicesRequest> {
       builder.field(HEALTH.getPreferredName());
       _health.toXContent(builder, params);
     }
-    builder.field(HELP.getPreferredName(), _help);
-    builder.field(INCLUDE_UNLOADED_SEGMENTS.getPreferredName(), _includeUnloadedSegments);
-    builder.field(LOCAL.getPreferredName(), _local);
+    if (_help != null) {
+      builder.field(HELP.getPreferredName(), _help);
+    }
+    if (_includeUnloadedSegments != null) {
+      builder.field(INCLUDE_UNLOADED_SEGMENTS.getPreferredName(), _includeUnloadedSegments);
+    }
+    if (_local != null) {
+      builder.field(LOCAL.getPreferredName(), _local);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
     }
-    builder.field(PRI.getPreferredName(), _pri);
+    if (_pri != null) {
+      builder.field(PRI.getPreferredName(), _pri);
+    }
     if (_sortByColumns != null) {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
-    builder.field(VERBOSE.getPreferredName(), _verbose);
+    if (_verbose != null) {
+      builder.field(VERBOSE.getPreferredName(), _verbose);
+    }
     builder.endObject();
     return builder;
   }

@@ -44,10 +44,18 @@ public class QueryUsage  implements XContentable<QueryUsage> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(PAGING.getPreferredName(), _paging);
-    builder.field(FAILED.getPreferredName(), _failed);
-    builder.field(COUNT.getPreferredName(), _count);
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_paging != null) {
+      builder.field(PAGING.getPreferredName(), _paging);
+    }
+    if (_failed != null) {
+      builder.field(FAILED.getPreferredName(), _failed);
+    }
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
     builder.endObject();
     return builder;
   }

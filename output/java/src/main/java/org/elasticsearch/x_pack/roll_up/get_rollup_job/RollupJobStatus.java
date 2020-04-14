@@ -46,7 +46,9 @@ public class RollupJobStatus  implements XContentable<RollupJobStatus> {
       builder.field(JOB_STATE.getPreferredName());
       _jobState.toXContent(builder, params);
     }
-    builder.field(UPGRADED_DOC_ID.getPreferredName(), _upgradedDocId);
+    if (_upgradedDocId != null) {
+      builder.field(UPGRADED_DOC_ID.getPreferredName(), _upgradedDocId);
+    }
     builder.endObject();
     return builder;
   }

@@ -63,13 +63,19 @@ public class SnapshotRequest  implements XContentable<SnapshotRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_includeGlobalState != null) {
+      builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
+    }
     if (_indices != null) {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
-    builder.field(PARTIAL.getPreferredName(), _partial);
+    if (_partial != null) {
+      builder.field(PARTIAL.getPreferredName(), _partial);
+    }
     if (_metadata != null) {
       builder.field(METADATA.getPreferredName());
       _metadata.toXContent(builder, params);
@@ -78,7 +84,9 @@ public class SnapshotRequest  implements XContentable<SnapshotRequest> {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    if (_waitForCompletion != null) {
+      builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    }
     builder.endObject();
     return builder;
   }

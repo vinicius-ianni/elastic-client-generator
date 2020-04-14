@@ -74,7 +74,9 @@ public class ClusterIndicesStats  implements XContentable<ClusterIndicesStats> {
       builder.field(COMPLETION.getPreferredName());
       _completion.toXContent(builder, params);
     }
-    builder.field(COUNT.getPreferredName(), _count);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
     if (_docs != null) {
       builder.field(DOCS.getPreferredName());
       _docs.toXContent(builder, params);

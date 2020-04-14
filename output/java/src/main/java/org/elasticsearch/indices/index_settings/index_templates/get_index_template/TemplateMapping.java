@@ -70,12 +70,16 @@ public class TemplateMapping  implements XContentable<TemplateMapping> {
       builder.field(MAPPINGS.getPreferredName());
       _mappings.toXContent(builder, params);
     }
-    builder.field(ORDER.getPreferredName(), _order);
+    if (_order != null) {
+      builder.field(ORDER.getPreferredName(), _order);
+    }
     if (_settings != null) {
       builder.field(SETTINGS.getPreferredName());
       _settings.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

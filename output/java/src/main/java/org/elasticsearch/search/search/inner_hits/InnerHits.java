@@ -105,19 +105,29 @@ public class InnerHits  implements XContentable<InnerHits> {
     if (_docvalueFields != null) {
       builder.array(DOCVALUE_FIELDS.getPreferredName(), _docvalueFields);
     }
-    builder.field(EXPLAIN.getPreferredName(), _explain);
-    builder.field(FROM.getPreferredName(), _from);
+    if (_explain != null) {
+      builder.field(EXPLAIN.getPreferredName(), _explain);
+    }
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
     if (_highlight != null) {
       builder.field(HIGHLIGHT.getPreferredName());
       _highlight.toXContent(builder, params);
     }
-    builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
-    builder.field(NAME.getPreferredName(), _name);
+    if (_ignoreUnmapped != null) {
+      builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_scriptFields != null) {
       builder.field(SCRIPT_FIELDS.getPreferredName());
       _scriptFields.toXContent(builder, params);
     }
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_sort != null) {
       builder.array(SORT.getPreferredName(), _sort);
     }
@@ -125,7 +135,9 @@ public class InnerHits  implements XContentable<InnerHits> {
       builder.field(SOURCE.getPreferredName());
       _source.map(builder::value, r-> r.toXContent(builder, params));
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

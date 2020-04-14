@@ -33,7 +33,9 @@ public class IlmUsage  implements XContentable<IlmUsage> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(POLICY_COUNT.getPreferredName(), _policyCount);
+    if (_policyCount != null) {
+      builder.field(POLICY_COUNT.getPreferredName(), _policyCount);
+    }
     if (_policyStats != null) {
       builder.array(POLICY_STATS.getPreferredName(), _policyStats);
     }

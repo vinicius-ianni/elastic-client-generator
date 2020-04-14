@@ -114,25 +114,39 @@ public class ReindexOnServerRequest  implements XContentable<ReindexOnServerRequ
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
     }
-    builder.field(SIZE.getPreferredName(), _size);
-    builder.field(MAX_DOCS.getPreferredName(), _maxDocs);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
+    if (_maxDocs != null) {
+      builder.field(MAX_DOCS.getPreferredName(), _maxDocs);
+    }
     if (_source != null) {
       builder.field(SOURCE.getPreferredName());
       _source.toXContent(builder, params);
     }
-    builder.field(REFRESH.getPreferredName(), _refresh);
-    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName(), _refresh);
+    }
+    if (_requestsPerSecond != null) {
+      builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    }
     if (_scroll != null) {
       builder.field(SCROLL.getPreferredName());
       _scroll.toXContent(builder, params);
     }
-    builder.field(SLICES.getPreferredName(), _slices);
+    if (_slices != null) {
+      builder.field(SLICES.getPreferredName(), _slices);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
-    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    if (_waitForActiveShards != null) {
+      builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    }
+    if (_waitForCompletion != null) {
+      builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    }
     builder.endObject();
     return builder;
   }

@@ -92,18 +92,42 @@ public class CatHealthRecord  implements XContentable<CatHealthRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CLUSTER.getPreferredName(), _cluster);
-    builder.field(EPOCH.getPreferredName(), _epoch);
-    builder.field(INIT.getPreferredName(), _init);
-    builder.field(NODE_DATA.getPreferredName(), _nodeData);
-    builder.field(NODE_TOTAL.getPreferredName(), _nodeTotal);
-    builder.field(PENDING_TASKS.getPreferredName(), _pendingTasks);
-    builder.field(PRI.getPreferredName(), _pri);
-    builder.field(RELO.getPreferredName(), _relo);
-    builder.field(SHARDS.getPreferredName(), _shards);
-    builder.field(STATUS.getPreferredName(), _status);
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
-    builder.field(UNASSIGN.getPreferredName(), _unassign);
+    if (_cluster != null) {
+      builder.field(CLUSTER.getPreferredName(), _cluster);
+    }
+    if (_epoch != null) {
+      builder.field(EPOCH.getPreferredName(), _epoch);
+    }
+    if (_init != null) {
+      builder.field(INIT.getPreferredName(), _init);
+    }
+    if (_nodeData != null) {
+      builder.field(NODE_DATA.getPreferredName(), _nodeData);
+    }
+    if (_nodeTotal != null) {
+      builder.field(NODE_TOTAL.getPreferredName(), _nodeTotal);
+    }
+    if (_pendingTasks != null) {
+      builder.field(PENDING_TASKS.getPreferredName(), _pendingTasks);
+    }
+    if (_pri != null) {
+      builder.field(PRI.getPreferredName(), _pri);
+    }
+    if (_relo != null) {
+      builder.field(RELO.getPreferredName(), _relo);
+    }
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName(), _shards);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName(), _status);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
+    if (_unassign != null) {
+      builder.field(UNASSIGN.getPreferredName(), _unassign);
+    }
     builder.endObject();
     return builder;
   }

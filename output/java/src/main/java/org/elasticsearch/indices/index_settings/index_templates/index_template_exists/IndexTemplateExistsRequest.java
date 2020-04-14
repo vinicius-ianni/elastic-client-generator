@@ -38,8 +38,12 @@ public class IndexTemplateExistsRequest  implements XContentable<IndexTemplateEx
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
-    builder.field(LOCAL.getPreferredName(), _local);
+    if (_flatSettings != null) {
+      builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    }
+    if (_local != null) {
+      builder.field(LOCAL.getPreferredName(), _local);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);

@@ -32,7 +32,9 @@ public class MonitoringUsage  implements XContentable<MonitoringUsage> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COLLECTION_ENABLED.getPreferredName(), _collectionEnabled);
+    if (_collectionEnabled != null) {
+      builder.field(COLLECTION_ENABLED.getPreferredName(), _collectionEnabled);
+    }
     if (_enabledExporters != null) {
       builder.field(ENABLED_EXPORTERS.getPreferredName());
       _enabledExporters.toXContent(builder, params);

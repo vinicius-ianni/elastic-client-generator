@@ -62,13 +62,27 @@ public class TranslogStats  implements XContentable<TranslogStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(EARLIEST_LAST_MODIFIED_AGE.getPreferredName(), _earliestLastModifiedAge);
-    builder.field(OPERATIONS.getPreferredName(), _operations);
-    builder.field(SIZE.getPreferredName(), _size);
-    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
-    builder.field(UNCOMMITTED_OPERATIONS.getPreferredName(), _uncommittedOperations);
-    builder.field(UNCOMMITTED_SIZE.getPreferredName(), _uncommittedSize);
-    builder.field(UNCOMMITTED_SIZE_IN_BYTES.getPreferredName(), _uncommittedSizeInBytes);
+    if (_earliestLastModifiedAge != null) {
+      builder.field(EARLIEST_LAST_MODIFIED_AGE.getPreferredName(), _earliestLastModifiedAge);
+    }
+    if (_operations != null) {
+      builder.field(OPERATIONS.getPreferredName(), _operations);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
+    if (_sizeInBytes != null) {
+      builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    }
+    if (_uncommittedOperations != null) {
+      builder.field(UNCOMMITTED_OPERATIONS.getPreferredName(), _uncommittedOperations);
+    }
+    if (_uncommittedSize != null) {
+      builder.field(UNCOMMITTED_SIZE.getPreferredName(), _uncommittedSize);
+    }
+    if (_uncommittedSizeInBytes != null) {
+      builder.field(UNCOMMITTED_SIZE_IN_BYTES.getPreferredName(), _uncommittedSizeInBytes);
+    }
     builder.endObject();
     return builder;
   }

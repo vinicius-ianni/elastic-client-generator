@@ -32,7 +32,9 @@ public class NodesStatsResponse  implements XContentable<NodesStatsResponse> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    if (_clusterName != null) {
+      builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    }
     if (_nodes != null) {
       builder.field(NODES.getPreferredName());
       _nodes.toXContent(builder, params);

@@ -32,8 +32,12 @@ public class StoreStats  implements XContentable<StoreStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(SIZE.getPreferredName(), _size);
-    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
+    if (_sizeInBytes != null) {
+      builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    }
     builder.endObject();
     return builder;
   }

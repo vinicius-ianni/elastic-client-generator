@@ -42,7 +42,9 @@ public class DateRangeExpression  implements XContentable<DateRangeExpression> {
       builder.field(FROM.getPreferredName());
       _from.toXContent(builder, params);
     }
-    builder.field(KEY.getPreferredName(), _key);
+    if (_key != null) {
+      builder.field(KEY.getPreferredName(), _key);
+    }
     if (_to != null) {
       builder.field(TO.getPreferredName());
       _to.toXContent(builder, params);

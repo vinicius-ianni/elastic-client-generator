@@ -63,9 +63,15 @@ public class SlackMessage  implements XContentable<SlackMessage> {
       builder.field(DYNAMIC_ATTACHMENTS.getPreferredName());
       _dynamicAttachments.toXContent(builder, params);
     }
-    builder.field(FROM.getPreferredName(), _from);
-    builder.field(ICON.getPreferredName(), _icon);
-    builder.field(TEXT.getPreferredName(), _text);
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
+    if (_icon != null) {
+      builder.field(ICON.getPreferredName(), _icon);
+    }
+    if (_text != null) {
+      builder.field(TEXT.getPreferredName(), _text);
+    }
     if (_to != null) {
       builder.array(TO.getPreferredName(), _to);
     }

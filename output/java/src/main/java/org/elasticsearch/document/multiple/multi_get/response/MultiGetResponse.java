@@ -35,7 +35,9 @@ public class MultiGetResponse  implements XContentable<MultiGetResponse> {
     if (_hits != null) {
       builder.array(HITS.getPreferredName(), _hits);
     }
-    builder.field(IS_VALID.getPreferredName(), _isValid);
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
     builder.endObject();
     return builder;
   }

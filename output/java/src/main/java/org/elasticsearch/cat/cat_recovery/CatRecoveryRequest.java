@@ -67,11 +67,15 @@ public class CatRecoveryRequest  implements XContentable<CatRecoveryRequest> {
       builder.field(BYTES.getPreferredName());
       _bytes.toXContent(builder, params);
     }
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_headers != null) {
       builder.array(HEADERS.getPreferredName(), _headers);
     }
-    builder.field(HELP.getPreferredName(), _help);
+    if (_help != null) {
+      builder.field(HELP.getPreferredName(), _help);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
@@ -79,7 +83,9 @@ public class CatRecoveryRequest  implements XContentable<CatRecoveryRequest> {
     if (_sortByColumns != null) {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
-    builder.field(VERBOSE.getPreferredName(), _verbose);
+    if (_verbose != null) {
+      builder.field(VERBOSE.getPreferredName(), _verbose);
+    }
     builder.endObject();
     return builder;
   }

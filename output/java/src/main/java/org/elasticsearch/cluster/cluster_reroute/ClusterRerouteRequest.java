@@ -66,8 +66,12 @@ public class ClusterRerouteRequest  implements XContentable<ClusterRerouteReques
     if (_commands != null) {
       builder.array(COMMANDS.getPreferredName(), _commands);
     }
-    builder.field(DRY_RUN.getPreferredName(), _dryRun);
-    builder.field(EXPLAIN.getPreferredName(), _explain);
+    if (_dryRun != null) {
+      builder.field(DRY_RUN.getPreferredName(), _dryRun);
+    }
+    if (_explain != null) {
+      builder.field(EXPLAIN.getPreferredName(), _explain);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
@@ -75,7 +79,9 @@ public class ClusterRerouteRequest  implements XContentable<ClusterRerouteReques
     if (_metric != null) {
       builder.array(METRIC.getPreferredName(), _metric);
     }
-    builder.field(RETRY_FAILED.getPreferredName(), _retryFailed);
+    if (_retryFailed != null) {
+      builder.field(RETRY_FAILED.getPreferredName(), _retryFailed);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);

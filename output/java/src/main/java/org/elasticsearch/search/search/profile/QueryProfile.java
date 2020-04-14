@@ -58,9 +58,15 @@ public class QueryProfile  implements XContentable<QueryProfile> {
     if (_children != null) {
       builder.array(CHILDREN.getPreferredName(), _children);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_timeInNanos != null) {
+      builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

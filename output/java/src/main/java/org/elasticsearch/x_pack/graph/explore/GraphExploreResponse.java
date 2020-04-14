@@ -58,8 +58,12 @@ public class GraphExploreResponse  implements XContentable<GraphExploreResponse>
     if (_failures != null) {
       builder.array(FAILURES.getPreferredName(), _failures);
     }
-    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
-    builder.field(TOOK.getPreferredName(), _took);
+    if (_timedOut != null) {
+      builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    }
+    if (_took != null) {
+      builder.field(TOOK.getPreferredName(), _took);
+    }
     if (_vertices != null) {
       builder.array(VERTICES.getPreferredName(), _vertices);
     }

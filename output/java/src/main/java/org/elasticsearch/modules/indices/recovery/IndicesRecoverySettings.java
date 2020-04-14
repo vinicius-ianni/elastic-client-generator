@@ -62,13 +62,27 @@ public class IndicesRecoverySettings  implements XContentable<IndicesRecoverySet
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COMPRESS.getPreferredName(), _compress);
-    builder.field(CONCURRENT_SMALL_FILE_STREAMS.getPreferredName(), _concurrentSmallFileStreams);
-    builder.field(CONCURRENT_STREAMS.getPreferredName(), _concurrentStreams);
-    builder.field(FILE_CHUNK_SIZE.getPreferredName(), _fileChunkSize);
-    builder.field(MAX_BYTES_PER_SECOND.getPreferredName(), _maxBytesPerSecond);
-    builder.field(TRANSLOG_OPERATIONS.getPreferredName(), _translogOperations);
-    builder.field(TRANSLOG_SIZE.getPreferredName(), _translogSize);
+    if (_compress != null) {
+      builder.field(COMPRESS.getPreferredName(), _compress);
+    }
+    if (_concurrentSmallFileStreams != null) {
+      builder.field(CONCURRENT_SMALL_FILE_STREAMS.getPreferredName(), _concurrentSmallFileStreams);
+    }
+    if (_concurrentStreams != null) {
+      builder.field(CONCURRENT_STREAMS.getPreferredName(), _concurrentStreams);
+    }
+    if (_fileChunkSize != null) {
+      builder.field(FILE_CHUNK_SIZE.getPreferredName(), _fileChunkSize);
+    }
+    if (_maxBytesPerSecond != null) {
+      builder.field(MAX_BYTES_PER_SECOND.getPreferredName(), _maxBytesPerSecond);
+    }
+    if (_translogOperations != null) {
+      builder.field(TRANSLOG_OPERATIONS.getPreferredName(), _translogOperations);
+    }
+    if (_translogSize != null) {
+      builder.field(TRANSLOG_SIZE.getPreferredName(), _translogSize);
+    }
     builder.endObject();
     return builder;
   }

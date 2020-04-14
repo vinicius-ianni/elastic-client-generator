@@ -32,8 +32,12 @@ public class ShardFileSizeInfo  implements XContentable<ShardFileSizeInfo> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_sizeInBytes != null) {
+      builder.field(SIZE_IN_BYTES.getPreferredName(), _sizeInBytes);
+    }
     builder.endObject();
     return builder;
   }

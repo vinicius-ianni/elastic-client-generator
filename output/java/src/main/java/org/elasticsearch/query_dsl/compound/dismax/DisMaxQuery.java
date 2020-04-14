@@ -36,7 +36,9 @@ public class DisMaxQuery  implements XContentable<DisMaxQuery> {
     if (_queries != null) {
       builder.array(QUERIES.getPreferredName(), _queries);
     }
-    builder.field(TIE_BREAKER.getPreferredName(), _tieBreaker);
+    if (_tieBreaker != null) {
+      builder.field(TIE_BREAKER.getPreferredName(), _tieBreaker);
+    }
     builder.endObject();
     return builder;
   }

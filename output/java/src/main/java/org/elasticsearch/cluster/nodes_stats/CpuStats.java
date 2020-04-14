@@ -62,13 +62,27 @@ public class CpuStats  implements XContentable<CpuStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(PERCENT.getPreferredName(), _percent);
-    builder.field(SYS.getPreferredName(), _sys);
-    builder.field(SYS_IN_MILLIS.getPreferredName(), _sysInMillis);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_IN_MILLIS.getPreferredName(), _totalInMillis);
-    builder.field(USER.getPreferredName(), _user);
-    builder.field(USER_IN_MILLIS.getPreferredName(), _userInMillis);
+    if (_percent != null) {
+      builder.field(PERCENT.getPreferredName(), _percent);
+    }
+    if (_sys != null) {
+      builder.field(SYS.getPreferredName(), _sys);
+    }
+    if (_sysInMillis != null) {
+      builder.field(SYS_IN_MILLIS.getPreferredName(), _sysInMillis);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalInMillis != null) {
+      builder.field(TOTAL_IN_MILLIS.getPreferredName(), _totalInMillis);
+    }
+    if (_user != null) {
+      builder.field(USER.getPreferredName(), _user);
+    }
+    if (_userInMillis != null) {
+      builder.field(USER_IN_MILLIS.getPreferredName(), _userInMillis);
+    }
     builder.endObject();
     return builder;
   }

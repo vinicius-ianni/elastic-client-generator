@@ -112,29 +112,53 @@ public class DeleteByQueryResponse  implements XContentable<DeleteByQueryRespons
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IS_VALID.getPreferredName(), _isValid);
-    builder.field(BATCHES.getPreferredName(), _batches);
-    builder.field(DELETED.getPreferredName(), _deleted);
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
+    if (_batches != null) {
+      builder.field(BATCHES.getPreferredName(), _batches);
+    }
+    if (_deleted != null) {
+      builder.field(DELETED.getPreferredName(), _deleted);
+    }
     if (_failures != null) {
       builder.array(FAILURES.getPreferredName(), _failures);
     }
-    builder.field(NOOPS.getPreferredName(), _noops);
-    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    if (_noops != null) {
+      builder.field(NOOPS.getPreferredName(), _noops);
+    }
+    if (_requestsPerSecond != null) {
+      builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    }
     if (_retries != null) {
       builder.field(RETRIES.getPreferredName());
       _retries.toXContent(builder, params);
     }
-    builder.field(SLICE_ID.getPreferredName(), _sliceId);
+    if (_sliceId != null) {
+      builder.field(SLICE_ID.getPreferredName(), _sliceId);
+    }
     if (_task != null) {
       builder.field(TASK.getPreferredName());
       _task.toXContent(builder, params);
     }
-    builder.field(THROTTLED_MILLIS.getPreferredName(), _throttledMillis);
-    builder.field(THROTTLED_UNTIL_MILLIS.getPreferredName(), _throttledUntilMillis);
-    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
-    builder.field(TOOK.getPreferredName(), _took);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    if (_throttledMillis != null) {
+      builder.field(THROTTLED_MILLIS.getPreferredName(), _throttledMillis);
+    }
+    if (_throttledUntilMillis != null) {
+      builder.field(THROTTLED_UNTIL_MILLIS.getPreferredName(), _throttledUntilMillis);
+    }
+    if (_timedOut != null) {
+      builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    }
+    if (_took != null) {
+      builder.field(TOOK.getPreferredName(), _took);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_versionConflicts != null) {
+      builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    }
     builder.endObject();
     return builder;
   }

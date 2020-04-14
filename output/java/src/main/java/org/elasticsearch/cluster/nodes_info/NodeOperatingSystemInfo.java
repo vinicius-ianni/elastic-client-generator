@@ -75,8 +75,12 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ARCH.getPreferredName(), _arch);
-    builder.field(AVAILABLE_PROCESSORS.getPreferredName(), _availableProcessors);
+    if (_arch != null) {
+      builder.field(ARCH.getPreferredName(), _arch);
+    }
+    if (_availableProcessors != null) {
+      builder.field(AVAILABLE_PROCESSORS.getPreferredName(), _availableProcessors);
+    }
     if (_cpu != null) {
       builder.field(CPU.getPreferredName());
       _cpu.toXContent(builder, params);
@@ -85,14 +89,22 @@ public class NodeOperatingSystemInfo  implements XContentable<NodeOperatingSyste
       builder.field(MEM.getPreferredName());
       _mem.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(PRETTY_NAME.getPreferredName(), _prettyName);
-    builder.field(REFRESH_INTERVAL_IN_MILLIS.getPreferredName(), _refreshIntervalInMillis);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_prettyName != null) {
+      builder.field(PRETTY_NAME.getPreferredName(), _prettyName);
+    }
+    if (_refreshIntervalInMillis != null) {
+      builder.field(REFRESH_INTERVAL_IN_MILLIS.getPreferredName(), _refreshIntervalInMillis);
+    }
     if (_swap != null) {
       builder.field(SWAP.getPreferredName());
       _swap.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

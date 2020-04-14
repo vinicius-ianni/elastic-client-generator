@@ -446,77 +446,219 @@ public class CatNodesRecord  implements XContentable<CatNodesRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BUILD.getPreferredName(), _build);
-    builder.field(COMPLETION_SIZE.getPreferredName(), _completionSize);
-    builder.field(CPU.getPreferredName(), _cpu);
-    builder.field(DISK_AVAILABLE.getPreferredName(), _diskAvailable);
-    builder.field(FIELDDATA_EVICTIONS.getPreferredName(), _fielddataEvictions);
-    builder.field(FIELDDATA_MEMORY.getPreferredName(), _fielddataMemory);
-    builder.field(FILE_DESCRIPTOR_CURRENT.getPreferredName(), _fileDescriptorCurrent);
-    builder.field(FILE_DESCRIPTOR_MAX.getPreferredName(), _fileDescriptorMax);
-    builder.field(FILE_DESCRIPTOR_PERCENT.getPreferredName(), _fileDescriptorPercent);
-    builder.field(FILTER_CACHE_EVICTIONS.getPreferredName(), _filterCacheEvictions);
-    builder.field(FILTER_CACHE_MEMORY.getPreferredName(), _filterCacheMemory);
-    builder.field(FLUSH_TOTAL.getPreferredName(), _flushTotal);
-    builder.field(FLUSH_TOTAL_TIME.getPreferredName(), _flushTotalTime);
-    builder.field(GET_CURRENT.getPreferredName(), _getCurrent);
-    builder.field(GET_EXISTS_TIME.getPreferredName(), _getExistsTime);
-    builder.field(GET_EXISTS_TOTAL.getPreferredName(), _getExistsTotal);
-    builder.field(GET_MISSING_TIME.getPreferredName(), _getMissingTime);
-    builder.field(GET_MISSING_TOTAL.getPreferredName(), _getMissingTotal);
-    builder.field(GET_TIME.getPreferredName(), _getTime);
-    builder.field(GET_TOTAL.getPreferredName(), _getTotal);
-    builder.field(HEAP_CURRENT.getPreferredName(), _heapCurrent);
-    builder.field(HEAP_MAX.getPreferredName(), _heapMax);
-    builder.field(HEAP_PERCENT.getPreferredName(), _heapPercent);
-    builder.field(ID_CACHE_MEMORY.getPreferredName(), _idCacheMemory);
-    builder.field(INDEXING_DELETE_CURRENT.getPreferredName(), _indexingDeleteCurrent);
-    builder.field(INDEXING_DELETE_TIME.getPreferredName(), _indexingDeleteTime);
-    builder.field(INDEXING_DELETE_TOTAL.getPreferredName(), _indexingDeleteTotal);
-    builder.field(INDEXING_INDEX_CURRENT.getPreferredName(), _indexingIndexCurrent);
-    builder.field(INDEXING_INDEX_TIME.getPreferredName(), _indexingIndexTime);
-    builder.field(INDEXING_INDEX_TOTAL.getPreferredName(), _indexingIndexTotal);
-    builder.field(IP.getPreferredName(), _ip);
-    builder.field(JDK.getPreferredName(), _jdk);
-    builder.field(LOAD_15M.getPreferredName(), _load_15m);
-    builder.field(LOAD_5M.getPreferredName(), _load_5m);
-    builder.field(LOAD_1M.getPreferredName(), _load_1m);
-    builder.field(MASTER.getPreferredName(), _master);
-    builder.field(MERGES_CURRENT.getPreferredName(), _mergesCurrent);
-    builder.field(MERGES_CURRENT_DOCS.getPreferredName(), _mergesCurrentDocs);
-    builder.field(MERGES_CURRENT_SIZE.getPreferredName(), _mergesCurrentSize);
-    builder.field(MERGES_TOTAL.getPreferredName(), _mergesTotal);
-    builder.field(MERGES_TOTAL_DOCS.getPreferredName(), _mergesTotalDocs);
-    builder.field(MERGES_TOTAL_TIME.getPreferredName(), _mergesTotalTime);
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(NODE_ID.getPreferredName(), _nodeId);
-    builder.field(NODE_ROLE.getPreferredName(), _nodeRole);
-    builder.field(PERCOLATE_CURRENT.getPreferredName(), _percolateCurrent);
-    builder.field(PERCOLATE_MEMORY.getPreferredName(), _percolateMemory);
-    builder.field(PERCOLATE_QUERIES.getPreferredName(), _percolateQueries);
-    builder.field(PERCOLATE_TIME.getPreferredName(), _percolateTime);
-    builder.field(PERCOLATE_TOTAL.getPreferredName(), _percolateTotal);
-    builder.field(PID.getPreferredName(), _pid);
-    builder.field(PORT.getPreferredName(), _port);
-    builder.field(RAM_CURRENT.getPreferredName(), _ramCurrent);
-    builder.field(RAM_MAX.getPreferredName(), _ramMax);
-    builder.field(RAM_PERCENT.getPreferredName(), _ramPercent);
-    builder.field(REFRESH_TIME.getPreferredName(), _refreshTime);
-    builder.field(REFRESH_TOTAL.getPreferredName(), _refreshTotal);
-    builder.field(SEARCH_FETCH_CURRENT.getPreferredName(), _searchFetchCurrent);
-    builder.field(SEARCH_FETCH_TIME.getPreferredName(), _searchFetchTime);
-    builder.field(SEARCH_FETCH_TOTAL.getPreferredName(), _searchFetchTotal);
-    builder.field(SEARCH_OPEN_CONTEXTS.getPreferredName(), _searchOpenContexts);
-    builder.field(SEARCH_QUERY_CURRENT.getPreferredName(), _searchQueryCurrent);
-    builder.field(SEARCH_QUERY_TIME.getPreferredName(), _searchQueryTime);
-    builder.field(SEARCH_QUERY_TOTAL.getPreferredName(), _searchQueryTotal);
-    builder.field(SEGMENTS_COUNT.getPreferredName(), _segmentsCount);
-    builder.field(SEGMENTS_INDEX_WRITER_MAX_MEMORY.getPreferredName(), _segmentsIndexWriterMaxMemory);
-    builder.field(SEGMENTS_INDEX_WRITER_MEMORY.getPreferredName(), _segmentsIndexWriterMemory);
-    builder.field(SEGMENTS_MEMORY.getPreferredName(), _segmentsMemory);
-    builder.field(SEGMENTS_VERSION_MAP_MEMORY.getPreferredName(), _segmentsVersionMapMemory);
-    builder.field(UPTIME.getPreferredName(), _uptime);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_build != null) {
+      builder.field(BUILD.getPreferredName(), _build);
+    }
+    if (_completionSize != null) {
+      builder.field(COMPLETION_SIZE.getPreferredName(), _completionSize);
+    }
+    if (_cpu != null) {
+      builder.field(CPU.getPreferredName(), _cpu);
+    }
+    if (_diskAvailable != null) {
+      builder.field(DISK_AVAILABLE.getPreferredName(), _diskAvailable);
+    }
+    if (_fielddataEvictions != null) {
+      builder.field(FIELDDATA_EVICTIONS.getPreferredName(), _fielddataEvictions);
+    }
+    if (_fielddataMemory != null) {
+      builder.field(FIELDDATA_MEMORY.getPreferredName(), _fielddataMemory);
+    }
+    if (_fileDescriptorCurrent != null) {
+      builder.field(FILE_DESCRIPTOR_CURRENT.getPreferredName(), _fileDescriptorCurrent);
+    }
+    if (_fileDescriptorMax != null) {
+      builder.field(FILE_DESCRIPTOR_MAX.getPreferredName(), _fileDescriptorMax);
+    }
+    if (_fileDescriptorPercent != null) {
+      builder.field(FILE_DESCRIPTOR_PERCENT.getPreferredName(), _fileDescriptorPercent);
+    }
+    if (_filterCacheEvictions != null) {
+      builder.field(FILTER_CACHE_EVICTIONS.getPreferredName(), _filterCacheEvictions);
+    }
+    if (_filterCacheMemory != null) {
+      builder.field(FILTER_CACHE_MEMORY.getPreferredName(), _filterCacheMemory);
+    }
+    if (_flushTotal != null) {
+      builder.field(FLUSH_TOTAL.getPreferredName(), _flushTotal);
+    }
+    if (_flushTotalTime != null) {
+      builder.field(FLUSH_TOTAL_TIME.getPreferredName(), _flushTotalTime);
+    }
+    if (_getCurrent != null) {
+      builder.field(GET_CURRENT.getPreferredName(), _getCurrent);
+    }
+    if (_getExistsTime != null) {
+      builder.field(GET_EXISTS_TIME.getPreferredName(), _getExistsTime);
+    }
+    if (_getExistsTotal != null) {
+      builder.field(GET_EXISTS_TOTAL.getPreferredName(), _getExistsTotal);
+    }
+    if (_getMissingTime != null) {
+      builder.field(GET_MISSING_TIME.getPreferredName(), _getMissingTime);
+    }
+    if (_getMissingTotal != null) {
+      builder.field(GET_MISSING_TOTAL.getPreferredName(), _getMissingTotal);
+    }
+    if (_getTime != null) {
+      builder.field(GET_TIME.getPreferredName(), _getTime);
+    }
+    if (_getTotal != null) {
+      builder.field(GET_TOTAL.getPreferredName(), _getTotal);
+    }
+    if (_heapCurrent != null) {
+      builder.field(HEAP_CURRENT.getPreferredName(), _heapCurrent);
+    }
+    if (_heapMax != null) {
+      builder.field(HEAP_MAX.getPreferredName(), _heapMax);
+    }
+    if (_heapPercent != null) {
+      builder.field(HEAP_PERCENT.getPreferredName(), _heapPercent);
+    }
+    if (_idCacheMemory != null) {
+      builder.field(ID_CACHE_MEMORY.getPreferredName(), _idCacheMemory);
+    }
+    if (_indexingDeleteCurrent != null) {
+      builder.field(INDEXING_DELETE_CURRENT.getPreferredName(), _indexingDeleteCurrent);
+    }
+    if (_indexingDeleteTime != null) {
+      builder.field(INDEXING_DELETE_TIME.getPreferredName(), _indexingDeleteTime);
+    }
+    if (_indexingDeleteTotal != null) {
+      builder.field(INDEXING_DELETE_TOTAL.getPreferredName(), _indexingDeleteTotal);
+    }
+    if (_indexingIndexCurrent != null) {
+      builder.field(INDEXING_INDEX_CURRENT.getPreferredName(), _indexingIndexCurrent);
+    }
+    if (_indexingIndexTime != null) {
+      builder.field(INDEXING_INDEX_TIME.getPreferredName(), _indexingIndexTime);
+    }
+    if (_indexingIndexTotal != null) {
+      builder.field(INDEXING_INDEX_TOTAL.getPreferredName(), _indexingIndexTotal);
+    }
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
+    if (_jdk != null) {
+      builder.field(JDK.getPreferredName(), _jdk);
+    }
+    if (_load_15m != null) {
+      builder.field(LOAD_15M.getPreferredName(), _load_15m);
+    }
+    if (_load_5m != null) {
+      builder.field(LOAD_5M.getPreferredName(), _load_5m);
+    }
+    if (_load_1m != null) {
+      builder.field(LOAD_1M.getPreferredName(), _load_1m);
+    }
+    if (_master != null) {
+      builder.field(MASTER.getPreferredName(), _master);
+    }
+    if (_mergesCurrent != null) {
+      builder.field(MERGES_CURRENT.getPreferredName(), _mergesCurrent);
+    }
+    if (_mergesCurrentDocs != null) {
+      builder.field(MERGES_CURRENT_DOCS.getPreferredName(), _mergesCurrentDocs);
+    }
+    if (_mergesCurrentSize != null) {
+      builder.field(MERGES_CURRENT_SIZE.getPreferredName(), _mergesCurrentSize);
+    }
+    if (_mergesTotal != null) {
+      builder.field(MERGES_TOTAL.getPreferredName(), _mergesTotal);
+    }
+    if (_mergesTotalDocs != null) {
+      builder.field(MERGES_TOTAL_DOCS.getPreferredName(), _mergesTotalDocs);
+    }
+    if (_mergesTotalTime != null) {
+      builder.field(MERGES_TOTAL_TIME.getPreferredName(), _mergesTotalTime);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_nodeId != null) {
+      builder.field(NODE_ID.getPreferredName(), _nodeId);
+    }
+    if (_nodeRole != null) {
+      builder.field(NODE_ROLE.getPreferredName(), _nodeRole);
+    }
+    if (_percolateCurrent != null) {
+      builder.field(PERCOLATE_CURRENT.getPreferredName(), _percolateCurrent);
+    }
+    if (_percolateMemory != null) {
+      builder.field(PERCOLATE_MEMORY.getPreferredName(), _percolateMemory);
+    }
+    if (_percolateQueries != null) {
+      builder.field(PERCOLATE_QUERIES.getPreferredName(), _percolateQueries);
+    }
+    if (_percolateTime != null) {
+      builder.field(PERCOLATE_TIME.getPreferredName(), _percolateTime);
+    }
+    if (_percolateTotal != null) {
+      builder.field(PERCOLATE_TOTAL.getPreferredName(), _percolateTotal);
+    }
+    if (_pid != null) {
+      builder.field(PID.getPreferredName(), _pid);
+    }
+    if (_port != null) {
+      builder.field(PORT.getPreferredName(), _port);
+    }
+    if (_ramCurrent != null) {
+      builder.field(RAM_CURRENT.getPreferredName(), _ramCurrent);
+    }
+    if (_ramMax != null) {
+      builder.field(RAM_MAX.getPreferredName(), _ramMax);
+    }
+    if (_ramPercent != null) {
+      builder.field(RAM_PERCENT.getPreferredName(), _ramPercent);
+    }
+    if (_refreshTime != null) {
+      builder.field(REFRESH_TIME.getPreferredName(), _refreshTime);
+    }
+    if (_refreshTotal != null) {
+      builder.field(REFRESH_TOTAL.getPreferredName(), _refreshTotal);
+    }
+    if (_searchFetchCurrent != null) {
+      builder.field(SEARCH_FETCH_CURRENT.getPreferredName(), _searchFetchCurrent);
+    }
+    if (_searchFetchTime != null) {
+      builder.field(SEARCH_FETCH_TIME.getPreferredName(), _searchFetchTime);
+    }
+    if (_searchFetchTotal != null) {
+      builder.field(SEARCH_FETCH_TOTAL.getPreferredName(), _searchFetchTotal);
+    }
+    if (_searchOpenContexts != null) {
+      builder.field(SEARCH_OPEN_CONTEXTS.getPreferredName(), _searchOpenContexts);
+    }
+    if (_searchQueryCurrent != null) {
+      builder.field(SEARCH_QUERY_CURRENT.getPreferredName(), _searchQueryCurrent);
+    }
+    if (_searchQueryTime != null) {
+      builder.field(SEARCH_QUERY_TIME.getPreferredName(), _searchQueryTime);
+    }
+    if (_searchQueryTotal != null) {
+      builder.field(SEARCH_QUERY_TOTAL.getPreferredName(), _searchQueryTotal);
+    }
+    if (_segmentsCount != null) {
+      builder.field(SEGMENTS_COUNT.getPreferredName(), _segmentsCount);
+    }
+    if (_segmentsIndexWriterMaxMemory != null) {
+      builder.field(SEGMENTS_INDEX_WRITER_MAX_MEMORY.getPreferredName(), _segmentsIndexWriterMaxMemory);
+    }
+    if (_segmentsIndexWriterMemory != null) {
+      builder.field(SEGMENTS_INDEX_WRITER_MEMORY.getPreferredName(), _segmentsIndexWriterMemory);
+    }
+    if (_segmentsMemory != null) {
+      builder.field(SEGMENTS_MEMORY.getPreferredName(), _segmentsMemory);
+    }
+    if (_segmentsVersionMapMemory != null) {
+      builder.field(SEGMENTS_VERSION_MAP_MEMORY.getPreferredName(), _segmentsVersionMapMemory);
+    }
+    if (_uptime != null) {
+      builder.field(UPTIME.getPreferredName(), _uptime);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

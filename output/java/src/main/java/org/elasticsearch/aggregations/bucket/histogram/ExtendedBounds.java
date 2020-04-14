@@ -32,8 +32,12 @@ public class ExtendedBounds<T>  implements XContentable<ExtendedBounds<T>> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MAX.getPreferredName(), _max);
-    builder.field(MIN.getPreferredName(), _min);
+    if (_max != null) {
+      builder.field(MAX.getPreferredName(), _max);
+    }
+    if (_min != null) {
+      builder.field(MIN.getPreferredName(), _min);
+    }
     builder.endObject();
     return builder;
   }

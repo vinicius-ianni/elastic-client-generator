@@ -76,12 +76,24 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTIVE_PRIMARY_SHARDS.getPreferredName(), _activePrimaryShards);
-    builder.field(ACTIVE_SHARDS.getPreferredName(), _activeShards);
-    builder.field(INITIALIZING_SHARDS.getPreferredName(), _initializingShards);
-    builder.field(NUMBER_OF_REPLICAS.getPreferredName(), _numberOfReplicas);
-    builder.field(NUMBER_OF_SHARDS.getPreferredName(), _numberOfShards);
-    builder.field(RELOCATING_SHARDS.getPreferredName(), _relocatingShards);
+    if (_activePrimaryShards != null) {
+      builder.field(ACTIVE_PRIMARY_SHARDS.getPreferredName(), _activePrimaryShards);
+    }
+    if (_activeShards != null) {
+      builder.field(ACTIVE_SHARDS.getPreferredName(), _activeShards);
+    }
+    if (_initializingShards != null) {
+      builder.field(INITIALIZING_SHARDS.getPreferredName(), _initializingShards);
+    }
+    if (_numberOfReplicas != null) {
+      builder.field(NUMBER_OF_REPLICAS.getPreferredName(), _numberOfReplicas);
+    }
+    if (_numberOfShards != null) {
+      builder.field(NUMBER_OF_SHARDS.getPreferredName(), _numberOfShards);
+    }
+    if (_relocatingShards != null) {
+      builder.field(RELOCATING_SHARDS.getPreferredName(), _relocatingShards);
+    }
     if (_shards != null) {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
@@ -90,7 +102,9 @@ public class IndexHealthStats  implements XContentable<IndexHealthStats> {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(UNASSIGNED_SHARDS.getPreferredName(), _unassignedShards);
+    if (_unassignedShards != null) {
+      builder.field(UNASSIGNED_SHARDS.getPreferredName(), _unassignedShards);
+    }
     builder.endObject();
     return builder;
   }

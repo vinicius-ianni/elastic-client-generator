@@ -43,7 +43,9 @@ public class InnerHitsMetadata  implements XContentable<InnerHitsMetadata> {
     if (_hits != null) {
       builder.array(HITS.getPreferredName(), _hits);
     }
-    builder.field(MAX_SCORE.getPreferredName(), _maxScore);
+    if (_maxScore != null) {
+      builder.field(MAX_SCORE.getPreferredName(), _maxScore);
+    }
     if (_total != null) {
       builder.field(TOTAL.getPreferredName());
       _total.toXContent(builder, params);

@@ -57,14 +57,22 @@ public class GetMappingRequest  implements XContentable<GetMappingRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    if (_allowNoIndices != null) {
+      builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    }
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
     }
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
-    builder.field(LOCAL.getPreferredName(), _local);
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_includeTypeName != null) {
+      builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    }
+    if (_local != null) {
+      builder.field(LOCAL.getPreferredName(), _local);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);

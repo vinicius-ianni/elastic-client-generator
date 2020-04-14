@@ -101,21 +101,35 @@ public class ExplainRequest  implements XContentable<ExplainRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    if (_analyzeWildcard != null) {
+      builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    }
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
     if (_defaultOperator != null) {
       builder.field(DEFAULT_OPERATOR.getPreferredName());
       _defaultOperator.toXContent(builder, params);
     }
-    builder.field(DF.getPreferredName(), _df);
-    builder.field(LENIENT.getPreferredName(), _lenient);
-    builder.field(PREFERENCE.getPreferredName(), _preference);
-    builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
+    if (_df != null) {
+      builder.field(DF.getPreferredName(), _df);
+    }
+    if (_lenient != null) {
+      builder.field(LENIENT.getPreferredName(), _lenient);
+    }
+    if (_preference != null) {
+      builder.field(PREFERENCE.getPreferredName(), _preference);
+    }
+    if (_queryOnQueryString != null) {
+      builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
     }
-    builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    if (_sourceEnabled != null) {
+      builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    }
     if (_sourceExcludes != null) {
       builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
     }

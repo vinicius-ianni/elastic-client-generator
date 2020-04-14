@@ -101,30 +101,48 @@ public class ReindexOnServerResponse  implements XContentable<ReindexOnServerRes
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IS_VALID.getPreferredName(), _isValid);
-    builder.field(BATCHES.getPreferredName(), _batches);
-    builder.field(CREATED.getPreferredName(), _created);
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
+    if (_batches != null) {
+      builder.field(BATCHES.getPreferredName(), _batches);
+    }
+    if (_created != null) {
+      builder.field(CREATED.getPreferredName(), _created);
+    }
     if (_failures != null) {
       builder.array(FAILURES.getPreferredName(), _failures);
     }
-    builder.field(NOOPS.getPreferredName(), _noops);
+    if (_noops != null) {
+      builder.field(NOOPS.getPreferredName(), _noops);
+    }
     if (_retries != null) {
       builder.field(RETRIES.getPreferredName());
       _retries.toXContent(builder, params);
     }
-    builder.field(SLICE_ID.getPreferredName(), _sliceId);
+    if (_sliceId != null) {
+      builder.field(SLICE_ID.getPreferredName(), _sliceId);
+    }
     if (_task != null) {
       builder.field(TASK.getPreferredName());
       _task.toXContent(builder, params);
     }
-    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    if (_timedOut != null) {
+      builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    }
     if (_took != null) {
       builder.field(TOOK.getPreferredName());
       _took.toXContent(builder, params);
     }
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(UPDATED.getPreferredName(), _updated);
-    builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_updated != null) {
+      builder.field(UPDATED.getPreferredName(), _updated);
+    }
+    if (_versionConflicts != null) {
+      builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    }
     builder.endObject();
     return builder;
   }

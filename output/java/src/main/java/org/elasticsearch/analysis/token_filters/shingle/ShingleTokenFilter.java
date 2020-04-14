@@ -56,12 +56,24 @@ public class ShingleTokenFilter  implements XContentable<ShingleTokenFilter> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FILLER_TOKEN.getPreferredName(), _fillerToken);
-    builder.field(MAX_SHINGLE_SIZE.getPreferredName(), _maxShingleSize);
-    builder.field(MIN_SHINGLE_SIZE.getPreferredName(), _minShingleSize);
-    builder.field(OUTPUT_UNIGRAMS.getPreferredName(), _outputUnigrams);
-    builder.field(OUTPUT_UNIGRAMS_IF_NO_SHINGLES.getPreferredName(), _outputUnigramsIfNoShingles);
-    builder.field(TOKEN_SEPARATOR.getPreferredName(), _tokenSeparator);
+    if (_fillerToken != null) {
+      builder.field(FILLER_TOKEN.getPreferredName(), _fillerToken);
+    }
+    if (_maxShingleSize != null) {
+      builder.field(MAX_SHINGLE_SIZE.getPreferredName(), _maxShingleSize);
+    }
+    if (_minShingleSize != null) {
+      builder.field(MIN_SHINGLE_SIZE.getPreferredName(), _minShingleSize);
+    }
+    if (_outputUnigrams != null) {
+      builder.field(OUTPUT_UNIGRAMS.getPreferredName(), _outputUnigrams);
+    }
+    if (_outputUnigramsIfNoShingles != null) {
+      builder.field(OUTPUT_UNIGRAMS_IF_NO_SHINGLES.getPreferredName(), _outputUnigramsIfNoShingles);
+    }
+    if (_tokenSeparator != null) {
+      builder.field(TOKEN_SEPARATOR.getPreferredName(), _tokenSeparator);
+    }
     builder.endObject();
     return builder;
   }

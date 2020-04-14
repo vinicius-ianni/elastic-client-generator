@@ -44,10 +44,18 @@ public class GetApiKeyRequest  implements XContentable<GetApiKeyRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(REALM_NAME.getPreferredName(), _realmName);
-    builder.field(USERNAME.getPreferredName(), _username);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_realmName != null) {
+      builder.field(REALM_NAME.getPreferredName(), _realmName);
+    }
+    if (_username != null) {
+      builder.field(USERNAME.getPreferredName(), _username);
+    }
     builder.endObject();
     return builder;
   }

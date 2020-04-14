@@ -94,13 +94,21 @@ public class UpdateByQueryResponse  implements XContentable<UpdateByQueryRespons
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IS_VALID.getPreferredName(), _isValid);
-    builder.field(BATCHES.getPreferredName(), _batches);
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
+    if (_batches != null) {
+      builder.field(BATCHES.getPreferredName(), _batches);
+    }
     if (_failures != null) {
       builder.array(FAILURES.getPreferredName(), _failures);
     }
-    builder.field(NOOPS.getPreferredName(), _noops);
-    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    if (_noops != null) {
+      builder.field(NOOPS.getPreferredName(), _noops);
+    }
+    if (_requestsPerSecond != null) {
+      builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    }
     if (_retries != null) {
       builder.field(RETRIES.getPreferredName());
       _retries.toXContent(builder, params);
@@ -109,11 +117,21 @@ public class UpdateByQueryResponse  implements XContentable<UpdateByQueryRespons
       builder.field(TASK.getPreferredName());
       _task.toXContent(builder, params);
     }
-    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
-    builder.field(TOOK.getPreferredName(), _took);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(UPDATED.getPreferredName(), _updated);
-    builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    if (_timedOut != null) {
+      builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    }
+    if (_took != null) {
+      builder.field(TOOK.getPreferredName(), _took);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_updated != null) {
+      builder.field(UPDATED.getPreferredName(), _updated);
+    }
+    if (_versionConflicts != null) {
+      builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    }
     builder.endObject();
     return builder;
   }

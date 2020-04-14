@@ -99,24 +99,44 @@ public class ValidateQueryRequest  implements XContentable<ValidateQueryRequest>
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALL_SHARDS.getPreferredName(), _allShards);
-    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
-    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    if (_allShards != null) {
+      builder.field(ALL_SHARDS.getPreferredName(), _allShards);
+    }
+    if (_allowNoIndices != null) {
+      builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    }
+    if (_analyzeWildcard != null) {
+      builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    }
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
     if (_defaultOperator != null) {
       builder.field(DEFAULT_OPERATOR.getPreferredName());
       _defaultOperator.toXContent(builder, params);
     }
-    builder.field(DF.getPreferredName(), _df);
+    if (_df != null) {
+      builder.field(DF.getPreferredName(), _df);
+    }
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
     }
-    builder.field(EXPLAIN.getPreferredName(), _explain);
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(LENIENT.getPreferredName(), _lenient);
-    builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
-    builder.field(REWRITE.getPreferredName(), _rewrite);
+    if (_explain != null) {
+      builder.field(EXPLAIN.getPreferredName(), _explain);
+    }
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_lenient != null) {
+      builder.field(LENIENT.getPreferredName(), _lenient);
+    }
+    if (_queryOnQueryString != null) {
+      builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
+    }
+    if (_rewrite != null) {
+      builder.field(REWRITE.getPreferredName(), _rewrite);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);

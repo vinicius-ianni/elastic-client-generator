@@ -61,7 +61,9 @@ public class WatcherNodeStats  implements XContentable<WatcherNodeStats> {
     if (_queuedWatches != null) {
       builder.array(QUEUED_WATCHES.getPreferredName(), _queuedWatches);
     }
-    builder.field(WATCH_COUNT.getPreferredName(), _watchCount);
+    if (_watchCount != null) {
+      builder.field(WATCH_COUNT.getPreferredName(), _watchCount);
+    }
     if (_watcherState != null) {
       builder.field(WATCHER_STATE.getPreferredName());
       _watcherState.toXContent(builder, params);

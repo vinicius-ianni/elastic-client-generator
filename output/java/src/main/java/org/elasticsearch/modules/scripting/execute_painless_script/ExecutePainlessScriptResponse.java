@@ -26,7 +26,9 @@ public class ExecutePainlessScriptResponse<TResult>  implements XContentable<Exe
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(RESULT.getPreferredName(), _result);
+    if (_result != null) {
+      builder.field(RESULT.getPreferredName(), _result);
+    }
     builder.endObject();
     return builder;
   }

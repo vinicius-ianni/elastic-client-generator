@@ -5,6 +5,8 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.common.xcontent.ToXContent;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.json.JsonXContent;
+import org.elasticsearch.query_dsl.MatchAllQuery;
+import org.elasticsearch.query_dsl.abstractions.container.QueryContainer;
 import org.elasticsearch.search.search.hits.TotalHitsRelation;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,6 +20,9 @@ public class SearchTests {
   @Test
   public void X() throws Exception {
     SearchRequest req = new SearchRequest()
+      .setQuery(new QueryContainer()
+        .setMatchAll(new MatchAllQuery())
+      )
       .setFrom(12)
       .setSize(100);
 

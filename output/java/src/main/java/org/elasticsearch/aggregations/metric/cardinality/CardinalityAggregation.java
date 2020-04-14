@@ -32,8 +32,12 @@ public class CardinalityAggregation  implements XContentable<CardinalityAggregat
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(PRECISION_THRESHOLD.getPreferredName(), _precisionThreshold);
-    builder.field(REHASH.getPreferredName(), _rehash);
+    if (_precisionThreshold != null) {
+      builder.field(PRECISION_THRESHOLD.getPreferredName(), _precisionThreshold);
+    }
+    if (_rehash != null) {
+      builder.field(REHASH.getPreferredName(), _rehash);
+    }
     builder.endObject();
     return builder;
   }

@@ -32,7 +32,9 @@ public class SlackActionResult  implements XContentable<SlackActionResult> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACCOUNT.getPreferredName(), _account);
+    if (_account != null) {
+      builder.field(ACCOUNT.getPreferredName(), _account);
+    }
     if (_sentMessages != null) {
       builder.array(SENT_MESSAGES.getPreferredName(), _sentMessages);
     }

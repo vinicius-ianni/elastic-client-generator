@@ -80,16 +80,36 @@ public class ShardIndexing  implements XContentable<ShardIndexing> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DELETE_CURRENT.getPreferredName(), _deleteCurrent);
-    builder.field(DELETE_TIME_IN_MILLIS.getPreferredName(), _deleteTimeInMillis);
-    builder.field(DELETE_TOTAL.getPreferredName(), _deleteTotal);
-    builder.field(INDEX_CURRENT.getPreferredName(), _indexCurrent);
-    builder.field(INDEX_FAILED.getPreferredName(), _indexFailed);
-    builder.field(INDEX_TIME_IN_MILLIS.getPreferredName(), _indexTimeInMillis);
-    builder.field(INDEX_TOTAL.getPreferredName(), _indexTotal);
-    builder.field(IS_THROTTLED.getPreferredName(), _isThrottled);
-    builder.field(NOOP_UPDATE_TOTAL.getPreferredName(), _noopUpdateTotal);
-    builder.field(THROTTLE_TIME_IN_MILLIS.getPreferredName(), _throttleTimeInMillis);
+    if (_deleteCurrent != null) {
+      builder.field(DELETE_CURRENT.getPreferredName(), _deleteCurrent);
+    }
+    if (_deleteTimeInMillis != null) {
+      builder.field(DELETE_TIME_IN_MILLIS.getPreferredName(), _deleteTimeInMillis);
+    }
+    if (_deleteTotal != null) {
+      builder.field(DELETE_TOTAL.getPreferredName(), _deleteTotal);
+    }
+    if (_indexCurrent != null) {
+      builder.field(INDEX_CURRENT.getPreferredName(), _indexCurrent);
+    }
+    if (_indexFailed != null) {
+      builder.field(INDEX_FAILED.getPreferredName(), _indexFailed);
+    }
+    if (_indexTimeInMillis != null) {
+      builder.field(INDEX_TIME_IN_MILLIS.getPreferredName(), _indexTimeInMillis);
+    }
+    if (_indexTotal != null) {
+      builder.field(INDEX_TOTAL.getPreferredName(), _indexTotal);
+    }
+    if (_isThrottled != null) {
+      builder.field(IS_THROTTLED.getPreferredName(), _isThrottled);
+    }
+    if (_noopUpdateTotal != null) {
+      builder.field(NOOP_UPDATE_TOTAL.getPreferredName(), _noopUpdateTotal);
+    }
+    if (_throttleTimeInMillis != null) {
+      builder.field(THROTTLE_TIME_IN_MILLIS.getPreferredName(), _throttleTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

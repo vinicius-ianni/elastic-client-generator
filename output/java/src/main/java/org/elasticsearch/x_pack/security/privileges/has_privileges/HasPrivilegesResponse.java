@@ -58,11 +58,15 @@ public class HasPrivilegesResponse  implements XContentable<HasPrivilegesRespons
       builder.field(CLUSTER.getPreferredName());
       _cluster.toXContent(builder, params);
     }
-    builder.field(HAS_ALL_REQUESTED.getPreferredName(), _hasAllRequested);
+    if (_hasAllRequested != null) {
+      builder.field(HAS_ALL_REQUESTED.getPreferredName(), _hasAllRequested);
+    }
     if (_index != null) {
       builder.array(INDEX.getPreferredName(), _index);
     }
-    builder.field(USERNAME.getPreferredName(), _username);
+    if (_username != null) {
+      builder.field(USERNAME.getPreferredName(), _username);
+    }
     builder.endObject();
     return builder;
   }

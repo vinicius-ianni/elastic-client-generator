@@ -46,7 +46,9 @@ public class MachineLearningInfoResponse  implements XContentable<MachineLearnin
       builder.field(LIMITS.getPreferredName());
       _limits.toXContent(builder, params);
     }
-    builder.field(UPGRADE_MODE.getPreferredName(), _upgradeMode);
+    if (_upgradeMode != null) {
+      builder.field(UPGRADE_MODE.getPreferredName(), _upgradeMode);
+    }
     builder.endObject();
     return builder;
   }

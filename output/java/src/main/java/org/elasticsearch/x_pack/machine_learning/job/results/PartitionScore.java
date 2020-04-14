@@ -50,11 +50,21 @@ public class PartitionScore  implements XContentable<PartitionScore> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(INITIAL_RECORD_SCORE.getPreferredName(), _initialRecordScore);
-    builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
-    builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
-    builder.field(PROBABILITY.getPreferredName(), _probability);
-    builder.field(RECORD_SCORE.getPreferredName(), _recordScore);
+    if (_initialRecordScore != null) {
+      builder.field(INITIAL_RECORD_SCORE.getPreferredName(), _initialRecordScore);
+    }
+    if (_partitionFieldName != null) {
+      builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
+    }
+    if (_partitionFieldValue != null) {
+      builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
+    }
+    if (_probability != null) {
+      builder.field(PROBABILITY.getPreferredName(), _probability);
+    }
+    if (_recordScore != null) {
+      builder.field(RECORD_SCORE.getPreferredName(), _recordScore);
+    }
     builder.endObject();
     return builder;
   }

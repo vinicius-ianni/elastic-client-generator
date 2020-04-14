@@ -141,29 +141,67 @@ public class CatThreadPoolRecord  implements XContentable<CatThreadPoolRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTIVE.getPreferredName(), _active);
-    builder.field(COMPLETED.getPreferredName(), _completed);
-    builder.field(CORE.getPreferredName(), _core);
-    builder.field(EPHEMERAL_NODE_ID.getPreferredName(), _ephemeralNodeId);
-    builder.field(HOST.getPreferredName(), _host);
-    builder.field(IP.getPreferredName(), _ip);
+    if (_active != null) {
+      builder.field(ACTIVE.getPreferredName(), _active);
+    }
+    if (_completed != null) {
+      builder.field(COMPLETED.getPreferredName(), _completed);
+    }
+    if (_core != null) {
+      builder.field(CORE.getPreferredName(), _core);
+    }
+    if (_ephemeralNodeId != null) {
+      builder.field(EPHEMERAL_NODE_ID.getPreferredName(), _ephemeralNodeId);
+    }
+    if (_host != null) {
+      builder.field(HOST.getPreferredName(), _host);
+    }
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
     if (_keepAlive != null) {
       builder.field(KEEP_ALIVE.getPreferredName());
       _keepAlive.toXContent(builder, params);
     }
-    builder.field(LARGEST.getPreferredName(), _largest);
-    builder.field(MAX.getPreferredName(), _max);
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(NODE_ID.getPreferredName(), _nodeId);
-    builder.field(NODE_NAME.getPreferredName(), _nodeName);
-    builder.field(POOL_SIZE.getPreferredName(), _poolSize);
-    builder.field(PORT.getPreferredName(), _port);
-    builder.field(PID.getPreferredName(), _pid);
-    builder.field(QUEUE.getPreferredName(), _queue);
-    builder.field(QUEUE_SIZE.getPreferredName(), _queueSize);
-    builder.field(REJECTED.getPreferredName(), _rejected);
-    builder.field(SIZE.getPreferredName(), _size);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_largest != null) {
+      builder.field(LARGEST.getPreferredName(), _largest);
+    }
+    if (_max != null) {
+      builder.field(MAX.getPreferredName(), _max);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_nodeId != null) {
+      builder.field(NODE_ID.getPreferredName(), _nodeId);
+    }
+    if (_nodeName != null) {
+      builder.field(NODE_NAME.getPreferredName(), _nodeName);
+    }
+    if (_poolSize != null) {
+      builder.field(POOL_SIZE.getPreferredName(), _poolSize);
+    }
+    if (_port != null) {
+      builder.field(PORT.getPreferredName(), _port);
+    }
+    if (_pid != null) {
+      builder.field(PID.getPreferredName(), _pid);
+    }
+    if (_queue != null) {
+      builder.field(QUEUE.getPreferredName(), _queue);
+    }
+    if (_queueSize != null) {
+      builder.field(QUEUE_SIZE.getPreferredName(), _queueSize);
+    }
+    if (_rejected != null) {
+      builder.field(REJECTED.getPreferredName(), _rejected);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

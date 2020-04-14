@@ -72,7 +72,9 @@ public class PutAliasRequest  implements XContentable<PutAliasRequest> {
       builder.field(INDEX_ROUTING.getPreferredName());
       _indexRouting.toXContent(builder, params);
     }
-    builder.field(IS_WRITE_INDEX.getPreferredName(), _isWriteIndex);
+    if (_isWriteIndex != null) {
+      builder.field(IS_WRITE_INDEX.getPreferredName(), _isWriteIndex);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);

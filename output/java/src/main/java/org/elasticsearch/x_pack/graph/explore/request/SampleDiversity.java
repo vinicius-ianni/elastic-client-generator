@@ -37,7 +37,9 @@ public class SampleDiversity  implements XContentable<SampleDiversity> {
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(MAX_DOCS_PER_VALUE.getPreferredName(), _maxDocsPerValue);
+    if (_maxDocsPerValue != null) {
+      builder.field(MAX_DOCS_PER_VALUE.getPreferredName(), _maxDocsPerValue);
+    }
     builder.endObject();
     return builder;
   }

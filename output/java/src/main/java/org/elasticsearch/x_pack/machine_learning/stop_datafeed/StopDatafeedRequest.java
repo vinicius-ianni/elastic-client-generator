@@ -38,8 +38,12 @@ public class StopDatafeedRequest  implements XContentable<StopDatafeedRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_DATAFEEDS.getPreferredName(), _allowNoDatafeeds);
-    builder.field(FORCE.getPreferredName(), _force);
+    if (_allowNoDatafeeds != null) {
+      builder.field(ALLOW_NO_DATAFEEDS.getPreferredName(), _allowNoDatafeeds);
+    }
+    if (_force != null) {
+      builder.field(FORCE.getPreferredName(), _force);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);

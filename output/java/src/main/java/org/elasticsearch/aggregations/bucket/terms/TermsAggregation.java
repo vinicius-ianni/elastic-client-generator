@@ -115,8 +115,12 @@ public class TermsAggregation  implements XContentable<TermsAggregation> {
       builder.field(INCLUDE.getPreferredName());
       _include.toXContent(builder, params);
     }
-    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
-    builder.field(MISSING.getPreferredName(), _missing);
+    if (_minDocCount != null) {
+      builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    }
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName(), _missing);
+    }
     if (_order != null) {
       builder.array(ORDER.getPreferredName(), _order);
     }
@@ -124,9 +128,15 @@ public class TermsAggregation  implements XContentable<TermsAggregation> {
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
     }
-    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
-    builder.field(SHOW_TERM_DOC_COUNT_ERROR.getPreferredName(), _showTermDocCountError);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_shardSize != null) {
+      builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    }
+    if (_showTermDocCountError != null) {
+      builder.field(SHOW_TERM_DOC_COUNT_ERROR.getPreferredName(), _showTermDocCountError);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

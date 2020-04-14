@@ -68,14 +68,30 @@ public class NodeInfoOscpu  implements XContentable<NodeInfoOscpu> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
-    builder.field(CACHE_SIZE_IN_BYTES.getPreferredName(), _cacheSizeInBytes);
-    builder.field(CORES_PER_SOCKET.getPreferredName(), _coresPerSocket);
-    builder.field(MHZ.getPreferredName(), _mhz);
-    builder.field(MODEL.getPreferredName(), _model);
-    builder.field(TOTAL_CORES.getPreferredName(), _totalCores);
-    builder.field(TOTAL_SOCKETS.getPreferredName(), _totalSockets);
-    builder.field(VENDOR.getPreferredName(), _vendor);
+    if (_cacheSize != null) {
+      builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
+    }
+    if (_cacheSizeInBytes != null) {
+      builder.field(CACHE_SIZE_IN_BYTES.getPreferredName(), _cacheSizeInBytes);
+    }
+    if (_coresPerSocket != null) {
+      builder.field(CORES_PER_SOCKET.getPreferredName(), _coresPerSocket);
+    }
+    if (_mhz != null) {
+      builder.field(MHZ.getPreferredName(), _mhz);
+    }
+    if (_model != null) {
+      builder.field(MODEL.getPreferredName(), _model);
+    }
+    if (_totalCores != null) {
+      builder.field(TOTAL_CORES.getPreferredName(), _totalCores);
+    }
+    if (_totalSockets != null) {
+      builder.field(TOTAL_SOCKETS.getPreferredName(), _totalSockets);
+    }
+    if (_vendor != null) {
+      builder.field(VENDOR.getPreferredName(), _vendor);
+    }
     builder.endObject();
     return builder;
   }

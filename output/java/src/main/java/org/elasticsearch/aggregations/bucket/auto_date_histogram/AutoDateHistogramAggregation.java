@@ -81,11 +81,19 @@ public class AutoDateHistogramAggregation  implements XContentable<AutoDateHisto
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(BUCKETS.getPreferredName(), _buckets);
-    builder.field(FORMAT.getPreferredName(), _format);
-    builder.field(MISSING.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_missing.toInstant()));
-    builder.field(OFFSET.getPreferredName(), _offset);
+    if (_buckets != null) {
+      builder.field(BUCKETS.getPreferredName(), _buckets);
+    }
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_missing.toInstant()));
+    }
+    if (_offset != null) {
+      builder.field(OFFSET.getPreferredName(), _offset);
+    }
     if (_params != null) {
       builder.field(PARAMS.getPreferredName());
       _params.toXContent(builder, params);
@@ -94,7 +102,9 @@ public class AutoDateHistogramAggregation  implements XContentable<AutoDateHisto
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
     }
-    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    if (_timeZone != null) {
+      builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    }
     if (_minimumInterval != null) {
       builder.field(MINIMUM_INTERVAL.getPreferredName());
       _minimumInterval.toXContent(builder, params);

@@ -58,15 +58,25 @@ public class TermVectors  implements XContentable<TermVectors> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FOUND.getPreferredName(), _found);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX.getPreferredName(), _index);
+    if (_found != null) {
+      builder.field(FOUND.getPreferredName(), _found);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
     if (_termVectors != null) {
       builder.field(TERM_VECTORS.getPreferredName());
       _termVectors.toXContent(builder, params);
     }
-    builder.field(TOOK.getPreferredName(), _took);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_took != null) {
+      builder.field(TOOK.getPreferredName(), _took);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

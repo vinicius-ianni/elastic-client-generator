@@ -45,13 +45,19 @@ public class MovingAverageAggregation  implements XContentable<MovingAverageAggr
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MINIMIZE.getPreferredName(), _minimize);
+    if (_minimize != null) {
+      builder.field(MINIMIZE.getPreferredName(), _minimize);
+    }
     if (_model != null) {
       builder.field(MODEL.getPreferredName());
       _model.toXContent(builder, params);
     }
-    builder.field(PREDICT.getPreferredName(), _predict);
-    builder.field(WINDOW.getPreferredName(), _window);
+    if (_predict != null) {
+      builder.field(PREDICT.getPreferredName(), _predict);
+    }
+    if (_window != null) {
+      builder.field(WINDOW.getPreferredName(), _window);
+    }
     builder.endObject();
     return builder;
   }

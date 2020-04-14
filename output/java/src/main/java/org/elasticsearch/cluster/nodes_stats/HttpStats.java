@@ -32,8 +32,12 @@ public class HttpStats  implements XContentable<HttpStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CURRENT_OPEN.getPreferredName(), _currentOpen);
-    builder.field(TOTAL_OPENED.getPreferredName(), _totalOpened);
+    if (_currentOpen != null) {
+      builder.field(CURRENT_OPEN.getPreferredName(), _currentOpen);
+    }
+    if (_totalOpened != null) {
+      builder.field(TOTAL_OPENED.getPreferredName(), _totalOpened);
+    }
     builder.endObject();
     return builder;
   }

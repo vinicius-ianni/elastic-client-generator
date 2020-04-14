@@ -45,7 +45,9 @@ public class SimulatedActions  implements XContentable<SimulatedActions> {
       builder.field(ALL.getPreferredName());
       _all.toXContent(builder, params);
     }
-    builder.field(USE_ALL.getPreferredName(), _useAll);
+    if (_useAll != null) {
+      builder.field(USE_ALL.getPreferredName(), _useAll);
+    }
     builder.endObject();
     return builder;
   }

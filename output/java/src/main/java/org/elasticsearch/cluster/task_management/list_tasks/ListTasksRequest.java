@@ -66,7 +66,9 @@ public class ListTasksRequest  implements XContentable<ListTasksRequest> {
     if (_actions != null) {
       builder.array(ACTIONS.getPreferredName(), _actions);
     }
-    builder.field(DETAILED.getPreferredName(), _detailed);
+    if (_detailed != null) {
+      builder.field(DETAILED.getPreferredName(), _detailed);
+    }
     if (_groupBy != null) {
       builder.field(GROUP_BY.getPreferredName());
       _groupBy.toXContent(builder, params);
@@ -74,12 +76,16 @@ public class ListTasksRequest  implements XContentable<ListTasksRequest> {
     if (_nodes != null) {
       builder.array(NODES.getPreferredName(), _nodes);
     }
-    builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
+    if (_parentTaskId != null) {
+      builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    if (_waitForCompletion != null) {
+      builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    }
     builder.endObject();
     return builder;
   }

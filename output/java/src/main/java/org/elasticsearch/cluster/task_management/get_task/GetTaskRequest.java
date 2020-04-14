@@ -36,7 +36,9 @@ public class GetTaskRequest  implements XContentable<GetTaskRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    if (_waitForCompletion != null) {
+      builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    }
     builder.endObject();
     return builder;
   }

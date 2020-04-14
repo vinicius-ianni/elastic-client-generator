@@ -37,7 +37,9 @@ public class ServerError  implements XContentable<ServerError> {
       builder.field(ERROR.getPreferredName());
       _error.toXContent(builder, params);
     }
-    builder.field(STATUS.getPreferredName(), _status);
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName(), _status);
+    }
     builder.endObject();
     return builder;
   }

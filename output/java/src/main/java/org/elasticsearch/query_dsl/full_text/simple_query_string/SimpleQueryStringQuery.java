@@ -102,9 +102,15 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
-    builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_analyzeWildcard != null) {
+      builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    }
+    if (_autoGenerateSynonymsPhraseQuery != null) {
+      builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
+    }
     if (_defaultOperator != null) {
       builder.field(DEFAULT_OPERATOR.getPreferredName());
       _defaultOperator.toXContent(builder, params);
@@ -116,16 +122,28 @@ public class SimpleQueryStringQuery  implements XContentable<SimpleQueryStringQu
       builder.field(FLAGS.getPreferredName());
       _flags.toXContent(builder, params);
     }
-    builder.field(FUZZY_MAX_EXPANSIONS.getPreferredName(), _fuzzyMaxExpansions);
-    builder.field(FUZZY_PREFIX_LENGTH.getPreferredName(), _fuzzyPrefixLength);
-    builder.field(FUZZY_TRANSPOSITIONS.getPreferredName(), _fuzzyTranspositions);
-    builder.field(LENIENT.getPreferredName(), _lenient);
+    if (_fuzzyMaxExpansions != null) {
+      builder.field(FUZZY_MAX_EXPANSIONS.getPreferredName(), _fuzzyMaxExpansions);
+    }
+    if (_fuzzyPrefixLength != null) {
+      builder.field(FUZZY_PREFIX_LENGTH.getPreferredName(), _fuzzyPrefixLength);
+    }
+    if (_fuzzyTranspositions != null) {
+      builder.field(FUZZY_TRANSPOSITIONS.getPreferredName(), _fuzzyTranspositions);
+    }
+    if (_lenient != null) {
+      builder.field(LENIENT.getPreferredName(), _lenient);
+    }
     if (_minimumShouldMatch != null) {
       builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
       _minimumShouldMatch.toXContent(builder, params);
     }
-    builder.field(QUERY.getPreferredName(), _query);
-    builder.field(QUOTE_FIELD_SUFFIX.getPreferredName(), _quoteFieldSuffix);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName(), _query);
+    }
+    if (_quoteFieldSuffix != null) {
+      builder.field(QUOTE_FIELD_SUFFIX.getPreferredName(), _quoteFieldSuffix);
+    }
     builder.endObject();
     return builder;
   }

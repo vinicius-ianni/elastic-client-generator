@@ -59,9 +59,15 @@ public class CompletionSuggester  implements XContentable<CompletionSuggester> {
       builder.field(FUZZY.getPreferredName());
       _fuzzy.toXContent(builder, params);
     }
-    builder.field(PREFIX.getPreferredName(), _prefix);
-    builder.field(REGEX.getPreferredName(), _regex);
-    builder.field(SKIP_DUPLICATES.getPreferredName(), _skipDuplicates);
+    if (_prefix != null) {
+      builder.field(PREFIX.getPreferredName(), _prefix);
+    }
+    if (_regex != null) {
+      builder.field(REGEX.getPreferredName(), _regex);
+    }
+    if (_skipDuplicates != null) {
+      builder.field(SKIP_DUPLICATES.getPreferredName(), _skipDuplicates);
+    }
     builder.endObject();
     return builder;
   }

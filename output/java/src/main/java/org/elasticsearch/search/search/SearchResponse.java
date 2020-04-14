@@ -120,13 +120,19 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
       builder.field(HITS.getPreferredName());
       _hits.toXContent(builder, params);
     }
-    builder.field(MAX_SCORE.getPreferredName(), _maxScore);
-    builder.field(NUM_REDUCE_PHASES.getPreferredName(), _numReducePhases);
+    if (_maxScore != null) {
+      builder.field(MAX_SCORE.getPreferredName(), _maxScore);
+    }
+    if (_numReducePhases != null) {
+      builder.field(NUM_REDUCE_PHASES.getPreferredName(), _numReducePhases);
+    }
     if (_profile != null) {
       builder.field(PROFILE.getPreferredName());
       _profile.toXContent(builder, params);
     }
-    builder.field(SCROLL_ID.getPreferredName(), _scrollId);
+    if (_scrollId != null) {
+      builder.field(SCROLL_ID.getPreferredName(), _scrollId);
+    }
     if (_shards != null) {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
@@ -135,9 +141,15 @@ public class SearchResponse<TDocument>  implements XContentable<SearchResponse<T
       builder.field(SUGGEST.getPreferredName());
       _suggest.toXContent(builder, params);
     }
-    builder.field(TERMINATED_EARLY.getPreferredName(), _terminatedEarly);
-    builder.field(TIMED_OUT.getPreferredName(), _timedOut);
-    builder.field(TOOK.getPreferredName(), _took);
+    if (_terminatedEarly != null) {
+      builder.field(TERMINATED_EARLY.getPreferredName(), _terminatedEarly);
+    }
+    if (_timedOut != null) {
+      builder.field(TIMED_OUT.getPreferredName(), _timedOut);
+    }
+    if (_took != null) {
+      builder.field(TOOK.getPreferredName(), _took);
+    }
     builder.endObject();
     return builder;
   }

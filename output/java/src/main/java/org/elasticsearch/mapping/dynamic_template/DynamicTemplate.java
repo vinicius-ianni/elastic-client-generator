@@ -67,15 +67,25 @@ public class DynamicTemplate  implements XContentable<DynamicTemplate> {
       builder.field(MAPPING.getPreferredName());
       _mapping.toXContent(builder, params);
     }
-    builder.field(MATCH.getPreferredName(), _match);
-    builder.field(MATCH_MAPPING_TYPE.getPreferredName(), _matchMappingType);
+    if (_match != null) {
+      builder.field(MATCH.getPreferredName(), _match);
+    }
+    if (_matchMappingType != null) {
+      builder.field(MATCH_MAPPING_TYPE.getPreferredName(), _matchMappingType);
+    }
     if (_matchPattern != null) {
       builder.field(MATCH_PATTERN.getPreferredName());
       _matchPattern.toXContent(builder, params);
     }
-    builder.field(PATH_MATCH.getPreferredName(), _pathMatch);
-    builder.field(PATH_UNMATCH.getPreferredName(), _pathUnmatch);
-    builder.field(UNMATCH.getPreferredName(), _unmatch);
+    if (_pathMatch != null) {
+      builder.field(PATH_MATCH.getPreferredName(), _pathMatch);
+    }
+    if (_pathUnmatch != null) {
+      builder.field(PATH_UNMATCH.getPreferredName(), _pathUnmatch);
+    }
+    if (_unmatch != null) {
+      builder.field(UNMATCH.getPreferredName(), _unmatch);
+    }
     builder.endObject();
     return builder;
   }

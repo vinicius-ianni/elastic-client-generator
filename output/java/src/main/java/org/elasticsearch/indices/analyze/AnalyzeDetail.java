@@ -47,7 +47,9 @@ public class AnalyzeDetail  implements XContentable<AnalyzeDetail> {
     if (_charfilters != null) {
       builder.array(CHARFILTERS.getPreferredName(), _charfilters);
     }
-    builder.field(CUSTOM_ANALYZER.getPreferredName(), _customAnalyzer);
+    if (_customAnalyzer != null) {
+      builder.field(CUSTOM_ANALYZER.getPreferredName(), _customAnalyzer);
+    }
     if (_tokenfilters != null) {
       builder.array(TOKENFILTERS.getPreferredName(), _tokenfilters);
     }

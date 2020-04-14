@@ -64,11 +64,19 @@ public class GetInfluencersRequest  implements XContentable<GetInfluencersReques
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DESCENDING.getPreferredName(), _descending);
-    builder.field(END.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
-    builder.field(EXCLUDE_INTERIM.getPreferredName(), _excludeInterim);
-    builder.field(INFLUENCER_SCORE.getPreferredName(), _influencerScore);
+    if (_descending != null) {
+      builder.field(DESCENDING.getPreferredName(), _descending);
+    }
+    if (_end != null) {
+      builder.field(END.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    }
+    if (_excludeInterim != null) {
+      builder.field(EXCLUDE_INTERIM.getPreferredName(), _excludeInterim);
+    }
+    if (_influencerScore != null) {
+      builder.field(INFLUENCER_SCORE.getPreferredName(), _influencerScore);
+    }
     if (_page != null) {
       builder.field(PAGE.getPreferredName());
       _page.toXContent(builder, params);
@@ -77,8 +85,10 @@ public class GetInfluencersRequest  implements XContentable<GetInfluencersReques
       builder.field(SORT.getPreferredName());
       _sort.toXContent(builder, params);
     }
-    builder.field(START.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    if (_start != null) {
+      builder.field(START.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

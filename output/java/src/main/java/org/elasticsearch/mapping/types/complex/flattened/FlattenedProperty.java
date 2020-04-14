@@ -81,19 +81,37 @@ public class FlattenedProperty  implements XContentable<FlattenedProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BOOST.getPreferredName(), _boost);
-    builder.field(DEPTH_LIMIT.getPreferredName(), _depthLimit);
-    builder.field(DOC_VALUES.getPreferredName(), _docValues);
-    builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
-    builder.field(IGNORE_ABOVE.getPreferredName(), _ignoreAbove);
-    builder.field(INDEX.getPreferredName(), _index);
+    if (_boost != null) {
+      builder.field(BOOST.getPreferredName(), _boost);
+    }
+    if (_depthLimit != null) {
+      builder.field(DEPTH_LIMIT.getPreferredName(), _depthLimit);
+    }
+    if (_docValues != null) {
+      builder.field(DOC_VALUES.getPreferredName(), _docValues);
+    }
+    if (_eagerGlobalOrdinals != null) {
+      builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
+    }
+    if (_ignoreAbove != null) {
+      builder.field(IGNORE_ABOVE.getPreferredName(), _ignoreAbove);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
     if (_indexOptions != null) {
       builder.field(INDEX_OPTIONS.getPreferredName());
       _indexOptions.toXContent(builder, params);
     }
-    builder.field(NULL_VALUE.getPreferredName(), _nullValue);
-    builder.field(SIMILARITY.getPreferredName(), _similarity);
-    builder.field(SPLIT_QUERIES_ON_WHITESPACE.getPreferredName(), _splitQueriesOnWhitespace);
+    if (_nullValue != null) {
+      builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    }
+    if (_similarity != null) {
+      builder.field(SIMILARITY.getPreferredName(), _similarity);
+    }
+    if (_splitQueriesOnWhitespace != null) {
+      builder.field(SPLIT_QUERIES_ON_WHITESPACE.getPreferredName(), _splitQueriesOnWhitespace);
+    }
     builder.endObject();
     return builder;
   }

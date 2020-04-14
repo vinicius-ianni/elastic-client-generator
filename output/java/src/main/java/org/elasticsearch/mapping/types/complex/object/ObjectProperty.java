@@ -44,7 +44,9 @@ public class ObjectProperty  implements XContentable<ObjectProperty> {
       builder.field(DYNAMIC.getPreferredName());
       _dynamic.map(builder::value, r-> r.toXContent(builder, params));
     }
-    builder.field(ENABLED.getPreferredName(), _enabled);
+    if (_enabled != null) {
+      builder.field(ENABLED.getPreferredName(), _enabled);
+    }
     if (_properties != null) {
       builder.field(PROPERTIES.getPreferredName());
       _properties.toXContent(builder, params);

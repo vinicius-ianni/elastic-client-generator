@@ -152,28 +152,72 @@ public class CatRecoveryRecord  implements XContentable<CatRecoveryRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BYTES.getPreferredName(), _bytes);
-    builder.field(BYTES_PERCENT.getPreferredName(), _bytesPercent);
-    builder.field(BYTES_RECOVERED.getPreferredName(), _bytesRecovered);
-    builder.field(BYTES_TOTAL.getPreferredName(), _bytesTotal);
-    builder.field(FILES.getPreferredName(), _files);
-    builder.field(FILES_PERCENT.getPreferredName(), _filesPercent);
-    builder.field(FILES_RECOVERED.getPreferredName(), _filesRecovered);
-    builder.field(FILES_TOTAL.getPreferredName(), _filesTotal);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(REPOSITORY.getPreferredName(), _repository);
-    builder.field(SHARD.getPreferredName(), _shard);
-    builder.field(SNAPSHOT.getPreferredName(), _snapshot);
-    builder.field(SOURCE_HOST.getPreferredName(), _sourceHost);
-    builder.field(SOURCE_NODE.getPreferredName(), _sourceNode);
-    builder.field(STAGE.getPreferredName(), _stage);
-    builder.field(TARGET_HOST.getPreferredName(), _targetHost);
-    builder.field(TARGET_NODE.getPreferredName(), _targetNode);
-    builder.field(TIME.getPreferredName(), _time);
-    builder.field(TRANSLOG_OPS.getPreferredName(), _translogOps);
-    builder.field(TRANSLOG_OPS_PERCENT.getPreferredName(), _translogOpsPercent);
-    builder.field(TRANSLOG_OPS_RECOVERED.getPreferredName(), _translogOpsRecovered);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_bytes != null) {
+      builder.field(BYTES.getPreferredName(), _bytes);
+    }
+    if (_bytesPercent != null) {
+      builder.field(BYTES_PERCENT.getPreferredName(), _bytesPercent);
+    }
+    if (_bytesRecovered != null) {
+      builder.field(BYTES_RECOVERED.getPreferredName(), _bytesRecovered);
+    }
+    if (_bytesTotal != null) {
+      builder.field(BYTES_TOTAL.getPreferredName(), _bytesTotal);
+    }
+    if (_files != null) {
+      builder.field(FILES.getPreferredName(), _files);
+    }
+    if (_filesPercent != null) {
+      builder.field(FILES_PERCENT.getPreferredName(), _filesPercent);
+    }
+    if (_filesRecovered != null) {
+      builder.field(FILES_RECOVERED.getPreferredName(), _filesRecovered);
+    }
+    if (_filesTotal != null) {
+      builder.field(FILES_TOTAL.getPreferredName(), _filesTotal);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_repository != null) {
+      builder.field(REPOSITORY.getPreferredName(), _repository);
+    }
+    if (_shard != null) {
+      builder.field(SHARD.getPreferredName(), _shard);
+    }
+    if (_snapshot != null) {
+      builder.field(SNAPSHOT.getPreferredName(), _snapshot);
+    }
+    if (_sourceHost != null) {
+      builder.field(SOURCE_HOST.getPreferredName(), _sourceHost);
+    }
+    if (_sourceNode != null) {
+      builder.field(SOURCE_NODE.getPreferredName(), _sourceNode);
+    }
+    if (_stage != null) {
+      builder.field(STAGE.getPreferredName(), _stage);
+    }
+    if (_targetHost != null) {
+      builder.field(TARGET_HOST.getPreferredName(), _targetHost);
+    }
+    if (_targetNode != null) {
+      builder.field(TARGET_NODE.getPreferredName(), _targetNode);
+    }
+    if (_time != null) {
+      builder.field(TIME.getPreferredName(), _time);
+    }
+    if (_translogOps != null) {
+      builder.field(TRANSLOG_OPS.getPreferredName(), _translogOps);
+    }
+    if (_translogOpsPercent != null) {
+      builder.field(TRANSLOG_OPS_PERCENT.getPreferredName(), _translogOpsPercent);
+    }
+    if (_translogOpsRecovered != null) {
+      builder.field(TRANSLOG_OPS_RECOVERED.getPreferredName(), _translogOpsRecovered);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

@@ -43,7 +43,9 @@ public class CompositeAggregation  implements XContentable<CompositeAggregation>
       builder.field(AFTER.getPreferredName());
       _after.toXContent(builder, params);
     }
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_sources != null) {
       builder.array(SOURCES.getPreferredName(), _sources);
     }

@@ -55,12 +55,18 @@ public class DateRangeAggregation  implements XContentable<DateRangeAggregation>
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(FORMAT.getPreferredName(), _format);
-    builder.field(MISSING.getPreferredName(), _missing);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName(), _missing);
+    }
     if (_ranges != null) {
       builder.array(RANGES.getPreferredName(), _ranges);
     }
-    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    if (_timeZone != null) {
+      builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    }
     builder.endObject();
     return builder;
   }

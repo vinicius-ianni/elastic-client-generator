@@ -80,16 +80,36 @@ public class ShardMerges  implements XContentable<ShardMerges> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CURRENT.getPreferredName(), _current);
-    builder.field(CURRENT_DOCS.getPreferredName(), _currentDocs);
-    builder.field(CURRENT_SIZE_IN_BYTES.getPreferredName(), _currentSizeInBytes);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_AUTO_THROTTLE_IN_BYTES.getPreferredName(), _totalAutoThrottleInBytes);
-    builder.field(TOTAL_DOCS.getPreferredName(), _totalDocs);
-    builder.field(TOTAL_SIZE_IN_BYTES.getPreferredName(), _totalSizeInBytes);
-    builder.field(TOTAL_STOPPED_TIME_IN_MILLIS.getPreferredName(), _totalStoppedTimeInMillis);
-    builder.field(TOTAL_THROTTLED_TIME_IN_MILLIS.getPreferredName(), _totalThrottledTimeInMillis);
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_current != null) {
+      builder.field(CURRENT.getPreferredName(), _current);
+    }
+    if (_currentDocs != null) {
+      builder.field(CURRENT_DOCS.getPreferredName(), _currentDocs);
+    }
+    if (_currentSizeInBytes != null) {
+      builder.field(CURRENT_SIZE_IN_BYTES.getPreferredName(), _currentSizeInBytes);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalAutoThrottleInBytes != null) {
+      builder.field(TOTAL_AUTO_THROTTLE_IN_BYTES.getPreferredName(), _totalAutoThrottleInBytes);
+    }
+    if (_totalDocs != null) {
+      builder.field(TOTAL_DOCS.getPreferredName(), _totalDocs);
+    }
+    if (_totalSizeInBytes != null) {
+      builder.field(TOTAL_SIZE_IN_BYTES.getPreferredName(), _totalSizeInBytes);
+    }
+    if (_totalStoppedTimeInMillis != null) {
+      builder.field(TOTAL_STOPPED_TIME_IN_MILLIS.getPreferredName(), _totalStoppedTimeInMillis);
+    }
+    if (_totalThrottledTimeInMillis != null) {
+      builder.field(TOTAL_THROTTLED_TIME_IN_MILLIS.getPreferredName(), _totalThrottledTimeInMillis);
+    }
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

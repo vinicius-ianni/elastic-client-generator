@@ -104,26 +104,44 @@ public class PhraseSuggester  implements XContentable<PhraseSuggester> {
       builder.field(COLLATE.getPreferredName());
       _collate.toXContent(builder, params);
     }
-    builder.field(CONFIDENCE.getPreferredName(), _confidence);
+    if (_confidence != null) {
+      builder.field(CONFIDENCE.getPreferredName(), _confidence);
+    }
     if (_directGenerator != null) {
       builder.array(DIRECT_GENERATOR.getPreferredName(), _directGenerator);
     }
-    builder.field(FORCE_UNIGRAMS.getPreferredName(), _forceUnigrams);
-    builder.field(GRAM_SIZE.getPreferredName(), _gramSize);
+    if (_forceUnigrams != null) {
+      builder.field(FORCE_UNIGRAMS.getPreferredName(), _forceUnigrams);
+    }
+    if (_gramSize != null) {
+      builder.field(GRAM_SIZE.getPreferredName(), _gramSize);
+    }
     if (_highlight != null) {
       builder.field(HIGHLIGHT.getPreferredName());
       _highlight.toXContent(builder, params);
     }
-    builder.field(MAX_ERRORS.getPreferredName(), _maxErrors);
-    builder.field(REAL_WORD_ERROR_LIKELIHOOD.getPreferredName(), _realWordErrorLikelihood);
-    builder.field(SEPARATOR.getPreferredName(), _separator);
-    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    if (_maxErrors != null) {
+      builder.field(MAX_ERRORS.getPreferredName(), _maxErrors);
+    }
+    if (_realWordErrorLikelihood != null) {
+      builder.field(REAL_WORD_ERROR_LIKELIHOOD.getPreferredName(), _realWordErrorLikelihood);
+    }
+    if (_separator != null) {
+      builder.field(SEPARATOR.getPreferredName(), _separator);
+    }
+    if (_shardSize != null) {
+      builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    }
     if (_smoothing != null) {
       builder.field(SMOOTHING.getPreferredName());
       _smoothing.toXContent(builder, params);
     }
-    builder.field(TEXT.getPreferredName(), _text);
-    builder.field(TOKEN_LIMIT.getPreferredName(), _tokenLimit);
+    if (_text != null) {
+      builder.field(TEXT.getPreferredName(), _text);
+    }
+    if (_tokenLimit != null) {
+      builder.field(TOKEN_LIMIT.getPreferredName(), _tokenLimit);
+    }
     builder.endObject();
     return builder;
   }

@@ -85,15 +85,33 @@ public class GetResponse<TDocument>  implements XContentable<GetResponse<TDocume
       builder.field(FIELDS.getPreferredName());
       _fields.toXContent(builder, params);
     }
-    builder.field(FOUND.getPreferredName(), _found);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
-    builder.field(ROUTING.getPreferredName(), _routing);
-    builder.field(SEQ_NO.getPreferredName(), _seqNo);
-    builder.field(SOURCE.getPreferredName(), _source);
-    builder.field(TYPE.getPreferredName(), _type);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_found != null) {
+      builder.field(FOUND.getPreferredName(), _found);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_primaryTerm != null) {
+      builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    }
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName(), _routing);
+    }
+    if (_seqNo != null) {
+      builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    }
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName(), _source);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

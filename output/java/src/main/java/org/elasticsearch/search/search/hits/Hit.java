@@ -94,7 +94,9 @@ public class Hit<TDocument>  implements XContentable<Hit<TDocument>> {
       builder.field(NESTED.getPreferredName());
       _nested.toXContent(builder, params);
     }
-    builder.field(SCORE.getPreferredName(), _score);
+    if (_score != null) {
+      builder.field(SCORE.getPreferredName(), _score);
+    }
     if (_sort != null) {
       builder.array(SORT.getPreferredName(), _sort);
     }

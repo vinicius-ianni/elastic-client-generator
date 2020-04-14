@@ -104,8 +104,12 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOC.getPreferredName(), _doc);
-    builder.field(FIELD_STATISTICS.getPreferredName(), _fieldStatistics);
+    if (_doc != null) {
+      builder.field(DOC.getPreferredName(), _doc);
+    }
+    if (_fieldStatistics != null) {
+      builder.field(FIELD_STATISTICS.getPreferredName(), _fieldStatistics);
+    }
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
@@ -118,9 +122,15 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(OFFSETS.getPreferredName(), _offsets);
-    builder.field(PAYLOADS.getPreferredName(), _payloads);
-    builder.field(POSITIONS.getPreferredName(), _positions);
+    if (_offsets != null) {
+      builder.field(OFFSETS.getPreferredName(), _offsets);
+    }
+    if (_payloads != null) {
+      builder.field(PAYLOADS.getPreferredName(), _payloads);
+    }
+    if (_positions != null) {
+      builder.field(POSITIONS.getPreferredName(), _positions);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
@@ -128,8 +138,12 @@ public class MultiTermVectorOperation  implements XContentable<MultiTermVectorOp
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
-    builder.field(TERM_STATISTICS.getPreferredName(), _termStatistics);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_termStatistics != null) {
+      builder.field(TERM_STATISTICS.getPreferredName(), _termStatistics);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);

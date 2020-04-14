@@ -36,7 +36,9 @@ public class CloseIndexResponse  implements XContentable<CloseIndexResponse> {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
-    builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    if (_shardsAcknowledged != null) {
+      builder.field(SHARDS_ACKNOWLEDGED.getPreferredName(), _shardsAcknowledged);
+    }
     builder.endObject();
     return builder;
   }

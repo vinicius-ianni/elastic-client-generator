@@ -81,14 +81,30 @@ public class ResumeFollowIndexRequest  implements XContentable<ResumeFollowIndex
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MAX_READ_REQUEST_OPERATION_COUNT.getPreferredName(), _maxReadRequestOperationCount);
-    builder.field(MAX_OUTSTANDING_READ_REQUESTS.getPreferredName(), _maxOutstandingReadRequests);
-    builder.field(MAX_READ_REQUEST_SIZE.getPreferredName(), _maxReadRequestSize);
-    builder.field(MAX_WRITE_REQUEST_OPERATION_COUNT.getPreferredName(), _maxWriteRequestOperationCount);
-    builder.field(MAX_WRITE_REQUEST_SIZE.getPreferredName(), _maxWriteRequestSize);
-    builder.field(MAX_OUTSTANDING_WRITE_REQUESTS.getPreferredName(), _maxOutstandingWriteRequests);
-    builder.field(MAX_WRITE_BUFFER_COUNT.getPreferredName(), _maxWriteBufferCount);
-    builder.field(MAX_WRITE_BUFFER_SIZE.getPreferredName(), _maxWriteBufferSize);
+    if (_maxReadRequestOperationCount != null) {
+      builder.field(MAX_READ_REQUEST_OPERATION_COUNT.getPreferredName(), _maxReadRequestOperationCount);
+    }
+    if (_maxOutstandingReadRequests != null) {
+      builder.field(MAX_OUTSTANDING_READ_REQUESTS.getPreferredName(), _maxOutstandingReadRequests);
+    }
+    if (_maxReadRequestSize != null) {
+      builder.field(MAX_READ_REQUEST_SIZE.getPreferredName(), _maxReadRequestSize);
+    }
+    if (_maxWriteRequestOperationCount != null) {
+      builder.field(MAX_WRITE_REQUEST_OPERATION_COUNT.getPreferredName(), _maxWriteRequestOperationCount);
+    }
+    if (_maxWriteRequestSize != null) {
+      builder.field(MAX_WRITE_REQUEST_SIZE.getPreferredName(), _maxWriteRequestSize);
+    }
+    if (_maxOutstandingWriteRequests != null) {
+      builder.field(MAX_OUTSTANDING_WRITE_REQUESTS.getPreferredName(), _maxOutstandingWriteRequests);
+    }
+    if (_maxWriteBufferCount != null) {
+      builder.field(MAX_WRITE_BUFFER_COUNT.getPreferredName(), _maxWriteBufferCount);
+    }
+    if (_maxWriteBufferSize != null) {
+      builder.field(MAX_WRITE_BUFFER_SIZE.getPreferredName(), _maxWriteBufferSize);
+    }
     if (_maxRetryDelay != null) {
       builder.field(MAX_RETRY_DELAY.getPreferredName());
       _maxRetryDelay.toXContent(builder, params);

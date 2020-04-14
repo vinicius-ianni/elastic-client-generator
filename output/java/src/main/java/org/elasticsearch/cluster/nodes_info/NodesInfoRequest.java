@@ -32,7 +32,9 @@ public class NodesInfoRequest  implements XContentable<NodesInfoRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    if (_flatSettings != null) {
+      builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);

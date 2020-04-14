@@ -59,12 +59,16 @@ public class DateHistogramRollupGrouping  implements XContentable<DateHistogramR
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_interval != null) {
       builder.field(INTERVAL.getPreferredName());
       _interval.toXContent(builder, params);
     }
-    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    if (_timeZone != null) {
+      builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    }
     builder.endObject();
     return builder;
   }

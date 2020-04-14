@@ -39,10 +39,14 @@ public class StartDatafeedRequest  implements XContentable<StartDatafeedRequest>
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(END.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
-    builder.field(START.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    if (_end != null) {
+      builder.field(END.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    }
+    if (_start != null) {
+      builder.field(START.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);

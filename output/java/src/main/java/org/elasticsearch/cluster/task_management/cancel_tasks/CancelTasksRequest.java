@@ -44,7 +44,9 @@ public class CancelTasksRequest  implements XContentable<CancelTasksRequest> {
     if (_nodes != null) {
       builder.array(NODES.getPreferredName(), _nodes);
     }
-    builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
+    if (_parentTaskId != null) {
+      builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
+    }
     builder.endObject();
     return builder;
   }

@@ -26,7 +26,9 @@ public class GetLicenseRequest  implements XContentable<GetLicenseRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(LOCAL.getPreferredName(), _local);
+    if (_local != null) {
+      builder.field(LOCAL.getPreferredName(), _local);
+    }
     builder.endObject();
     return builder;
   }

@@ -80,16 +80,36 @@ public class RollupJobStats  implements XContentable<RollupJobStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOCUMENTS_PROCESSED.getPreferredName(), _documentsProcessed);
-    builder.field(PAGES_PROCESSED.getPreferredName(), _pagesProcessed);
-    builder.field(ROLLUPS_INDEXED.getPreferredName(), _rollupsIndexed);
-    builder.field(TRIGGER_COUNT.getPreferredName(), _triggerCount);
-    builder.field(SEARCH_FAILURES.getPreferredName(), _searchFailures);
-    builder.field(INDEX_FAILURES.getPreferredName(), _indexFailures);
-    builder.field(INDEX_TIME_IN_MS.getPreferredName(), _indexTimeInMs);
-    builder.field(INDEX_TOTAL.getPreferredName(), _indexTotal);
-    builder.field(SEARCH_TIME_IN_MS.getPreferredName(), _searchTimeInMs);
-    builder.field(SEARCH_TOTAL.getPreferredName(), _searchTotal);
+    if (_documentsProcessed != null) {
+      builder.field(DOCUMENTS_PROCESSED.getPreferredName(), _documentsProcessed);
+    }
+    if (_pagesProcessed != null) {
+      builder.field(PAGES_PROCESSED.getPreferredName(), _pagesProcessed);
+    }
+    if (_rollupsIndexed != null) {
+      builder.field(ROLLUPS_INDEXED.getPreferredName(), _rollupsIndexed);
+    }
+    if (_triggerCount != null) {
+      builder.field(TRIGGER_COUNT.getPreferredName(), _triggerCount);
+    }
+    if (_searchFailures != null) {
+      builder.field(SEARCH_FAILURES.getPreferredName(), _searchFailures);
+    }
+    if (_indexFailures != null) {
+      builder.field(INDEX_FAILURES.getPreferredName(), _indexFailures);
+    }
+    if (_indexTimeInMs != null) {
+      builder.field(INDEX_TIME_IN_MS.getPreferredName(), _indexTimeInMs);
+    }
+    if (_indexTotal != null) {
+      builder.field(INDEX_TOTAL.getPreferredName(), _indexTotal);
+    }
+    if (_searchTimeInMs != null) {
+      builder.field(SEARCH_TIME_IN_MS.getPreferredName(), _searchTimeInMs);
+    }
+    if (_searchTotal != null) {
+      builder.field(SEARCH_TOTAL.getPreferredName(), _searchTotal);
+    }
     builder.endObject();
     return builder;
   }

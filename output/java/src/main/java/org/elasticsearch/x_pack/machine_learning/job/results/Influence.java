@@ -32,7 +32,9 @@ public class Influence  implements XContentable<Influence> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(INFLUENCER_FIELD_NAME.getPreferredName(), _influencerFieldName);
+    if (_influencerFieldName != null) {
+      builder.field(INFLUENCER_FIELD_NAME.getPreferredName(), _influencerFieldName);
+    }
     if (_influencerFieldValues != null) {
       builder.array(INFLUENCER_FIELD_VALUES.getPreferredName(), _influencerFieldValues);
     }

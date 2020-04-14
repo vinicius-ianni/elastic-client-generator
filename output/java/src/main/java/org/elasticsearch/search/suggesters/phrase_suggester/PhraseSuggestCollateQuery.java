@@ -36,7 +36,9 @@ public class PhraseSuggestCollateQuery  implements XContentable<PhraseSuggestCol
       builder.field(ID.getPreferredName());
       _id.toXContent(builder, params);
     }
-    builder.field(SOURCE.getPreferredName(), _source);
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName(), _source);
+    }
     builder.endObject();
     return builder;
   }

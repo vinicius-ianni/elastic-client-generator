@@ -75,21 +75,37 @@ public class ModelSnapshot  implements XContentable<ModelSnapshot> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(JOB_ID.getPreferredName(), _jobId);
-    builder.field(LATEST_RECORD_TIME_STAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_latestRecordTimeStamp.toInstant()));
-    builder.field(LATEST_RESULT_TIME_STAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_latestResultTimeStamp.toInstant()));
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
+    if (_latestRecordTimeStamp != null) {
+      builder.field(LATEST_RECORD_TIME_STAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_latestRecordTimeStamp.toInstant()));
+    }
+    if (_latestResultTimeStamp != null) {
+      builder.field(LATEST_RESULT_TIME_STAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_latestResultTimeStamp.toInstant()));
+    }
     if (_modelSizeStats != null) {
       builder.field(MODEL_SIZE_STATS.getPreferredName());
       _modelSizeStats.toXContent(builder, params);
     }
-    builder.field(RETAIN.getPreferredName(), _retain);
-    builder.field(SNAPSHOT_DOC_COUNT.getPreferredName(), _snapshotDocCount);
-    builder.field(SNAPSHOT_ID.getPreferredName(), _snapshotId);
-    builder.field(TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_retain != null) {
+      builder.field(RETAIN.getPreferredName(), _retain);
+    }
+    if (_snapshotDocCount != null) {
+      builder.field(SNAPSHOT_DOC_COUNT.getPreferredName(), _snapshotDocCount);
+    }
+    if (_snapshotId != null) {
+      builder.field(SNAPSHOT_ID.getPreferredName(), _snapshotId);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

@@ -70,12 +70,22 @@ public class GetBucketsRequest  implements XContentable<GetBucketsRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANOMALY_SCORE.getPreferredName(), _anomalyScore);
-    builder.field(DESC.getPreferredName(), _desc);
-    builder.field(END.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
-    builder.field(EXCLUDE_INTERIM.getPreferredName(), _excludeInterim);
-    builder.field(EXPAND.getPreferredName(), _expand);
+    if (_anomalyScore != null) {
+      builder.field(ANOMALY_SCORE.getPreferredName(), _anomalyScore);
+    }
+    if (_desc != null) {
+      builder.field(DESC.getPreferredName(), _desc);
+    }
+    if (_end != null) {
+      builder.field(END.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    }
+    if (_excludeInterim != null) {
+      builder.field(EXCLUDE_INTERIM.getPreferredName(), _excludeInterim);
+    }
+    if (_expand != null) {
+      builder.field(EXPAND.getPreferredName(), _expand);
+    }
     if (_page != null) {
       builder.field(PAGE.getPreferredName());
       _page.toXContent(builder, params);
@@ -84,8 +94,10 @@ public class GetBucketsRequest  implements XContentable<GetBucketsRequest> {
       builder.field(SORT.getPreferredName());
       _sort.toXContent(builder, params);
     }
-    builder.field(START.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    if (_start != null) {
+      builder.field(START.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

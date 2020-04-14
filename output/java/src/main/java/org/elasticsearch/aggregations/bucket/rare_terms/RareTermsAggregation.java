@@ -70,9 +70,15 @@ public class RareTermsAggregation  implements XContentable<RareTermsAggregation>
       builder.field(INCLUDE.getPreferredName());
       _include.toXContent(builder, params);
     }
-    builder.field(MAX_DOC_COUNT.getPreferredName(), _maxDocCount);
-    builder.field(MISSING.getPreferredName(), _missing);
-    builder.field(PRECISION.getPreferredName(), _precision);
+    if (_maxDocCount != null) {
+      builder.field(MAX_DOC_COUNT.getPreferredName(), _maxDocCount);
+    }
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName(), _missing);
+    }
+    if (_precision != null) {
+      builder.field(PRECISION.getPreferredName(), _precision);
+    }
     builder.endObject();
     return builder;
   }

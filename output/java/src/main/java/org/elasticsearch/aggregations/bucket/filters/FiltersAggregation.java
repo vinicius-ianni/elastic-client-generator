@@ -42,8 +42,12 @@ public class FiltersAggregation  implements XContentable<FiltersAggregation> {
       builder.field(FILTERS.getPreferredName());
       _filters.map(r-> r.toXContent(builder, params), builder::value /* TODO List<QueryContainer> */);
     }
-    builder.field(OTHER_BUCKET.getPreferredName(), _otherBucket);
-    builder.field(OTHER_BUCKET_KEY.getPreferredName(), _otherBucketKey);
+    if (_otherBucket != null) {
+      builder.field(OTHER_BUCKET.getPreferredName(), _otherBucket);
+    }
+    if (_otherBucketKey != null) {
+      builder.field(OTHER_BUCKET_KEY.getPreferredName(), _otherBucketKey);
+    }
     builder.endObject();
     return builder;
   }

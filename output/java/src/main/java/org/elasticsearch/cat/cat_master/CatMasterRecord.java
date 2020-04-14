@@ -38,9 +38,15 @@ public class CatMasterRecord  implements XContentable<CatMasterRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(IP.getPreferredName(), _ip);
-    builder.field(NODE.getPreferredName(), _node);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
     builder.endObject();
     return builder;
   }

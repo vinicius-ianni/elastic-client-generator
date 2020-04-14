@@ -36,7 +36,9 @@ public class FielddataSettings  implements XContentable<FielddataSettings> {
       builder.field(CACHE_EXPIRE.getPreferredName());
       _cacheExpire.toXContent(builder, params);
     }
-    builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
+    if (_cacheSize != null) {
+      builder.field(CACHE_SIZE.getPreferredName(), _cacheSize);
+    }
     builder.endObject();
     return builder;
   }

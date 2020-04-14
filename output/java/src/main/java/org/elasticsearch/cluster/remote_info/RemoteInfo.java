@@ -57,14 +57,22 @@ public class RemoteInfo  implements XContentable<RemoteInfo> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CONNECTED.getPreferredName(), _connected);
-    builder.field(SKIP_UNAVAILABLE.getPreferredName(), _skipUnavailable);
+    if (_connected != null) {
+      builder.field(CONNECTED.getPreferredName(), _connected);
+    }
+    if (_skipUnavailable != null) {
+      builder.field(SKIP_UNAVAILABLE.getPreferredName(), _skipUnavailable);
+    }
     if (_initialConnectTimeout != null) {
       builder.field(INITIAL_CONNECT_TIMEOUT.getPreferredName());
       _initialConnectTimeout.toXContent(builder, params);
     }
-    builder.field(MAX_CONNECTIONS_PER_CLUSTER.getPreferredName(), _maxConnectionsPerCluster);
-    builder.field(NUM_NODES_CONNECTED.getPreferredName(), _numNodesConnected);
+    if (_maxConnectionsPerCluster != null) {
+      builder.field(MAX_CONNECTIONS_PER_CLUSTER.getPreferredName(), _maxConnectionsPerCluster);
+    }
+    if (_numNodesConnected != null) {
+      builder.field(NUM_NODES_CONNECTED.getPreferredName(), _numNodesConnected);
+    }
     if (_seeds != null) {
       builder.array(SEEDS.getPreferredName(), _seeds);
     }

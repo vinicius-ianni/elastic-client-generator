@@ -35,7 +35,9 @@ public class RemovePolicyResponse  implements XContentable<RemovePolicyResponse>
     if (_failedIndexes != null) {
       builder.array(FAILED_INDEXES.getPreferredName(), _failedIndexes);
     }
-    builder.field(HAS_FAILURES.getPreferredName(), _hasFailures);
+    if (_hasFailures != null) {
+      builder.field(HAS_FAILURES.getPreferredName(), _hasFailures);
+    }
     builder.endObject();
     return builder;
   }

@@ -53,8 +53,12 @@ public class CorePropertyBase  implements XContentable<CorePropertyBase> {
       builder.field(FIELDS.getPreferredName());
       _fields.toXContent(builder, params);
     }
-    builder.field(SIMILARITY.getPreferredName(), _similarity);
-    builder.field(STORE.getPreferredName(), _store);
+    if (_similarity != null) {
+      builder.field(SIMILARITY.getPreferredName(), _similarity);
+    }
+    if (_store != null) {
+      builder.field(STORE.getPreferredName(), _store);
+    }
     builder.endObject();
     return builder;
   }

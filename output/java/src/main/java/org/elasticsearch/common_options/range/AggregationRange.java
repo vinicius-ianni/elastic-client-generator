@@ -38,9 +38,15 @@ public class AggregationRange  implements XContentable<AggregationRange> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FROM.getPreferredName(), _from);
-    builder.field(KEY.getPreferredName(), _key);
-    builder.field(TO.getPreferredName(), _to);
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
+    if (_key != null) {
+      builder.field(KEY.getPreferredName(), _key);
+    }
+    if (_to != null) {
+      builder.field(TO.getPreferredName(), _to);
+    }
     builder.endObject();
     return builder;
   }

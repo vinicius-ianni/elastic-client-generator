@@ -39,7 +39,9 @@ public class CancelTasksResponse  implements XContentable<CancelTasksResponse> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IS_VALID.getPreferredName(), _isValid);
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
     if (_nodeFailures != null) {
       builder.array(NODE_FAILURES.getPreferredName(), _nodeFailures);
     }

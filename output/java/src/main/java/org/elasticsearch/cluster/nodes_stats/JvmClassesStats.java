@@ -38,9 +38,15 @@ public class JvmClassesStats  implements XContentable<JvmClassesStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CURRENT_LOADED_COUNT.getPreferredName(), _currentLoadedCount);
-    builder.field(TOTAL_LOADED_COUNT.getPreferredName(), _totalLoadedCount);
-    builder.field(TOTAL_UNLOADED_COUNT.getPreferredName(), _totalUnloadedCount);
+    if (_currentLoadedCount != null) {
+      builder.field(CURRENT_LOADED_COUNT.getPreferredName(), _currentLoadedCount);
+    }
+    if (_totalLoadedCount != null) {
+      builder.field(TOTAL_LOADED_COUNT.getPreferredName(), _totalLoadedCount);
+    }
+    if (_totalUnloadedCount != null) {
+      builder.field(TOTAL_UNLOADED_COUNT.getPreferredName(), _totalUnloadedCount);
+    }
     builder.endObject();
     return builder;
   }

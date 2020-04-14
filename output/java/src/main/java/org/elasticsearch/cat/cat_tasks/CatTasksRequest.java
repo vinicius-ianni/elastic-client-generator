@@ -77,20 +77,30 @@ public class CatTasksRequest  implements XContentable<CatTasksRequest> {
     if (_actions != null) {
       builder.array(ACTIONS.getPreferredName(), _actions);
     }
-    builder.field(DETAILED.getPreferredName(), _detailed);
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_detailed != null) {
+      builder.field(DETAILED.getPreferredName(), _detailed);
+    }
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_headers != null) {
       builder.array(HEADERS.getPreferredName(), _headers);
     }
-    builder.field(HELP.getPreferredName(), _help);
+    if (_help != null) {
+      builder.field(HELP.getPreferredName(), _help);
+    }
     if (_nodeId != null) {
       builder.array(NODE_ID.getPreferredName(), _nodeId);
     }
-    builder.field(PARENT_TASK.getPreferredName(), _parentTask);
+    if (_parentTask != null) {
+      builder.field(PARENT_TASK.getPreferredName(), _parentTask);
+    }
     if (_sortByColumns != null) {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
-    builder.field(VERBOSE.getPreferredName(), _verbose);
+    if (_verbose != null) {
+      builder.field(VERBOSE.getPreferredName(), _verbose);
+    }
     builder.endObject();
     return builder;
   }

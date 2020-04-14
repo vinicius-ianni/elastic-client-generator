@@ -42,7 +42,9 @@ public class PipelineAggregation  implements XContentable<PipelineAggregation> {
       builder.field(BUCKETS_PATH.getPreferredName());
       _bucketsPath.toXContent(builder, params);
     }
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_gapPolicy != null) {
       builder.field(GAP_POLICY.getPreferredName());
       _gapPolicy.toXContent(builder, params);

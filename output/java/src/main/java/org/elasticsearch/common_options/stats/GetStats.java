@@ -80,16 +80,36 @@ public class GetStats  implements XContentable<GetStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CURRENT.getPreferredName(), _current);
-    builder.field(EXISTS_TIME.getPreferredName(), _existsTime);
-    builder.field(EXISTS_TIME_IN_MILLIS.getPreferredName(), _existsTimeInMillis);
-    builder.field(EXISTS_TOTAL.getPreferredName(), _existsTotal);
-    builder.field(MISSING_TIME.getPreferredName(), _missingTime);
-    builder.field(MISSING_TIME_IN_MILLIS.getPreferredName(), _missingTimeInMillis);
-    builder.field(MISSING_TOTAL.getPreferredName(), _missingTotal);
-    builder.field(TIME.getPreferredName(), _time);
-    builder.field(TIME_IN_MILLIS.getPreferredName(), _timeInMillis);
-    builder.field(TOTAL.getPreferredName(), _total);
+    if (_current != null) {
+      builder.field(CURRENT.getPreferredName(), _current);
+    }
+    if (_existsTime != null) {
+      builder.field(EXISTS_TIME.getPreferredName(), _existsTime);
+    }
+    if (_existsTimeInMillis != null) {
+      builder.field(EXISTS_TIME_IN_MILLIS.getPreferredName(), _existsTimeInMillis);
+    }
+    if (_existsTotal != null) {
+      builder.field(EXISTS_TOTAL.getPreferredName(), _existsTotal);
+    }
+    if (_missingTime != null) {
+      builder.field(MISSING_TIME.getPreferredName(), _missingTime);
+    }
+    if (_missingTimeInMillis != null) {
+      builder.field(MISSING_TIME_IN_MILLIS.getPreferredName(), _missingTimeInMillis);
+    }
+    if (_missingTotal != null) {
+      builder.field(MISSING_TOTAL.getPreferredName(), _missingTotal);
+    }
+    if (_time != null) {
+      builder.field(TIME.getPreferredName(), _time);
+    }
+    if (_timeInMillis != null) {
+      builder.field(TIME_IN_MILLIS.getPreferredName(), _timeInMillis);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
     builder.endObject();
     return builder;
   }

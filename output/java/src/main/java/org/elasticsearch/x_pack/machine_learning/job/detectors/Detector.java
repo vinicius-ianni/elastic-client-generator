@@ -61,14 +61,22 @@ public class Detector  implements XContentable<Detector> {
     if (_customRules != null) {
       builder.array(CUSTOM_RULES.getPreferredName(), _customRules);
     }
-    builder.field(DETECTOR_DESCRIPTION.getPreferredName(), _detectorDescription);
-    builder.field(DETECTOR_INDEX.getPreferredName(), _detectorIndex);
+    if (_detectorDescription != null) {
+      builder.field(DETECTOR_DESCRIPTION.getPreferredName(), _detectorDescription);
+    }
+    if (_detectorIndex != null) {
+      builder.field(DETECTOR_INDEX.getPreferredName(), _detectorIndex);
+    }
     if (_excludeFrequent != null) {
       builder.field(EXCLUDE_FREQUENT.getPreferredName());
       _excludeFrequent.toXContent(builder, params);
     }
-    builder.field(FUNCTION.getPreferredName(), _function);
-    builder.field(USE_NULL.getPreferredName(), _useNull);
+    if (_function != null) {
+      builder.field(FUNCTION.getPreferredName(), _function);
+    }
+    if (_useNull != null) {
+      builder.field(USE_NULL.getPreferredName(), _useNull);
+    }
     builder.endObject();
     return builder;
   }

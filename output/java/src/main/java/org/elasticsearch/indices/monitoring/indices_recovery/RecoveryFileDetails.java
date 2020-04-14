@@ -38,9 +38,15 @@ public class RecoveryFileDetails  implements XContentable<RecoveryFileDetails> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(LENGTH.getPreferredName(), _length);
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(RECOVERED.getPreferredName(), _recovered);
+    if (_length != null) {
+      builder.field(LENGTH.getPreferredName(), _length);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_recovered != null) {
+      builder.field(RECOVERED.getPreferredName(), _recovered);
+    }
     builder.endObject();
     return builder;
   }

@@ -32,8 +32,12 @@ public class ExecutionAction  implements XContentable<ExecutionAction> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_IN_MS.getPreferredName(), _totalInMs);
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalInMs != null) {
+      builder.field(TOTAL_IN_MS.getPreferredName(), _totalInMs);
+    }
     builder.endObject();
     return builder;
   }

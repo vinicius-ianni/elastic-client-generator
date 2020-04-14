@@ -36,7 +36,9 @@ public class GetBucketsResponse  implements XContentable<GetBucketsResponse> {
     if (_buckets != null) {
       builder.array(BUCKETS.getPreferredName(), _buckets);
     }
-    builder.field(COUNT.getPreferredName(), _count);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
     builder.endObject();
     return builder;
   }

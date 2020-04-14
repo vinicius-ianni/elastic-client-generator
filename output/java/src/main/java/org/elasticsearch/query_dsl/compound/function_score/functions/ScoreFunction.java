@@ -37,7 +37,9 @@ public class ScoreFunction  implements XContentable<ScoreFunction> {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
     }
-    builder.field(WEIGHT.getPreferredName(), _weight);
+    if (_weight != null) {
+      builder.field(WEIGHT.getPreferredName(), _weight);
+    }
     builder.endObject();
     return builder;
   }

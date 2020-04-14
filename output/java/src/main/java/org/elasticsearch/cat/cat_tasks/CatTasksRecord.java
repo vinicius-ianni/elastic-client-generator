@@ -74,15 +74,33 @@ public class CatTasksRecord  implements XContentable<CatTasksRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTION.getPreferredName(), _action);
-    builder.field(IP.getPreferredName(), _ip);
-    builder.field(NODE.getPreferredName(), _node);
-    builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
-    builder.field(RUNNING_TIME.getPreferredName(), _runningTime);
-    builder.field(START_TIME.getPreferredName(), _startTime);
-    builder.field(TASK_ID.getPreferredName(), _taskId);
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_action != null) {
+      builder.field(ACTION.getPreferredName(), _action);
+    }
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
+    if (_parentTaskId != null) {
+      builder.field(PARENT_TASK_ID.getPreferredName(), _parentTaskId);
+    }
+    if (_runningTime != null) {
+      builder.field(RUNNING_TIME.getPreferredName(), _runningTime);
+    }
+    if (_startTime != null) {
+      builder.field(START_TIME.getPreferredName(), _startTime);
+    }
+    if (_taskId != null) {
+      builder.field(TASK_ID.getPreferredName(), _taskId);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

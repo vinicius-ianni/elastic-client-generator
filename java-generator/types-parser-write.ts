@@ -5,7 +5,12 @@ import {specification} from "./specs";
 
 const directWriteTypes = ["Object", "String", "Integer", "Boolean", "Double", "Long", "Float"];
 
-const $writeProperty = (prop: Domain.InterfaceProperty, parent: Domain.Interface) => {
+const $writePropertyWrapped = (prop: Domain.InterfaceProperty, parent: Domain.Interface) =>
+  [`if (${$fieldName(prop.name)} != null) {`]
+    .concat($writeProperty(prop, parent).map(e => `  ${e}`))
+    .concat([`}`]);
+
+const $writeProperty = (prop: Domain.InterfaceProperty, parent: Domain.Interface) : string[] => {
   const typeSymbol = $instanceOf(prop.type);
   if (directWriteTypes.includes(typeSymbol))
     return [`builder.field(${$parseFieldName(prop.name)}.getPreferredName(), ${$fieldName(prop.name)});`];
@@ -27,36 +32,28 @@ const $writeProperty = (prop: Domain.InterfaceProperty, parent: Domain.Interface
       return "r-> r.toXContent(builder, params)";
     };
     return [
-      `if (${$fieldName(prop.name)} != null) {`,
-      `  builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
-      `  ${$fieldName(prop.name)}.map(${lr(prop.type.items[0])}, ${lr(prop.type.items[1])});`,
-      `}`
+      `builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
+      `${$fieldName(prop.name)}.map(${lr(prop.type.items[0])}, ${lr(prop.type.items[1])});`,
     ];
   }
   if (prop.type instanceof Domain.ArrayOf)
     return [
-      `if (${$fieldName(prop.name)} != null) {`,
-      `  builder.array(${$parseFieldName(prop.name)}.getPreferredName(), ${$fieldName(prop.name)});`,
-      `}`
+      `builder.array(${$parseFieldName(prop.name)}.getPreferredName(), ${$fieldName(prop.name)});`,
     ];
 
   if (stringTypes.includes(typeSymbol))
     return [
-      `if (${$fieldName(prop.name)} != null) {`,
-      `  builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
-      `  ${$fieldName(prop.name)}.toXContent(builder, params);`,
-      `}`
+      `builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
+      `${$fieldName(prop.name)}.toXContent(builder, params);`,
     ];
 
   if (["TDocument", "TPartialDocument", "TResult", "T", "TCatRecord"].includes(typeSymbol))
     return [`builder.field(${$parseFieldName(prop.name)}.getPreferredName(), ${$fieldName(prop.name)});`];
 
   return [
-    `if (${$fieldName(prop.name)} != null) {`,
-    `  builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
-    `  ${$fieldName(prop.name)}.toXContent(builder, params);`,
-    `}`
+    `builder.field(${$parseFieldName(prop.name)}.getPreferredName());`,
+    `${$fieldName(prop.name)}.toXContent(builder, params);`,
   ];
 };
 
-export const $writeProperties = (type: Domain.Interface) => type.properties.flatMap(p => $writeProperty(p, type)).join("\n    ");
+export const $writeProperties = (type: Domain.Interface) => type.properties.flatMap(p => $writePropertyWrapped(p, type)).join("\n    ");

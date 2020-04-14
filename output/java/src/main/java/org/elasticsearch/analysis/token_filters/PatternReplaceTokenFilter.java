@@ -38,9 +38,15 @@ public class PatternReplaceTokenFilter  implements XContentable<PatternReplaceTo
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FLAGS.getPreferredName(), _flags);
-    builder.field(PATTERN.getPreferredName(), _pattern);
-    builder.field(REPLACEMENT.getPreferredName(), _replacement);
+    if (_flags != null) {
+      builder.field(FLAGS.getPreferredName(), _flags);
+    }
+    if (_pattern != null) {
+      builder.field(PATTERN.getPreferredName(), _pattern);
+    }
+    if (_replacement != null) {
+      builder.field(REPLACEMENT.getPreferredName(), _replacement);
+    }
     builder.endObject();
     return builder;
   }

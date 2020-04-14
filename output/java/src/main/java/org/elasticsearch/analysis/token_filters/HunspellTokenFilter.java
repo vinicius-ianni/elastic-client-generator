@@ -44,10 +44,18 @@ public class HunspellTokenFilter  implements XContentable<HunspellTokenFilter> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DEDUP.getPreferredName(), _dedup);
-    builder.field(DICTIONARY.getPreferredName(), _dictionary);
-    builder.field(LOCALE.getPreferredName(), _locale);
-    builder.field(LONGEST_ONLY.getPreferredName(), _longestOnly);
+    if (_dedup != null) {
+      builder.field(DEDUP.getPreferredName(), _dedup);
+    }
+    if (_dictionary != null) {
+      builder.field(DICTIONARY.getPreferredName(), _dictionary);
+    }
+    if (_locale != null) {
+      builder.field(LOCALE.getPreferredName(), _locale);
+    }
+    if (_longestOnly != null) {
+      builder.field(LONGEST_ONLY.getPreferredName(), _longestOnly);
+    }
     builder.endObject();
     return builder;
   }

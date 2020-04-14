@@ -67,7 +67,9 @@ public class JobForecastStatistics  implements XContentable<JobForecastStatistic
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(TOTAL.getPreferredName(), _total);
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
     builder.endObject();
     return builder;
   }

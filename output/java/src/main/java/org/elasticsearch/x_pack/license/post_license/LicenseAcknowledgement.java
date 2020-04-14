@@ -35,7 +35,9 @@ public class LicenseAcknowledgement  implements XContentable<LicenseAcknowledgem
     if (_license != null) {
       builder.array(LICENSE.getPreferredName(), _license);
     }
-    builder.field(MESSAGE.getPreferredName(), _message);
+    if (_message != null) {
+      builder.field(MESSAGE.getPreferredName(), _message);
+    }
     builder.endObject();
     return builder;
   }

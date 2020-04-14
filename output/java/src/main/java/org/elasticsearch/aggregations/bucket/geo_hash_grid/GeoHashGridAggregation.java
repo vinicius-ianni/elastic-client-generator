@@ -54,8 +54,12 @@ public class GeoHashGridAggregation  implements XContentable<GeoHashGridAggregat
       builder.field(PRECISION.getPreferredName());
       _precision.toXContent(builder, params);
     }
-    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_shardSize != null) {
+      builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

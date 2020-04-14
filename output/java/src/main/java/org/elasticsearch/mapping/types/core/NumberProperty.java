@@ -63,16 +63,28 @@ public class NumberProperty  implements XContentable<NumberProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BOOST.getPreferredName(), _boost);
-    builder.field(COERCE.getPreferredName(), _coerce);
+    if (_boost != null) {
+      builder.field(BOOST.getPreferredName(), _boost);
+    }
+    if (_coerce != null) {
+      builder.field(COERCE.getPreferredName(), _coerce);
+    }
     if (_fielddata != null) {
       builder.field(FIELDDATA.getPreferredName());
       _fielddata.toXContent(builder, params);
     }
-    builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(NULL_VALUE.getPreferredName(), _nullValue);
-    builder.field(SCALING_FACTOR.getPreferredName(), _scalingFactor);
+    if (_ignoreMalformed != null) {
+      builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_nullValue != null) {
+      builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    }
+    if (_scalingFactor != null) {
+      builder.field(SCALING_FACTOR.getPreferredName(), _scalingFactor);
+    }
     builder.endObject();
     return builder;
   }

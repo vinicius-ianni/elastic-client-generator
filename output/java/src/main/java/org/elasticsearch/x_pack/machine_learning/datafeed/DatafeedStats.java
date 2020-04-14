@@ -50,8 +50,12 @@ public class DatafeedStats  implements XContentable<DatafeedStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ASSIGNMENT_EXPLANATION.getPreferredName(), _assignmentExplanation);
-    builder.field(DATAFEED_ID.getPreferredName(), _datafeedId);
+    if (_assignmentExplanation != null) {
+      builder.field(ASSIGNMENT_EXPLANATION.getPreferredName(), _assignmentExplanation);
+    }
+    if (_datafeedId != null) {
+      builder.field(DATAFEED_ID.getPreferredName(), _datafeedId);
+    }
     if (_node != null) {
       builder.field(NODE.getPreferredName());
       _node.toXContent(builder, params);

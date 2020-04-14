@@ -35,7 +35,9 @@ public class MultiplexerTokenFilter  implements XContentable<MultiplexerTokenFil
     if (_filters != null) {
       builder.array(FILTERS.getPreferredName(), _filters);
     }
-    builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    if (_preserveOriginal != null) {
+      builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    }
     builder.endObject();
     return builder;
   }

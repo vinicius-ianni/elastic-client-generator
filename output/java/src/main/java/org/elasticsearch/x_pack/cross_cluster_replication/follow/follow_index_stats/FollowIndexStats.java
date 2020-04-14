@@ -32,7 +32,9 @@ public class FollowIndexStats  implements XContentable<FollowIndexStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(INDEX.getPreferredName(), _index);
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
     if (_shards != null) {
       builder.array(SHARDS.getPreferredName(), _shards);
     }

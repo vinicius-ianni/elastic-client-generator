@@ -38,9 +38,15 @@ public class CreateFollowIndexResponse  implements XContentable<CreateFollowInde
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FOLLOW_INDEX_CREATED.getPreferredName(), _followIndexCreated);
-    builder.field(FOLLOW_INDEX_SHARDS_ACKED.getPreferredName(), _followIndexShardsAcked);
-    builder.field(INDEX_FOLLOWING_STARTED.getPreferredName(), _indexFollowingStarted);
+    if (_followIndexCreated != null) {
+      builder.field(FOLLOW_INDEX_CREATED.getPreferredName(), _followIndexCreated);
+    }
+    if (_followIndexShardsAcked != null) {
+      builder.field(FOLLOW_INDEX_SHARDS_ACKED.getPreferredName(), _followIndexShardsAcked);
+    }
+    if (_indexFollowingStarted != null) {
+      builder.field(INDEX_FOLLOWING_STARTED.getPreferredName(), _indexFollowingStarted);
+    }
     builder.endObject();
     return builder;
   }

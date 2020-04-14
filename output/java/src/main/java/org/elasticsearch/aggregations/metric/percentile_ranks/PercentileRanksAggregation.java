@@ -46,7 +46,9 @@ public class PercentileRanksAggregation  implements XContentable<PercentileRanks
     if (_values != null) {
       builder.array(VALUES.getPreferredName(), _values);
     }
-    builder.field(KEYED.getPreferredName(), _keyed);
+    if (_keyed != null) {
+      builder.field(KEYED.getPreferredName(), _keyed);
+    }
     builder.endObject();
     return builder;
   }

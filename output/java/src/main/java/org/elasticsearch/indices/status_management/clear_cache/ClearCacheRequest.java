@@ -63,18 +63,28 @@ public class ClearCacheRequest  implements XContentable<ClearCacheRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    if (_allowNoIndices != null) {
+      builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    }
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
     }
-    builder.field(FIELDDATA.getPreferredName(), _fielddata);
+    if (_fielddata != null) {
+      builder.field(FIELDDATA.getPreferredName(), _fielddata);
+    }
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(QUERY.getPreferredName(), _query);
-    builder.field(REQUEST.getPreferredName(), _request);
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName(), _query);
+    }
+    if (_request != null) {
+      builder.field(REQUEST.getPreferredName(), _request);
+    }
     builder.endObject();
     return builder;
   }

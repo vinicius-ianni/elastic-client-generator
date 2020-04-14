@@ -53,8 +53,12 @@ public class SnapshotStats  implements XContentable<SnapshotStats> {
       builder.field(TOTAL.getPreferredName());
       _total.toXContent(builder, params);
     }
-    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
-    builder.field(TIME_IN_MILLIS.getPreferredName(), _timeInMillis);
+    if (_startTimeInMillis != null) {
+      builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    }
+    if (_timeInMillis != null) {
+      builder.field(TIME_IN_MILLIS.getPreferredName(), _timeInMillis);
+    }
     builder.endObject();
     return builder;
   }

@@ -50,11 +50,21 @@ public class PutWatchResponse  implements XContentable<PutWatchResponse> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CREATED.getPreferredName(), _created);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(VERSION.getPreferredName(), _version);
-    builder.field(SEQ_NO.getPreferredName(), _seqNo);
-    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    if (_created != null) {
+      builder.field(CREATED.getPreferredName(), _created);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
+    if (_seqNo != null) {
+      builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    }
+    if (_primaryTerm != null) {
+      builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    }
     builder.endObject();
     return builder;
   }

@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const domain_1 = __importDefault(require("elasticsearch-client-specification/src/domain"));
 const naming_1 = require("./naming");
 const directWriteTypes = ["Object", "String", "Integer", "Boolean", "Double", "Long", "Float"];
+const $writePropertyWrapped = (prop, parent) => [`if (${naming_1.$fieldName(prop.name)} != null) {`]
+    .concat($writeProperty(prop, parent).map(e => `  ${e}`))
+    .concat([`}`]);
 const $writeProperty = (prop, parent) => {
     const typeSymbol = naming_1.$instanceOf(prop.type);
     if (directWriteTypes.includes(typeSymbol))
@@ -27,33 +30,25 @@ const $writeProperty = (prop, parent) => {
             return "r-> r.toXContent(builder, params)";
         };
         return [
-            `if (${naming_1.$fieldName(prop.name)} != null) {`,
-            `  builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
-            `  ${naming_1.$fieldName(prop.name)}.map(${lr(prop.type.items[0])}, ${lr(prop.type.items[1])});`,
-            `}`
+            `builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
+            `${naming_1.$fieldName(prop.name)}.map(${lr(prop.type.items[0])}, ${lr(prop.type.items[1])});`,
         ];
     }
     if (prop.type instanceof domain_1.default.ArrayOf)
         return [
-            `if (${naming_1.$fieldName(prop.name)} != null) {`,
-            `  builder.array(${naming_1.$parseFieldName(prop.name)}.getPreferredName(), ${naming_1.$fieldName(prop.name)});`,
-            `}`
+            `builder.array(${naming_1.$parseFieldName(prop.name)}.getPreferredName(), ${naming_1.$fieldName(prop.name)});`,
         ];
     if (naming_1.stringTypes.includes(typeSymbol))
         return [
-            `if (${naming_1.$fieldName(prop.name)} != null) {`,
-            `  builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
-            `  ${naming_1.$fieldName(prop.name)}.toXContent(builder, params);`,
-            `}`
+            `builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
+            `${naming_1.$fieldName(prop.name)}.toXContent(builder, params);`,
         ];
     if (["TDocument", "TPartialDocument", "TResult", "T", "TCatRecord"].includes(typeSymbol))
         return [`builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName(), ${naming_1.$fieldName(prop.name)});`];
     return [
-        `if (${naming_1.$fieldName(prop.name)} != null) {`,
-        `  builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
-        `  ${naming_1.$fieldName(prop.name)}.toXContent(builder, params);`,
-        `}`
+        `builder.field(${naming_1.$parseFieldName(prop.name)}.getPreferredName());`,
+        `${naming_1.$fieldName(prop.name)}.toXContent(builder, params);`,
     ];
 };
-exports.$writeProperties = (type) => type.properties.flatMap(p => $writeProperty(p, type)).join("\n    ");
+exports.$writeProperties = (type) => type.properties.flatMap(p => $writePropertyWrapped(p, type)).join("\n    ");
 //# sourceMappingURL=types-parser-write.js.map

@@ -89,9 +89,15 @@ public class NodeJvmStats  implements XContentable<NodeJvmStats> {
       builder.field(THREADS.getPreferredName());
       _threads.toXContent(builder, params);
     }
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
-    builder.field(UPTIME.getPreferredName(), _uptime);
-    builder.field(UPTIME_IN_MILLIS.getPreferredName(), _uptimeInMillis);
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
+    if (_uptime != null) {
+      builder.field(UPTIME.getPreferredName(), _uptime);
+    }
+    if (_uptimeInMillis != null) {
+      builder.field(UPTIME_IN_MILLIS.getPreferredName(), _uptimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

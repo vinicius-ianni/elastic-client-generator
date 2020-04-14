@@ -26,7 +26,9 @@ public class GetJobStatsRequest  implements XContentable<GetJobStatsRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_JOBS.getPreferredName(), _allowNoJobs);
+    if (_allowNoJobs != null) {
+      builder.field(ALLOW_NO_JOBS.getPreferredName(), _allowNoJobs);
+    }
     builder.endObject();
     return builder;
   }

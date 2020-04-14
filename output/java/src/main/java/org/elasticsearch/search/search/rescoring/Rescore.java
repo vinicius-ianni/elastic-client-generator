@@ -37,7 +37,9 @@ public class Rescore  implements XContentable<Rescore> {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
     }
-    builder.field(WINDOW_SIZE.getPreferredName(), _windowSize);
+    if (_windowSize != null) {
+      builder.field(WINDOW_SIZE.getPreferredName(), _windowSize);
+    }
     builder.endObject();
     return builder;
   }

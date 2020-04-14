@@ -91,7 +91,9 @@ public class ExecutionResultAction  implements XContentable<ExecutionResultActio
       builder.field(EMAIL.getPreferredName());
       _email.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName(), _id);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
     if (_index != null) {
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
@@ -104,7 +106,9 @@ public class ExecutionResultAction  implements XContentable<ExecutionResultActio
       builder.field(PAGERDUTY.getPreferredName());
       _pagerduty.toXContent(builder, params);
     }
-    builder.field(REASON.getPreferredName(), _reason);
+    if (_reason != null) {
+      builder.field(REASON.getPreferredName(), _reason);
+    }
     if (_slack != null) {
       builder.field(SLACK.getPreferredName());
       _slack.toXContent(builder, params);

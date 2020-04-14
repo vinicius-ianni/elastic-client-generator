@@ -50,12 +50,22 @@ public class GetCalendarEventsRequest  implements XContentable<GetCalendarEvents
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(END.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
-    builder.field(JOB_ID.getPreferredName(), _jobId);
-    builder.field(START.getPreferredName(), _start);
-    builder.field(FROM.getPreferredName(), _from);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_end != null) {
+      builder.field(END.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    }
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
+    if (_start != null) {
+      builder.field(START.getPreferredName(), _start);
+    }
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

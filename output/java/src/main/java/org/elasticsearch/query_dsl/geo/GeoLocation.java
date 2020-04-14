@@ -32,8 +32,12 @@ public class GeoLocation  implements XContentable<GeoLocation> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(LAT.getPreferredName(), _lat);
-    builder.field(LON.getPreferredName(), _lon);
+    if (_lat != null) {
+      builder.field(LAT.getPreferredName(), _lat);
+    }
+    if (_lon != null) {
+      builder.field(LON.getPreferredName(), _lon);
+    }
     builder.endObject();
     return builder;
   }

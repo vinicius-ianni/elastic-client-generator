@@ -32,8 +32,12 @@ public class ShardDocs  implements XContentable<ShardDocs> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COUNT.getPreferredName(), _count);
-    builder.field(DELETED.getPreferredName(), _deleted);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
+    if (_deleted != null) {
+      builder.field(DELETED.getPreferredName(), _deleted);
+    }
     builder.endObject();
     return builder;
   }

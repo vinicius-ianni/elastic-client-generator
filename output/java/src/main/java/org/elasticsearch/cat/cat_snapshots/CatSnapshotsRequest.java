@@ -62,12 +62,18 @@ public class CatSnapshotsRequest  implements XContentable<CatSnapshotsRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_headers != null) {
       builder.array(HEADERS.getPreferredName(), _headers);
     }
-    builder.field(HELP.getPreferredName(), _help);
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    if (_help != null) {
+      builder.field(HELP.getPreferredName(), _help);
+    }
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
@@ -75,7 +81,9 @@ public class CatSnapshotsRequest  implements XContentable<CatSnapshotsRequest> {
     if (_sortByColumns != null) {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
-    builder.field(VERBOSE.getPreferredName(), _verbose);
+    if (_verbose != null) {
+      builder.field(VERBOSE.getPreferredName(), _verbose);
+    }
     builder.endObject();
     return builder;
   }

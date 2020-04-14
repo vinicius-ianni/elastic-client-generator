@@ -108,7 +108,9 @@ public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsR
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOC.getPreferredName(), _doc);
+    if (_doc != null) {
+      builder.field(DOC.getPreferredName(), _doc);
+    }
     if (_filter != null) {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
@@ -117,21 +119,37 @@ public class TermVectorsRequest<TDocument>  implements XContentable<TermVectorsR
       builder.field(PER_FIELD_ANALYZER.getPreferredName());
       _perFieldAnalyzer.toXContent(builder, params);
     }
-    builder.field(FIELD_STATISTICS.getPreferredName(), _fieldStatistics);
+    if (_fieldStatistics != null) {
+      builder.field(FIELD_STATISTICS.getPreferredName(), _fieldStatistics);
+    }
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
-    builder.field(OFFSETS.getPreferredName(), _offsets);
-    builder.field(PAYLOADS.getPreferredName(), _payloads);
-    builder.field(POSITIONS.getPreferredName(), _positions);
-    builder.field(PREFERENCE.getPreferredName(), _preference);
-    builder.field(REALTIME.getPreferredName(), _realtime);
+    if (_offsets != null) {
+      builder.field(OFFSETS.getPreferredName(), _offsets);
+    }
+    if (_payloads != null) {
+      builder.field(PAYLOADS.getPreferredName(), _payloads);
+    }
+    if (_positions != null) {
+      builder.field(POSITIONS.getPreferredName(), _positions);
+    }
+    if (_preference != null) {
+      builder.field(PREFERENCE.getPreferredName(), _preference);
+    }
+    if (_realtime != null) {
+      builder.field(REALTIME.getPreferredName(), _realtime);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
     }
-    builder.field(TERM_STATISTICS.getPreferredName(), _termStatistics);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_termStatistics != null) {
+      builder.field(TERM_STATISTICS.getPreferredName(), _termStatistics);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);

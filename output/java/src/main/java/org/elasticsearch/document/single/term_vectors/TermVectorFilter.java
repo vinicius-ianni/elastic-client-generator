@@ -62,13 +62,27 @@ public class TermVectorFilter  implements XContentable<TermVectorFilter> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MAX_DOC_FREQ.getPreferredName(), _maxDocFreq);
-    builder.field(MAX_NUM_TERMS.getPreferredName(), _maxNumTerms);
-    builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
-    builder.field(MAX_WORD_LENGTH.getPreferredName(), _maxWordLength);
-    builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
-    builder.field(MIN_TERM_FREQ.getPreferredName(), _minTermFreq);
-    builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    if (_maxDocFreq != null) {
+      builder.field(MAX_DOC_FREQ.getPreferredName(), _maxDocFreq);
+    }
+    if (_maxNumTerms != null) {
+      builder.field(MAX_NUM_TERMS.getPreferredName(), _maxNumTerms);
+    }
+    if (_maxTermFreq != null) {
+      builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
+    }
+    if (_maxWordLength != null) {
+      builder.field(MAX_WORD_LENGTH.getPreferredName(), _maxWordLength);
+    }
+    if (_minDocFreq != null) {
+      builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
+    }
+    if (_minTermFreq != null) {
+      builder.field(MIN_TERM_FREQ.getPreferredName(), _minTermFreq);
+    }
+    if (_minWordLength != null) {
+      builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    }
     builder.endObject();
     return builder;
   }

@@ -46,12 +46,16 @@ public class BucketSortAggregation  implements XContentable<BucketSortAggregatio
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FROM.getPreferredName(), _from);
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
     if (_gapPolicy != null) {
       builder.field(GAP_POLICY.getPreferredName());
       _gapPolicy.toXContent(builder, params);
     }
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_sort != null) {
       builder.array(SORT.getPreferredName(), _sort);
     }

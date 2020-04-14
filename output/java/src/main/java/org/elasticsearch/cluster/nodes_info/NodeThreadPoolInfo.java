@@ -56,12 +56,24 @@ public class NodeThreadPoolInfo  implements XContentable<NodeThreadPoolInfo> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(KEEP_ALIVE.getPreferredName(), _keepAlive);
-    builder.field(MAX.getPreferredName(), _max);
-    builder.field(CORE.getPreferredName(), _core);
-    builder.field(SIZE.getPreferredName(), _size);
-    builder.field(QUEUE_SIZE.getPreferredName(), _queueSize);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_keepAlive != null) {
+      builder.field(KEEP_ALIVE.getPreferredName(), _keepAlive);
+    }
+    if (_max != null) {
+      builder.field(MAX.getPreferredName(), _max);
+    }
+    if (_core != null) {
+      builder.field(CORE.getPreferredName(), _core);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
+    if (_queueSize != null) {
+      builder.field(QUEUE_SIZE.getPreferredName(), _queueSize);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

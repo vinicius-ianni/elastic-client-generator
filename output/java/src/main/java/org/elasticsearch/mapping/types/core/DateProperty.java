@@ -63,17 +63,29 @@ public class DateProperty  implements XContentable<DateProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BOOST.getPreferredName(), _boost);
+    if (_boost != null) {
+      builder.field(BOOST.getPreferredName(), _boost);
+    }
     if (_fielddata != null) {
       builder.field(FIELDDATA.getPreferredName());
       _fielddata.toXContent(builder, params);
     }
-    builder.field(FORMAT.getPreferredName(), _format);
-    builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(NULL_VALUE.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_nullValue.toInstant()));
-    builder.field(PRECISION_STEP.getPreferredName(), _precisionStep);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
+    if (_ignoreMalformed != null) {
+      builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_nullValue != null) {
+      builder.field(NULL_VALUE.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_nullValue.toInstant()));
+    }
+    if (_precisionStep != null) {
+      builder.field(PRECISION_STEP.getPreferredName(), _precisionStep);
+    }
     builder.endObject();
     return builder;
   }

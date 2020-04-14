@@ -44,7 +44,9 @@ public class MetricAggregation  implements XContentable<MetricAggregation> {
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(MISSING.getPreferredName(), _missing);
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName(), _missing);
+    }
     if (_script != null) {
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);

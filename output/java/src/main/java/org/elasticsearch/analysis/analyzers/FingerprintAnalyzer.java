@@ -51,14 +51,22 @@ public class FingerprintAnalyzer  implements XContentable<FingerprintAnalyzer> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MAX_OUTPUT_SIZE.getPreferredName(), _maxOutputSize);
-    builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
-    builder.field(SEPARATOR.getPreferredName(), _separator);
+    if (_maxOutputSize != null) {
+      builder.field(MAX_OUTPUT_SIZE.getPreferredName(), _maxOutputSize);
+    }
+    if (_preserveOriginal != null) {
+      builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    }
+    if (_separator != null) {
+      builder.field(SEPARATOR.getPreferredName(), _separator);
+    }
     if (_stopwords != null) {
       builder.field(STOPWORDS.getPreferredName());
       _stopwords.toXContent(builder, params);
     }
-    builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    if (_stopwordsPath != null) {
+      builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    }
     builder.endObject();
     return builder;
   }

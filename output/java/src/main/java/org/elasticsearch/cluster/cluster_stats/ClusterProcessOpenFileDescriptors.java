@@ -38,9 +38,15 @@ public class ClusterProcessOpenFileDescriptors  implements XContentable<ClusterP
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(AVG.getPreferredName(), _avg);
-    builder.field(MAX.getPreferredName(), _max);
-    builder.field(MIN.getPreferredName(), _min);
+    if (_avg != null) {
+      builder.field(AVG.getPreferredName(), _avg);
+    }
+    if (_max != null) {
+      builder.field(MAX.getPreferredName(), _max);
+    }
+    if (_min != null) {
+      builder.field(MIN.getPreferredName(), _min);
+    }
     builder.endObject();
     return builder;
   }

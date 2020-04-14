@@ -50,8 +50,12 @@ public class RescoreQuery  implements XContentable<RescoreQuery> {
       builder.field(RESCORE_QUERY.getPreferredName());
       _rescoreQuery.toXContent(builder, params);
     }
-    builder.field(QUERY_WEIGHT.getPreferredName(), _queryWeight);
-    builder.field(RESCORE_QUERY_WEIGHT.getPreferredName(), _rescoreQueryWeight);
+    if (_queryWeight != null) {
+      builder.field(QUERY_WEIGHT.getPreferredName(), _queryWeight);
+    }
+    if (_rescoreQueryWeight != null) {
+      builder.field(RESCORE_QUERY_WEIGHT.getPreferredName(), _rescoreQueryWeight);
+    }
     if (_scoreMode != null) {
       builder.field(SCORE_MODE.getPreferredName());
       _scoreMode.toXContent(builder, params);

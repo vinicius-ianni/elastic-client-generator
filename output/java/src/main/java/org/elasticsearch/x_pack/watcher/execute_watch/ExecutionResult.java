@@ -58,9 +58,13 @@ public class ExecutionResult  implements XContentable<ExecutionResult> {
       builder.field(CONDITION.getPreferredName());
       _condition.toXContent(builder, params);
     }
-    builder.field(EXECUTION_DURATION.getPreferredName(), _executionDuration);
-    builder.field(EXECUTION_TIME.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_executionTime.toInstant()));
+    if (_executionDuration != null) {
+      builder.field(EXECUTION_DURATION.getPreferredName(), _executionDuration);
+    }
+    if (_executionTime != null) {
+      builder.field(EXECUTION_TIME.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_executionTime.toInstant()));
+    }
     if (_input != null) {
       builder.field(INPUT.getPreferredName());
       _input.toXContent(builder, params);

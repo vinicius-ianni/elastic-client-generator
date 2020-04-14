@@ -35,7 +35,9 @@ public class MappingCharFilter  implements XContentable<MappingCharFilter> {
     if (_mappings != null) {
       builder.array(MAPPINGS.getPreferredName(), _mappings);
     }
-    builder.field(MAPPINGS_PATH.getPreferredName(), _mappingsPath);
+    if (_mappingsPath != null) {
+      builder.field(MAPPINGS_PATH.getPreferredName(), _mappingsPath);
+    }
     builder.endObject();
     return builder;
   }

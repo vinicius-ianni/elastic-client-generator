@@ -44,10 +44,18 @@ public class RecoveryStats  implements XContentable<RecoveryStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CURRENT_AS_SOURCE.getPreferredName(), _currentAsSource);
-    builder.field(CURRENT_AS_TARGET.getPreferredName(), _currentAsTarget);
-    builder.field(THROTTLE_TIME.getPreferredName(), _throttleTime);
-    builder.field(THROTTLE_TIME_IN_MILLIS.getPreferredName(), _throttleTimeInMillis);
+    if (_currentAsSource != null) {
+      builder.field(CURRENT_AS_SOURCE.getPreferredName(), _currentAsSource);
+    }
+    if (_currentAsTarget != null) {
+      builder.field(CURRENT_AS_TARGET.getPreferredName(), _currentAsTarget);
+    }
+    if (_throttleTime != null) {
+      builder.field(THROTTLE_TIME.getPreferredName(), _throttleTime);
+    }
+    if (_throttleTimeInMillis != null) {
+      builder.field(THROTTLE_TIME_IN_MILLIS.getPreferredName(), _throttleTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

@@ -56,7 +56,9 @@ public class IndicesStats  implements XContentable<IndicesStats> {
       builder.field(TOTAL.getPreferredName());
       _total.toXContent(builder, params);
     }
-    builder.field(UUID.getPreferredName(), _uuid);
+    if (_uuid != null) {
+      builder.field(UUID.getPreferredName(), _uuid);
+    }
     builder.endObject();
     return builder;
   }

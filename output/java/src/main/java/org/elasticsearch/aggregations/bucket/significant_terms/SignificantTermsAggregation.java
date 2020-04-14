@@ -137,7 +137,9 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
       builder.field(INCLUDE.getPreferredName());
       _include.toXContent(builder, params);
     }
-    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    if (_minDocCount != null) {
+      builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    }
     if (_mutualInformation != null) {
       builder.field(MUTUAL_INFORMATION.getPreferredName());
       _mutualInformation.toXContent(builder, params);
@@ -150,9 +152,15 @@ public class SignificantTermsAggregation  implements XContentable<SignificantTer
       builder.field(SCRIPT_HEURISTIC.getPreferredName());
       _scriptHeuristic.toXContent(builder, params);
     }
-    builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
-    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_shardMinDocCount != null) {
+      builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
+    }
+    if (_shardSize != null) {
+      builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

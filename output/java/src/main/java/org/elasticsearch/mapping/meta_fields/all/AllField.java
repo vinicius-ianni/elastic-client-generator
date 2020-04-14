@@ -80,16 +80,36 @@ public class AllField  implements XContentable<AllField> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(ENABLED.getPreferredName(), _enabled);
-    builder.field(OMIT_NORMS.getPreferredName(), _omitNorms);
-    builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
-    builder.field(SIMILARITY.getPreferredName(), _similarity);
-    builder.field(STORE.getPreferredName(), _store);
-    builder.field(STORE_TERM_VECTOR_OFFSETS.getPreferredName(), _storeTermVectorOffsets);
-    builder.field(STORE_TERM_VECTOR_PAYLOADS.getPreferredName(), _storeTermVectorPayloads);
-    builder.field(STORE_TERM_VECTOR_POSITIONS.getPreferredName(), _storeTermVectorPositions);
-    builder.field(STORE_TERM_VECTORS.getPreferredName(), _storeTermVectors);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_enabled != null) {
+      builder.field(ENABLED.getPreferredName(), _enabled);
+    }
+    if (_omitNorms != null) {
+      builder.field(OMIT_NORMS.getPreferredName(), _omitNorms);
+    }
+    if (_searchAnalyzer != null) {
+      builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    }
+    if (_similarity != null) {
+      builder.field(SIMILARITY.getPreferredName(), _similarity);
+    }
+    if (_store != null) {
+      builder.field(STORE.getPreferredName(), _store);
+    }
+    if (_storeTermVectorOffsets != null) {
+      builder.field(STORE_TERM_VECTOR_OFFSETS.getPreferredName(), _storeTermVectorOffsets);
+    }
+    if (_storeTermVectorPayloads != null) {
+      builder.field(STORE_TERM_VECTOR_PAYLOADS.getPreferredName(), _storeTermVectorPayloads);
+    }
+    if (_storeTermVectorPositions != null) {
+      builder.field(STORE_TERM_VECTOR_POSITIONS.getPreferredName(), _storeTermVectorPositions);
+    }
+    if (_storeTermVectors != null) {
+      builder.field(STORE_TERM_VECTORS.getPreferredName(), _storeTermVectors);
+    }
     builder.endObject();
     return builder;
   }

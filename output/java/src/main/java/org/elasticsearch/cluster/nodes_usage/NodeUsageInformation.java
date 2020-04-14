@@ -42,10 +42,14 @@ public class NodeUsageInformation  implements XContentable<NodeUsageInformation>
       builder.field(REST_ACTIONS.getPreferredName());
       _restActions.toXContent(builder, params);
     }
-    builder.field(SINCE.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_since.toInstant()));
-    builder.field(TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_since != null) {
+      builder.field(SINCE.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_since.toInstant()));
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

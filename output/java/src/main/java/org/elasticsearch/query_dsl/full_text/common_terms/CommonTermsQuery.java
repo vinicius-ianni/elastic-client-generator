@@ -58,8 +58,12 @@ public class CommonTermsQuery  implements XContentable<CommonTermsQuery> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(CUTOFF_FREQUENCY.getPreferredName(), _cutoffFrequency);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_cutoffFrequency != null) {
+      builder.field(CUTOFF_FREQUENCY.getPreferredName(), _cutoffFrequency);
+    }
     if (_highFreqOperator != null) {
       builder.field(HIGH_FREQ_OPERATOR.getPreferredName());
       _highFreqOperator.toXContent(builder, params);
@@ -72,7 +76,9 @@ public class CommonTermsQuery  implements XContentable<CommonTermsQuery> {
       builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
       _minimumShouldMatch.toXContent(builder, params);
     }
-    builder.field(QUERY.getPreferredName(), _query);
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName(), _query);
+    }
     builder.endObject();
     return builder;
   }

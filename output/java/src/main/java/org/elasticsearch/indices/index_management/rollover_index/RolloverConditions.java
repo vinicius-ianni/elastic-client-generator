@@ -43,8 +43,12 @@ public class RolloverConditions  implements XContentable<RolloverConditions> {
       builder.field(MAX_AGE.getPreferredName());
       _maxAge.toXContent(builder, params);
     }
-    builder.field(MAX_DOCS.getPreferredName(), _maxDocs);
-    builder.field(MAX_SIZE.getPreferredName(), _maxSize);
+    if (_maxDocs != null) {
+      builder.field(MAX_DOCS.getPreferredName(), _maxDocs);
+    }
+    if (_maxSize != null) {
+      builder.field(MAX_SIZE.getPreferredName(), _maxSize);
+    }
     builder.endObject();
     return builder;
   }

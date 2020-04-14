@@ -32,7 +32,9 @@ public class PostLicenseRequest  implements XContentable<PostLicenseRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACKNOWLEDGE.getPreferredName(), _acknowledge);
+    if (_acknowledge != null) {
+      builder.field(ACKNOWLEDGE.getPreferredName(), _acknowledge);
+    }
     if (_license != null) {
       builder.field(LICENSE.getPreferredName());
       _license.toXContent(builder, params);

@@ -32,7 +32,9 @@ public class DelimitedPayloadTokenFilter  implements XContentable<DelimitedPaylo
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DELIMITER.getPreferredName(), _delimiter);
+    if (_delimiter != null) {
+      builder.field(DELIMITER.getPreferredName(), _delimiter);
+    }
     if (_encoding != null) {
       builder.field(ENCODING.getPreferredName());
       _encoding.toXContent(builder, params);

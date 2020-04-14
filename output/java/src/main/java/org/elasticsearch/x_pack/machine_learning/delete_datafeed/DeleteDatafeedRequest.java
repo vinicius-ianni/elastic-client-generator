@@ -26,7 +26,9 @@ public class DeleteDatafeedRequest  implements XContentable<DeleteDatafeedReques
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORCE.getPreferredName(), _force);
+    if (_force != null) {
+      builder.field(FORCE.getPreferredName(), _force);
+    }
     builder.endObject();
     return builder;
   }

@@ -67,9 +67,15 @@ public class ReindexNode  implements XContentable<ReindexNode> {
       builder.field(ATTRIBUTES.getPreferredName());
       _attributes.toXContent(builder, params);
     }
-    builder.field(HOST.getPreferredName(), _host);
-    builder.field(IP.getPreferredName(), _ip);
-    builder.field(NAME.getPreferredName(), _name);
+    if (_host != null) {
+      builder.field(HOST.getPreferredName(), _host);
+    }
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_roles != null) {
       builder.array(ROLES.getPreferredName(), _roles);
     }
@@ -77,7 +83,9 @@ public class ReindexNode  implements XContentable<ReindexNode> {
       builder.field(TASKS.getPreferredName());
       _tasks.toXContent(builder, params);
     }
-    builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    if (_transportAddress != null) {
+      builder.field(TRANSPORT_ADDRESS.getPreferredName(), _transportAddress);
+    }
     builder.endObject();
     return builder;
   }

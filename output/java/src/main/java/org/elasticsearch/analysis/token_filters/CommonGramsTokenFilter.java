@@ -47,9 +47,15 @@ public class CommonGramsTokenFilter  implements XContentable<CommonGramsTokenFil
     if (_commonWords != null) {
       builder.array(COMMON_WORDS.getPreferredName(), _commonWords);
     }
-    builder.field(COMMON_WORDS_PATH.getPreferredName(), _commonWordsPath);
-    builder.field(IGNORE_CASE.getPreferredName(), _ignoreCase);
-    builder.field(QUERY_MODE.getPreferredName(), _queryMode);
+    if (_commonWordsPath != null) {
+      builder.field(COMMON_WORDS_PATH.getPreferredName(), _commonWordsPath);
+    }
+    if (_ignoreCase != null) {
+      builder.field(IGNORE_CASE.getPreferredName(), _ignoreCase);
+    }
+    if (_queryMode != null) {
+      builder.field(QUERY_MODE.getPreferredName(), _queryMode);
+    }
     builder.endObject();
     return builder;
   }

@@ -26,7 +26,9 @@ public class CatHelpRecord  implements XContentable<CatHelpRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ENDPOINT.getPreferredName(), _endpoint);
+    if (_endpoint != null) {
+      builder.field(ENDPOINT.getPreferredName(), _endpoint);
+    }
     builder.endObject();
     return builder;
   }

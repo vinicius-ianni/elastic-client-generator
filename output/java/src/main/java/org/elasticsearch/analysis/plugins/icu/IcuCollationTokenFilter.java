@@ -94,21 +94,35 @@ public class IcuCollationTokenFilter  implements XContentable<IcuCollationTokenF
       builder.field(CASE_FIRST.getPreferredName());
       _caseFirst.toXContent(builder, params);
     }
-    builder.field(CASE_LEVEL.getPreferredName(), _caseLevel);
-    builder.field(COUNTRY.getPreferredName(), _country);
+    if (_caseLevel != null) {
+      builder.field(CASE_LEVEL.getPreferredName(), _caseLevel);
+    }
+    if (_country != null) {
+      builder.field(COUNTRY.getPreferredName(), _country);
+    }
     if (_decomposition != null) {
       builder.field(DECOMPOSITION.getPreferredName());
       _decomposition.toXContent(builder, params);
     }
-    builder.field(HIRAGANA_QUATERNARY_MODE.getPreferredName(), _hiraganaQuaternaryMode);
-    builder.field(LANGUAGE.getPreferredName(), _language);
-    builder.field(NUMERIC.getPreferredName(), _numeric);
+    if (_hiraganaQuaternaryMode != null) {
+      builder.field(HIRAGANA_QUATERNARY_MODE.getPreferredName(), _hiraganaQuaternaryMode);
+    }
+    if (_language != null) {
+      builder.field(LANGUAGE.getPreferredName(), _language);
+    }
+    if (_numeric != null) {
+      builder.field(NUMERIC.getPreferredName(), _numeric);
+    }
     if (_strength != null) {
       builder.field(STRENGTH.getPreferredName());
       _strength.toXContent(builder, params);
     }
-    builder.field(VARIABLE_TOP.getPreferredName(), _variableTop);
-    builder.field(VARIANT.getPreferredName(), _variant);
+    if (_variableTop != null) {
+      builder.field(VARIABLE_TOP.getPreferredName(), _variableTop);
+    }
+    if (_variant != null) {
+      builder.field(VARIANT.getPreferredName(), _variant);
+    }
     builder.endObject();
     return builder;
   }

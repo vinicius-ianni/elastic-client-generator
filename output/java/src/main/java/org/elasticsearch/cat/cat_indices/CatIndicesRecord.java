@@ -86,17 +86,39 @@ public class CatIndicesRecord  implements XContentable<CatIndicesRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOCS_COUNT.getPreferredName(), _docsCount);
-    builder.field(DOCS_DELETED.getPreferredName(), _docsDeleted);
-    builder.field(HEALTH.getPreferredName(), _health);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(UUID.getPreferredName(), _uuid);
-    builder.field(PRI.getPreferredName(), _pri);
-    builder.field(PRI_STORE_SIZE.getPreferredName(), _priStoreSize);
-    builder.field(REP.getPreferredName(), _rep);
-    builder.field(STATUS.getPreferredName(), _status);
-    builder.field(STORE_SIZE.getPreferredName(), _storeSize);
-    builder.field(TM.getPreferredName(), _tm);
+    if (_docsCount != null) {
+      builder.field(DOCS_COUNT.getPreferredName(), _docsCount);
+    }
+    if (_docsDeleted != null) {
+      builder.field(DOCS_DELETED.getPreferredName(), _docsDeleted);
+    }
+    if (_health != null) {
+      builder.field(HEALTH.getPreferredName(), _health);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_uuid != null) {
+      builder.field(UUID.getPreferredName(), _uuid);
+    }
+    if (_pri != null) {
+      builder.field(PRI.getPreferredName(), _pri);
+    }
+    if (_priStoreSize != null) {
+      builder.field(PRI_STORE_SIZE.getPreferredName(), _priStoreSize);
+    }
+    if (_rep != null) {
+      builder.field(REP.getPreferredName(), _rep);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName(), _status);
+    }
+    if (_storeSize != null) {
+      builder.field(STORE_SIZE.getPreferredName(), _storeSize);
+    }
+    if (_tm != null) {
+      builder.field(TM.getPreferredName(), _tm);
+    }
     builder.endObject();
     return builder;
   }

@@ -68,9 +68,15 @@ public class GraphVertexDefinition  implements XContentable<GraphVertexDefinitio
     if (_include != null) {
       builder.array(INCLUDE.getPreferredName(), _include);
     }
-    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
-    builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_minDocCount != null) {
+      builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    }
+    if (_shardMinDocCount != null) {
+      builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

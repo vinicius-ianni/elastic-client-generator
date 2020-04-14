@@ -89,14 +89,22 @@ public class IndexRequest<TDocument>  implements XContentable<IndexRequest<TDocu
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOCUMENT.getPreferredName(), _document);
-    builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
-    builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    if (_document != null) {
+      builder.field(DOCUMENT.getPreferredName(), _document);
+    }
+    if (_ifPrimaryTerm != null) {
+      builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
+    }
+    if (_ifSequenceNumber != null) {
+      builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    }
     if (_opType != null) {
       builder.field(OP_TYPE.getPreferredName());
       _opType.toXContent(builder, params);
     }
-    builder.field(PIPELINE.getPreferredName(), _pipeline);
+    if (_pipeline != null) {
+      builder.field(PIPELINE.getPreferredName(), _pipeline);
+    }
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
@@ -109,12 +117,16 @@ public class IndexRequest<TDocument>  implements XContentable<IndexRequest<TDocu
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    if (_waitForActiveShards != null) {
+      builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    }
     builder.endObject();
     return builder;
   }

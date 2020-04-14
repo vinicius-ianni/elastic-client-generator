@@ -47,7 +47,9 @@ public class RuleCondition  implements XContentable<RuleCondition> {
       builder.field(OPERATOR.getPreferredName());
       _operator.toXContent(builder, params);
     }
-    builder.field(VALUE.getPreferredName(), _value);
+    if (_value != null) {
+      builder.field(VALUE.getPreferredName(), _value);
+    }
     builder.endObject();
     return builder;
   }

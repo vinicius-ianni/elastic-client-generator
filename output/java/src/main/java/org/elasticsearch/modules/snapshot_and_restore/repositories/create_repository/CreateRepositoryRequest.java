@@ -57,7 +57,9 @@ public class CreateRepositoryRequest  implements XContentable<CreateRepositoryRe
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(VERIFY.getPreferredName(), _verify);
+    if (_verify != null) {
+      builder.field(VERIFY.getPreferredName(), _verify);
+    }
     builder.endObject();
     return builder;
   }

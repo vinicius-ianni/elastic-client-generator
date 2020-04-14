@@ -51,13 +51,21 @@ public class TermVectorTerm  implements XContentable<TermVectorTerm> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOC_FREQ.getPreferredName(), _docFreq);
-    builder.field(TERM_FREQ.getPreferredName(), _termFreq);
-    builder.field(SCORE.getPreferredName(), _score);
+    if (_docFreq != null) {
+      builder.field(DOC_FREQ.getPreferredName(), _docFreq);
+    }
+    if (_termFreq != null) {
+      builder.field(TERM_FREQ.getPreferredName(), _termFreq);
+    }
+    if (_score != null) {
+      builder.field(SCORE.getPreferredName(), _score);
+    }
     if (_tokens != null) {
       builder.array(TOKENS.getPreferredName(), _tokens);
     }
-    builder.field(TTF.getPreferredName(), _ttf);
+    if (_ttf != null) {
+      builder.field(TTF.getPreferredName(), _ttf);
+    }
     builder.endObject();
     return builder;
   }

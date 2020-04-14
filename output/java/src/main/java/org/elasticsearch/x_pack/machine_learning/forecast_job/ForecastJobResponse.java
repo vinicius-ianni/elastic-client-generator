@@ -26,7 +26,9 @@ public class ForecastJobResponse  implements XContentable<ForecastJobResponse> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORECAST_ID.getPreferredName(), _forecastId);
+    if (_forecastId != null) {
+      builder.field(FORECAST_ID.getPreferredName(), _forecastId);
+    }
     builder.endObject();
     return builder;
   }

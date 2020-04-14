@@ -36,7 +36,9 @@ public class Aggregation  implements XContentable<Aggregation> {
       builder.field(META.getPreferredName());
       _meta.toXContent(builder, params);
     }
-    builder.field(NAME.getPreferredName(), _name);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     builder.endObject();
     return builder;
   }

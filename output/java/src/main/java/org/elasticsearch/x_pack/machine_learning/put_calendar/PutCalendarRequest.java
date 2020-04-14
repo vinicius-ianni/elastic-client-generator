@@ -26,7 +26,9 @@ public class PutCalendarRequest  implements XContentable<PutCalendarRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     builder.endObject();
     return builder;
   }

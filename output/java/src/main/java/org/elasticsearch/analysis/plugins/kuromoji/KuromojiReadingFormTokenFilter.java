@@ -26,7 +26,9 @@ public class KuromojiReadingFormTokenFilter  implements XContentable<KuromojiRea
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(USE_ROMAJI.getPreferredName(), _useRomaji);
+    if (_useRomaji != null) {
+      builder.field(USE_ROMAJI.getPreferredName(), _useRomaji);
+    }
     builder.endObject();
     return builder;
   }

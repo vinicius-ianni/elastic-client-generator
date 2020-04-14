@@ -41,7 +41,9 @@ public class ShardProfile  implements XContentable<ShardProfile> {
     if (_aggregations != null) {
       builder.array(AGGREGATIONS.getPreferredName(), _aggregations);
     }
-    builder.field(ID.getPreferredName(), _id);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
     if (_searches != null) {
       builder.array(SEARCHES.getPreferredName(), _searches);
     }

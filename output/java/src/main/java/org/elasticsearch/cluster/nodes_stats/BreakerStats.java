@@ -56,12 +56,24 @@ public class BreakerStats  implements XContentable<BreakerStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ESTIMATED_SIZE.getPreferredName(), _estimatedSize);
-    builder.field(ESTIMATED_SIZE_IN_BYTES.getPreferredName(), _estimatedSizeInBytes);
-    builder.field(LIMIT_SIZE.getPreferredName(), _limitSize);
-    builder.field(LIMIT_SIZE_IN_BYTES.getPreferredName(), _limitSizeInBytes);
-    builder.field(OVERHEAD.getPreferredName(), _overhead);
-    builder.field(TRIPPED.getPreferredName(), _tripped);
+    if (_estimatedSize != null) {
+      builder.field(ESTIMATED_SIZE.getPreferredName(), _estimatedSize);
+    }
+    if (_estimatedSizeInBytes != null) {
+      builder.field(ESTIMATED_SIZE_IN_BYTES.getPreferredName(), _estimatedSizeInBytes);
+    }
+    if (_limitSize != null) {
+      builder.field(LIMIT_SIZE.getPreferredName(), _limitSize);
+    }
+    if (_limitSizeInBytes != null) {
+      builder.field(LIMIT_SIZE_IN_BYTES.getPreferredName(), _limitSizeInBytes);
+    }
+    if (_overhead != null) {
+      builder.field(OVERHEAD.getPreferredName(), _overhead);
+    }
+    if (_tripped != null) {
+      builder.field(TRIPPED.getPreferredName(), _tripped);
+    }
     builder.endObject();
     return builder;
   }

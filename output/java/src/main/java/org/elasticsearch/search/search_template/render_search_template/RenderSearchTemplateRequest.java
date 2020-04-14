@@ -38,12 +38,16 @@ public class RenderSearchTemplateRequest  implements XContentable<RenderSearchTe
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FILE.getPreferredName(), _file);
+    if (_file != null) {
+      builder.field(FILE.getPreferredName(), _file);
+    }
     if (_params != null) {
       builder.field(PARAMS.getPreferredName());
       _params.toXContent(builder, params);
     }
-    builder.field(SOURCE.getPreferredName(), _source);
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName(), _source);
+    }
     builder.endObject();
     return builder;
   }

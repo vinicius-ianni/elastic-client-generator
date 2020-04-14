@@ -113,7 +113,9 @@ public class PutDatafeedRequest  implements XContentable<PutDatafeedRequest> {
       builder.field(SCRIPT_FIELDS.getPreferredName());
       _scriptFields.toXContent(builder, params);
     }
-    builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    if (_scrollSize != null) {
+      builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    }
     builder.endObject();
     return builder;
   }

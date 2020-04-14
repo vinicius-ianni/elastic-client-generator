@@ -55,11 +55,17 @@ public class ScheduledEvent  implements XContentable<ScheduledEvent> {
       builder.field(CALENDAR_ID.getPreferredName());
       _calendarId.toXContent(builder, params);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(START_TIME.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_startTime.toInstant()));
-    builder.field(END_TIME.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_endTime.toInstant()));
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_startTime != null) {
+      builder.field(START_TIME.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_startTime.toInstant()));
+    }
+    if (_endTime != null) {
+      builder.field(END_TIME.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_endTime.toInstant()));
+    }
     if (_eventId != null) {
       builder.field(EVENT_ID.getPreferredName());
       _eventId.toXContent(builder, params);

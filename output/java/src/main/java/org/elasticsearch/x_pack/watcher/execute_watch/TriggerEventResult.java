@@ -43,9 +43,13 @@ public class TriggerEventResult  implements XContentable<TriggerEventResult> {
       builder.field(MANUAL.getPreferredName());
       _manual.toXContent(builder, params);
     }
-    builder.field(TRIGGERED_TIME.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_triggeredTime.toInstant()));
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_triggeredTime != null) {
+      builder.field(TRIGGERED_TIME.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_triggeredTime.toInstant()));
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

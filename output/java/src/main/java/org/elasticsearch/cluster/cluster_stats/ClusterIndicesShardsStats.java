@@ -49,9 +49,15 @@ public class ClusterIndicesShardsStats  implements XContentable<ClusterIndicesSh
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(PRIMARIES.getPreferredName(), _primaries);
-    builder.field(REPLICATION.getPreferredName(), _replication);
-    builder.field(TOTAL.getPreferredName(), _total);
+    if (_primaries != null) {
+      builder.field(PRIMARIES.getPreferredName(), _primaries);
+    }
+    if (_replication != null) {
+      builder.field(REPLICATION.getPreferredName(), _replication);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
     builder.endObject();
     return builder;
   }

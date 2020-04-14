@@ -32,8 +32,12 @@ public class AnalysisLimits  implements XContentable<AnalysisLimits> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CATEGORIZATION_EXAMPLES_LIMIT.getPreferredName(), _categorizationExamplesLimit);
-    builder.field(MODEL_MEMORY_LIMIT.getPreferredName(), _modelMemoryLimit);
+    if (_categorizationExamplesLimit != null) {
+      builder.field(CATEGORIZATION_EXAMPLES_LIMIT.getPreferredName(), _categorizationExamplesLimit);
+    }
+    if (_modelMemoryLimit != null) {
+      builder.field(MODEL_MEMORY_LIMIT.getPreferredName(), _modelMemoryLimit);
+    }
     builder.endObject();
     return builder;
   }

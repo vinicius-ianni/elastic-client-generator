@@ -124,13 +124,19 @@ public class Highlight  implements XContentable<Highlight> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BOUNDARY_CHARS.getPreferredName(), _boundaryChars);
-    builder.field(BOUNDARY_MAX_SCAN.getPreferredName(), _boundaryMaxScan);
+    if (_boundaryChars != null) {
+      builder.field(BOUNDARY_CHARS.getPreferredName(), _boundaryChars);
+    }
+    if (_boundaryMaxScan != null) {
+      builder.field(BOUNDARY_MAX_SCAN.getPreferredName(), _boundaryMaxScan);
+    }
     if (_boundaryScanner != null) {
       builder.field(BOUNDARY_SCANNER.getPreferredName());
       _boundaryScanner.toXContent(builder, params);
     }
-    builder.field(BOUNDARY_SCANNER_LOCALE.getPreferredName(), _boundaryScannerLocale);
+    if (_boundaryScannerLocale != null) {
+      builder.field(BOUNDARY_SCANNER_LOCALE.getPreferredName(), _boundaryScannerLocale);
+    }
     if (_encoder != null) {
       builder.field(ENCODER.getPreferredName());
       _encoder.toXContent(builder, params);
@@ -143,11 +149,21 @@ public class Highlight  implements XContentable<Highlight> {
       builder.field(FRAGMENTER.getPreferredName());
       _fragmenter.toXContent(builder, params);
     }
-    builder.field(FRAGMENT_OFFSET.getPreferredName(), _fragmentOffset);
-    builder.field(FRAGMENT_SIZE.getPreferredName(), _fragmentSize);
-    builder.field(MAX_FRAGMENT_LENGTH.getPreferredName(), _maxFragmentLength);
-    builder.field(NO_MATCH_SIZE.getPreferredName(), _noMatchSize);
-    builder.field(NUMBER_OF_FRAGMENTS.getPreferredName(), _numberOfFragments);
+    if (_fragmentOffset != null) {
+      builder.field(FRAGMENT_OFFSET.getPreferredName(), _fragmentOffset);
+    }
+    if (_fragmentSize != null) {
+      builder.field(FRAGMENT_SIZE.getPreferredName(), _fragmentSize);
+    }
+    if (_maxFragmentLength != null) {
+      builder.field(MAX_FRAGMENT_LENGTH.getPreferredName(), _maxFragmentLength);
+    }
+    if (_noMatchSize != null) {
+      builder.field(NO_MATCH_SIZE.getPreferredName(), _noMatchSize);
+    }
+    if (_numberOfFragments != null) {
+      builder.field(NUMBER_OF_FRAGMENTS.getPreferredName(), _numberOfFragments);
+    }
     if (_order != null) {
       builder.field(ORDER.getPreferredName());
       _order.toXContent(builder, params);
@@ -158,7 +174,9 @@ public class Highlight  implements XContentable<Highlight> {
     if (_preTags != null) {
       builder.array(PRE_TAGS.getPreferredName(), _preTags);
     }
-    builder.field(REQUIRE_FIELD_MATCH.getPreferredName(), _requireFieldMatch);
+    if (_requireFieldMatch != null) {
+      builder.field(REQUIRE_FIELD_MATCH.getPreferredName(), _requireFieldMatch);
+    }
     if (_tagsSchema != null) {
       builder.field(TAGS_SCHEMA.getPreferredName());
       _tagsSchema.toXContent(builder, params);

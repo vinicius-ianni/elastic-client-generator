@@ -32,7 +32,9 @@ public class IncludeExclude  implements XContentable<IncludeExclude> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(PATTERN.getPreferredName(), _pattern);
+    if (_pattern != null) {
+      builder.field(PATTERN.getPreferredName(), _pattern);
+    }
     if (_values != null) {
       builder.array(VALUES.getPreferredName(), _values);
     }

@@ -45,7 +45,9 @@ public class NoriAnalyzer  implements XContentable<NoriAnalyzer> {
     if (_stoptags != null) {
       builder.array(STOPTAGS.getPreferredName(), _stoptags);
     }
-    builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    if (_userDictionary != null) {
+      builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    }
     builder.endObject();
     return builder;
   }

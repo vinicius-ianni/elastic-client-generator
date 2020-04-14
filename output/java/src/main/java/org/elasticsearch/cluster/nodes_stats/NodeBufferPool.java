@@ -50,11 +50,21 @@ public class NodeBufferPool  implements XContentable<NodeBufferPool> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COUNT.getPreferredName(), _count);
-    builder.field(TOTAL_CAPACITY.getPreferredName(), _totalCapacity);
-    builder.field(TOTAL_CAPACITY_IN_BYTES.getPreferredName(), _totalCapacityInBytes);
-    builder.field(USED.getPreferredName(), _used);
-    builder.field(USED_IN_BYTES.getPreferredName(), _usedInBytes);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
+    if (_totalCapacity != null) {
+      builder.field(TOTAL_CAPACITY.getPreferredName(), _totalCapacity);
+    }
+    if (_totalCapacityInBytes != null) {
+      builder.field(TOTAL_CAPACITY_IN_BYTES.getPreferredName(), _totalCapacityInBytes);
+    }
+    if (_used != null) {
+      builder.field(USED.getPreferredName(), _used);
+    }
+    if (_usedInBytes != null) {
+      builder.field(USED_IN_BYTES.getPreferredName(), _usedInBytes);
+    }
     builder.endObject();
     return builder;
   }

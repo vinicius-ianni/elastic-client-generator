@@ -80,17 +80,37 @@ public class BucketInfluencer  implements XContentable<BucketInfluencer> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BUCKET_SPAN.getPreferredName(), _bucketSpan);
-    builder.field(INFLUENCER_FIELD_NAME.getPreferredName(), _influencerFieldName);
-    builder.field(INFLUENCER_FIELD_VALUE.getPreferredName(), _influencerFieldValue);
-    builder.field(INFLUENCER_SCORE.getPreferredName(), _influencerScore);
-    builder.field(INITIAL_INFLUENCER_SCORE.getPreferredName(), _initialInfluencerScore);
-    builder.field(IS_INTERIM.getPreferredName(), _isInterim);
-    builder.field(JOB_ID.getPreferredName(), _jobId);
-    builder.field(PROBABILITY.getPreferredName(), _probability);
-    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
-    builder.field(TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_bucketSpan != null) {
+      builder.field(BUCKET_SPAN.getPreferredName(), _bucketSpan);
+    }
+    if (_influencerFieldName != null) {
+      builder.field(INFLUENCER_FIELD_NAME.getPreferredName(), _influencerFieldName);
+    }
+    if (_influencerFieldValue != null) {
+      builder.field(INFLUENCER_FIELD_VALUE.getPreferredName(), _influencerFieldValue);
+    }
+    if (_influencerScore != null) {
+      builder.field(INFLUENCER_SCORE.getPreferredName(), _influencerScore);
+    }
+    if (_initialInfluencerScore != null) {
+      builder.field(INITIAL_INFLUENCER_SCORE.getPreferredName(), _initialInfluencerScore);
+    }
+    if (_isInterim != null) {
+      builder.field(IS_INTERIM.getPreferredName(), _isInterim);
+    }
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
+    if (_probability != null) {
+      builder.field(PROBABILITY.getPreferredName(), _probability);
+    }
+    if (_resultType != null) {
+      builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

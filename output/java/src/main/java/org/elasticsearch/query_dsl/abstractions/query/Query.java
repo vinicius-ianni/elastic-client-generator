@@ -56,12 +56,24 @@ public class Query  implements XContentable<Query> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BOOST.getPreferredName(), _boost);
-    builder.field(CONDITIONLESS.getPreferredName(), _conditionless);
-    builder.field(IS_STRICT.getPreferredName(), _isStrict);
-    builder.field(IS_VERBATIM.getPreferredName(), _isVerbatim);
-    builder.field(IS_WRITABLE.getPreferredName(), _isWritable);
-    builder.field(NAME.getPreferredName(), _name);
+    if (_boost != null) {
+      builder.field(BOOST.getPreferredName(), _boost);
+    }
+    if (_conditionless != null) {
+      builder.field(CONDITIONLESS.getPreferredName(), _conditionless);
+    }
+    if (_isStrict != null) {
+      builder.field(IS_STRICT.getPreferredName(), _isStrict);
+    }
+    if (_isVerbatim != null) {
+      builder.field(IS_VERBATIM.getPreferredName(), _isVerbatim);
+    }
+    if (_isWritable != null) {
+      builder.field(IS_WRITABLE.getPreferredName(), _isWritable);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     builder.endObject();
     return builder;
   }

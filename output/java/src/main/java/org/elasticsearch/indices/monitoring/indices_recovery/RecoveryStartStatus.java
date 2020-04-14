@@ -32,8 +32,12 @@ public class RecoveryStartStatus  implements XContentable<RecoveryStartStatus> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CHECK_INDEX_TIME.getPreferredName(), _checkIndexTime);
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_checkIndexTime != null) {
+      builder.field(CHECK_INDEX_TIME.getPreferredName(), _checkIndexTime);
+    }
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

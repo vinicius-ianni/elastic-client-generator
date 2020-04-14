@@ -80,7 +80,9 @@ public class ReindexSource  implements XContentable<ReindexSource> {
       builder.field(REMOTE.getPreferredName());
       _remote.toXContent(builder, params);
     }
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_slice != null) {
       builder.field(SLICE.getPreferredName());
       _slice.toXContent(builder, params);

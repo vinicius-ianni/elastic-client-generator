@@ -43,8 +43,12 @@ public class SlicedScroll  implements XContentable<SlicedScroll> {
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(MAX.getPreferredName(), _max);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_max != null) {
+      builder.field(MAX.getPreferredName(), _max);
+    }
     builder.endObject();
     return builder;
   }

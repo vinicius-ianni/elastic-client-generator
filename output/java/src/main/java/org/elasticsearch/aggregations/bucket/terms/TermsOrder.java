@@ -65,7 +65,9 @@ public class TermsOrder  implements XContentable<TermsOrder> {
       builder.field(COUNT_DESCENDING.getPreferredName());
       _countDescending.toXContent(builder, params);
     }
-    builder.field(KEY.getPreferredName(), _key);
+    if (_key != null) {
+      builder.field(KEY.getPreferredName(), _key);
+    }
     if (_keyAscending != null) {
       builder.field(KEY_ASCENDING.getPreferredName());
       _keyAscending.toXContent(builder, params);

@@ -59,11 +59,21 @@ public class ClusterStateResponse  implements XContentable<ClusterStateResponse>
     if (_state != null) {
       builder.array(STATE.getPreferredName(), _state);
     }
-    builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
-    builder.field(CLUSTER_UUID.getPreferredName(), _clusterUuid);
-    builder.field(MASTER_NODE.getPreferredName(), _masterNode);
-    builder.field(STATE_UUID.getPreferredName(), _stateUuid);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_clusterName != null) {
+      builder.field(CLUSTER_NAME.getPreferredName(), _clusterName);
+    }
+    if (_clusterUuid != null) {
+      builder.field(CLUSTER_UUID.getPreferredName(), _clusterUuid);
+    }
+    if (_masterNode != null) {
+      builder.field(MASTER_NODE.getPreferredName(), _masterNode);
+    }
+    if (_stateUuid != null) {
+      builder.field(STATE_UUID.getPreferredName(), _stateUuid);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

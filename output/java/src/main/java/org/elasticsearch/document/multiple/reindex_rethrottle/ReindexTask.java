@@ -75,18 +75,34 @@ public class ReindexTask  implements XContentable<ReindexTask> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTION.getPreferredName(), _action);
-    builder.field(CANCELLABLE.getPreferredName(), _cancellable);
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(NODE.getPreferredName(), _node);
-    builder.field(RUNNING_TIME_IN_NANOS.getPreferredName(), _runningTimeInNanos);
-    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    if (_action != null) {
+      builder.field(ACTION.getPreferredName(), _action);
+    }
+    if (_cancellable != null) {
+      builder.field(CANCELLABLE.getPreferredName(), _cancellable);
+    }
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
+    if (_runningTimeInNanos != null) {
+      builder.field(RUNNING_TIME_IN_NANOS.getPreferredName(), _runningTimeInNanos);
+    }
+    if (_startTimeInMillis != null) {
+      builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    }
     if (_status != null) {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

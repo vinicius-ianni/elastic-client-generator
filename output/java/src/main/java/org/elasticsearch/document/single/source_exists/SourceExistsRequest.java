@@ -77,21 +77,31 @@ public class SourceExistsRequest  implements XContentable<SourceExistsRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(PREFERENCE.getPreferredName(), _preference);
-    builder.field(REALTIME.getPreferredName(), _realtime);
-    builder.field(REFRESH.getPreferredName(), _refresh);
+    if (_preference != null) {
+      builder.field(PREFERENCE.getPreferredName(), _preference);
+    }
+    if (_realtime != null) {
+      builder.field(REALTIME.getPreferredName(), _realtime);
+    }
+    if (_refresh != null) {
+      builder.field(REFRESH.getPreferredName(), _refresh);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
     }
-    builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    if (_sourceEnabled != null) {
+      builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    }
     if (_sourceExcludes != null) {
       builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
     }
     if (_sourceIncludes != null) {
       builder.array(SOURCE_INCLUDES.getPreferredName(), _sourceIncludes);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);

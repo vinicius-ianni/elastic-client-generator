@@ -82,14 +82,22 @@ public class UpdateJobRequest  implements XContentable<UpdateJobRequest> {
       builder.field(CUSTOM_SETTINGS.getPreferredName());
       _customSettings.toXContent(builder, params);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     if (_modelPlotConfig != null) {
       builder.field(MODEL_PLOT_CONFIG.getPreferredName());
       _modelPlotConfig.toXContent(builder, params);
     }
-    builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
-    builder.field(RENORMALIZATION_WINDOW_DAYS.getPreferredName(), _renormalizationWindowDays);
-    builder.field(RESULTS_RETENTION_DAYS.getPreferredName(), _resultsRetentionDays);
+    if (_modelSnapshotRetentionDays != null) {
+      builder.field(MODEL_SNAPSHOT_RETENTION_DAYS.getPreferredName(), _modelSnapshotRetentionDays);
+    }
+    if (_renormalizationWindowDays != null) {
+      builder.field(RENORMALIZATION_WINDOW_DAYS.getPreferredName(), _renormalizationWindowDays);
+    }
+    if (_resultsRetentionDays != null) {
+      builder.field(RESULTS_RETENTION_DAYS.getPreferredName(), _resultsRetentionDays);
+    }
     builder.endObject();
     return builder;
   }

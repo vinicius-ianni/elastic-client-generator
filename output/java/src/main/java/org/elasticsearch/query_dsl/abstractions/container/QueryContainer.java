@@ -467,10 +467,18 @@ public class QueryContainer  implements XContentable<QueryContainer> {
       builder.field(INTERVALS.getPreferredName());
       _intervals.toXContent(builder, params);
     }
-    builder.field(IS_CONDITIONLESS.getPreferredName(), _isConditionless);
-    builder.field(IS_STRICT.getPreferredName(), _isStrict);
-    builder.field(IS_VERBATIM.getPreferredName(), _isVerbatim);
-    builder.field(IS_WRITABLE.getPreferredName(), _isWritable);
+    if (_isConditionless != null) {
+      builder.field(IS_CONDITIONLESS.getPreferredName(), _isConditionless);
+    }
+    if (_isStrict != null) {
+      builder.field(IS_STRICT.getPreferredName(), _isStrict);
+    }
+    if (_isVerbatim != null) {
+      builder.field(IS_VERBATIM.getPreferredName(), _isVerbatim);
+    }
+    if (_isWritable != null) {
+      builder.field(IS_WRITABLE.getPreferredName(), _isWritable);
+    }
     if (_match != null) {
       builder.field(MATCH.getPreferredName());
       _match.toXContent(builder, params);

@@ -88,25 +88,41 @@ public class TaskInfo  implements XContentable<TaskInfo> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTION.getPreferredName(), _action);
-    builder.field(CANCELLABLE.getPreferredName(), _cancellable);
+    if (_action != null) {
+      builder.field(ACTION.getPreferredName(), _action);
+    }
+    if (_cancellable != null) {
+      builder.field(CANCELLABLE.getPreferredName(), _cancellable);
+    }
     if (_children != null) {
       builder.array(CHILDREN.getPreferredName(), _children);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     if (_headers != null) {
       builder.field(HEADERS.getPreferredName());
       _headers.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(NODE.getPreferredName(), _node);
-    builder.field(RUNNING_TIME_IN_NANOS.getPreferredName(), _runningTimeInNanos);
-    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
+    if (_runningTimeInNanos != null) {
+      builder.field(RUNNING_TIME_IN_NANOS.getPreferredName(), _runningTimeInNanos);
+    }
+    if (_startTimeInMillis != null) {
+      builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    }
     if (_status != null) {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

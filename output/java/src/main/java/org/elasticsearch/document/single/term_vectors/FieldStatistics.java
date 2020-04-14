@@ -38,9 +38,15 @@ public class FieldStatistics  implements XContentable<FieldStatistics> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOC_COUNT.getPreferredName(), _docCount);
-    builder.field(SUM_DOC_FREQ.getPreferredName(), _sumDocFreq);
-    builder.field(SUM_TTF.getPreferredName(), _sumTtf);
+    if (_docCount != null) {
+      builder.field(DOC_COUNT.getPreferredName(), _docCount);
+    }
+    if (_sumDocFreq != null) {
+      builder.field(SUM_DOC_FREQ.getPreferredName(), _sumDocFreq);
+    }
+    if (_sumTtf != null) {
+      builder.field(SUM_TTF.getPreferredName(), _sumTtf);
+    }
     builder.endObject();
     return builder;
   }

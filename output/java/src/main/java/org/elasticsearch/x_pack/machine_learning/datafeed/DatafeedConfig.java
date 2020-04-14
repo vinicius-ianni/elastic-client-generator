@@ -94,7 +94,9 @@ public class DatafeedConfig  implements XContentable<DatafeedConfig> {
       builder.field(CHUNKING_CONFIG.getPreferredName());
       _chunkingConfig.toXContent(builder, params);
     }
-    builder.field(DATAFEED_ID.getPreferredName(), _datafeedId);
+    if (_datafeedId != null) {
+      builder.field(DATAFEED_ID.getPreferredName(), _datafeedId);
+    }
     if (_frequency != null) {
       builder.field(FREQUENCY.getPreferredName());
       _frequency.toXContent(builder, params);
@@ -103,7 +105,9 @@ public class DatafeedConfig  implements XContentable<DatafeedConfig> {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
-    builder.field(JOB_ID.getPreferredName(), _jobId);
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
@@ -116,7 +120,9 @@ public class DatafeedConfig  implements XContentable<DatafeedConfig> {
       builder.field(SCRIPT_FIELDS.getPreferredName());
       _scriptFields.toXContent(builder, params);
     }
-    builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    if (_scrollSize != null) {
+      builder.field(SCROLL_SIZE.getPreferredName(), _scrollSize);
+    }
     builder.endObject();
     return builder;
   }

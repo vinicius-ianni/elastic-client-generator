@@ -38,8 +38,12 @@ public class IntervalsPrefix  implements XContentable<IntervalsPrefix> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(PREFIX.getPreferredName(), _prefix);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_prefix != null) {
+      builder.field(PREFIX.getPreferredName(), _prefix);
+    }
     if (_useField != null) {
       builder.field(USE_FIELD.getPreferredName());
       _useField.toXContent(builder, params);

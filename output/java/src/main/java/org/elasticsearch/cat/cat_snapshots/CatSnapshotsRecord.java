@@ -91,16 +91,36 @@ public class CatSnapshotsRecord  implements XContentable<CatSnapshotsRecord> {
       builder.field(DURATION.getPreferredName());
       _duration.toXContent(builder, params);
     }
-    builder.field(END_EPOCH.getPreferredName(), _endEpoch);
-    builder.field(END_TIME.getPreferredName(), _endTime);
-    builder.field(FAILED_SHARDS.getPreferredName(), _failedShards);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDICES.getPreferredName(), _indices);
-    builder.field(START_EPOCH.getPreferredName(), _startEpoch);
-    builder.field(START_TIME.getPreferredName(), _startTime);
-    builder.field(STATUS.getPreferredName(), _status);
-    builder.field(SUCCESSFUL_SHARDS.getPreferredName(), _successfulShards);
-    builder.field(TOTAL_SHARDS.getPreferredName(), _totalShards);
+    if (_endEpoch != null) {
+      builder.field(END_EPOCH.getPreferredName(), _endEpoch);
+    }
+    if (_endTime != null) {
+      builder.field(END_TIME.getPreferredName(), _endTime);
+    }
+    if (_failedShards != null) {
+      builder.field(FAILED_SHARDS.getPreferredName(), _failedShards);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_indices != null) {
+      builder.field(INDICES.getPreferredName(), _indices);
+    }
+    if (_startEpoch != null) {
+      builder.field(START_EPOCH.getPreferredName(), _startEpoch);
+    }
+    if (_startTime != null) {
+      builder.field(START_TIME.getPreferredName(), _startTime);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName(), _status);
+    }
+    if (_successfulShards != null) {
+      builder.field(SUCCESSFUL_SHARDS.getPreferredName(), _successfulShards);
+    }
+    if (_totalShards != null) {
+      builder.field(TOTAL_SHARDS.getPreferredName(), _totalShards);
+    }
     builder.endObject();
     return builder;
   }

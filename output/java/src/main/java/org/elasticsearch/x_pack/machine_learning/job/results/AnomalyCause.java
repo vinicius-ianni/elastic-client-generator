@@ -108,20 +108,42 @@ public class AnomalyCause  implements XContentable<AnomalyCause> {
     if (_actual != null) {
       builder.array(ACTUAL.getPreferredName(), _actual);
     }
-    builder.field(BY_FIELD_NAME.getPreferredName(), _byFieldName);
-    builder.field(BY_FIELD_VALUE.getPreferredName(), _byFieldValue);
-    builder.field(CORRELATED_BY_FIELD_VALUE.getPreferredName(), _correlatedByFieldValue);
-    builder.field(FIELD_NAME.getPreferredName(), _fieldName);
-    builder.field(FUNCTION.getPreferredName(), _function);
-    builder.field(FUNCTION_DESCRIPTION.getPreferredName(), _functionDescription);
+    if (_byFieldName != null) {
+      builder.field(BY_FIELD_NAME.getPreferredName(), _byFieldName);
+    }
+    if (_byFieldValue != null) {
+      builder.field(BY_FIELD_VALUE.getPreferredName(), _byFieldValue);
+    }
+    if (_correlatedByFieldValue != null) {
+      builder.field(CORRELATED_BY_FIELD_VALUE.getPreferredName(), _correlatedByFieldValue);
+    }
+    if (_fieldName != null) {
+      builder.field(FIELD_NAME.getPreferredName(), _fieldName);
+    }
+    if (_function != null) {
+      builder.field(FUNCTION.getPreferredName(), _function);
+    }
+    if (_functionDescription != null) {
+      builder.field(FUNCTION_DESCRIPTION.getPreferredName(), _functionDescription);
+    }
     if (_influencers != null) {
       builder.array(INFLUENCERS.getPreferredName(), _influencers);
     }
-    builder.field(OVER_FIELD_NAME.getPreferredName(), _overFieldName);
-    builder.field(OVER_FIELD_VALUE.getPreferredName(), _overFieldValue);
-    builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
-    builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
-    builder.field(PROBABILITY.getPreferredName(), _probability);
+    if (_overFieldName != null) {
+      builder.field(OVER_FIELD_NAME.getPreferredName(), _overFieldName);
+    }
+    if (_overFieldValue != null) {
+      builder.field(OVER_FIELD_VALUE.getPreferredName(), _overFieldValue);
+    }
+    if (_partitionFieldName != null) {
+      builder.field(PARTITION_FIELD_NAME.getPreferredName(), _partitionFieldName);
+    }
+    if (_partitionFieldValue != null) {
+      builder.field(PARTITION_FIELD_VALUE.getPreferredName(), _partitionFieldValue);
+    }
+    if (_probability != null) {
+      builder.field(PROBABILITY.getPreferredName(), _probability);
+    }
     if (_typical != null) {
       builder.array(TYPICAL.getPreferredName(), _typical);
     }

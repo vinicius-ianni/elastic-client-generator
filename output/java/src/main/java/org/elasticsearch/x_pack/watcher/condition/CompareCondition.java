@@ -38,9 +38,15 @@ public class CompareCondition  implements XContentable<CompareCondition> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COMPARISON.getPreferredName(), _comparison);
-    builder.field(PATH.getPreferredName(), _path);
-    builder.field(VALUE.getPreferredName(), _value);
+    if (_comparison != null) {
+      builder.field(COMPARISON.getPreferredName(), _comparison);
+    }
+    if (_path != null) {
+      builder.field(PATH.getPreferredName(), _path);
+    }
+    if (_value != null) {
+      builder.field(VALUE.getPreferredName(), _value);
+    }
     builder.endObject();
     return builder;
   }

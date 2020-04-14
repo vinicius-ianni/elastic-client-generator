@@ -38,9 +38,15 @@ public class CatCountRecord  implements XContentable<CatCountRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COUNT.getPreferredName(), _count);
-    builder.field(EPOCH.getPreferredName(), _epoch);
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
+    if (_epoch != null) {
+      builder.field(EPOCH.getPreferredName(), _epoch);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
     builder.endObject();
     return builder;
   }

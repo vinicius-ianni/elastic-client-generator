@@ -26,7 +26,9 @@ public class RankFeatureProperty  implements XContentable<RankFeatureProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(POSITIVE_SCORE_IMPACT.getPreferredName(), _positiveScoreImpact);
+    if (_positiveScoreImpact != null) {
+      builder.field(POSITIVE_SCORE_IMPACT.getPreferredName(), _positiveScoreImpact);
+    }
     builder.endObject();
     return builder;
   }

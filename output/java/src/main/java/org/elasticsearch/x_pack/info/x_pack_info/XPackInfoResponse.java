@@ -56,7 +56,9 @@ public class XPackInfoResponse  implements XContentable<XPackInfoResponse> {
       builder.field(LICENSE.getPreferredName());
       _license.toXContent(builder, params);
     }
-    builder.field(TAGLINE.getPreferredName(), _tagline);
+    if (_tagline != null) {
+      builder.field(TAGLINE.getPreferredName(), _tagline);
+    }
     builder.endObject();
     return builder;
   }

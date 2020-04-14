@@ -66,13 +66,19 @@ public class SuggestBucket  implements XContentable<SuggestBucket> {
       builder.field(PHRASE.getPreferredName());
       _phrase.toXContent(builder, params);
     }
-    builder.field(PREFIX.getPreferredName(), _prefix);
-    builder.field(REGEX.getPreferredName(), _regex);
+    if (_prefix != null) {
+      builder.field(PREFIX.getPreferredName(), _prefix);
+    }
+    if (_regex != null) {
+      builder.field(REGEX.getPreferredName(), _regex);
+    }
     if (_term != null) {
       builder.field(TERM.getPreferredName());
       _term.toXContent(builder, params);
     }
-    builder.field(TEXT.getPreferredName(), _text);
+    if (_text != null) {
+      builder.field(TEXT.getPreferredName(), _text);
+    }
     builder.endObject();
     return builder;
   }

@@ -35,7 +35,9 @@ public class ElisionTokenFilter  implements XContentable<ElisionTokenFilter> {
     if (_articles != null) {
       builder.array(ARTICLES.getPreferredName(), _articles);
     }
-    builder.field(ARTICLES_CASE.getPreferredName(), _articlesCase);
+    if (_articlesCase != null) {
+      builder.field(ARTICLES_CASE.getPreferredName(), _articlesCase);
+    }
     builder.endObject();
     return builder;
   }

@@ -35,7 +35,9 @@ public class PatternCaptureTokenFilter  implements XContentable<PatternCaptureTo
     if (_patterns != null) {
       builder.array(PATTERNS.getPreferredName(), _patterns);
     }
-    builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    if (_preserveOriginal != null) {
+      builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    }
     builder.endObject();
     return builder;
   }

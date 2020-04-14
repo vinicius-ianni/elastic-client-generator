@@ -85,12 +85,24 @@ public class NodeJvmInfo  implements XContentable<NodeJvmInfo> {
     if (_memoryPools != null) {
       builder.array(MEMORY_POOLS.getPreferredName(), _memoryPools);
     }
-    builder.field(PID.getPreferredName(), _pid);
-    builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
-    builder.field(VERSION.getPreferredName(), _version);
-    builder.field(VM_NAME.getPreferredName(), _vmName);
-    builder.field(VM_VENDOR.getPreferredName(), _vmVendor);
-    builder.field(VM_VERSION.getPreferredName(), _vmVersion);
+    if (_pid != null) {
+      builder.field(PID.getPreferredName(), _pid);
+    }
+    if (_startTimeInMillis != null) {
+      builder.field(START_TIME_IN_MILLIS.getPreferredName(), _startTimeInMillis);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
+    if (_vmName != null) {
+      builder.field(VM_NAME.getPreferredName(), _vmName);
+    }
+    if (_vmVendor != null) {
+      builder.field(VM_VENDOR.getPreferredName(), _vmVendor);
+    }
+    if (_vmVersion != null) {
+      builder.field(VM_VERSION.getPreferredName(), _vmVersion);
+    }
     builder.endObject();
     return builder;
   }

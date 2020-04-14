@@ -32,7 +32,9 @@ public class CatHelpRequest  implements XContentable<CatHelpRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(HELP.getPreferredName(), _help);
+    if (_help != null) {
+      builder.field(HELP.getPreferredName(), _help);
+    }
     if (_sortByColumns != null) {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }

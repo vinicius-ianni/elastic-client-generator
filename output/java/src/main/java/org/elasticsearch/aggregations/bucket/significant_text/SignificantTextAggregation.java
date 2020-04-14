@@ -141,7 +141,9 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(FILTER_DUPLICATE_TEXT.getPreferredName(), _filterDuplicateText);
+    if (_filterDuplicateText != null) {
+      builder.field(FILTER_DUPLICATE_TEXT.getPreferredName(), _filterDuplicateText);
+    }
     if (_gnd != null) {
       builder.field(GND.getPreferredName());
       _gnd.toXContent(builder, params);
@@ -150,7 +152,9 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
       builder.field(INCLUDE.getPreferredName());
       _include.toXContent(builder, params);
     }
-    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    if (_minDocCount != null) {
+      builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    }
     if (_mutualInformation != null) {
       builder.field(MUTUAL_INFORMATION.getPreferredName());
       _mutualInformation.toXContent(builder, params);
@@ -163,9 +167,15 @@ public class SignificantTextAggregation  implements XContentable<SignificantText
       builder.field(SCRIPT_HEURISTIC.getPreferredName());
       _scriptHeuristic.toXContent(builder, params);
     }
-    builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
-    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_shardMinDocCount != null) {
+      builder.field(SHARD_MIN_DOC_COUNT.getPreferredName(), _shardMinDocCount);
+    }
+    if (_shardSize != null) {
+      builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_sourceFields != null) {
       builder.array(SOURCE_FIELDS.getPreferredName(), _sourceFields);
     }

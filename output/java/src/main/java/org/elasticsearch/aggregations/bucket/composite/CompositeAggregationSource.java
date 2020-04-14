@@ -55,13 +55,19 @@ public class CompositeAggregationSource  implements XContentable<CompositeAggreg
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(MISSING_BUCKET.getPreferredName(), _missingBucket);
-    builder.field(NAME.getPreferredName(), _name);
+    if (_missingBucket != null) {
+      builder.field(MISSING_BUCKET.getPreferredName(), _missingBucket);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     if (_order != null) {
       builder.field(ORDER.getPreferredName());
       _order.toXContent(builder, params);
     }
-    builder.field(SOURCE_TYPE.getPreferredName(), _sourceType);
+    if (_sourceType != null) {
+      builder.field(SOURCE_TYPE.getPreferredName(), _sourceType);
+    }
     builder.endObject();
     return builder;
   }

@@ -107,28 +107,48 @@ public class TextProperty  implements XContentable<TextProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(BOOST.getPreferredName(), _boost);
-    builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
-    builder.field(FIELDDATA.getPreferredName(), _fielddata);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_boost != null) {
+      builder.field(BOOST.getPreferredName(), _boost);
+    }
+    if (_eagerGlobalOrdinals != null) {
+      builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
+    }
+    if (_fielddata != null) {
+      builder.field(FIELDDATA.getPreferredName(), _fielddata);
+    }
     if (_fielddataFrequencyFilter != null) {
       builder.field(FIELDDATA_FREQUENCY_FILTER.getPreferredName());
       _fielddataFrequencyFilter.toXContent(builder, params);
     }
-    builder.field(INDEX.getPreferredName(), _index);
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
     if (_indexOptions != null) {
       builder.field(INDEX_OPTIONS.getPreferredName());
       _indexOptions.toXContent(builder, params);
     }
-    builder.field(INDEX_PHRASES.getPreferredName(), _indexPhrases);
+    if (_indexPhrases != null) {
+      builder.field(INDEX_PHRASES.getPreferredName(), _indexPhrases);
+    }
     if (_indexPrefixes != null) {
       builder.field(INDEX_PREFIXES.getPreferredName());
       _indexPrefixes.toXContent(builder, params);
     }
-    builder.field(NORMS.getPreferredName(), _norms);
-    builder.field(POSITION_INCREMENT_GAP.getPreferredName(), _positionIncrementGap);
-    builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
-    builder.field(SEARCH_QUOTE_ANALYZER.getPreferredName(), _searchQuoteAnalyzer);
+    if (_norms != null) {
+      builder.field(NORMS.getPreferredName(), _norms);
+    }
+    if (_positionIncrementGap != null) {
+      builder.field(POSITION_INCREMENT_GAP.getPreferredName(), _positionIncrementGap);
+    }
+    if (_searchAnalyzer != null) {
+      builder.field(SEARCH_ANALYZER.getPreferredName(), _searchAnalyzer);
+    }
+    if (_searchQuoteAnalyzer != null) {
+      builder.field(SEARCH_QUOTE_ANALYZER.getPreferredName(), _searchQuoteAnalyzer);
+    }
     if (_termVector != null) {
       builder.field(TERM_VECTOR.getPreferredName());
       _termVector.toXContent(builder, params);

@@ -44,9 +44,15 @@ public class XPackFeature  implements XContentable<XPackFeature> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(AVAILABLE.getPreferredName(), _available);
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(ENABLED.getPreferredName(), _enabled);
+    if (_available != null) {
+      builder.field(AVAILABLE.getPreferredName(), _available);
+    }
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_enabled != null) {
+      builder.field(ENABLED.getPreferredName(), _enabled);
+    }
     if (_nativeCodeInfo != null) {
       builder.field(NATIVE_CODE_INFO.getPreferredName());
       _nativeCodeInfo.toXContent(builder, params);

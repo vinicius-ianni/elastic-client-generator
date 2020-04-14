@@ -68,19 +68,31 @@ public class PagerDutyEvent  implements XContentable<PagerDutyEvent> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACCOUNT.getPreferredName(), _account);
-    builder.field(ATTACH_PAYLOAD.getPreferredName(), _attachPayload);
-    builder.field(CLIENT.getPreferredName(), _client);
-    builder.field(CLIENT_URL.getPreferredName(), _clientUrl);
+    if (_account != null) {
+      builder.field(ACCOUNT.getPreferredName(), _account);
+    }
+    if (_attachPayload != null) {
+      builder.field(ATTACH_PAYLOAD.getPreferredName(), _attachPayload);
+    }
+    if (_client != null) {
+      builder.field(CLIENT.getPreferredName(), _client);
+    }
+    if (_clientUrl != null) {
+      builder.field(CLIENT_URL.getPreferredName(), _clientUrl);
+    }
     if (_context != null) {
       builder.array(CONTEXT.getPreferredName(), _context);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     if (_eventType != null) {
       builder.field(EVENT_TYPE.getPreferredName());
       _eventType.toXContent(builder, params);
     }
-    builder.field(INCIDENT_KEY.getPreferredName(), _incidentKey);
+    if (_incidentKey != null) {
+      builder.field(INCIDENT_KEY.getPreferredName(), _incidentKey);
+    }
     builder.endObject();
     return builder;
   }

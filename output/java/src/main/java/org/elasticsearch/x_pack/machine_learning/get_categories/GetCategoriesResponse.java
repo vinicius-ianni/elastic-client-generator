@@ -36,7 +36,9 @@ public class GetCategoriesResponse  implements XContentable<GetCategoriesRespons
     if (_categories != null) {
       builder.array(CATEGORIES.getPreferredName(), _categories);
     }
-    builder.field(COUNT.getPreferredName(), _count);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
     builder.endObject();
     return builder;
   }

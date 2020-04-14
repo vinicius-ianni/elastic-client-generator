@@ -110,21 +110,51 @@ public class CatSegmentsRecord  implements XContentable<CatSegmentsRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COMMITTED.getPreferredName(), _committed);
-    builder.field(COMPOUND.getPreferredName(), _compound);
-    builder.field(DOCS_COUNT.getPreferredName(), _docsCount);
-    builder.field(DOCS_DELETED.getPreferredName(), _docsDeleted);
-    builder.field(GENERATION.getPreferredName(), _generation);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(IP.getPreferredName(), _ip);
-    builder.field(PRIREP.getPreferredName(), _prirep);
-    builder.field(SEARCHABLE.getPreferredName(), _searchable);
-    builder.field(SEGMENT.getPreferredName(), _segment);
-    builder.field(SHARD.getPreferredName(), _shard);
-    builder.field(SIZE.getPreferredName(), _size);
-    builder.field(SIZE_MEMORY.getPreferredName(), _sizeMemory);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_committed != null) {
+      builder.field(COMMITTED.getPreferredName(), _committed);
+    }
+    if (_compound != null) {
+      builder.field(COMPOUND.getPreferredName(), _compound);
+    }
+    if (_docsCount != null) {
+      builder.field(DOCS_COUNT.getPreferredName(), _docsCount);
+    }
+    if (_docsDeleted != null) {
+      builder.field(DOCS_DELETED.getPreferredName(), _docsDeleted);
+    }
+    if (_generation != null) {
+      builder.field(GENERATION.getPreferredName(), _generation);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
+    if (_prirep != null) {
+      builder.field(PRIREP.getPreferredName(), _prirep);
+    }
+    if (_searchable != null) {
+      builder.field(SEARCHABLE.getPreferredName(), _searchable);
+    }
+    if (_segment != null) {
+      builder.field(SEGMENT.getPreferredName(), _segment);
+    }
+    if (_shard != null) {
+      builder.field(SHARD.getPreferredName(), _shard);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
+    if (_sizeMemory != null) {
+      builder.field(SIZE_MEMORY.getPreferredName(), _sizeMemory);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

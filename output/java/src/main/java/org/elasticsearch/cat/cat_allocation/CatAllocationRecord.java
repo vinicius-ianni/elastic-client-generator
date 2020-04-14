@@ -56,12 +56,24 @@ public class CatAllocationRecord  implements XContentable<CatAllocationRecord> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DISK_AVAIL.getPreferredName(), _diskAvail);
-    builder.field(DISK_RATIO.getPreferredName(), _diskRatio);
-    builder.field(DISK_USED.getPreferredName(), _diskUsed);
-    builder.field(IP.getPreferredName(), _ip);
-    builder.field(NODE.getPreferredName(), _node);
-    builder.field(SHARDS.getPreferredName(), _shards);
+    if (_diskAvail != null) {
+      builder.field(DISK_AVAIL.getPreferredName(), _diskAvail);
+    }
+    if (_diskRatio != null) {
+      builder.field(DISK_RATIO.getPreferredName(), _diskRatio);
+    }
+    if (_diskUsed != null) {
+      builder.field(DISK_USED.getPreferredName(), _diskUsed);
+    }
+    if (_ip != null) {
+      builder.field(IP.getPreferredName(), _ip);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
+    if (_shards != null) {
+      builder.field(SHARDS.getPreferredName(), _shards);
+    }
     builder.endObject();
     return builder;
   }

@@ -59,7 +59,9 @@ public class LikeDocument  implements XContentable<LikeDocument> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOC.getPreferredName(), _doc);
+    if (_doc != null) {
+      builder.field(DOC.getPreferredName(), _doc);
+    }
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }

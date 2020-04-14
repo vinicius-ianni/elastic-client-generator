@@ -84,25 +84,39 @@ public class SuggestOption<TDocument>  implements XContentable<SuggestOption<TDo
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COLLATE_MATCH.getPreferredName(), _collateMatch);
+    if (_collateMatch != null) {
+      builder.field(COLLATE_MATCH.getPreferredName(), _collateMatch);
+    }
     if (_contexts != null) {
       builder.field(CONTEXTS.getPreferredName());
       _contexts.toXContent(builder, params);
     }
-    builder.field(SCORE.getPreferredName(), _score);
+    if (_score != null) {
+      builder.field(SCORE.getPreferredName(), _score);
+    }
     if (_fields != null) {
       builder.field(FIELDS.getPreferredName());
       _fields.toXContent(builder, params);
     }
-    builder.field(FREQ.getPreferredName(), _freq);
-    builder.field(HIGHLIGHTED.getPreferredName(), _highlighted);
-    builder.field(ID.getPreferredName(), _id);
+    if (_freq != null) {
+      builder.field(FREQ.getPreferredName(), _freq);
+    }
+    if (_highlighted != null) {
+      builder.field(HIGHLIGHTED.getPreferredName(), _highlighted);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
     if (_index != null) {
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(SOURCE.getPreferredName(), _source);
-    builder.field(TEXT.getPreferredName(), _text);
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName(), _source);
+    }
+    if (_text != null) {
+      builder.field(TEXT.getPreferredName(), _text);
+    }
     builder.endObject();
     return builder;
   }

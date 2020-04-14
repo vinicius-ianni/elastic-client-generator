@@ -35,7 +35,9 @@ public class NodeInfoTransport  implements XContentable<NodeInfoTransport> {
     if (_boundAddress != null) {
       builder.array(BOUND_ADDRESS.getPreferredName(), _boundAddress);
     }
-    builder.field(PUBLISH_ADDRESS.getPreferredName(), _publishAddress);
+    if (_publishAddress != null) {
+      builder.field(PUBLISH_ADDRESS.getPreferredName(), _publishAddress);
+    }
     builder.endObject();
     return builder;
   }

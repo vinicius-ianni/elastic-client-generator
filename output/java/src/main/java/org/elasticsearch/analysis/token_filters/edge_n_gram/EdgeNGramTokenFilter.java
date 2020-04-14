@@ -39,8 +39,12 @@ public class EdgeNGramTokenFilter  implements XContentable<EdgeNGramTokenFilter>
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MAX_GRAM.getPreferredName(), _maxGram);
-    builder.field(MIN_GRAM.getPreferredName(), _minGram);
+    if (_maxGram != null) {
+      builder.field(MAX_GRAM.getPreferredName(), _maxGram);
+    }
+    if (_minGram != null) {
+      builder.field(MIN_GRAM.getPreferredName(), _minGram);
+    }
     if (_side != null) {
       builder.field(SIDE.getPreferredName());
       _side.toXContent(builder, params);

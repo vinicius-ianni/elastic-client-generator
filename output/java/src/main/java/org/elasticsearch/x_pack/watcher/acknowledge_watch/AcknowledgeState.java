@@ -37,8 +37,10 @@ public class AcknowledgeState  implements XContentable<AcknowledgeState> {
       builder.field(STATE.getPreferredName());
       _state.toXContent(builder, params);
     }
-    builder.field(TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

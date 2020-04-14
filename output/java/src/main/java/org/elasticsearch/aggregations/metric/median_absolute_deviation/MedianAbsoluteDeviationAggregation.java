@@ -26,7 +26,9 @@ public class MedianAbsoluteDeviationAggregation  implements XContentable<MedianA
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COMPRESSION.getPreferredName(), _compression);
+    if (_compression != null) {
+      builder.field(COMPRESSION.getPreferredName(), _compression);
+    }
     builder.endObject();
     return builder;
   }

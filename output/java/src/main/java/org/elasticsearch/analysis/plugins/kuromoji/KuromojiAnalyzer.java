@@ -36,7 +36,9 @@ public class KuromojiAnalyzer  implements XContentable<KuromojiAnalyzer> {
       builder.field(MODE.getPreferredName());
       _mode.toXContent(builder, params);
     }
-    builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    if (_userDictionary != null) {
+      builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    }
     builder.endObject();
     return builder;
   }

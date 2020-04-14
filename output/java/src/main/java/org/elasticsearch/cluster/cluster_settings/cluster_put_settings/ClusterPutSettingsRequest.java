@@ -58,7 +58,9 @@ public class ClusterPutSettingsRequest  implements XContentable<ClusterPutSettin
       builder.field(TRANSIENT.getPreferredName());
       _transient.toXContent(builder, params);
     }
-    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    if (_flatSettings != null) {
+      builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);

@@ -46,7 +46,9 @@ public class ValidateQueryResponse  implements XContentable<ValidateQueryRespons
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
     }
-    builder.field(VALID.getPreferredName(), _valid);
+    if (_valid != null) {
+      builder.field(VALID.getPreferredName(), _valid);
+    }
     builder.endObject();
     return builder;
   }

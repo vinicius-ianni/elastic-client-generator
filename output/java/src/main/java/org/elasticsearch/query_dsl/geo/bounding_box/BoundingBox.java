@@ -46,7 +46,9 @@ public class BoundingBox  implements XContentable<BoundingBox> {
       builder.field(TOP_LEFT.getPreferredName());
       _topLeft.toXContent(builder, params);
     }
-    builder.field(WKT.getPreferredName(), _wkt);
+    if (_wkt != null) {
+      builder.field(WKT.getPreferredName(), _wkt);
+    }
     builder.endObject();
     return builder;
   }

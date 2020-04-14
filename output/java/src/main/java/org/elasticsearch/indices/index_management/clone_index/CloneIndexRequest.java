@@ -68,7 +68,9 @@ public class CloneIndexRequest  implements XContentable<CloneIndexRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    if (_waitForActiveShards != null) {
+      builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    }
     builder.endObject();
     return builder;
   }

@@ -39,7 +39,9 @@ public class ExecutePainlessScriptRequest  implements XContentable<ExecutePainle
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CONTEXT.getPreferredName(), _context);
+    if (_context != null) {
+      builder.field(CONTEXT.getPreferredName(), _context);
+    }
     if (_contextSetup != null) {
       builder.field(CONTEXT_SETUP.getPreferredName());
       _contextSetup.toXContent(builder, params);

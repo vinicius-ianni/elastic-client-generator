@@ -91,9 +91,15 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
     if (_ignoreIndexSettings != null) {
       builder.array(IGNORE_INDEX_SETTINGS.getPreferredName(), _ignoreIndexSettings);
     }
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(INCLUDE_ALIASES.getPreferredName(), _includeAliases);
-    builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_includeAliases != null) {
+      builder.field(INCLUDE_ALIASES.getPreferredName(), _includeAliases);
+    }
+    if (_includeGlobalState != null) {
+      builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
+    }
     if (_indexSettings != null) {
       builder.field(INDEX_SETTINGS.getPreferredName());
       _indexSettings.toXContent(builder, params);
@@ -102,14 +108,22 @@ public class RestoreRequest  implements XContentable<RestoreRequest> {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
-    builder.field(PARTIAL.getPreferredName(), _partial);
-    builder.field(RENAME_PATTERN.getPreferredName(), _renamePattern);
-    builder.field(RENAME_REPLACEMENT.getPreferredName(), _renameReplacement);
+    if (_partial != null) {
+      builder.field(PARTIAL.getPreferredName(), _partial);
+    }
+    if (_renamePattern != null) {
+      builder.field(RENAME_PATTERN.getPreferredName(), _renamePattern);
+    }
+    if (_renameReplacement != null) {
+      builder.field(RENAME_REPLACEMENT.getPreferredName(), _renameReplacement);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    if (_waitForCompletion != null) {
+      builder.field(WAIT_FOR_COMPLETION.getPreferredName(), _waitForCompletion);
+    }
     builder.endObject();
     return builder;
   }

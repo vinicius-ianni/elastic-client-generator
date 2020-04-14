@@ -36,7 +36,9 @@ public class StopAnalyzer  implements XContentable<StopAnalyzer> {
       builder.field(STOPWORDS.getPreferredName());
       _stopwords.toXContent(builder, params);
     }
-    builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    if (_stopwordsPath != null) {
+      builder.field(STOPWORDS_PATH.getPreferredName(), _stopwordsPath);
+    }
     builder.endObject();
     return builder;
   }

@@ -51,14 +51,22 @@ public class ShardFailure  implements XContentable<ShardFailure> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(NODE.getPreferredName(), _node);
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
     if (_reason != null) {
       builder.field(REASON.getPreferredName());
       _reason.toXContent(builder, params);
     }
-    builder.field(SHARD.getPreferredName(), _shard);
-    builder.field(STATUS.getPreferredName(), _status);
+    if (_shard != null) {
+      builder.field(SHARD.getPreferredName(), _shard);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName(), _status);
+    }
     builder.endObject();
     return builder;
   }

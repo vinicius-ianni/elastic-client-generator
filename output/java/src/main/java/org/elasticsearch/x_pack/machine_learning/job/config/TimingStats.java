@@ -62,13 +62,27 @@ public class TimingStats  implements XContentable<TimingStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(JOB_ID.getPreferredName(), _jobId);
-    builder.field(BUCKET_COUNT.getPreferredName(), _bucketCount);
-    builder.field(MINIMUM_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _minimumBucketProcessingTimeMs);
-    builder.field(MAXIMUM_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _maximumBucketProcessingTimeMs);
-    builder.field(AVERAGE_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _averageBucketProcessingTimeMs);
-    builder.field(EXPONENTIAL_AVERAGE_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _exponentialAverageBucketProcessingTimeMs);
-    builder.field(EXPONENTIAL_AVERAGE_BUCKET_PROCESSING_TIME_PER_HOUR_MS.getPreferredName(), _exponentialAverageBucketProcessingTimePerHourMs);
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
+    if (_bucketCount != null) {
+      builder.field(BUCKET_COUNT.getPreferredName(), _bucketCount);
+    }
+    if (_minimumBucketProcessingTimeMs != null) {
+      builder.field(MINIMUM_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _minimumBucketProcessingTimeMs);
+    }
+    if (_maximumBucketProcessingTimeMs != null) {
+      builder.field(MAXIMUM_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _maximumBucketProcessingTimeMs);
+    }
+    if (_averageBucketProcessingTimeMs != null) {
+      builder.field(AVERAGE_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _averageBucketProcessingTimeMs);
+    }
+    if (_exponentialAverageBucketProcessingTimeMs != null) {
+      builder.field(EXPONENTIAL_AVERAGE_BUCKET_PROCESSING_TIME_MS.getPreferredName(), _exponentialAverageBucketProcessingTimeMs);
+    }
+    if (_exponentialAverageBucketProcessingTimePerHourMs != null) {
+      builder.field(EXPONENTIAL_AVERAGE_BUCKET_PROCESSING_TIME_PER_HOUR_MS.getPreferredName(), _exponentialAverageBucketProcessingTimePerHourMs);
+    }
     builder.endObject();
     return builder;
   }

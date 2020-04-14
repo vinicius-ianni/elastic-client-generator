@@ -32,8 +32,12 @@ public class GetFiltersRequest  implements XContentable<GetFiltersRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FROM.getPreferredName(), _from);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

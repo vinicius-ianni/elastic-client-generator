@@ -37,7 +37,9 @@ public class SpanGapQuery  implements XContentable<SpanGapQuery> {
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(WIDTH.getPreferredName(), _width);
+    if (_width != null) {
+      builder.field(WIDTH.getPreferredName(), _width);
+    }
     builder.endObject();
     return builder;
   }

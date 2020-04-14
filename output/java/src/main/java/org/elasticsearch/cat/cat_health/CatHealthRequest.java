@@ -68,13 +68,21 @@ public class CatHealthRequest  implements XContentable<CatHealthRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_headers != null) {
       builder.array(HEADERS.getPreferredName(), _headers);
     }
-    builder.field(HELP.getPreferredName(), _help);
-    builder.field(INCLUDE_TIMESTAMP.getPreferredName(), _includeTimestamp);
-    builder.field(LOCAL.getPreferredName(), _local);
+    if (_help != null) {
+      builder.field(HELP.getPreferredName(), _help);
+    }
+    if (_includeTimestamp != null) {
+      builder.field(INCLUDE_TIMESTAMP.getPreferredName(), _includeTimestamp);
+    }
+    if (_local != null) {
+      builder.field(LOCAL.getPreferredName(), _local);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
@@ -82,7 +90,9 @@ public class CatHealthRequest  implements XContentable<CatHealthRequest> {
     if (_sortByColumns != null) {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
-    builder.field(VERBOSE.getPreferredName(), _verbose);
+    if (_verbose != null) {
+      builder.field(VERBOSE.getPreferredName(), _verbose);
+    }
     builder.endObject();
     return builder;
   }

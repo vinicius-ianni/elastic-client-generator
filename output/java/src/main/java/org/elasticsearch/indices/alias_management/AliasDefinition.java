@@ -54,10 +54,18 @@ public class AliasDefinition  implements XContentable<AliasDefinition> {
       builder.field(FILTER.getPreferredName());
       _filter.toXContent(builder, params);
     }
-    builder.field(INDEX_ROUTING.getPreferredName(), _indexRouting);
-    builder.field(IS_WRITE_INDEX.getPreferredName(), _isWriteIndex);
-    builder.field(ROUTING.getPreferredName(), _routing);
-    builder.field(SEARCH_ROUTING.getPreferredName(), _searchRouting);
+    if (_indexRouting != null) {
+      builder.field(INDEX_ROUTING.getPreferredName(), _indexRouting);
+    }
+    if (_isWriteIndex != null) {
+      builder.field(IS_WRITE_INDEX.getPreferredName(), _isWriteIndex);
+    }
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName(), _routing);
+    }
+    if (_searchRouting != null) {
+      builder.field(SEARCH_ROUTING.getPreferredName(), _searchRouting);
+    }
     builder.endObject();
     return builder;
   }

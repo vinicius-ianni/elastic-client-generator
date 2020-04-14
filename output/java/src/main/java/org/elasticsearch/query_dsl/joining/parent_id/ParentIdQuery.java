@@ -43,7 +43,9 @@ public class ParentIdQuery  implements XContentable<ParentIdQuery> {
       builder.field(ID.getPreferredName());
       _id.toXContent(builder, params);
     }
-    builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    if (_ignoreUnmapped != null) {
+      builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    }
     if (_type != null) {
       builder.field(TYPE.getPreferredName());
       _type.toXContent(builder, params);

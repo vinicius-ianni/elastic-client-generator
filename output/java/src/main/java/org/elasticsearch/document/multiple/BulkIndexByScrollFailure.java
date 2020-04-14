@@ -55,10 +55,18 @@ public class BulkIndexByScrollFailure  implements XContentable<BulkIndexByScroll
       builder.field(CAUSE.getPreferredName());
       _cause.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(STATUS.getPreferredName(), _status);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName(), _status);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

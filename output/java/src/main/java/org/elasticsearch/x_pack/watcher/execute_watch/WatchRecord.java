@@ -109,9 +109,15 @@ public class WatchRecord  implements XContentable<WatchRecord> {
       builder.field(TRIGGER_EVENT.getPreferredName());
       _triggerEvent.toXContent(builder, params);
     }
-    builder.field(USER.getPreferredName(), _user);
-    builder.field(NODE.getPreferredName(), _node);
-    builder.field(WATCH_ID.getPreferredName(), _watchId);
+    if (_user != null) {
+      builder.field(USER.getPreferredName(), _user);
+    }
+    if (_node != null) {
+      builder.field(NODE.getPreferredName(), _node);
+    }
+    if (_watchId != null) {
+      builder.field(WATCH_ID.getPreferredName(), _watchId);
+    }
     builder.endObject();
     return builder;
   }

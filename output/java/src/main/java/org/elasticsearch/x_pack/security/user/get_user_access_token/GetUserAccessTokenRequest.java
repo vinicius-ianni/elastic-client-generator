@@ -36,7 +36,9 @@ public class GetUserAccessTokenRequest  implements XContentable<GetUserAccessTok
       builder.field(GRANT_TYPE.getPreferredName());
       _grantType.toXContent(builder, params);
     }
-    builder.field(SCOPE.getPreferredName(), _scope);
+    if (_scope != null) {
+      builder.field(SCOPE.getPreferredName(), _scope);
+    }
     builder.endObject();
     return builder;
   }

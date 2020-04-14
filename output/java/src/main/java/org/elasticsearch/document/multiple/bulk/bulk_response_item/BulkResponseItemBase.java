@@ -98,20 +98,40 @@ public class BulkResponseItemBase  implements XContentable<BulkResponseItemBase>
       builder.field(ERROR.getPreferredName());
       _error.toXContent(builder, params);
     }
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(OPERATION.getPreferredName(), _operation);
-    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
-    builder.field(RESULT.getPreferredName(), _result);
-    builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_operation != null) {
+      builder.field(OPERATION.getPreferredName(), _operation);
+    }
+    if (_primaryTerm != null) {
+      builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    }
+    if (_result != null) {
+      builder.field(RESULT.getPreferredName(), _result);
+    }
+    if (_seqNo != null) {
+      builder.field(SEQ_NO.getPreferredName(), _seqNo);
+    }
     if (_shards != null) {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);
     }
-    builder.field(STATUS.getPreferredName(), _status);
-    builder.field(TYPE.getPreferredName(), _type);
-    builder.field(VERSION.getPreferredName(), _version);
-    builder.field(IS_VALID.getPreferredName(), _isValid);
+    if (_status != null) {
+      builder.field(STATUS.getPreferredName(), _status);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
     builder.endObject();
     return builder;
   }

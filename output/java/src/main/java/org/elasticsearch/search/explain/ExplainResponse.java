@@ -46,7 +46,9 @@ public class ExplainResponse<TDocument>  implements XContentable<ExplainResponse
       builder.field(GET.getPreferredName());
       _get.toXContent(builder, params);
     }
-    builder.field(MATCHED.getPreferredName(), _matched);
+    if (_matched != null) {
+      builder.field(MATCHED.getPreferredName(), _matched);
+    }
     builder.endObject();
     return builder;
   }

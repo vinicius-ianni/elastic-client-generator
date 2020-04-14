@@ -98,23 +98,45 @@ public class WordDelimiterTokenFilter  implements XContentable<WordDelimiterToke
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CATENATE_ALL.getPreferredName(), _catenateAll);
-    builder.field(CATENATE_NUMBERS.getPreferredName(), _catenateNumbers);
-    builder.field(CATENATE_WORDS.getPreferredName(), _catenateWords);
-    builder.field(GENERATE_NUMBER_PARTS.getPreferredName(), _generateNumberParts);
-    builder.field(GENERATE_WORD_PARTS.getPreferredName(), _generateWordParts);
-    builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    if (_catenateAll != null) {
+      builder.field(CATENATE_ALL.getPreferredName(), _catenateAll);
+    }
+    if (_catenateNumbers != null) {
+      builder.field(CATENATE_NUMBERS.getPreferredName(), _catenateNumbers);
+    }
+    if (_catenateWords != null) {
+      builder.field(CATENATE_WORDS.getPreferredName(), _catenateWords);
+    }
+    if (_generateNumberParts != null) {
+      builder.field(GENERATE_NUMBER_PARTS.getPreferredName(), _generateNumberParts);
+    }
+    if (_generateWordParts != null) {
+      builder.field(GENERATE_WORD_PARTS.getPreferredName(), _generateWordParts);
+    }
+    if (_preserveOriginal != null) {
+      builder.field(PRESERVE_ORIGINAL.getPreferredName(), _preserveOriginal);
+    }
     if (_protectedWords != null) {
       builder.array(PROTECTED_WORDS.getPreferredName(), _protectedWords);
     }
-    builder.field(PROTECTED_WORDS_PATH.getPreferredName(), _protectedWordsPath);
-    builder.field(SPLIT_ON_CASE_CHANGE.getPreferredName(), _splitOnCaseChange);
-    builder.field(SPLIT_ON_NUMERICS.getPreferredName(), _splitOnNumerics);
-    builder.field(STEM_ENGLISH_POSSESSIVE.getPreferredName(), _stemEnglishPossessive);
+    if (_protectedWordsPath != null) {
+      builder.field(PROTECTED_WORDS_PATH.getPreferredName(), _protectedWordsPath);
+    }
+    if (_splitOnCaseChange != null) {
+      builder.field(SPLIT_ON_CASE_CHANGE.getPreferredName(), _splitOnCaseChange);
+    }
+    if (_splitOnNumerics != null) {
+      builder.field(SPLIT_ON_NUMERICS.getPreferredName(), _splitOnNumerics);
+    }
+    if (_stemEnglishPossessive != null) {
+      builder.field(STEM_ENGLISH_POSSESSIVE.getPreferredName(), _stemEnglishPossessive);
+    }
     if (_typeTable != null) {
       builder.array(TYPE_TABLE.getPreferredName(), _typeTable);
     }
-    builder.field(TYPE_TABLE_PATH.getPreferredName(), _typeTablePath);
+    if (_typeTablePath != null) {
+      builder.field(TYPE_TABLE_PATH.getPreferredName(), _typeTablePath);
+    }
     builder.endObject();
     return builder;
   }

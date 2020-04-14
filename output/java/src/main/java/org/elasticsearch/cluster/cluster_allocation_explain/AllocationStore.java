@@ -56,12 +56,24 @@ public class AllocationStore  implements XContentable<AllocationStore> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOCATION_ID.getPreferredName(), _allocationId);
-    builder.field(FOUND.getPreferredName(), _found);
-    builder.field(IN_SYNC.getPreferredName(), _inSync);
-    builder.field(MATCHING_SIZE_IN_BYTES.getPreferredName(), _matchingSizeInBytes);
-    builder.field(MATCHING_SYNC_ID.getPreferredName(), _matchingSyncId);
-    builder.field(STORE_EXCEPTION.getPreferredName(), _storeException);
+    if (_allocationId != null) {
+      builder.field(ALLOCATION_ID.getPreferredName(), _allocationId);
+    }
+    if (_found != null) {
+      builder.field(FOUND.getPreferredName(), _found);
+    }
+    if (_inSync != null) {
+      builder.field(IN_SYNC.getPreferredName(), _inSync);
+    }
+    if (_matchingSizeInBytes != null) {
+      builder.field(MATCHING_SIZE_IN_BYTES.getPreferredName(), _matchingSizeInBytes);
+    }
+    if (_matchingSyncId != null) {
+      builder.field(MATCHING_SYNC_ID.getPreferredName(), _matchingSyncId);
+    }
+    if (_storeException != null) {
+      builder.field(STORE_EXCEPTION.getPreferredName(), _storeException);
+    }
     builder.endObject();
     return builder;
   }

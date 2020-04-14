@@ -112,7 +112,9 @@ public class DateHistogramAggregation  implements XContentable<DateHistogramAggr
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_interval != null) {
       builder.field(INTERVAL.getPreferredName());
       _interval.map(r-> r.toXContent(builder, params), r-> r.toXContent(builder, params));
@@ -125,10 +127,16 @@ public class DateHistogramAggregation  implements XContentable<DateHistogramAggr
       builder.field(FIXED_INTERVAL.getPreferredName());
       _fixedInterval.map(r-> r.toXContent(builder, params), r-> r.toXContent(builder, params));
     }
-    builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
-    builder.field(MISSING.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_missing.toInstant()));
-    builder.field(OFFSET.getPreferredName(), _offset);
+    if (_minDocCount != null) {
+      builder.field(MIN_DOC_COUNT.getPreferredName(), _minDocCount);
+    }
+    if (_missing != null) {
+      builder.field(MISSING.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_missing.toInstant()));
+    }
+    if (_offset != null) {
+      builder.field(OFFSET.getPreferredName(), _offset);
+    }
     if (_order != null) {
       builder.field(ORDER.getPreferredName());
       _order.toXContent(builder, params);
@@ -141,7 +149,9 @@ public class DateHistogramAggregation  implements XContentable<DateHistogramAggr
       builder.field(SCRIPT.getPreferredName());
       _script.toXContent(builder, params);
     }
-    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    if (_timeZone != null) {
+      builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    }
     builder.endObject();
     return builder;
   }

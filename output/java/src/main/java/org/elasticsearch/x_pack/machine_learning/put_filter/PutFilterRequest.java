@@ -32,7 +32,9 @@ public class PutFilterRequest  implements XContentable<PutFilterRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     if (_items != null) {
       builder.array(ITEMS.getPreferredName(), _items);
     }

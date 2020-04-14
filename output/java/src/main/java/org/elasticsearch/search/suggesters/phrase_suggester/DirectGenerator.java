@@ -92,15 +92,33 @@ public class DirectGenerator  implements XContentable<DirectGenerator> {
       builder.field(FIELD.getPreferredName());
       _field.toXContent(builder, params);
     }
-    builder.field(MAX_EDITS.getPreferredName(), _maxEdits);
-    builder.field(MAX_INSPECTIONS.getPreferredName(), _maxInspections);
-    builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
-    builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
-    builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
-    builder.field(POST_FILTER.getPreferredName(), _postFilter);
-    builder.field(PRE_FILTER.getPreferredName(), _preFilter);
-    builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_maxEdits != null) {
+      builder.field(MAX_EDITS.getPreferredName(), _maxEdits);
+    }
+    if (_maxInspections != null) {
+      builder.field(MAX_INSPECTIONS.getPreferredName(), _maxInspections);
+    }
+    if (_maxTermFreq != null) {
+      builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
+    }
+    if (_minDocFreq != null) {
+      builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
+    }
+    if (_minWordLength != null) {
+      builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    }
+    if (_postFilter != null) {
+      builder.field(POST_FILTER.getPreferredName(), _postFilter);
+    }
+    if (_preFilter != null) {
+      builder.field(PRE_FILTER.getPreferredName(), _preFilter);
+    }
+    if (_prefixLength != null) {
+      builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_suggestMode != null) {
       builder.field(SUGGEST_MODE.getPreferredName());
       _suggestMode.toXContent(builder, params);

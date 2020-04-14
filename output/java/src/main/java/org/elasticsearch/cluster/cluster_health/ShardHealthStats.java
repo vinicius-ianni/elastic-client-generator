@@ -57,15 +57,25 @@ public class ShardHealthStats  implements XContentable<ShardHealthStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTIVE_SHARDS.getPreferredName(), _activeShards);
-    builder.field(INITIALIZING_SHARDS.getPreferredName(), _initializingShards);
-    builder.field(PRIMARY_ACTIVE.getPreferredName(), _primaryActive);
-    builder.field(RELOCATING_SHARDS.getPreferredName(), _relocatingShards);
+    if (_activeShards != null) {
+      builder.field(ACTIVE_SHARDS.getPreferredName(), _activeShards);
+    }
+    if (_initializingShards != null) {
+      builder.field(INITIALIZING_SHARDS.getPreferredName(), _initializingShards);
+    }
+    if (_primaryActive != null) {
+      builder.field(PRIMARY_ACTIVE.getPreferredName(), _primaryActive);
+    }
+    if (_relocatingShards != null) {
+      builder.field(RELOCATING_SHARDS.getPreferredName(), _relocatingShards);
+    }
     if (_status != null) {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(UNASSIGNED_SHARDS.getPreferredName(), _unassignedShards);
+    if (_unassignedShards != null) {
+      builder.field(UNASSIGNED_SHARDS.getPreferredName(), _unassignedShards);
+    }
     builder.endObject();
     return builder;
   }

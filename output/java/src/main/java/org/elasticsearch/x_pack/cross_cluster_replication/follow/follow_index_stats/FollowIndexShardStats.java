@@ -196,36 +196,90 @@ public class FollowIndexShardStats  implements XContentable<FollowIndexShardStat
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BYTES_READ.getPreferredName(), _bytesRead);
-    builder.field(FAILED_READ_REQUESTS.getPreferredName(), _failedReadRequests);
-    builder.field(FAILED_WRITE_REQUESTS.getPreferredName(), _failedWriteRequests);
-    builder.field(FOLLOWER_GLOBAL_CHECKPOINT.getPreferredName(), _followerGlobalCheckpoint);
-    builder.field(FOLLOWER_INDEX.getPreferredName(), _followerIndex);
-    builder.field(FOLLOWER_MAPPING_VERSION.getPreferredName(), _followerMappingVersion);
-    builder.field(FOLLOWER_MAX_SEQ_NO.getPreferredName(), _followerMaxSeqNo);
-    builder.field(FOLLOWER_SETTINGS_VERSION.getPreferredName(), _followerSettingsVersion);
-    builder.field(FOLLOWER_ALIASES_VERSION.getPreferredName(), _followerAliasesVersion);
-    builder.field(LAST_REQUESTED_SEQ_NO.getPreferredName(), _lastRequestedSeqNo);
-    builder.field(LEADER_GLOBAL_CHECKPOINT.getPreferredName(), _leaderGlobalCheckpoint);
-    builder.field(LEADER_INDEX.getPreferredName(), _leaderIndex);
-    builder.field(LEADER_MAX_SEQ_NO.getPreferredName(), _leaderMaxSeqNo);
-    builder.field(OPERATIONS_READ.getPreferredName(), _operationsRead);
-    builder.field(OPERATIONS_WRITTEN.getPreferredName(), _operationsWritten);
-    builder.field(OUTSTANDING_READ_REQUESTS.getPreferredName(), _outstandingReadRequests);
-    builder.field(OUTSTANDING_WRITE_REQUESTS.getPreferredName(), _outstandingWriteRequests);
-    builder.field(REMOTE_CLUSTER.getPreferredName(), _remoteCluster);
-    builder.field(SHARD_ID.getPreferredName(), _shardId);
-    builder.field(SUCCESSFUL_READ_REQUESTS.getPreferredName(), _successfulReadRequests);
-    builder.field(SUCCESSFUL_WRITE_REQUESTS.getPreferredName(), _successfulWriteRequests);
-    builder.field(TOTAL_READ_REMOTE_EXEC_TIME_MILLIS.getPreferredName(), _totalReadRemoteExecTimeMillis);
-    builder.field(TOTAL_READ_TIME_MILLIS.getPreferredName(), _totalReadTimeMillis);
-    builder.field(TOTAL_WRITE_TIME_MILLIS.getPreferredName(), _totalWriteTimeMillis);
-    builder.field(WRITE_BUFFER_OPERATION_COUNT.getPreferredName(), _writeBufferOperationCount);
-    builder.field(WRITE_BUFFER_SIZE_IN_BYTES.getPreferredName(), _writeBufferSizeInBytes);
+    if (_bytesRead != null) {
+      builder.field(BYTES_READ.getPreferredName(), _bytesRead);
+    }
+    if (_failedReadRequests != null) {
+      builder.field(FAILED_READ_REQUESTS.getPreferredName(), _failedReadRequests);
+    }
+    if (_failedWriteRequests != null) {
+      builder.field(FAILED_WRITE_REQUESTS.getPreferredName(), _failedWriteRequests);
+    }
+    if (_followerGlobalCheckpoint != null) {
+      builder.field(FOLLOWER_GLOBAL_CHECKPOINT.getPreferredName(), _followerGlobalCheckpoint);
+    }
+    if (_followerIndex != null) {
+      builder.field(FOLLOWER_INDEX.getPreferredName(), _followerIndex);
+    }
+    if (_followerMappingVersion != null) {
+      builder.field(FOLLOWER_MAPPING_VERSION.getPreferredName(), _followerMappingVersion);
+    }
+    if (_followerMaxSeqNo != null) {
+      builder.field(FOLLOWER_MAX_SEQ_NO.getPreferredName(), _followerMaxSeqNo);
+    }
+    if (_followerSettingsVersion != null) {
+      builder.field(FOLLOWER_SETTINGS_VERSION.getPreferredName(), _followerSettingsVersion);
+    }
+    if (_followerAliasesVersion != null) {
+      builder.field(FOLLOWER_ALIASES_VERSION.getPreferredName(), _followerAliasesVersion);
+    }
+    if (_lastRequestedSeqNo != null) {
+      builder.field(LAST_REQUESTED_SEQ_NO.getPreferredName(), _lastRequestedSeqNo);
+    }
+    if (_leaderGlobalCheckpoint != null) {
+      builder.field(LEADER_GLOBAL_CHECKPOINT.getPreferredName(), _leaderGlobalCheckpoint);
+    }
+    if (_leaderIndex != null) {
+      builder.field(LEADER_INDEX.getPreferredName(), _leaderIndex);
+    }
+    if (_leaderMaxSeqNo != null) {
+      builder.field(LEADER_MAX_SEQ_NO.getPreferredName(), _leaderMaxSeqNo);
+    }
+    if (_operationsRead != null) {
+      builder.field(OPERATIONS_READ.getPreferredName(), _operationsRead);
+    }
+    if (_operationsWritten != null) {
+      builder.field(OPERATIONS_WRITTEN.getPreferredName(), _operationsWritten);
+    }
+    if (_outstandingReadRequests != null) {
+      builder.field(OUTSTANDING_READ_REQUESTS.getPreferredName(), _outstandingReadRequests);
+    }
+    if (_outstandingWriteRequests != null) {
+      builder.field(OUTSTANDING_WRITE_REQUESTS.getPreferredName(), _outstandingWriteRequests);
+    }
+    if (_remoteCluster != null) {
+      builder.field(REMOTE_CLUSTER.getPreferredName(), _remoteCluster);
+    }
+    if (_shardId != null) {
+      builder.field(SHARD_ID.getPreferredName(), _shardId);
+    }
+    if (_successfulReadRequests != null) {
+      builder.field(SUCCESSFUL_READ_REQUESTS.getPreferredName(), _successfulReadRequests);
+    }
+    if (_successfulWriteRequests != null) {
+      builder.field(SUCCESSFUL_WRITE_REQUESTS.getPreferredName(), _successfulWriteRequests);
+    }
+    if (_totalReadRemoteExecTimeMillis != null) {
+      builder.field(TOTAL_READ_REMOTE_EXEC_TIME_MILLIS.getPreferredName(), _totalReadRemoteExecTimeMillis);
+    }
+    if (_totalReadTimeMillis != null) {
+      builder.field(TOTAL_READ_TIME_MILLIS.getPreferredName(), _totalReadTimeMillis);
+    }
+    if (_totalWriteTimeMillis != null) {
+      builder.field(TOTAL_WRITE_TIME_MILLIS.getPreferredName(), _totalWriteTimeMillis);
+    }
+    if (_writeBufferOperationCount != null) {
+      builder.field(WRITE_BUFFER_OPERATION_COUNT.getPreferredName(), _writeBufferOperationCount);
+    }
+    if (_writeBufferSizeInBytes != null) {
+      builder.field(WRITE_BUFFER_SIZE_IN_BYTES.getPreferredName(), _writeBufferSizeInBytes);
+    }
     if (_readExceptions != null) {
       builder.array(READ_EXCEPTIONS.getPreferredName(), _readExceptions);
     }
-    builder.field(TIME_SINCE_LAST_READ_MILLIS.getPreferredName(), _timeSinceLastReadMillis);
+    if (_timeSinceLastReadMillis != null) {
+      builder.field(TIME_SINCE_LAST_READ_MILLIS.getPreferredName(), _timeSinceLastReadMillis);
+    }
     if (_fatalException != null) {
       builder.field(FATAL_EXCEPTION.getPreferredName());
       _fatalException.toXContent(builder, params);

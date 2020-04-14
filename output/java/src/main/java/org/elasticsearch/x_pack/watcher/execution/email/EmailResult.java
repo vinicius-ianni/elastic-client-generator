@@ -91,8 +91,12 @@ public class EmailResult  implements XContentable<EmailResult> {
     if (_cc != null) {
       builder.array(CC.getPreferredName(), _cc);
     }
-    builder.field(FROM.getPreferredName(), _from);
-    builder.field(ID.getPreferredName(), _id);
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
     if (_priority != null) {
       builder.field(PRIORITY.getPreferredName());
       _priority.toXContent(builder, params);
@@ -100,9 +104,13 @@ public class EmailResult  implements XContentable<EmailResult> {
     if (_replyTo != null) {
       builder.array(REPLY_TO.getPreferredName(), _replyTo);
     }
-    builder.field(SENT_DATE.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_sentDate.toInstant()));
-    builder.field(SUBJECT.getPreferredName(), _subject);
+    if (_sentDate != null) {
+      builder.field(SENT_DATE.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_sentDate.toInstant()));
+    }
+    if (_subject != null) {
+      builder.field(SUBJECT.getPreferredName(), _subject);
+    }
     if (_to != null) {
       builder.array(TO.getPreferredName(), _to);
     }

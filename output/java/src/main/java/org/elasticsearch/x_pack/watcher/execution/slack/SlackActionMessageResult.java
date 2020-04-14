@@ -61,7 +61,9 @@ public class SlackActionMessageResult  implements XContentable<SlackActionMessag
       builder.field(MESSAGE.getPreferredName());
       _message.toXContent(builder, params);
     }
-    builder.field(REASON.getPreferredName(), _reason);
+    if (_reason != null) {
+      builder.field(REASON.getPreferredName(), _reason);
+    }
     if (_request != null) {
       builder.field(REQUEST.getPreferredName());
       _request.toXContent(builder, params);
@@ -74,7 +76,9 @@ public class SlackActionMessageResult  implements XContentable<SlackActionMessag
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
     }
-    builder.field(TO.getPreferredName(), _to);
+    if (_to != null) {
+      builder.field(TO.getPreferredName(), _to);
+    }
     builder.endObject();
     return builder;
   }

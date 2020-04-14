@@ -54,7 +54,9 @@ public class IndicesModuleSettings  implements XContentable<IndicesModuleSetting
       builder.field(FIELDDATA_SETTINGS.getPreferredName());
       _fielddataSettings.toXContent(builder, params);
     }
-    builder.field(QEUERIES_CACHE_SIZE.getPreferredName(), _qeueriesCacheSize);
+    if (_qeueriesCacheSize != null) {
+      builder.field(QEUERIES_CACHE_SIZE.getPreferredName(), _qeueriesCacheSize);
+    }
     if (_recoverySettings != null) {
       builder.field(RECOVERY_SETTINGS.getPreferredName());
       _recoverySettings.toXContent(builder, params);

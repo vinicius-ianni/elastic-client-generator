@@ -149,7 +149,9 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
       builder.field(ALL_FIELD.getPreferredName());
       _allField.toXContent(builder, params);
     }
-    builder.field(DATE_DETECTION.getPreferredName(), _dateDetection);
+    if (_dateDetection != null) {
+      builder.field(DATE_DETECTION.getPreferredName(), _dateDetection);
+    }
     if (_dynamic != null) {
       builder.field(DYNAMIC.getPreferredName());
       _dynamic.map(builder::value, r-> r.toXContent(builder, params));
@@ -173,7 +175,9 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
       builder.field(META.getPreferredName());
       _meta.toXContent(builder, params);
     }
-    builder.field(NUMERIC_DETECTION.getPreferredName(), _numericDetection);
+    if (_numericDetection != null) {
+      builder.field(NUMERIC_DETECTION.getPreferredName(), _numericDetection);
+    }
     if (_properties != null) {
       builder.field(PROPERTIES.getPreferredName());
       _properties.toXContent(builder, params);
@@ -190,13 +194,19 @@ public class PutMappingRequest  implements XContentable<PutMappingRequest> {
       builder.field(SOURCE_FIELD.getPreferredName());
       _sourceField.toXContent(builder, params);
     }
-    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    if (_allowNoIndices != null) {
+      builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    }
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
     }
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_includeTypeName != null) {
+      builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);

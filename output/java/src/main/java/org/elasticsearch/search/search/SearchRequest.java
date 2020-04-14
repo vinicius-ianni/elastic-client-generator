@@ -347,28 +347,56 @@ public class SearchRequest  implements XContentable<SearchRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
-    builder.field(ALLOW_PARTIAL_SEARCH_RESULTS.getPreferredName(), _allowPartialSearchResults);
-    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(BATCHED_REDUCE_SIZE.getPreferredName(), _batchedReduceSize);
-    builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
+    if (_allowNoIndices != null) {
+      builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    }
+    if (_allowPartialSearchResults != null) {
+      builder.field(ALLOW_PARTIAL_SEARCH_RESULTS.getPreferredName(), _allowPartialSearchResults);
+    }
+    if (_analyzeWildcard != null) {
+      builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    }
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_batchedReduceSize != null) {
+      builder.field(BATCHED_REDUCE_SIZE.getPreferredName(), _batchedReduceSize);
+    }
+    if (_ccsMinimizeRoundtrips != null) {
+      builder.field(CCS_MINIMIZE_ROUNDTRIPS.getPreferredName(), _ccsMinimizeRoundtrips);
+    }
     if (_defaultOperator != null) {
       builder.field(DEFAULT_OPERATOR.getPreferredName());
       _defaultOperator.toXContent(builder, params);
     }
-    builder.field(DF.getPreferredName(), _df);
+    if (_df != null) {
+      builder.field(DF.getPreferredName(), _df);
+    }
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
     }
-    builder.field(IGNORE_THROTTLED.getPreferredName(), _ignoreThrottled);
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(LENIENT.getPreferredName(), _lenient);
-    builder.field(MAX_CONCURRENT_SHARD_REQUESTS.getPreferredName(), _maxConcurrentShardRequests);
-    builder.field(PRE_FILTER_SHARD_SIZE.getPreferredName(), _preFilterShardSize);
-    builder.field(PREFERENCE.getPreferredName(), _preference);
-    builder.field(REQUEST_CACHE.getPreferredName(), _requestCache);
+    if (_ignoreThrottled != null) {
+      builder.field(IGNORE_THROTTLED.getPreferredName(), _ignoreThrottled);
+    }
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_lenient != null) {
+      builder.field(LENIENT.getPreferredName(), _lenient);
+    }
+    if (_maxConcurrentShardRequests != null) {
+      builder.field(MAX_CONCURRENT_SHARD_REQUESTS.getPreferredName(), _maxConcurrentShardRequests);
+    }
+    if (_preFilterShardSize != null) {
+      builder.field(PRE_FILTER_SHARD_SIZE.getPreferredName(), _preFilterShardSize);
+    }
+    if (_preference != null) {
+      builder.field(PREFERENCE.getPreferredName(), _preference);
+    }
+    if (_requestCache != null) {
+      builder.field(REQUEST_CACHE.getPreferredName(), _requestCache);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
@@ -381,7 +409,9 @@ public class SearchRequest  implements XContentable<SearchRequest> {
       builder.field(SEARCH_TYPE.getPreferredName());
       _searchType.toXContent(builder, params);
     }
-    builder.field(SEQUENCE_NUMBER_PRIMARY_TERM.getPreferredName(), _sequenceNumberPrimaryTerm);
+    if (_sequenceNumberPrimaryTerm != null) {
+      builder.field(SEQUENCE_NUMBER_PRIMARY_TERM.getPreferredName(), _sequenceNumberPrimaryTerm);
+    }
     if (_stats != null) {
       builder.array(STATS.getPreferredName(), _stats);
     }
@@ -393,10 +423,18 @@ public class SearchRequest  implements XContentable<SearchRequest> {
       builder.field(SUGGEST_MODE.getPreferredName());
       _suggestMode.toXContent(builder, params);
     }
-    builder.field(SUGGEST_SIZE.getPreferredName(), _suggestSize);
-    builder.field(SUGGEST_TEXT.getPreferredName(), _suggestText);
-    builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
-    builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    if (_suggestSize != null) {
+      builder.field(SUGGEST_SIZE.getPreferredName(), _suggestSize);
+    }
+    if (_suggestText != null) {
+      builder.field(SUGGEST_TEXT.getPreferredName(), _suggestText);
+    }
+    if (_totalHitsAsInteger != null) {
+      builder.field(TOTAL_HITS_AS_INTEGER.getPreferredName(), _totalHitsAsInteger);
+    }
+    if (_typedKeys != null) {
+      builder.field(TYPED_KEYS.getPreferredName(), _typedKeys);
+    }
     if (_aggs != null) {
       builder.field(AGGS.getPreferredName());
       _aggs.toXContent(builder, params);
@@ -408,8 +446,12 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     if (_docvalueFields != null) {
       builder.array(DOCVALUE_FIELDS.getPreferredName(), _docvalueFields);
     }
-    builder.field(EXPLAIN.getPreferredName(), _explain);
-    builder.field(FROM.getPreferredName(), _from);
+    if (_explain != null) {
+      builder.field(EXPLAIN.getPreferredName(), _explain);
+    }
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
     if (_highlight != null) {
       builder.field(HIGHLIGHT.getPreferredName());
       _highlight.toXContent(builder, params);
@@ -418,12 +460,16 @@ public class SearchRequest  implements XContentable<SearchRequest> {
       builder.field(INDICES_BOOST.getPreferredName());
       _indicesBoost.toXContent(builder, params);
     }
-    builder.field(MIN_SCORE.getPreferredName(), _minScore);
+    if (_minScore != null) {
+      builder.field(MIN_SCORE.getPreferredName(), _minScore);
+    }
     if (_postFilter != null) {
       builder.field(POST_FILTER.getPreferredName());
       _postFilter.toXContent(builder, params);
     }
-    builder.field(PROFILE.getPreferredName(), _profile);
+    if (_profile != null) {
+      builder.field(PROFILE.getPreferredName(), _profile);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);
@@ -438,7 +484,9 @@ public class SearchRequest  implements XContentable<SearchRequest> {
     if (_searchAfter != null) {
       builder.array(SEARCH_AFTER.getPreferredName(), _searchAfter);
     }
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_slice != null) {
       builder.field(SLICE.getPreferredName());
       _slice.toXContent(builder, params);
@@ -457,11 +505,21 @@ public class SearchRequest  implements XContentable<SearchRequest> {
       builder.field(SUGGEST.getPreferredName());
       _suggest.toXContent(builder, params);
     }
-    builder.field(TERMINATE_AFTER.getPreferredName(), _terminateAfter);
-    builder.field(TIMEOUT.getPreferredName(), _timeout);
-    builder.field(TRACK_SCORES.getPreferredName(), _trackScores);
-    builder.field(TRACK_TOTAL_HITS.getPreferredName(), _trackTotalHits);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_terminateAfter != null) {
+      builder.field(TERMINATE_AFTER.getPreferredName(), _terminateAfter);
+    }
+    if (_timeout != null) {
+      builder.field(TIMEOUT.getPreferredName(), _timeout);
+    }
+    if (_trackScores != null) {
+      builder.field(TRACK_SCORES.getPreferredName(), _trackScores);
+    }
+    if (_trackTotalHits != null) {
+      builder.field(TRACK_TOTAL_HITS.getPreferredName(), _trackTotalHits);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

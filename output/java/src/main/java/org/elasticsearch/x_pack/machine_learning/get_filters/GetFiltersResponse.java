@@ -33,7 +33,9 @@ public class GetFiltersResponse  implements XContentable<GetFiltersResponse> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COUNT.getPreferredName(), _count);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
     if (_filters != null) {
       builder.array(FILTERS.getPreferredName(), _filters);
     }

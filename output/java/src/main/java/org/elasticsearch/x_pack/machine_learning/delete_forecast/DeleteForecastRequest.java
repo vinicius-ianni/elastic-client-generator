@@ -32,7 +32,9 @@ public class DeleteForecastRequest  implements XContentable<DeleteForecastReques
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_FORECASTS.getPreferredName(), _allowNoForecasts);
+    if (_allowNoForecasts != null) {
+      builder.field(ALLOW_NO_FORECASTS.getPreferredName(), _allowNoForecasts);
+    }
     if (_timeout != null) {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);

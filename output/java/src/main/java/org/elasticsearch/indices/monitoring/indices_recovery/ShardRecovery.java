@@ -99,35 +99,49 @@ public class ShardRecovery  implements XContentable<ShardRecovery> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ID.getPreferredName(), _id);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
     if (_index != null) {
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(PRIMARY.getPreferredName(), _primary);
+    if (_primary != null) {
+      builder.field(PRIMARY.getPreferredName(), _primary);
+    }
     if (_source != null) {
       builder.field(SOURCE.getPreferredName());
       _source.toXContent(builder, params);
     }
-    builder.field(STAGE.getPreferredName(), _stage);
+    if (_stage != null) {
+      builder.field(STAGE.getPreferredName(), _stage);
+    }
     if (_start != null) {
       builder.field(START.getPreferredName());
       _start.toXContent(builder, params);
     }
-    builder.field(START_TIME_IN_MILLIS.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_startTimeInMillis.toInstant()));
-    builder.field(STOP_TIME_IN_MILLIS.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_stopTimeInMillis.toInstant()));
+    if (_startTimeInMillis != null) {
+      builder.field(START_TIME_IN_MILLIS.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_startTimeInMillis.toInstant()));
+    }
+    if (_stopTimeInMillis != null) {
+      builder.field(STOP_TIME_IN_MILLIS.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_stopTimeInMillis.toInstant()));
+    }
     if (_target != null) {
       builder.field(TARGET.getPreferredName());
       _target.toXContent(builder, params);
     }
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     if (_translog != null) {
       builder.field(TRANSLOG.getPreferredName());
       _translog.toXContent(builder, params);
     }
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     if (_verifyIndex != null) {
       builder.field(VERIFY_INDEX.getPreferredName());
       _verifyIndex.toXContent(builder, params);

@@ -91,10 +91,18 @@ public class PutWatchRequest  implements XContentable<PutWatchRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTIVE.getPreferredName(), _active);
-    builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
-    builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_active != null) {
+      builder.field(ACTIVE.getPreferredName(), _active);
+    }
+    if (_ifPrimaryTerm != null) {
+      builder.field(IF_PRIMARY_TERM.getPreferredName(), _ifPrimaryTerm);
+    }
+    if (_ifSequenceNumber != null) {
+      builder.field(IF_SEQUENCE_NUMBER.getPreferredName(), _ifSequenceNumber);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_actions != null) {
       builder.field(ACTIONS.getPreferredName());
       _actions.toXContent(builder, params);
@@ -111,7 +119,9 @@ public class PutWatchRequest  implements XContentable<PutWatchRequest> {
       builder.field(METADATA.getPreferredName());
       _metadata.toXContent(builder, params);
     }
-    builder.field(THROTTLE_PERIOD.getPreferredName(), _throttlePeriod);
+    if (_throttlePeriod != null) {
+      builder.field(THROTTLE_PERIOD.getPreferredName(), _throttlePeriod);
+    }
     if (_transform != null) {
       builder.field(TRANSFORM.getPreferredName());
       _transform.toXContent(builder, params);

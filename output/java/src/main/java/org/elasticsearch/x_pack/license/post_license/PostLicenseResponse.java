@@ -43,7 +43,9 @@ public class PostLicenseResponse  implements XContentable<PostLicenseResponse> {
       builder.field(ACKNOWLEDGE.getPreferredName());
       _acknowledge.toXContent(builder, params);
     }
-    builder.field(ACKNOWLEDGED.getPreferredName(), _acknowledged);
+    if (_acknowledged != null) {
+      builder.field(ACKNOWLEDGED.getPreferredName(), _acknowledged);
+    }
     if (_licenseStatus != null) {
       builder.field(LICENSE_STATUS.getPreferredName());
       _licenseStatus.toXContent(builder, params);

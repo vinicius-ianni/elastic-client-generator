@@ -63,18 +63,30 @@ public class GetOverallBucketsRequest  implements XContentable<GetOverallBuckets
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_JOBS.getPreferredName(), _allowNoJobs);
+    if (_allowNoJobs != null) {
+      builder.field(ALLOW_NO_JOBS.getPreferredName(), _allowNoJobs);
+    }
     if (_bucketSpan != null) {
       builder.field(BUCKET_SPAN.getPreferredName());
       _bucketSpan.toXContent(builder, params);
     }
-    builder.field(END.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
-    builder.field(EXCLUDE_INTERIM.getPreferredName(), _excludeInterim);
-    builder.field(OVERALL_SCORE.getPreferredName(), _overallScore);
-    builder.field(START.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
-    builder.field(TOP_N.getPreferredName(), _topN);
+    if (_end != null) {
+      builder.field(END.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    }
+    if (_excludeInterim != null) {
+      builder.field(EXCLUDE_INTERIM.getPreferredName(), _excludeInterim);
+    }
+    if (_overallScore != null) {
+      builder.field(OVERALL_SCORE.getPreferredName(), _overallScore);
+    }
+    if (_start != null) {
+      builder.field(START.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    }
+    if (_topN != null) {
+      builder.field(TOP_N.getPreferredName(), _topN);
+    }
     builder.endObject();
     return builder;
   }

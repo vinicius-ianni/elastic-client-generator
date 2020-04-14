@@ -50,11 +50,21 @@ public class CircuitBreakerSettings  implements XContentable<CircuitBreakerSetti
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FIELDDATA_LIMIT.getPreferredName(), _fielddataLimit);
-    builder.field(FIELDDATA_OVERHEAD.getPreferredName(), _fielddataOverhead);
-    builder.field(REQUEST_LIMIT.getPreferredName(), _requestLimit);
-    builder.field(REQUEST_OVERHEAD.getPreferredName(), _requestOverhead);
-    builder.field(TOTAL_LIMIT.getPreferredName(), _totalLimit);
+    if (_fielddataLimit != null) {
+      builder.field(FIELDDATA_LIMIT.getPreferredName(), _fielddataLimit);
+    }
+    if (_fielddataOverhead != null) {
+      builder.field(FIELDDATA_OVERHEAD.getPreferredName(), _fielddataOverhead);
+    }
+    if (_requestLimit != null) {
+      builder.field(REQUEST_LIMIT.getPreferredName(), _requestLimit);
+    }
+    if (_requestOverhead != null) {
+      builder.field(REQUEST_OVERHEAD.getPreferredName(), _requestOverhead);
+    }
+    if (_totalLimit != null) {
+      builder.field(TOTAL_LIMIT.getPreferredName(), _totalLimit);
+    }
     builder.endObject();
     return builder;
   }

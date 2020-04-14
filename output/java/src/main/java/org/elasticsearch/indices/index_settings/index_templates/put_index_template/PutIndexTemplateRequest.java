@@ -101,15 +101,25 @@ public class PutIndexTemplateRequest  implements XContentable<PutIndexTemplateRe
       builder.field(MAPPINGS.getPreferredName());
       _mappings.toXContent(builder, params);
     }
-    builder.field(ORDER.getPreferredName(), _order);
+    if (_order != null) {
+      builder.field(ORDER.getPreferredName(), _order);
+    }
     if (_settings != null) {
       builder.field(SETTINGS.getPreferredName());
       _settings.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
-    builder.field(CREATE.getPreferredName(), _create);
-    builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
-    builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
+    if (_create != null) {
+      builder.field(CREATE.getPreferredName(), _create);
+    }
+    if (_flatSettings != null) {
+      builder.field(FLAT_SETTINGS.getPreferredName(), _flatSettings);
+    }
+    if (_includeTypeName != null) {
+      builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);

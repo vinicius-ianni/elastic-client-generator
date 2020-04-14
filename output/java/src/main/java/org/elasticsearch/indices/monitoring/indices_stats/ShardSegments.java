@@ -99,22 +99,46 @@ public class ShardSegments  implements XContentable<ShardSegments> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COUNT.getPreferredName(), _count);
-    builder.field(DOC_VALUES_MEMORY_IN_BYTES.getPreferredName(), _docValuesMemoryInBytes);
+    if (_count != null) {
+      builder.field(COUNT.getPreferredName(), _count);
+    }
+    if (_docValuesMemoryInBytes != null) {
+      builder.field(DOC_VALUES_MEMORY_IN_BYTES.getPreferredName(), _docValuesMemoryInBytes);
+    }
     if (_fileSizes != null) {
       builder.field(FILE_SIZES.getPreferredName());
       _fileSizes.toXContent(builder, params);
     }
-    builder.field(FIXED_BIT_SET_MEMORY_IN_BYTES.getPreferredName(), _fixedBitSetMemoryInBytes);
-    builder.field(INDEX_WRITER_MEMORY_IN_BYTES.getPreferredName(), _indexWriterMemoryInBytes);
-    builder.field(MAX_UNSAFE_AUTO_ID_TIMESTAMP.getPreferredName(), _maxUnsafeAutoIdTimestamp);
-    builder.field(MEMORY_IN_BYTES.getPreferredName(), _memoryInBytes);
-    builder.field(NORMS_MEMORY_IN_BYTES.getPreferredName(), _normsMemoryInBytes);
-    builder.field(POINTS_MEMORY_IN_BYTES.getPreferredName(), _pointsMemoryInBytes);
-    builder.field(STORED_FIELDS_MEMORY_IN_BYTES.getPreferredName(), _storedFieldsMemoryInBytes);
-    builder.field(TERMS_MEMORY_IN_BYTES.getPreferredName(), _termsMemoryInBytes);
-    builder.field(TERM_VECTORS_MEMORY_IN_BYTES.getPreferredName(), _termVectorsMemoryInBytes);
-    builder.field(VERSION_MAP_MEMORY_IN_BYTES.getPreferredName(), _versionMapMemoryInBytes);
+    if (_fixedBitSetMemoryInBytes != null) {
+      builder.field(FIXED_BIT_SET_MEMORY_IN_BYTES.getPreferredName(), _fixedBitSetMemoryInBytes);
+    }
+    if (_indexWriterMemoryInBytes != null) {
+      builder.field(INDEX_WRITER_MEMORY_IN_BYTES.getPreferredName(), _indexWriterMemoryInBytes);
+    }
+    if (_maxUnsafeAutoIdTimestamp != null) {
+      builder.field(MAX_UNSAFE_AUTO_ID_TIMESTAMP.getPreferredName(), _maxUnsafeAutoIdTimestamp);
+    }
+    if (_memoryInBytes != null) {
+      builder.field(MEMORY_IN_BYTES.getPreferredName(), _memoryInBytes);
+    }
+    if (_normsMemoryInBytes != null) {
+      builder.field(NORMS_MEMORY_IN_BYTES.getPreferredName(), _normsMemoryInBytes);
+    }
+    if (_pointsMemoryInBytes != null) {
+      builder.field(POINTS_MEMORY_IN_BYTES.getPreferredName(), _pointsMemoryInBytes);
+    }
+    if (_storedFieldsMemoryInBytes != null) {
+      builder.field(STORED_FIELDS_MEMORY_IN_BYTES.getPreferredName(), _storedFieldsMemoryInBytes);
+    }
+    if (_termsMemoryInBytes != null) {
+      builder.field(TERMS_MEMORY_IN_BYTES.getPreferredName(), _termsMemoryInBytes);
+    }
+    if (_termVectorsMemoryInBytes != null) {
+      builder.field(TERM_VECTORS_MEMORY_IN_BYTES.getPreferredName(), _termVectorsMemoryInBytes);
+    }
+    if (_versionMapMemoryInBytes != null) {
+      builder.field(VERSION_MAP_MEMORY_IN_BYTES.getPreferredName(), _versionMapMemoryInBytes);
+    }
     builder.endObject();
     return builder;
   }

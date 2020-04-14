@@ -50,11 +50,21 @@ public class OperatingSystemMemoryInfo  implements XContentable<OperatingSystemM
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FREE_IN_BYTES.getPreferredName(), _freeInBytes);
-    builder.field(FREE_PERCENT.getPreferredName(), _freePercent);
-    builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
-    builder.field(USED_IN_BYTES.getPreferredName(), _usedInBytes);
-    builder.field(USED_PERCENT.getPreferredName(), _usedPercent);
+    if (_freeInBytes != null) {
+      builder.field(FREE_IN_BYTES.getPreferredName(), _freeInBytes);
+    }
+    if (_freePercent != null) {
+      builder.field(FREE_PERCENT.getPreferredName(), _freePercent);
+    }
+    if (_totalInBytes != null) {
+      builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
+    }
+    if (_usedInBytes != null) {
+      builder.field(USED_IN_BYTES.getPreferredName(), _usedInBytes);
+    }
+    if (_usedPercent != null) {
+      builder.field(USED_PERCENT.getPreferredName(), _usedPercent);
+    }
     builder.endObject();
     return builder;
   }

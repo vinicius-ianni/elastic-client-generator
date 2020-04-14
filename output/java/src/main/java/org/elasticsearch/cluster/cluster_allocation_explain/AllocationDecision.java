@@ -38,12 +38,16 @@ public class AllocationDecision  implements XContentable<AllocationDecision> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DECIDER.getPreferredName(), _decider);
+    if (_decider != null) {
+      builder.field(DECIDER.getPreferredName(), _decider);
+    }
     if (_decision != null) {
       builder.field(DECISION.getPreferredName());
       _decision.toXContent(builder, params);
     }
-    builder.field(EXPLANATION.getPreferredName(), _explanation);
+    if (_explanation != null) {
+      builder.field(EXPLANATION.getPreferredName(), _explanation);
+    }
     builder.endObject();
     return builder;
   }

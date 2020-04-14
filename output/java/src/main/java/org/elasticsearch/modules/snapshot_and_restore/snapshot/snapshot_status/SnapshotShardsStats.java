@@ -56,12 +56,24 @@ public class SnapshotShardsStats  implements XContentable<SnapshotShardsStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DONE.getPreferredName(), _done);
-    builder.field(FAILED.getPreferredName(), _failed);
-    builder.field(FINALIZING.getPreferredName(), _finalizing);
-    builder.field(INITIALIZING.getPreferredName(), _initializing);
-    builder.field(STARTED.getPreferredName(), _started);
-    builder.field(TOTAL.getPreferredName(), _total);
+    if (_done != null) {
+      builder.field(DONE.getPreferredName(), _done);
+    }
+    if (_failed != null) {
+      builder.field(FAILED.getPreferredName(), _failed);
+    }
+    if (_finalizing != null) {
+      builder.field(FINALIZING.getPreferredName(), _finalizing);
+    }
+    if (_initializing != null) {
+      builder.field(INITIALIZING.getPreferredName(), _initializing);
+    }
+    if (_started != null) {
+      builder.field(STARTED.getPreferredName(), _started);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
     builder.endObject();
     return builder;
   }

@@ -49,7 +49,9 @@ public class PagerDutyActionEventResult  implements XContentable<PagerDutyAction
       builder.field(EVENT.getPreferredName());
       _event.toXContent(builder, params);
     }
-    builder.field(REASON.getPreferredName(), _reason);
+    if (_reason != null) {
+      builder.field(REASON.getPreferredName(), _reason);
+    }
     if (_request != null) {
       builder.field(REQUEST.getPreferredName());
       _request.toXContent(builder, params);

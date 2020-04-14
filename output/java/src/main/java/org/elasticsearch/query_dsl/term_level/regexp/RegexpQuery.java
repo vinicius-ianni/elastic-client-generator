@@ -38,9 +38,15 @@ public class RegexpQuery  implements XContentable<RegexpQuery> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FLAGS.getPreferredName(), _flags);
-    builder.field(MAX_DETERMINIZED_STATES.getPreferredName(), _maxDeterminizedStates);
-    builder.field(VALUE.getPreferredName(), _value);
+    if (_flags != null) {
+      builder.field(FLAGS.getPreferredName(), _flags);
+    }
+    if (_maxDeterminizedStates != null) {
+      builder.field(MAX_DETERMINIZED_STATES.getPreferredName(), _maxDeterminizedStates);
+    }
+    if (_value != null) {
+      builder.field(VALUE.getPreferredName(), _value);
+    }
     builder.endObject();
     return builder;
   }

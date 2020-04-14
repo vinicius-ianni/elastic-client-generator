@@ -85,15 +85,33 @@ public class MultiGetHit<TDocument>  implements XContentable<MultiGetHit<TDocume
       builder.field(ERROR.getPreferredName());
       _error.toXContent(builder, params);
     }
-    builder.field(FOUND.getPreferredName(), _found);
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(ROUTING.getPreferredName(), _routing);
-    builder.field(SOURCE.getPreferredName(), _source);
-    builder.field(TYPE.getPreferredName(), _type);
-    builder.field(VERSION.getPreferredName(), _version);
-    builder.field(SEQUENCE_NUMBER.getPreferredName(), _sequenceNumber);
-    builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    if (_found != null) {
+      builder.field(FOUND.getPreferredName(), _found);
+    }
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_routing != null) {
+      builder.field(ROUTING.getPreferredName(), _routing);
+    }
+    if (_source != null) {
+      builder.field(SOURCE.getPreferredName(), _source);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
+    if (_sequenceNumber != null) {
+      builder.field(SEQUENCE_NUMBER.getPreferredName(), _sequenceNumber);
+    }
+    if (_primaryTerm != null) {
+      builder.field(PRIMARY_TERM.getPreferredName(), _primaryTerm);
+    }
     builder.endObject();
     return builder;
   }

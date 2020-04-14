@@ -176,10 +176,18 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_LEADING_WILDCARD.getPreferredName(), _allowLeadingWildcard);
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
-    builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
+    if (_allowLeadingWildcard != null) {
+      builder.field(ALLOW_LEADING_WILDCARD.getPreferredName(), _allowLeadingWildcard);
+    }
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_analyzeWildcard != null) {
+      builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    }
+    if (_autoGenerateSynonymsPhraseQuery != null) {
+      builder.field(AUTO_GENERATE_SYNONYMS_PHRASE_QUERY.getPreferredName(), _autoGenerateSynonymsPhraseQuery);
+    }
     if (_defaultField != null) {
       builder.field(DEFAULT_FIELD.getPreferredName());
       _defaultField.toXContent(builder, params);
@@ -188,8 +196,12 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
       builder.field(DEFAULT_OPERATOR.getPreferredName());
       _defaultOperator.toXContent(builder, params);
     }
-    builder.field(ENABLE_POSITION_INCREMENTS.getPreferredName(), _enablePositionIncrements);
-    builder.field(ESCAPE.getPreferredName(), _escape);
+    if (_enablePositionIncrements != null) {
+      builder.field(ENABLE_POSITION_INCREMENTS.getPreferredName(), _enablePositionIncrements);
+    }
+    if (_escape != null) {
+      builder.field(ESCAPE.getPreferredName(), _escape);
+    }
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
@@ -197,29 +209,51 @@ public class QueryStringQuery  implements XContentable<QueryStringQuery> {
       builder.field(FUZZINESS.getPreferredName());
       _fuzziness.toXContent(builder, params);
     }
-    builder.field(FUZZY_MAX_EXPANSIONS.getPreferredName(), _fuzzyMaxExpansions);
-    builder.field(FUZZY_PREFIX_LENGTH.getPreferredName(), _fuzzyPrefixLength);
+    if (_fuzzyMaxExpansions != null) {
+      builder.field(FUZZY_MAX_EXPANSIONS.getPreferredName(), _fuzzyMaxExpansions);
+    }
+    if (_fuzzyPrefixLength != null) {
+      builder.field(FUZZY_PREFIX_LENGTH.getPreferredName(), _fuzzyPrefixLength);
+    }
     if (_fuzzyRewrite != null) {
       builder.field(FUZZY_REWRITE.getPreferredName());
       _fuzzyRewrite.toXContent(builder, params);
     }
-    builder.field(FUZZY_TRANSPOSITIONS.getPreferredName(), _fuzzyTranspositions);
-    builder.field(LENIENT.getPreferredName(), _lenient);
-    builder.field(MAX_DETERMINIZED_STATES.getPreferredName(), _maxDeterminizedStates);
+    if (_fuzzyTranspositions != null) {
+      builder.field(FUZZY_TRANSPOSITIONS.getPreferredName(), _fuzzyTranspositions);
+    }
+    if (_lenient != null) {
+      builder.field(LENIENT.getPreferredName(), _lenient);
+    }
+    if (_maxDeterminizedStates != null) {
+      builder.field(MAX_DETERMINIZED_STATES.getPreferredName(), _maxDeterminizedStates);
+    }
     if (_minimumShouldMatch != null) {
       builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
       _minimumShouldMatch.toXContent(builder, params);
     }
-    builder.field(PHRASE_SLOP.getPreferredName(), _phraseSlop);
-    builder.field(QUERY.getPreferredName(), _query);
-    builder.field(QUOTE_ANALYZER.getPreferredName(), _quoteAnalyzer);
-    builder.field(QUOTE_FIELD_SUFFIX.getPreferredName(), _quoteFieldSuffix);
+    if (_phraseSlop != null) {
+      builder.field(PHRASE_SLOP.getPreferredName(), _phraseSlop);
+    }
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName(), _query);
+    }
+    if (_quoteAnalyzer != null) {
+      builder.field(QUOTE_ANALYZER.getPreferredName(), _quoteAnalyzer);
+    }
+    if (_quoteFieldSuffix != null) {
+      builder.field(QUOTE_FIELD_SUFFIX.getPreferredName(), _quoteFieldSuffix);
+    }
     if (_rewrite != null) {
       builder.field(REWRITE.getPreferredName());
       _rewrite.toXContent(builder, params);
     }
-    builder.field(TIE_BREAKER.getPreferredName(), _tieBreaker);
-    builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    if (_tieBreaker != null) {
+      builder.field(TIE_BREAKER.getPreferredName(), _tieBreaker);
+    }
+    if (_timeZone != null) {
+      builder.field(TIME_ZONE.getPreferredName(), _timeZone);
+    }
     if (_type != null) {
       builder.field(TYPE.getPreferredName());
       _type.toXContent(builder, params);

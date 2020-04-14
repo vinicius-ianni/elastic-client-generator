@@ -151,35 +151,67 @@ public class ErrorCause  implements XContentable<ErrorCause> {
       builder.field(ADDITIONAL_PROPERTIES.getPreferredName());
       _additionalProperties.toXContent(builder, params);
     }
-    builder.field(BYTES_LIMIT.getPreferredName(), _bytesLimit);
-    builder.field(BYTES_WANTED.getPreferredName(), _bytesWanted);
+    if (_bytesLimit != null) {
+      builder.field(BYTES_LIMIT.getPreferredName(), _bytesLimit);
+    }
+    if (_bytesWanted != null) {
+      builder.field(BYTES_WANTED.getPreferredName(), _bytesWanted);
+    }
     if (_causedBy != null) {
       builder.field(CAUSED_BY.getPreferredName());
       _causedBy.toXContent(builder, params);
     }
-    builder.field(COLUMN.getPreferredName(), _column);
+    if (_column != null) {
+      builder.field(COLUMN.getPreferredName(), _column);
+    }
     if (_failedShards != null) {
       builder.array(FAILED_SHARDS.getPreferredName(), _failedShards);
     }
-    builder.field(GROUPED.getPreferredName(), _grouped);
-    builder.field(INDEX.getPreferredName(), _index);
-    builder.field(INDEX_U_U_I_D.getPreferredName(), _indexUUID);
-    builder.field(LANGUAGE.getPreferredName(), _language);
-    builder.field(LICENSED_EXPIRED_FEATURE.getPreferredName(), _licensedExpiredFeature);
-    builder.field(LINE.getPreferredName(), _line);
-    builder.field(PHASE.getPreferredName(), _phase);
-    builder.field(REASON.getPreferredName(), _reason);
+    if (_grouped != null) {
+      builder.field(GROUPED.getPreferredName(), _grouped);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
+    if (_indexUUID != null) {
+      builder.field(INDEX_U_U_I_D.getPreferredName(), _indexUUID);
+    }
+    if (_language != null) {
+      builder.field(LANGUAGE.getPreferredName(), _language);
+    }
+    if (_licensedExpiredFeature != null) {
+      builder.field(LICENSED_EXPIRED_FEATURE.getPreferredName(), _licensedExpiredFeature);
+    }
+    if (_line != null) {
+      builder.field(LINE.getPreferredName(), _line);
+    }
+    if (_phase != null) {
+      builder.field(PHASE.getPreferredName(), _phase);
+    }
+    if (_reason != null) {
+      builder.field(REASON.getPreferredName(), _reason);
+    }
     if (_resourceId != null) {
       builder.array(RESOURCE_ID.getPreferredName(), _resourceId);
     }
-    builder.field(RESOURCE_TYPE.getPreferredName(), _resourceType);
-    builder.field(SCRIPT.getPreferredName(), _script);
+    if (_resourceType != null) {
+      builder.field(RESOURCE_TYPE.getPreferredName(), _resourceType);
+    }
+    if (_script != null) {
+      builder.field(SCRIPT.getPreferredName(), _script);
+    }
     if (_scriptStack != null) {
       builder.array(SCRIPT_STACK.getPreferredName(), _scriptStack);
     }
-    builder.field(SHARD.getPreferredName(), _shard);
-    builder.field(STACK_TRACE.getPreferredName(), _stackTrace);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_shard != null) {
+      builder.field(SHARD.getPreferredName(), _shard);
+    }
+    if (_stackTrace != null) {
+      builder.field(STACK_TRACE.getPreferredName(), _stackTrace);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

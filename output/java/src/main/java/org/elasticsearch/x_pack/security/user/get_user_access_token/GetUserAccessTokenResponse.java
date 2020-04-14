@@ -44,10 +44,18 @@ public class GetUserAccessTokenResponse  implements XContentable<GetUserAccessTo
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACCESS_TOKEN.getPreferredName(), _accessToken);
-    builder.field(EXPIRES_IN.getPreferredName(), _expiresIn);
-    builder.field(SCOPE.getPreferredName(), _scope);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_accessToken != null) {
+      builder.field(ACCESS_TOKEN.getPreferredName(), _accessToken);
+    }
+    if (_expiresIn != null) {
+      builder.field(EXPIRES_IN.getPreferredName(), _expiresIn);
+    }
+    if (_scope != null) {
+      builder.field(SCOPE.getPreferredName(), _scope);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

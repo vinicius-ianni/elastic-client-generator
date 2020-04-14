@@ -74,13 +74,19 @@ public class BulkOperation  implements XContentable<BulkOperation> {
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(OPERATION.getPreferredName(), _operation);
-    builder.field(RETRY_ON_CONFLICT.getPreferredName(), _retryOnConflict);
+    if (_operation != null) {
+      builder.field(OPERATION.getPreferredName(), _operation);
+    }
+    if (_retryOnConflict != null) {
+      builder.field(RETRY_ON_CONFLICT.getPreferredName(), _retryOnConflict);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);

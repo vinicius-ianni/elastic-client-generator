@@ -55,10 +55,18 @@ public class SuggestFuzziness  implements XContentable<SuggestFuzziness> {
       builder.field(FUZZINESS.getPreferredName());
       _fuzziness.toXContent(builder, params);
     }
-    builder.field(MIN_LENGTH.getPreferredName(), _minLength);
-    builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
-    builder.field(TRANSPOSITIONS.getPreferredName(), _transpositions);
-    builder.field(UNICODE_AWARE.getPreferredName(), _unicodeAware);
+    if (_minLength != null) {
+      builder.field(MIN_LENGTH.getPreferredName(), _minLength);
+    }
+    if (_prefixLength != null) {
+      builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
+    }
+    if (_transpositions != null) {
+      builder.field(TRANSPOSITIONS.getPreferredName(), _transpositions);
+    }
+    if (_unicodeAware != null) {
+      builder.field(UNICODE_AWARE.getPreferredName(), _unicodeAware);
+    }
     builder.endObject();
     return builder;
   }

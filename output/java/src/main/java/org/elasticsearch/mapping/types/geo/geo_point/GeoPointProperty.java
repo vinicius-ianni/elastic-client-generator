@@ -38,8 +38,12 @@ public class GeoPointProperty  implements XContentable<GeoPointProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
-    builder.field(IGNORE_Z_VALUE.getPreferredName(), _ignoreZValue);
+    if (_ignoreMalformed != null) {
+      builder.field(IGNORE_MALFORMED.getPreferredName(), _ignoreMalformed);
+    }
+    if (_ignoreZValue != null) {
+      builder.field(IGNORE_Z_VALUE.getPreferredName(), _ignoreZValue);
+    }
     if (_nullValue != null) {
       builder.field(NULL_VALUE.getPreferredName());
       _nullValue.toXContent(builder, params);

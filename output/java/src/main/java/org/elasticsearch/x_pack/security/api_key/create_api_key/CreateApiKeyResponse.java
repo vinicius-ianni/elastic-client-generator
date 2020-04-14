@@ -44,11 +44,19 @@ public class CreateApiKeyResponse  implements XContentable<CreateApiKeyResponse>
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(EXPIRATION.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_expiration.toInstant()));
-    builder.field(API_KEY.getPreferredName(), _apiKey);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_expiration != null) {
+      builder.field(EXPIRATION.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_expiration.toInstant()));
+    }
+    if (_apiKey != null) {
+      builder.field(API_KEY.getPreferredName(), _apiKey);
+    }
     builder.endObject();
     return builder;
   }

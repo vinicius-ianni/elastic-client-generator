@@ -111,7 +111,9 @@ public class TypeMapping  implements XContentable<TypeMapping> {
       builder.field(ALL_FIELD.getPreferredName());
       _allField.toXContent(builder, params);
     }
-    builder.field(DATE_DETECTION.getPreferredName(), _dateDetection);
+    if (_dateDetection != null) {
+      builder.field(DATE_DETECTION.getPreferredName(), _dateDetection);
+    }
     if (_dynamic != null) {
       builder.field(DYNAMIC.getPreferredName());
       _dynamic.map(builder::value, r-> r.toXContent(builder, params));
@@ -135,7 +137,9 @@ public class TypeMapping  implements XContentable<TypeMapping> {
       builder.field(META.getPreferredName());
       _meta.toXContent(builder, params);
     }
-    builder.field(NUMERIC_DETECTION.getPreferredName(), _numericDetection);
+    if (_numericDetection != null) {
+      builder.field(NUMERIC_DETECTION.getPreferredName(), _numericDetection);
+    }
     if (_properties != null) {
       builder.field(PROPERTIES.getPreferredName());
       _properties.toXContent(builder, params);

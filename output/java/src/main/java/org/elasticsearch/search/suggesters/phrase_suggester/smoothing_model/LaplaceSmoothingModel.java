@@ -26,7 +26,9 @@ public class LaplaceSmoothingModel  implements XContentable<LaplaceSmoothingMode
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALPHA.getPreferredName(), _alpha);
+    if (_alpha != null) {
+      builder.field(ALPHA.getPreferredName(), _alpha);
+    }
     builder.endObject();
     return builder;
   }

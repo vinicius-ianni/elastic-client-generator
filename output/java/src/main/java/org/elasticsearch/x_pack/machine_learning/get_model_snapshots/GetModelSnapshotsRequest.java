@@ -52,9 +52,13 @@ public class GetModelSnapshotsRequest  implements XContentable<GetModelSnapshots
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DESC.getPreferredName(), _desc);
-    builder.field(END.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    if (_desc != null) {
+      builder.field(DESC.getPreferredName(), _desc);
+    }
+    if (_end != null) {
+      builder.field(END.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_end.toInstant()));
+    }
     if (_page != null) {
       builder.field(PAGE.getPreferredName());
       _page.toXContent(builder, params);
@@ -63,8 +67,10 @@ public class GetModelSnapshotsRequest  implements XContentable<GetModelSnapshots
       builder.field(SORT.getPreferredName());
       _sort.toXContent(builder, params);
     }
-    builder.field(START.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    if (_start != null) {
+      builder.field(START.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_start.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

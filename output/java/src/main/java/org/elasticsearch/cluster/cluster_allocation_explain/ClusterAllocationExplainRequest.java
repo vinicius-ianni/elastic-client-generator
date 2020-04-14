@@ -55,10 +55,18 @@ public class ClusterAllocationExplainRequest  implements XContentable<ClusterAll
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(PRIMARY.getPreferredName(), _primary);
-    builder.field(SHARD.getPreferredName(), _shard);
-    builder.field(INCLUDE_DISK_INFO.getPreferredName(), _includeDiskInfo);
-    builder.field(INCLUDE_YES_DECISIONS.getPreferredName(), _includeYesDecisions);
+    if (_primary != null) {
+      builder.field(PRIMARY.getPreferredName(), _primary);
+    }
+    if (_shard != null) {
+      builder.field(SHARD.getPreferredName(), _shard);
+    }
+    if (_includeDiskInfo != null) {
+      builder.field(INCLUDE_DISK_INFO.getPreferredName(), _includeDiskInfo);
+    }
+    if (_includeYesDecisions != null) {
+      builder.field(INCLUDE_YES_DECISIONS.getPreferredName(), _includeYesDecisions);
+    }
     builder.endObject();
     return builder;
   }

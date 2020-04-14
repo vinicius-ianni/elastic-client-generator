@@ -111,24 +111,52 @@ public class SlackAttachment  implements XContentable<SlackAttachment> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(AUTHOR_ICON.getPreferredName(), _authorIcon);
-    builder.field(AUTHOR_LINK.getPreferredName(), _authorLink);
-    builder.field(AUTHOR_NAME.getPreferredName(), _authorName);
-    builder.field(COLOR.getPreferredName(), _color);
-    builder.field(FALLBACK.getPreferredName(), _fallback);
+    if (_authorIcon != null) {
+      builder.field(AUTHOR_ICON.getPreferredName(), _authorIcon);
+    }
+    if (_authorLink != null) {
+      builder.field(AUTHOR_LINK.getPreferredName(), _authorLink);
+    }
+    if (_authorName != null) {
+      builder.field(AUTHOR_NAME.getPreferredName(), _authorName);
+    }
+    if (_color != null) {
+      builder.field(COLOR.getPreferredName(), _color);
+    }
+    if (_fallback != null) {
+      builder.field(FALLBACK.getPreferredName(), _fallback);
+    }
     if (_fields != null) {
       builder.array(FIELDS.getPreferredName(), _fields);
     }
-    builder.field(FOOTER.getPreferredName(), _footer);
-    builder.field(FOOTER_ICON.getPreferredName(), _footerIcon);
-    builder.field(IMAGE_URL.getPreferredName(), _imageUrl);
-    builder.field(PRETEXT.getPreferredName(), _pretext);
-    builder.field(TEXT.getPreferredName(), _text);
-    builder.field(THUMB_URL.getPreferredName(), _thumbUrl);
-    builder.field(TITLE.getPreferredName(), _title);
-    builder.field(TITLE_LINK.getPreferredName(), _titleLink);
-    builder.field(TS.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_ts.toInstant()));
+    if (_footer != null) {
+      builder.field(FOOTER.getPreferredName(), _footer);
+    }
+    if (_footerIcon != null) {
+      builder.field(FOOTER_ICON.getPreferredName(), _footerIcon);
+    }
+    if (_imageUrl != null) {
+      builder.field(IMAGE_URL.getPreferredName(), _imageUrl);
+    }
+    if (_pretext != null) {
+      builder.field(PRETEXT.getPreferredName(), _pretext);
+    }
+    if (_text != null) {
+      builder.field(TEXT.getPreferredName(), _text);
+    }
+    if (_thumbUrl != null) {
+      builder.field(THUMB_URL.getPreferredName(), _thumbUrl);
+    }
+    if (_title != null) {
+      builder.field(TITLE.getPreferredName(), _title);
+    }
+    if (_titleLink != null) {
+      builder.field(TITLE_LINK.getPreferredName(), _titleLink);
+    }
+    if (_ts != null) {
+      builder.field(TS.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_ts.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

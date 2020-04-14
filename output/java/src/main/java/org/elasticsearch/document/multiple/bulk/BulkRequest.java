@@ -87,7 +87,9 @@ public class BulkRequest  implements XContentable<BulkRequest> {
     if (_operations != null) {
       builder.array(OPERATIONS.getPreferredName(), _operations);
     }
-    builder.field(PIPELINE.getPreferredName(), _pipeline);
+    if (_pipeline != null) {
+      builder.field(PIPELINE.getPreferredName(), _pipeline);
+    }
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
@@ -96,7 +98,9 @@ public class BulkRequest  implements XContentable<BulkRequest> {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
     }
-    builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    if (_sourceEnabled != null) {
+      builder.field(SOURCE_ENABLED.getPreferredName(), _sourceEnabled);
+    }
     if (_sourceExcludes != null) {
       builder.array(SOURCE_EXCLUDES.getPreferredName(), _sourceExcludes);
     }
@@ -107,8 +111,12 @@ public class BulkRequest  implements XContentable<BulkRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(TYPE_QUERY_STRING.getPreferredName(), _typeQueryString);
-    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    if (_typeQueryString != null) {
+      builder.field(TYPE_QUERY_STRING.getPreferredName(), _typeQueryString);
+    }
+    if (_waitForActiveShards != null) {
+      builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    }
     builder.endObject();
     return builder;
   }

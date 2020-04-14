@@ -26,7 +26,9 @@ public class RoutingField  implements XContentable<RoutingField> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(REQUIRED.getPreferredName(), _required);
+    if (_required != null) {
+      builder.field(REQUIRED.getPreferredName(), _required);
+    }
     builder.endObject();
     return builder;
   }

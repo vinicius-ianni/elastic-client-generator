@@ -75,18 +75,34 @@ public class KeywordProperty  implements XContentable<KeywordProperty> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BOOST.getPreferredName(), _boost);
-    builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
-    builder.field(IGNORE_ABOVE.getPreferredName(), _ignoreAbove);
-    builder.field(INDEX.getPreferredName(), _index);
+    if (_boost != null) {
+      builder.field(BOOST.getPreferredName(), _boost);
+    }
+    if (_eagerGlobalOrdinals != null) {
+      builder.field(EAGER_GLOBAL_ORDINALS.getPreferredName(), _eagerGlobalOrdinals);
+    }
+    if (_ignoreAbove != null) {
+      builder.field(IGNORE_ABOVE.getPreferredName(), _ignoreAbove);
+    }
+    if (_index != null) {
+      builder.field(INDEX.getPreferredName(), _index);
+    }
     if (_indexOptions != null) {
       builder.field(INDEX_OPTIONS.getPreferredName());
       _indexOptions.toXContent(builder, params);
     }
-    builder.field(NORMALIZER.getPreferredName(), _normalizer);
-    builder.field(NORMS.getPreferredName(), _norms);
-    builder.field(NULL_VALUE.getPreferredName(), _nullValue);
-    builder.field(SPLIT_QUERIES_ON_WHITESPACE.getPreferredName(), _splitQueriesOnWhitespace);
+    if (_normalizer != null) {
+      builder.field(NORMALIZER.getPreferredName(), _normalizer);
+    }
+    if (_norms != null) {
+      builder.field(NORMS.getPreferredName(), _norms);
+    }
+    if (_nullValue != null) {
+      builder.field(NULL_VALUE.getPreferredName(), _nullValue);
+    }
+    if (_splitQueriesOnWhitespace != null) {
+      builder.field(SPLIT_QUERIES_ON_WHITESPACE.getPreferredName(), _splitQueriesOnWhitespace);
+    }
     builder.endObject();
     return builder;
   }

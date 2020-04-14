@@ -94,14 +94,30 @@ public class TermSuggester  implements XContentable<TermSuggester> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(LOWERCASE_TERMS.getPreferredName(), _lowercaseTerms);
-    builder.field(MAX_EDITS.getPreferredName(), _maxEdits);
-    builder.field(MAX_INSPECTIONS.getPreferredName(), _maxInspections);
-    builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
-    builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
-    builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
-    builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
-    builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    if (_lowercaseTerms != null) {
+      builder.field(LOWERCASE_TERMS.getPreferredName(), _lowercaseTerms);
+    }
+    if (_maxEdits != null) {
+      builder.field(MAX_EDITS.getPreferredName(), _maxEdits);
+    }
+    if (_maxInspections != null) {
+      builder.field(MAX_INSPECTIONS.getPreferredName(), _maxInspections);
+    }
+    if (_maxTermFreq != null) {
+      builder.field(MAX_TERM_FREQ.getPreferredName(), _maxTermFreq);
+    }
+    if (_minDocFreq != null) {
+      builder.field(MIN_DOC_FREQ.getPreferredName(), _minDocFreq);
+    }
+    if (_minWordLength != null) {
+      builder.field(MIN_WORD_LENGTH.getPreferredName(), _minWordLength);
+    }
+    if (_prefixLength != null) {
+      builder.field(PREFIX_LENGTH.getPreferredName(), _prefixLength);
+    }
+    if (_shardSize != null) {
+      builder.field(SHARD_SIZE.getPreferredName(), _shardSize);
+    }
     if (_sort != null) {
       builder.field(SORT.getPreferredName());
       _sort.toXContent(builder, params);
@@ -114,7 +130,9 @@ public class TermSuggester  implements XContentable<TermSuggester> {
       builder.field(SUGGEST_MODE.getPreferredName());
       _suggestMode.toXContent(builder, params);
     }
-    builder.field(TEXT.getPreferredName(), _text);
+    if (_text != null) {
+      builder.field(TEXT.getPreferredName(), _text);
+    }
     builder.endObject();
     return builder;
   }

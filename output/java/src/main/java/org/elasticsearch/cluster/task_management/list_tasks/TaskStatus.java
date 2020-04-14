@@ -87,20 +87,40 @@ public class TaskStatus  implements XContentable<TaskStatus> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BATCHES.getPreferredName(), _batches);
-    builder.field(CREATED.getPreferredName(), _created);
-    builder.field(DELETED.getPreferredName(), _deleted);
-    builder.field(NOOPS.getPreferredName(), _noops);
-    builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    if (_batches != null) {
+      builder.field(BATCHES.getPreferredName(), _batches);
+    }
+    if (_created != null) {
+      builder.field(CREATED.getPreferredName(), _created);
+    }
+    if (_deleted != null) {
+      builder.field(DELETED.getPreferredName(), _deleted);
+    }
+    if (_noops != null) {
+      builder.field(NOOPS.getPreferredName(), _noops);
+    }
+    if (_requestsPerSecond != null) {
+      builder.field(REQUESTS_PER_SECOND.getPreferredName(), _requestsPerSecond);
+    }
     if (_retries != null) {
       builder.field(RETRIES.getPreferredName());
       _retries.toXContent(builder, params);
     }
-    builder.field(THROTTLED_MILLIS.getPreferredName(), _throttledMillis);
-    builder.field(THROTTLED_UNTIL_MILLIS.getPreferredName(), _throttledUntilMillis);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(UPDATED.getPreferredName(), _updated);
-    builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    if (_throttledMillis != null) {
+      builder.field(THROTTLED_MILLIS.getPreferredName(), _throttledMillis);
+    }
+    if (_throttledUntilMillis != null) {
+      builder.field(THROTTLED_UNTIL_MILLIS.getPreferredName(), _throttledUntilMillis);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_updated != null) {
+      builder.field(UPDATED.getPreferredName(), _updated);
+    }
+    if (_versionConflicts != null) {
+      builder.field(VERSION_CONFLICTS.getPreferredName(), _versionConflicts);
+    }
     builder.endObject();
     return builder;
   }

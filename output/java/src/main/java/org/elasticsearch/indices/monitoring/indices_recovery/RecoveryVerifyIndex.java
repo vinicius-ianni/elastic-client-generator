@@ -32,8 +32,12 @@ public class RecoveryVerifyIndex  implements XContentable<RecoveryVerifyIndex> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CHECK_INDEX_TIME_IN_MILLIS.getPreferredName(), _checkIndexTimeInMillis);
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_checkIndexTimeInMillis != null) {
+      builder.field(CHECK_INDEX_TIME_IN_MILLIS.getPreferredName(), _checkIndexTimeInMillis);
+    }
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

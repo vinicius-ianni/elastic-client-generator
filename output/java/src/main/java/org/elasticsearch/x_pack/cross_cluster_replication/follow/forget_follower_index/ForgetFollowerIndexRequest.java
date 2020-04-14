@@ -44,13 +44,19 @@ public class ForgetFollowerIndexRequest  implements XContentable<ForgetFollowerI
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FOLLOWER_CLUSTER.getPreferredName(), _followerCluster);
+    if (_followerCluster != null) {
+      builder.field(FOLLOWER_CLUSTER.getPreferredName(), _followerCluster);
+    }
     if (_followerIndex != null) {
       builder.field(FOLLOWER_INDEX.getPreferredName());
       _followerIndex.toXContent(builder, params);
     }
-    builder.field(FOLLOWER_INDEX_UUID.getPreferredName(), _followerIndexUuid);
-    builder.field(LEADER_REMOTE_CLUSTER.getPreferredName(), _leaderRemoteCluster);
+    if (_followerIndexUuid != null) {
+      builder.field(FOLLOWER_INDEX_UUID.getPreferredName(), _followerIndexUuid);
+    }
+    if (_leaderRemoteCluster != null) {
+      builder.field(LEADER_REMOTE_CLUSTER.getPreferredName(), _leaderRemoteCluster);
+    }
     builder.endObject();
     return builder;
   }

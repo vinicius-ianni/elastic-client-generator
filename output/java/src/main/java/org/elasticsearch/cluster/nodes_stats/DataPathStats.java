@@ -116,22 +116,54 @@ public class DataPathStats  implements XContentable<DataPathStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(AVAILABLE.getPreferredName(), _available);
-    builder.field(AVAILABLE_IN_BYTES.getPreferredName(), _availableInBytes);
-    builder.field(DISK_QUEUE.getPreferredName(), _diskQueue);
-    builder.field(DISK_READS.getPreferredName(), _diskReads);
-    builder.field(DISK_READ_SIZE.getPreferredName(), _diskReadSize);
-    builder.field(DISK_READ_SIZE_IN_BYTES.getPreferredName(), _diskReadSizeInBytes);
-    builder.field(DISK_WRITES.getPreferredName(), _diskWrites);
-    builder.field(DISK_WRITE_SIZE.getPreferredName(), _diskWriteSize);
-    builder.field(DISK_WRITE_SIZE_IN_BYTES.getPreferredName(), _diskWriteSizeInBytes);
-    builder.field(FREE.getPreferredName(), _free);
-    builder.field(FREE_IN_BYTES.getPreferredName(), _freeInBytes);
-    builder.field(MOUNT.getPreferredName(), _mount);
-    builder.field(PATH.getPreferredName(), _path);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_available != null) {
+      builder.field(AVAILABLE.getPreferredName(), _available);
+    }
+    if (_availableInBytes != null) {
+      builder.field(AVAILABLE_IN_BYTES.getPreferredName(), _availableInBytes);
+    }
+    if (_diskQueue != null) {
+      builder.field(DISK_QUEUE.getPreferredName(), _diskQueue);
+    }
+    if (_diskReads != null) {
+      builder.field(DISK_READS.getPreferredName(), _diskReads);
+    }
+    if (_diskReadSize != null) {
+      builder.field(DISK_READ_SIZE.getPreferredName(), _diskReadSize);
+    }
+    if (_diskReadSizeInBytes != null) {
+      builder.field(DISK_READ_SIZE_IN_BYTES.getPreferredName(), _diskReadSizeInBytes);
+    }
+    if (_diskWrites != null) {
+      builder.field(DISK_WRITES.getPreferredName(), _diskWrites);
+    }
+    if (_diskWriteSize != null) {
+      builder.field(DISK_WRITE_SIZE.getPreferredName(), _diskWriteSize);
+    }
+    if (_diskWriteSizeInBytes != null) {
+      builder.field(DISK_WRITE_SIZE_IN_BYTES.getPreferredName(), _diskWriteSizeInBytes);
+    }
+    if (_free != null) {
+      builder.field(FREE.getPreferredName(), _free);
+    }
+    if (_freeInBytes != null) {
+      builder.field(FREE_IN_BYTES.getPreferredName(), _freeInBytes);
+    }
+    if (_mount != null) {
+      builder.field(MOUNT.getPreferredName(), _mount);
+    }
+    if (_path != null) {
+      builder.field(PATH.getPreferredName(), _path);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalInBytes != null) {
+      builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

@@ -32,8 +32,12 @@ public class CatRepositoriesRecord  implements XContentable<CatRepositoriesRecor
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ID.getPreferredName(), _id);
-    builder.field(TYPE.getPreferredName(), _type);
+    if (_id != null) {
+      builder.field(ID.getPreferredName(), _id);
+    }
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
     builder.endObject();
     return builder;
   }

@@ -66,14 +66,22 @@ public class PutUserRequest  implements XContentable<PutUserRequest> {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
     }
-    builder.field(EMAIL.getPreferredName(), _email);
-    builder.field(FULL_NAME.getPreferredName(), _fullName);
+    if (_email != null) {
+      builder.field(EMAIL.getPreferredName(), _email);
+    }
+    if (_fullName != null) {
+      builder.field(FULL_NAME.getPreferredName(), _fullName);
+    }
     if (_metadata != null) {
       builder.field(METADATA.getPreferredName());
       _metadata.toXContent(builder, params);
     }
-    builder.field(PASSWORD.getPreferredName(), _password);
-    builder.field(PASSWORD_HASH.getPreferredName(), _passwordHash);
+    if (_password != null) {
+      builder.field(PASSWORD.getPreferredName(), _password);
+    }
+    if (_passwordHash != null) {
+      builder.field(PASSWORD_HASH.getPreferredName(), _passwordHash);
+    }
     if (_roles != null) {
       builder.array(ROLES.getPreferredName(), _roles);
     }

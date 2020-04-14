@@ -77,7 +77,9 @@ public class CreateIndexRequest  implements XContentable<CreateIndexRequest> {
       builder.field(SETTINGS.getPreferredName());
       _settings.toXContent(builder, params);
     }
-    builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    if (_includeTypeName != null) {
+      builder.field(INCLUDE_TYPE_NAME.getPreferredName(), _includeTypeName);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
@@ -86,7 +88,9 @@ public class CreateIndexRequest  implements XContentable<CreateIndexRequest> {
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    if (_waitForActiveShards != null) {
+      builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    }
     builder.endObject();
     return builder;
   }

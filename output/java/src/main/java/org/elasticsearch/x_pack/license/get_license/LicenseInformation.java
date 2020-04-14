@@ -81,15 +81,29 @@ public class LicenseInformation  implements XContentable<LicenseInformation> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(EXPIRY_DATE.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_expiryDate.toInstant()));
-    builder.field(EXPIRY_DATE_IN_MILLIS.getPreferredName(), _expiryDateInMillis);
-    builder.field(ISSUE_DATE.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_issueDate.toInstant()));
-    builder.field(ISSUE_DATE_IN_MILLIS.getPreferredName(), _issueDateInMillis);
-    builder.field(ISSUED_TO.getPreferredName(), _issuedTo);
-    builder.field(ISSUER.getPreferredName(), _issuer);
-    builder.field(MAX_NODES.getPreferredName(), _maxNodes);
+    if (_expiryDate != null) {
+      builder.field(EXPIRY_DATE.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_expiryDate.toInstant()));
+    }
+    if (_expiryDateInMillis != null) {
+      builder.field(EXPIRY_DATE_IN_MILLIS.getPreferredName(), _expiryDateInMillis);
+    }
+    if (_issueDate != null) {
+      builder.field(ISSUE_DATE.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_issueDate.toInstant()));
+    }
+    if (_issueDateInMillis != null) {
+      builder.field(ISSUE_DATE_IN_MILLIS.getPreferredName(), _issueDateInMillis);
+    }
+    if (_issuedTo != null) {
+      builder.field(ISSUED_TO.getPreferredName(), _issuedTo);
+    }
+    if (_issuer != null) {
+      builder.field(ISSUER.getPreferredName(), _issuer);
+    }
+    if (_maxNodes != null) {
+      builder.field(MAX_NODES.getPreferredName(), _maxNodes);
+    }
     if (_status != null) {
       builder.field(STATUS.getPreferredName());
       _status.toXContent(builder, params);
@@ -98,7 +112,9 @@ public class LicenseInformation  implements XContentable<LicenseInformation> {
       builder.field(TYPE.getPreferredName());
       _type.toXContent(builder, params);
     }
-    builder.field(UID.getPreferredName(), _uid);
+    if (_uid != null) {
+      builder.field(UID.getPreferredName(), _uid);
+    }
     builder.endObject();
     return builder;
   }

@@ -57,14 +57,22 @@ public class KuromojiTokenizer  implements XContentable<KuromojiTokenizer> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DISCARD_PUNCTUATION.getPreferredName(), _discardPunctuation);
+    if (_discardPunctuation != null) {
+      builder.field(DISCARD_PUNCTUATION.getPreferredName(), _discardPunctuation);
+    }
     if (_mode != null) {
       builder.field(MODE.getPreferredName());
       _mode.toXContent(builder, params);
     }
-    builder.field(NBEST_COST.getPreferredName(), _nbestCost);
-    builder.field(NBEST_EXAMPLES.getPreferredName(), _nbestExamples);
-    builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    if (_nbestCost != null) {
+      builder.field(NBEST_COST.getPreferredName(), _nbestCost);
+    }
+    if (_nbestExamples != null) {
+      builder.field(NBEST_EXAMPLES.getPreferredName(), _nbestExamples);
+    }
+    if (_userDictionary != null) {
+      builder.field(USER_DICTIONARY.getPreferredName(), _userDictionary);
+    }
     if (_userDictionaryRules != null) {
       builder.array(USER_DICTIONARY_RULES.getPreferredName(), _userDictionaryRules);
     }

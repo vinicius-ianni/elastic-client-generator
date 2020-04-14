@@ -36,7 +36,9 @@ public class ResourcePrivileges  implements XContentable<ResourcePrivileges> {
       builder.field(PRIVILEGES.getPreferredName());
       _privileges.toXContent(builder, params);
     }
-    builder.field(RESOURCE.getPreferredName(), _resource);
+    if (_resource != null) {
+      builder.field(RESOURCE.getPreferredName(), _resource);
+    }
     builder.endObject();
     return builder;
   }

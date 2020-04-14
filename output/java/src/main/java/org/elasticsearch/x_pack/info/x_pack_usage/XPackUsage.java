@@ -32,8 +32,12 @@ public class XPackUsage  implements XContentable<XPackUsage> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(AVAILABLE.getPreferredName(), _available);
-    builder.field(ENABLED.getPreferredName(), _enabled);
+    if (_available != null) {
+      builder.field(AVAILABLE.getPreferredName(), _available);
+    }
+    if (_enabled != null) {
+      builder.field(ENABLED.getPreferredName(), _enabled);
+    }
     builder.endObject();
     return builder;
   }

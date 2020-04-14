@@ -32,8 +32,12 @@ public class TokenFilterBase  implements XContentable<TokenFilterBase> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(TYPE.getPreferredName(), _type);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_type != null) {
+      builder.field(TYPE.getPreferredName(), _type);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

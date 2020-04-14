@@ -42,7 +42,9 @@ public class PhraseSuggestCollate  implements XContentable<PhraseSuggestCollate>
       builder.field(PARAMS.getPreferredName());
       _params.toXContent(builder, params);
     }
-    builder.field(PRUNE.getPreferredName(), _prune);
+    if (_prune != null) {
+      builder.field(PRUNE.getPreferredName(), _prune);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);

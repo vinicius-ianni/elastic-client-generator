@@ -68,14 +68,30 @@ public class AggregationBreakdown  implements XContentable<AggregationBreakdown>
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(BUILD_AGGREGATION.getPreferredName(), _buildAggregation);
-    builder.field(BUILD_AGGREGATION_COUNT.getPreferredName(), _buildAggregationCount);
-    builder.field(COLLECT.getPreferredName(), _collect);
-    builder.field(COLLECT_COUNT.getPreferredName(), _collectCount);
-    builder.field(INITIALIZE.getPreferredName(), _initialize);
-    builder.field(INTIALIZE_COUNT.getPreferredName(), _intializeCount);
-    builder.field(REDUCE.getPreferredName(), _reduce);
-    builder.field(REDUCE_COUNT.getPreferredName(), _reduceCount);
+    if (_buildAggregation != null) {
+      builder.field(BUILD_AGGREGATION.getPreferredName(), _buildAggregation);
+    }
+    if (_buildAggregationCount != null) {
+      builder.field(BUILD_AGGREGATION_COUNT.getPreferredName(), _buildAggregationCount);
+    }
+    if (_collect != null) {
+      builder.field(COLLECT.getPreferredName(), _collect);
+    }
+    if (_collectCount != null) {
+      builder.field(COLLECT_COUNT.getPreferredName(), _collectCount);
+    }
+    if (_initialize != null) {
+      builder.field(INITIALIZE.getPreferredName(), _initialize);
+    }
+    if (_intializeCount != null) {
+      builder.field(INTIALIZE_COUNT.getPreferredName(), _intializeCount);
+    }
+    if (_reduce != null) {
+      builder.field(REDUCE.getPreferredName(), _reduce);
+    }
+    if (_reduceCount != null) {
+      builder.field(REDUCE_COUNT.getPreferredName(), _reduceCount);
+    }
     builder.endObject();
     return builder;
   }

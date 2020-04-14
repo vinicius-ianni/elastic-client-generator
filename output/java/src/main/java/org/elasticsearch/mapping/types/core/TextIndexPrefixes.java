@@ -32,8 +32,12 @@ public class TextIndexPrefixes  implements XContentable<TextIndexPrefixes> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(MAX_CHARS.getPreferredName(), _maxChars);
-    builder.field(MIN_CHARS.getPreferredName(), _minChars);
+    if (_maxChars != null) {
+      builder.field(MAX_CHARS.getPreferredName(), _maxChars);
+    }
+    if (_minChars != null) {
+      builder.field(MIN_CHARS.getPreferredName(), _minChars);
+    }
     builder.endObject();
     return builder;
   }

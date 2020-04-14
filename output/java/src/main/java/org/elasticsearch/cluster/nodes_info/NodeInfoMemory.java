@@ -32,8 +32,12 @@ public class NodeInfoMemory  implements XContentable<NodeInfoMemory> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_totalInBytes != null) {
+      builder.field(TOTAL_IN_BYTES.getPreferredName(), _totalInBytes);
+    }
     builder.endObject();
     return builder;
   }

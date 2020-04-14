@@ -62,13 +62,27 @@ public class TransportStats  implements XContentable<TransportStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(RX_COUNT.getPreferredName(), _rxCount);
-    builder.field(RX_SIZE.getPreferredName(), _rxSize);
-    builder.field(RX_SIZE_IN_BYTES.getPreferredName(), _rxSizeInBytes);
-    builder.field(SERVER_OPEN.getPreferredName(), _serverOpen);
-    builder.field(TX_COUNT.getPreferredName(), _txCount);
-    builder.field(TX_SIZE.getPreferredName(), _txSize);
-    builder.field(TX_SIZE_IN_BYTES.getPreferredName(), _txSizeInBytes);
+    if (_rxCount != null) {
+      builder.field(RX_COUNT.getPreferredName(), _rxCount);
+    }
+    if (_rxSize != null) {
+      builder.field(RX_SIZE.getPreferredName(), _rxSize);
+    }
+    if (_rxSizeInBytes != null) {
+      builder.field(RX_SIZE_IN_BYTES.getPreferredName(), _rxSizeInBytes);
+    }
+    if (_serverOpen != null) {
+      builder.field(SERVER_OPEN.getPreferredName(), _serverOpen);
+    }
+    if (_txCount != null) {
+      builder.field(TX_COUNT.getPreferredName(), _txCount);
+    }
+    if (_txSize != null) {
+      builder.field(TX_SIZE.getPreferredName(), _txSize);
+    }
+    if (_txSizeInBytes != null) {
+      builder.field(TX_SIZE_IN_BYTES.getPreferredName(), _txSizeInBytes);
+    }
     builder.endObject();
     return builder;
   }

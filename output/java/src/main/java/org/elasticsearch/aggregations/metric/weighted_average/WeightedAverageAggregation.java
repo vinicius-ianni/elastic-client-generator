@@ -44,7 +44,9 @@ public class WeightedAverageAggregation  implements XContentable<WeightedAverage
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORMAT.getPreferredName(), _format);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
     if (_value != null) {
       builder.field(VALUE.getPreferredName());
       _value.toXContent(builder, params);

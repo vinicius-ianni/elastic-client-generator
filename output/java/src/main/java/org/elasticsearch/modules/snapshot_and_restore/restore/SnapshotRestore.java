@@ -42,7 +42,9 @@ public class SnapshotRestore  implements XContentable<SnapshotRestore> {
     if (_indices != null) {
       builder.array(INDICES.getPreferredName(), _indices);
     }
-    builder.field(SNAPSHOT.getPreferredName(), _snapshot);
+    if (_snapshot != null) {
+      builder.field(SNAPSHOT.getPreferredName(), _snapshot);
+    }
     if (_shards != null) {
       builder.field(SHARDS.getPreferredName());
       _shards.toXContent(builder, params);

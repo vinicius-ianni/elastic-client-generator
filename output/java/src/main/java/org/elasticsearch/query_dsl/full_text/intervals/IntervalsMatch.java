@@ -51,10 +51,18 @@ public class IntervalsMatch  implements XContentable<IntervalsMatch> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
-    builder.field(MAX_GAPS.getPreferredName(), _maxGaps);
-    builder.field(ORDERED.getPreferredName(), _ordered);
-    builder.field(QUERY.getPreferredName(), _query);
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
+    if (_maxGaps != null) {
+      builder.field(MAX_GAPS.getPreferredName(), _maxGaps);
+    }
+    if (_ordered != null) {
+      builder.field(ORDERED.getPreferredName(), _ordered);
+    }
+    if (_query != null) {
+      builder.field(QUERY.getPreferredName(), _query);
+    }
     if (_useField != null) {
       builder.field(USE_FIELD.getPreferredName());
       _useField.toXContent(builder, params);

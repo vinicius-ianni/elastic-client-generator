@@ -104,7 +104,9 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
       builder.field(AUTH.getPreferredName());
       _auth.toXContent(builder, params);
     }
-    builder.field(BODY.getPreferredName(), _body);
+    if (_body != null) {
+      builder.field(BODY.getPreferredName(), _body);
+    }
     if (_connectionTimeout != null) {
       builder.field(CONNECTION_TIMEOUT.getPreferredName());
       _connectionTimeout.toXContent(builder, params);
@@ -113,7 +115,9 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
       builder.field(HEADERS.getPreferredName());
       _headers.toXContent(builder, params);
     }
-    builder.field(HOST.getPreferredName(), _host);
+    if (_host != null) {
+      builder.field(HOST.getPreferredName(), _host);
+    }
     if (_method != null) {
       builder.field(METHOD.getPreferredName());
       _method.toXContent(builder, params);
@@ -122,8 +126,12 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
       builder.field(PARAMS.getPreferredName());
       _params.toXContent(builder, params);
     }
-    builder.field(PATH.getPreferredName(), _path);
-    builder.field(PORT.getPreferredName(), _port);
+    if (_path != null) {
+      builder.field(PATH.getPreferredName(), _path);
+    }
+    if (_port != null) {
+      builder.field(PORT.getPreferredName(), _port);
+    }
     if (_proxy != null) {
       builder.field(PROXY.getPreferredName());
       _proxy.toXContent(builder, params);
@@ -136,7 +144,9 @@ public class HttpInputRequest  implements XContentable<HttpInputRequest> {
       builder.field(SCHEME.getPreferredName());
       _scheme.toXContent(builder, params);
     }
-    builder.field(URL.getPreferredName(), _url);
+    if (_url != null) {
+      builder.field(URL.getPreferredName(), _url);
+    }
     builder.endObject();
     return builder;
   }

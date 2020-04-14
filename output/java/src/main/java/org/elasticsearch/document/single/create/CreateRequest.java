@@ -71,8 +71,12 @@ public class CreateRequest<TDocument>  implements XContentable<CreateRequest<TDo
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DOCUMENT.getPreferredName(), _document);
-    builder.field(PIPELINE.getPreferredName(), _pipeline);
+    if (_document != null) {
+      builder.field(DOCUMENT.getPreferredName(), _document);
+    }
+    if (_pipeline != null) {
+      builder.field(PIPELINE.getPreferredName(), _pipeline);
+    }
     if (_refresh != null) {
       builder.field(REFRESH.getPreferredName());
       _refresh.toXContent(builder, params);
@@ -85,12 +89,16 @@ public class CreateRequest<TDocument>  implements XContentable<CreateRequest<TDo
       builder.field(TIMEOUT.getPreferredName());
       _timeout.toXContent(builder, params);
     }
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     if (_versionType != null) {
       builder.field(VERSION_TYPE.getPreferredName());
       _versionType.toXContent(builder, params);
     }
-    builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    if (_waitForActiveShards != null) {
+      builder.field(WAIT_FOR_ACTIVE_SHARDS.getPreferredName(), _waitForActiveShards);
+    }
     builder.endObject();
     return builder;
   }

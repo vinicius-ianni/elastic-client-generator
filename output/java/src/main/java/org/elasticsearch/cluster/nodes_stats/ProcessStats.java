@@ -53,8 +53,12 @@ public class ProcessStats  implements XContentable<ProcessStats> {
       builder.field(MEM.getPreferredName());
       _mem.toXContent(builder, params);
     }
-    builder.field(OPEN_FILE_DESCRIPTORS.getPreferredName(), _openFileDescriptors);
-    builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    if (_openFileDescriptors != null) {
+      builder.field(OPEN_FILE_DESCRIPTORS.getPreferredName(), _openFileDescriptors);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(), _timestamp);
+    }
     builder.endObject();
     return builder;
   }

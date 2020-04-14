@@ -61,7 +61,9 @@ public class BoolQuery  implements XContentable<BoolQuery> {
     if (_filter != null) {
       builder.array(FILTER.getPreferredName(), _filter);
     }
-    builder.field(LOCKED.getPreferredName(), _locked);
+    if (_locked != null) {
+      builder.field(LOCKED.getPreferredName(), _locked);
+    }
     if (_minimumShouldMatch != null) {
       builder.field(MINIMUM_SHOULD_MATCH.getPreferredName());
       _minimumShouldMatch.toXContent(builder, params);

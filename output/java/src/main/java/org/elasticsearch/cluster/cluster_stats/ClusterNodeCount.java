@@ -56,12 +56,24 @@ public class ClusterNodeCount  implements XContentable<ClusterNodeCount> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(COORDINATING_ONLY.getPreferredName(), _coordinatingOnly);
-    builder.field(DATA.getPreferredName(), _data);
-    builder.field(INGEST.getPreferredName(), _ingest);
-    builder.field(MASTER.getPreferredName(), _master);
-    builder.field(TOTAL.getPreferredName(), _total);
-    builder.field(VOTING_ONLY.getPreferredName(), _votingOnly);
+    if (_coordinatingOnly != null) {
+      builder.field(COORDINATING_ONLY.getPreferredName(), _coordinatingOnly);
+    }
+    if (_data != null) {
+      builder.field(DATA.getPreferredName(), _data);
+    }
+    if (_ingest != null) {
+      builder.field(INGEST.getPreferredName(), _ingest);
+    }
+    if (_master != null) {
+      builder.field(MASTER.getPreferredName(), _master);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
+    if (_votingOnly != null) {
+      builder.field(VOTING_ONLY.getPreferredName(), _votingOnly);
+    }
     builder.endObject();
     return builder;
   }

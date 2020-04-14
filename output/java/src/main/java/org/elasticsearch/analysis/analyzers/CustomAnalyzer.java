@@ -50,8 +50,12 @@ public class CustomAnalyzer  implements XContentable<CustomAnalyzer> {
     if (_filter != null) {
       builder.array(FILTER.getPreferredName(), _filter);
     }
-    builder.field(POSITION_OFFSET_GAP.getPreferredName(), _positionOffsetGap);
-    builder.field(TOKENIZER.getPreferredName(), _tokenizer);
+    if (_positionOffsetGap != null) {
+      builder.field(POSITION_OFFSET_GAP.getPreferredName(), _positionOffsetGap);
+    }
+    if (_tokenizer != null) {
+      builder.field(TOKENIZER.getPreferredName(), _tokenizer);
+    }
     builder.endObject();
     return builder;
   }

@@ -35,7 +35,9 @@ public class CharFilterDetail  implements XContentable<CharFilterDetail> {
     if (_filteredText != null) {
       builder.array(FILTERED_TEXT.getPreferredName(), _filteredText);
     }
-    builder.field(NAME.getPreferredName(), _name);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
     builder.endObject();
     return builder;
   }

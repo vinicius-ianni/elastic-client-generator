@@ -50,13 +50,21 @@ public class PlainRequestBase<TParameters>  implements XContentable<PlainRequest
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ERROR_TRACE.getPreferredName(), _errorTrace);
+    if (_errorTrace != null) {
+      builder.field(ERROR_TRACE.getPreferredName(), _errorTrace);
+    }
     if (_filterPath != null) {
       builder.array(FILTER_PATH.getPreferredName(), _filterPath);
     }
-    builder.field(HUMAN.getPreferredName(), _human);
-    builder.field(PRETTY.getPreferredName(), _pretty);
-    builder.field(SOURCE_QUERY_STRING.getPreferredName(), _sourceQueryString);
+    if (_human != null) {
+      builder.field(HUMAN.getPreferredName(), _human);
+    }
+    if (_pretty != null) {
+      builder.field(PRETTY.getPreferredName(), _pretty);
+    }
+    if (_sourceQueryString != null) {
+      builder.field(SOURCE_QUERY_STRING.getPreferredName(), _sourceQueryString);
+    }
     builder.endObject();
     return builder;
   }

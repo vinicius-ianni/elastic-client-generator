@@ -68,13 +68,21 @@ public class CatNodesRequest  implements XContentable<CatNodesRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FORMAT.getPreferredName(), _format);
-    builder.field(FULL_ID.getPreferredName(), _fullId);
+    if (_format != null) {
+      builder.field(FORMAT.getPreferredName(), _format);
+    }
+    if (_fullId != null) {
+      builder.field(FULL_ID.getPreferredName(), _fullId);
+    }
     if (_headers != null) {
       builder.array(HEADERS.getPreferredName(), _headers);
     }
-    builder.field(HELP.getPreferredName(), _help);
-    builder.field(LOCAL.getPreferredName(), _local);
+    if (_help != null) {
+      builder.field(HELP.getPreferredName(), _help);
+    }
+    if (_local != null) {
+      builder.field(LOCAL.getPreferredName(), _local);
+    }
     if (_masterTimeout != null) {
       builder.field(MASTER_TIMEOUT.getPreferredName());
       _masterTimeout.toXContent(builder, params);
@@ -82,7 +90,9 @@ public class CatNodesRequest  implements XContentable<CatNodesRequest> {
     if (_sortByColumns != null) {
       builder.array(SORT_BY_COLUMNS.getPreferredName(), _sortByColumns);
     }
-    builder.field(VERBOSE.getPreferredName(), _verbose);
+    if (_verbose != null) {
+      builder.field(VERBOSE.getPreferredName(), _verbose);
+    }
     builder.endObject();
     return builder;
   }

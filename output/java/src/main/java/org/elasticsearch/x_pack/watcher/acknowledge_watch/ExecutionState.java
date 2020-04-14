@@ -32,9 +32,13 @@ public class ExecutionState  implements XContentable<ExecutionState> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(SUCCESSFUL.getPreferredName(), _successful);
-    builder.field(TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_successful != null) {
+      builder.field(SUCCESSFUL.getPreferredName(), _successful);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

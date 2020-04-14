@@ -38,9 +38,15 @@ public class RoleUsage  implements XContentable<RoleUsage> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(DLS.getPreferredName(), _dls);
-    builder.field(FLS.getPreferredName(), _fls);
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_dls != null) {
+      builder.field(DLS.getPreferredName(), _dls);
+    }
+    if (_fls != null) {
+      builder.field(FLS.getPreferredName(), _fls);
+    }
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

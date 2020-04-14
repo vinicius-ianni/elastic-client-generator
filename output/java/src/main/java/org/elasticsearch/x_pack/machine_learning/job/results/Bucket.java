@@ -88,7 +88,9 @@ public class Bucket  implements XContentable<Bucket> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ANOMALY_SCORE.getPreferredName(), _anomalyScore);
+    if (_anomalyScore != null) {
+      builder.field(ANOMALY_SCORE.getPreferredName(), _anomalyScore);
+    }
     if (_bucketInfluencers != null) {
       builder.array(BUCKET_INFLUENCERS.getPreferredName(), _bucketInfluencers);
     }
@@ -96,17 +98,31 @@ public class Bucket  implements XContentable<Bucket> {
       builder.field(BUCKET_SPAN.getPreferredName());
       _bucketSpan.toXContent(builder, params);
     }
-    builder.field(EVENT_COUNT.getPreferredName(), _eventCount);
-    builder.field(INITIAL_ANOMALY_SCORE.getPreferredName(), _initialAnomalyScore);
-    builder.field(IS_INTERIM.getPreferredName(), _isInterim);
-    builder.field(JOB_ID.getPreferredName(), _jobId);
+    if (_eventCount != null) {
+      builder.field(EVENT_COUNT.getPreferredName(), _eventCount);
+    }
+    if (_initialAnomalyScore != null) {
+      builder.field(INITIAL_ANOMALY_SCORE.getPreferredName(), _initialAnomalyScore);
+    }
+    if (_isInterim != null) {
+      builder.field(IS_INTERIM.getPreferredName(), _isInterim);
+    }
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
     if (_partitionScores != null) {
       builder.array(PARTITION_SCORES.getPreferredName(), _partitionScores);
     }
-    builder.field(PROCESSING_TIME_MS.getPreferredName(), _processingTimeMs);
-    builder.field(RESULT_TYPE.getPreferredName(), _resultType);
-    builder.field(TIMESTAMP.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    if (_processingTimeMs != null) {
+      builder.field(PROCESSING_TIME_MS.getPreferredName(), _processingTimeMs);
+    }
+    if (_resultType != null) {
+      builder.field(RESULT_TYPE.getPreferredName(), _resultType);
+    }
+    if (_timestamp != null) {
+      builder.field(TIMESTAMP.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_timestamp.toInstant()));
+    }
     builder.endObject();
     return builder;
   }

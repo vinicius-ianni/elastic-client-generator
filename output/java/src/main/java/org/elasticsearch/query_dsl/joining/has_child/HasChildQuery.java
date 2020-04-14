@@ -66,13 +66,19 @@ public class HasChildQuery  implements XContentable<HasChildQuery> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    if (_ignoreUnmapped != null) {
+      builder.field(IGNORE_UNMAPPED.getPreferredName(), _ignoreUnmapped);
+    }
     if (_innerHits != null) {
       builder.field(INNER_HITS.getPreferredName());
       _innerHits.toXContent(builder, params);
     }
-    builder.field(MAX_CHILDREN.getPreferredName(), _maxChildren);
-    builder.field(MIN_CHILDREN.getPreferredName(), _minChildren);
+    if (_maxChildren != null) {
+      builder.field(MAX_CHILDREN.getPreferredName(), _maxChildren);
+    }
+    if (_minChildren != null) {
+      builder.field(MIN_CHILDREN.getPreferredName(), _minChildren);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);

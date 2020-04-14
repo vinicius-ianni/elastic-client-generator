@@ -113,29 +113,51 @@ public class CountRequest  implements XContentable<CountRequest> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
-    builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
-    builder.field(ANALYZER.getPreferredName(), _analyzer);
+    if (_allowNoIndices != null) {
+      builder.field(ALLOW_NO_INDICES.getPreferredName(), _allowNoIndices);
+    }
+    if (_analyzeWildcard != null) {
+      builder.field(ANALYZE_WILDCARD.getPreferredName(), _analyzeWildcard);
+    }
+    if (_analyzer != null) {
+      builder.field(ANALYZER.getPreferredName(), _analyzer);
+    }
     if (_defaultOperator != null) {
       builder.field(DEFAULT_OPERATOR.getPreferredName());
       _defaultOperator.toXContent(builder, params);
     }
-    builder.field(DF.getPreferredName(), _df);
+    if (_df != null) {
+      builder.field(DF.getPreferredName(), _df);
+    }
     if (_expandWildcards != null) {
       builder.field(EXPAND_WILDCARDS.getPreferredName());
       _expandWildcards.toXContent(builder, params);
     }
-    builder.field(IGNORE_THROTTLED.getPreferredName(), _ignoreThrottled);
-    builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
-    builder.field(LENIENT.getPreferredName(), _lenient);
-    builder.field(MIN_SCORE.getPreferredName(), _minScore);
-    builder.field(PREFERENCE.getPreferredName(), _preference);
-    builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
+    if (_ignoreThrottled != null) {
+      builder.field(IGNORE_THROTTLED.getPreferredName(), _ignoreThrottled);
+    }
+    if (_ignoreUnavailable != null) {
+      builder.field(IGNORE_UNAVAILABLE.getPreferredName(), _ignoreUnavailable);
+    }
+    if (_lenient != null) {
+      builder.field(LENIENT.getPreferredName(), _lenient);
+    }
+    if (_minScore != null) {
+      builder.field(MIN_SCORE.getPreferredName(), _minScore);
+    }
+    if (_preference != null) {
+      builder.field(PREFERENCE.getPreferredName(), _preference);
+    }
+    if (_queryOnQueryString != null) {
+      builder.field(QUERY_ON_QUERY_STRING.getPreferredName(), _queryOnQueryString);
+    }
     if (_routing != null) {
       builder.field(ROUTING.getPreferredName());
       _routing.toXContent(builder, params);
     }
-    builder.field(TERMINATE_AFTER.getPreferredName(), _terminateAfter);
+    if (_terminateAfter != null) {
+      builder.field(TERMINATE_AFTER.getPreferredName(), _terminateAfter);
+    }
     if (_query != null) {
       builder.field(QUERY.getPreferredName());
       _query.toXContent(builder, params);

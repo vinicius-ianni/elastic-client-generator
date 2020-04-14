@@ -56,12 +56,24 @@ public class QueryBreakdown  implements XContentable<QueryBreakdown> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ADVANCE.getPreferredName(), _advance);
-    builder.field(BUILD_SCORER.getPreferredName(), _buildScorer);
-    builder.field(CREATE_WEIGHT.getPreferredName(), _createWeight);
-    builder.field(MATCH.getPreferredName(), _match);
-    builder.field(NEXT_DOC.getPreferredName(), _nextDoc);
-    builder.field(SCORE.getPreferredName(), _score);
+    if (_advance != null) {
+      builder.field(ADVANCE.getPreferredName(), _advance);
+    }
+    if (_buildScorer != null) {
+      builder.field(BUILD_SCORER.getPreferredName(), _buildScorer);
+    }
+    if (_createWeight != null) {
+      builder.field(CREATE_WEIGHT.getPreferredName(), _createWeight);
+    }
+    if (_match != null) {
+      builder.field(MATCH.getPreferredName(), _match);
+    }
+    if (_nextDoc != null) {
+      builder.field(NEXT_DOC.getPreferredName(), _nextDoc);
+    }
+    if (_score != null) {
+      builder.field(SCORE.getPreferredName(), _score);
+    }
     builder.endObject();
     return builder;
   }

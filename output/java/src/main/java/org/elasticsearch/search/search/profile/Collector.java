@@ -48,9 +48,15 @@ public class Collector  implements XContentable<Collector> {
     if (_children != null) {
       builder.array(CHILDREN.getPreferredName(), _children);
     }
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(REASON.getPreferredName(), _reason);
-    builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_reason != null) {
+      builder.field(REASON.getPreferredName(), _reason);
+    }
+    if (_timeInNanos != null) {
+      builder.field(TIME_IN_NANOS.getPreferredName(), _timeInNanos);
+    }
     builder.endObject();
     return builder;
   }

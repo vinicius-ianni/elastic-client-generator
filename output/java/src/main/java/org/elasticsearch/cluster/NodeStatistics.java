@@ -45,9 +45,15 @@ public class NodeStatistics  implements XContentable<NodeStatistics> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FAILED.getPreferredName(), _failed);
-    builder.field(SUCCESSFUL.getPreferredName(), _successful);
-    builder.field(TOTAL.getPreferredName(), _total);
+    if (_failed != null) {
+      builder.field(FAILED.getPreferredName(), _failed);
+    }
+    if (_successful != null) {
+      builder.field(SUCCESSFUL.getPreferredName(), _successful);
+    }
+    if (_total != null) {
+      builder.field(TOTAL.getPreferredName(), _total);
+    }
     if (_failures != null) {
       builder.array(FAILURES.getPreferredName(), _failures);
     }

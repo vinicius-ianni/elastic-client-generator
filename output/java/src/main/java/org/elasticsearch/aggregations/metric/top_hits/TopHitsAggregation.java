@@ -94,8 +94,12 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
     if (_docvalueFields != null) {
       builder.array(DOCVALUE_FIELDS.getPreferredName(), _docvalueFields);
     }
-    builder.field(EXPLAIN.getPreferredName(), _explain);
-    builder.field(FROM.getPreferredName(), _from);
+    if (_explain != null) {
+      builder.field(EXPLAIN.getPreferredName(), _explain);
+    }
+    if (_from != null) {
+      builder.field(FROM.getPreferredName(), _from);
+    }
     if (_highlight != null) {
       builder.field(HIGHLIGHT.getPreferredName());
       _highlight.toXContent(builder, params);
@@ -104,7 +108,9 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
       builder.field(SCRIPT_FIELDS.getPreferredName());
       _scriptFields.toXContent(builder, params);
     }
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     if (_sort != null) {
       builder.array(SORT.getPreferredName(), _sort);
     }
@@ -115,8 +121,12 @@ public class TopHitsAggregation  implements XContentable<TopHitsAggregation> {
     if (_storedFields != null) {
       builder.array(STORED_FIELDS.getPreferredName(), _storedFields);
     }
-    builder.field(TRACK_SCORES.getPreferredName(), _trackScores);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_trackScores != null) {
+      builder.field(TRACK_SCORES.getPreferredName(), _trackScores);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

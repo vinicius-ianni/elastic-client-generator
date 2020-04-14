@@ -44,9 +44,15 @@ public class PatternAnalyzer  implements XContentable<PatternAnalyzer> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(FLAGS.getPreferredName(), _flags);
-    builder.field(LOWERCASE.getPreferredName(), _lowercase);
-    builder.field(PATTERN.getPreferredName(), _pattern);
+    if (_flags != null) {
+      builder.field(FLAGS.getPreferredName(), _flags);
+    }
+    if (_lowercase != null) {
+      builder.field(LOWERCASE.getPreferredName(), _lowercase);
+    }
+    if (_pattern != null) {
+      builder.field(PATTERN.getPreferredName(), _pattern);
+    }
     if (_stopwords != null) {
       builder.field(STOPWORDS.getPreferredName());
       _stopwords.toXContent(builder, params);

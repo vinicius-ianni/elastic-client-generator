@@ -47,9 +47,15 @@ public class NodeInfoHttp  implements XContentable<NodeInfoHttp> {
     if (_boundAddress != null) {
       builder.array(BOUND_ADDRESS.getPreferredName(), _boundAddress);
     }
-    builder.field(MAX_CONTENT_LENGTH.getPreferredName(), _maxContentLength);
-    builder.field(MAX_CONTENT_LENGTH_IN_BYTES.getPreferredName(), _maxContentLengthInBytes);
-    builder.field(PUBLISH_ADDRESS.getPreferredName(), _publishAddress);
+    if (_maxContentLength != null) {
+      builder.field(MAX_CONTENT_LENGTH.getPreferredName(), _maxContentLength);
+    }
+    if (_maxContentLengthInBytes != null) {
+      builder.field(MAX_CONTENT_LENGTH_IN_BYTES.getPreferredName(), _maxContentLengthInBytes);
+    }
+    if (_publishAddress != null) {
+      builder.field(PUBLISH_ADDRESS.getPreferredName(), _publishAddress);
+    }
     builder.endObject();
     return builder;
   }

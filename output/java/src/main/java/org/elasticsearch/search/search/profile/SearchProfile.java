@@ -45,7 +45,9 @@ public class SearchProfile  implements XContentable<SearchProfile> {
     if (_query != null) {
       builder.array(QUERY.getPreferredName(), _query);
     }
-    builder.field(REWRITE_TIME.getPreferredName(), _rewriteTime);
+    if (_rewriteTime != null) {
+      builder.field(REWRITE_TIME.getPreferredName(), _rewriteTime);
+    }
     builder.endObject();
     return builder;
   }

@@ -67,7 +67,9 @@ public class MultiTermQueryRewrite  implements XContentable<MultiTermQueryRewrit
       builder.field(SCORING_BOOLEAN.getPreferredName());
       _scoringBoolean.toXContent(builder, params);
     }
-    builder.field(SIZE.getPreferredName(), _size);
+    if (_size != null) {
+      builder.field(SIZE.getPreferredName(), _size);
+    }
     builder.endObject();
     return builder;
   }

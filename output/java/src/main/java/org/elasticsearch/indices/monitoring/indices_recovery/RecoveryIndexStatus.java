@@ -69,9 +69,15 @@ public class RecoveryIndexStatus  implements XContentable<RecoveryIndexStatus> {
       builder.field(SIZE.getPreferredName());
       _size.toXContent(builder, params);
     }
-    builder.field(SOURCE_THROTTLE_TIME_IN_MILLIS.getPreferredName(), _sourceThrottleTimeInMillis);
-    builder.field(TARGET_THROTTLE_TIME_IN_MILLIS.getPreferredName(), _targetThrottleTimeInMillis);
-    builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    if (_sourceThrottleTimeInMillis != null) {
+      builder.field(SOURCE_THROTTLE_TIME_IN_MILLIS.getPreferredName(), _sourceThrottleTimeInMillis);
+    }
+    if (_targetThrottleTimeInMillis != null) {
+      builder.field(TARGET_THROTTLE_TIME_IN_MILLIS.getPreferredName(), _targetThrottleTimeInMillis);
+    }
+    if (_totalTimeInMillis != null) {
+      builder.field(TOTAL_TIME_IN_MILLIS.getPreferredName(), _totalTimeInMillis);
+    }
     builder.endObject();
     return builder;
   }

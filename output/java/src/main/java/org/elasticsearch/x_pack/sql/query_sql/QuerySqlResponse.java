@@ -47,7 +47,9 @@ public class QuerySqlResponse  implements XContentable<QuerySqlResponse> {
     if (_columns != null) {
       builder.array(COLUMNS.getPreferredName(), _columns);
     }
-    builder.field(CURSOR.getPreferredName(), _cursor);
+    if (_cursor != null) {
+      builder.field(CURSOR.getPreferredName(), _cursor);
+    }
     if (_rows != null) {
       builder.array(ROWS.getPreferredName(), _rows);
     }

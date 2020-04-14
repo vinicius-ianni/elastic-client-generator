@@ -68,16 +68,30 @@ public class PluginStats  implements XContentable<PluginStats> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(CLASSNAME.getPreferredName(), _classname);
-    builder.field(DESCRIPTION.getPreferredName(), _description);
-    builder.field(ELASTICSEARCH_VERSION.getPreferredName(), _elasticsearchVersion);
+    if (_classname != null) {
+      builder.field(CLASSNAME.getPreferredName(), _classname);
+    }
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
+    if (_elasticsearchVersion != null) {
+      builder.field(ELASTICSEARCH_VERSION.getPreferredName(), _elasticsearchVersion);
+    }
     if (_extendedPlugins != null) {
       builder.array(EXTENDED_PLUGINS.getPreferredName(), _extendedPlugins);
     }
-    builder.field(NAME.getPreferredName(), _name);
-    builder.field(HAS_NATIVE_CONTROLLER.getPreferredName(), _hasNativeController);
-    builder.field(JAVA_VERSION.getPreferredName(), _javaVersion);
-    builder.field(VERSION.getPreferredName(), _version);
+    if (_name != null) {
+      builder.field(NAME.getPreferredName(), _name);
+    }
+    if (_hasNativeController != null) {
+      builder.field(HAS_NATIVE_CONTROLLER.getPreferredName(), _hasNativeController);
+    }
+    if (_javaVersion != null) {
+      builder.field(JAVA_VERSION.getPreferredName(), _javaVersion);
+    }
+    if (_version != null) {
+      builder.field(VERSION.getPreferredName(), _version);
+    }
     builder.endObject();
     return builder;
   }

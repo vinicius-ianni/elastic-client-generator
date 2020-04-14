@@ -100,28 +100,48 @@ public class LifecycleExplain  implements XContentable<LifecycleExplain> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(ACTION.getPreferredName(), _action);
-    builder.field(ACTION_TIME_MILLIS.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_actionTimeMillis.toInstant()));
-    builder.field(FAILED_STEP.getPreferredName(), _failedStep);
+    if (_action != null) {
+      builder.field(ACTION.getPreferredName(), _action);
+    }
+    if (_actionTimeMillis != null) {
+      builder.field(ACTION_TIME_MILLIS.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_actionTimeMillis.toInstant()));
+    }
+    if (_failedStep != null) {
+      builder.field(FAILED_STEP.getPreferredName(), _failedStep);
+    }
     if (_index != null) {
       builder.field(INDEX.getPreferredName());
       _index.toXContent(builder, params);
     }
-    builder.field(LIFECYCLE_DATE_MILLIS.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_lifecycleDateMillis.toInstant()));
-    builder.field(MANAGED.getPreferredName(), _managed);
-    builder.field(PHASE.getPreferredName(), _phase);
-    builder.field(PHASE_TIME_MILLIS.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_phaseTimeMillis.toInstant()));
-    builder.field(POLICY.getPreferredName(), _policy);
-    builder.field(STEP.getPreferredName(), _step);
+    if (_lifecycleDateMillis != null) {
+      builder.field(LIFECYCLE_DATE_MILLIS.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_lifecycleDateMillis.toInstant()));
+    }
+    if (_managed != null) {
+      builder.field(MANAGED.getPreferredName(), _managed);
+    }
+    if (_phase != null) {
+      builder.field(PHASE.getPreferredName(), _phase);
+    }
+    if (_phaseTimeMillis != null) {
+      builder.field(PHASE_TIME_MILLIS.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_phaseTimeMillis.toInstant()));
+    }
+    if (_policy != null) {
+      builder.field(POLICY.getPreferredName(), _policy);
+    }
+    if (_step != null) {
+      builder.field(STEP.getPreferredName(), _step);
+    }
     if (_stepInfo != null) {
       builder.field(STEP_INFO.getPreferredName());
       _stepInfo.toXContent(builder, params);
     }
-    builder.field(STEP_TIME_MILLIS.getPreferredName(),
-      DateTimeFormatter.ISO_DATE.format(_stepTimeMillis.toInstant()));
+    if (_stepTimeMillis != null) {
+      builder.field(STEP_TIME_MILLIS.getPreferredName(),
+        DateTimeFormatter.ISO_DATE.format(_stepTimeMillis.toInstant()));
+    }
     if (_age != null) {
       builder.field(AGE.getPreferredName());
       _age.toXContent(builder, params);

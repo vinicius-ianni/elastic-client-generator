@@ -38,7 +38,9 @@ public class GetAliasResponse extends DictionaryResponseBase<IndexName, IndexAli
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
-    builder.field(IS_VALID.getPreferredName(), _isValid);
+    if (_isValid != null) {
+      builder.field(IS_VALID.getPreferredName(), _isValid);
+    }
     builder.endObject();
     return builder;
   }

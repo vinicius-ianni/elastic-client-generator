@@ -68,23 +68,33 @@ public class SnapshotStatus  implements XContentable<SnapshotStatus> {
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
+    if (_includeGlobalState != null) {
+      builder.field(INCLUDE_GLOBAL_STATE.getPreferredName(), _includeGlobalState);
+    }
     if (_indices != null) {
       builder.field(INDICES.getPreferredName());
       _indices.toXContent(builder, params);
     }
-    builder.field(REPOSITORY.getPreferredName(), _repository);
+    if (_repository != null) {
+      builder.field(REPOSITORY.getPreferredName(), _repository);
+    }
     if (_shardsStats != null) {
       builder.field(SHARDS_STATS.getPreferredName());
       _shardsStats.toXContent(builder, params);
     }
-    builder.field(SNAPSHOT.getPreferredName(), _snapshot);
-    builder.field(STATE.getPreferredName(), _state);
+    if (_snapshot != null) {
+      builder.field(SNAPSHOT.getPreferredName(), _snapshot);
+    }
+    if (_state != null) {
+      builder.field(STATE.getPreferredName(), _state);
+    }
     if (_stats != null) {
       builder.field(STATS.getPreferredName());
       _stats.toXContent(builder, params);
     }
-    builder.field(UUID.getPreferredName(), _uuid);
+    if (_uuid != null) {
+      builder.field(UUID.getPreferredName(), _uuid);
+    }
     builder.endObject();
     return builder;
   }

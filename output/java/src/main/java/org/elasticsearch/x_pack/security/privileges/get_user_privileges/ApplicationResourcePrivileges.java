@@ -38,7 +38,9 @@ public class ApplicationResourcePrivileges  implements XContentable<ApplicationR
   @Override
   public XContentBuilder toXContent(XContentBuilder builder, ToXContent.Params params) throws IOException {
     builder.startObject();
-    builder.field(APPLICATION.getPreferredName(), _application);
+    if (_application != null) {
+      builder.field(APPLICATION.getPreferredName(), _application);
+    }
     if (_privileges != null) {
       builder.array(PRIVILEGES.getPreferredName(), _privileges);
     }

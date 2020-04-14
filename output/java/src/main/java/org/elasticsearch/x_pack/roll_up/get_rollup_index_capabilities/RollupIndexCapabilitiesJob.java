@@ -48,9 +48,15 @@ public class RollupIndexCapabilitiesJob  implements XContentable<RollupIndexCapa
       builder.field(FIELDS.getPreferredName());
       _fields.toXContent(builder, params);
     }
-    builder.field(INDEX_PATTERN.getPreferredName(), _indexPattern);
-    builder.field(JOB_ID.getPreferredName(), _jobId);
-    builder.field(ROLLUP_INDEX.getPreferredName(), _rollupIndex);
+    if (_indexPattern != null) {
+      builder.field(INDEX_PATTERN.getPreferredName(), _indexPattern);
+    }
+    if (_jobId != null) {
+      builder.field(JOB_ID.getPreferredName(), _jobId);
+    }
+    if (_rollupIndex != null) {
+      builder.field(ROLLUP_INDEX.getPreferredName(), _rollupIndex);
+    }
     builder.endObject();
     return builder;
   }

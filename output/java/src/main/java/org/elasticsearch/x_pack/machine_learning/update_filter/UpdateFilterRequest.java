@@ -41,7 +41,9 @@ public class UpdateFilterRequest  implements XContentable<UpdateFilterRequest> {
     if (_addItems != null) {
       builder.array(ADD_ITEMS.getPreferredName(), _addItems);
     }
-    builder.field(DESCRIPTION.getPreferredName(), _description);
+    if (_description != null) {
+      builder.field(DESCRIPTION.getPreferredName(), _description);
+    }
     if (_removeItems != null) {
       builder.array(REMOVE_ITEMS.getPreferredName(), _removeItems);
     }
