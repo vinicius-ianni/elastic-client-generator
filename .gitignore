@@ -39,3 +39,10 @@ node_modules
 # Build output directory
 dist/
 flight-recorder-generator/output
+src/api-specification.d.ts
+src/domain.d.ts
+src/main.d.ts
+src/specification/rest-spec-mapping.d.ts
+src/specification/type-reader.d.ts
+src/specification/validator.d.ts
+*.d.ts
