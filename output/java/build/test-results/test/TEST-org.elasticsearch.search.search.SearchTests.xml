@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.elasticsearch.search.search.SearchTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-06-04T13:01:30" hostname="mpdreamz-laptop" time="0.426">
-  <properties/>
-  <testcase name="X" classname="org.elasticsearch.search.search.SearchTests" time="0.426"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
