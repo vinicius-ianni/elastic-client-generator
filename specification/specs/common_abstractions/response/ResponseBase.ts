@@ -1,3 +1,4 @@
 class ResponseBase implements IResponse {
-	error: ServerError;
+	debug_information: string;
+	server_error: ServerError;
 }

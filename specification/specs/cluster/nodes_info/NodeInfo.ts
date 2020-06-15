@@ -11,6 +11,7 @@ class NodeInfo {
 	process: NodeProcessInfo;
 	roles: NodeRole[];
 	settings: string[];
+	@prop_serializer("VerbatimInterfaceReadOnlyDictionaryKeysFormatter`2")
 	thread_pool: Dictionary<string, NodeThreadPoolInfo>;
 	transport: NodeInfoTransport;
 	transport_address: string;

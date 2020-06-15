@@ -1,19 +1,14 @@
 package org.elasticsearch.search.search;
 
 import org.elasticsearch.ElasticsearchClient;
+import org.elasticsearch.NamedContainer;
+import org.elasticsearch.aggregations.AggregationContainer;
 import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.common.xcontent.ToXContent;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.json.JsonXContent;
 import org.elasticsearch.query_dsl.MatchAllQuery;
 import org.elasticsearch.query_dsl.abstractions.container.QueryContainer;
 import org.elasticsearch.search.search.hits.TotalHitsRelation;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 public class SearchTests {
 
