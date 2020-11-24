@@ -30,10 +30,7 @@ export function loadModel(spec: Specification): Model {
   // 'any' is translated to 'object'
   allTypeNames.set("object", {name:"object", namespace: "internal"});
 
-  // Types that have some recursive generic params in spec but have no generic params
-  const nonRecursiveImpl = new Set(["RequestBase", "ResponseBase", "NodesResponseBase", "ListTasksResponse",
-    "WriteResponseBase"]);
-
+  // See makeImplements()
   const autoFixedGenerics = new Set<string>();
 
   // Make endpoints, this will pull all needed types transitively
@@ -156,8 +153,8 @@ export function loadModel(spec: Specification): Model {
   }
 
   function makeImplements(impl: Domain.ImplementsReference, openGenerics: string[]): Implements {
-    // Autofix requests and responses that have self-reference generic parameters
 
+    // Autofix requests and responses that have self-reference generic parameters
     if (impl.closedGenerics.length > 0 && impl.type.openGenerics.length === 0) {
       if (!autoFixedGenerics.has(impl.type.name)) {
         console.log("Auto fixing implements generic parameters for " + impl.type.name);
