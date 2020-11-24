@@ -7,6 +7,7 @@ import {
   InstanceOf,
   Model,
   Property,
+  RequestInterface,
   Stability,
   TypeDefinition,
   TypeName,
@@ -37,6 +38,40 @@ export function loadModel(spec: Specification): Model {
   model.endpoints = spec.endpoints.map(ep => makeEndpoint(ep)).filter(ep => ep);
   model.types = Array.from(allTypeDefinitions.values());
 
+  // Move path and query properties docs to the corresponding request properties
+  model.endpoints.forEach(ep => {
+    const specEp = spec.endpoints.find(sep => sep.name === ep.name);
+    const reqType = allTypeDefinitions.get(ep.request.name);
+
+    if (reqType._kind === "request") {
+      if (!reqType.description) {
+        reqType.description = nonEmpty(specEp.body && specEp.body.description);
+      }
+
+      reqType.path.forEach(prop => {
+        if (prop.description && prop.description.length > 0) return; // already has some docs
+        outer: for (const path of specEp.url.paths) {
+          for (const part of path.parts) {
+            if (part.name === prop.name) {
+              prop.description = nonEmpty(part.description);
+              break outer;
+            }
+          }
+        }
+      });
+
+      reqType.query.forEach(prop => {
+        if (prop.description && prop.description.length > 0) return; // already has some docs
+        for (const param of specEp.queryStringParameters) {
+          if (param.name === prop.name) {
+            prop.description = nonEmpty(param.description);
+            break;
+          }
+        }
+      });
+    }
+  });
+
   console.log("Model: " + model.types.length + " types (" + spec.types.length + " in spec)");
   console.log("Model: " + model.endpoints.length + " endpoints (" + spec.endpoints.length + " in spec)");
 
@@ -51,16 +86,43 @@ export function loadModel(spec: Specification): Model {
       return undefined;
     }
 
+    // Move endpoint docs to the request definition
+    const request = makeTypeDefinition(api.typeMapping.request) as RequestInterface;
+    if (!request.description || request.description.length === 0) {
+      request.description = nonEmpty(api.body && api.body.description);
+    }
+
+    request.path.forEach(prop => {
+      if (prop.description && prop.description.length > 0) return; // already has some docs
+      outer: for (const path of api.url.paths) {
+        for (const part of path.parts) {
+          if (part.name === prop.name) {
+            prop.description = nonEmpty(part.description);
+            break outer;
+          }
+        }
+      }
+    });
+
+    request.query.forEach(prop => {
+      if (prop.description && prop.description.length > 0) return; // already has some docs
+      for (const param of api.queryStringParameters) {
+        if (param.name === prop.name) {
+          prop.description = nonEmpty(param.description);
+          break;
+        }
+      }
+    });
+
     return {
       name: api.name,
-      description: api.documentation.description,
+      description: nonEmpty(api.documentation.description),
       docUrl: api.documentation.url,
       stability: makeStability(api.stability),
       deprecation: api.deprecated,
 
-      request: makeTypeDefinition(api.typeMapping.request).name,
+      request: request.name,
       requestBodyRequired: !!api.body && api.body.required,
-      requestBodyDescription: api.body && api.body.description,
 
       response: makeTypeDefinition(api.typeMapping.response).name,
 
@@ -92,7 +154,14 @@ export function loadModel(spec: Specification): Model {
       return store({
         _kind: "enum",
         name: fullName,
-        members: []
+        members: specType.members.map(m => {
+          return {
+            name: m.name,
+            stringValue: m.stringRepresentation,
+            description: nonEmpty(m.generatorHints && m.generatorHints.description),
+            annotations: nonEmptyObj(m.generatorHints && m.generatorHints.annotations)
+          };
+        })
       });
     }
 
@@ -107,8 +176,8 @@ export function loadModel(spec: Specification): Model {
       return store({
         _kind: "request",
         name: fullName,
-        generics: specType.openGenerics,
-        inherits: specType.inherits.map(i => makeImplements(i, specType.openGenerics)),
+        generics: nonEmptyArr(specType.openGenerics),
+        inherits: nonEmptyArr(specType.inherits.map(i => makeImplements(i, specType.openGenerics))),
         path: specType.path.map(prop => makeProperty(prop, specType.openGenerics)),
         query: specType.queryParameters.map(prop => makeProperty(prop, specType.openGenerics)),
         body: body,
@@ -141,8 +210,8 @@ export function loadModel(spec: Specification): Model {
       return store({
         _kind: "interface",
         name: fullName,
-        generics: specType.openGenerics,
-        inherits: specType.inherits.map(impl => makeImplements(impl, specType.openGenerics)),
+        generics: nonEmptyArr(specType.openGenerics),
+        inherits: nonEmptyArr(specType.inherits.map(impl => makeImplements(impl, specType.openGenerics))),
         properties: specType.properties.map(prop => makeProperty(prop, specType.openGenerics)),
       });
     }
@@ -165,7 +234,7 @@ export function loadModel(spec: Specification): Model {
 
     return {
       type: { name: impl.type.name, namespace: impl.type.namespace },
-      generics: impl.closedGenerics.map(i => makeInstanceOf(i, openGenerics))
+      generics: nonEmptyArr(impl.closedGenerics.map(i => makeInstanceOf(i, openGenerics)))
     };
   }
 
@@ -175,7 +244,7 @@ export function loadModel(spec: Specification): Model {
       return {
         _kind: "value",
         name: makeTypeName(inst.name, openGenerics),
-        generics: inst.closedGenerics.map(g => makeInstanceOf(g, openGenerics)),
+        generics: nonEmptyArr(inst.closedGenerics.map(g => makeInstanceOf(g, openGenerics))),
       };
     }
 
@@ -223,9 +292,9 @@ export function loadModel(spec: Specification): Model {
     return {
       name: prop.name,
       type: makeInstanceOf(prop.type, openGenerics),
-      nullable: prop.nullable,
-      description: prop.generatorHints && prop.generatorHints.description,
-      annotations: prop.generatorHints && prop.generatorHints.annotations
+      required: !prop.nullable,
+      description: nonEmpty(prop.generatorHints && prop.generatorHints.description),
+      annotations: nonEmptyObj(prop.generatorHints && prop.generatorHints.annotations)
     };
   }
 
@@ -259,6 +328,30 @@ export function loadModel(spec: Specification): Model {
       }
       return t;
     })
+  }
+
+  function nonEmpty(str: string): string {
+    if (!str || str.length === 0) {
+      return undefined;
+    } else {
+      return str;
+    }
+  }
+
+  function nonEmptyArr<T>(arr: T[]): T[] {
+    if (!arr || arr.length === 0) {
+      return undefined;
+    } else {
+      return arr;
+    }
+  }
+
+  function nonEmptyObj<T>(obj: T): T {
+    if (!obj || Object.keys(obj).length === 0) {
+      return undefined
+    } else {
+      return obj;
+    }
   }
 
   return model;

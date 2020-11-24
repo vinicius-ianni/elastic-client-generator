@@ -17,16 +17,16 @@ export class TypeName {
 // ------------------------------------------------------------------------------------------------
 // Value types
 
-// Note: "optional" (or "nullable", or "required") is part of Property. This means we can have optional properties
-// but we can't have null entries in containers (array and dictionary), which doesn't seem to be needed.
+// Note: "required" is part of Property. This means we can have optional properties but we can't have null entries in
+// containers (array and dictionary), which doesn't seem to be needed.
 export type InstanceOf = ValueOf | ArrayOf | UnionOf | DictionaryOf | NamedValueOf | UserDefinedValue
 
 /** A single value */
 export class ValueOf {
   _kind: "value";
   name: TypeName;
-  /** Closed generics. */
-  generics: InstanceOf[] = [];
+  /** Generic parameters for the `name` type */
+  generics?: InstanceOf[];
 }
 
 export class ArrayOf {
@@ -59,9 +59,9 @@ export class UserDefinedValue {
 export class Property {
   name: string;
   type: InstanceOf;
-  nullable: boolean;
+  required: boolean;
   description?: string;
-  annotations: Record<string, string>;
+  annotations?: Record<string, string>;
 
   // Removed properties:
   // isRequestParameter - request has 3 parameter lists for path/query/body
@@ -75,36 +75,39 @@ export class Property {
 
 export type TypeDefinition = Enum | Interface | RequestInterface | UnionAlias | StringAlias | NumberAlias ;
 // Missing in all type declarations
-// - description
 // - annotations
 
 export class UnionAlias {
   _kind: "union_alias";
   name: TypeName;
+  description?: string;
   alias: UnionOf;
 }
 
 export class StringAlias {
   _kind: "string_alias";
   name: TypeName;
+  description?: string;
 }
 
 export class NumberAlias {
   _kind: "number_alias";
   name: TypeName;
+  description?: string;
 }
 
 export class EnumMember{
   name: string;
+  description?: string;
   // See DateMathTimeUnit - could we use string enums for this?
   stringValue: string;
-  description?: string;
-  annotations: Record<string, string>;
+  annotations?: Record<string, string>;
 }
 
 export class Enum {
   _kind: "enum";
   name: TypeName;
+  description?: string;
   members: EnumMember[];
 
   // Removed properties:
@@ -114,24 +117,28 @@ export class Enum {
 export class Implements {
   type: TypeName;
   // generic parameters: either concrete types or open parameters from the enclosing type
-  generics: InstanceOf[];
+  generics?: InstanceOf[];
 }
 
 export class Interface {
   _kind: "interface";
   name: TypeName;
-  generics: string[];
-  inherits: Implements[];
-  properties: Property[] = [];
+  description?: string;
+  generics?: string[];
+  inherits?: Implements[];
+  properties: Property[];
 }
 
 export class RequestInterface {
   // Note: does not extend Interface as properties are split across path, query and body
   _kind: "request";
   name: TypeName;
-  generics: string[];
-  inherits: Implements[];
+  description?: string;
+  generics?: string[];
+  inherits?: Implements[];
+  /** URL path properties */
   path: Property[];
+  /** Query string properties */
   query: Property[];
   // Note: weed a "query_params" annotation on a property that lists query params replaced by a body property so that
   // we can skip them.
@@ -140,7 +147,7 @@ export class RequestInterface {
   // Is there a priority rule between path and body parameters?
   //
   // We can also pull path parameter descriptions on body properties they replace
-  body: InstanceOf | Property[];
+  body?: InstanceOf | Property[];
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -166,21 +173,20 @@ export class Endpoint {
 
   request: TypeName;
   requestBodyRequired: boolean; // Not sure this is useful
-  requestBodyDescription: string;
 
   response: TypeName;
 
   urls: UrlTemplate[];
 
   // Removed properties:
-  // - routeParts: should be request.path
-  // - queryStringParameters: should be request.query
+  // - routeParts: should be request.path (but we currently have some inconsistencies)
+  // - queryStringParameters: should be request.query (ditto)
 }
 
 export class UrlTemplate {
   path: string;
   methods: string[];
-  deprecation: Deprecation;
+  deprecation?: Deprecation;
 }
 
 export class Model {
