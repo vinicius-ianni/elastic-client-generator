@@ -1,5 +1,10 @@
 /* tslint:disable:no-console */
-import Domain from "elasticsearch-client-specification/src/domain";
+import {Specification} from "elasticsearch-client-specification/lib/src/api-specification";
+import Domain, {
+  GeneratorDocumentation,
+  InterfaceProperty,
+  RequestInterface, TypeDeclaration
+} from "elasticsearch-client-specification/src/domain";
 import fs from "fs";
 import * as changeCase from "change-case";
 import {stringTypes, objectTypes, numberTypes} from "./naming";
@@ -10,6 +15,9 @@ import {$createEnum} from "./enums";
 import {specification} from "./specs";
 
 import {Emitter, testIt} from "./emitter";
+import {loadModel} from "./metamodel_reader";
+
+//const specification = Specification.load();
 
 if (specification.domain_errors.length + specification.endpoint_errors.length !== 0) {
   if (specification.endpoint_errors.length > 0) console.error("The specification contains the following endpoint mapping errors:");
@@ -35,12 +43,10 @@ const $renderType = (type: Domain.TypeDeclaration) => {
 
 const OUTPUT_DIR = "../output/java/src/main/java/org/elasticsearch";
 
-const spec = specification;
-
 // Do not generate, point to the hand-written version
-spec.typeLookup.SingleKeyDictionary.namespace = "org.elasticsearch";
+specification.typeLookup.SingleKeyDictionary.namespace = "org.elasticsearch";
 
-spec.types.forEach(type => {
+specification.types.forEach(type => {
   // Move core types to a single package -- Why?
   if (type.namespace.startsWith("mapping.types.core."))
     type.namespace = "mapping.types.core";
@@ -85,7 +91,11 @@ function normalizeArrays(props: Domain.InterfaceProperty[]): void {
 }
 
 // generateOne("CatNodeAttributesRecord");
-generateAll();
+// generateAll();
+// dumpModel();
+
+const newModel = loadModel(specification);
+console.log(JSON.stringify(newModel, null, 2));
 
 function generateOne(name: string) {
   generateType(specification.typeLookup[name]);
@@ -136,4 +146,149 @@ function generateType(type: Domain.TypeDeclaration): boolean {
     // console.log(`Rendered type ${type.constructor.name}(${type.name})`)
     return true;
   }
+}
+
+function dumpModel() {
+
+  const typeAnnotations = new Set<string>();
+  const enumAnnotations = new Set<string>();
+  const propertyAnnotations = new Set<string>();
+
+  specification.types.forEach(type => {
+
+    if (type instanceof Domain.Interface) {
+      if (type.implementsUnion()) {
+        // Never seen. Deprecated to be removed?
+        console.log(type.name + " implements union");
+      }
+    }
+
+    if (type instanceof Domain.Enum) {
+      // @ts-ignore
+      type.type = "enum";
+      type.members.forEach(e => {
+        cleanupHints(e.generatorHints, enumAnnotations);
+      });
+
+    } else if (type instanceof RequestInterface) {
+      // @ts-ignore
+      type.type = "request";
+      cleanupInterface(type);
+      // Only keep body properties
+      delete type.properties;
+
+      type.path.forEach(p => cleanupHints(p.generatorHints, propertyAnnotations));
+      type.queryParameters.forEach(p => cleanupHints(p.generatorHints, propertyAnnotations));
+      if (type.body instanceof Array) {
+        type.body.forEach(p => cleanupHints(p.generatorHints, propertyAnnotations));
+      } else if(type.body) {
+        console.log(type.name + ": body isn't a struct");
+      }
+
+    } else if (type instanceof Domain.UnionAlias) {
+      // @ts-ignore
+      type.type = "union_alias";
+
+    } else if (type instanceof Domain.StringAlias) {
+      // @ts-ignore
+      type.type = "string_alias";
+
+    } else if (type instanceof Domain.NumberAlias) {
+      // @ts-ignore
+      type.type = "number_alias";
+
+    } else if (type instanceof Domain.Interface) {
+      // @ts-ignore
+      type.type = "interface";
+      cleanupInterface(type);
+      type.properties.forEach(p => cleanupHints(p.generatorHints, propertyAnnotations));
+    } else {
+      throw Error("Unknown type " + typeof (type))
+    }
+
+    if (!type.generatorHints) {
+      // Comment says "/** generator hinting, never null */"
+      // @ts-ignore
+      // console.log(type.name + " (" + type.type + ") has no hints");
+    } else {
+      if (type.namespace === "internal") {
+        // @ts-ignore
+        // console.log("internal " + type.name + " (" + type.type + ") has hints?");
+      }
+
+      cleanupHints(type.generatorHints, typeAnnotations);
+    }
+  });
+
+  console.log("Type annotations", typeAnnotations);
+  console.log("Enum annotations", enumAnnotations);
+  console.log("Enum annotations", propertyAnnotations);
+
+  specification.endpoints.forEach(api => {
+    const req = specification.typeLookup[api.typeMapping.request] as RequestInterface;
+
+    // Verify path params
+    const pathParams = new Set<string>();
+    api.url.paths.forEach(p => {
+      p.parts.forEach(part => {
+        pathParams.add(part.name);
+      })
+    });
+
+    diffNames(api.name + " path",
+      Array.from(pathParams),
+      req.queryParameters.map(p => p.name),
+      false
+    );
+
+    // Verify query params
+    diffNames(api.name + " query",
+      api.queryStringParameters.map(p => p.name),
+      req.queryParameters.map(p => p.name),
+      false
+    );
+
+  });
+
+  delete specification.typeLookup;
+
+  console.log("done");
+//  console.log(JSON.stringify(specification, null, 2));
+}
+
+function diffNames(kind: string, apiNames: string[], reqNames: string[], log: boolean): boolean {
+  const onlyInApi = apiNames.filter(n => !reqNames.includes(n));
+  const onlyInReq = reqNames.filter(n => !apiNames.includes(n));
+
+  if (onlyInApi.length > 0 || onlyInReq.length > 0) {
+    if (log) console.log(`api ${kind} - only in API: [${onlyInApi}], only in req: [${onlyInReq}]`)
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function cleanupHints(hints: GeneratorDocumentation, annotations: Set<string>) {
+  if (!hints) return;
+
+  // Annotations
+  Object.keys(hints.annotations).forEach(a => annotations.add(a));
+
+  if (hints.description && hints.description.length === 0) {
+    delete hints.description;
+  }
+
+  // @alternate_name --> generatorHints.alternateName
+  delete hints.alternateName;
+  // @prop_serializer --> generatorHints.customSerializationRoutine
+  delete hints.customSerializationRoutine;
+}
+
+function cleanupInterface(type: Domain.Interface) {
+  const parents = Object.keys(type.inheritsFromUnresolved);
+  if (type.inherits.length !== parents.length) {
+    throw Error("Inheritance inconsistency in "+ type.name);
+  }
+  delete type.inheritsFromUnresolved; // this is some temporary stuff
+
 }
