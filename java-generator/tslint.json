@@ -1,17 +1,17 @@
 {
   "extends": "tslint:recommended",
   "rules": {
-    "max-line-length": { "options": [160] },
+    "max-line-length": { "options": [120] },
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": true,
     "member-ordering": [false],
     "object-literal-sort-keys": false,
     "trailing-comma": [true, {"multiline": "ignore", "singleline": "never"}],
     "object-literal-key-quotes": [true, "as-needed"],
-    "curly": [true, "as-needed"],
+    "object-literal-shorthand": false,
+    "curly": [true, "ignore-same-line"],
     "member-access": [true, "no-public"],
     "ordered-imports": false,
-    "only-arrow-functions": true,
     "arrow-parens": [true, "ban-single-arg-parens"],
     "interface-over-type-literal": false,
     "no-console": {
