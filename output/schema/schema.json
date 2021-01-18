@@ -57560,7 +57560,7 @@
               }
             ]
           },
-          "required": false
+          "required": true
         },
         {
           "name": "hits",
