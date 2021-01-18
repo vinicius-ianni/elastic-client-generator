@@ -11,14 +11,7 @@
           "kind": "instance_of",
           "type": {
             "namespace": "aggregations",
-            "name": "ValueAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "DocCountAggregate"
+            "name": "SingleBucketAggregate"
           }
         },
         {
@@ -101,84 +94,7 @@
           "kind": "instance_of",
           "type": {
             "namespace": "aggregations",
-            "name": "SingleBucketAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
             "name": "MatrixStatsAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "BoxPlotAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "ExtendedStatsAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "GeoBoundsAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "GeoCentroidAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "PercentilesAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "ScriptedMetricAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "StatsAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "StringStatsAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "TopHitsAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "TopMetricsAggregate"
           }
         },
         {
@@ -192,14 +108,7 @@
           "kind": "instance_of",
           "type": {
             "namespace": "aggregations",
-            "name": "TDigestPercentilesAggregate"
-          }
-        },
-        {
-          "kind": "instance_of",
-          "type": {
-            "namespace": "aggregations",
-            "name": "HdrPercentilesAggregate"
+            "name": "MetricAggregate"
           }
         }
       ]
@@ -1290,6 +1199,31 @@
         "namespace": "aggregations",
         "name": "BucketBase"
       },
+      "implements": [
+        {
+          "depth": 0,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
+        }
+      ],
       "properties": []
     },
     {
@@ -1304,6 +1238,31 @@
             "namespace": "aggregations",
             "name": "BucketBase"
           }
+        }
+      ],
+      "implements": [
+        {
+          "depth": 1,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
       ],
       "properties": []
@@ -1371,35 +1330,32 @@
           }
         }
       ],
-      "properties": []
-    },
-    {
-      "kind": "interface",
-      "name": {
-        "namespace": "aggregations",
-        "name": "DocCountAggregate"
-      },
-      "inherits": [
+      "implements": [
         {
+          "depth": 1,
           "type": {
-            "namespace": "aggregations",
-            "name": "AggregateBase"
-          }
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
       ],
-      "properties": [
-        {
-          "name": "doc_count",
-          "type": {
-            "kind": "instance_of",
-            "type": {
-              "namespace": "internal",
-              "name": "double"
-            }
-          },
-          "required": true
-        }
-      ]
+      "properties": []
     },
     {
       "kind": "interface",
@@ -1571,6 +1527,31 @@
             "namespace": "aggregations",
             "name": "BucketBase"
           }
+        }
+      ],
+      "implements": [
+        {
+          "depth": 1,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
       ],
       "properties": [
@@ -1761,6 +1742,31 @@
           }
         }
       ],
+      "implements": [
+        {
+          "depth": 1,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
+        }
+      ],
       "properties": []
     },
     {
@@ -1778,6 +1784,31 @@
             "namespace": "aggregations",
             "name": "BucketBase"
           }
+        }
+      ],
+      "implements": [
+        {
+          "depth": 1,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
       ],
       "properties": []
@@ -1942,6 +1973,106 @@
       "kind": "union",
       "name": {
         "namespace": "aggregations",
+        "name": "MetricAggregate"
+      },
+      "items": [
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "ValueAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "BoxPlotAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "GeoBoundsAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "GeoCentroidAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "PercentilesAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "ScriptedMetricAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "StatsAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "StringStatsAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "TopHitsAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "TopMetricsAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "ExtendedStatsAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "TDigestPercentilesAggregate"
+          }
+        },
+        {
+          "kind": "instance_of",
+          "type": {
+            "namespace": "aggregations",
+            "name": "HdrPercentilesAggregate"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "union",
+      "name": {
+        "namespace": "aggregations",
         "name": "Missing"
       },
       "items": [
@@ -2078,6 +2209,31 @@
           }
         }
       ],
+      "implements": [
+        {
+          "depth": 1,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
+        }
+      ],
       "properties": []
     },
     {
@@ -2095,6 +2251,31 @@
             "namespace": "aggregations",
             "name": "BucketBase"
           }
+        }
+      ],
+      "implements": [
+        {
+          "depth": 1,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
       ],
       "properties": []
@@ -2183,6 +2364,31 @@
           }
         }
       ],
+      "implements": [
+        {
+          "depth": 1,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
+        }
+      ],
       "properties": []
     },
     {
@@ -2199,7 +2405,44 @@
           }
         }
       ],
-      "properties": []
+      "implements": [
+        {
+          "depth": 0,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "name": "doc_count",
+          "type": {
+            "kind": "instance_of",
+            "type": {
+              "namespace": "internal",
+              "name": "double"
+            }
+          },
+          "required": true
+        }
+      ]
     },
     {
       "kind": "interface",
@@ -6496,7 +6739,7 @@
       "kind": "interface",
       "name": {
         "namespace": "analysis.char_filters",
-        "name": "ICharFilter"
+        "name": "CharFilterBase"
       },
       "properties": [
         {
@@ -6527,7 +6770,7 @@
       "kind": "interface",
       "name": {
         "namespace": "analysis.token_filters",
-        "name": "ITokenFilter"
+        "name": "TokenFilterBase"
       },
       "properties": [
         {
@@ -6558,7 +6801,7 @@
       "kind": "interface",
       "name": {
         "namespace": "analysis.tokenizers",
-        "name": "ITokenizer"
+        "name": "TokenizerBase"
       },
       "properties": [
         {
@@ -21873,6 +22116,18 @@
       ]
     },
     {
+      "kind": "interface",
+      "name": {
+        "namespace": "common",
+        "name": "IDictionary"
+      },
+      "generics": [
+        "TKey",
+        "TValue"
+      ],
+      "properties": []
+    },
+    {
       "kind": "enum",
       "name": {
         "namespace": "common",
@@ -32212,7 +32467,7 @@
                     "kind": "instance_of",
                     "type": {
                       "namespace": "analysis.char_filters",
-                      "name": "ICharFilter"
+                      "name": "CharFilterBase"
                     }
                   }
                 ]
@@ -32260,7 +32515,7 @@
                     "kind": "instance_of",
                     "type": {
                       "namespace": "analysis.token_filters",
-                      "name": "ITokenFilter"
+                      "name": "TokenFilterBase"
                     }
                   }
                 ]
@@ -32309,7 +32564,7 @@
                   "kind": "instance_of",
                   "type": {
                     "namespace": "analysis.tokenizers",
-                    "name": "ITokenizer"
+                    "name": "TokenizerBase"
                   }
                 }
               ]
@@ -36123,7 +36378,7 @@
                 "kind": "instance_of",
                 "type": {
                   "namespace": "mapping.types",
-                  "name": "IProperty"
+                  "name": "PropertyBase"
                 }
               }
             },
@@ -43574,6 +43829,20 @@
       "kind": "type_alias",
       "name": {
         "namespace": "internal",
+        "name": "AggregateName"
+      },
+      "type": {
+        "kind": "instance_of",
+        "type": {
+          "namespace": "internal",
+          "name": "string"
+        }
+      }
+    },
+    {
+      "kind": "type_alias",
+      "name": {
+        "namespace": "internal",
         "name": "CategoryId"
       },
       "type": {
@@ -44622,7 +44891,7 @@
               "kind": "instance_of",
               "type": {
                 "namespace": "mapping.types",
-                "name": "IProperty"
+                "name": "PropertyBase"
               }
             }
           },
@@ -44676,7 +44945,7 @@
             "kind": "instance_of",
             "type": {
               "namespace": "mapping.types",
-              "name": "IProperty"
+              "name": "PropertyBase"
             }
           },
           "required": true
@@ -45045,7 +45314,7 @@
       "kind": "interface",
       "name": {
         "namespace": "mapping.types",
-        "name": "IProperty"
+        "name": "PropertyBase"
       },
       "properties": [
         {
@@ -45063,7 +45332,7 @@
               "kind": "user_defined_value"
             }
           },
-          "required": false
+          "required": true
         },
         {
           "name": "meta",
@@ -45084,7 +45353,7 @@
               }
             }
           },
-          "required": false
+          "required": true
         },
         {
           "name": "name",
@@ -45095,7 +45364,7 @@
               "name": "PropertyName"
             }
           },
-          "required": false
+          "required": true
         },
         {
           "name": "type",
@@ -55991,7 +56260,7 @@
               "kind": "instance_of",
               "type": {
                 "namespace": "internal",
-                "name": "string"
+                "name": "AggregateName"
               }
             },
             "value": {
@@ -74264,7 +74533,7 @@
               "kind": "instance_of",
               "type": {
                 "namespace": "analysis.token_filters",
-                "name": "ITokenFilter"
+                "name": "TokenFilterBase"
               }
             }
           },
