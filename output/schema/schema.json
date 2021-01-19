@@ -1189,7 +1189,6 @@
       },
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -1211,6 +1210,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": []
     },
@@ -1271,7 +1273,6 @@
       },
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -1293,6 +1294,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": []
     },
@@ -1462,7 +1466,6 @@
       },
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -1484,6 +1487,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": [
         {
@@ -1667,7 +1673,6 @@
       },
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -1689,6 +1694,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": []
     },
@@ -1703,7 +1711,6 @@
       ],
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -1725,6 +1732,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": []
     },
@@ -2118,7 +2128,6 @@
       },
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -2140,6 +2149,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": []
     },
@@ -2154,7 +2166,6 @@
       ],
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -2176,6 +2187,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": []
     },
@@ -2257,7 +2271,6 @@
       ],
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -2279,6 +2292,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": []
     },
@@ -2298,7 +2314,6 @@
       ],
       "implements": [
         {
-          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -2320,6 +2335,9 @@
             }
           ]
         }
+      ],
+      "traits": [
+        "IDictionary"
       ],
       "properties": [
         {
