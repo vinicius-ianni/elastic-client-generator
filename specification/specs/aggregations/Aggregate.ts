@@ -197,7 +197,7 @@ class StringStatsAggregate extends AggregateBase {
 
 //hard
 class TopHitsAggregate extends AggregateBase {
-  hits: HitsMetadata<UserDefinedValue>
+  hits: HitsMetadata<LazyDocument>
 }
 
 //TODO wrong on purpose

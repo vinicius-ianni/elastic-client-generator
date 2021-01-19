@@ -2689,7 +2689,11 @@
             },
             "generics": [
               {
-                "kind": "user_defined_value"
+                "kind": "instance_of",
+                "type": {
+                  "namespace": "internal",
+                  "name": "LazyDocument"
+                }
               }
             ]
           },
@@ -22316,14 +22320,6 @@
     {
       "kind": "interface",
       "name": {
-        "namespace": "common_abstractions.lazy_document",
-        "name": "LazyDocument"
-      },
-      "properties": []
-    },
-    {
-      "kind": "interface",
-      "name": {
         "namespace": "common_abstractions.request",
         "name": "RequestBase"
       },
@@ -25467,7 +25463,7 @@
               {
                 "kind": "instance_of",
                 "type": {
-                  "namespace": "common_abstractions.lazy_document",
+                  "namespace": "internal",
                   "name": "LazyDocument"
                 }
               }
@@ -29641,7 +29637,7 @@
             "value": {
               "kind": "instance_of",
               "type": {
-                "namespace": "common_abstractions.lazy_document",
+                "namespace": "internal",
                 "name": "LazyDocument"
               }
             }
@@ -43456,7 +43452,7 @@
           "type": {
             "kind": "instance_of",
             "type": {
-              "namespace": "common_abstractions.lazy_document",
+              "namespace": "internal",
               "name": "LazyDocument"
             }
           },
@@ -44317,6 +44313,14 @@
           "required": true
         }
       ]
+    },
+    {
+      "kind": "interface",
+      "name": {
+        "namespace": "internal",
+        "name": "LazyDocument"
+      },
+      "properties": []
     },
     {
       "kind": "type_alias",
@@ -54020,7 +54024,7 @@
             "value": {
               "kind": "instance_of",
               "type": {
-                "namespace": "common_abstractions.lazy_document",
+                "namespace": "internal",
                 "name": "LazyDocument"
               }
             }
@@ -56010,7 +56014,7 @@
             "value": {
               "kind": "instance_of",
               "type": {
-                "namespace": "common_abstractions.lazy_document",
+                "namespace": "internal",
                 "name": "LazyDocument"
               }
             }
@@ -56679,7 +56683,7 @@
           "type": {
             "kind": "instance_of",
             "type": {
-              "namespace": "common_abstractions.lazy_document",
+              "namespace": "internal",
               "name": "LazyDocument"
             }
           },
@@ -57397,7 +57401,7 @@
             "value": {
               "kind": "instance_of",
               "type": {
-                "namespace": "common_abstractions.lazy_document",
+                "namespace": "internal",
                 "name": "LazyDocument"
               }
             }
@@ -57722,7 +57726,7 @@
                 {
                   "kind": "instance_of",
                   "type": {
-                    "namespace": "common_abstractions.lazy_document",
+                    "namespace": "internal",
                     "name": "LazyDocument"
                   }
                 }
@@ -59399,7 +59403,7 @@
             "value": {
               "kind": "instance_of",
               "type": {
-                "namespace": "common_abstractions.lazy_document",
+                "namespace": "internal",
                 "name": "LazyDocument"
               }
             }
@@ -83585,7 +83589,7 @@
       "inherits": [
         {
           "type": {
-            "namespace": "common_abstractions.lazy_document",
+            "namespace": "internal",
             "name": "LazyDocument"
           }
         }
