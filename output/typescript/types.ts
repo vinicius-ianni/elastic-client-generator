@@ -114,7 +114,7 @@ export interface BucketAggregate extends AggregateBase {
   items: Bucket
 }
 
-export interface BucketBase extends IDictionary<AggregateName, Aggregate> {
+export interface BucketBase {
 }
 
 export interface CompositeBucket extends BucketBase {
@@ -222,7 +222,7 @@ export interface SignificantTermsAggregate<TKey = unknown> extends MultiBucketAg
 export interface SignificantTermsBucket<TKey = unknown> extends BucketBase {
 }
 
-export interface SingleBucketAggregate extends AggregateBase, IDictionary<AggregateName, Aggregate> {
+export interface SingleBucketAggregate extends AggregateBase {
   doc_count: double
 }
 
@@ -746,17 +746,17 @@ export interface SumBucketAggregation {
 }
 
 export type StopWords = string | Array<string>
-export interface ICharFilter {
+export interface CharFilterBase {
   type: string
   version: string
 }
 
-export interface ITokenFilter {
+export interface TokenFilterBase {
   type: string
   version: string
 }
 
-export interface ITokenizer {
+export interface TokenizerBase {
   type: string
   version: string
 }
@@ -3473,13 +3473,13 @@ export interface AnalyzeRequest extends RequestBase {
   body?: {
     analyzer?: string
     attributes?: Array<string>
-    char_filter?: Array<string | ICharFilter>
+    char_filter?: Array<string | CharFilterBase>
     explain?: boolean
     field?: Field
-    filter?: Array<string | ITokenFilter>
+    filter?: Array<string | TokenFilterBase>
     normalizer?: string
     text?: Array<string>
-    tokenizer?: string | ITokenizer
+    tokenizer?: string | TokenizerBase
   } | string | Buffer | ReadableStream
 }
 
@@ -3877,7 +3877,7 @@ export interface PutMappingRequest extends RequestBase {
     index_field?: IndexField
     meta?: Record<string, any>
     numeric_detection?: boolean
-    properties?: Record<PropertyName, IProperty>
+    properties?: Record<PropertyName, PropertyBase>
     routing_field?: RoutingField
     size_field?: SizeField
     source_field?: SourceField
@@ -4831,14 +4831,14 @@ export interface TypeMapping {
   index_field?: IndexField
   _meta: Record<string, any>
   numeric_detection?: boolean
-  properties: Record<PropertyName, IProperty>
+  properties: Record<PropertyName, PropertyBase>
   _routing: RoutingField
   _size: SizeField
   _source: SourceField
 }
 
 export interface DynamicTemplate {
-  mapping: IProperty
+  mapping: PropertyBase
   match: string
   match_mapping_type: string
   match_pattern: MatchType
@@ -4889,10 +4889,10 @@ export interface SourceField {
   includes: Array<string>
 }
 
-export interface IProperty {
-  local_metadata?: Record<string, any>
-  meta?: Record<string, string>
-  name?: PropertyName
+export interface PropertyBase {
+  local_metadata: Record<string, any>
+  meta: Record<string, string>
+  name: PropertyName
   type: string
 }
 
@@ -8099,7 +8099,7 @@ export interface AnomalyDetectors {
 }
 
 export interface CategorizationAnalyzer {
-  filter: Array<ITokenFilter>
+  filter: Array<TokenFilterBase>
   tokenizer: string
 }
 
