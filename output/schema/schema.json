@@ -1051,11 +1051,7 @@
           },
           "generics": [
             {
-              "kind": "instance_of",
-              "type": {
-                "namespace": "internal",
-                "name": "object"
-              }
+              "kind": "user_defined_value"
             }
           ]
         },
@@ -1067,11 +1063,7 @@
           },
           "generics": [
             {
-              "kind": "instance_of",
-              "type": {
-                "namespace": "internal",
-                "name": "object"
-              }
+              "kind": "user_defined_value"
             }
           ]
         },
@@ -1083,11 +1075,7 @@
           },
           "generics": [
             {
-              "kind": "instance_of",
-              "type": {
-                "namespace": "internal",
-                "name": "object"
-              }
+              "kind": "user_defined_value"
             }
           ]
         }
@@ -1197,10 +1185,11 @@
       "kind": "interface",
       "name": {
         "namespace": "aggregations",
-        "name": "BucketBase"
+        "name": "CompositeBucket"
       },
       "implements": [
         {
+          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -1222,28 +1211,6 @@
             }
           ]
         }
-      ],
-      "traits": [
-        "IDictionary"
-      ],
-      "properties": []
-    },
-    {
-      "kind": "interface",
-      "name": {
-        "namespace": "aggregations",
-        "name": "CompositeBucket"
-      },
-      "inherits": [
-        {
-          "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
-        }
-      ],
-      "traits": [
-        "IDictionary"
       ],
       "properties": []
     },
@@ -1302,16 +1269,30 @@
         "namespace": "aggregations",
         "name": "DateHistogramBucket"
       },
-      "inherits": [
+      "implements": [
         {
+          "depth": 0,
           "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
-      ],
-      "traits": [
-        "IDictionary"
       ],
       "properties": []
     },
@@ -1479,16 +1460,30 @@
         "namespace": "aggregations",
         "name": "FiltersBucketItem"
       },
-      "inherits": [
+      "implements": [
         {
+          "depth": 0,
           "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
-      ],
-      "traits": [
-        "IDictionary"
       ],
       "properties": [
         {
@@ -1670,16 +1665,30 @@
         "namespace": "aggregations",
         "name": "IpRangeBucket"
       },
-      "inherits": [
+      "implements": [
         {
+          "depth": 0,
           "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
-      ],
-      "traits": [
-        "IDictionary"
       ],
       "properties": []
     },
@@ -1692,16 +1701,30 @@
       "generics": [
         "TKey"
       ],
-      "inherits": [
+      "implements": [
         {
+          "depth": 0,
           "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
-      ],
-      "traits": [
-        "IDictionary"
       ],
       "properties": []
     },
@@ -2093,16 +2116,30 @@
         "namespace": "aggregations",
         "name": "RangeBucket"
       },
-      "inherits": [
+      "implements": [
         {
+          "depth": 0,
           "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
-      ],
-      "traits": [
-        "IDictionary"
       ],
       "properties": []
     },
@@ -2115,16 +2152,30 @@
       "generics": [
         "TKey"
       ],
-      "inherits": [
+      "implements": [
         {
+          "depth": 0,
           "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
         }
-      ],
-      "traits": [
-        "IDictionary"
       ],
       "properties": []
     },
@@ -2204,35 +2255,9 @@
       "generics": [
         "TKey"
       ],
-      "inherits": [
-        {
-          "type": {
-            "namespace": "aggregations",
-            "name": "BucketBase"
-          }
-        }
-      ],
-      "traits": [
-        "IDictionary"
-      ],
-      "properties": []
-    },
-    {
-      "kind": "interface",
-      "name": {
-        "namespace": "aggregations",
-        "name": "SingleBucketAggregate"
-      },
-      "inherits": [
-        {
-          "type": {
-            "namespace": "aggregations",
-            "name": "AggregateBase"
-          }
-        }
-      ],
       "implements": [
         {
+          "depth": 0,
           "type": {
             "namespace": "common",
             "name": "IDictionary"
@@ -2255,8 +2280,46 @@
           ]
         }
       ],
-      "traits": [
-        "IDictionary"
+      "properties": []
+    },
+    {
+      "kind": "interface",
+      "name": {
+        "namespace": "aggregations",
+        "name": "SingleBucketAggregate"
+      },
+      "inherits": [
+        {
+          "type": {
+            "namespace": "aggregations",
+            "name": "AggregateBase"
+          }
+        }
+      ],
+      "implements": [
+        {
+          "depth": 0,
+          "type": {
+            "namespace": "common",
+            "name": "IDictionary"
+          },
+          "generics": [
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "internal",
+                "name": "AggregateName"
+              }
+            },
+            {
+              "kind": "instance_of",
+              "type": {
+                "namespace": "aggregations",
+                "name": "Aggregate"
+              }
+            }
+          ]
+        }
       ],
       "properties": [
         {
@@ -2615,7 +2678,24 @@
           }
         }
       ],
-      "properties": []
+      "properties": [
+        {
+          "name": "hits",
+          "type": {
+            "kind": "instance_of",
+            "type": {
+              "namespace": "search.search.hits",
+              "name": "HitsMetadata"
+            },
+            "generics": [
+              {
+                "kind": "user_defined_value"
+              }
+            ]
+          },
+          "required": true
+        }
+      ]
     },
     {
       "kind": "interface",

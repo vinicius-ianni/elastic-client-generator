@@ -1,26 +1,27 @@
 //@class_serializer("AggregateFormatter")
+
 type Bucket =
   CompositeBucket
   | DateHistogramBucket
   | FiltersBucketItem
   | IpRangeBucket
   | RangeBucket
-  | RareTermsBucket<any>
-  | SignificantTermsBucket<any>
-  | KeyedBucket<any>
+  | RareTermsBucket<UserDefinedValue>
+  | SignificantTermsBucket<UserDefinedValue>
+  | KeyedBucket<UserDefinedValue>
 
-class BucketBase implements IDictionary<AggregateName, Aggregate> {}
+//class BucketBase implements IDictionary<AggregateName, Aggregate> {}
 
-class CompositeBucket extends BucketBase {}
-class DateHistogramBucket extends BucketBase {}
-class FiltersBucketItem extends BucketBase {
+class CompositeBucket implements IDictionary<AggregateName, Aggregate>{}
+class DateHistogramBucket implements IDictionary<AggregateName, Aggregate> {}
+class FiltersBucketItem implements IDictionary<AggregateName, Aggregate> {
   doc_count: long;
 }
-class IpRangeBucket extends BucketBase {}
-class RangeBucket extends BucketBase {}
-class RareTermsBucket<TKey> extends BucketBase {}
-class SignificantTermsBucket<TKey> extends BucketBase {}
-class KeyedBucket<TKey> extends BucketBase {}
+class IpRangeBucket implements IDictionary<AggregateName, Aggregate> {}
+class RangeBucket implements IDictionary<AggregateName, Aggregate> {}
+class RareTermsBucket<TKey> implements IDictionary<AggregateName, Aggregate> {}
+class SignificantTermsBucket<TKey> implements IDictionary<AggregateName, Aggregate> {}
+class KeyedBucket<TKey> implements IDictionary<AggregateName, Aggregate> {}
 
 type Aggregate  =
   | SingleBucketAggregate
@@ -196,6 +197,7 @@ class StringStatsAggregate extends AggregateBase {
 
 //hard
 class TopHitsAggregate extends AggregateBase {
+  hits: HitsMetadata<UserDefinedValue>
 }
 
 //TODO wrong on purpose
