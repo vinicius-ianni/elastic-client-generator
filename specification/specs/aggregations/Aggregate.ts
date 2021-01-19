@@ -10,6 +10,7 @@ type Bucket =
   | KeyedBucket<any>
 
 class BucketBase implements IDictionary<AggregateName, Aggregate> {}
+
 class CompositeBucket extends BucketBase {}
 class DateHistogramBucket extends BucketBase {}
 class FiltersBucketItem extends BucketBase {
